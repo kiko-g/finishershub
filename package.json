@@ -4,6 +4,8 @@
   "version": "0.1.0",
   "author": "Francisco Gonçalves <kikojpgoncalves@gmail.com>",
   "dependencies": {
+    "@headlessui/react": "^1.5.0",
+    "@heroicons/react": "^1.0.6",
     "gatsby": "^4.11.2",
     "gatsby-plugin-gatsby-cloud": "^4.11.1",
     "gatsby-plugin-image": "^2.11.1",

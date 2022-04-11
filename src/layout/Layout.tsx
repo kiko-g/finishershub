@@ -1,4 +1,5 @@
 import * as React from 'react'
+import { Navbar } from './Navbar'
 import { Footer } from './Footer'
 import { Background } from './Background'
 import { useStaticQuery, graphql } from 'gatsby'
@@ -22,6 +23,7 @@ export const Layout: React.FC<Props> = ({ children, location, background }) => {
 
   return (
     <div className="layout background">
+      <Navbar location={location} siteTitle={data.site.siteMetadata?.title} />
       {background ? <Background /> : null}
       <div className="container z-10 mx-auto my-auto">{children}</div>
       <Footer siteTitle={data.site.siteMetadata?.title} />
