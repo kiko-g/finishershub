@@ -1,5 +1,5 @@
 import React from 'react'
-import '../styles/colors.css'
+import '../styles/utilities.css'
 import { socials } from '../utils'
 
 type Props = {

@@ -32,24 +32,14 @@ export const Navbar: React.FC<Props> = ({ siteTitle, location }) => {
 const Hamburger = ({ open }) => (
   <div
     className={`z-50 md:hidden ${
-      open
-        ? 'absolute top-2 right-2 my-auto flex h-6 items-center justify-end space-x-2'
-        : 'flex w-full items-center justify-between'
+      open ? 'absolute top-2 right-2 my-auto flex h-6 items-center justify-end space-x-2' : 'flex w-full items-center justify-between'
     }`}
   >
     <a href="https://linktr.ee/kikogoncalves" target="_blank">
       {open ? (
-        <StaticImage
-          className="avatar top-0.5 h-5 w-5 rounded-full"
-          src="../../static/images/avatar.png"
-          alt="Francisco Gonçalves"
-        />
+        <StaticImage className="avatar top-0.5 h-5 w-5 rounded-full" src="../../static/images/avatar.png" alt="Francisco Gonçalves" />
       ) : (
-        <StaticImage
-          className="avatar h-6 w-6 rounded-full"
-          src="../../static/images/avatar.png"
-          alt="Francisco Gonçalves"
-        />
+        <StaticImage className="avatar h-6 w-6 rounded-full" src="../../static/images/avatar.png" alt="Francisco Gonçalves" />
       )}
     </a>
 
