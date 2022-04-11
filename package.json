@@ -1,9 +1,8 @@
 {
-  "name": "gatsby-starter-default",
-  "private": true,
-  "description": "A simple starter to get up and developing quickly with Gatsby",
+  "name": "finishershub",
+  "description": "FinishersHun using GatsbyJS and TailwindCSS",
   "version": "0.1.0",
-  "author": "Kyle Mathews <mathews.kyle@gmail.com>",
+  "author": "Francisco Gonçalves <kikojpgoncalves@gmail.com>",
   "dependencies": {
     "gatsby": "^4.11.2",
     "gatsby-plugin-gatsby-cloud": "^4.11.1",
@@ -20,7 +19,13 @@
     "react-helmet": "^6.1.0"
   },
   "devDependencies": {
-    "prettier": "^2.6.2"
+    "@types/react-helmet": "^6.1.5",
+    "autoprefixer": "^10.4.4",
+    "gatsby-plugin-postcss": "^5.11.0",
+    "postcss": "^8.4.12",
+    "prettier": "^2.6.2",
+    "prettier-plugin-tailwindcss": "^0.1.8",
+    "tailwindcss": "^3.0.23"
   },
   "keywords": [
     "gatsby"
@@ -31,6 +36,7 @@
     "develop": "gatsby develop",
     "format": "prettier --write \"**/*.{js,jsx,ts,tsx,json,md}\"",
     "start": "gatsby develop",
+    "hardrun": "gatsby clean && gatsby develop",
     "serve": "gatsby serve",
     "clean": "gatsby clean",
     "test": "echo \"Write tests! -> https://gatsby.dev/unit-testing\" && exit 1"
