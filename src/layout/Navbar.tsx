@@ -17,7 +17,7 @@ export const Navbar: React.FC<Props> = ({ siteTitle, location }) => {
       {({ open }) => {
         return (
           <>
-            <div className="relative flex items-center justify-between">
+            <div className={`${open ? 'p-0' : 'p-2'} relative flex items-center justify-between md:py-0`}>
               <Hamburger open={open} />
               <Header title={siteTitle} location={location} />
             </div>
@@ -64,7 +64,7 @@ const Hamburger = ({ open }) => (
           />
         ) : (
           <MenuIcon
-            className="ease dark:group-hover:text-/75 group-hover:text-dark1/75 block h-6 w-6 transition duration-200"
+            className="ease dark:group-hover:text-/75 block h-6 w-6 transition duration-200 group-hover:text-dark/75"
             aria-hidden="true"
           />
         )}

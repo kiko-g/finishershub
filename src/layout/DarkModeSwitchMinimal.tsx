@@ -16,12 +16,12 @@ export const DarkModeSwitchMinimal: React.FC = () => {
         >
           {enabled ? (
             <MoonIcon
-              className="ease block h-6 w-6 text-light1 transition duration-100 hover:text-light1/75 md:h-8 md:w-8"
+              className="ease block h-6 w-6 text-blue-200 transition duration-150 hover:text-blue-100 md:h-8 md:w-8"
               aria-hidden="true"
             />
           ) : (
             <SunIcon
-              className="ease block h-6 w-6 text-orange-300 transition duration-100 hover:text-orange-400/80 md:h-8 md:w-8"
+              className="ease block h-6 w-6 text-orange-300 transition duration-150 hover:text-orange-400/80 md:h-8 md:w-8"
               aria-hidden="true"
             />
           )}
