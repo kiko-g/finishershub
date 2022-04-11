@@ -1,7 +1,7 @@
 module.exports = {
   siteMetadata: {
     title: `Finishers Hub`,
-    description: `The place for all finisher related content. Chaotic, outrageous, lawless on the fence of criminality.`,
+    description: `The place for all finisher related content. Chaotic, outrageous, lawless on the fence of criminality. Perfectly unbalanced. As all things should be.`,
     author: `Francisco Gonçalves`,
     siteUrl: `https://finishershub.netlify.app/`,
   },
