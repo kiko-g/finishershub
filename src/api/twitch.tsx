@@ -1,6 +1,10 @@
 import axios, { AxiosInstance } from 'axios'
 
-const getClips = (api: AxiosInstance) => {
+const PAGINATION_AMOUNT = 100
+const TWITCH_API_URL = 'https://api.twitch.tv/helix'
+
+const getClips = (callback: Function) => {
+  let api: AxiosInstance
   axios
     .post('https://id.twitch.tv/oauth2/token', {
       client_id: process.env.GATSBY_CLIENT_ID,
@@ -16,9 +20,9 @@ const getClips = (api: AxiosInstance) => {
       })
     })
     .then(() => {
-      api.get('https://api.twitch.tv/helix/clips?broadcaster_id=40540258&first=100').then(res => {
-        console.log(res.data)
-      })
+      api
+        .get(`${TWITCH_API_URL}/clips?broadcaster_id=${process.env.GATSBY_TWITCH_BROADCASTER_ID}&first=${PAGINATION_AMOUNT}`)
+        .then(response => callback(response.data))
     })
     .catch(error => console.log(error))
 }

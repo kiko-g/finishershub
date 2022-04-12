@@ -1,10 +1,7 @@
 import React from 'react'
+import { CarouselProps } from '../@types'
 
-type Props = {
-  video: string
-}
-
-export const Carousel = ({ video }: Props) => {
+export const Carousel = ({ video }: CarouselProps) => {
   return (
     <div className="h-full w-full rounded-xl shadow">
       <div className="relative h-full w-full">
