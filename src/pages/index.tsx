@@ -1,4 +1,5 @@
-import * as React from 'react'
+import React, { useState, useEffect } from 'react'
+import axios, { AxiosInstance } from 'axios'
 import Seo from '../components/Seo'
 import { Layout } from '../layout/Layout'
 import { useStaticQuery, graphql } from 'gatsby'
@@ -15,8 +16,32 @@ const mock = [
 ]
 
 const IndexPage = () => {
-  const [view, setView] = React.useState(false)
-  const [videos, setVideos] = React.useState(mock)
+  const [view, setView] = useState(false)
+  const [videos, setVideos] = useState(mock)
+
+  let api: AxiosInstance
+  useEffect(() => {
+    axios
+      .post('https://id.twitch.tv/oauth2/token', {
+        client_id: process.env.GATSBY_CLIENT_ID,
+        client_secret: process.env.GATSBY_CLIENT_SECRET,
+        grant_type: 'client_credentials',
+      })
+      .then(response => {
+        api = axios.create({
+          headers: {
+            'Client-ID': process.env.GATSBY_CLIENT_ID,
+            Authorization: `Bearer ${response.data.access_token}`,
+          },
+        })
+      })
+      .then(() => {
+        api.get('https://api.twitch.tv/helix/clips?broadcaster_id=40540258&first=100').then(res => {
+          console.log(res.data)
+        })
+      })
+      .catch(error => console.log(error))
+  }, [])
 
   const data = useStaticQuery(graphql`
     query {
