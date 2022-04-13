@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react'
 
 const usePaginationQuantity = () => {
-  const [paginationQuantity, setPaginationQuantity] = useState(6)
+  const [paginationQuantity, setPaginationQuantity] = useState(3)
 
   return [paginationQuantity, setPaginationQuantity]
 }

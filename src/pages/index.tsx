@@ -13,40 +13,40 @@ import { ViewTogglers } from '../components/ViewTogglers'
 import { TwitchVideoClip } from '../components/TwitchVideoClip'
 
 const IndexPage = () => {
-  const [view, setView] = useState(false)
-  const [cursor, setCursor] = useState('')
-  const [videos, setVideos] = useState([])
-  const [mounted, setMounted] = useState(false)
-  const [paginationQuantity, setPaginationQuantity] = usePaginationQuantity()
-
-  const parseVideos = (response: ClipsResponse) => {
-    setCursor(response.pagination.cursor)
-    setVideos(
-      response.data
-        .filter(({ game_id }) => game_id.toString() === process.env.GATSBY_TWITCH_MW_GAME_ID)
-        .map(({ embed_url }) => embed_url)
-    )
-    setMounted(true)
-  }
-
-  const parseLoadMoreVideos = (response: ClipsResponse) => {
-    setCursor(response.pagination.cursor)
-    setVideos([
-      ...videos,
-      ...response.data
-        .filter(({ game_id }) => game_id.toString() === process.env.GATSBY_TWITCH_MW_GAME_ID)
-        .map(({ embed_url }) => embed_url),
-    ])
-    setMounted(true)
-  }
-
-  useEffect(() => {
-    api.getClips((response: ClipsResponse) => parseVideos(response), paginationQuantity)
-  }, [])
-
   const data = useStaticQuery(homeQuery)
   const title = data.site.siteMetadata?.title ?? 'Title'
   const description = data.site.siteMetadata?.description ?? 'Description'
+
+  const [view, setView] = useState(false) //grid or list view boolean
+  const [cursor, setCursor] = useState('') //pagination cursor string
+  const [videos, setVideos] = useState([[]]) //array of arrays with video links
+  const [mounted, setMounted] = useState([false]) //array of boolean
+  const [paginationQuantity] = usePaginationQuantity()
+
+  const requestLoad = () => {
+    api.getClips((response: ClipsResponse) => {
+      setCursor(response.pagination.cursor)
+      setVideos([[...response.data.map(({ embed_url }) => embed_url)]])
+      setMounted([true])
+    }, paginationQuantity)
+  }
+
+  const requestLoadMore = () => {
+    setMounted([...mounted, false])
+    api.getMoreClips(
+      (response: ClipsResponse) => {
+        setCursor(response.pagination.cursor)
+        setVideos([...videos, [...response.data.map(({ embed_url }) => embed_url)]])
+        setMounted([...mounted, true])
+      },
+      paginationQuantity,
+      cursor
+    )
+  }
+
+  useEffect(() => {
+    requestLoad()
+  }, [])
 
   return (
     <Layout location="Home" background={false}>
@@ -59,23 +59,18 @@ const IndexPage = () => {
         </div>
       </header>
       <main className={view ? 'list' : 'grid'}>
-        {mounted
-          ? videos.map((video, videoIdx) => (
-              <TwitchVideoClip video={video} parent={process.env.GATSBY_DOMAIN} key={`video-${videoIdx}`} />
-            ))
-          : Array(paginationQuantity)
-              .fill(null)
-              .map((_, skeletonIdx) => <Skeleton key={`skeleton-${skeletonIdx}`} />)}
+        {mounted.map((isMounted, index: number) =>
+          isMounted
+            ? videos[index].map((video: string, videoIdx: number) => (
+                <TwitchVideoClip video={video} parent={process.env.GATSBY_DOMAIN} key={`video-${index}-${videoIdx}`} />
+              ))
+            : Array(paginationQuantity)
+                .fill(null)
+                .map((_, skeletonIdx) => <Skeleton key={`skeleton-${skeletonIdx}`} />)
+        )}
       </main>
       <footer>
-        <button
-          type="button"
-          className="load-more"
-          onClick={() => {
-            setMounted(false)
-            api.getMoreClips((response: ClipsResponse) => parseLoadMoreVideos(response), paginationQuantity, cursor)
-          }}
-        >
+        <button type="button" className="load-more" onClick={() => requestLoadMore()}>
           <PlusIcon className="-ml-1 mr-2 h-5 w-5" aria-hidden="true" />
           Load More Videos
         </button>
