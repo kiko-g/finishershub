@@ -1,28 +1,30 @@
 import api from '../api/twitch'
+import Seo from '../components/Seo'
 import { useStaticQuery, graphql } from 'gatsby'
 import React, { useState, useEffect } from 'react'
-import Seo from '../components/Seo'
+
 import { ClipsResponse } from '../@types'
 import { Layout } from '../layout/Layout'
-import { TwitchVideoClip } from '../components/TwitchVideoClip'
-import { Pagination } from '../components/Pagination'
+import { Skeleton } from '../components/Skeleton'
 import { ViewTogglers } from '../components/ViewTogglers'
+import { TwitchVideoClip } from '../components/TwitchVideoClip'
+import usePaginationQuantity from '../hooks/usePaginationQuantity'
+import { PlusIcon } from '@heroicons/react/solid'
 
 const IndexPage = () => {
-  console.log(process.env.GATSBY_DOMAIN)
-  console.log(process.env.GATSBY_TWITCH_GAME_ID)
-  console.log(process.env.GATSBY_TWITCH_BROADCASTER_ID)
-
   const [view, setView] = useState(false)
   const [cursor, setCursor] = useState('')
   const [videos, setVideos] = useState([])
+  const [mounted, setMounted] = useState(false)
+  const [paginationQuantity, setPaginationQuantity] = usePaginationQuantity()
 
   useEffect(() => {
     api.getClips((response: ClipsResponse) => {
       setCursor(response.pagination.cursor)
       setVideos(response.data.map(({ embed_url }) => embed_url))
-    })
-  }, [])
+      setMounted(true)
+    }, paginationQuantity)
+  }, [paginationQuantity])
 
   const data = useStaticQuery(graphql`
     query {
@@ -51,13 +53,24 @@ const IndexPage = () => {
           view ? '' : 'sm:grid-cols-1 lg:grid-cols-2 xl:grid-cols-3'
         }`}
       >
-        {videos.map((video, videoIdx) => (
-          <TwitchVideoClip video={video} parent={process.env.GATSBY_DOMAIN} key={`video-${videoIdx}`} />
-        ))}
+        {mounted
+          ? videos.map((video, videoIdx) => (
+              <TwitchVideoClip video={video} parent={process.env.GATSBY_DOMAIN} key={`video-${videoIdx}`} />
+            ))
+          : Array(paginationQuantity)
+              .fill(null)
+              .map(() => <Skeleton />)}
       </main>
 
-      <footer>
-        <Pagination api={api} />
+      <footer className="mt-2 flex items-center justify-center">
+        <button
+          type="button"
+          className="inline-flex items-center rounded-md border border-transparent bg-primary px-4 py-2 text-sm font-medium text-white shadow-sm transition 
+          hover:bg-primary/90 focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2"
+        >
+          <PlusIcon className="-ml-1 mr-2 h-5 w-5" aria-hidden="true" />
+          Load More Videos
+        </button>
       </footer>
     </Layout>
   )

@@ -2,21 +2,17 @@ import React, { useState } from 'react'
 import { ChevronLeftIcon, ChevronRightIcon } from '@heroicons/react/solid'
 import '../styles/components/pagination.css'
 
-type PaginationProps = {
+type Props = {
   api: any
+  paginationQuantity: number | React.Dispatch<React.SetStateAction<number>>
 }
 
-export const Pagination = ({ api }: PaginationProps) => {
+export const Pagination = ({ api, paginationQuantity }: Props) => {
   const [activePage, setActivePage] = useState(1)
-  const pages = Array(5).fill(null)
+  const pages = Array(paginationQuantity).fill(null)
 
-  const prev = () => {
-    console.log('previous page')
-  }
-
-  const next = () => {
-    console.log('next page')
-  }
+  const prev = () => {}
+  const next = () => {}
 
   return (
     <div className="pagination">

@@ -1,6 +1,5 @@
 import axios, { AxiosInstance } from 'axios'
 
-const PAGINATION = 6
 const TWITCH_API_URL = 'https://api.twitch.tv/helix'
 const TWITCH_API_TOKEN_URL = 'https://id.twitch.tv/oauth2/token'
 
@@ -26,8 +25,11 @@ const twitchApiRequest = (url: string, callback: Function) => {
     .catch(error => console.log(error))
 }
 
-const getClips = (callback: Function) => {
-  twitchApiRequest(`clips?broadcaster_id=${process.env.GATSBY_TWITCH_BROADCASTER_ID}&first=${PAGINATION}`, callback)
+const getClips = (callback: Function, paginationQuantity: any) => {
+  twitchApiRequest(
+    `clips?broadcaster_id=${process.env.GATSBY_TWITCH_BROADCASTER_ID}&first=${paginationQuantity}`,
+    callback
+  )
 }
 
 const api = {

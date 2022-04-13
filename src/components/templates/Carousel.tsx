@@ -1,23 +1,20 @@
 import React from 'react'
 
-type CarouselProps = {
+type Props = {
   video: string
 }
 
-export const Carousel = ({ video }: CarouselProps) => {
-  const prev = () => {
-    console.log('Previous carousel pressed')
-  }
-
-  const next = () => {
-    console.log('Next carousel pressed')
-  }
+export const Carousel = ({ video }: Props) => {
+  const prev = () => {}
+  const next = () => {}
 
   return (
     <div className="h-full w-full rounded-xl shadow">
       <div className="relative h-full w-full">
+        {/* Display */}
         <video controls className="h-full w-full rounded-xl" src={video} />
 
+        {/* Left Button */}
         <button
           className="group absolute top-1/2 left-2 z-10 rounded-full bg-white/10 p-0.5 transition hover:bg-white/50"
           onClick={prev}
@@ -34,6 +31,7 @@ export const Carousel = ({ video }: CarouselProps) => {
           </svg>
         </button>
 
+        {/* Right Button */}
         <button
           className="group absolute top-1/2 right-2 z-10 rounded-full bg-white/10 p-0.5 transition hover:bg-white/50"
           onClick={next}

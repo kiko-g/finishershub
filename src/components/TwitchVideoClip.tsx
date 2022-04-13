@@ -1,13 +1,11 @@
 import React from 'react'
 
-type TwitchVideoClipProps = {
+type Props = {
   video: string
   parent: string
 }
 
-export const TwitchVideoClip = ({ video, parent }: TwitchVideoClipProps) => {
-  console.log(parent)
-
+export const TwitchVideoClip = ({ video, parent }: Props) => {
   return (
     <div className="h-full w-full rounded-xl shadow">
       <div className="relative h-full w-full">
