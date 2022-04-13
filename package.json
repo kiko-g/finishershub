@@ -6,7 +6,9 @@
   "dependencies": {
     "@headlessui/react": "^1.5.0",
     "@heroicons/react": "^1.0.6",
+    "axios": "^0.26.1",
     "gatsby": "^4.11.2",
+    "gatsby-plugin-env-variables": "^2.2.0",
     "gatsby-plugin-gatsby-cloud": "^4.11.1",
     "gatsby-plugin-image": "^2.11.1",
     "gatsby-plugin-manifest": "^4.11.1",
@@ -38,7 +40,7 @@
     "develop": "gatsby develop",
     "format": "prettier --write \"**/*.{js,jsx,ts,tsx,json,md}\"",
     "start": "gatsby develop",
-    "hardrun": "gatsby clean && gatsby develop",
+    "cstart": "gatsby clean && gatsby develop",
     "serve": "gatsby serve",
     "clean": "gatsby clean",
     "test": "echo \"Write tests! -> https://gatsby.dev/unit-testing\" && exit 1"
