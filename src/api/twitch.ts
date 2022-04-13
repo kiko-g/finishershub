@@ -32,8 +32,16 @@ const getClips = (callback: Function, paginationQuantity: any) => {
   )
 }
 
+const getMoreClips = (callback: Function, paginationQuantity: any, cursor: string) => {
+  twitchApiRequest(
+    `clips?broadcaster_id=${process.env.GATSBY_TWITCH_BROADCASTER_ID}&first=${paginationQuantity}&after=${cursor}`,
+    callback
+  )
+}
+
 const api = {
   getClips,
+  getMoreClips,
 }
 
 export default api
