@@ -1,4 +1,4 @@
-import * as React from 'react'
+import React from 'react'
 import { Layout } from '../layout/Layout'
 import Seo from '../components/Seo'
 import { StaticImage } from 'gatsby-plugin-image'

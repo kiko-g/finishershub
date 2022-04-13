@@ -1,11 +1,11 @@
 import React, { Dispatch, SetStateAction } from 'react'
 
 type Props = {
-  viewHook: [boolean, Dispatch<SetStateAction<boolean>>]
+  hook: [boolean, Dispatch<SetStateAction<boolean>>]
 }
 
-export const ViewTogglers = ({ viewHook }: Props) => {
-  const [view, setView] = viewHook
+export const ViewTogglers = ({ hook }: Props) => {
+  const [view, setView] = hook
 
   return (
     <div className="hidden items-end justify-center space-x-2 md:flex">
