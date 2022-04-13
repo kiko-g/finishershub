@@ -10,10 +10,14 @@ import { ViewTogglers } from '../components/ViewTogglers'
 
 const IndexPage = () => {
   const [view, setView] = useState(false)
+  const [cursor, setCursor] = useState('')
   const [videos, setVideos] = useState([])
 
   useEffect(() => {
-    api.getClips((response: ClipsResponse) => setVideos(response.data.map(({ embed_url }) => embed_url)))
+    api.getClips((response: ClipsResponse) => {
+      setCursor(response.pagination.cursor)
+      setVideos(response.data.map(({ embed_url }) => embed_url))
+    })
   }, [])
 
   const data = useStaticQuery(graphql`
@@ -39,7 +43,7 @@ const IndexPage = () => {
       </header>
 
       <main
-        className={`mt-4 grid grid-cols-1 gap-4 py-2 md:mt-0 md:gap-4 md:py-4 ${
+        className={`mt-4 grid grid-cols-1 gap-4 py-2 md:mt-0 md:gap-5 md:py-4 ${
           view ? '' : 'sm:grid-cols-1 lg:grid-cols-2 xl:grid-cols-3'
         }`}
       >

@@ -8,7 +8,7 @@ type PaginationProps = {
 
 export const Pagination = ({ api }: PaginationProps) => {
   const [activePage, setActivePage] = useState(1)
-  const pages = Array(3).fill(null)
+  const pages = Array(5).fill(null)
 
   const prev = () => {
     console.log('previous page')
