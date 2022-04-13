@@ -45,7 +45,11 @@ const Hamburger = ({ open }) => (
           alt="Francisco Gonçalves"
         />
       ) : (
-        <StaticImage className="avatar h-6 w-6 rounded-full" src="../../static/images/avatar.png" alt="Francisco Gonçalves" />
+        <StaticImage
+          className="avatar h-6 w-6 rounded-full"
+          src="../../static/images/avatar.png"
+          alt="Francisco Gonçalves"
+        />
       )}
     </a>
 

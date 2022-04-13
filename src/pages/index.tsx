@@ -4,7 +4,7 @@ import React, { useState, useEffect } from 'react'
 import Seo from '../components/Seo'
 import { ClipsResponse } from '../@types'
 import { Layout } from '../layout/Layout'
-import { VideoClip } from '../components/VideoClip'
+import { TwitchVideoClip } from '../components/TwitchVideoClip'
 import { Pagination } from '../components/Pagination'
 import { ViewTogglers } from '../components/ViewTogglers'
 
@@ -48,7 +48,7 @@ const IndexPage = () => {
         }`}
       >
         {videos.map((video, videoIdx) => (
-          <VideoClip video={video} key={`video-${videoIdx}`} />
+          <TwitchVideoClip video={video} parent={process.env.GATSBY_DOMAIN} key={`video-${videoIdx}`} />
         ))}
       </main>
 
