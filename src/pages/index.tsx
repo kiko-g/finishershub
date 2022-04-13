@@ -9,6 +9,10 @@ import { Pagination } from '../components/Pagination'
 import { ViewTogglers } from '../components/ViewTogglers'
 
 const IndexPage = () => {
+  console.log(process.env.GATSBY_DOMAIN)
+  console.log(process.env.GATSBY_TWITCH_GAME_ID)
+  console.log(process.env.GATSBY_TWITCH_BROADCASTER_ID)
+
   const [view, setView] = useState(false)
   const [cursor, setCursor] = useState('')
   const [videos, setVideos] = useState([])
