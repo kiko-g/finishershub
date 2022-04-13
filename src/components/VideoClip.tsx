@@ -8,7 +8,7 @@ export const VideoClip = ({ video }: VideoClipProps) => {
   return (
     <div className="h-full w-full rounded-xl shadow">
       <div className="relative h-full w-full">
-        <iframe src={`${video}&parent=localhost`} allowFullScreen className="aspect-video w-full rounded-xl"></iframe>
+        <iframe allowFullScreen className="aspect-video w-full rounded-xl" src={`${video}&parent=localhost`}></iframe>
       </div>
     </div>
   )

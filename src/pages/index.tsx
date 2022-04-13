@@ -5,7 +5,7 @@ import Seo from '../components/Seo'
 import { ClipsResponse } from '../@types'
 import { Layout } from '../layout/Layout'
 import { VideoClip } from '../components/VideoClip'
-// import { Pagination } from '../components/Pagination'
+import { Pagination } from '../components/Pagination'
 import { ViewTogglers } from '../components/ViewTogglers'
 
 const IndexPage = () => {
@@ -38,13 +38,19 @@ const IndexPage = () => {
         </div>
       </header>
 
-      <main className={`mt-4 grid grid-cols-1 gap-4 py-2 md:mt-0 md:gap-8 md:py-4 ${view ? 'md:grid-cols-1' : 'md:grid-cols-3'}`}>
+      <main
+        className={`mt-4 grid grid-cols-1 gap-4 py-2 md:mt-0 md:gap-4 md:py-4 ${
+          view ? '' : 'sm:grid-cols-1 lg:grid-cols-2 xl:grid-cols-3'
+        }`}
+      >
         {videos.map((video, videoIdx) => (
           <VideoClip video={video} key={`video-${videoIdx}`} />
         ))}
       </main>
 
-      <footer>{/* <Pagination api={api} /> */}</footer>
+      <footer>
+        <Pagination api={api} />
+      </footer>
     </Layout>
   )
 }

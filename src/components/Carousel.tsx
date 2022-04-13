@@ -6,11 +6,11 @@ type CarouselProps = {
 
 export const Carousel = ({ video }: CarouselProps) => {
   const prev = () => {
-    console.log('Previous pressed')
+    console.log('Previous carousel pressed')
   }
 
   const next = () => {
-    console.log('Next pressed')
+    console.log('Next carousel pressed')
   }
 
   return (
