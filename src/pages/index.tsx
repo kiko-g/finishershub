@@ -1,10 +1,11 @@
 import api from '../api/twitch'
+import { useStaticQuery, graphql } from 'gatsby'
 import React, { useState, useEffect } from 'react'
 import Seo from '../components/Seo'
 import { ClipsResponse } from '../@types'
 import { Layout } from '../layout/Layout'
-import { useStaticQuery, graphql } from 'gatsby'
-import { Carousel } from '../components/Carousel'
+import { VideoClip } from '../components/VideoClip'
+// import { Pagination } from '../components/Pagination'
 import { ViewTogglers } from '../components/ViewTogglers'
 
 const IndexPage = () => {
@@ -12,10 +13,7 @@ const IndexPage = () => {
   const [videos, setVideos] = useState([])
 
   useEffect(() => {
-    api.getClips((response: ClipsResponse) => {
-      console.log(response.data)
-      setVideos(response.data.map(({ embed_url }) => embed_url))
-    })
+    api.getClips((response: ClipsResponse) => setVideos(response.data.map(({ embed_url }) => embed_url)))
   }, [])
 
   const data = useStaticQuery(graphql`
@@ -39,11 +37,14 @@ const IndexPage = () => {
           <ViewTogglers viewHook={[view, setView]} />
         </div>
       </header>
-      <div className={`mt-4 grid grid-cols-1 gap-4 py-2 md:mt-0 md:gap-6 md:py-4 ${view ? 'md:grid-cols-1' : 'md:grid-cols-3'}`}>
+
+      <main className={`mt-4 grid grid-cols-1 gap-4 py-2 md:mt-0 md:gap-8 md:py-4 ${view ? 'md:grid-cols-1' : 'md:grid-cols-3'}`}>
         {videos.map((video, videoIdx) => (
-          <Carousel video={video} key={`video-${videoIdx}`} />
+          <VideoClip video={video} key={`video-${videoIdx}`} />
         ))}
-      </div>
+      </main>
+
+      <footer>{/* <Pagination api={api} /> */}</footer>
     </Layout>
   )
 }

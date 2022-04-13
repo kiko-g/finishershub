@@ -1,6 +1,6 @@
 import axios, { AxiosInstance } from 'axios'
 
-const PAGINATION = 9
+const PAGINATION = 6
 const TWITCH_API_URL = 'https://api.twitch.tv/helix'
 const TWITCH_API_TOKEN_URL = 'https://id.twitch.tv/oauth2/token'
 
