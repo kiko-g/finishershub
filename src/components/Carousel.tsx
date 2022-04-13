@@ -1,11 +1,15 @@
 import React from 'react'
-import { CarouselProps } from '../@types'
+
+type CarouselProps = {
+  video: string
+}
 
 export const Carousel = ({ video }: CarouselProps) => {
   return (
     <div className="h-full w-full rounded-xl shadow">
       <div className="relative h-full w-full">
         <video controls className="h-full w-full rounded-xl" src={video} />
+        {/* <iframe src={`${video}&parent=finishershub.netlify.app`} allowFullScreen></iframe> */}
 
         <button className="group absolute top-1/2 left-2 z-10 rounded-full bg-white/10 p-0.5 transition hover:bg-white/50">
           <svg

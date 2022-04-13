@@ -1,28 +1,20 @@
+import api from '../api/twitch'
 import React, { useState, useEffect } from 'react'
-import axios, { AxiosInstance } from 'axios'
 import Seo from '../components/Seo'
+import { ClipsResponse } from '../@types'
 import { Layout } from '../layout/Layout'
 import { useStaticQuery, graphql } from 'gatsby'
 import { Carousel } from '../components/Carousel'
 import { ViewTogglers } from '../components/ViewTogglers'
-import { getClips } from '../api/twitch'
-
-const mock = [
-  'https://production.assets.clips.twitchcdn.net/42933675437-offset-7816.mp4?sig=ebc34f0a5138380f5704d02d99a9e8979278e368&token=%7B%22authorization%22%3A%7B%22forbidden%22%3Afalse%2C%22reason%22%3A%22%22%7D%2C%22clip_uri%22%3A%22https%3A%2F%2Fproduction.assets.clips.twitchcdn.net%2F42933675437-offset-7816.mp4%22%2C%22device_id%22%3A%22acipLQp3c8AYGAwgxpU0N3mVmjzdCaWe%22%2C%22expires%22%3A1649708403%2C%22user_id%22%3A%2240540258%22%2C%22version%22%3A2%7D',
-  'https://production.assets.clips.twitchcdn.net/42933675437-offset-7816.mp4?sig=ebc34f0a5138380f5704d02d99a9e8979278e368&token=%7B%22authorization%22%3A%7B%22forbidden%22%3Afalse%2C%22reason%22%3A%22%22%7D%2C%22clip_uri%22%3A%22https%3A%2F%2Fproduction.assets.clips.twitchcdn.net%2F42933675437-offset-7816.mp4%22%2C%22device_id%22%3A%22acipLQp3c8AYGAwgxpU0N3mVmjzdCaWe%22%2C%22expires%22%3A1649708403%2C%22user_id%22%3A%2240540258%22%2C%22version%22%3A2%7D',
-  'https://production.assets.clips.twitchcdn.net/42933675437-offset-7816.mp4?sig=ebc34f0a5138380f5704d02d99a9e8979278e368&token=%7B%22authorization%22%3A%7B%22forbidden%22%3Afalse%2C%22reason%22%3A%22%22%7D%2C%22clip_uri%22%3A%22https%3A%2F%2Fproduction.assets.clips.twitchcdn.net%2F42933675437-offset-7816.mp4%22%2C%22device_id%22%3A%22acipLQp3c8AYGAwgxpU0N3mVmjzdCaWe%22%2C%22expires%22%3A1649708403%2C%22user_id%22%3A%2240540258%22%2C%22version%22%3A2%7D',
-  'https://production.assets.clips.twitchcdn.net/42933675437-offset-7816.mp4?sig=ebc34f0a5138380f5704d02d99a9e8979278e368&token=%7B%22authorization%22%3A%7B%22forbidden%22%3Afalse%2C%22reason%22%3A%22%22%7D%2C%22clip_uri%22%3A%22https%3A%2F%2Fproduction.assets.clips.twitchcdn.net%2F42933675437-offset-7816.mp4%22%2C%22device_id%22%3A%22acipLQp3c8AYGAwgxpU0N3mVmjzdCaWe%22%2C%22expires%22%3A1649708403%2C%22user_id%22%3A%2240540258%22%2C%22version%22%3A2%7D',
-  'https://production.assets.clips.twitchcdn.net/42933675437-offset-7816.mp4?sig=ebc34f0a5138380f5704d02d99a9e8979278e368&token=%7B%22authorization%22%3A%7B%22forbidden%22%3Afalse%2C%22reason%22%3A%22%22%7D%2C%22clip_uri%22%3A%22https%3A%2F%2Fproduction.assets.clips.twitchcdn.net%2F42933675437-offset-7816.mp4%22%2C%22device_id%22%3A%22acipLQp3c8AYGAwgxpU0N3mVmjzdCaWe%22%2C%22expires%22%3A1649708403%2C%22user_id%22%3A%2240540258%22%2C%22version%22%3A2%7D',
-  'https://production.assets.clips.twitchcdn.net/42933675437-offset-7816.mp4?sig=ebc34f0a5138380f5704d02d99a9e8979278e368&token=%7B%22authorization%22%3A%7B%22forbidden%22%3Afalse%2C%22reason%22%3A%22%22%7D%2C%22clip_uri%22%3A%22https%3A%2F%2Fproduction.assets.clips.twitchcdn.net%2F42933675437-offset-7816.mp4%22%2C%22device_id%22%3A%22acipLQp3c8AYGAwgxpU0N3mVmjzdCaWe%22%2C%22expires%22%3A1649708403%2C%22user_id%22%3A%2240540258%22%2C%22version%22%3A2%7D',
-]
 
 const IndexPage = () => {
   const [view, setView] = useState(false)
-  const [videos, setVideos] = useState(mock)
+  const [videos, setVideos] = useState([])
 
   useEffect(() => {
-    const query = getClips((response: any[]) => {
-      console.log(response)
+    api.getClips((response: ClipsResponse) => {
+      console.log(response.data)
+      setVideos(response.data.map(({ embed_url }) => embed_url))
     })
   }, [])
 
