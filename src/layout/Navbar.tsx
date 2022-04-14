@@ -42,21 +42,17 @@ const Hamburger = ({ open }) => (
         : 'flex w-full items-center justify-between'
     }`}
   >
-    <a href="https://linktr.ee/kikogoncalves" target="_blank">
+    <Link to="/">
       {open ? (
         <StaticImage
           className="avatar top-0.5 h-5 w-5 rounded-full"
           src="../../static/images/avatar.png"
-          alt="Francisco Gonçalves"
+          alt="Finishers Hub"
         />
       ) : (
-        <StaticImage
-          className="avatar h-6 w-6 rounded-full"
-          src="../../static/images/avatar.png"
-          alt="Francisco Gonçalves"
-        />
+        <StaticImage className="avatar h-6 w-6 rounded-full" src="../../static/images/avatar.png" alt="Finishers Hub" />
       )}
-    </a>
+    </Link>
 
     <div className="flex items-center space-x-1">
       <DarkModeSwitchMinimal />
@@ -85,7 +81,7 @@ const Header = ({ title, location }) => (
         <StaticImage
           className="z-20 inline-flex h-6 w-6 rounded-full transition"
           src="../../static/images/avatar.png"
-          alt="Francisco Gonçalves"
+          alt="Finishers Hub"
         />
         <h2 className="text-xs font-bold tracking-tighter duration-150 lg:text-base">{title}</h2>
       </Link>

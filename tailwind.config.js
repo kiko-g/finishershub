@@ -35,6 +35,20 @@ module.exports = {
         system: defaultTheme.fontFamily.sans,
         flow: 'Flow',
       },
+      keyframes: {
+        dark: {
+          '0%, 100%': { transform: 'rotate(5deg)' },
+          '50%': { transform: 'rotate(-5deg)' },
+        },
+        light: {
+          '0%, 100%': { transform: 'rotate(5deg)' },
+          '50%': { transform: 'rotate(-5deg)' },
+        },
+      },
+      animation: {
+        dark: 'dark 400ms ease-in-out',
+        light: 'light 400ms ease-in-out',
+      },
     },
   },
   plugins: ['gatsby-plugin-postcss'],
