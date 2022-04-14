@@ -8,12 +8,12 @@ export const ViewTogglers = ({ hook }: Props) => {
   const [view, setView] = hook
 
   return (
-    <div className="hidden items-end justify-center space-x-2 md:flex">
+    <div className="hidden items-end justify-center space-x-2 text-primary dark:text-light md:flex">
       {view ? (
         <button className="transition hover:opacity-75" onClick={() => setView(false)}>
           <svg
             xmlns="http://www.w3.org/2000/svg"
-            className="h-6 w-6"
+            className="h-8 w-8"
             fill="none"
             viewBox="0 0 24 24"
             stroke="currentColor"
@@ -26,7 +26,7 @@ export const ViewTogglers = ({ hook }: Props) => {
         <button className="transition hover:opacity-75" onClick={() => setView(true)}>
           <svg
             xmlns="http://www.w3.org/2000/svg"
-            className="h-6 w-6"
+            className="h-8 w-8"
             fill="none"
             viewBox="0 0 24 24"
             stroke="currentColor"
