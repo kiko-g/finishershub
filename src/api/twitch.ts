@@ -1,3 +1,4 @@
+import { daysDifference, random } from '../utils'
 import axios, { AxiosInstance } from 'axios'
 
 const TWITCH_API_URL = 'https://api.twitch.tv/helix'
@@ -26,17 +27,31 @@ const twitchApiRequest = (url: string, callback: Function) => {
 }
 
 const getClips = (callback: Function, paginationQuantity: any) => {
-  twitchApiRequest(
-    `clips?broadcaster_id=${process.env.GATSBY_TWITCH_BROADCASTER_ID}&first=${paginationQuantity}`,
-    callback
-  )
+  const today = new Date()
+  const debut = new Date('2021, 5, 1')
+  const hiatus = new Date('2021, 7, 22')
+
+  const start = debut
+  const end = today
+
+  const daysBetweenDebutAndHiatus = Math.round(daysDifference(debut, hiatus))
+  const offset = random(daysBetweenDebutAndHiatus)
+  start.setDate(start.getDate() + offset)
+
+  const url =
+    'clips' +
+    ('?broadcaster_id=' + process.env.GATSBY_TWITCH_BROADCASTER_ID) +
+    ('&first=' + (paginationQuantity + 3)) +
+    ('&started_at=' + start.toISOString()) +
+    ('&ended_at=' + end.toISOString())
+
+  twitchApiRequest(url, callback)
 }
 
 const getMoreClips = (callback: Function, paginationQuantity: any, cursor: string) => {
-  twitchApiRequest(
-    `clips?broadcaster_id=${process.env.GATSBY_TWITCH_BROADCASTER_ID}&first=${paginationQuantity}&after=${cursor}`,
-    callback
-  )
+  if (!cursor) return
+  const url = `clips?broadcaster_id=${process.env.GATSBY_TWITCH_BROADCASTER_ID}&first=${paginationQuantity}&after=${cursor}`
+  twitchApiRequest(url, callback)
 }
 
 const api = {

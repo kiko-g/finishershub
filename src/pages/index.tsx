@@ -18,7 +18,7 @@ const IndexPage = () => {
   const description = data.site.siteMetadata?.description ?? 'Description'
 
   const [view, setView] = useState(false) //grid or list view boolean
-  const [cursor, setCursor] = useState('') //pagination cursor string
+  const [cursor, setCursor] = useState(null) //pagination cursor string
   const [videos, setVideos] = useState([[]]) //array of arrays with video links
   const [mounted, setMounted] = useState([false]) //array of boolean
   const [paginationQuantity] = usePaginationQuantity()
@@ -70,10 +70,12 @@ const IndexPage = () => {
         )}
       </main>
       <footer>
-        <button type="button" className="load-more" onClick={() => requestLoadMore()}>
-          <PlusIcon className="-ml-1 mr-2 h-5 w-5" aria-hidden="true" />
-          Load More Videos
-        </button>
+        {cursor && (
+          <button type="button" className="load-more" onClick={() => requestLoadMore()}>
+            <PlusIcon className="-ml-1 mr-2 h-5 w-5" aria-hidden="true" />
+            Load More Videos
+          </button>
+        )}
       </footer>
     </Layout>
   )

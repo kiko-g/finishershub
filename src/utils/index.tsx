@@ -5,12 +5,15 @@ export const classNames = (...classes: any[]) => {
   return classes.filter(Boolean).join(' ')
 }
 
-export const daysDifference = (dateString: string) => {
-  let now = new Date()
-  let date = new Date(dateString)
-  let difference = (now.getTime() - date.getTime()) / (1000 * 3600 * 24)
+export const daysDifference = (before: Date, after: Date) => {
+  let a = new Date(after.toString())
+  let b = new Date(before.toString())
 
-  return difference
+  return (a.getTime() - b.getTime()) / (1000 * 3600 * 24)
+}
+
+export const random = (max: number) => {
+  return Math.floor(Math.random() * (max + 1)) //between 0 and max
 }
 
 export const navigation = [
