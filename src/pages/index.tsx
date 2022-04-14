@@ -8,9 +8,9 @@ import usePaginationQuantity from '../hooks/usePaginationQuantity'
 
 import { ClipsResponse } from '../@types'
 import { Layout } from '../layout/Layout'
-import { Skeleton } from '../components/Skeleton'
 import { ViewTogglers } from '../components/ViewTogglers'
 import { TwitchVideoClip } from '../components/TwitchVideoClip'
+import { Skeleton } from '../components/Skeleton'
 
 const IndexPage = () => {
   const data = useStaticQuery(homeQuery)
@@ -20,24 +20,20 @@ const IndexPage = () => {
   const [view, setView] = useState(false) //grid or list view boolean
   const [cursor, setCursor] = useState(null) //pagination cursor string
   const [videos, setVideos] = useState([[]]) //array of arrays with video links
-  const [mounted, setMounted] = useState([false]) //array of boolean
   const [paginationQuantity] = usePaginationQuantity()
 
   const requestLoad = () => {
     api.getClips((response: ClipsResponse) => {
       setCursor(response.pagination.cursor)
       setVideos([[...response.data.map(({ embed_url }) => embed_url)]])
-      setMounted([true])
     }, paginationQuantity)
   }
 
   const requestLoadMore = () => {
-    setMounted([...mounted, false])
     api.getMoreClips(
       (response: ClipsResponse) => {
         setCursor(response.pagination.cursor)
         setVideos([...videos, [...response.data.map(({ embed_url }) => embed_url)]])
-        setMounted([...mounted, true])
       },
       paginationQuantity,
       cursor
@@ -59,20 +55,20 @@ const IndexPage = () => {
         </div>
       </header>
       <main className={view ? 'list' : 'grid'}>
-        {mounted.map((isMounted, index: number) =>
-          isMounted
-            ? videos[index].map((video: string, videoIdx: number) => (
-                <TwitchVideoClip video={video} parent={process.env.GATSBY_DOMAIN} key={`video-${index}-${videoIdx}`} />
-              ))
-            : Array(paginationQuantity)
-                .fill(null)
-                .map((_, skeletonIdx) => <Skeleton key={`skeleton-${skeletonIdx}`} />)
+        {videos.map((array: string[], index: number) =>
+          array.map((video: string, videoIdx: number) => (
+            <TwitchVideoClip video={video} parent={process.env.GATSBY_DOMAIN} key={`video-${index}-${videoIdx}`} />
+          ))
         )}
+        {videos[0].length === 0
+          ? Array(6)
+              .fill(null)
+              .map((skeleton, skeletonIdx) => <Skeleton key={`skeleton-${skeletonIdx}`} />)
+          : null}
       </main>
       <footer>
         {cursor && (
           <button type="button" className="load-more" onClick={() => requestLoadMore()}>
-            <PlusIcon className="-ml-1 mr-2 h-5 w-5" aria-hidden="true" />
             Load More Videos
           </button>
         )}

@@ -1,4 +1,5 @@
-import React, { Dispatch, SetStateAction } from 'react'
+import React, { useEffect, useState } from 'react'
+import { Skeleton } from './Skeleton'
 
 type Props = {
   video: string
@@ -6,16 +7,24 @@ type Props = {
 }
 
 export const TwitchVideoClip = ({ video, parent }: Props) => {
+  const [loaded, setLoaded] = useState(false)
+
   return (
-    <div className="h-full w-full rounded-xl shadow">
-      <div className="relative h-full w-full">
-        <iframe
-          className="aspect-video w-full rounded-xl"
-          src={`${video}&parent=${parent}`}
-          onLoad={() => {}}
-          allowFullScreen
-        ></iframe>
+    <>
+      <div className={`${loaded ? 'flex' : 'hidden'} h-full w-full rounded-xl shadow`}>
+        <div className="relative h-full w-full">
+          <iframe
+            className="aspect-video w-full rounded-xl"
+            src={`${video}&parent=${parent}`}
+            onLoad={() => {
+              console.log('loaded')
+              setLoaded(true)
+            }}
+            allowFullScreen
+          ></iframe>
+        </div>
       </div>
-    </div>
+      {!loaded && <Skeleton />}
+    </>
   )
 }

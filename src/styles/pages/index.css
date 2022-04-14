@@ -11,7 +11,7 @@ header > div > p {
 }
 
 main {
-  @apply mt-4 grid grid-cols-1 gap-4 py-2 md:mt-0 md:gap-5 md:py-4;
+  @apply mt-4 mb-2 grid grid-cols-1 gap-4 py-2 md:mt-0 md:gap-5 md:py-4;
 }
 
 main.list {
@@ -23,7 +23,7 @@ main.grid {
 }
 
 footer {
-  @apply mt-2 flex items-center justify-center;
+  @apply flex items-center justify-center;
 }
 
 footer > button.load-more {
