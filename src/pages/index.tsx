@@ -54,24 +54,23 @@ const IndexPage = () => {
           <ViewTogglers hook={[view, setView]} />
         </div>
       </header>
+
       <main className={view ? 'list' : 'grid'}>
         {videos.map((array: string[], index: number) =>
           array.map((video: string, videoIdx: number) => (
             <TwitchVideoClip video={video} parent={process.env.GATSBY_DOMAIN} key={`video-${index}-${videoIdx}`} />
           ))
         )}
-        {videos[0].length === 0
-          ? Array(6)
-              .fill(null)
-              .map((skeleton, skeletonIdx) => <Skeleton key={`skeleton-${skeletonIdx}`} />)
-          : null}
+        {videos[0].length === 0 &&
+          Array(6)
+            .fill(null)
+            .map((skeleton, skeletonIdx) => <Skeleton key={`skeleton-${skeletonIdx}`} />)}
       </main>
+
       <footer>
-        {cursor && (
-          <button type="button" className="load-more" onClick={() => requestLoadMore()}>
-            Load More Videos
-          </button>
-        )}
+        <button type="button" className={`load-more ${cursor ? '' : 'hidden'}`} onClick={() => requestLoadMore()}>
+          Load More Videos
+        </button>
       </footer>
     </Layout>
   )

@@ -17,7 +17,7 @@ export const Skeleton = ({}: Props) => {
             </div>
             <div className="h-2 rounded bg-gray-300 dark:bg-gray-600"></div>
           </div>
-          <div className="h-36 w-full rounded bg-gray-300 dark:bg-gray-600"></div>
+          <div className="h-44 w-full rounded bg-gray-300 dark:bg-gray-600"></div>
         </div>
       </div>
     </div>
