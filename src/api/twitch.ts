@@ -1,5 +1,5 @@
 import axios, { AxiosInstance } from 'axios'
-import { daysDifference, randomBetween } from '../utils/index'
+import { daysDifference, randomBetween } from '../utils'
 
 const TWITCH_API_URL = 'https://api.twitch.tv/helix'
 const TWITCH_API_TOKEN_URL = 'https://id.twitch.tv/oauth2/token'

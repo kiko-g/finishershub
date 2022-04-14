@@ -18,7 +18,7 @@ interface Props {
   title: string
 }
 
-const Seo: React.FC<Props> = ({ description, lang, meta, title }) => {
+const Seo = ({ description, lang, meta, title }: Props) => {
   const { site } = useStaticQuery(
     graphql`
       query {
@@ -38,11 +38,9 @@ const Seo: React.FC<Props> = ({ description, lang, meta, title }) => {
 
   return (
     <Helmet
-      htmlAttributes={{
-        lang,
-      }}
       title={title}
       titleTemplate={defaultTitle ? `%s | ${defaultTitle}` : null}
+      htmlAttributes={{ lang }}
       meta={[
         {
           name: `description`,
