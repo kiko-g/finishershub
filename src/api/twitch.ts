@@ -1,8 +1,18 @@
-import { daysDifference, randomBetween } from '../utils'
 import axios, { AxiosInstance } from 'axios'
 
 const TWITCH_API_URL = 'https://api.twitch.tv/helix'
 const TWITCH_API_TOKEN_URL = 'https://id.twitch.tv/oauth2/token'
+
+const daysDifference = (before: Date, after: Date) => {
+  let a = new Date(after.toString())
+  let b = new Date(before.toString())
+
+  return (a.getTime() - b.getTime()) / (1000 * 3600 * 24)
+}
+
+const randomBetween = (min: number, max: number) => {
+  return Math.floor(Math.random() * (max - min + 1)) + min
+}
 
 const twitchApiRequest = (url: string, callback: Function) => {
   let api: AxiosInstance
