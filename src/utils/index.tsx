@@ -12,8 +12,8 @@ export const daysDifference = (before: Date, after: Date) => {
   return (a.getTime() - b.getTime()) / (1000 * 3600 * 24)
 }
 
-export const random = (max: number) => {
-  return Math.floor(Math.random() * (max + 1)) //between 0 and max
+export const randomBetween = (min: number, max: number) => {
+  return Math.floor(Math.random() * (max - min + 1)) + min
 }
 
 export const navigation = [

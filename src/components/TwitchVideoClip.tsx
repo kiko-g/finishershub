@@ -16,10 +16,7 @@ export const TwitchVideoClip = ({ video, parent }: Props) => {
           <iframe
             className="aspect-video w-full rounded-xl"
             src={`${video}&parent=${parent}`}
-            onLoad={() => {
-              console.log('loaded')
-              setLoaded(true)
-            }}
+            onLoad={() => setLoaded(true)}
             allowFullScreen
           ></iframe>
         </div>

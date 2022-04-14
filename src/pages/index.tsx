@@ -68,7 +68,11 @@ const IndexPage = () => {
       </main>
 
       <footer>
-        <button type="button" className={`load-more ${cursor ? '' : 'hidden'}`} onClick={() => requestLoadMore()}>
+        <button
+          type="button"
+          className={`load-more ${cursor ? 'inline-flex' : 'hidden'}`}
+          onClick={() => requestLoadMore()}
+        >
           Load More Videos
         </button>
       </footer>

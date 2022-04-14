@@ -1,4 +1,4 @@
-import { daysDifference, random } from '../utils'
+import { daysDifference, randomBetween } from '../utils'
 import axios, { AxiosInstance } from 'axios'
 
 const TWITCH_API_URL = 'https://api.twitch.tv/helix'
@@ -29,13 +29,11 @@ const twitchApiRequest = (url: string, callback: Function) => {
 const getClips = (callback: Function, paginationQuantity: any) => {
   const today = new Date()
   const debut = new Date('2021, 5, 1')
-  const hiatus = new Date('2021, 7, 22')
+  const minimum = new Date('2021, 7, 20')
 
   const start = debut
   const end = today
-
-  const daysBetweenDebutAndHiatus = Math.round(daysDifference(debut, hiatus))
-  const offset = random(daysBetweenDebutAndHiatus)
+  const offset = randomBetween(0, Math.round(daysDifference(debut, minimum)))
   start.setDate(start.getDate() + offset)
 
   const url =
