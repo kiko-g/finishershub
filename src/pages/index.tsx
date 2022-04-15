@@ -1,11 +1,11 @@
 import api from '../api/twitch'
-import Seo from '../components/Seo'
 import '../styles/pages/index.css'
+import { shuffle } from '../utils'
 import { useStaticQuery, graphql } from 'gatsby'
 import { PlusIcon } from '@heroicons/react/solid'
 import React, { useState, useEffect } from 'react'
-import usePaginationQuantity from '../hooks/usePaginationQuantity'
 
+import Seo from '../components/Seo'
 import { Layout } from '../layout/Layout'
 import { ViewTogglers } from '../components/ViewTogglers'
 import { TwitchVideoClip } from '../components/TwitchVideoClip'
@@ -16,16 +16,16 @@ const IndexPage = () => {
   const title = data.site.siteMetadata?.title ?? 'Title'
   const description = data.site.siteMetadata?.description ?? 'Description'
 
+  const [shown, setShown] = useState(6)
   const [view, setView] = useState(false) //grid or list view boolean
   const [cursor, setCursor] = useState(null) //pagination cursor string
   const [videos, setVideos] = useState([]) //array of arrays with video links
-  const [paginationQuantity] = usePaginationQuantity()
 
   const requestLoad = () => {
     api.getClips((cursor: string, embedUrls: string[]) => {
       setCursor(cursor)
       setVideos(embedUrls)
-    }, paginationQuantity)
+    }, shown)
   }
 
   const requestLoadMore = () => {
@@ -34,17 +34,19 @@ const IndexPage = () => {
         setCursor(cursor)
         setVideos([...videos.concat(embedUrls)])
       },
-      paginationQuantity,
+      shown,
       cursor
     )
   }
 
   const requestLoadAll = () => {
-    api.getAllClips((videos: string[]) => {})
+    api.getAllClips((allEmbedUrls: string[]) => {
+      setVideos(shuffle(allEmbedUrls))
+    })
   }
 
   useEffect(() => {
-    requestLoad()
+    requestLoadAll()
   }, [])
 
   return (
@@ -59,7 +61,7 @@ const IndexPage = () => {
       </header>
 
       <main className={view ? 'list' : 'grid'}>
-        {videos.map((video: string, videoIdx: number) => (
+        {videos.slice(0, shown).map((video: string, videoIdx: number) => (
           <TwitchVideoClip video={video} parent={process.env.GATSBY_DOMAIN} key={`video-${videoIdx}`} />
         ))}
         {videos.length === 0 &&
@@ -71,8 +73,8 @@ const IndexPage = () => {
       <footer>
         <button
           type="button"
-          className={`load-more ${cursor ? 'inline-flex' : 'hidden'}`}
-          onClick={() => requestLoadMore()}
+          className={`load-more ${videos.length === 0 ? 'hidden' : 'inline-flex'}`}
+          onClick={() => setShown(shown + 3)}
         >
           <PlusIcon className="-ml-1 mr-2 h-5 w-5" aria-hidden="true" />
           Load More Videos
