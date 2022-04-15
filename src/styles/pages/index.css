@@ -2,11 +2,11 @@ header > h2 {
   @apply text-4xl font-extrabold tracking-tight sm:text-5xl;
 }
 
-header > div {
+header > section {
   @apply mt-4 flex justify-between space-x-2 md:space-x-3;
 }
 
-header > div > p {
+header > section > p {
   @apply grow text-lg font-normal;
 }
 
