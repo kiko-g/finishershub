@@ -40,6 +40,10 @@ const IndexPage = () => {
     )
   }
 
+  const requestLoadAll = () => {
+    api.getAllClips((videos: string[]) => {})
+  }
+
   useEffect(() => {
     requestLoad()
   }, [])
@@ -73,6 +77,7 @@ const IndexPage = () => {
           className={`load-more ${cursor ? 'inline-flex' : 'hidden'}`}
           onClick={() => requestLoadMore()}
         >
+          <PlusIcon className="-ml-1 mr-2 h-5 w-5" aria-hidden="true" />
           Load More Videos
         </button>
       </footer>
