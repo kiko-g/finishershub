@@ -6,7 +6,6 @@ import { PlusIcon } from '@heroicons/react/solid'
 import React, { useState, useEffect } from 'react'
 import usePaginationQuantity from '../hooks/usePaginationQuantity'
 
-import { ClipsResponse } from '../@types'
 import { Layout } from '../layout/Layout'
 import { ViewTogglers } from '../components/ViewTogglers'
 import { TwitchVideoClip } from '../components/TwitchVideoClip'
@@ -19,21 +18,21 @@ const IndexPage = () => {
 
   const [view, setView] = useState(false) //grid or list view boolean
   const [cursor, setCursor] = useState(null) //pagination cursor string
-  const [videos, setVideos] = useState([[]]) //array of arrays with video links
+  const [videos, setVideos] = useState([]) //array of arrays with video links
   const [paginationQuantity] = usePaginationQuantity()
 
   const requestLoad = () => {
-    api.getClips((response: ClipsResponse) => {
-      setCursor(response.pagination.cursor)
-      setVideos([[...response.data.map(({ embed_url }) => embed_url)]])
+    api.getClips((cursor: string, embedUrls: string[]) => {
+      setCursor(cursor)
+      setVideos(embedUrls)
     }, paginationQuantity)
   }
 
   const requestLoadMore = () => {
     api.getMoreClips(
-      (response: ClipsResponse) => {
-        setCursor(response.pagination.cursor)
-        setVideos([...videos, [...response.data.map(({ embed_url }) => embed_url)]])
+      (cursor: string, embedUrls: string[]) => {
+        setCursor(cursor)
+        setVideos([...videos.concat(embedUrls)])
       },
       paginationQuantity,
       cursor
@@ -60,12 +59,10 @@ const IndexPage = () => {
       </header>
 
       <main className={view ? 'list' : 'grid'}>
-        {videos.map((array: string[], index: number) =>
-          array.map((video: string, videoIdx: number) => (
-            <TwitchVideoClip video={video} parent={process.env.GATSBY_DOMAIN} key={`video-${index}-${videoIdx}`} />
-          ))
-        )}
-        {videos[0].length === 0 &&
+        {videos.map((video: string, videoIdx: number) => (
+          <TwitchVideoClip video={video} parent={process.env.GATSBY_DOMAIN} key={`video-${videoIdx}`} />
+        ))}
+        {videos.length === 0 &&
           Array(6)
             .fill(null)
             .map((skeleton, skeletonIdx) => <Skeleton key={`skeleton-${skeletonIdx}`} />)}

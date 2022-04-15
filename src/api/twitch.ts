@@ -45,13 +45,24 @@ const getClips = (callback: Function, paginationQuantity: any) => {
     ('&started_at=' + start.toISOString()) +
     ('&ended_at=' + end.toISOString())
 
-  twitchApiRequest(url, callback)
+  twitchApiRequest(url, (response: ClipsResponse) =>
+    callback(
+      response.pagination.cursor,
+      response.data.map(({ embed_url }) => embed_url)
+    )
+  )
 }
 
 const getMoreClips = (callback: Function, paginationQuantity: any, cursor: string) => {
   if (!cursor) return
   const url = `clips?broadcaster_id=${process.env.GATSBY_TWITCH_BROADCASTER_ID}&first=${paginationQuantity}&after=${cursor}`
-  twitchApiRequest(url, callback)
+
+  twitchApiRequest(url, (response: ClipsResponse) =>
+    callback(
+      response.pagination.cursor,
+      response.data.map(({ embed_url }) => embed_url)
+    )
+  )
 }
 
 const getAllClips = (callback: Function) => {

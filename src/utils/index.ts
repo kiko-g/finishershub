@@ -13,4 +13,17 @@ const randomBetween = (min: number, max: number) => {
   return Math.floor(Math.random() * (max - min + 1)) + min
 }
 
-export { classNames, daysDifference, randomBetween }
+const shuffle = (array: any[]) => {
+  let result = []
+
+  while (array.length) {
+    let randomIndex = Math.floor(Math.random() * array.length),
+      element = array.splice(randomIndex, 1)
+
+    result.push(element[0])
+  }
+
+  return result
+}
+
+export { classNames, daysDifference, randomBetween, shuffle }
