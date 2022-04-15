@@ -10,16 +10,17 @@ import { Layout } from '../layout/Layout'
 import { ViewTogglers } from '../components/ViewTogglers'
 import { TwitchVideoClip } from '../components/TwitchVideoClip'
 import { Skeleton } from '../components/Skeleton'
+import { DelayDisclaimer } from '../components/DelayDisclaimer'
 
 const IndexPage = () => {
   const data = useStaticQuery(homeQuery)
   const title = data.site.siteMetadata?.title ?? 'Title'
   const description = data.site.siteMetadata?.description ?? 'Description'
 
-  const [shown, setShown] = useState(6)
   const [view, setView] = useState(false) //grid or list view boolean
-  const [cursor, setCursor] = useState(null) //pagination cursor string
+  const [shown, setShown] = useState(9) // how many clips are displayed
   const [videos, setVideos] = useState([]) //array of arrays with video links
+  const [cursor, setCursor] = useState(null) //pagination cursor string
 
   const requestLoad = () => {
     api.getClips((cursor: string, embedUrls: string[]) => {
@@ -54,10 +55,11 @@ const IndexPage = () => {
       <Seo title="Home" />
       <header>
         <h2>{title}</h2>
-        <div>
+        <section>
           <p>{description}</p>
           <ViewTogglers hook={[view, setView]} />
-        </div>
+        </section>
+        <DelayDisclaimer />
       </header>
 
       <main className={view ? 'list' : 'grid'}>
@@ -65,7 +67,7 @@ const IndexPage = () => {
           <TwitchVideoClip video={video} parent={process.env.GATSBY_DOMAIN} key={`video-${videoIdx}`} />
         ))}
         {videos.length === 0 &&
-          Array(6)
+          Array(shown)
             .fill(null)
             .map((skeleton, skeletonIdx) => <Skeleton key={`skeleton-${skeletonIdx}`} />)}
       </main>
