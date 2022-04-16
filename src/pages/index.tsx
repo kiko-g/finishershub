@@ -1,6 +1,7 @@
 import api from '../api/twitch'
 import '../styles/pages/index.css'
 import { shuffle } from '../utils'
+import { isStorageValid, writeVideosStorage } from '../utils/storage'
 import { useStaticQuery, graphql } from 'gatsby'
 import { PlusIcon } from '@heroicons/react/solid'
 import React, { useState, useEffect } from 'react'
@@ -17,38 +18,23 @@ const IndexPage = () => {
   const title = data.site.siteMetadata?.title ?? 'Title'
   const description = data.site.siteMetadata?.description ?? 'Description'
 
-  const [view, setView] = useState(false) //grid or list view boolean
-  const [shown, setShown] = useState(9) // how many clips are displayed
+  const [view, setView] = useState(false) //grid or list view
+  const [shown, setShown] = useState(9) // amount of clips displayed
   const [videos, setVideos] = useState([]) //array of arrays with video links
-  const [cursor, setCursor] = useState(null) //pagination cursor string
-
-  const requestLoad = () => {
-    api.getClips((cursor: string, embedUrls: string[]) => {
-      setCursor(cursor)
-      setVideos(embedUrls)
-    }, shown)
-  }
-
-  const requestLoadMore = () => {
-    api.getMoreClips(
-      (cursor: string, embedUrls: string[]) => {
-        setCursor(cursor)
-        setVideos([...videos.concat(embedUrls)])
-      },
-      shown,
-      cursor
-    )
-  }
 
   const requestLoadAll = () => {
-    api.getAllClips((allEmbedUrls: string[]) => {
-      setVideos(shuffle(allEmbedUrls))
-    })
+    if (isStorageValid(48)) {
+      setVideos(JSON.parse(localStorage.getItem('finishershub.videos')))
+    } else {
+      api.getAllClips((allEmbedUrls: string[]) => {
+        const shuffledVideos = shuffle(allEmbedUrls)
+        setVideos(shuffledVideos)
+        writeVideosStorage(shuffledVideos)
+      })
+    }
   }
 
-  useEffect(() => {
-    requestLoadAll()
-  }, [])
+  useEffect(() => requestLoadAll(), [])
 
   return (
     <Layout location="Home" background={false}>

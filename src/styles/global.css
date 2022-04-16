@@ -7,7 +7,7 @@
 }
 
 .navbar {
-  @apply sticky top-0 z-20 space-x-4 bg-light/75 px-3 py-2 text-dark dark:bg-darkest/75 dark:text-white md:py-0 md:px-3;
+  @apply sticky top-0 z-20 space-x-4 bg-light/80 px-3 py-2 text-dark dark:bg-darkest/80 dark:text-white md:py-0 md:px-3;
 }
 
 .hamburger {

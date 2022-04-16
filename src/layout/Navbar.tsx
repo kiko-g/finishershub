@@ -18,7 +18,7 @@ type Props = {
 
 export const Navbar: React.FC<Props> = ({ siteTitle, location }) => {
   return (
-    <Disclosure as="nav" className="navbar">
+    <Disclosure as="nav" className="navbar background">
       {({ open }) => {
         return (
           <>

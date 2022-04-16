@@ -15,14 +15,12 @@ const randomBetween = (min: number, max: number) => {
 
 const shuffle = (array: any[]) => {
   let result = []
-
   while (array.length) {
     let randomIndex = Math.floor(Math.random() * array.length),
       element = array.splice(randomIndex, 1)
 
     result.push(element[0])
   }
-
   return result
 }
 
