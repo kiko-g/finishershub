@@ -24,7 +24,7 @@ const IndexPage = () => {
 
   const requestLoadAll = () => {
     if (isStorageValid(48)) {
-      setVideos(JSON.parse(localStorage.getItem('finishershub.videos')))
+      setVideos(shuffle(JSON.parse(localStorage.getItem('finishershub.videos'))))
     } else {
       api.getAllClips((allEmbedUrls: string[]) => {
         const shuffledVideos = shuffle(allEmbedUrls)
