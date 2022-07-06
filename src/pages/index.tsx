@@ -8,10 +8,11 @@ import React, { useState, useEffect } from 'react'
 
 import Seo from '../components/Seo'
 import { Layout } from '../layout/Layout'
-import { ViewTogglers } from '../components/ViewTogglers'
+import { ViewToggler } from '../components/ViewToggler'
 import { TwitchVideoClip } from '../components/TwitchVideoClip'
 import { Skeleton } from '../components/Skeleton'
 import { DelayDisclaimer } from '../components/DelayDisclaimer'
+import { MuteToggler } from '../components/MuteToggler'
 
 const IndexPage = () => {
   const data = useStaticQuery(homeQuery)
@@ -19,6 +20,7 @@ const IndexPage = () => {
   const description = data.site.siteMetadata?.description ?? 'Description'
 
   const [view, setView] = useState(false) //grid or list view
+  const [muted, setMuted] = useState(true) //muted or unmuted videos
   const [shown, setShown] = useState(9) // amount of clips displayed
   const [videos, setVideos] = useState([]) //array of arrays with video links
 
@@ -43,7 +45,10 @@ const IndexPage = () => {
         <h2>{title}</h2>
         <section>
           <p>{description}</p>
-          <ViewTogglers hook={[view, setView]} />
+          <div>
+            <MuteToggler hook={[muted, setMuted]} />
+            <ViewToggler hook={[view, setView]} />
+          </div>
         </section>
         <DelayDisclaimer />
       </header>
@@ -51,7 +56,7 @@ const IndexPage = () => {
       <main className={view ? 'list' : 'grid'}>
         {videos.slice(0, shown).map((video: string, videoIdx: number) => (
           <TwitchVideoClip
-            muted={true}
+            muted={muted}
             video={video}
             parent={process.env.GATSBY_DOMAIN}
             key={`video-${videoIdx}`}
