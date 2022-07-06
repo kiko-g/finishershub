@@ -2,7 +2,7 @@ import React from 'react'
 
 type Props = {}
 
-export const Skeleton = ({}: Props) => {
+const Skeleton = ({}: Props) => {
   return (
     <div className="mx-auto w-full rounded-xl bg-lightest p-4 dark:bg-dark">
       <div className="flex animate-pulse space-x-4">
@@ -23,3 +23,5 @@ export const Skeleton = ({}: Props) => {
     </div>
   )
 }
+
+export default Skeleton

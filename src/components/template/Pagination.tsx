@@ -7,7 +7,7 @@ type Props = {
   paginationQuantity: number | React.Dispatch<React.SetStateAction<number>>
 }
 
-export const Pagination = ({ api, paginationQuantity }: Props) => {
+const Pagination = ({ api, paginationQuantity }: Props) => {
   const [activePage, setActivePage] = useState(1)
   const pages = Array(paginationQuantity).fill(null)
 
@@ -50,3 +50,5 @@ export const Pagination = ({ api, paginationQuantity }: Props) => {
     </div>
   )
 }
+
+export default Pagination

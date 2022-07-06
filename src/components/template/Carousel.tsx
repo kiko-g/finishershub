@@ -4,7 +4,7 @@ type Props = {
   video: string
 }
 
-export const Carousel = ({ video }: Props) => {
+const Carousel = ({ video }: Props) => {
   const prev = () => {}
   const next = () => {}
 
@@ -51,3 +51,5 @@ export const Carousel = ({ video }: Props) => {
     </div>
   )
 }
+
+export default Carousel

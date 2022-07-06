@@ -1,18 +1,13 @@
+import React, { useState, useEffect } from 'react'
+import Layout from '../layout'
 import api from '../api/twitch'
-import '../styles/pages/index.css'
+import Seo from '../components/Seo'
 import { shuffle } from '../utils'
 import { isStorageValid, writeVideosStorage } from '../utils/storage'
 import { useStaticQuery, graphql } from 'gatsby'
 import { PlusIcon } from '@heroicons/react/solid'
-import React, { useState, useEffect } from 'react'
-
-import Seo from '../components/Seo'
-import { Layout } from '../layout/Layout'
-import { ViewToggler } from '../components/ViewToggler'
-import { TwitchVideoClip } from '../components/TwitchVideoClip'
-import { Skeleton } from '../components/Skeleton'
-import { DelayDisclaimer } from '../components/DelayDisclaimer'
-import { MuteToggler } from '../components/MuteToggler'
+import { ViewToggler, MuteToggler, DelayDisclaimer, TwitchVideoClip, Skeleton } from '../components/home'
+import '../styles/pages/index.css'
 
 const IndexPage = () => {
   const data = useStaticQuery(homeQuery)

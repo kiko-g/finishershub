@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { Skeleton } from './Skeleton'
+import Skeleton from './Skeleton'
 
 type Props = {
   video: string
@@ -8,7 +8,7 @@ type Props = {
   autoplay?: boolean
 }
 
-export const TwitchVideoClip = ({ video, parent, muted = false, autoplay = false }: Props) => {
+const TwitchVideoClip = ({ video, parent, muted = false, autoplay = false }: Props) => {
   const [loaded, setLoaded] = useState(false)
 
   return (
@@ -27,3 +27,5 @@ export const TwitchVideoClip = ({ video, parent, muted = false, autoplay = false
     </>
   )
 }
+
+export default TwitchVideoClip
