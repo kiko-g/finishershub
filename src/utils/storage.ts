@@ -3,8 +3,7 @@ const isStorageValid = (hoursElapsed: number) => {
   const storedSavedTime = new Date(JSON.parse(localStorage.getItem('finishershub.videos-fetch-date'))).getTime()
   const expiredStorage = Math.abs(new Date().getTime() - storedSavedTime) / 36e5 > hoursElapsed
 
-  if (storedVideos === null || storedSavedTime === null || expiredStorage) return false
-  else return true
+  return storedVideos !== null && storedSavedTime !== null && !expiredStorage
 }
 
 const writeVideosStorage = (videos: string[]) => {

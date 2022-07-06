@@ -23,7 +23,7 @@ const IndexPage = () => {
   const [videos, setVideos] = useState([]) //array of arrays with video links
 
   const requestLoadAll = () => {
-    if (isStorageValid(48)) {
+    if (isStorageValid(24 * 7)) {
       setVideos(shuffle(JSON.parse(localStorage.getItem('finishershub.videos'))))
     } else {
       api.getAllClips((allEmbedUrls: string[]) => {
@@ -50,7 +50,13 @@ const IndexPage = () => {
 
       <main className={view ? 'list' : 'grid'}>
         {videos.slice(0, shown).map((video: string, videoIdx: number) => (
-          <TwitchVideoClip video={video} parent={process.env.GATSBY_DOMAIN} key={`video-${videoIdx}`} />
+          <TwitchVideoClip
+            muted={true}
+            video={video}
+            parent={process.env.GATSBY_DOMAIN}
+            key={`video-${videoIdx}`}
+            autoplay={videoIdx === 0 ? true : false}
+          />
         ))}
         {videos.length === 0 &&
           Array(shown)
