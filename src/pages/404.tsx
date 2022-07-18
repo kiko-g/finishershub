@@ -8,7 +8,7 @@ const NotFoundPage = () => (
     <Seo title="404: Not found" />
     <div className="flex flex-col items-center justify-center space-y-2">
       <StaticImage
-        src="../images/turtle.jpg"
+        src="../../static/images/turtle.jpg"
         alt="Not found display"
         objectFit="cover"
         objectPosition="50% 50%"
