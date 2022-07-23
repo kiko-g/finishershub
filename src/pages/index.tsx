@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import Layout from '../layout'
-import api from '../backend/twitch'
+import api from '../api/twitch'
 import Seo from '../components/Seo'
 import { shuffle } from '../utils'
 import { isStorageValid, writeVideosStorage } from '../utils/storage'
