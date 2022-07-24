@@ -1,0 +1,7 @@
+.member-card {
+  @apply flex w-full flex-col space-y-3 rounded-xl bg-lightest p-3 shadow dark:bg-white/5 lg:flex-row lg:space-y-0;
+}
+
+.member-card button.action {
+  @apply inline-flex items-center space-x-2 rounded p-2 text-center text-sm font-medium text-white transition hover:opacity-80;
+}
