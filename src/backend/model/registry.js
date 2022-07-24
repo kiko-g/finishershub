@@ -6,6 +6,7 @@ const schema = mongoose.Schema(
     name: String,
     finishers: Number,
     aliases: [String],
+    code: String,
   },
   {
     collection: 'Registry',

@@ -1,6 +1,7 @@
 import React, { useState } from 'react'
+import ClaimIdentity from './ClaimIdentity'
 import { RegistryEntry } from '../../@types'
-import { FingerPrintIcon, MinusCircleIcon, PlusCircleIcon } from '@heroicons/react/outline'
+import { MinusCircleIcon, PlusCircleIcon } from '@heroicons/react/outline'
 
 type Props = {
   member: RegistryEntry
@@ -35,14 +36,7 @@ const MemberCard = ({ member }: Props) => {
           </div>
 
           <div className="flex items-center gap-2">
-            <button
-              disabled={!locked}
-              title={locked ? `Prove you are ${member.name}` : `You already have access to ${member.name}'s data`}
-              className="action bg-primary"
-            >
-              <span>Claim identity</span>
-              <FingerPrintIcon className="h-4 w-4" />
-            </button>
+            <ClaimIdentity locked={locked} member={member} />
 
             <button
               disabled={locked}

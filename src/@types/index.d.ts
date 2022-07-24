@@ -31,4 +31,5 @@ export type RegistryEntry = {
   name: string
   finishers: number
   aliases: string[]
+  code: string
 }
