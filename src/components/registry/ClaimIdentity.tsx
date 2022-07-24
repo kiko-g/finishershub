@@ -86,7 +86,7 @@ const ClaimIdentity = ({ member, lockedHook }: Props) => {
                     <button
                       type="button"
                       onClick={closeModal}
-                      className="p-1 text-primary rounded hover:text-white hover:bg-rose-800 transition"
+                      className="p-1 text-primary rounded hover:text-white hover:bg-primary transition"
                     >
                       <XIcon className="h-6 w-6" />
                     </button>
