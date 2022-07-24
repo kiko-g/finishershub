@@ -1,7 +1,10 @@
 import axios, { AxiosInstance } from 'axios'
 
+const domain = process.env.BACKEND_DOMAIN || 'http://localhost:5000'
+console.log(domain)
+
 const backend: AxiosInstance = axios.create({
-  baseURL: (process.env.BACKEND_DOMAIN || 'http://localhost:5000') + '/registry',
+  baseURL: `${domain}/registry`,
   headers: {
     Accept: 'application/json',
     'Access-Control-Allow-Origin': '*',
