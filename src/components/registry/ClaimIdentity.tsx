@@ -78,7 +78,7 @@ const ClaimIdentity = ({ member, lockedHook }: Props) => {
                   <header className="flex justify-between items-center">
                     <Dialog.Title
                       as="h3"
-                      className="text-xl font-semibold leading-6 text-primary dark:text-white"
+                      className="text-xl font-semibold leading-6 text-primary"
                     >
                       Claim Identity
                     </Dialog.Title>
@@ -92,7 +92,7 @@ const ClaimIdentity = ({ member, lockedHook }: Props) => {
                     </button>
                   </header>
 
-                  <p className="mt-2 text-gray-600 dark:text-white">
+                  <p className="mt-2 text-gray-600 ">
                     Type your codephrase to prove you are <strong>{member.name}</strong> and get access to data controls.
                   </p>
 
@@ -113,7 +113,7 @@ const ClaimIdentity = ({ member, lockedHook }: Props) => {
                     <button
                       type="button"
                       onClick={togglePasswordShown}
-                      className="absolute text-primary hover:opacity-80 transition dark:text-white right-[12px] top-[11px]">
+                      className="absolute text-primary hover:opacity-80 transition  right-[12px] top-[11px]">
                       {passwordShown ? <EyeOffIcon className="h-5 w-5" /> : <EyeIcon className="h-5 w-5" />}
                     </button>
                   </div>
