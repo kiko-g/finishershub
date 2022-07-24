@@ -32,11 +32,11 @@ const MemberCard = ({ member }: Props) => {
           </header>
           <div>
             <p className="font-normal text-gray-600 dark:text-white">Lifetime finisher count</p>
-            <span className="text-6xl font-semibold uppercase text-gray-600 dark:text-white">#{member.finishers}</span>
+            <span className="text-5xl font-semibold uppercase text-gray-600 dark:text-white">#{member.finishers}</span>
           </div>
 
           <div className="flex items-center gap-2">
-            <ClaimIdentity locked={locked} member={member} />
+            <ClaimIdentity lockedHook={[locked, setLocked]} member={member} />
 
             <button
               disabled={locked}
