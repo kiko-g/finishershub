@@ -57,7 +57,17 @@ const incrementFinishers = async (req, res) => {
 // @access   Private
 const decrementFinishers = async (req, res) => {
   try {
-    res.status(200).json({ message: 'Decrement finishers' })
+    const id = req.params.id
+    const stats = await Registry.findById(id)
+
+    if (!stats) {
+      res.status(400).json({ message: 'Member not found' })
+      throw new Error('Member not found')
+    }
+
+    const increment = { finishers: stats.finishers - 1 }
+    const updatedStats = await Registry.findByIdAndUpdate(id, increment, { new: true })
+    res.status(200).json(updatedStats)
   } catch (error) {
     res.status(500).json({ message: error.message })
   }
