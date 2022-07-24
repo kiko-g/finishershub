@@ -3,6 +3,7 @@ import Layout from '../layout'
 import Seo from '../components/Seo'
 import RegistryAPI from '../api/registry'
 import { RegistryEntry } from '../@types'
+import { MemberCard } from '../components/registry'
 
 const RegistryPage = () => {
   const [members, setMembers] = useState<RegistryEntry[]>([])
@@ -21,12 +22,8 @@ const RegistryPage = () => {
     <Layout location="Registry">
       <Seo title="Registry" />
       <div>
-        {members.map((member: RegistryEntry, idx: number) => (
-          <div key={`member-${idx}`}>
-            <h2>
-              {member.name}: {member.finishers}
-            </h2>
-          </div>
+        {members.map((member: RegistryEntry, memberIdx: number) => (
+          <MemberCard key={`${member}-memberIdx`} member={member} />
         ))}
       </div>
     </Layout>
