@@ -9,14 +9,13 @@ import '../styles/pages/registry.css'
 const RegistryPage = () => {
   const [members, setMembers] = useState<RegistryEntry[]>([])
 
-  const getMembers = () => {
-    RegistryAPI.getAllFinishers((results: RegistryEntry[]) => {
-      setMembers(results)
-    })
+  const updateMembers = (newEntry: RegistryEntry) => {
+    setMembers(members.map((oldEntry: RegistryEntry) => (oldEntry._id === newEntry._id ? newEntry : oldEntry)))
   }
 
   useEffect(() => {
-    getMembers()
+    // fetch and set members
+    RegistryAPI.getAllFinishers((results: RegistryEntry[]) => setMembers(results))
   }, [])
 
   return (
@@ -27,17 +26,17 @@ const RegistryPage = () => {
           <h2 className="text-4xl font-extrabold tracking-tight sm:text-5xl">Finishers Club</h2>
           <section className="mt-4 flex justify-between space-x-2 md:space-x-3">
             <p>The profiles and stats of the criminals like never seen before.</p>
-            <div>
-              {/* <MuteToggler hook={[muted, setMuted]} />
-            <ViewToggler hook={[view, setView]} /> */}
-            </div>
           </section>
           <DataDisclaimer />
         </header>
 
         <div className="member-list">
           {members.map((member: RegistryEntry, memberIdx: number) => (
-            <MemberCard key={`member-${memberIdx}`} member={member} />
+            <MemberCard
+              key={`member-${memberIdx}`}
+              member={member}
+              updateMembers={updateMembers}
+            />
           ))}
         </div>
       </main>

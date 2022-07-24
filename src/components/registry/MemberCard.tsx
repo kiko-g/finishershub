@@ -6,21 +6,18 @@ import { MinusCircleIcon, PlusCircleIcon } from '@heroicons/react/outline'
 
 type Props = {
   member: RegistryEntry
+  updateMembers: Function
 }
 
-const MemberCard = ({ member }: Props) => {
+const MemberCard = ({ member, updateMembers }: Props) => {
   const [locked, setLocked] = useState(true)
 
   const addFinisher = () => {
-    RegistryAPI.incrementFinishers(member._id, (results: RegistryEntry[]) => {
-      console.log(results)
-    })
+    RegistryAPI.incrementFinishers(member._id, (newEntry: RegistryEntry) => updateMembers(newEntry))
   }
 
   const removeFinisher = () => {
-    RegistryAPI.decrementFinishers(member._id, (results: RegistryEntry[]) => {
-      console.log(results)
-    })
+    RegistryAPI.decrementFinishers(member._id, (newEntry: RegistryEntry) => updateMembers(newEntry))
   }
 
   return (
