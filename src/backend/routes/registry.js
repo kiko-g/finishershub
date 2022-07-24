@@ -1,5 +1,5 @@
-const config = require('./config')
 const express = require('express')
+const config = require('../config')
 const router = express.Router()
 const controller = require('../controller/registry')
 

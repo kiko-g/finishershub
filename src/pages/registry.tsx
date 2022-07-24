@@ -2,16 +2,16 @@ import React, { useEffect } from 'react'
 import Layout from '../layout'
 import Seo from '../components/Seo'
 import RegistryAPI from '../api/registry'
-import axios from 'axios'
 
 const RegistryPage = () => {
-  useEffect(() => {
+  const getAll = () => {
     RegistryAPI.getAllFinishers()
-  }, [])
+  }
 
   return (
     <Layout location="Registry">
       <Seo title="Registry" />
+      <button onClick={getAll}>FETCH ALL AND LOG</button>
     </Layout>
   )
 }
