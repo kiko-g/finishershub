@@ -1,7 +1,8 @@
 import axios, { AxiosInstance } from 'axios'
 
-const domain = process.env.BACKEND_DOMAIN || 'http://localhost:5000'
-console.log(domain)
+const domain = process.env.BACKEND_DOMAIN || 'https://finishershub-backend.herokuapp.com'
+console.log('domain: ' + domain)
+console.log('env: ' + process.env.BACKEND_DOMAIN)
 
 const backend: AxiosInstance = axios.create({
   baseURL: `${domain}/registry`,
