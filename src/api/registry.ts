@@ -5,6 +5,8 @@ const backend: AxiosInstance = axios.create({
   headers: {
     Accept: 'application/json',
     'Access-Control-Allow-Origin': '*',
+    'Access-Control-Allow-Headers': '*',
+    'Access-Control-Allow-Methods': '*',
   },
 })
 
