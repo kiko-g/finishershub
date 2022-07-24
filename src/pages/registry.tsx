@@ -1,17 +1,34 @@
-import React, { useEffect } from 'react'
+import React, { useState, useEffect } from 'react'
 import Layout from '../layout'
 import Seo from '../components/Seo'
 import RegistryAPI from '../api/registry'
+import { RegistryEntry } from '../@types'
 
 const RegistryPage = () => {
-  const getAll = () => {
-    RegistryAPI.getAllFinishers()
+  const [members, setMembers] = useState<RegistryEntry[]>([])
+
+  const getMembers = () => {
+    RegistryAPI.getAllFinishers((results: RegistryEntry[]) => {
+      setMembers(results)
+    })
   }
+
+  useEffect(() => {
+    getMembers()
+  }, [])
 
   return (
     <Layout location="Registry">
       <Seo title="Registry" />
-      <button onClick={getAll}>FETCH ALL AND LOG</button>
+      <div>
+        {members.map((member: RegistryEntry, idx: number) => (
+          <div key={`member-${idx}`}>
+            <h2>
+              {member.name}: {member.finishers}
+            </h2>
+          </div>
+        ))}
+      </div>
     </Layout>
   )
 }
