@@ -1,5 +1,6 @@
 import React, { useState } from 'react'
 import ClaimIdentity from './ClaimIdentity'
+import RegistryAPI from '../../api/registry'
 import { RegistryEntry } from '../../@types'
 import { MinusCircleIcon, PlusCircleIcon } from '@heroicons/react/outline'
 
@@ -9,6 +10,18 @@ type Props = {
 
 const MemberCard = ({ member }: Props) => {
   const [locked, setLocked] = useState(true)
+
+  const addFinisher = () => {
+    RegistryAPI.incrementFinishers(member._id, (results: RegistryEntry[]) => {
+      console.log(results)
+    })
+  }
+
+  const removeFinisher = () => {
+    RegistryAPI.decrementFinishers(member._id, (results: RegistryEntry[]) => {
+      console.log(results)
+    })
+  }
 
   return (
     <div className="member-card">
@@ -40,20 +53,22 @@ const MemberCard = ({ member }: Props) => {
 
             <button
               disabled={locked}
+              onClick={addFinisher}
               className="action bg-sky-800"
               title={locked ? `You need to prove you are ${member.name} first` : `Add 1 finisher to ${member.name}`}
             >
               <span>Add</span>
-              <PlusCircleIcon className="h-4 w-4" />
+              <PlusCircleIcon className="h-5 w-5" />
             </button>
 
             <button
               disabled={locked}
+              onClick={removeFinisher}
               className="action bg-rose-800"
               title={locked ? `You need to prove you are ${member.name} first` : `Remove 1 finisher to ${member.name}`}
             >
               <span>Remove</span>
-              <MinusCircleIcon className="h-4 w-4" />
+              <MinusCircleIcon className="h-5 w-5" />
             </button>
           </div>
         </div>

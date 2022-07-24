@@ -46,7 +46,7 @@ const ClaimIdentity = ({ member, lockedHook }: Props) => {
         className="action bg-primary"
       >
         <span>Claim identity</span>
-        <FingerPrintIcon className="h-4 w-4" />
+        <FingerPrintIcon className="h-5 w-5" />
       </button>
 
       <Transition appear show={isOpen} as={Fragment}>
