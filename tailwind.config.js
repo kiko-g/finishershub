@@ -13,9 +13,11 @@ module.exports = {
         dark: '#242731',
         darker: '#1e2028',
         darkest: '#1a1c23',
+        darkish: '#333640',
         light: '#f2f4f7',
         lighter: '#f7f7f7',
         lightest: '#fcfcfc',
+        lightish: '#ebedf0',
         navydark: '#1a202c',
       },
       maxWidth: {

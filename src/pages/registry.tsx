@@ -3,7 +3,7 @@ import Layout from '../layout'
 import Seo from '../components/Seo'
 import RegistryAPI from '../api/registry'
 import { RegistryEntry } from '../@types'
-import { MemberCard, DataDisclaimer } from '../components/registry'
+import { MemberCard, DataDisclaimer, MemberCardSkeleton } from '../components/registry'
 import '../styles/pages/registry.css'
 
 const RegistryPage = () => {
@@ -31,12 +31,14 @@ const RegistryPage = () => {
         </header>
 
         <div className="member-list">
-          {members.map((member: RegistryEntry, memberIdx: number) => (
+          {members.length !== 0 ? members.map((member: RegistryEntry, memberIdx: number) => (
             <MemberCard
               key={`member-${memberIdx}`}
               member={member}
               updateMembers={updateMembers}
             />
+          )) : Array(4).fill(0).map((_, idx) => (
+            <MemberCardSkeleton />
           ))}
         </div>
       </main>
