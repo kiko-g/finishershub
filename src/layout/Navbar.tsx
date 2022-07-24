@@ -4,10 +4,11 @@ import { Disclosure } from '@headlessui/react'
 import { StaticImage } from 'gatsby-plugin-image'
 import { MenuIcon, XIcon } from '@heroicons/react/outline'
 import { DarkModeSwitchMinimal } from './DarkModeSwitchMinimal'
-import { HomeIcon, CubeTransparentIcon } from '@heroicons/react/outline'
+import { HomeIcon, ChartSquareBarIcon, CubeTransparentIcon } from '@heroicons/react/outline'
 
 const navigation = [
   { title: 'Home', location: '/', icon: <HomeIcon className="mr-1.5 h-5 w-5" /> },
+  { title: 'Registry', location: '/registry', icon: <ChartSquareBarIcon className="mr-1.5 h-5 w-5" /> },
   { title: 'About', location: '/about', icon: <CubeTransparentIcon className="mr-1.5 h-5 w-5" /> },
 ]
 

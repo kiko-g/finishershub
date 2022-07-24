@@ -24,3 +24,12 @@ export type ClipsResponse = {
   data: Clip[]
   pagination: Pagination
 }
+
+export type RegistryEntry = {
+  _id: string
+  id: number
+  name: string
+  finishers: number
+  aliases: string[]
+  code: string
+}
