@@ -6,7 +6,7 @@ import axios from 'axios'
 
 const RegistryPage = () => {
   useEffect(() => {
-    axios.get(`http://localhost:5000/registry`).then(response => console.log(response.data))
+    RegistryAPI.getAllFinishers()
   }, [])
 
   return (
