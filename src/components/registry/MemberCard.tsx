@@ -1,6 +1,7 @@
 import React, { useState } from 'react'
 import ClaimIdentity from './ClaimIdentity'
 import RegistryAPI from '../../api/registry'
+import useLocked from '../../hooks/useLocked'
 import { RegistryEntry } from '../../@types'
 import { MinusCircleIcon, PlusCircleIcon } from '@heroicons/react/outline'
 
@@ -10,7 +11,7 @@ type Props = {
 }
 
 const MemberCard = ({ member, updateMembers }: Props) => {
-  const [locked, setLocked] = useState(true)
+  const [locked, setLocked] = useLocked(member)
 
   const addFinisher = () => {
     RegistryAPI.incrementFinishers(member._id, (newEntry: RegistryEntry) => updateMembers(newEntry))
