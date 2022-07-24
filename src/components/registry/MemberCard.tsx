@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { RegistryEntry } from '../../@types'
 import { FingerPrintIcon, MinusCircleIcon, PlusCircleIcon } from '@heroicons/react/outline'
 
@@ -7,6 +7,8 @@ type Props = {
 }
 
 const MemberCard = ({ member }: Props) => {
+  const [locked, setLocked] = useState(true)
+
   return (
     <div className="member-card">
       <aside className="relative rounded-l-xl md:rounded-xl">
@@ -33,17 +35,29 @@ const MemberCard = ({ member }: Props) => {
           </div>
 
           <div className="flex items-center gap-2">
-            <button className="action bg-primary">
+            <button
+              disabled={!locked}
+              title={locked ? `Prove you are ${member.name}` : `You already have access to ${member.name}'s data`}
+              className="action bg-primary"
+            >
               <span>Claim identity</span>
               <FingerPrintIcon className="h-4 w-4" />
             </button>
 
-            <button className="action bg-sky-800">
+            <button
+              disabled={locked}
+              className="action bg-sky-800"
+              title={locked ? `You need to prove you are ${member.name} first` : `Add 1 finisher to ${member.name}`}
+            >
               <span>Add</span>
               <PlusCircleIcon className="h-4 w-4" />
             </button>
 
-            <button className="action bg-rose-800">
+            <button
+              disabled={locked}
+              className="action bg-rose-800"
+              title={locked ? `You need to prove you are ${member.name} first` : `Remove 1 finisher to ${member.name}`}
+            >
               <span>Remove</span>
               <MinusCircleIcon className="h-4 w-4" />
             </button>

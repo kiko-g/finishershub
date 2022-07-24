@@ -22,23 +22,25 @@ const RegistryPage = () => {
   return (
     <Layout location="Registry">
       <Seo title="Registry" />
-      <header>
-        <h2 className="text-4xl font-extrabold tracking-tight sm:text-5xl">Finishers Club</h2>
-        <section className="mt-4 flex justify-between space-x-2 md:space-x-3">
-          <p>The profiles and stats of the criminals like never seen before.</p>
-          <div>
-            {/* <MuteToggler hook={[muted, setMuted]} />
+      <main className="registry">
+        <header>
+          <h2 className="text-4xl font-extrabold tracking-tight sm:text-5xl">Finishers Club</h2>
+          <section className="mt-4 flex justify-between space-x-2 md:space-x-3">
+            <p>The profiles and stats of the criminals like never seen before.</p>
+            <div>
+              {/* <MuteToggler hook={[muted, setMuted]} />
             <ViewToggler hook={[view, setView]} /> */}
-          </div>
-        </section>
-        <DataDisclaimer />
-      </header>
+            </div>
+          </section>
+          <DataDisclaimer />
+        </header>
 
-      <div className="xl:grid xl:grid-cols-2 flex flex-col gap-4">
-        {members.map((member: RegistryEntry, memberIdx: number) => (
-          <MemberCard key={`member-${memberIdx}`} member={member} />
-        ))}
-      </div>
+        <div className="member-list">
+          {members.map((member: RegistryEntry, memberIdx: number) => (
+            <MemberCard key={`member-${memberIdx}`} member={member} />
+          ))}
+        </div>
+      </main>
     </Layout>
   )
 }
