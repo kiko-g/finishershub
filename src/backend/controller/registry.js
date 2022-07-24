@@ -5,8 +5,8 @@ const Registry = require('../model/registry')
 // @access   Public
 const getAllFinishers = async (req, res) => {
   try {
-    const allFinishers = await Registry.find()
-    res.json(allFinishers)
+    const allStats = await Registry.find()
+    res.json(allStats)
   } catch (error) {
     res.status(500).json({ message: error.message })
   }
@@ -17,20 +17,36 @@ const getAllFinishers = async (req, res) => {
 // @access   Public
 const getFinishers = async (req, res) => {
   try {
-    const finishers = await Registry.findById(req.params.id)
-    res.status(200).json(finishers)
+    const id = req.params.id
+    const stats = await Registry.findById()
+
+    if (!stats) {
+      res.status(400).json({ message: 'Member not found' })
+      throw new Error('Member not found')
+    }
+
+    res.status(200).json(stats)
   } catch (error) {
     res.status(500).json({ message: error.message })
   }
 }
 
 // @desc     Increment finishers of a certain member
-// @route    GET /registry/increment/:id
+// @route    PUT /registry/increment/:id
 // @access   Private
 const incrementFinishers = async (req, res) => {
   try {
-    const finishers = await Registry.findById(req.params.id)
-    res.status(200).json({ success: true })
+    const id = req.params.id
+    const stats = await Registry.findById(id)
+
+    if (!stats) {
+      res.status(400).json({ message: 'Member not found' })
+      throw new Error('Member not found')
+    }
+
+    const increment = { finishers: stats.finishers + 1 }
+    const updatedStats = await Registry.findByIdAndUpdate(id, increment, { new: true })
+    res.status(200).json(updatedStats)
   } catch (error) {
     res.status(500).json({ message: error.message })
   }
