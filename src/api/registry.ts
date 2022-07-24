@@ -8,9 +8,9 @@ const api: AxiosInstance = axios.create({
   headers: {},
 })
 
-const getAllFinishers = async (): Promise<RegistryEntry[]> => {
-  const response = await api.get(`${BASE_URL}/`)
-  return response.data
+const getAllFinishers = () => {
+  console.log(BASE_URL)
+  axios.get(`${BASE_URL}/`).then(response => console.log(response.data))
 }
 
 const getFinishers = async (id: string): Promise<RegistryEntry[]> => {
@@ -27,3 +27,12 @@ const decrementFinishers = async (id: string): Promise<RegistryEntry[]> => {
   const response = await api.get(`${BASE_URL}/${id}/decrement`)
   return response.data
 }
+
+const registryApi = {
+  getFinishers,
+  getAllFinishers,
+  incrementFinishers,
+  decrementFinishers,
+}
+
+export default registryApi
