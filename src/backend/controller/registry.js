@@ -65,8 +65,8 @@ const decrementFinishers = async (req, res) => {
       throw new Error('Member not found')
     }
 
-    const increment = { finishers: stats.finishers - 1 }
-    const updatedStats = await Registry.findByIdAndUpdate(id, increment, { new: true })
+    const decrement = { finishers: stats.finishers - 1 }
+    const updatedStats = await Registry.findByIdAndUpdate(id, decrement, { new: true })
     res.status(200).json(updatedStats)
   } catch (error) {
     res.status(500).json({ message: error.message })
