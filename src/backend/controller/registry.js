@@ -1,3 +1,5 @@
+const Registry = require('../model/registry')
+
 // @desc     Ping registry
 // @route    GET /registry
 // @access   Public
@@ -9,7 +11,11 @@ const ping = (req, res) => {
 // @route    GET /registry/:id
 // @access   Public
 const getFinishers = (req, res) => {
-  res.status(200).json({ message: `Get finishers of member #${req.params.id}` })
+  const finishers = Registry.find()
+  res.status(200).json({
+    message: `Get finishers of member #${req.params.id}`,
+    finishers: finishers,
+  })
 }
 
 // @desc     Increment finishers of member
