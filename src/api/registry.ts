@@ -17,11 +17,11 @@ const getFinishers = (id: string, callback: Function) => {
 }
 
 const incrementFinishers = (id: string, callback: Function) => {
-  backend.get(`/${id}/increment`).then(response => callback(response.data))
+  backend.put(`/${id}/increment`).then(response => callback(response.data))
 }
 
 const decrementFinishers = (id: string, callback: Function) => {
-  backend.get(`/${id}/decrement`).then(response => callback(response.data))
+  backend.put(`/${id}/decrement`).then(response => callback(response.data))
 }
 
 const registryApi = {
