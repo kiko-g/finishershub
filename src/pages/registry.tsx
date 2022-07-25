@@ -38,7 +38,7 @@ const RegistryPage = () => {
               updateMembers={updateMembers}
             />
           )) : Array(4).fill(0).map((_, idx) => (
-            <MemberCardSkeleton />
+            <MemberCardSkeleton key={`member-skeleton-${idx}`} />
           ))}
         </div>
       </main>
