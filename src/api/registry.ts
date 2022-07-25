@@ -1,7 +1,6 @@
 import axios, { AxiosInstance } from 'axios'
 
 const domain = process.env.GATSBY_BACKEND_DOMAIN || 'https://finishershub-backend.herokuapp.com'
-console.log(process.env.GATSBY_BACKEND_DOMAIN)
 
 const backend: AxiosInstance = axios.create({
   baseURL: `${domain}/registry`,
