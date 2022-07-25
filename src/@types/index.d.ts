@@ -32,4 +32,5 @@ export type RegistryEntry = {
   finishers: number
   aliases: string[]
   code: string
+  imgurUrl: string
 }

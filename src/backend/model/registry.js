@@ -7,6 +7,7 @@ const schema = mongoose.Schema(
     finishers: Number,
     aliases: [String],
     code: String,
+    imgurUrl: String,
   },
   {
     collection: 'Registry',

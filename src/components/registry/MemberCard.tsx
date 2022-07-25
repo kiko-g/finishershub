@@ -24,7 +24,15 @@ const MemberCard = ({ member, updateMembers }: Props) => {
   return (
     <div className="member-card">
       <aside className="relative rounded-l-xl md:rounded-xl">
-        <div className="h-64 w-full rounded-xl bg-gradient-to-br from-primary via-primary to-primary shadow lg:h-full lg:w-72"></div>
+        {member.imgurUrl ? (
+          <img
+            alt={member.name}
+            src={member.imgurUrl}
+            className="h-80 w-full lg:h-full lg:max-h-64 lg:w-80 rounded-xl object-cover"
+          />
+        ) : (
+          <div className="h-64 w-full rounded-xl bg-gradient-to-br from-primary via-primary to-primary shadow lg:h-full lg:w-72" />
+        )}
       </aside>
 
       <section className="relative flex w-auto grow flex-col justify-between space-y-6 rounded-r-xl px-1 py-1 text-base font-normal lg:h-auto lg:max-h-full lg:w-3/4 lg:py-0 lg:pl-4 lg:pr-0">
