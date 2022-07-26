@@ -21,7 +21,7 @@ const RegistryPage = () => {
   return (
     <Layout location="Registry">
       <Seo title="Registry" />
-      <main className="registry">
+      <div className="registry">
         <header>
           <h2 className="text-4xl font-extrabold tracking-tight sm:text-5xl">Finishers Club</h2>
           <section className="mt-4 flex justify-between space-x-2 md:space-x-3">
@@ -30,7 +30,7 @@ const RegistryPage = () => {
           <DataDisclaimer />
         </header>
 
-        <div className="member-list">
+        <main className="member-list">
           {members.length !== 0
             ? members.map((member: RegistryEntry, memberIdx: number) => (
                 <MemberCard key={`member-${memberIdx}`} member={member} updateMembers={updateMembers} />
@@ -38,8 +38,8 @@ const RegistryPage = () => {
             : Array(6)
                 .fill(0)
                 .map((_, idx) => <MemberCardSkeleton key={`member-skeleton-${idx}`} />)}
-        </div>
-      </main>
+        </main>
+      </div>
     </Layout>
   )
 }

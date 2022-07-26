@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react'
 import Layout from '../layout'
 import api from '../api/twitch'
 import Seo from '../components/Seo'
-import { shuffle } from '../utils'
+import { classNames, shuffle } from '../utils'
 import { isStorageValid, writeVideosStorage } from '../utils/storage'
 import { useStaticQuery, graphql } from 'gatsby'
 import { PlusIcon } from '@heroicons/react/solid'
@@ -22,8 +22,8 @@ const IndexPage = () => {
   const description = data.site.siteMetadata?.description ?? 'Description'
 
   const [view, setView] = useState(false) //grid or list view
-  const [muted, setMuted] = useState(false) //muted or unmuted videos
-  const [autoplay, setAutoplay] = useState(true) //muted or unmuted videos
+  const [muted, setMuted] = useState(true) //muted or unmuted videos
+  const [autoplay, setAutoplay] = useState(false) //muted or unmuted videos
   const [shown, setShown] = useState(9) // amount of clips displayed
   const [videos, setVideos] = useState([]) //array of arrays with video links
 
@@ -44,46 +44,48 @@ const IndexPage = () => {
   return (
     <Layout location="Home" background={false}>
       <Seo title="Home" />
-      <header>
-        <div className="left">
-          <h2>{title}</h2>
-          <p>{description}</p>
-        </div>
-        <div className="right">
-          <AutoplayToggler hook={[autoplay, setAutoplay]} />
-          <MuteToggler hook={[muted, setMuted]} />
-          <ViewToggler hook={[view, setView]} />
-        </div>
-      </header>
+      <div className="home">
+        <header>
+          <div className="left">
+            <h2>{title}</h2>
+            <p>{description}</p>
+          </div>
+          <div className="right">
+            <AutoplayToggler hook={[autoplay, setAutoplay]} />
+            <MuteToggler hook={[muted, setMuted]} />
+            <ViewToggler hook={[view, setView]} />
+          </div>
+        </header>
 
-      <DelayDisclaimer />
+        <DelayDisclaimer />
 
-      <main className={view ? 'list' : 'grid'}>
-        {videos.slice(0, shown).map((video: string, videoIdx: number) => (
-          <TwitchVideoClip
-            muted={muted}
-            video={video}
-            parent={process.env.GATSBY_DOMAIN}
-            key={`video-${videoIdx}`}
-            autoplay={videoIdx === 0 ? true : autoplay}
-          />
-        ))}
-        {videos.length === 0 &&
-          Array(shown)
-            .fill(null)
-            .map((skeleton, skeletonIdx) => <Skeleton key={`skeleton-${skeletonIdx}`} />)}
-      </main>
+        <main className={view ? 'video-list' : 'video-grid'}>
+          {videos.slice(0, shown).map((video: string, videoIdx: number) => (
+            <TwitchVideoClip
+              muted={muted}
+              video={video}
+              parent={process.env.GATSBY_DOMAIN}
+              key={`video-${videoIdx}`}
+              autoplay={videoIdx === 0 ? true : autoplay}
+            />
+          ))}
+          {videos.length === 0 &&
+            Array(shown)
+              .fill(null)
+              .map((skeleton, skeletonIdx) => <Skeleton key={`skeleton-${skeletonIdx}`} />)}
+        </main>
 
-      <footer>
-        <button
-          type="button"
-          className={`load-more ${videos.length === 0 ? 'hidden' : 'inline-flex'}`}
-          onClick={() => setShown(shown + 3)}
-        >
-          <PlusIcon className="-ml-1 mr-2 h-5 w-5" aria-hidden="true" />
-          Load More Videos
-        </button>
-      </footer>
+        <footer>
+          <button
+            type="button"
+            className={`load-more ${videos.length === 0 ? 'hidden' : 'inline-flex'}`}
+            onClick={() => setShown(shown + 3)}
+          >
+            <PlusIcon className="-ml-1 mr-2 h-5 w-5" aria-hidden="true" />
+            Load More Videos
+          </button>
+        </footer>
+      </div>
     </Layout>
   )
 }
