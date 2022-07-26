@@ -100,7 +100,7 @@ const controller = {
   getFinishers,
   incrementFinishers,
   decrementFinishers,
-  updatePassword
+  updatePassword,
 }
 
 module.exports = controller

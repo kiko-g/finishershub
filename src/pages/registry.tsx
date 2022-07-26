@@ -31,15 +31,13 @@ const RegistryPage = () => {
         </header>
 
         <div className="member-list">
-          {members.length !== 0 ? members.map((member: RegistryEntry, memberIdx: number) => (
-            <MemberCard
-              key={`member-${memberIdx}`}
-              member={member}
-              updateMembers={updateMembers}
-            />
-          )) : Array(6).fill(0).map((_, idx) => (
-            <MemberCardSkeleton key={`member-skeleton-${idx}`} />
-          ))}
+          {members.length !== 0
+            ? members.map((member: RegistryEntry, memberIdx: number) => (
+                <MemberCard key={`member-${memberIdx}`} member={member} updateMembers={updateMembers} />
+              ))
+            : Array(6)
+                .fill(0)
+                .map((_, idx) => <MemberCardSkeleton key={`member-skeleton-${idx}`} />)}
         </div>
       </main>
     </Layout>

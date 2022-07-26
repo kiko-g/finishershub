@@ -29,7 +29,7 @@ const MemberCard = ({ member, updateMembers }: Props) => {
           <img
             alt={member.name}
             src={member.imgurUrl}
-            className="h-80 w-full lg:h-full lg:max-h-64 lg:w-80 rounded-xl object-cover"
+            className="h-80 w-full rounded-xl object-cover lg:h-full lg:max-h-64 lg:w-80"
           />
         ) : (
           <div className="h-64 w-full rounded-xl bg-gradient-to-br from-primary via-primary to-primary shadow lg:h-full lg:w-72" />
@@ -55,27 +55,33 @@ const MemberCard = ({ member, updateMembers }: Props) => {
             <span className="text-5xl font-semibold uppercase text-gray-600 dark:text-white">#{member.finishers}</span>
           </div>
 
-          <div className="flex items-center gap-2">
-            <ClaimIdentity lockedHook={[locked, setLocked]} member={member} />
-            <ChangePassword lockedHook={[locked, setLocked]} member={member} />
-            <button
-              disabled={locked}
-              onClick={addFinisher}
-              className="action bg-sky-800"
-              title={locked ? `You need to prove you are ${member.name} first` : `Add 1 finisher to ${member.name}`}
-            >
-              <span>Add</span>
-              <PlusCircleIcon className="h-5 w-5" />
-            </button>
-            <button
-              disabled={locked}
-              onClick={removeFinisher}
-              className="action bg-rose-800"
-              title={locked ? `You need to prove you are ${member.name} first` : `Remove 1 finisher to ${member.name}`}
-            >
-              <span>Remove</span>
-              <MinusCircleIcon className="h-5 w-5" />
-            </button>
+          <div className="flex flex-col items-center gap-2">
+            <div className="flex items-center gap-2">
+              <ClaimIdentity lockedHook={[locked, setLocked]} member={member} />
+              <ChangePassword lockedHook={[locked, setLocked]} member={member} />
+            </div>
+            <div className="flex items-center gap-2">
+              <button
+                disabled={locked}
+                onClick={addFinisher}
+                className="action bg-sky-800"
+                title={locked ? `You need to prove you are ${member.name} first` : `Add 1 finisher to ${member.name}`}
+              >
+                <span>Add</span>
+                <PlusCircleIcon className="h-5 w-5" />
+              </button>
+              <button
+                disabled={locked}
+                onClick={removeFinisher}
+                className="action bg-rose-800"
+                title={
+                  locked ? `You need to prove you are ${member.name} first` : `Remove 1 finisher to ${member.name}`
+                }
+              >
+                <span>Remove</span>
+                <MinusCircleIcon className="h-5 w-5" />
+              </button>
+            </div>
           </div>
         </div>
       </section>
