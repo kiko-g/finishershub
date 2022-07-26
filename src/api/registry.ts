@@ -28,6 +28,10 @@ const decrementFinishers = (id: string, callback: Function) => {
   backend.put(`/${id}/decrement`).then(response => callback(response.data))
 }
 
+const updatePassword = (id: string, newPassword: string, callback: Function) => {
+  backend.put(`/${id}/password/${newPassword}`).then(response => callback(response.data))
+}
+
 const registryApi = {
   getAllFinishers,
   getFinishers,

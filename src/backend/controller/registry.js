@@ -73,6 +73,28 @@ const decrementFinishers = async (req, res) => {
   }
 }
 
+// @desc     Update password of a certain member
+// @route    GET /registry/:id/password/:newPassword
+// @access   Private
+const updatePassword = async (req, res) => {
+  try {
+    const id = req.params.id
+    const password = req.params.newPassword
+    const stats = await Registry.findById(id)
+
+    if (!stats) {
+      res.status(400).json({ message: 'Member not found' })
+      throw new Error('Member not found')
+    }
+
+    const updated = { code: password }
+    const updatedStats = await Registry.findByIdAndUpdate(id, updated, { new: true })
+    res.status(200).json(updatedStats)
+  } catch (error) {
+    res.status(500).json({ message: error.message })
+  }
+}
+
 const controller = {
   getAllFinishers,
   getFinishers,
