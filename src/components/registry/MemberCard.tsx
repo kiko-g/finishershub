@@ -1,10 +1,11 @@
 import React, { useState } from 'react'
 import ClaimIdentity from './ClaimIdentity'
 import ChangePassword from './ChangePassword'
+import FinisherInfoModal from './FinisherInfoModal'
 import RegistryAPI from '../../api/registry'
 import useLocked from '../../hooks/useLocked'
 import { RegistryEntry } from '../../@types'
-import { MinusCircleIcon, PlusCircleIcon } from '@heroicons/react/outline'
+import { MinusCircleIcon, PlusCircleIcon, InformationCircleIcon } from '@heroicons/react/outline'
 
 type Props = {
   member: RegistryEntry
@@ -38,6 +39,7 @@ const MemberCard = ({ member, updateMembers }: Props) => {
 
       <section className="relative flex w-auto grow flex-col justify-between space-y-6 rounded-r-xl px-1 py-1 text-base font-normal lg:h-auto lg:max-h-full lg:w-3/4 lg:py-0 lg:pl-4 lg:pr-0">
         <div className="flex h-full flex-col justify-between gap-4">
+          {/* Header */}
           <header>
             <p className="text-3xl font-semibold capitalize text-primary dark:text-white">{member.name}</p>
             <p className="font-normal lowercase text-gray-500 dark:text-white">
@@ -50,11 +52,17 @@ const MemberCard = ({ member, updateMembers }: Props) => {
               ))}
             </p>
           </header>
-          <div>
-            <p className="font-normal text-gray-600 dark:text-white">Lifetime finisher count</p>
-            <span className="text-5xl font-semibold uppercase text-gray-600 dark:text-white">#{member.finishers}</span>
+
+          {/* Counter */}
+          <div className="flex flex-col text-gray-600 dark:text-white">
+            <div className="flex w-full items-center gap-1">
+              <p className="font-normal">Lifetime finisher count</p>
+              <FinisherInfoModal />
+            </div>
+            <p className="text-5xl font-semibold uppercase">#{member.finishers}</p>
           </div>
 
+          {/* Buttons */}
           <div className="flex flex-col gap-2">
             <div className="flex items-center gap-2">
               <button
