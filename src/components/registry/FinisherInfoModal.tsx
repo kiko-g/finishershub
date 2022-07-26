@@ -3,7 +3,7 @@ import { Dialog, Transition } from '@headlessui/react'
 import { CheckIcon, InformationCircleIcon, XIcon } from '@heroicons/react/outline'
 
 const FinisherInfoModal = () => {
-  let [isOpen, setIsOpen] = useState(true)
+  let [isOpen, setIsOpen] = useState(false)
 
   function closeModal() {
     setIsOpen(false)
@@ -18,10 +18,11 @@ const FinisherInfoModal = () => {
       <button
         onClick={openModal}
         title="Further information about counting"
-        className="inline-flex items-center space-x-2 rounded-full text-center text-sm font-medium text-teal-700 
+        className="flex w-min items-center gap-1 text-center text-sm font-medium 
         transition hover:opacity-80 disabled:cursor-not-allowed disabled:opacity-50"
       >
-        <InformationCircleIcon className="h-5 w-5" />
+        <span className="whitespace-nowrap">Lifetime finisher count</span>
+        <InformationCircleIcon className="mt-[1px] inline-flex h-4 w-4" />
       </button>
 
       <Transition appear show={isOpen} as={Fragment}>
@@ -35,7 +36,7 @@ const FinisherInfoModal = () => {
             leaveFrom="opacity-100"
             leaveTo="opacity-0"
           >
-            <div className="fixed inset-0 bg-black bg-opacity-25" />
+            <div className="fixed inset-0 bg-black bg-opacity-75" />
           </Transition.Child>
 
           <div className="fixed inset-0 overflow-y-auto">

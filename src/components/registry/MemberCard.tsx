@@ -41,7 +41,7 @@ const MemberCard = ({ member, updateMembers }: Props) => {
         <div className="flex h-full flex-col justify-between gap-4">
           {/* Header */}
           <header>
-            <p className="text-3xl font-semibold capitalize text-primary dark:text-white">{member.name}</p>
+            <p className="text-3xl font-semibold capitalize text-primary dark:text-teal-600">{member.name}</p>
             <p className="font-normal lowercase text-gray-500 dark:text-white">
               <span className="font-bold">aka&nbsp;</span>
               {member.aliases.map((alias: string, aliasIdx: number) => (
@@ -54,11 +54,8 @@ const MemberCard = ({ member, updateMembers }: Props) => {
           </header>
 
           {/* Counter */}
-          <div className="flex flex-col text-gray-600 dark:text-white">
-            <div className="flex w-full items-center gap-1">
-              <p className="font-normal">Lifetime finisher count</p>
-              <FinisherInfoModal />
-            </div>
+          <div className="mb-2 flex flex-col text-gray-600 dark:text-white">
+            <FinisherInfoModal />
             <p className="text-5xl font-semibold uppercase">#{member.finishers}</p>
           </div>
 
