@@ -55,7 +55,7 @@ const MemberCard = ({ member, updateMembers }: Props) => {
             <span className="text-5xl font-semibold uppercase text-gray-600 dark:text-white">#{member.finishers}</span>
           </div>
 
-          <div className="flex flex-col items-center gap-2">
+          <div className="flex flex-col gap-2">
             <div className="flex items-center gap-2">
               <ClaimIdentity lockedHook={[locked, setLocked]} member={member} />
               <ChangePassword lockedHook={[locked, setLocked]} member={member} />
