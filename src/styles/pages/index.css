@@ -1,17 +1,21 @@
-header > h2 {
-  @apply text-4xl font-extrabold tracking-tight sm:text-5xl;
-}
-
-header > section {
+header {
   @apply mt-4 flex justify-between space-x-2 md:space-x-3;
 }
 
-header > section > p {
+header h2 {
+  @apply text-4xl font-extrabold tracking-tight sm:text-5xl;
+}
+
+header p {
   @apply grow text-lg font-normal;
 }
 
-header > section > div {
-  @apply flex items-center justify-center space-x-2;
+header div.left {
+  @apply flex flex-col justify-center gap-2;
+}
+
+header div.right {
+  @apply flex items-end justify-center gap-2;
 }
 
 main {

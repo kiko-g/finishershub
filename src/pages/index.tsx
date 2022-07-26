@@ -45,17 +45,18 @@ const IndexPage = () => {
     <Layout location="Home" background={false}>
       <Seo title="Home" />
       <header>
-        <h2>{title}</h2>
-        <section>
+        <div className="left">
+          <h2>{title}</h2>
           <p>{description}</p>
-          <div>
-            <AutoplayToggler hook={[autoplay, setAutoplay]} />
-            <MuteToggler hook={[muted, setMuted]} />
-            <ViewToggler hook={[view, setView]} />
-          </div>
-        </section>
-        <DelayDisclaimer />
+        </div>
+        <div className="right">
+          <AutoplayToggler hook={[autoplay, setAutoplay]} />
+          <MuteToggler hook={[muted, setMuted]} />
+          <ViewToggler hook={[view, setView]} />
+        </div>
       </header>
+
+      <DelayDisclaimer />
 
       <main className={view ? 'list' : 'grid'}>
         {videos.slice(0, shown).map((video: string, videoIdx: number) => (
