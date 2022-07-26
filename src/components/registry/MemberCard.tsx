@@ -57,10 +57,6 @@ const MemberCard = ({ member, updateMembers }: Props) => {
 
           <div className="flex flex-col gap-2">
             <div className="flex items-center gap-2">
-              <ClaimIdentity lockedHook={[locked, setLocked]} member={member} />
-              <ChangePassword lockedHook={[locked, setLocked]} member={member} />
-            </div>
-            <div className="flex items-center gap-2">
               <button
                 disabled={locked}
                 onClick={addFinisher}
@@ -81,6 +77,10 @@ const MemberCard = ({ member, updateMembers }: Props) => {
                 <span>Remove</span>
                 <MinusCircleIcon className="h-5 w-5" />
               </button>
+            </div>
+            <div className="flex items-center gap-2">
+              <ClaimIdentity lockedHook={[locked, setLocked]} member={member} />
+              <ChangePassword lockedHook={[locked, setLocked]} member={member} />
             </div>
           </div>
         </div>
