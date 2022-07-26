@@ -8,7 +8,7 @@ const MuteToggler = ({ hook }: Props) => {
   const [mute, setMuted] = hook
 
   return (
-    <div className="hidden items-end justify-center space-x-2 text-primary dark:text-light md:flex">
+    <div className="flex items-end justify-center space-x-2 text-primary dark:text-light">
       {mute ? (
         <button className="transition hover:opacity-75" onClick={() => setMuted(false)}>
           <svg

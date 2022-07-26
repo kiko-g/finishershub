@@ -6,7 +6,14 @@ import { shuffle } from '../utils'
 import { isStorageValid, writeVideosStorage } from '../utils/storage'
 import { useStaticQuery, graphql } from 'gatsby'
 import { PlusIcon } from '@heroicons/react/solid'
-import { ViewToggler, MuteToggler, DelayDisclaimer, TwitchVideoClip, Skeleton } from '../components/home'
+import {
+  ViewToggler,
+  AutoplayToggler,
+  MuteToggler,
+  DelayDisclaimer,
+  TwitchVideoClip,
+  Skeleton,
+} from '../components/home'
 import '../styles/pages/index.css'
 
 const IndexPage = () => {
@@ -15,7 +22,8 @@ const IndexPage = () => {
   const description = data.site.siteMetadata?.description ?? 'Description'
 
   const [view, setView] = useState(false) //grid or list view
-  const [muted, setMuted] = useState(true) //muted or unmuted videos
+  const [muted, setMuted] = useState(false) //muted or unmuted videos
+  const [autoplay, setAutoplay] = useState(true) //muted or unmuted videos
   const [shown, setShown] = useState(9) // amount of clips displayed
   const [videos, setVideos] = useState([]) //array of arrays with video links
 
@@ -41,6 +49,7 @@ const IndexPage = () => {
         <section>
           <p>{description}</p>
           <div>
+            <AutoplayToggler hook={[autoplay, setAutoplay]} />
             <MuteToggler hook={[muted, setMuted]} />
             <ViewToggler hook={[view, setView]} />
           </div>
@@ -55,7 +64,7 @@ const IndexPage = () => {
             video={video}
             parent={process.env.GATSBY_DOMAIN}
             key={`video-${videoIdx}`}
-            autoplay={videoIdx === 0 ? true : false}
+            autoplay={videoIdx === 0 ? true : autoplay}
           />
         ))}
         {videos.length === 0 &&

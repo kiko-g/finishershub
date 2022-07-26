@@ -1,5 +1,5 @@
 import React, { Dispatch, Fragment, SetStateAction, useState } from 'react'
-import RegistryApi from '../../api/registry'
+import RegistryAPI from '../../api/registry'
 import { RegistryEntry } from '../../@types'
 import { Dialog, Transition } from '@headlessui/react'
 import { EyeIcon, EyeOffIcon, FingerPrintIcon, XIcon } from '@heroicons/react/outline'
@@ -28,7 +28,7 @@ const ClaimIdentity = ({ member, lockedHook }: Props) => {
   }
 
   const submitNewPassword = () => {
-    RegistryApi.updatePassword(member._id, newPassword, () => {
+    RegistryAPI.updatePassword(member._id, newPassword, () => {
       setLocked(false)
       setNewPassword('')
       setIsOpen(false)
@@ -40,7 +40,7 @@ const ClaimIdentity = ({ member, lockedHook }: Props) => {
       <button
         onClick={openModal}
         disabled={locked}
-        title={locked ? `Prove you are ${member.name}` : `Change the password of ${member.name}`}
+        title={locked ? `You need to claim identity for ${member.name} first` : `Change the password of ${member.name}`}
         className="action bg-slate-700"
       >
         <span>Change password</span>
