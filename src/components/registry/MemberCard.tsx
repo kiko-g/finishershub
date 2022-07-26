@@ -1,5 +1,6 @@
 import React, { useState } from 'react'
 import ClaimIdentity from './ClaimIdentity'
+import ChangePassword from './ChangePassword'
 import RegistryAPI from '../../api/registry'
 import useLocked from '../../hooks/useLocked'
 import { RegistryEntry } from '../../@types'
@@ -56,7 +57,7 @@ const MemberCard = ({ member, updateMembers }: Props) => {
 
           <div className="flex items-center gap-2">
             <ClaimIdentity lockedHook={[locked, setLocked]} member={member} />
-
+            <ChangePassword lockedHook={[locked, setLocked]} member={member} />
             <button
               disabled={locked}
               onClick={addFinisher}
@@ -66,7 +67,6 @@ const MemberCard = ({ member, updateMembers }: Props) => {
               <span>Add</span>
               <PlusCircleIcon className="h-5 w-5" />
             </button>
-
             <button
               disabled={locked}
               onClick={removeFinisher}

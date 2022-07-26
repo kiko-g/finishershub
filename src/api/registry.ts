@@ -37,6 +37,7 @@ const registryApi = {
   getFinishers,
   incrementFinishers,
   decrementFinishers,
+  updatePassword,
 }
 
 export default registryApi

@@ -1,4 +1,5 @@
 import React, { Dispatch, Fragment, SetStateAction, useState } from 'react'
+import RegistryApi from '../../api/registry';
 import { RegistryEntry } from '../../@types'
 import { Dialog, Transition } from '@headlessui/react'
 import { EyeIcon, EyeOffIcon, FingerPrintIcon, XIcon } from '@heroicons/react/outline';
@@ -11,7 +12,7 @@ type Props = {
 const ClaimIdentity = ({ member, lockedHook }: Props) => {
   const [locked, setLocked] = lockedHook
   const [isOpen, setIsOpen] = useState(false)
-  const [password, setPassword] = useState('')
+  const [newPassword, setNewPassword] = useState('')
   const [passwordShown, setPasswordShown] = useState(false);
 
   const closeModal = () => {
@@ -26,25 +27,22 @@ const ClaimIdentity = ({ member, lockedHook }: Props) => {
     setPasswordShown(!passwordShown)
   }
 
-  const submitPassword = () => {
-    if (password === member.code) {
-      setPassword('')
+  const submitNewPassword = () => {
+    RegistryApi.updatePassword(member._id, newPassword, () => {
       setLocked(false)
+      setNewPassword('')
       setIsOpen(false)
-    }
-    else {
-      setPassword('')
-    }
+    })
   }
 
-  return locked && <>
+  return !locked && <>
     <button
       onClick={openModal}
-      disabled={!locked}
-      title={locked ? `Prove you are ${member.name}` : `You already have access to ${member.name}'s data`}
-      className="action bg-slate-700"
+      disabled={locked}
+      title={locked ? `Prove you are ${member.name}` : `Change the password of ${member.name}`}
+      className="action bg-teal-700"
     >
-      <span>Claim identity</span>
+      <span>Change Password</span>
       <FingerPrintIcon className="h-5 w-5" />
     </button>
 
@@ -79,7 +77,7 @@ const ClaimIdentity = ({ member, lockedHook }: Props) => {
                     as="h3"
                     className="text-xl font-semibold leading-6 text-primary"
                   >
-                    Claim Identity
+                    Change Password
                   </Dialog.Title>
 
                   <button
@@ -92,12 +90,12 @@ const ClaimIdentity = ({ member, lockedHook }: Props) => {
                 </header>
 
                 <p className="mt-2 text-gray-600 ">
-                  Type your codephrase to prove you are <strong>{member.name}</strong> and get access to data controls.
+                  Type your new codephrase for <strong>{member.name}</strong> and then submit your changes to <strong>replace the previous one</strong>.
                 </p>
 
                 <div className="relative flex flex-col gap-1 mt-3">
                   <label htmlFor="password" className="sr-only">
-                    Identity Codephrase
+                    New Identity Codephrase
                   </label>
                   <input
                     name="password"
@@ -105,9 +103,9 @@ const ClaimIdentity = ({ member, lockedHook }: Props) => {
                     autoComplete="current-password"
                     required
                     className="appearance-none focus:accent-primary relative block w-full px-3 py-2 border rounded"
-                    placeholder="Password"
-                    value={password}
-                    onChange={(e) => setPassword(e.target.value)}
+                    placeholder="New password"
+                    value={newPassword}
+                    onChange={(e) => setNewPassword(e.target.value)}
                   />
                   <button
                     type="button"
@@ -120,7 +118,7 @@ const ClaimIdentity = ({ member, lockedHook }: Props) => {
                 <footer className="mt-4">
                   <button
                     type="button"
-                    onClick={submitPassword}
+                    onClick={submitNewPassword}
                     className="w-full p-2 bg-primary rounded text-white hover:opacity-80 transition"
                   >
                     Submit
