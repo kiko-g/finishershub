@@ -1,5 +1,9 @@
+.casino {
+  @apply flex flex-col gap-4;
+}
+
 .casino header {
-  @apply mt-4 flex justify-between space-x-2 md:space-x-3;
+  @apply mt-4 flex flex-col justify-between gap-2 md:space-x-3 lg:flex-row;
 }
 
 .casino header h2 {
@@ -15,5 +19,9 @@
 }
 
 .casino header div.right {
-  @apply flex items-end justify-center gap-2;
+  @apply flex items-end justify-end gap-2;
+}
+
+.casino main {
+  @apply w-full xl:w-2/3 2xl:w-2/3;
 }

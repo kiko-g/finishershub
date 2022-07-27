@@ -41,7 +41,7 @@ const CasinoPage = () => {
   return (
     <Layout location="Casino" background={false}>
       <Seo title="Casino" />
-      <div className="home">
+      <div className="casino">
         <header>
           <div className="left">
             <h2>Finishers Hub Slot Machine</h2>
@@ -59,7 +59,7 @@ const CasinoPage = () => {
 
         <UsageDisclaimer />
 
-        <main className="video-list">
+        <main>
           <TwitchVideoClip
             muted={muted}
             video={videos[index]}
