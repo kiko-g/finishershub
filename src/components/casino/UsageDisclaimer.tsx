@@ -13,7 +13,7 @@ const UsageDisclaimer = ({}: Props) => {
         <div className="flex">
           <InformationCircleIcon className="h-6 w-6" aria-hidden="true" />
           <p className="ml-3 font-medium">
-            <span>Click the arrows to draw a new outstanding highlight.</span>
+            <span>Flip the switch to draw a new outstanding highlight.</span>
           </p>
         </div>
       </div>

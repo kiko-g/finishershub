@@ -4,20 +4,29 @@ import api from '../api/twitch'
 import Seo from '../components/Seo'
 import { shuffle } from '../utils'
 import { isStorageValid, writeVideosStorage } from '../utils/storage'
-import { PlusIcon } from '@heroicons/react/solid'
-import { AutoplayToggler, MuteToggler, UsageDisclaimer, TwitchVideoClip, Skeleton } from '../components/casino'
+import {
+  AutoplayToggler,
+  MuteToggler,
+  UsageDisclaimer,
+  TwitchVideoClip,
+  Skeleton,
+  ShuffleButton,
+} from '../components/casino'
 import '../styles/pages/casino.css'
 
 const CasinoPage = () => {
-  const [index, setIndex] = useState(0)
+  const [index, setIndex] = useState(0) // index of the current video
   const [muted, setMuted] = useState(true) //muted or unmuted videos
   const [autoplay, setAutoplay] = useState(false) //muted or unmuted videos
-  const [shown, setShown] = useState(9) // amount of clips displayed
   const [videos, setVideos] = useState([]) //array of arrays with video links
+
+  const shuffleAndSetVideos = () => {
+    setVideos(shuffle(JSON.parse(localStorage.getItem('finishershub.videos'))))
+  }
 
   const requestLoadAll = () => {
     if (isStorageValid(24 * 7)) {
-      setVideos(shuffle(JSON.parse(localStorage.getItem('finishershub.videos'))))
+      shuffleAndSetVideos()
     } else {
       api.getAllClips((allEmbedUrls: string[]) => {
         const shuffledVideos = shuffle(allEmbedUrls)
@@ -42,6 +51,7 @@ const CasinoPage = () => {
             </p>
           </div>
           <div className="right">
+            <ShuffleButton shuffle={shuffleAndSetVideos} />
             <AutoplayToggler hook={[autoplay, setAutoplay]} />
             <MuteToggler hook={[muted, setMuted]} />
           </div>
