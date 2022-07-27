@@ -10,7 +10,7 @@ const AutoplayToggler = ({ hook }: Props) => {
   return (
     <div className="flex items-end justify-center space-x-2 text-primary dark:text-light">
       {autoplay ? (
-        <button className="transition hover:opacity-75" onClick={() => setAutoplay(false)}>
+        <button title="Turn autoplay off" className="transition hover:opacity-75" onClick={() => setAutoplay(false)}>
           <svg xmlns="http://www.w3.org/2000/svg" className="h-8 w-8" viewBox="0 0 20 20" fill="currentColor">
             <path
               fillRule="evenodd"
@@ -20,7 +20,7 @@ const AutoplayToggler = ({ hook }: Props) => {
           </svg>
         </button>
       ) : (
-        <button className="transition hover:opacity-75" onClick={() => setAutoplay(true)}>
+        <button title="Turn autoplay on" className="transition hover:opacity-75" onClick={() => setAutoplay(true)}>
           <svg
             xmlns="http://www.w3.org/2000/svg"
             className="h-8 w-8"

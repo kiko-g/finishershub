@@ -10,7 +10,7 @@ const ViewToggler = ({ hook }: Props) => {
   return (
     <div className="hidden items-end justify-center space-x-2 text-primary dark:text-light md:flex">
       {view ? (
-        <button className="transition hover:opacity-75" onClick={() => setView(false)}>
+        <button title="Change to grid view" className="transition hover:opacity-75" onClick={() => setView(false)}>
           <svg
             xmlns="http://www.w3.org/2000/svg"
             className="h-8 w-8"
@@ -23,7 +23,7 @@ const ViewToggler = ({ hook }: Props) => {
           </svg>
         </button>
       ) : (
-        <button className="transition hover:opacity-75" onClick={() => setView(true)}>
+        <button title="Change to list view" className="transition hover:opacity-75" onClick={() => setView(true)}>
           <svg
             xmlns="http://www.w3.org/2000/svg"
             className="h-8 w-8"

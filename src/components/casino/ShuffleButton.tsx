@@ -36,7 +36,7 @@ const MuteToggler = ({ shuffle }: Props) => {
           </svg>
         </button>
       ) : (
-        <button className="transition hover:opacity-75" onClick={shuffleAction}>
+        <button title="Shuffle all videos" className="transition hover:opacity-75" onClick={shuffleAction}>
           <svg
             xmlns="http://www.w3.org/2000/svg"
             className="h-8 w-8"

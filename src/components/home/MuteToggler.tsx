@@ -10,7 +10,7 @@ const MuteToggler = ({ hook }: Props) => {
   return (
     <div className="flex items-end justify-center space-x-2 text-primary dark:text-light">
       {mute ? (
-        <button className="transition hover:opacity-75" onClick={() => setMuted(false)}>
+        <button title="Turn default mute off" className="transition hover:opacity-75" onClick={() => setMuted(false)}>
           <svg
             xmlns="http://www.w3.org/2000/svg"
             className="h-8 w-8"
@@ -29,7 +29,7 @@ const MuteToggler = ({ hook }: Props) => {
           </svg>
         </button>
       ) : (
-        <button className="transition hover:opacity-75" onClick={() => setMuted(true)}>
+        <button title="Turn default mute on" className="transition hover:opacity-75" onClick={() => setMuted(true)}>
           <svg
             xmlns="http://www.w3.org/2000/svg"
             className="h-8 w-8"
