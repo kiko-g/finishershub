@@ -1,0 +1,19 @@
+.casino header {
+  @apply mt-4 flex justify-between space-x-2 md:space-x-3;
+}
+
+.casino header h2 {
+  @apply text-4xl font-extrabold tracking-tight sm:text-5xl;
+}
+
+.casino header p {
+  @apply grow text-lg font-normal;
+}
+
+.casino header div.left {
+  @apply flex flex-col justify-center gap-2;
+}
+
+.casino header div.right {
+  @apply flex items-end justify-center gap-2;
+}
