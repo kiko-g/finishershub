@@ -10,6 +10,7 @@ import {
   ViewToggler,
   AutoplayToggler,
   MuteToggler,
+  ShuffleButton,
   DelayDisclaimer,
   TwitchVideoClip,
   Skeleton,
@@ -27,9 +28,13 @@ const IndexPage = () => {
   const [shown, setShown] = useState(9) // amount of clips displayed
   const [videos, setVideos] = useState([]) //array of arrays with video links
 
+  const shuffleAndSetVideos = () => {
+    setVideos(shuffle(JSON.parse(localStorage.getItem('finishershub.videos'))))
+  }
+
   const requestLoadAll = () => {
     if (isStorageValid(24 * 7)) {
-      setVideos(shuffle(JSON.parse(localStorage.getItem('finishershub.videos'))))
+      shuffleAndSetVideos()
     } else {
       api.getAllClips((allEmbedUrls: string[]) => {
         const shuffledVideos = shuffle(allEmbedUrls)
@@ -51,6 +56,7 @@ const IndexPage = () => {
             <p>{description}</p>
           </div>
           <div className="right">
+            <ShuffleButton shuffle={shuffleAndSetVideos} />
             <AutoplayToggler hook={[autoplay, setAutoplay]} />
             <MuteToggler hook={[muted, setMuted]} />
             <ViewToggler hook={[view, setView]} />
