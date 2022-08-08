@@ -4,23 +4,27 @@ import ChangePassword from './ChangePassword'
 import FinisherInfoModal from './FinisherInfoModal'
 import RegistryAPI from '../../api/registry'
 import useLocked from '../../hooks/useLocked'
-import { RegistryEntry } from '../../@types'
-import { MinusCircleIcon, PlusCircleIcon, InformationCircleIcon } from '@heroicons/react/outline'
+import { FinishersClubMember } from '../../@types'
+import { MinusCircleIcon, PlusCircleIcon } from '@heroicons/react/outline'
 
 type Props = {
-  member: RegistryEntry
+  member: FinishersClubMember
   updateMembers: Function
 }
 
 const MemberCard = ({ member, updateMembers }: Props) => {
+  const arenas = ['All', 'Warzone', 'Warzone 2']
+  const [arenaIdx, setArenaIdx] = useState(1)
   const [locked, setLocked] = useLocked(member)
 
+  console.log(member.finishers)
+
   const addFinisher = () => {
-    RegistryAPI.incrementFinishers(member._id, (newEntry: RegistryEntry) => updateMembers(newEntry))
+    RegistryAPI.incrementFinishers(member._id, (newEntry: FinishersClubMember) => updateMembers(newEntry))
   }
 
   const removeFinisher = () => {
-    RegistryAPI.decrementFinishers(member._id, (newEntry: RegistryEntry) => updateMembers(newEntry))
+    RegistryAPI.decrementFinishers(member._id, (newEntry: FinishersClubMember) => updateMembers(newEntry))
   }
 
   return (
@@ -56,7 +60,9 @@ const MemberCard = ({ member, updateMembers }: Props) => {
           {/* Counter */}
           <div className="mb-2 flex flex-col text-gray-600 dark:text-white">
             <FinisherInfoModal />
-            <p className="text-5xl font-semibold uppercase">#{member.finishers}</p>
+            <p className="text-5xl font-semibold uppercase">
+              #{arenaIdx === 0 ? member.finishers.reduce((a, b) => a + b, 0) : member.finishers[arenaIdx]}
+            </p>
           </div>
 
           {/* Buttons */}

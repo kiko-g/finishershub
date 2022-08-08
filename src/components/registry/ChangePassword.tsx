@@ -1,11 +1,11 @@
 import React, { Dispatch, Fragment, SetStateAction, useState } from 'react'
 import RegistryAPI from '../../api/registry'
-import { RegistryEntry } from '../../@types'
+import { FinishersClubMember } from '../../@types'
 import { Dialog, Transition } from '@headlessui/react'
 import { EyeIcon, EyeOffIcon, FingerPrintIcon, XIcon } from '@heroicons/react/outline'
 
 type Props = {
-  member: RegistryEntry
+  member: FinishersClubMember
   lockedHook: [boolean, Dispatch<SetStateAction<boolean>>]
 }
 

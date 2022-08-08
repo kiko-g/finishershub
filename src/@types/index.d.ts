@@ -25,11 +25,11 @@ export type ClipsResponse = {
   pagination: Pagination
 }
 
-export type RegistryEntry = {
+export type FinishersClubMember = {
   _id: string
   id: number
   name: string
-  finishers: number
+  finishers: number[]
   aliases: string[]
   code: string
   imgurUrl: string

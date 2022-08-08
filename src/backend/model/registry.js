@@ -4,7 +4,7 @@ const schema = mongoose.Schema(
   {
     id: Number,
     name: String,
-    finishers: Number,
+    finishers: [Number],
     aliases: [String],
     code: String,
     imgurUrl: String,

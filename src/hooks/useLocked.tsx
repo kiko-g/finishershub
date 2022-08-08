@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react'
-import { RegistryEntry } from '../@types'
+import { FinishersClubMember } from '../@types'
 
 const useLocalStorage = (key: string, initialValue?: any) => {
   const [storedValue, setStoredValue] = useState(() => {
@@ -26,7 +26,7 @@ const useLocalStorage = (key: string, initialValue?: any) => {
   return [storedValue, setValue]
 }
 
-const useLocked = (member: RegistryEntry) => {
+const useLocked = (member: FinishersClubMember) => {
   const key = `finishershub.members.${member.name}`
   const [locked, setLocked] = useLocalStorage(key, true)
 

@@ -2,20 +2,20 @@ import React, { useState, useEffect } from 'react'
 import Layout from '../layout'
 import Seo from '../components/Seo'
 import RegistryAPI from '../api/registry'
-import { RegistryEntry } from '../@types'
+import { FinishersClubMember } from '../@types'
 import { MemberCard, DataDisclaimer, MemberCardSkeleton } from '../components/registry'
 import '../styles/pages/registry.css'
 
 const RegistryPage = () => {
-  const [members, setMembers] = useState<RegistryEntry[]>([])
+  const [members, setMembers] = useState<FinishersClubMember[]>([])
 
-  const updateMembers = (newEntry: RegistryEntry) => {
-    setMembers(members.map((oldEntry: RegistryEntry) => (oldEntry._id === newEntry._id ? newEntry : oldEntry)))
+  const updateMembers = (newEntry: FinishersClubMember) => {
+    setMembers(members.map((oldEntry: FinishersClubMember) => (oldEntry._id === newEntry._id ? newEntry : oldEntry)))
   }
 
   useEffect(() => {
     // fetch and set members
-    RegistryAPI.getAllFinishers((results: RegistryEntry[]) => setMembers(results))
+    RegistryAPI.getAllFinishers((results: FinishersClubMember[]) => setMembers(results))
   }, [])
 
   return (
@@ -32,7 +32,7 @@ const RegistryPage = () => {
 
         <main className="member-list">
           {members.length !== 0
-            ? members.map((member: RegistryEntry, memberIdx: number) => (
+            ? members.map((member: FinishersClubMember, memberIdx: number) => (
                 <MemberCard key={`member-${memberIdx}`} member={member} updateMembers={updateMembers} />
               ))
             : Array(6)
