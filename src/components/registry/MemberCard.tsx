@@ -24,11 +24,15 @@ const MemberCard = ({ member, updateMembers }: Props) => {
   const arenaIndex = useMemo(() => arenas.findIndex(a => a.name === arena.name), [arena])
 
   const addFinisher = () => {
-    RegistryAPI.incrementFinishers(member._id, arenaIndex, (newEntry: FinishersClubMember) => updateMembers(newEntry))
+    RegistryAPI.incrementFinishers(member._id, arenaIndex - 1, (newEntry: FinishersClubMember) =>
+      updateMembers(newEntry)
+    )
   }
 
   const removeFinisher = () => {
-    RegistryAPI.decrementFinishers(member._id, arenaIndex, (newEntry: FinishersClubMember) => updateMembers(newEntry))
+    RegistryAPI.decrementFinishers(member._id, arenaIndex - 1, (newEntry: FinishersClubMember) =>
+      updateMembers(newEntry)
+    )
   }
 
   return (

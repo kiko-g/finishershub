@@ -21,10 +21,12 @@ const getFinishers = (id: string, callback: Function) => {
 }
 
 const incrementFinishers = (id: string, arena: number, callback: Function) => {
+  console.log(`/${id}/${arena}/increment`)
   backend.put(`/${id}/${arena}/increment`).then(response => callback(response.data))
 }
 
 const decrementFinishers = (id: string, arena: number, callback: Function) => {
+  console.log(`/${id}/${arena}/decrement`)
   backend.put(`/${id}/${arena}/decrement`).then(response => callback(response.data))
 }
 

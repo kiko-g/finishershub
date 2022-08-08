@@ -46,6 +46,7 @@ const incrementFinishers = async (req, res) => {
     }
 
     const increment = { finishers: stats.finishers.map((count, index) => (index === arena ? count + 1 : count)) }
+    console.log(increment)
     const updatedStats = await Registry.findByIdAndUpdate(id, increment, { new: true })
     res.status(200).json(updatedStats)
   } catch (error) {
@@ -68,6 +69,7 @@ const decrementFinishers = async (req, res) => {
     }
 
     const decrement = { finishers: stats.finishers.map((count, index) => (index === arena ? count - 1 : count)) }
+    console.log(decrement)
     const updatedStats = await Registry.findByIdAndUpdate(id, decrement, { new: true })
     res.status(200).json(updatedStats)
   } catch (error) {
