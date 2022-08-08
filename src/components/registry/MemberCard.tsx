@@ -20,7 +20,7 @@ const MemberCard = ({ member, updateMembers }: Props) => {
   )
 
   const [locked, setLocked] = useLocked(member)
-  const [arena, setArena] = useState(arenas[arenas.length - 1])
+  const [arena, setArena] = useState(arenas[arenas.length - 2]) // FIXME: change this to - 1 when December comes
 
   const arenaIndex = useMemo(() => arenas.findIndex(a => a.name === arena.name), [arena])
   const finisherTotal = useMemo(() => member.finishers.reduce((a, b) => a + b, 0), [member])
