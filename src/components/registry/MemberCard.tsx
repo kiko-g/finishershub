@@ -74,7 +74,7 @@ const MemberCard = ({ member, updateMembers }: Props) => {
           <div className="flex flex-col gap-2">
             <div className="flex items-center gap-2">
               <button
-                disabled={locked}
+                disabled={locked || arenaIndex === 0}
                 onClick={addFinisher}
                 className="action bg-sky-800 text-white"
                 title={locked ? `You need to prove you are ${member.name} first` : `Add 1 finisher to ${member.name}`}
@@ -83,7 +83,7 @@ const MemberCard = ({ member, updateMembers }: Props) => {
                 <PlusCircleIcon className="h-5 w-5" />
               </button>
               <button
-                disabled={locked}
+                disabled={locked || arenaIndex === 0}
                 onClick={removeFinisher}
                 className="action bg-rose-800 text-white"
                 title={
