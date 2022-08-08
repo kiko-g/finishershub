@@ -18,7 +18,7 @@ const getAllFinishers = async (req, res) => {
 const getFinishers = async (req, res) => {
   try {
     const id = req.params.id
-    const stats = await Registry.findById()
+    const stats = await Registry.findById(id)
 
     if (!stats) {
       res.status(400).json({ message: 'Member not found' })
