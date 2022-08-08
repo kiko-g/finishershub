@@ -3,11 +3,15 @@ import Layout from '../layout'
 import Seo from '../components/Seo'
 import RegistryAPI from '../api/registry'
 import { FinishersClubMember } from '../@types'
-import { MemberCard, DataDisclaimer, MemberCardSkeleton } from '../components/registry'
+import { MemberCard, DataDisclaimer, TotalFinishersDisclaimer, MemberCardSkeleton } from '../components/registry'
 import '../styles/pages/registry.css'
 
 const RegistryPage = () => {
   const [members, setMembers] = useState<FinishersClubMember[]>([])
+  const totalFinishers = members
+    .map(member => member.finishers.reduce((a, b) => a + b, 0))
+    .flat()
+    .reduce((a, b) => a + b, 0)
 
   const updateMembers = (newEntry: FinishersClubMember) => {
     setMembers(members.map((oldEntry: FinishersClubMember) => (oldEntry._id === newEntry._id ? newEntry : oldEntry)))
@@ -28,6 +32,7 @@ const RegistryPage = () => {
             <p>The profiles and stats of the criminals like never seen before.</p>
           </section>
           <DataDisclaimer />
+          <TotalFinishersDisclaimer count={totalFinishers} />
         </header>
 
         <main className="member-list">
