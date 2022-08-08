@@ -15,7 +15,7 @@ type Props = {
 
 const MemberCard = ({ member, updateMembers }: Props) => {
   const arenas = useMemo(
-    () => [, ...member.finishers.map((count, index) => ({ name: `Warzone ${index + 1}` }))],
+    () => [{ name: 'All' }, ...member.finishers.map((count, index) => ({ name: `Warzone ${index + 1}` }))],
     [member]
   )
 
