@@ -37,7 +37,7 @@ const getFinishers = async (req, res) => {
 const incrementFinishers = async (req, res) => {
   try {
     const id = req.params.id
-    const arena = req.params.arena
+    const arena = parseInt(req.params.arena)
     const stats = await Registry.findById(id)
 
     if (!stats) {
@@ -45,9 +45,7 @@ const incrementFinishers = async (req, res) => {
       throw new Error('Member not found')
     }
 
-    const newFinishers = stats.finishers.map((count, index) => (index === arena ? count + 1 : count))
-    console.log(newFinishers)
-    const increment = { finishers: newFinishers }
+    const increment = { finishers: stats.finishers.map((count, index) => (index === arena ? count + 1 : count)) }
     const updatedStats = await Registry.findByIdAndUpdate(id, increment, { new: true })
     res.status(200).json(updatedStats)
   } catch (error) {
@@ -61,7 +59,7 @@ const incrementFinishers = async (req, res) => {
 const decrementFinishers = async (req, res) => {
   try {
     const id = req.params.id
-    const arena = req.params.arena
+    const arena = parseInt(req.params.arena)
     const stats = await Registry.findById(id)
 
     if (!stats) {
@@ -69,9 +67,7 @@ const decrementFinishers = async (req, res) => {
       throw new Error('Member not found')
     }
 
-    const newFinishers = stats.finishers.map((count, index) => (index === arena ? count - 1 : count))
-    console.log(newFinishers)
-    const decrement = { finishers: newFinishers }
+    const decrement = { finishers: stats.finishers.map((count, index) => (index === arena ? count - 1 : count)) }
     const updatedStats = await Registry.findByIdAndUpdate(id, decrement, { new: true })
     res.status(200).json(updatedStats)
   } catch (error) {
