@@ -2,9 +2,10 @@ import React, { useState } from 'react'
 import ClaimIdentity from './ClaimIdentity'
 import ChangePassword from './ChangePassword'
 import FinisherInfoModal from './FinisherInfoModal'
+import MemberCardSelectArena from './MemberCardSelectArena'
 import RegistryAPI from '../../api/registry'
 import useLocked from '../../hooks/useLocked'
-import { FinishersClubMember } from '../../@types'
+import { Arena, FinishersClubMember } from '../../@types'
 import { MinusCircleIcon, PlusCircleIcon } from '@heroicons/react/outline'
 
 type Props = {
@@ -13,11 +14,13 @@ type Props = {
 }
 
 const MemberCard = ({ member, updateMembers }: Props) => {
-  const arenas = ['All', 'Warzone', 'Warzone 2']
-  const [arenaIdx, setArenaIdx] = useState(1)
-  const [locked, setLocked] = useLocked(member)
+  const arenas: Arena[] = [
+    { name: 'All', count: member.finishers.reduce((a, b) => a + b, 0) },
+    ...member.finishers.map((count, index) => ({ name: `Warzone ${index + 1}`, count: count })),
+  ]
 
-  console.log(member.finishers)
+  const [locked, setLocked] = useLocked(member)
+  const [arena, setArena] = useState<Arena>(arenas[arenas.length - 1])
 
   const addFinisher = () => {
     RegistryAPI.incrementFinishers(member._id, (newEntry: FinishersClubMember) => updateMembers(newEntry))
@@ -41,7 +44,10 @@ const MemberCard = ({ member, updateMembers }: Props) => {
         )}
       </aside>
 
-      <section className="relative flex w-auto grow flex-col justify-between space-y-6 rounded-r-xl px-1 py-1 text-base font-normal lg:h-auto lg:max-h-full lg:w-3/4 lg:py-0 lg:pl-4 lg:pr-0">
+      <section
+        className="relative flex w-auto grow flex-col justify-between space-y-6 rounded-r-xl px-1 py-1 
+        text-base font-normal lg:h-auto lg:max-h-full lg:w-3/4 lg:py-0 lg:pl-4 lg:pr-0"
+      >
         <div className="flex h-full flex-col justify-between gap-4">
           {/* Header */}
           <header>
@@ -60,9 +66,7 @@ const MemberCard = ({ member, updateMembers }: Props) => {
           {/* Counter */}
           <div className="mb-2 flex flex-col text-gray-600 dark:text-white">
             <FinisherInfoModal />
-            <p className="text-5xl font-semibold uppercase">
-              #{arenaIdx === 0 ? member.finishers.reduce((a, b) => a + b, 0) : member.finishers[arenaIdx]}
-            </p>
+            <p className="text-5xl font-semibold uppercase">#{arena.count}</p>
           </div>
 
           {/* Buttons */}
@@ -71,7 +75,7 @@ const MemberCard = ({ member, updateMembers }: Props) => {
               <button
                 disabled={locked}
                 onClick={addFinisher}
-                className="action bg-sky-800"
+                className="action bg-sky-800 text-white"
                 title={locked ? `You need to prove you are ${member.name} first` : `Add 1 finisher to ${member.name}`}
               >
                 <span>Add</span>
@@ -80,7 +84,7 @@ const MemberCard = ({ member, updateMembers }: Props) => {
               <button
                 disabled={locked}
                 onClick={removeFinisher}
-                className="action bg-rose-800"
+                className="action bg-rose-800 text-white"
                 title={
                   locked ? `You need to prove you are ${member.name} first` : `Remove 1 finisher to ${member.name}`
                 }
@@ -88,6 +92,7 @@ const MemberCard = ({ member, updateMembers }: Props) => {
                 <span>Remove</span>
                 <MinusCircleIcon className="h-5 w-5" />
               </button>
+              <MemberCardSelectArena arenas={arenas} selectedHook={[arena, setArena]} />
             </div>
             <div className="flex items-center gap-2">
               <ClaimIdentity lockedHook={[locked, setLocked]} member={member} />

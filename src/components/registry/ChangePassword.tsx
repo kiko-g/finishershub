@@ -41,7 +41,7 @@ const ClaimIdentity = ({ member, lockedHook }: Props) => {
         onClick={openModal}
         disabled={locked}
         title={locked ? `You need to claim identity for ${member.name} first` : `Change the password of ${member.name}`}
-        className="action bg-slate-700"
+        className="action bg-slate-700 text-white dark:bg-gray-100 dark:text-slate-700"
       >
         <span>Change password</span>
         <FingerPrintIcon className="h-5 w-5" />

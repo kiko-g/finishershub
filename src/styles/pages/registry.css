@@ -11,6 +11,6 @@
 }
 
 .registry .member-card button.action {
-  @apply inline-flex items-center space-x-2 rounded p-2 text-center text-sm font-medium text-white transition 
+  @apply inline-flex items-center space-x-2 rounded p-2 text-center text-sm font-medium transition 
   hover:opacity-80 disabled:cursor-not-allowed disabled:opacity-50;
 }
