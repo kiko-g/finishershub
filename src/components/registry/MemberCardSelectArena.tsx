@@ -1,11 +1,10 @@
 import React, { Dispatch, Fragment, SetStateAction } from 'react'
 import { Listbox, Transition } from '@headlessui/react'
 import { CheckIcon, SelectorIcon } from '@heroicons/react/solid'
-import { Arena } from '../../@types'
 
 type Props = {
-  arenas: Arena[]
-  selectedHook: [Arena, Dispatch<SetStateAction<Arena>>]
+  arenas: any
+  selectedHook: [any, Dispatch<SetStateAction<any>>]
 }
 
 const MemberCardSelectArena = ({ arenas, selectedHook }: Props) => {
@@ -23,7 +22,7 @@ const MemberCardSelectArena = ({ arenas, selectedHook }: Props) => {
             className="absolute mt-1 max-h-60 w-full min-w-[12rem] overflow-auto 
             rounded border border-primary/20 bg-gray-100 py-1 shadow"
           >
-            {arenas.map((arena: Arena, arenaIdx: number) => (
+            {arenas.map((arena: any, arenaIdx: number) => (
               <Listbox.Option
                 key={arenaIdx}
                 className={({ active }) =>

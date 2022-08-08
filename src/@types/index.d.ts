@@ -34,8 +34,3 @@ export type FinishersClubMember = {
   code: string
   imgurUrl: string
 }
-
-export type Arena = {
-  name: string
-  count: number
-}

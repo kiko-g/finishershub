@@ -5,7 +5,7 @@ import FinisherInfoModal from './FinisherInfoModal'
 import MemberCardSelectArena from './MemberCardSelectArena'
 import RegistryAPI from '../../api/registry'
 import useLocked from '../../hooks/useLocked'
-import { Arena, FinishersClubMember } from '../../@types'
+import { FinishersClubMember } from '../../@types'
 import { MinusCircleIcon, PlusCircleIcon } from '@heroicons/react/outline'
 
 type Props = {
@@ -14,14 +14,16 @@ type Props = {
 }
 
 const MemberCard = ({ member, updateMembers }: Props) => {
-  const arenas: Arena[] = [
-    { name: 'All', count: member.finishers.reduce((a, b) => a + b, 0) },
-    ...member.finishers.map((count, index) => ({ name: `Warzone ${index + 1}`, count: count })),
-  ]
+  const arenas = useMemo(
+    () => [, ...member.finishers.map((count, index) => ({ name: `Warzone ${index + 1}` }))],
+    [member]
+  )
 
   const [locked, setLocked] = useLocked(member)
-  const [arena, setArena] = useState<Arena>(arenas[arenas.length - 1])
+  const [arena, setArena] = useState(arenas[arenas.length - 1])
+
   const arenaIndex = useMemo(() => arenas.findIndex(a => a.name === arena.name), [arena])
+  const finisherTotal = useMemo(() => member.finishers.reduce((a, b) => a + b, 0), [member])
 
   const addFinisher = () => {
     RegistryAPI.incrementFinishers(member._id, arenaIndex - 1, (newEntry: FinishersClubMember) =>
@@ -71,7 +73,9 @@ const MemberCard = ({ member, updateMembers }: Props) => {
           {/* Counter */}
           <div className="mb-2 flex flex-col text-gray-600 dark:text-white">
             <FinisherInfoModal />
-            <p className="text-5xl font-semibold uppercase">#{arena.count}</p>
+            <p className="text-5xl font-semibold uppercase">
+              #{arenaIndex === 0 ? finisherTotal : member.finishers[arenaIndex - 1]}
+            </p>
           </div>
 
           {/* Buttons */}
@@ -87,7 +91,7 @@ const MemberCard = ({ member, updateMembers }: Props) => {
                 <PlusCircleIcon className="h-5 w-5" />
               </button>
               <button
-                disabled={locked || arenaIndex === 0 || arena.count === 0}
+                disabled={locked || arenaIndex === 0 || member.finishers[arenaIndex - 1] === 0}
                 onClick={removeFinisher}
                 className="action bg-rose-800 text-white"
                 title={
