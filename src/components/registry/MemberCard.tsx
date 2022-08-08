@@ -87,7 +87,7 @@ const MemberCard = ({ member, updateMembers }: Props) => {
                 <PlusCircleIcon className="h-5 w-5" />
               </button>
               <button
-                disabled={locked || arenaIndex === 0}
+                disabled={locked || arenaIndex === 0 || arena.count === 0}
                 onClick={removeFinisher}
                 className="action bg-rose-800 text-white"
                 title={
