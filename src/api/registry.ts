@@ -20,12 +20,12 @@ const getFinishers = (id: string, callback: Function) => {
   backend.get(`/${id}`).then(response => callback(response.data))
 }
 
-const incrementFinishers = (id: string, callback: Function) => {
-  backend.put(`/${id}/increment`).then(response => callback(response.data))
+const incrementFinishers = (id: string, arena: number, callback: Function) => {
+  backend.put(`/${id}/${arena}/increment`).then(response => callback(response.data))
 }
 
-const decrementFinishers = (id: string, callback: Function) => {
-  backend.put(`/${id}/decrement`).then(response => callback(response.data))
+const decrementFinishers = (id: string, arena: number, callback: Function) => {
+  backend.put(`/${id}/${arena}/decrement`).then(response => callback(response.data))
 }
 
 const updatePassword = (id: string, newPassword: string, callback: Function) => {

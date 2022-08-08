@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useMemo, useState } from 'react'
 import ClaimIdentity from './ClaimIdentity'
 import ChangePassword from './ChangePassword'
 import FinisherInfoModal from './FinisherInfoModal'
@@ -21,13 +21,14 @@ const MemberCard = ({ member, updateMembers }: Props) => {
 
   const [locked, setLocked] = useLocked(member)
   const [arena, setArena] = useState<Arena>(arenas[arenas.length - 1])
+  const arenaIndex = useMemo(() => arenas.findIndex(a => a.name === arena.name), [arena])
 
   const addFinisher = () => {
-    RegistryAPI.incrementFinishers(member._id, (newEntry: FinishersClubMember) => updateMembers(newEntry))
+    RegistryAPI.incrementFinishers(member._id, arenaIndex, (newEntry: FinishersClubMember) => updateMembers(newEntry))
   }
 
   const removeFinisher = () => {
-    RegistryAPI.decrementFinishers(member._id, (newEntry: FinishersClubMember) => updateMembers(newEntry))
+    RegistryAPI.decrementFinishers(member._id, arenaIndex, (newEntry: FinishersClubMember) => updateMembers(newEntry))
   }
 
   return (

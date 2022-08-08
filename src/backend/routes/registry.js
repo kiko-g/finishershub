@@ -21,8 +21,8 @@ if (config.env.mode === 'development') {
 
 router.get('/', controller.getAllFinishers)
 router.get('/:id', controller.getFinishers)
-router.put('/:id/increment', controller.incrementFinishers)
-router.put('/:id/decrement', controller.decrementFinishers)
+router.put('/:id/:arena/increment', controller.incrementFinishers)
+router.put('/:id/:arena/decrement', controller.decrementFinishers)
 router.put('/:id/password/:newPassword', controller.updatePassword)
 
 module.exports = router
