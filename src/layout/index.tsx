@@ -8,9 +8,10 @@ type Props = {
   children: JSX.Element[] | JSX.Element
   location: string
   background?: boolean
+  wrapperClassNames?: string
 }
 
-const Layout: React.FC<Props> = ({ children, location, background }) => {
+const Layout: React.FC<Props> = ({ children, location, background, wrapperClassNames }) => {
   const data = useStaticQuery(graphql`
     query SiteTitleQuery {
       site {
@@ -25,7 +26,7 @@ const Layout: React.FC<Props> = ({ children, location, background }) => {
     <div className="layout background">
       <Navbar location={location} siteTitle={data.site.siteMetadata?.title} />
       {background ? <Background /> : null}
-      <div className="container z-10 mx-auto my-auto p-4">{children}</div>
+      <div className={`container z-10 mx-auto my-auto p-4 ${wrapperClassNames}`}>{children}</div>
       <Footer siteTitle={data.site.siteMetadata?.title} />
     </div>
   )

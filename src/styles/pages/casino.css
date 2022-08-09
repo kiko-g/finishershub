@@ -1,5 +1,5 @@
 .casino {
-  @apply flex flex-col gap-4;
+  @apply flex flex-col gap-3;
 }
 
 .casino header {
@@ -11,7 +11,7 @@
 }
 
 .casino header p {
-  @apply grow text-lg font-normal;
+  @apply grow text-base font-normal;
 }
 
 .casino header div.left {
@@ -22,6 +22,11 @@
   @apply flex items-end justify-end gap-2;
 }
 
+.casino button.arrow {
+  @apply inline-flex items-center gap-2 rounded-full p-2 text-center text-sm font-medium transition 
+  hover:opacity-80 disabled:cursor-not-allowed disabled:opacity-50;
+}
+
 .casino main {
-  @apply w-full xl:w-2/3 2xl:w-2/3;
+  @apply flex h-full w-full items-center gap-x-8 rounded px-4;
 }
