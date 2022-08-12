@@ -69,9 +69,9 @@ const CasinoPage = () => {
             onClick={prevVideo}
             disabled={index === 0}
             title="Go to the previous highlight"
-            className="arrow bg-primary/20 text-primary hover:bg-primary hover:text-white"
+            className="arrow left"
           >
-            <ChevronLeftIcon className="inline-flex h-8 w-8" />
+            <ChevronLeftIcon />
           </button>
           <div className="w-full">
             <TwitchVideoClip
@@ -85,9 +85,9 @@ const CasinoPage = () => {
             onClick={nextVideo}
             disabled={index === videos.length - 1}
             title="Go to the next highlight"
-            className="arrow bg-primary/20 text-primary hover:bg-primary hover:text-white"
+            className="arrow right"
           >
-            <ChevronRightIcon className="inline-flex h-8 w-8" />
+            <ChevronRightIcon />
           </button>
         </main>
       </div>
