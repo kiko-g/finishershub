@@ -2,7 +2,11 @@ import React, { Fragment, useState } from 'react'
 import { Dialog, Transition } from '@headlessui/react'
 import { CheckIcon, InformationCircleIcon, XIcon } from '@heroicons/react/outline'
 
-const FinisherInfoModal = () => {
+type Props = {
+  custom?: JSX.Element
+}
+
+const FinisherInfoModal = ({ custom }: Props) => {
   let [isOpen, setIsOpen] = useState(false)
 
   function closeModal() {
@@ -18,11 +22,17 @@ const FinisherInfoModal = () => {
       <button
         onClick={openModal}
         title="Further information about counting"
-        className="flex w-min items-center gap-1 text-center text-sm font-medium 
-        transition hover:opacity-80 disabled:cursor-not-allowed disabled:opacity-50"
+        className="flex w-min items-center gap-1 text-center font-medium transition 
+        hover:opacity-80 disabled:cursor-not-allowed disabled:opacity-50"
       >
-        <span className="whitespace-nowrap">Lifetime finisher count</span>
-        <InformationCircleIcon className="mt-[1px] inline-flex h-4 w-4" />
+        {custom ? (
+          custom
+        ) : (
+          <>
+            <span className="whitespace-nowrap">Lifetime finisher count</span>
+            <InformationCircleIcon className="mt-[1px] inline-flex h-4 w-4" />
+          </>
+        )}
       </button>
 
       <Transition appear show={isOpen} as={Fragment}>
@@ -50,7 +60,10 @@ const FinisherInfoModal = () => {
                 leaveFrom="opacity-100 scale-100"
                 leaveTo="opacity-0 scale-95"
               >
-                <Dialog.Panel className="w-full max-w-3xl transform overflow-hidden rounded-2xl bg-white p-6 text-left align-middle shadow-xl transition-all">
+                <Dialog.Panel
+                  className="w-full max-w-3xl transform overflow-hidden rounded-2xl bg-white p-6 
+                   text-left align-middle text-sm shadow-xl transition-all lg:text-base"
+                >
                   <header className="flex items-center justify-between">
                     <Dialog.Title as="h3" className="text-2xl font-semibold leading-6 text-primary">
                       Lifetime Finisher Count
@@ -67,13 +80,11 @@ const FinisherInfoModal = () => {
 
                   <div className="mt-3 flex flex-col text-gray-700">
                     <p>
-                      The <strong>lifetime finisher count</strong> is the sum of all the <strong>truthful</strong>{' '}
-                      finishing moves performed by any member of the finishers club. We believe this metric also applies
-                      to all players across the world.
+                      The <strong className="text-primary">lifetime finisher count</strong> is the{' '}
+                      <strong>sum of all the valid finishing moves</strong> performed by any member of the finishers
+                      club. This metric also applies to all players across the world.
                     </p>
-                    <p className="mt-3">
-                      A <strong>truthful</strong> finisher must meet the following criteria:
-                    </p>
+                    <p className="mt-3 font-bold">A valid and truthful finisher must meet the following criteria:</p>
                     <ul className="mt-1 ml-4 list-disc">
                       <li>Finishing move is performed on Warzone.</li>
                       <li>Finishing move is performed on non-downed players.</li>
@@ -81,14 +92,19 @@ const FinisherInfoModal = () => {
                     <p className="mt-3">
                       Other <strong>key notes</strong> to keep in mind:
                     </p>
-                    <ul className="mt-1 ml-4 list-disc">
+                    <ul className="mt-1 ml-4 list-decimal">
                       <li>
-                        Finishing moves on downed players are <strong>not counted</strong> and often considered{' '}
-                        <strong>frowned upon</strong>.
+                        Finishing moves on downed players are <strong>not counted</strong> and{' '}
+                        <strong>often considered frowned upon</strong>.
                       </li>
                       <li>
                         Finishing moves performed on players that have recently used their <strong>self-revive</strong>{' '}
                         are allowed and considered a <strong>noble practice</strong>.
+                      </li>
+                      <li>
+                        Even though finishing moves performed on arenas like Multiplayer{' '}
+                        <strong>do not count towards the lifetime finisher count</strong>, the Finisher Club still
+                        highly encourages performing them whenever possible.
                       </li>
                     </ul>
                   </div>
