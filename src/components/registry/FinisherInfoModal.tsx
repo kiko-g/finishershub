@@ -61,50 +61,50 @@ const FinisherInfoModal = ({ custom }: Props) => {
                 leaveTo="opacity-0 scale-95"
               >
                 <Dialog.Panel
-                  className="w-full max-w-3xl transform overflow-hidden rounded-2xl bg-white p-6 
-                   text-left align-middle text-sm shadow-xl transition-all lg:text-base"
+                  className="w-full max-w-xl transform overflow-hidden rounded-2xl bg-lightest p-5 text-left align-middle
+                  text-sm font-normal text-gray-700 shadow-xl transition-all dark:bg-dark dark:text-white
+                  lg:max-w-[52rem] lg:p-6 lg:text-base"
                 >
                   <header className="flex items-center justify-between">
-                    <Dialog.Title as="h3" className="text-2xl font-semibold leading-6 text-primary">
+                    <Dialog.Title as="h3" className="text-xl font-semibold leading-6 text-teal-600 lg:text-2xl">
                       Lifetime Finisher Count
                     </Dialog.Title>
 
                     <button
                       type="button"
                       onClick={closeModal}
-                      className="rounded p-1 text-primary transition hover:bg-primary hover:text-white"
+                      className="rounded p-0.5 text-white transition hover:bg-rose-700 hover:text-white lg:p-1"
                     >
-                      <XIcon className="h-6 w-6" />
+                      <XIcon className="h-5 w-5" />
                     </button>
                   </header>
 
-                  <div className="mt-3 flex flex-col text-gray-700">
+                  <div className="mt-3 flex flex-col">
                     <p>
-                      The <strong className="text-primary">lifetime finisher count</strong> is the{' '}
-                      <strong>sum of all the valid finishing moves</strong> performed by any member of the finishers
-                      club. This metric also applies to all players across the world.
+                      The{' '}
+                      <strong className="text-primary dark:text-white dark:underline">lifetime finisher count</strong>{' '}
+                      is the <strong>sum of all the valid finishing moves</strong> performed by any member of the
+                      finishers club. This metric also applies to all players across the world.
                     </p>
                     <p className="mt-3 font-bold">A valid and truthful finisher must meet the following criteria:</p>
-                    <ul className="mt-1 ml-4 list-disc">
-                      <li>Finishing move is performed on Warzone.</li>
-                      <li>Finishing move is performed on non-downed players.</li>
+                    <ul className="mt-1 ml-4 flex list-disc flex-col gap-y-1 lg:gap-y-0.5">
+                      <li>Finishing move is performed on Warzone. ✅</li>
+                      <li>Finishing move is performed on non-downed players. ✅</li>
                     </ul>
-                    <p className="mt-3">
-                      Other <strong>key notes</strong> to keep in mind:
-                    </p>
-                    <ul className="mt-1 ml-4 list-decimal">
+                    <p className="mt-3 font-bold">Other key notes to keep in mind:</p>
+                    <ul className="mt-1 ml-4 flex list-decimal flex-col gap-y-1 lg:gap-y-0.5">
                       <li>
                         Finishing moves on downed players are <strong>not counted</strong> and{' '}
-                        <strong>often considered frowned upon</strong>.
+                        <strong>often considered frowned upon</strong>. ⚠️
                       </li>
                       <li>
                         Finishing moves performed on players that have recently used their <strong>self-revive</strong>{' '}
-                        are allowed and considered a <strong>noble practice</strong>.
+                        are allowed and considered a <strong>noble practice</strong>. 🥇
                       </li>
                       <li>
                         Even though finishing moves performed on arenas like Multiplayer{' '}
                         <strong>do not count towards the lifetime finisher count</strong>, the Finisher Club still
-                        highly encourages performing them whenever possible.
+                        highly encourages performing them whenever possible. ℹ️
                       </li>
                     </ul>
                   </div>
