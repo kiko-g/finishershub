@@ -19,3 +19,21 @@
 .header {
   @apply flex flex-1 items-center justify-between md:items-stretch md:justify-between;
 }
+
+/* Utilities */
+.twitch:hover {
+  color: #6441a5;
+}
+
+.linktree:hover {
+  color: #40e09e;
+}
+
+.linkedin:hover {
+  color: #0a66c2;
+}
+
+.github:hover {
+  color: #333;
+}
+

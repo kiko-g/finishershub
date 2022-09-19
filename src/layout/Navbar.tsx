@@ -24,7 +24,7 @@ type Props = {
   location: string
 }
 
-export const Navbar: React.FC<Props> = ({ siteTitle, location }) => {
+export default function Navbar({ siteTitle, location }: Props) {
   return (
     <Disclosure as="nav" className="navbar background">
       {({ open }) => {
