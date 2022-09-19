@@ -26,7 +26,7 @@ const Layout: React.FC<Props> = ({ children, location, background, wrapperClassN
     <div className="layout background">
       <Navbar location={location} siteTitle={data.site.siteMetadata?.title} />
       {background ? <Background /> : null}
-      <div className={`container z-10 mx-auto my-auto p-4 ${wrapperClassNames}`}>{children}</div>
+      <div className={`container z-10 mx-auto mb-auto p-4 ${wrapperClassNames}`}>{children}</div>
       <Footer siteTitle={data.site.siteMetadata?.title} />
     </div>
   )
