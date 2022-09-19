@@ -8,8 +8,8 @@ const AboutPage = () => (
   <Layout location="About" background={true} wrapperClassNames="max-w-7xl">
     <Seo title="About" />
     <h2 className="text-3xl font-extrabold tracking-tight sm:text-5xl">About</h2>
-    <div className="mt-3 rounded bg-[#f1f7fb] px-8 py-6 dark:bg-dark">
-      <ul className="ml-4 mt-1 flex list-disc flex-col gap-y-3 font-normal">
+    <div className="mt-3 rounded bg-light px-4 py-4 lg:px-8 lg:py-6 dark:bg-dark">
+      <ul className="flex flex-col gap-y-3 font-normal">
         <li>
           👋 Finishers Hub is a passion project developed by{' '}
           <a
