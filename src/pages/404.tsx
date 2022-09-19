@@ -2,6 +2,7 @@ import React from 'react'
 import Layout from '../layout'
 import Seo from '../components/Seo'
 import { StaticImage } from 'gatsby-plugin-image'
+import { Link } from 'gatsby'
 
 const NotFoundPage = () => (
   <Layout location="Oops">
@@ -16,8 +17,15 @@ const NotFoundPage = () => (
         alt="Not found display"
         objectFit="cover"
         objectPosition="50% 50%"
-        className="aspect-square h-auto lg:h-96 rounded-xl shadow"
+        className="aspect-square w-auto rounded-xl shadow lg:w-96"
       />
+      <Link
+        to="/"
+        className="inline-flex w-full justify-center rounded bg-secondary p-2 text-white
+        shadow transition hover:opacity-80 lg:w-96"
+      >
+        Country roads, take me home!
+      </Link>
     </div>
   </Layout>
 )
