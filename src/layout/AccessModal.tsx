@@ -14,7 +14,10 @@ const AccessModal = ({ lockedHook }: Props) => {
   const [codephraseShown, setCodephraseShown] = useState(false)
 
   const closeModal = () => {
-    setIsOpen(false)
+    if (codephrase.toLowerCase() === secret.toLowerCase()) {
+      setLocked(false)
+      setIsOpen(false)
+    }
   }
 
   const togglePasswordShown = () => {
