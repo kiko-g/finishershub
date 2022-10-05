@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import Layout from '../layout'
+import AccessModal from '../layout/AccessModal'
 import api from '../api/twitch'
 import Seo from '../components/Seo'
 import { classNames, shuffle } from '../utils'
@@ -24,6 +25,7 @@ const IndexPage = () => {
 
   const [view, setView] = useState(false) //grid or list view
   const [muted, setMuted] = useState(true) //muted or unmuted videos
+  const [locked, setLocked] = useState(true) //view page allowed
   const [autoplay, setAutoplay] = useState(false) //muted or unmuted videos
   const [shown, setShown] = useState(9) // amount of clips displayed
   const [videos, setVideos] = useState([]) //array of arrays with video links
@@ -33,7 +35,7 @@ const IndexPage = () => {
   }
 
   const requestLoadAll = () => {
-    if (isStorageValid(24 * 7)) {
+    if (isStorageValid(24 * 30)) {
       shuffleAndSetVideos()
     } else {
       api.getAllClips((allEmbedUrls: string[]) => {
@@ -49,6 +51,7 @@ const IndexPage = () => {
   return (
     <Layout location="Home" background={false}>
       <Seo title="Home" />
+      <AccessModal lockedHook={[locked, setLocked]} />
       <div className="home">
         <header>
           <div className="left">

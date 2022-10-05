@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import Layout from '../layout'
+import AccessModal from '../layout/AccessModal'
 import api from '../api/twitch'
 import Seo from '../components/Seo'
 import { shuffle } from '../utils'
@@ -18,6 +19,7 @@ import { ChevronLeftIcon, ChevronRightIcon } from '@heroicons/react/solid'
 const CasinoPage = () => {
   const [index, setIndex] = useState(0) // index of the current video
   const [muted, setMuted] = useState(true) //muted videos or not
+  const [locked, setLocked] = useState(true) //view page allowed
   const [autoplay, setAutoplay] = useState(true) //play automatically videos or not
   const [videos, setVideos] = useState([]) //array of arrays with video links
 
@@ -30,7 +32,7 @@ const CasinoPage = () => {
   }
 
   const requestLoadAll = () => {
-    if (isStorageValid(24 * 7)) {
+    if (isStorageValid(24 * 30)) {
       shuffleAndSetVideos()
     } else {
       api.getAllClips((allEmbedUrls: string[]) => {
@@ -46,6 +48,7 @@ const CasinoPage = () => {
   return (
     <Layout location="Casino" wrapperClassNames="max-w-5xl">
       <Seo title="Casino" />
+      <AccessModal lockedHook={[locked, setLocked]} />
       <div className="casino">
         <header>
           <div className="left">
