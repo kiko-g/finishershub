@@ -17,10 +17,6 @@ const AccessModal = ({ lockedHook }: Props) => {
     setIsOpen(false)
   }
 
-  const openModal = () => {
-    setIsOpen(true)
-  }
-
   const togglePasswordShown = () => {
     setCodephraseShown(!codephraseShown)
   }
@@ -68,14 +64,6 @@ const AccessModal = ({ lockedHook }: Props) => {
                   <Dialog.Title as="h3" className="text-xl font-semibold leading-6 text-primary">
                     Claim Identity
                   </Dialog.Title>
-
-                  <button
-                    type="button"
-                    onClick={closeModal}
-                    className="rounded p-1 text-primary transition hover:bg-primary hover:text-white"
-                  >
-                    <XIcon className="h-6 w-6" />
-                  </button>
                 </header>
 
                 <p className="mt-2 text-gray-600 ">
