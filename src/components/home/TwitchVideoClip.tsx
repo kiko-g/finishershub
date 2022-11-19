@@ -16,7 +16,7 @@ const TwitchVideoClip = ({ video, parent, muted = false, autoplay = false }: Pro
       <div className={`${loaded ? 'flex' : 'hidden'} h-full w-full rounded-xl shadow`}>
         <div className="relative h-full w-full">
           <iframe
-            className="aspect-video w-full rounded-xl"
+            className="aspect-video w-full rounded"
             src={`${video}&parent=${parent}&muted=${muted.toString()}&autoplay=${autoplay.toString()}`}
             onLoad={() => setLoaded(true)}
             allowFullScreen

@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import Layout from '../layout'
+import useAccessDenied from '../hooks/useAccessDenied'
 import AccessModal from '../layout/AccessModal'
 import api from '../api/twitch'
 import Seo from '../components/Seo'
@@ -25,10 +26,10 @@ const IndexPage = () => {
 
   const [view, setView] = useState(false) //grid or list view
   const [muted, setMuted] = useState(true) //muted or unmuted videos
-  const [locked, setLocked] = useState(true) //view page allowed
-  const [autoplay, setAutoplay] = useState(false) //muted or unmuted videos
   const [shown, setShown] = useState(9) // amount of clips displayed
   const [videos, setVideos] = useState([]) //array of arrays with video links
+  const [autoplay, setAutoplay] = useState(false) //muted or unmuted videos
+  const [accessDenied, setAccessDenied] = useAccessDenied() // control access to content
 
   const shuffleAndSetVideos = () => {
     setVideos(shuffle(JSON.parse(localStorage.getItem('finishershub.videos'))))
@@ -51,7 +52,7 @@ const IndexPage = () => {
   return (
     <Layout location="Home" background={false}>
       <Seo title="Home" />
-      <AccessModal lockedHook={[locked, setLocked]} />
+      <AccessModal lockedHook={[accessDenied, setAccessDenied]} />
       <div className="home">
         <header>
           <div className="left">

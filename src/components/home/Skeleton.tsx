@@ -4,7 +4,7 @@ type Props = {}
 
 const Skeleton = ({}: Props) => {
   return (
-    <div className="mx-auto w-full rounded-xl bg-lightest p-4 dark:bg-dark">
+    <div className="mx-auto w-full rounded bg-lightest p-4 dark:bg-dark">
       <div className="flex animate-pulse space-x-4">
         <div className="h-14 w-14 rounded-full bg-gray-300 dark:bg-gray-600"></div>
 

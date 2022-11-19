@@ -69,8 +69,12 @@ const AccessModal = ({ lockedHook }: Props) => {
                   </Dialog.Title>
                 </header>
 
-                <p className="mt-2 text-gray-600 ">
+                <p className="mt-2 text-sm text-gray-600">
                   Enter the codephrase to prove you are worthy of viewing the content.
+                </p>
+
+                <p className="mt-1 text-xs text-gray-500">
+                  <strong>Hint</strong>: <span>Levels, Bio, Window</span>
                 </p>
 
                 <div className="relative mt-3 flex flex-col gap-1">
@@ -78,10 +82,10 @@ const AccessModal = ({ lockedHook }: Props) => {
                     Identity Codephrase
                   </label>
                   <input
+                    required
                     name="password"
                     type={codephraseShown ? 'text' : 'password'}
                     autoComplete="current-password"
-                    required
                     className="relative block w-full appearance-none rounded border px-3 py-2 focus:accent-primary"
                     placeholder="Password"
                     value={codephrase}
