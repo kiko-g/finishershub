@@ -49,10 +49,6 @@ const IndexPage = () => {
 
   useEffect(() => requestLoadAll(), [])
 
-  useEffect(() => {
-    setMuted(accessDenied ? true : false)
-  }, [accessDenied])
-
   return (
     <Layout location="Home" background={false}>
       <Seo title="Home" />

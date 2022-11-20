@@ -46,10 +46,6 @@ const CasinoPage = () => {
 
   useEffect(() => requestLoadAll(), [])
 
-  useEffect(() => {
-    setMuted(accessDenied ? true : false)
-  }, [accessDenied])
-
   return (
     <Layout location="Casino" wrapperClassNames="max-w-5xl">
       <Seo title="Casino" />
