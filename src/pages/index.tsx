@@ -24,12 +24,12 @@ const IndexPage = () => {
   const title = data.site.siteMetadata?.title ?? 'Title'
   const description = data.site.siteMetadata?.description ?? 'Description'
 
-  const [view, setView] = useState(false) //grid or list view
-  const [muted, setMuted] = useState(true) //muted or unmuted videos
   const [shown, setShown] = useState(9) // amount of clips displayed
   const [videos, setVideos] = useState([]) //array of arrays with video links
-  const [autoplay, setAutoplay] = useState(false) //muted or unmuted videos
   const [accessDenied, setAccessDenied] = useAccessDenied() // control access to content
+  const [view, setView] = useState(false) //grid or list view
+  const [muted, setMuted] = useState(true) //muted videos or not
+  const [autoplay, setAutoplay] = useState(false) //play automatically videos or not
 
   const shuffleAndSetVideos = () => {
     setVideos(shuffle(JSON.parse(localStorage.getItem('finishershub.videos'))))
@@ -48,6 +48,10 @@ const IndexPage = () => {
   }
 
   useEffect(() => requestLoadAll(), [])
+
+  useEffect(() => {
+    setMuted(accessDenied ? true : false)
+  }, [accessDenied])
 
   return (
     <Layout location="Home" background={false}>
@@ -82,7 +86,7 @@ const IndexPage = () => {
           {videos.length === 0 &&
             Array(shown)
               .fill(null)
-              .map((skeleton, skeletonIdx) => <Skeleton key={`skeleton-${skeletonIdx}`} />)}
+              .map((_, skeletonIdx) => <Skeleton key={`skeleton-${skeletonIdx}`} />)}
         </main>
 
         <footer>

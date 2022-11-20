@@ -21,8 +21,8 @@ const CasinoPage = () => {
   const [index, setIndex] = useState(0) // index of the current video
   const [videos, setVideos] = useState([]) //array of arrays with video links
   const [accessDenied, setAccessDenied] = useAccessDenied() // control access to content
-  const [autoplay, setAutoplay] = useState(accessDenied ? false : true) //play automatically videos or not
-  const [muted, setMuted] = useState(accessDenied ? true : false) //muted videos or not
+  const [muted, setMuted] = useState(true) //muted videos or not
+  const [autoplay, setAutoplay] = useState(true) //play automatically videos or not
 
   const prevVideo = () => setIndex(prev => prev - 1)
 
@@ -45,6 +45,10 @@ const CasinoPage = () => {
   }
 
   useEffect(() => requestLoadAll(), [])
+
+  useEffect(() => {
+    setMuted(accessDenied ? true : false)
+  }, [accessDenied])
 
   return (
     <Layout location="Casino" wrapperClassNames="max-w-5xl">
