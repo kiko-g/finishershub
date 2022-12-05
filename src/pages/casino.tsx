@@ -14,6 +14,7 @@ import {
   TwitchVideoClip,
   Skeleton,
   ShuffleButton,
+  DeleteCookiesButton,
 } from '../components/casino'
 import '../styles/pages/casino.css'
 import { ChevronLeftIcon, ChevronRightIcon } from '@heroicons/react/solid'
@@ -63,6 +64,7 @@ const CasinoPage = () => {
             </p>
           </div>
           <div className="right">
+            <DeleteCookiesButton />
             <ShuffleButton shuffle={shuffleAndSetVideos} />
             <AutoplayToggler hook={[autoplay, setAutoplay]} />
             <MuteToggler hook={[muted, setMuted]} />

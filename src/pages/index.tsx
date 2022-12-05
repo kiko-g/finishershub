@@ -15,6 +15,7 @@ import {
   ShuffleButton,
   DelayDisclaimer,
   TwitchVideoClip,
+  DeleteCookiesButton,
   Skeleton,
 } from '../components/home'
 import '../styles/pages/index.css'
@@ -60,6 +61,7 @@ const IndexPage = () => {
             <p>{description}</p>
           </div>
           <div className="right">
+            <DeleteCookiesButton />
             <ShuffleButton shuffle={shuffleAndSetVideos} />
             <AutoplayToggler hook={[autoplay, setAutoplay]} />
             <MuteToggler hook={[muted, setMuted]} />
