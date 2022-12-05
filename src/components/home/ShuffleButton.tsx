@@ -19,7 +19,7 @@ const MuteToggler = ({ shuffle }: Props) => {
         <button disabled>
           <svg
             xmlns="http://www.w3.org/2000/svg"
-            className="h-8 w-8 animate-spin fill-primary text-gray-300 dark:fill-white dark:text-gray-500"
+            className="h-10 w-10 animate-spin fill-primary text-gray-300 dark:fill-white dark:text-gray-500 lg:h-8 lg:w-8"
             fill="none"
             viewBox="0 0 100 101"
             stroke="currentColor"
@@ -39,7 +39,7 @@ const MuteToggler = ({ shuffle }: Props) => {
         <button title="Shuffle all videos" className="transition hover:opacity-75" onClick={shuffleAction}>
           <svg
             xmlns="http://www.w3.org/2000/svg"
-            className="h-8 w-8"
+            className="h-10 w-10 lg:h-8 lg:w-8"
             fill="none"
             viewBox="0 0 24 24"
             stroke="currentColor"

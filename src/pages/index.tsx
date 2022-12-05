@@ -23,13 +23,12 @@ const IndexPage = () => {
   const data = useStaticQuery(homeQuery)
   const title = data.site.siteMetadata?.title ?? 'Title'
   const description = data.site.siteMetadata?.description ?? 'Description'
-
-  const [shown, setShown] = useState(9) // amount of clips displayed
-  const [videos, setVideos] = useState([]) //array of arrays with video links
+  const [shown, setShown] = useState(3) // amount of clips displayed
+  const [videos, setVideos] = useState([]) // array of arrays with video links
   const [accessDenied, setAccessDenied] = useAccessDenied() // control access to content
-  const [view, setView] = useState(false) //grid or list view
-  const [muted, setMuted] = useState(true) //muted videos or not
-  const [autoplay, setAutoplay] = useState(false) //play automatically videos or not
+  const [view, setView] = useState(false) // grid or list view
+  const [muted, setMuted] = useState(true) // muted videos or not
+  const [autoplay, setAutoplay] = useState(false) // play automatically videos or not
 
   const shuffleAndSetVideos = () => {
     setVideos(shuffle(JSON.parse(localStorage.getItem('finishershub.videos'))))
