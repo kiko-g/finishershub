@@ -1,7 +1,3 @@
-const classNames = (...classes: any[]) => {
-  return classes.filter(Boolean).join(' ')
-}
-
 const daysDifference = (before: Date, after: Date) => {
   let a = new Date(after.toString())
   let b = new Date(before.toString())
@@ -24,4 +20,4 @@ const shuffle = (array: any[]) => {
   return result
 }
 
-export { classNames, daysDifference, randomBetween, shuffle }
+export { daysDifference, randomBetween, shuffle }

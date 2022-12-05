@@ -6,7 +6,7 @@ import useAccessDenied from '../hooks/useAccessDenied'
 import api from '../api/twitch'
 import Seo from '../components/Seo'
 import { shuffle } from '../utils'
-import { isStorageValid, writeVideosStorage } from '../utils/storage'
+import { deleteAllCookies, isStorageValid, writeVideosStorage } from '../utils/storage'
 import {
   AutoplayToggler,
   MuteToggler,
@@ -35,8 +35,9 @@ const CasinoPage = () => {
   }
 
   const requestLoadAll = () => {
-    if (isStorageValid(24 * 30)) {
+    if (isStorageValid(24 * 7)) {
       shuffleAndSetVideos()
+      deleteAllCookies()
     } else {
       api.getAllClips((allEmbedUrls: string[]) => {
         const shuffledVideos = shuffle(allEmbedUrls)
@@ -72,7 +73,7 @@ const CasinoPage = () => {
 
         {isMobile ? (
           // Display Mobile
-          <main className="flex flex-col gap-6">
+          <main className="flex w-full flex-col gap-6">
             <div className="w-full">
               <TwitchVideoClip
                 muted={muted}

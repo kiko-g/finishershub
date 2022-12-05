@@ -7,6 +7,7 @@
     "@headlessui/react": "^1.6.6",
     "@heroicons/react": "^1.0.6",
     "axios": "^0.26.1",
+    "classnames": "^2.3.2",
     "gatsby": "^4.11.2",
     "gatsby-plugin-env-variables": "^2.2.0",
     "gatsby-plugin-gatsby-cloud": "^4.11.1",

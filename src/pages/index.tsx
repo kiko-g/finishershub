@@ -4,8 +4,8 @@ import useAccessDenied from '../hooks/useAccessDenied'
 import AccessModal from '../layout/AccessModal'
 import api from '../api/twitch'
 import Seo from '../components/Seo'
-import { classNames, shuffle } from '../utils'
-import { isStorageValid, writeVideosStorage } from '../utils/storage'
+import { shuffle } from '../utils'
+import { deleteAllCookies, isStorageValid, writeVideosStorage } from '../utils/storage'
 import { useStaticQuery, graphql } from 'gatsby'
 import { PlusIcon } from '@heroicons/react/solid'
 import {
@@ -35,8 +35,9 @@ const IndexPage = () => {
   }
 
   const requestLoadAll = () => {
-    if (isStorageValid(24 * 30)) {
+    if (isStorageValid(24 * 7)) {
       shuffleAndSetVideos()
+      deleteAllCookies()
     } else {
       api.getAllClips((allEmbedUrls: string[]) => {
         const shuffledVideos = shuffle(allEmbedUrls)

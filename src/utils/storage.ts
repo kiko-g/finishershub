@@ -1,3 +1,9 @@
+const deleteAllCookies = () => {
+  document.cookie.split(';').forEach(function (c) {
+    document.cookie = c.replace(/^ +/, '').replace(/=.*/, '=;expires=' + new Date().toUTCString() + ';path=/')
+  })
+}
+
 const isStorageValid = (hoursElapsed: number) => {
   const storedVideos = JSON.parse(localStorage.getItem('finishershub.videos'))
   const storedSavedTime = new Date(JSON.parse(localStorage.getItem('finishershub.videos-fetch-date'))).getTime()
@@ -11,4 +17,4 @@ const writeVideosStorage = (videos: string[]) => {
   localStorage.setItem('finishershub.videos-fetch-date', JSON.stringify(new Date()))
 }
 
-export { isStorageValid, writeVideosStorage }
+export { deleteAllCookies, isStorageValid, writeVideosStorage }
