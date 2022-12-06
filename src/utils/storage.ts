@@ -10,10 +10,10 @@ const resetCookies = () => {
 const clearCache = (invalidateCookies?: boolean) => {
   localStorage.clear()
   sessionStorage.clear()
-  if(invalidateCookies) resetCookies()
+  if (invalidateCookies) resetCookies()
 }
 
-const isStorageValid = (hoursElapsed: number) => {
+const isStorageValid = (hoursElapsed: number = 24 * 7) => {
   const storedVideos = JSON.parse(localStorage.getItem('finishershub.videos'))
   const storedSavedTime = new Date(JSON.parse(localStorage.getItem('finishershub.videos-fetch-date'))).getTime()
   const expiredStorage = Math.abs(new Date().getTime() - storedSavedTime) / 36e5 > hoursElapsed

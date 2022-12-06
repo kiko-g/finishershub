@@ -36,9 +36,10 @@ const IndexPage = () => {
   }
 
   const requestLoadAll = () => {
-    if (isStorageValid(24 * 30)) {
+    if (isStorageValid()) {
       shuffleAndSetVideos()
     } else {
+      clearCache(true)
       api.getAllClips((allEmbedUrls: string[]) => {
         const shuffledVideos = shuffle(allEmbedUrls)
         setVideos(shuffledVideos)
@@ -48,6 +49,13 @@ const IndexPage = () => {
   }
 
   useEffect(() => requestLoadAll(), [])
+
+  useEffect(() => {
+    if (!accessDenied) {
+      setMuted(false)
+      setAutoplay(true)
+    }
+  }, [accessDenied])
 
   return (
     <Layout location="Home" background={false}>

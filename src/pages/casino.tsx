@@ -36,9 +36,10 @@ const CasinoPage = () => {
   }
 
   const requestLoadAll = () => {
-    if (isStorageValid(24 * 30)) {
+    if (isStorageValid()) {
       shuffleAndSetVideos()
     } else {
+      clearCache(true)
       api.getAllClips((allEmbedUrls: string[]) => {
         const shuffledVideos = shuffle(allEmbedUrls)
         setVideos(shuffledVideos)
@@ -48,6 +49,13 @@ const CasinoPage = () => {
   }
 
   useEffect(() => requestLoadAll(), [])
+
+  useEffect(() => {
+    if (!accessDenied) {
+      setMuted(false)
+      setAutoplay(false)
+    }
+  }, [accessDenied])
 
   return (
     <Layout location="Casino" wrapperClassNames="max-w-5xl">
