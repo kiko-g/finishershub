@@ -1,5 +1,5 @@
 import React from 'react'
-import { deleteAllCookies } from '../../utils/storage'
+import { clearCache } from '../../utils/storage'
 
 const DeleteCookiesButton = () => {
   return (
@@ -7,7 +7,11 @@ const DeleteCookiesButton = () => {
       <button
         title="Clear all cookies (helps if page does not load)"
         className="transition hover:opacity-75"
-        onClick={deleteAllCookies}
+        onClick={() => {
+          clearCache()
+          alert('Do you want to clear all cookies and reload the page?')
+          window.location.reload()
+        }}
       >
         <svg
           xmlns="http://www.w3.org/2000/svg"

@@ -1,7 +1,16 @@
-const deleteAllCookies = () => {
-  document.cookie.split(';').forEach(function (c) {
-    document.cookie = c.replace(/^ +/, '').replace(/=.*/, '=;expires=' + new Date().toUTCString() + ';path=/')
-  })
+const resetCookies = () => {
+  document.cookie
+    .split(';')
+    .forEach(
+      cookie =>
+        (document.cookie = cookie.replace(/^ +/, '').replace(/=.*/, `=;expires=${new Date(0).toUTCString()};path=/`))
+    )
+}
+
+const clearCache = (invalidateCookies?: boolean) => {
+  localStorage.clear()
+  sessionStorage.clear()
+  if(invalidateCookies) resetCookies()
 }
 
 const isStorageValid = (hoursElapsed: number) => {
@@ -17,4 +26,4 @@ const writeVideosStorage = (videos: string[]) => {
   localStorage.setItem('finishershub.videos-fetch-date', JSON.stringify(new Date()))
 }
 
-export { deleteAllCookies, isStorageValid, writeVideosStorage }
+export { clearCache, isStorageValid, writeVideosStorage }

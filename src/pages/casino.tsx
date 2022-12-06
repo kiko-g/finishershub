@@ -6,7 +6,7 @@ import useAccessDenied from '../hooks/useAccessDenied'
 import api from '../api/twitch'
 import Seo from '../components/Seo'
 import { shuffle } from '../utils'
-import { deleteAllCookies, isStorageValid, writeVideosStorage } from '../utils/storage'
+import { clearCache, isStorageValid, writeVideosStorage } from '../utils/storage'
 import {
   AutoplayToggler,
   MuteToggler,
@@ -36,9 +36,8 @@ const CasinoPage = () => {
   }
 
   const requestLoadAll = () => {
-    if (isStorageValid(24 * 7)) {
+    if (isStorageValid(24 * 30)) {
       shuffleAndSetVideos()
-      deleteAllCookies()
     } else {
       api.getAllClips((allEmbedUrls: string[]) => {
         const shuffledVideos = shuffle(allEmbedUrls)

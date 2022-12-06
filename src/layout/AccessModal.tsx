@@ -89,6 +89,7 @@ const AccessModal = ({ lockedHook }: Props) => {
                     className="relative block w-full appearance-none rounded border px-3 py-2 focus:accent-primary"
                     placeholder="Password"
                     value={codephrase}
+                    onKeyDown={e => e.key === 'Enter' && submitPassword()}
                     onChange={e => setCodephrase(e.target.value)}
                   />
                   <button
