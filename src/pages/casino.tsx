@@ -53,7 +53,6 @@ const CasinoPage = () => {
   useEffect(() => {
     if (!accessDenied) {
       setMuted(false)
-      setAutoplay(false)
     }
   }, [accessDenied])
 

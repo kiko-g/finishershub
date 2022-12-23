@@ -53,7 +53,6 @@ const IndexPage = () => {
   useEffect(() => {
     if (!accessDenied) {
       setMuted(false)
-      setAutoplay(true)
     }
   }, [accessDenied])
 
