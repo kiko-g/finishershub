@@ -19,17 +19,20 @@ import {
   Skeleton,
 } from '../components/home'
 import '../styles/pages/index.css'
+import { useMediaQuery } from 'usehooks-ts'
 
 const IndexPage = () => {
   const data = useStaticQuery(homeQuery)
   const title = data.site.siteMetadata?.title ?? 'Title'
   const description = data.site.siteMetadata?.description ?? 'Description'
-  const [shown, setShown] = useState(3) // amount of clips displayed
+  const isMobile = useMediaQuery('(max-width: 768px)')
+  const [shown, setShown] = useState(isMobile ? 1 : 3) // amount of clips displayed
   const [videos, setVideos] = useState([]) // array of arrays with video links
   const [accessDenied, setAccessDenied] = useAccessDenied() // control access to content
   const [view, setView] = useState(false) // grid or list view
   const [muted, setMuted] = useState(true) // muted videos or not
   const [autoplay, setAutoplay] = useState(false) // play automatically videos or not
+  const [showMoreCount, setShowMoreCount] = useState(0) // counts when show more is pressed
 
   const shuffleAndSetVideos = () => {
     setVideos(shuffle(JSON.parse(localStorage.getItem('finishershub.videos'))))
@@ -84,7 +87,7 @@ const IndexPage = () => {
               video={video}
               parent={process.env.GATSBY_DOMAIN}
               key={`video-${videoIdx}`}
-              autoplay={videoIdx === 0 ? true : autoplay}
+              autoplay={isMobile ? (videoIdx <= showMoreCount ? true : autoplay) : videoIdx === 0 ? true : autoplay}
             />
           ))}
           {videos.length === 0 &&
@@ -97,7 +100,12 @@ const IndexPage = () => {
           <button
             type="button"
             className={`load-more ${videos.length === 0 ? 'hidden' : 'inline-flex'}`}
-            onClick={() => setShown(shown + 3)}
+            onClick={() => {
+              setShowMoreCount(prev => prev + 1)
+
+              if (isMobile) setShown(prev => prev + 1)
+              else setShown(prev => prev + 3)
+            }}
           >
             <PlusIcon className="-ml-1 mr-2 h-5 w-5" aria-hidden="true" />
             Load More Videos
