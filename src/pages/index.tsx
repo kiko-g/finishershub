@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react'
 import Layout from '../layout'
 import useAccessDenied from '../hooks/useAccessDenied'
 import AccessModal from '../layout/AccessModal'
-import api from '../api/twitch'
+import TwitchAPI from '../api/twitch'
 import Seo from '../components/Seo'
 import { shuffle } from '../utils'
 import { clearCache, isStorageValid, writeVideosStorage } from '../utils/storage'
@@ -22,10 +22,11 @@ import '../styles/pages/index.css'
 import { useMediaQuery } from 'usehooks-ts'
 
 const IndexPage = () => {
-  const data = useStaticQuery(homeQuery)
-  const title = data.site.siteMetadata?.title ?? 'Title'
-  const description = data.site.siteMetadata?.description ?? 'Description'
-  const isMobile = useMediaQuery('(max-width: 768px)')
+  const data = useStaticQuery(homeQuery) // query for site metadata
+  const title = data.site.siteMetadata?.title ?? 'Title' // title of the site
+  const description = data.site.siteMetadata?.description ?? 'Description' // description of the site
+  const sensitive = process.env.SENSITIVE || true // whether the site contains sensitive/private information
+  const isMobile = useMediaQuery('(max-width: 768px)') // whether the screen is mobile or not
   const [shown, setShown] = useState(isMobile ? 1 : 3) // amount of clips displayed
   const [videos, setVideos] = useState([]) // array of arrays with video links
   const [accessDenied, setAccessDenied] = useAccessDenied() // control access to content
@@ -43,7 +44,7 @@ const IndexPage = () => {
       shuffleAndSetVideos()
     } else {
       clearCache(true)
-      api.getAllClips((allEmbedUrls: string[]) => {
+      TwitchAPI.getAllClips((allEmbedUrls: string[]) => {
         const shuffledVideos = shuffle(allEmbedUrls)
         setVideos(shuffledVideos)
         writeVideosStorage(shuffledVideos)
@@ -62,7 +63,7 @@ const IndexPage = () => {
   return (
     <Layout location="Home" background={false}>
       <Seo title="Home" />
-      <AccessModal lockedHook={[accessDenied, setAccessDenied]} />
+      {sensitive ? <AccessModal lockedHook={[accessDenied, setAccessDenied]} /> : null}
       <div className="home">
         <header>
           <div className="left">

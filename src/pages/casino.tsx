@@ -3,9 +3,10 @@ import { useMediaQuery } from 'usehooks-ts'
 import Layout from '../layout'
 import AccessModal from '../layout/AccessModal'
 import useAccessDenied from '../hooks/useAccessDenied'
-import api from '../api/twitch'
+import TwitchAPI from '../api/twitch'
 import Seo from '../components/Seo'
 import { shuffle } from '../utils'
+import { ChevronLeftIcon, ChevronRightIcon } from '@heroicons/react/solid'
 import { clearCache, isStorageValid, writeVideosStorage } from '../utils/storage'
 import {
   AutoplayToggler,
@@ -17,10 +18,10 @@ import {
   DeleteCookiesButton,
 } from '../components/casino'
 import '../styles/pages/casino.css'
-import { ChevronLeftIcon, ChevronRightIcon } from '@heroicons/react/solid'
 
 const CasinoPage = () => {
-  const isMobile = useMediaQuery('(max-width: 768px)')
+  const sensitive = process.env.SENSITIVE || true // whether the site contains sensitive/private information
+  const isMobile = useMediaQuery('(max-width: 768px)') // whether the screen is mobile or not
   const [index, setIndex] = useState(0) // index of the current video
   const [videos, setVideos] = useState([]) //array of arrays with video links
   const [accessDenied, setAccessDenied] = useAccessDenied() // control access to content
@@ -40,7 +41,7 @@ const CasinoPage = () => {
       shuffleAndSetVideos()
     } else {
       clearCache(true)
-      api.getAllClips((allEmbedUrls: string[]) => {
+      TwitchAPI.getAllClips((allEmbedUrls: string[]) => {
         const shuffledVideos = shuffle(allEmbedUrls)
         setVideos(shuffledVideos)
         writeVideosStorage(shuffledVideos)
@@ -59,7 +60,7 @@ const CasinoPage = () => {
   return (
     <Layout location="Casino" wrapperClassNames="max-w-5xl">
       <Seo title="Casino" />
-      <AccessModal lockedHook={[accessDenied, setAccessDenied]} />
+      {sensitive ? <AccessModal lockedHook={[accessDenied, setAccessDenied]} /> : null}
       <div className="casino">
         <header>
           <div className="left">
