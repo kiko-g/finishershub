@@ -1,6 +1,7 @@
 import axios, { AxiosInstance } from 'axios'
 
-const domain = process.env.GATSBY_BACKEND_DOMAIN || 'https://finishershub-backend.herokuapp.com'
+const domainEnv = process.env.GATSBY_BACKEND_DOMAIN || 'https://finishershub-backend.netlify.app'
+const domain = domainEnv.slice(-1) ? '/' : domainEnv.slice(0, -1)
 
 const backend: AxiosInstance = axios.create({
   baseURL: `${domain}/registry`,
