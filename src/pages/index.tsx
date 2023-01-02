@@ -25,7 +25,7 @@ const IndexPage = () => {
   const data = useStaticQuery(homeQuery) // query for site metadata
   const title = data.site.siteMetadata?.title ?? 'Title' // title of the site
   const description = data.site.siteMetadata?.description ?? 'Description' // description of the site
-  const sensitive = process.env.SENSITIVE || true // whether the site contains sensitive/private information
+  const sensitive = Boolean(process.env.SENSITIVE) || true // whether the site contains sensitive/private information
   const isMobile = useMediaQuery('(max-width: 768px)') // whether the screen is mobile or not
   const [shown, setShown] = useState(isMobile ? 1 : 3) // amount of clips displayed
   const [videos, setVideos] = useState([]) // array of arrays with video links
