@@ -20,8 +20,9 @@ import {
 import '../styles/pages/casino.css'
 
 const CasinoPage = () => {
-  const sensitive = Boolean(process.env.GATSBY_SENSITIVE) || true // whether the site contains sensitive/private information
+  const sensitive = process.env.GATSBY_SENSITIVE === 'false' ? false : true // whether the site contains sensitive/private information
   const isMobile = useMediaQuery('(max-width: 768px)') // whether the screen is mobile or not
+
   const [index, setIndex] = useState(0) // index of the current video
   const [videos, setVideos] = useState([]) //array of arrays with video links
   const [accessDenied, setAccessDenied] = useAccessDenied() // control access to content
