@@ -1,4 +1,5 @@
 .registry {
+  @apply mt-0;
 }
 
 .registry .member-list {

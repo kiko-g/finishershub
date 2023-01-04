@@ -2,10 +2,9 @@ import React from 'react'
 import Layout from '../layout'
 import Seo from '../components/Seo'
 import { Link } from 'gatsby'
-import '../styles/pages/about.css'
 
 const AboutPage = () => (
-  <Layout location="About" background={true} wrapperClassNames="max-w-7xl my-auto">
+  <Layout location="About" wrapperClassNames="max-w-7xl my-auto" background>
     <Seo title="About" />
     <h2 className="text-3xl font-extrabold tracking-tight sm:text-5xl">About</h2>
     <div className="mt-6 rounded bg-lightest px-4 py-4 text-base dark:bg-dark lg:px-8 lg:py-8 lg:text-xl">
