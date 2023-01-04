@@ -19,7 +19,7 @@ const TotalFinishersDisclaimer = ({ count }: Props) => {
       <div className="flex flex-1 items-start justify-between">
         <div className="flex">
           <CakeIcon className="h-6 w-6" aria-hidden="true" />
-          <p className="ml-3 font-medium inline-flex gap-x-1 justify-start items-start flex-wrap">
+          <p className="ml-3 inline-flex flex-wrap items-start justify-start gap-x-1 font-medium">
             Total <FinisherInfoModal custom={customElement} /> by all member across all arenas: <strong>{count}</strong>
           </p>
         </div>
