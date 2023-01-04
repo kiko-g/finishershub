@@ -1,6 +1,6 @@
 import React, { Dispatch, Fragment, SetStateAction, useState } from 'react'
 import { Dialog, Transition } from '@headlessui/react'
-import { EyeIcon, EyeOffIcon, FingerPrintIcon, XMarkIcon } from '@heroicons/react/24/outline'
+import { EyeIcon, EyeSlashIcon } from '@heroicons/react/24/outline'
 
 type Props = {
   lockedHook: [boolean, Dispatch<SetStateAction<boolean>>]
@@ -97,7 +97,7 @@ const AccessModal = ({ lockedHook }: Props) => {
                     onClick={togglePasswordShown}
                     className="absolute right-[12px] top-[11px] text-primary  transition hover:opacity-80"
                   >
-                    {codephraseShown ? <EyeOffIcon className="h-5 w-5" /> : <EyeIcon className="h-5 w-5" />}
+                    {codephraseShown ? <EyeSlashIcon className="h-5 w-5" /> : <EyeIcon className="h-5 w-5" />}
                   </button>
                 </div>
 
