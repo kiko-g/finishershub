@@ -6,7 +6,7 @@ import useAccessDenied from '../hooks/useAccessDenied'
 import TwitchAPI from '../api/twitch'
 import Seo from '../components/Seo'
 import { shuffle } from '../utils'
-import { ChevronLeftIcon, ChevronRightIcon } from '@heroicons/react/solid'
+import { ChevronLeftIcon, ChevronRightIcon } from '@heroicons/react/24/solid'
 import { clearCache, isStorageValid, writeVideosStorage } from '../utils/storage'
 import {
   AutoplayToggler,

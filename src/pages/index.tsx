@@ -7,7 +7,7 @@ import Seo from '../components/Seo'
 import { shuffle } from '../utils'
 import { clearCache, isStorageValid, writeVideosStorage } from '../utils/storage'
 import { useStaticQuery, graphql } from 'gatsby'
-import { PlusIcon } from '@heroicons/react/solid'
+import { PlusIcon } from '@heroicons/react/24/solid'
 import {
   ViewToggler,
   AutoplayToggler,

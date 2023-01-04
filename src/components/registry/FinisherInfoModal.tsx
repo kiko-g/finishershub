@@ -1,6 +1,6 @@
 import React, { Fragment, useState } from 'react'
 import { Dialog, Transition } from '@headlessui/react'
-import { CheckIcon, InformationCircleIcon, XIcon } from '@heroicons/react/outline'
+import { CheckIcon, InformationCircleIcon, XMarkIcon } from '@heroicons/react/24/outline'
 
 type Props = {
   custom?: JSX.Element
@@ -75,7 +75,7 @@ const FinisherInfoModal = ({ custom }: Props) => {
                       onClick={closeModal}
                       className="rounded p-0.5 text-white transition hover:bg-rose-700 hover:text-white lg:p-1"
                     >
-                      <XIcon className="h-5 w-5" />
+                      <XMarkIcon className="h-5 w-5" />
                     </button>
                   </header>
 

@@ -1,6 +1,6 @@
 import React, { Dispatch, Fragment, SetStateAction, useState } from 'react'
 import { Dialog, Transition } from '@headlessui/react'
-import { EyeIcon, EyeOffIcon, FingerPrintIcon, XIcon } from '@heroicons/react/outline'
+import { EyeIcon, EyeOffIcon, FingerPrintIcon, XMarkIcon } from '@heroicons/react/24/outline'
 
 type Props = {
   lockedHook: [boolean, Dispatch<SetStateAction<boolean>>]

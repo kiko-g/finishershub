@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { ChevronLeftIcon, ChevronRightIcon } from '@heroicons/react/solid'
+import { ChevronLeftIcon, ChevronRightIcon } from '@heroicons/react/24/solid'
 import '../styles/components/pagination.css'
 
 type Props = {

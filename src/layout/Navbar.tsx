@@ -2,20 +2,20 @@ import React from 'react'
 import { Link } from 'gatsby'
 import { Disclosure } from '@headlessui/react'
 import { StaticImage } from 'gatsby-plugin-image'
-import { DarkModeSwitchMinimal } from './DarkModeSwitchMinimal'
+import DarkModeSwitch from './DarkModeSwitch'
 import {
-  HomeIcon,
-  ChartSquareBarIcon,
+  HomeModernIcon,
+  ChartBarSquareIcon,
   CubeTransparentIcon,
-  LightningBoltIcon,
-  MenuIcon,
-  XIcon,
-} from '@heroicons/react/outline'
+  BoltIcon,
+  Bars3Icon,
+  XMarkIcon,
+} from '@heroicons/react/24/outline'
 
 const navigation = [
-  { title: 'Home', location: '/', icon: <HomeIcon className="mr-1.5 h-5 w-5" /> },
-  { title: 'Casino', location: '/casino', icon: <LightningBoltIcon className="mr-1.5 h-5 w-5" /> },
-  { title: 'Registry', location: '/registry', icon: <ChartSquareBarIcon className="mr-1.5 h-5 w-5" /> },
+  { title: 'Home', location: '/', icon: <HomeModernIcon className="mr-1.5 h-5 w-5" /> },
+  { title: 'Casino', location: '/casino', icon: <BoltIcon className="mr-1.5 h-5 w-5" /> },
+  { title: 'Registry', location: '/registry', icon: <ChartBarSquareIcon className="mr-1.5 h-5 w-5" /> },
   { title: 'About', location: '/about', icon: <CubeTransparentIcon className="mr-1.5 h-5 w-5" /> },
 ]
 
@@ -63,16 +63,16 @@ const Hamburger = ({ open }) => (
     </Link>
 
     <div className="flex items-center space-x-1">
-      <DarkModeSwitchMinimal />
+      <DarkModeSwitch />
       <Disclosure.Button className="hamburger group">
         <span className="sr-only">Open nav menu</span>
         {open ? (
-          <XIcon
+          <XMarkIcon
             className="ease block h-6 w-6 transition duration-200 group-hover:text-primary/75 dark:group-hover:text-primary/75"
             aria-hidden="true"
           />
         ) : (
-          <MenuIcon
+          <Bars3Icon
             className="ease dark:group-hover:text-/75 block h-6 w-6 transition duration-200 group-hover:text-dark/75"
             aria-hidden="true"
           />
@@ -116,7 +116,7 @@ const Header = ({ title, location }) => (
     </div>
 
     <div className="hidden self-center md:inline-flex">
-      <DarkModeSwitchMinimal />
+      <DarkModeSwitch />
     </div>
   </div>
 )

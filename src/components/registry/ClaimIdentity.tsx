@@ -1,7 +1,7 @@
 import React, { Dispatch, Fragment, SetStateAction, useState } from 'react'
 import { FinishersClubMember } from '../../@types'
 import { Dialog, Transition } from '@headlessui/react'
-import { EyeIcon, EyeOffIcon, FingerPrintIcon, XIcon } from '@heroicons/react/outline'
+import { EyeIcon, EyeOffIcon, FingerPrintIcon, XMarkIcon } from '@heroicons/react/24/outline'
 
 type Props = {
   member: FinishersClubMember
@@ -84,7 +84,7 @@ const ClaimIdentity = ({ member, lockedHook }: Props) => {
                       onClick={closeModal}
                       className="rounded p-1 text-primary transition hover:bg-primary hover:text-white"
                     >
-                      <XIcon className="h-6 w-6" />
+                      <XMarkIcon className="h-6 w-6" />
                     </button>
                   </header>
 

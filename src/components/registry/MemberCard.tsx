@@ -6,7 +6,7 @@ import MemberCardSelectArena from './MemberCardSelectArena'
 import RegistryAPI from '../../api/registry'
 import useLocked from '../../hooks/useLocked'
 import { FinishersClubMember } from '../../@types'
-import { MinusCircleIcon, PlusCircleIcon } from '@heroicons/react/outline'
+import { MinusCircleIcon, PlusCircleIcon } from '@heroicons/react/24/outline'
 
 type Props = {
   member: FinishersClubMember

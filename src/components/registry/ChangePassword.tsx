@@ -2,7 +2,7 @@ import React, { Dispatch, Fragment, SetStateAction, useState } from 'react'
 import RegistryAPI from '../../api/registry'
 import { FinishersClubMember } from '../../@types'
 import { Dialog, Transition } from '@headlessui/react'
-import { EyeIcon, EyeOffIcon, FingerPrintIcon, XIcon } from '@heroicons/react/outline'
+import { EyeIcon, EyeSlashIcon, FingerPrintIcon, XMarkIcon } from '@heroicons/react/24/outline'
 
 type Props = {
   member: FinishersClubMember
@@ -83,7 +83,7 @@ const ClaimIdentity = ({ member, lockedHook }: Props) => {
                       onClick={closeModal}
                       className="rounded p-1 text-primary transition hover:bg-primary hover:text-white"
                     >
-                      <XIcon className="h-6 w-6" />
+                      <XMarkIcon className="h-6 w-6" />
                     </button>
                   </header>
 
@@ -111,7 +111,7 @@ const ClaimIdentity = ({ member, lockedHook }: Props) => {
                       onClick={togglePasswordShown}
                       className="absolute right-[12px] top-[11px] text-primary  transition hover:opacity-80"
                     >
-                      {passwordShown ? <EyeOffIcon className="h-5 w-5" /> : <EyeIcon className="h-5 w-5" />}
+                      {passwordShown ? <EyeSlashIcon className="h-5 w-5" /> : <EyeIcon className="h-5 w-5" />}
                     </button>
                   </div>
 

@@ -1,6 +1,6 @@
 import React, { Dispatch, Fragment, SetStateAction } from 'react'
 import { Listbox, Transition } from '@headlessui/react'
-import { CheckIcon, SelectorIcon } from '@heroicons/react/solid'
+import { CheckIcon, ChevronUpDownIcon } from '@heroicons/react/24/solid'
 
 type Props = {
   arenas: any
@@ -15,7 +15,7 @@ const MemberCardSelectArena = ({ arenas, selectedHook }: Props) => {
       <div className="relative z-20">
         <Listbox.Button className="inline-flex items-center space-x-2 rounded bg-primary p-2 text-center text-sm font-medium text-white transition hover:opacity-80">
           <span className="block truncate">{picked.name}</span>
-          <SelectorIcon className="h-5 w-5" aria-hidden="true" />
+          <ChevronUpDownIcon className="h-5 w-5" aria-hidden="true" />
         </Listbox.Button>
         <Transition as={Fragment} leave="transition ease-in duration-100" leaveFrom="opacity-100" leaveTo="opacity-0">
           <Listbox.Options
