@@ -37,9 +37,11 @@ const RegistryPage = () => {
 
         <main className="member-list">
           {members.length !== 0
-            ? members.map((member: FinishersClubMember, memberIdx: number) => (
-                <MemberCard key={`member-${memberIdx}`} member={member} updateMembers={updateMembers} />
-              ))
+            ? members // descending order
+                .sort((a, b) => (a.finishers[a.finishers.length - 1] > b.finishers[a.finishers.length - 1] ? -1 : 1))
+                .map((member: FinishersClubMember, memberIdx: number) => (
+                  <MemberCard key={`member-${memberIdx}`} member={member} updateMembers={updateMembers} />
+                ))
             : Array(6)
                 .fill(0)
                 .map((_, idx) => <MemberCardSkeleton key={`member-skeleton-${idx}`} />)}
