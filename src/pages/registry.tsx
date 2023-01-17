@@ -38,7 +38,12 @@ const RegistryPage = () => {
         <main className="member-list">
           {members.length !== 0
             ? members // descending order
-                .sort((a, b) => (a.finishers[a.finishers.length - 1] > b.finishers[a.finishers.length - 1] ? -1 : 1))
+                .sort((a, b) => {
+                  let x = a.finishers[a.finishers.length - 1]
+                  let y = b.finishers[b.finishers.length - 1]
+
+                  return x === y ? a.name.localeCompare(b.name) : y - x
+                })
                 .map((member: FinishersClubMember, memberIdx: number) => (
                   <MemberCard key={`member-${memberIdx}`} member={member} updateMembers={updateMembers} />
                 ))
