@@ -21,7 +21,7 @@ import InvisbleTopLayer from '../components/layout/InvisbleTopLayer'
 import { FullAccessBadge, LimitedAccessBadge } from '../components/utils'
 import { ArrowLongRightIcon } from '@heroicons/react/24/outline'
 
-const CasinoPage = () => {
+export default function CasinoPage() {
   const sensitive = process.env.GATSBY_SENSITIVE === 'false' ? false : true
   const isMobile = useMediaQuery('(max-width: 768px)')
 
@@ -65,8 +65,8 @@ const CasinoPage = () => {
     <Layout location="Casino">
       <Seo title="Casino" />
       <div className="mx-auto max-w-xl lg:max-w-2xl xl:max-w-3xl 2xl:max-w-4xl">
-        <div className="flex flex-col gap-3">
-          <header className="mt-1 flex flex-col justify-between gap-y-2 lg:mt-3 lg:flex-row lg:gap-x-6">
+        <main className="flex flex-col gap-3">
+          <div className="mt-1 flex flex-col justify-between gap-y-2 lg:mt-3 lg:flex-row lg:gap-x-6">
             <div className="text-lg font-normal">
               <h2 className="mb-2 text-4xl font-extrabold tracking-tight sm:text-5xl">Slot Machine</h2>
               <p>
@@ -85,11 +85,11 @@ const CasinoPage = () => {
                 {limitedAccess ? null : <MuteToggler hook={[muted, setMuted]} />}
               </div>
             </div>
-          </header>
+          </div>
 
           <UsageDisclaimer />
 
-          <main className="flex w-full flex-col gap-y-3">
+          <div className="flex w-full flex-col gap-y-3">
             {/* Video */}
             <div className="relative w-full">
               {limitedAccess ? <InvisbleTopLayer /> : null}
@@ -133,11 +133,9 @@ const CasinoPage = () => {
                 <ArrowLongRightIcon className="inline-flex h-7 w-7" />
               </button>
             </div>
-          </main>
-        </div>
+          </div>
+        </main>
       </div>
     </Layout>
   )
 }
-
-export default CasinoPage

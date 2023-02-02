@@ -74,7 +74,7 @@ export default function ClaimIdentity({ member, lockedHook }: Props) {
                 leaveTo="opacity-0 scale-95"
               >
                 <Dialog.Panel className="w-full max-w-xl transform overflow-hidden rounded-2xl bg-white p-6 text-left align-middle shadow-xl transition-all">
-                  <header className="flex items-center justify-between">
+                  <div className="flex items-center justify-between">
                     <Dialog.Title as="h3" className="text-xl font-semibold leading-6 text-primary">
                       Claim Identity
                     </Dialog.Title>
@@ -86,7 +86,7 @@ export default function ClaimIdentity({ member, lockedHook }: Props) {
                     >
                       <XMarkIcon className="h-6 w-6" />
                     </button>
-                  </header>
+                  </div>
 
                   <p className="mt-2 text-gray-600 ">
                     Type your password to prove you are <strong>{member.name}</strong> and get access to data controls.
@@ -116,7 +116,7 @@ export default function ClaimIdentity({ member, lockedHook }: Props) {
                     </button>
                   </div>
 
-                  <footer className="mt-4">
+                  <div className="mt-4">
                     <button
                       type="button"
                       onClick={submitPassword}
@@ -124,7 +124,7 @@ export default function ClaimIdentity({ member, lockedHook }: Props) {
                     >
                       Submit
                     </button>
-                  </footer>
+                  </div>
                 </Dialog.Panel>
               </Transition.Child>
             </div>

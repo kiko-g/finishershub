@@ -60,7 +60,7 @@ export default function MemberCard({ member, updateMembers }: Props) {
       >
         <div className="flex h-full flex-col justify-between gap-4">
           {/* Header */}
-          <header>
+          <div>
             <p className="text-3xl font-semibold capitalize text-primary dark:text-teal-600">{member.name}</p>
             <p className="font-normal lowercase text-gray-500 dark:text-white">
               <span className="font-bold">aka&nbsp;</span>
@@ -71,7 +71,7 @@ export default function MemberCard({ member, updateMembers }: Props) {
                 </span>
               ))}
             </p>
-          </header>
+          </div>
 
           {/* Counter */}
           <div className="mb-2 flex flex-col text-gray-600 dark:text-white">

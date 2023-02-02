@@ -35,13 +35,13 @@ export default function Navbar({ siteTitle, location }: Props) {
     >
       {({ open }) => {
         return (
-          <>
+          <header>
             <div className={`${open ? 'p-0' : 'p-2'} relative flex items-center justify-between md:py-0`}>
               <Hamburger open={open} />
               <Header title={siteTitle} location={location} />
             </div>
             <Mobile location={location} />
-          </>
+          </header>
         )
       }}
     </Disclosure>

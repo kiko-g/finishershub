@@ -65,7 +65,7 @@ const FinisherInfoModal = ({ custom }: Props) => {
                   text-sm font-normal text-gray-700 shadow-xl transition-all dark:bg-dark dark:text-white
                   lg:max-w-[52rem] lg:p-6 lg:text-base"
                 >
-                  <header className="flex items-center justify-between">
+                  <div className="flex items-center justify-between">
                     <Dialog.Title
                       as="h3"
                       className="text-xl font-semibold leading-6 text-primary dark:text-white lg:text-2xl"
@@ -80,7 +80,7 @@ const FinisherInfoModal = ({ custom }: Props) => {
                     >
                       <XMarkIcon className="h-5 w-5" />
                     </button>
-                  </header>
+                  </div>
 
                   <div className="mt-3 flex flex-col">
                     <p>

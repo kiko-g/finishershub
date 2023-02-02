@@ -86,14 +86,14 @@ export default function AccessModal({ lockedHook }: Props) {
                   className="w-full max-w-xl transform overflow-hidden rounded-2xl bg-white 
                   p-6 text-left align-middle shadow-xl transition-all"
                 >
-                  <header className="flex items-center justify-between">
+                  <div className="flex items-center justify-between">
                     <Dialog.Title as="h3" className="text-xl font-semibold leading-6 text-primary">
                       Prove your identity
                     </Dialog.Title>
                     <button onClick={closeModal} className="rounded p-1 transition hover:bg-rose-600 hover:text-white">
                       <XMarkIcon className="h-5 w-5" />{' '}
                     </button>
-                  </header>
+                  </div>
 
                   <div className="mt-2">
                     <div className="text-sm font-normal tracking-tight text-gray-600 lg:text-base">
@@ -145,7 +145,7 @@ export default function AccessModal({ lockedHook }: Props) {
                     </button>
                   </div>
 
-                  <footer className="mt-4">
+                  <div className="mt-4">
                     <button
                       type="button"
                       onClick={submitPassword}
@@ -153,7 +153,7 @@ export default function AccessModal({ lockedHook }: Props) {
                     >
                       Submit
                     </button>
-                  </footer>
+                  </div>
                 </Dialog.Panel>
               </Transition.Child>
             </div>

@@ -23,7 +23,7 @@ import {
 } from '../components/home'
 import { FullAccessBadge, LimitedAccessBadge } from '../components/utils'
 
-const IndexPage = () => {
+export default function IndexPage() {
   const data = useStaticQuery(homeQuery) // query for site metadata
   const title = data.site.siteMetadata?.title ?? 'Title' // title of the site
   const description = data.site.siteMetadata?.description ?? 'Description' // description of the site
@@ -78,8 +78,8 @@ const IndexPage = () => {
   return (
     <Layout location="Home" background={false}>
       <Seo title="Home" />
-      <div className="flex flex-col gap-2 px-0 lg:px-4">
-        <header className="mt-1 flex flex-col justify-between gap-y-2 lg:mt-3 lg:flex-row lg:gap-x-6">
+      <main className="flex flex-col gap-2 px-0 lg:px-4">
+        <div className="mt-1 flex flex-col justify-between gap-y-2 lg:mt-3 lg:flex-row lg:gap-x-6">
           <div className="flex flex-col justify-center gap-2">
             <h2 className="text-4xl font-extrabold tracking-tight sm:text-5xl">{title}</h2>
             <p className="grow text-lg font-normal">{description}</p>
@@ -95,13 +95,13 @@ const IndexPage = () => {
               <ViewToggler hook={[view, setView]} />
             </div>
           </div>
-        </header>
+        </div>
 
         <div className="mt-2">
           <DelayDisclaimer />
         </div>
 
-        <main
+        <div
           className={classNames(
             'relative',
             view ? 'grid-cols-1' : 'sm:grid-cols-1 lg:grid-cols-2 xl:grid-cols-3',
@@ -125,9 +125,9 @@ const IndexPage = () => {
             Array(shown)
               .fill(null)
               .map((_, skeletonIdx) => <Skeleton key={`skeleton-${skeletonIdx}`} />)}
-        </main>
+        </div>
 
-        <footer className="flex items-center justify-center">
+        <div className="flex items-center justify-center">
           <button
             type="button"
             onClick={loadMore}
@@ -139,8 +139,8 @@ const IndexPage = () => {
             <PlusIcon className="-ml-1 mr-2 h-5 w-5" aria-hidden="true" />
             Load More Videos
           </button>
-        </footer>
-      </div>
+        </div>
+      </main>
     </Layout>
   )
 }
@@ -155,5 +155,3 @@ const homeQuery = graphql`
     }
   }
 `
-
-export default IndexPage
