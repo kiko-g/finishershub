@@ -20,6 +20,7 @@ import {
   Skeleton,
 } from '../components/home'
 import { useMediaQuery } from 'usehooks-ts'
+import InvisbleTopLayer from '../components/layout/InvisbleTopLayer'
 
 const IndexPage = () => {
   const data = useStaticQuery(homeQuery) // query for site metadata
@@ -63,26 +64,30 @@ const IndexPage = () => {
   useEffect(() => requestLoadAll(), [])
 
   useEffect(() => {
-    if (!accessDenied) {
+    if (accessDenied) {
+      setMuted(true)
+      setAutoplay(true)
+    } else {
       setMuted(false)
+      setAutoplay(false)
     }
   }, [accessDenied])
 
   return (
     <Layout location="Home" background={false}>
       <Seo title="Home" />
-      {sensitive ? <AccessModal lockedHook={[accessDenied, setAccessDenied]} /> : null}
-      <div className="flex flex-col gap-2">
+      <div className="flex flex-col gap-2 p-0 lg:p-4">
         <header className="mt-4 flex flex-col justify-between gap-2 md:space-x-3 lg:flex-row">
           <div className="flex flex-col justify-center gap-2">
             <h2 className="text-4xl font-extrabold tracking-tight sm:text-5xl">{title}</h2>
             <p className="grow text-lg font-normal">{description}</p>
           </div>
           <div className="flex items-end justify-end gap-2">
+            {sensitive && accessDenied ? <AccessModal lockedHook={[accessDenied, setAccessDenied]} /> : null}
             <DeleteCookiesButton />
             <ShuffleButton shuffle={shuffleAndSetVideos} />
             <AutoplayToggler hook={[autoplay, setAutoplay]} />
-            <MuteToggler hook={[muted, setMuted]} />
+            {sensitive && accessDenied ? null : <MuteToggler hook={[muted, setMuted]} />}
             <ViewToggler hook={[view, setView]} />
           </div>
         </header>
@@ -93,19 +98,24 @@ const IndexPage = () => {
 
         <main
           className={classNames(
+            'relative',
             view ? 'grid-cols-1' : 'sm:grid-cols-1 lg:grid-cols-2 xl:grid-cols-3',
             'mb-2 grid grid-cols-1 gap-6 py-2 md:mt-0 md:gap-5 md:py-4'
           )}
         >
-          {videos.slice(0, shown).map((video: string, videoIdx: number) => (
-            <TwitchVideoClip
-              muted={muted}
-              video={video}
-              parent={process.env.GATSBY_DOMAIN}
-              key={`video-${videoIdx}`}
-              autoplay={isMobile ? (videoIdx <= showMoreCount ? true : autoplay) : videoIdx === 0 ? true : autoplay}
-            />
-          ))}
+          {sensitive && accessDenied ? <InvisbleTopLayer /> : null}
+          {videos.slice(0, shown).map((video: string, videoIdx: number) => {
+            const play = isMobile ? (videoIdx <= showMoreCount ? true : autoplay) : videoIdx === 0 ? true : autoplay
+            return (
+              <TwitchVideoClip
+                muted={muted}
+                video={video}
+                parent={process.env.GATSBY_DOMAIN}
+                key={`video-${videoIdx}`}
+                autoplay={play}
+              />
+            )
+          })}
           {videos.length === 0 &&
             Array(shown)
               .fill(null)

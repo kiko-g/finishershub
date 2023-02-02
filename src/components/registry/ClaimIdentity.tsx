@@ -12,7 +12,7 @@ const ClaimIdentity = ({ member, lockedHook }: Props) => {
   const [locked, setLocked] = lockedHook
   const [isOpen, setIsOpen] = useState(false)
   const [password, setPassword] = useState('')
-  const [passwordShown, setPasswordShown] = useState(false)
+  const [passwordShown, setPasswordShown] = useState(true)
 
   const closeModal = () => {
     setIsOpen(false)
@@ -89,13 +89,12 @@ const ClaimIdentity = ({ member, lockedHook }: Props) => {
                   </header>
 
                   <p className="mt-2 text-gray-600 ">
-                    Type your codephrase to prove you are <strong>{member.name}</strong> and get access to data
-                    controls.
+                    Type your password to prove you are <strong>{member.name}</strong> and get access to data controls.
                   </p>
 
                   <div className="relative mt-3 flex flex-col gap-1">
                     <label htmlFor="password" className="sr-only">
-                      Identity Codephrase
+                      Identity password for <strong>{member.name}</strong>
                     </label>
                     <input
                       name="password"
@@ -105,6 +104,7 @@ const ClaimIdentity = ({ member, lockedHook }: Props) => {
                       className="relative block w-full appearance-none rounded border px-3 py-2 focus:accent-primary"
                       placeholder="Password"
                       value={password}
+                      onKeyDown={e => e.key === 'Enter' && submitPassword()}
                       onChange={e => setPassword(e.target.value)}
                     />
                     <button

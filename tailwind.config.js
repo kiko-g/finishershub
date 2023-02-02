@@ -51,6 +51,10 @@ module.exports = {
         dark: 'dark 400ms ease-in-out',
         light: 'light 400ms ease-in-out',
       },
+      blur: {
+        xxs: '1px',
+        xs: '2px',
+      }
     },
   },
   plugins: ['gatsby-plugin-postcss'],

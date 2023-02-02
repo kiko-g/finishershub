@@ -88,13 +88,13 @@ const ClaimIdentity = ({ member, lockedHook }: Props) => {
                   </header>
 
                   <p className="mt-2 text-gray-600 ">
-                    Type your new codephrase for <strong>{member.name}</strong> and then submit your changes to{' '}
+                    Type your new password for <strong>{member.name}</strong> and then submit your changes to{' '}
                     <strong>replace the previous one</strong>.
                   </p>
 
                   <div className="relative mt-3 flex flex-col gap-1">
                     <label htmlFor="password" className="sr-only">
-                      New Identity Codephrase
+                      New Identity password for <strong>{member.name}</strong>
                     </label>
                     <input
                       name="password"

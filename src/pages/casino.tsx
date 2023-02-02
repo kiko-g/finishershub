@@ -17,6 +17,7 @@ import {
   ShuffleButton,
   DeleteCookiesButton,
 } from '../components/casino'
+import InvisbleTopLayer from '../components/layout/InvisbleTopLayer'
 
 const CasinoPage = () => {
   const sensitive = process.env.GATSBY_SENSITIVE === 'false' ? false : true
@@ -61,7 +62,6 @@ const CasinoPage = () => {
     <Layout location="Casino">
       <Seo title="Casino" />
       <div className="mx-auto max-w-5xl">
-        {sensitive ? <AccessModal lockedHook={[accessDenied, setAccessDenied]} /> : null}
         <div className="flex flex-col gap-4">
           <header className="mt-4 flex flex-col justify-between gap-2 md:space-x-3 lg:flex-row">
             <div className="flex flex-col justify-center gap-2">
@@ -73,10 +73,11 @@ const CasinoPage = () => {
             </div>
 
             <div className="flex items-end justify-end gap-2">
+              {sensitive ? <AccessModal lockedHook={[accessDenied, setAccessDenied]} /> : null}
               <DeleteCookiesButton />
               <ShuffleButton shuffle={shuffleAndSetVideos} />
               <AutoplayToggler hook={[autoplay, setAutoplay]} />
-              <MuteToggler hook={[muted, setMuted]} />
+              {sensitive && accessDenied ? null : <MuteToggler hook={[muted, setMuted]} />}
             </div>
           </header>
 
@@ -86,7 +87,8 @@ const CasinoPage = () => {
             // Display Mobile
             <main className="flex w-full flex-col gap-6">
               {/* Video */}
-              <div className="w-full">
+              <div className="relative w-full">
+                {sensitive && accessDenied ? <InvisbleTopLayer /> : null}
                 <TwitchVideoClip
                   muted={muted}
                   video={videos[index]}
@@ -131,7 +133,8 @@ const CasinoPage = () => {
               >
                 <ChevronLeftIcon className="inline-flex h-12 w-12 lg:h-9 lg:w-9" />
               </button>
-              <div className="w-full">
+              <div className="relative w-full">
+                {sensitive && accessDenied ? <InvisbleTopLayer /> : null}
                 <TwitchVideoClip
                   muted={muted}
                   video={videos[index]}
