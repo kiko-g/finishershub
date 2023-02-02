@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import { useMediaQuery } from 'usehooks-ts'
-import Layout from '../layout'
-import AccessModal from '../layout/AccessModal'
+import Layout from '../components/layout'
+import AccessModal from '../components/layout/AccessModal'
 import useAccessDenied from '../hooks/useAccessDenied'
 import TwitchAPI from '../api/twitch'
 import Seo from '../components/Seo'
@@ -59,40 +59,62 @@ const CasinoPage = () => {
   }, [accessDenied])
 
   return (
-    <Layout location="Casino" wrapperClassNames="max-w-5xl">
+    <Layout location="Casino">
       <Seo title="Casino" />
-      {sensitive ? <AccessModal lockedHook={[accessDenied, setAccessDenied]} /> : null}
-      <div className="casino">
-        <header>
-          <div className="left">
-            <h2>Finishers Hub Slot Machine</h2>
-            <p>
-              More fun than a casino, especially because we don't take your money. Not sure about the addiction part
-              though.
-            </p>
-          </div>
-          <div className="right">
-            <DeleteCookiesButton />
-            <ShuffleButton shuffle={shuffleAndSetVideos} />
-            <AutoplayToggler hook={[autoplay, setAutoplay]} />
-            <MuteToggler hook={[muted, setMuted]} />
-          </div>
-        </header>
-
-        <UsageDisclaimer />
-
-        {isMobile ? (
-          // Display Mobile
-          <main className="flex w-full flex-col gap-6">
-            <div className="w-full">
-              <TwitchVideoClip
-                muted={muted}
-                video={videos[index]}
-                parent={process.env.GATSBY_DOMAIN}
-                autoplay={index === 0 ? true : autoplay}
-              />
+      <div className="mx-auto max-w-5xl">
+        {sensitive ? <AccessModal lockedHook={[accessDenied, setAccessDenied]} /> : null}
+        <div className="casino">
+          <header>
+            <div className="left">
+              <h2>Finishers Hub Slot Machine</h2>
+              <p>
+                More fun than a casino, especially because we don't take your money. Not sure about the addiction part
+                though.
+              </p>
             </div>
-            <div className="flex w-full justify-between">
+            <div className="right">
+              <DeleteCookiesButton />
+              <ShuffleButton shuffle={shuffleAndSetVideos} />
+              <AutoplayToggler hook={[autoplay, setAutoplay]} />
+              <MuteToggler hook={[muted, setMuted]} />
+            </div>
+          </header>
+
+          <UsageDisclaimer />
+
+          {isMobile ? (
+            // Display Mobile
+            <main className="flex w-full flex-col gap-6">
+              <div className="w-full">
+                <TwitchVideoClip
+                  muted={muted}
+                  video={videos[index]}
+                  parent={process.env.GATSBY_DOMAIN}
+                  autoplay={index === 0 ? true : autoplay}
+                />
+              </div>
+              <div className="flex w-full justify-between">
+                <button
+                  onClick={prevVideo}
+                  disabled={index === 0}
+                  title="Go to the previous highlight"
+                  className="arrow left"
+                >
+                  <ChevronLeftIcon />
+                </button>
+                <button
+                  onClick={nextVideo}
+                  disabled={index === videos.length - 1}
+                  title="Go to the next highlight"
+                  className="arrow right"
+                >
+                  <ChevronRightIcon />
+                </button>
+              </div>
+            </main>
+          ) : (
+            // Display Desktop
+            <main className="flex h-full w-full items-center gap-x-1.5 rounded px-0 lg:gap-x-3">
               <button
                 onClick={prevVideo}
                 disabled={index === 0}
@@ -101,6 +123,14 @@ const CasinoPage = () => {
               >
                 <ChevronLeftIcon />
               </button>
+              <div className="w-full">
+                <TwitchVideoClip
+                  muted={muted}
+                  video={videos[index]}
+                  parent={process.env.GATSBY_DOMAIN}
+                  autoplay={index === 0 ? true : autoplay}
+                />
+              </div>
               <button
                 onClick={nextVideo}
                 disabled={index === videos.length - 1}
@@ -109,37 +139,9 @@ const CasinoPage = () => {
               >
                 <ChevronRightIcon />
               </button>
-            </div>
-          </main>
-        ) : (
-          // Display Desktop
-          <main className="flex h-full w-full items-center gap-x-1.5 rounded px-0 lg:gap-x-3">
-            <button
-              onClick={prevVideo}
-              disabled={index === 0}
-              title="Go to the previous highlight"
-              className="arrow left"
-            >
-              <ChevronLeftIcon />
-            </button>
-            <div className="w-full">
-              <TwitchVideoClip
-                muted={muted}
-                video={videos[index]}
-                parent={process.env.GATSBY_DOMAIN}
-                autoplay={index === 0 ? true : autoplay}
-              />
-            </div>
-            <button
-              onClick={nextVideo}
-              disabled={index === videos.length - 1}
-              title="Go to the next highlight"
-              className="arrow right"
-            >
-              <ChevronRightIcon />
-            </button>
-          </main>
-        )}
+            </main>
+          )}
+        </div>
       </div>
     </Layout>
   )

@@ -12,6 +12,8 @@ import {
   XMarkIcon,
 } from '@heroicons/react/24/outline'
 
+const avatar = '../../../static/images/avatar.png'
+
 const navigation = [
   { title: 'Home', location: '/', icon: <HomeModernIcon className="mr-1.5 h-5 w-5" /> },
   { title: 'Casino', location: '/casino', icon: <BoltIcon className="mr-1.5 h-5 w-5" /> },
@@ -26,7 +28,11 @@ type Props = {
 
 export default function Navbar({ siteTitle, location }: Props) {
   return (
-    <Disclosure as="nav" className="navbar background">
+    <Disclosure
+      as="nav"
+      className="background sticky top-0 z-20 space-x-4 bg-light/80 px-3 py-2 text-dark 
+      dark:bg-darkest/80 dark:text-white md:py-0 md:px-3"
+    >
       {({ open }) => {
         return (
           <>
@@ -52,19 +58,15 @@ const Hamburger = ({ open }) => (
   >
     <Link to="/">
       {open ? (
-        <StaticImage
-          className="avatar top-0.5 h-5 w-5 rounded-full"
-          src="../../static/images/avatar.png"
-          alt="Finishers Hub"
-        />
+        <StaticImage className="avatar top-0.5 h-5 w-5 rounded-full" src={avatar} alt="Finishers Hub" />
       ) : (
-        <StaticImage className="avatar h-6 w-6 rounded-full" src="../../static/images/avatar.png" alt="Finishers Hub" />
+        <StaticImage className="avatar h-6 w-6 rounded-full" src={avatar} alt="Finishers Hub" />
       )}
     </Link>
 
     <div className="flex items-center space-x-1">
       <DarkModeSwitch />
-      <Disclosure.Button className="hamburger group">
+      <Disclosure.Button className="group text-dark transition duration-200 ease-in dark:text-white md:hidden">
         <span className="sr-only">Open nav menu</span>
         {open ? (
           <XMarkIcon
@@ -83,14 +85,13 @@ const Hamburger = ({ open }) => (
 )
 
 const Header = ({ title, location }) => (
-  <div className="header">
+  <div
+    className="flex flex-1 items-center justify-between
+  md:items-stretch md:justify-between"
+  >
     <div className="relative hidden h-auto space-x-12 self-center duration-200 hover:opacity-75 md:inline-flex">
       <Link to="/" className="flex items-center space-x-2">
-        <StaticImage
-          className="z-20 inline-flex h-6 w-6 rounded-full transition"
-          src="../../static/images/avatar.png"
-          alt="Finishers Hub"
-        />
+        <StaticImage className="z-20 inline-flex h-6 w-6 rounded-full transition" src={avatar} alt="Finishers Hub" />
         <h2 className="text-xs font-bold tracking-tighter duration-150 lg:text-base">{title}</h2>
       </Link>
     </div>
@@ -100,9 +101,9 @@ const Header = ({ title, location }) => (
         <Link to={link.location} key={`nav-${index}`} className="relative py-1">
           <button
             type="button"
-            className={`flex h-12 items-center justify-center font-medium lowercase tracking-wider transition ${
+            className={`flex h-12 items-center justify-center font-normal lowercase transition ${
               location === link.title
-                ? 'text-primary dark:text-white'
+                ? 'font-bold text-primary dark:text-white'
                 : 'text-dark/50 hover:text-dark dark:text-white/50 dark:hover:text-white'
             }`}
           >

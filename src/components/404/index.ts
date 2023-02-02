@@ -1,5 +1,8 @@
-import Turtle from './Turtle'
-import TheRock from './TheRock'
+import Blush from './Blush'
+import Doeu from './Doeu'
 import OhNo from './OhNo'
+import Saul from './Saul'
+import TheRock from './TheRock'
+import Turtle from './Turtle'
 
-export { Turtle, TheRock, OhNo }
+export { Blush, Doeu, Turtle, TheRock, OhNo, Saul }

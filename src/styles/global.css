@@ -4,22 +4,6 @@
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700;800;900');
 @import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@100;200;300;400;500;600;700;800;900');
 
-.layout {
-  @apply flex min-h-screen flex-col scroll-smooth bg-light font-prose font-medium text-dark opacity-[99%] dark:bg-darkest dark:text-white;
-}
-
-.navbar {
-  @apply sticky top-0 z-20 space-x-4 bg-light/80 px-3 py-2 text-dark dark:bg-darkest/80 dark:text-white md:py-0 md:px-3;
-}
-
-.hamburger {
-  @apply text-dark transition duration-200 ease-in dark:text-white md:hidden;
-}
-
-.header {
-  @apply flex flex-1 items-center justify-between md:items-stretch md:justify-between;
-}
-
 /* Utilities */
 .twitch:hover {
   color: #6441a5;

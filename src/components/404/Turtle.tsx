@@ -4,12 +4,13 @@ import { StaticImage } from 'gatsby-plugin-image'
 type Props = {}
 
 export default function Turtle({}: Props) {
-  const title = 'Bro...'
+  const title = "Bro... That's not right."
   const source = '../../../static/images/404/turtle.jpg'
 
   return (
     <StaticImage
       alt={title}
+      title={title}
       src={source}
       objectFit="cover"
       objectPosition="50% 50%"

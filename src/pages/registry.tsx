@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react'
-import Layout from '../layout'
+import Layout from '../components/layout'
 import Seo from '../components/Seo'
 import RegistryAPI from '../api/registry'
 import { FinishersClubMember } from '../@types'
@@ -35,7 +35,7 @@ const RegistryPage = () => {
           <TotalFinishersDisclaimer count={totalFinishers} />
         </header>
 
-        <main className="member-list">
+        <main className="member-list mb-16">
           {members.length !== 0
             ? members // descending order
                 .sort((a, b) => {

@@ -8,10 +8,9 @@ type Props = {
   children: JSX.Element[] | JSX.Element
   location: string
   background?: boolean
-  wrapperClassNames?: string
 }
 
-const Layout: React.FC<Props> = ({ children, location, background, wrapperClassNames }) => {
+const Layout: React.FC<Props> = ({ children, location = 'Unknown', background = false }) => {
   const data = useStaticQuery(graphql`
     query SiteTitleQuery {
       site {
@@ -23,19 +22,16 @@ const Layout: React.FC<Props> = ({ children, location, background, wrapperClassN
   `)
 
   return (
-    <div className="layout background">
+    <div
+      className="background flex min-h-screen flex-col scroll-smooth bg-light font-prose 
+      font-medium text-dark opacity-[99%] dark:bg-darkest dark:text-white"
+    >
       <Navbar location={location} siteTitle={data.site.siteMetadata?.title} />
       {background ? <Background /> : null}
-      <div className={`container z-10 mx-auto mb-auto p-4 ${wrapperClassNames}`}>{children}</div>
+      <div className="container z-10 mx-auto mb-auto p-4">{children}</div>
       <Footer siteTitle={data.site.siteMetadata?.title} />
     </div>
   )
-}
-
-Layout.defaultProps = {
-  children: null,
-  location: 'Unknown',
-  background: false,
 }
 
 export default Layout

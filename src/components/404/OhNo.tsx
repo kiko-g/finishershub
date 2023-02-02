@@ -7,6 +7,6 @@ export default function OhNo({}: Props) {
   const title = 'Oh dear lord what have you stumbled upon..?'
 
   return (
-    <img alt={title} src={GIF} className="aspect-square w-auto rounded object-cover shadow lg:w-full" />
+    <img title={title} alt={title} src={GIF} className="aspect-square w-auto rounded object-cover shadow lg:w-full" />
   )
 }
