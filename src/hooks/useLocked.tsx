@@ -30,7 +30,7 @@ const useLocalStorage = (key: string, initialValue?: any) => {
   return [storedValue, setValue]
 }
 
-const useLocked = (member: FinishersClubMember) => {
+export default function useLocked(member: FinishersClubMember) {
   const key = `finishershub.members.${member.name}`
   const [locked, setLocked] = useLocalStorage(key, true)
 
@@ -42,5 +42,3 @@ const useLocked = (member: FinishersClubMember) => {
 
   return [locked, setLocked]
 }
-
-export default useLocked

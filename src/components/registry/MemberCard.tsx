@@ -13,7 +13,7 @@ type Props = {
   updateMembers: Function
 }
 
-const MemberCard = ({ member, updateMembers }: Props) => {
+export default function MemberCard({ member, updateMembers }: Props) {
   const arenas = useMemo(
     () => [{ name: 'All' }, ...member.finishers.map((count, index) => ({ name: `Warzone ${index + 1}` }))],
     [member]
@@ -116,5 +116,3 @@ const MemberCard = ({ member, updateMembers }: Props) => {
     </div>
   )
 }
-
-export default MemberCard

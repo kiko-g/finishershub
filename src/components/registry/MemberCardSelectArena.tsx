@@ -7,7 +7,7 @@ type Props = {
   selectedHook: [any, Dispatch<SetStateAction<any>>]
 }
 
-const MemberCardSelectArena = ({ arenas, selectedHook }: Props) => {
+export default function MemberCardSelectArena({ arenas, selectedHook }: Props) {
   const [picked, setPicked] = selectedHook
 
   return (
@@ -51,5 +51,3 @@ const MemberCardSelectArena = ({ arenas, selectedHook }: Props) => {
     </Listbox>
   )
 }
-
-export default MemberCardSelectArena

@@ -3,7 +3,7 @@ import { InformationCircleIcon } from '@heroicons/react/24/outline'
 
 type Props = {}
 
-const DelayDisclaimer = ({}: Props) => {
+export default function DelayDisclaimer({}: Props) {
   return (
     <div
       className="flex flex-wrap items-center justify-between rounded border-2 
@@ -18,5 +18,3 @@ const DelayDisclaimer = ({}: Props) => {
     </div>
   )
 }
-
-export default DelayDisclaimer

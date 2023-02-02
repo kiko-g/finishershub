@@ -5,7 +5,7 @@ type Props = {
   tall?: boolean
 }
 
-const Skeleton = ({ tall }: Props) => {
+export default function Skeleton({ tall }: Props) {
   return (
     <div className="mx-auto w-full rounded-xl bg-lightest p-4 dark:bg-dark">
       <div className="flex animate-pulse space-x-4">
@@ -26,5 +26,3 @@ const Skeleton = ({ tall }: Props) => {
     </div>
   )
 }
-
-export default Skeleton

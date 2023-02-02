@@ -8,7 +8,7 @@ type Props = {
   autoplay?: boolean
 }
 
-const TwitchVideoClip = ({ video, parent, muted = false, autoplay = false }: Props) => {
+export default function TwitchVideoClip({ video, parent, muted = false, autoplay = false }: Props) {
   const [loaded, setLoaded] = useState(false)
 
   return (
@@ -27,5 +27,3 @@ const TwitchVideoClip = ({ video, parent, muted = false, autoplay = false }: Pro
     </>
   )
 }
-
-export default TwitchVideoClip

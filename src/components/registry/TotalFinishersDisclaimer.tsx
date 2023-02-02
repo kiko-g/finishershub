@@ -6,7 +6,7 @@ type Props = {
   count: number
 }
 
-const TotalFinishersDisclaimer = ({ count }: Props) => {
+export default function TotalFinishersDisclaimer({ count }: Props) {
   const customElement = (
     <span className="inline-flex whitespace-nowrap underline hover:opacity-90">valid finishers</span>
   )
@@ -27,5 +27,3 @@ const TotalFinishersDisclaimer = ({ count }: Props) => {
     </div>
   )
 }
-
-export default TotalFinishersDisclaimer

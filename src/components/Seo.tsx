@@ -1,10 +1,3 @@
-/**
- * SEO component that queries for data with
- *  Gatsby's useStaticQuery React hook
- *
- * See: https://www.gatsbyjs.com/docs/use-static-query/
- */
-
 import React from 'react'
 import { Helmet } from 'react-helmet'
 import { useStaticQuery, graphql } from 'gatsby'
@@ -14,12 +7,15 @@ type MetaProps = JSX.IntrinsicElements['meta']
 interface Props {
   description?: string
   lang?: string
-  meta?: MetaProps[]
+  meta?: MetaProps[] | []
   title: string
 }
 
-const Seo = ({ description, lang, meta, title }: Props) => {
-  const { site } = useStaticQuery(
+export default function Seo({ description = '', lang = 'en', meta = [], title = '' }: Props) {
+  // See: https://www.gatsbyjs.com/docs/use-static-query/
+  const {
+    site: { siteMetadata },
+  } = useStaticQuery(
     graphql`
       query {
         site {
@@ -33,15 +29,17 @@ const Seo = ({ description, lang, meta, title }: Props) => {
     `
   )
 
-  const metaDescription = description || site.siteMetadata.description
-  const defaultTitle = site.siteMetadata?.title
+  const author = siteMetadata?.author
+  const siteTitle = siteMetadata?.title
+  const metaDescription = description === '' ? siteMetadata?.description : description
 
   return (
     <Helmet
       title={title}
-      titleTemplate={defaultTitle ? `%s | ${defaultTitle}` : null}
+      titleTemplate={siteTitle ? `%s | ${siteTitle}` : null}
       htmlAttributes={{ lang }}
       meta={[
+        ...meta,
         {
           name: `description`,
           content: metaDescription,
@@ -64,7 +62,7 @@ const Seo = ({ description, lang, meta, title }: Props) => {
         },
         {
           name: `twitter:creator`,
-          content: site.siteMetadata?.author || ``,
+          content: author || ``,
         },
         {
           name: `twitter:title`,
@@ -74,16 +72,7 @@ const Seo = ({ description, lang, meta, title }: Props) => {
           name: `twitter:description`,
           content: metaDescription,
         },
-        // @ts-ignore
-      ].concat(meta)}
+      ]}
     />
   )
 }
-
-Seo.defaultProps = {
-  lang: `en`,
-  meta: [],
-  description: ``,
-}
-
-export default Seo

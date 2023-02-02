@@ -3,7 +3,7 @@ import { InformationCircleIcon } from '@heroicons/react/24/outline'
 
 type Props = {}
 
-const UsageDisclaimer = ({}: Props) => {
+export default function UsageDisclaimer({}: Props) {
   return (
     <div
       className="flex items-start justify-start rounded border-2 border-primary/90 bg-primary/75 px-3 
@@ -17,5 +17,3 @@ const UsageDisclaimer = ({}: Props) => {
     </div>
   )
 }
-
-export default UsageDisclaimer

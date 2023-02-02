@@ -88,10 +88,10 @@ const paginationCycle = (videos: string[], url: string, cursor: string, callback
   } else callback(videos)
 }
 
-const api = {
+const twitchAPI = {
   getClips,
   getMoreClips,
   getAllClips,
 }
 
-export default api
+export default twitchAPI

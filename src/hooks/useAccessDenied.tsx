@@ -28,7 +28,7 @@ const useLocalStorage = (key: string, initialValue?: any) => {
   return [storedValue, setValue]
 }
 
-const useAccessDenied = () => {
+export default function useAccessDenied() {
   const key = `finishershub.access`
   const [accessDenied, setAccessDenied] = useLocalStorage(key, true)
 
@@ -40,5 +40,3 @@ const useAccessDenied = () => {
 
   return [accessDenied, setAccessDenied]
 }
-
-export default useAccessDenied

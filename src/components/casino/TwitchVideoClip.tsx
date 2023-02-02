@@ -10,7 +10,7 @@ type Props = {
   rounded?: boolean
 }
 
-const TwitchVideoClip = ({ video, parent, muted = false, autoplay = false, rounded = true }: Props) => {
+export default function TwitchVideoClip({ video, parent, muted = false, autoplay = false, rounded = true }: Props) {
   const [loaded, setLoaded] = useState(false)
 
   return (
@@ -29,5 +29,3 @@ const TwitchVideoClip = ({ video, parent, muted = false, autoplay = false, round
     </>
   )
 }
-
-export default TwitchVideoClip

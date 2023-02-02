@@ -9,7 +9,7 @@ type Props = {
   lockedHook: [boolean, Dispatch<SetStateAction<boolean>>]
 }
 
-const ClaimIdentity = ({ member, lockedHook }: Props) => {
+export default function ClaimIdentity({ member, lockedHook }: Props) {
   const [locked, setLocked] = lockedHook
   const [isOpen, setIsOpen] = useState(false)
   const [newPassword, setNewPassword] = useState('')
@@ -133,5 +133,3 @@ const ClaimIdentity = ({ member, lockedHook }: Props) => {
     </>
   )
 }
-
-export default ClaimIdentity

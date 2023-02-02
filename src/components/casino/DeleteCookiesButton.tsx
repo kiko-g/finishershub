@@ -1,17 +1,23 @@
 import React from 'react'
 import { clearCache } from '../../utils/storage'
 
-const DeleteCookiesButton = () => {
+type Props = {}
+
+export default function DeleteCookiesButton({}: Props) {
+  const clearData = () => {
+    alert('Do you want to clear all cookies and reload the page?')
+    if (typeof window !== 'undefined') {
+      clearCache()
+      window.location.reload()
+    }
+  }
+
   return (
     <div className="flex items-end justify-center space-x-2 text-rose-800 dark:text-rose-600">
       <button
         title="Clear all cookies (helps if page does not load)"
         className="transition hover:opacity-75"
-        onClick={() => {
-          clearCache()
-          alert('Do you want to clear all cookies and reload the page?')
-          if (typeof window !== 'undefined') window.location.reload()
-        }}
+        onClick={clearData}
       >
         <svg
           xmlns="http://www.w3.org/2000/svg"
@@ -31,5 +37,3 @@ const DeleteCookiesButton = () => {
     </div>
   )
 }
-
-export default DeleteCookiesButton

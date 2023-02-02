@@ -1,7 +1,9 @@
 import React from 'react'
 import { clearCache } from '../../utils/storage'
 
-const DeleteCookiesButton = () => {
+type Props = {}
+
+export default function DeleteCookiesButton({}: Props) {
   return (
     <div className="flex items-end justify-center space-x-2 text-rose-800 dark:text-rose-600">
       <button
@@ -34,5 +36,3 @@ const DeleteCookiesButton = () => {
     </div>
   )
 }
-
-export default DeleteCookiesButton

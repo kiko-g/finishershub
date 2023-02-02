@@ -4,7 +4,7 @@ type Props = {
   hook: [boolean, Dispatch<SetStateAction<boolean>>]
 }
 
-const ViewToggler = ({ hook }: Props) => {
+export default function ViewToggler({ hook }: Props) {
   const [view, setView] = hook
 
   return (
@@ -43,5 +43,3 @@ const ViewToggler = ({ hook }: Props) => {
     </div>
   )
 }
-
-export default ViewToggler

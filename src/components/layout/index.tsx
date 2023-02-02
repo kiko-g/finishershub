@@ -10,7 +10,7 @@ type Props = {
   background?: boolean
 }
 
-const Layout: React.FC<Props> = ({ children, location = 'Unknown', background = false }) => {
+export default function Layout({ children, location = 'Unknown', background = false }: Props) {
   const data = useStaticQuery(graphql`
     query SiteTitleQuery {
       site {
@@ -33,5 +33,3 @@ const Layout: React.FC<Props> = ({ children, location = 'Unknown', background = 
     </div>
   )
 }
-
-export default Layout

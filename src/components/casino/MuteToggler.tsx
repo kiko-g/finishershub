@@ -4,7 +4,7 @@ type Props = {
   hook: [boolean, Dispatch<SetStateAction<boolean>>]
 }
 
-const MuteToggler = ({ hook }: Props) => {
+export default function MuteToggler({ hook }: Props) {
   const [mute, setMuted] = hook
 
   return (
@@ -49,5 +49,3 @@ const MuteToggler = ({ hook }: Props) => {
     </div>
   )
 }
-
-export default MuteToggler

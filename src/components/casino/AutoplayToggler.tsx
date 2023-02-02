@@ -4,7 +4,7 @@ type Props = {
   hook: [boolean, Dispatch<SetStateAction<boolean>>]
 }
 
-const AutoplayToggler = ({ hook }: Props) => {
+export default function AutoplayToggler({ hook }: Props) {
   const [autoplay, setAutoplay] = hook
 
   return (
@@ -46,5 +46,3 @@ const AutoplayToggler = ({ hook }: Props) => {
     </div>
   )
 }
-
-export default AutoplayToggler

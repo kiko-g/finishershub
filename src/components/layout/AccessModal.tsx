@@ -6,7 +6,7 @@ type Props = {
   lockedHook: [boolean, Dispatch<SetStateAction<boolean>>]
 }
 
-const AccessModal = ({ lockedHook }: Props) => {
+export default function AccessModal({ lockedHook }: Props) {
   const secret = 'Doeu'
   const secretHints = ['Levels', 'Bio', 'Window', 'Clip']
   const [locked, setLocked] = lockedHook
@@ -163,5 +163,3 @@ const AccessModal = ({ lockedHook }: Props) => {
     </>
   )
 }
-
-export default AccessModal

@@ -3,7 +3,7 @@ import { InformationCircleIcon } from '@heroicons/react/24/outline'
 
 type Props = {}
 
-const DataDisclaimer = ({}: Props) => {
+export default function DataDisclaimer({}: Props) {
   return (
     <div
       className="mx-auto my-4 flex flex-wrap items-center justify-between rounded border-2 
@@ -20,5 +20,3 @@ const DataDisclaimer = ({}: Props) => {
     </div>
   )
 }
-
-export default DataDisclaimer

@@ -33,7 +33,7 @@ const updatePassword = (id: string, newPassword: string, callback: Function) => 
   backend.put(`/registry/${id}/password/${newPassword}`).then(response => callback(response.data))
 }
 
-const registryApi = {
+const registryAPI = {
   getAllFinishers,
   getFinishers,
   incrementFinishers,
@@ -41,4 +41,4 @@ const registryApi = {
   updatePassword,
 }
 
-export default registryApi
+export default registryAPI
