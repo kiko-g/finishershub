@@ -66,15 +66,15 @@ const CasinoPage = () => {
       <div className="mx-auto max-w-5xl">
         <div className="flex flex-col gap-4">
           <header className="mt-4 flex flex-col justify-between gap-2 md:space-x-3 lg:flex-row">
-            <div className="flex flex-col justify-center gap-2">
-              <h2 className="text-4xl font-extrabold tracking-tight sm:text-5xl">Slot Machine</h2>
-              <p className="grow text-base font-normal">
+            <div className="text-lg font-normal">
+              <h2 className="mb-2 text-4xl font-extrabold tracking-tight sm:text-5xl">Slot Machine</h2>
+              <p>
                 More fun than a casino, especially because we don't take your money. Not sure about the addiction part
                 though.
               </p>
             </div>
 
-            <div className="flex flex-col items-end justify-end gap-2">
+            <div className="mt-1 flex flex-row items-center justify-end gap-3 lg:mt-0 lg:flex-col">
               {limitedAccess ? <LimitedAccessBadge /> : <FullAccessBadge />}
               <div className="flex items-center justify-end gap-x-2">
                 {limitedAccess ? <AccessModal lockedHook={[accessDenied, setAccessDenied]} /> : null}

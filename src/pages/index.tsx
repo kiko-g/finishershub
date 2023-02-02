@@ -78,13 +78,13 @@ const IndexPage = () => {
   return (
     <Layout location="Home" background={false}>
       <Seo title="Home" />
-      <div className="flex flex-col gap-2 p-0 lg:p-4">
+      <div className="flex flex-col gap-2 px-0 lg:px-4">
         <header className="mt-4 flex flex-col justify-between gap-2 md:space-x-3 lg:flex-row">
           <div className="flex flex-col justify-center gap-2">
             <h2 className="text-4xl font-extrabold tracking-tight sm:text-5xl">{title}</h2>
             <p className="grow text-lg font-normal">{description}</p>
           </div>
-          <div className="flex flex-col items-end justify-end gap-2">
+          <div className="mt-1 flex flex-row items-center justify-end gap-3 lg:mt-0 lg:flex-col">
             {limitedAccess ? <LimitedAccessBadge /> : <FullAccessBadge />}
             <div className="flex items-center justify-end gap-x-2">
               {limitedAccess ? <AccessModal lockedHook={[accessDenied, setAccessDenied]} /> : null}

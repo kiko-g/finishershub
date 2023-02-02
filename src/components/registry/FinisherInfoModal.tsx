@@ -66,7 +66,10 @@ const FinisherInfoModal = ({ custom }: Props) => {
                   lg:max-w-[52rem] lg:p-6 lg:text-base"
                 >
                   <header className="flex items-center justify-between">
-                    <Dialog.Title as="h3" className="text-xl font-semibold leading-6 text-teal-600 lg:text-2xl">
+                    <Dialog.Title
+                      as="h3"
+                      className="text-xl font-semibold leading-6 text-primary dark:text-white lg:text-2xl"
+                    >
                       Lifetime Finisher Count
                     </Dialog.Title>
 

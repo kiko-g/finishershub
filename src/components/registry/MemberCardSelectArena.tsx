@@ -22,14 +22,14 @@ const MemberCardSelectArena = ({ arenas, selectedHook }: Props) => {
         </Listbox.Button>
         <Transition as={Fragment} leave="transition ease-in duration-100" leaveFrom="opacity-100" leaveTo="opacity-0">
           <Listbox.Options
-            className="absolute mt-1 max-h-60 w-full min-w-[12rem] overflow-auto 
+            className="absolute mt-1 max-h-60 w-auto overflow-auto 
             rounded border border-emerald-600/20 bg-gray-100 py-1 shadow"
           >
             {arenas.map((arena: any, arenaIdx: number) => (
               <Listbox.Option
                 key={arenaIdx}
                 className={({ active }) =>
-                  `relative cursor-pointer select-none py-2 pl-10 pr-4 ${
+                  `relative cursor-pointer select-none py-1.5 pl-10 pr-4 ${
                     active ? 'bg-emerald-600/20 text-emerald-600' : 'text-gray-900'
                   }`
                 }
