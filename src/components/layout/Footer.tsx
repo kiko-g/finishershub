@@ -44,9 +44,12 @@ const socials = [
 
 export default function Footer({ siteTitle }: Props) {
   return (
-    <footer className="z-10 flex items-center justify-between p-2 text-xs text-gray-500 opacity-80 dark:text-gray-300 md:p-3 md:text-sm">
+    <footer
+      className="z-10 flex items-center justify-between px-2 py-2 
+      text-xs text-gray-500 opacity-80 dark:text-gray-300 md:px-3 md:py-3 md:text-sm"
+    >
       <span className="text-gray-700 dark:text-gray-300 sm:text-center">© 2022 {siteTitle}™</span>
-      <div className="flex gap-x-3 sm:justify-center md:mt-0 md:gap-x-2">
+      <div className="flex gap-x-3 sm:justify-center md:mt-0 md:gap-x-3">
         {socials
           .filter(social => social.shown)
           .map((social, socialIdx) => (
@@ -58,7 +61,7 @@ export default function Footer({ siteTitle }: Props) {
               className={`transition ${social.label}`}
             >
               <svg
-                className="h-6 w-6"
+                className="h-7 w-7"
                 fill="currentColor"
                 viewBox={social.viewBox ? social.viewBox : '0 0 24 24'}
                 aria-hidden="true"

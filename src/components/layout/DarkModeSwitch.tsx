@@ -10,19 +10,23 @@ export default function DarkModeSwitch() {
     <Switch.Group>
       <div className="flex items-center">
         <Switch
-          className={`${enabled ? 'animate-dark' : 'animate-light'} rounded-full`}
+          title="Toggle Dark Mode"
+          aria-label="Toggle Dark Mode"
           checked={enabled}
           onChange={() => setEnabled(!enabled)}
+          className={`${enabled ? 'animate-dark' : 'animate-light'} rounded-full`}
         >
           {enabled ? (
             <MoonIcon
-              className="ease block h-6 w-6 text-blue-200 transition duration-150 hover:text-blue-100 md:h-8 md:w-8"
               aria-hidden="true"
+              className="ease block h-6 w-6 text-blue-200 transition duration-150 
+              hover:text-blue-100 md:h-8 md:w-8"
             />
           ) : (
             <SunIcon
-              className="ease block h-6 w-6 text-orange-300 transition duration-150 hover:text-orange-400/80 md:h-8 md:w-8"
               aria-hidden="true"
+              className="ease block h-6 w-6 text-orange-300 transition duration-150 
+              hover:text-orange-400/80 md:h-8 md:w-8"
             />
           )}
         </Switch>

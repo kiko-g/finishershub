@@ -127,7 +127,7 @@ export default function IndexPage() {
               .map((_, skeletonIdx) => <Skeleton key={`skeleton-${skeletonIdx}`} />)}
         </div>
 
-        <div className="flex items-center justify-center">
+        <div className="mb-8 flex items-center justify-center">
           <button
             type="button"
             onClick={loadMore}

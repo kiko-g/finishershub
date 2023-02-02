@@ -101,7 +101,7 @@ export default function AccessModal({ lockedHook }: Props) {
                       <ul className="ml-4 list-disc">
                         <li>
                           You can <strong>close the modal</strong> and have{' '}
-                          <strong className="text-rose-800">limited access</strong> to the site.
+                          <strong className="text-rose-600">limited access</strong> to the site.
                         </li>
                         <li>
                           Tou can click the <strong className="text-teal-700">green fingerprint</strong> to reopen the
@@ -139,6 +139,8 @@ export default function AccessModal({ lockedHook }: Props) {
                     <button
                       type="button"
                       onClick={togglePasswordShown}
+                      title={`${codephraseShown ? 'Hide' : 'Show'} password`}
+                      aria-label={`${codephraseShown ? 'Hide' : 'Show'} password`}
                       className="absolute right-[12px] top-[11px] text-primary  transition hover:opacity-80"
                     >
                       {codephraseShown ? <EyeSlashIcon className="h-5 w-5" /> : <EyeIcon className="h-5 w-5" />}
