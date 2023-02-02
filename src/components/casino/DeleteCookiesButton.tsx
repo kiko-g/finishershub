@@ -10,7 +10,7 @@ const DeleteCookiesButton = () => {
         onClick={() => {
           clearCache()
           alert('Do you want to clear all cookies and reload the page?')
-          window.location.reload()
+          if (typeof window !== 'undefined') window.location.reload()
         }}
       >
         <svg

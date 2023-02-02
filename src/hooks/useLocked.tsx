@@ -4,8 +4,10 @@ import { FinishersClubMember } from '../@types'
 const useLocalStorage = (key: string, initialValue?: any) => {
   const [storedValue, setStoredValue] = useState(() => {
     try {
-      const item = window.localStorage.getItem(key)
-      return item ? JSON.parse(item) : initialValue
+      if (typeof window !== 'undefined') {
+        const item = window.localStorage.getItem(key)
+        return item ? JSON.parse(item) : initialValue
+      }
     } catch (error) {
       console.warn(error)
       return initialValue
@@ -18,7 +20,9 @@ const useLocalStorage = (key: string, initialValue?: any) => {
 
       setStoredValue(valueToStore)
 
-      window.localStorage.setItem(key, JSON.stringify(valueToStore))
+      if (typeof window !== 'undefined') {
+        window.localStorage.setItem(key, JSON.stringify(valueToStore))
+      }
     } catch (error) {
       console.warn(error)
     }
@@ -31,7 +35,9 @@ const useLocked = (member: FinishersClubMember) => {
   const [locked, setLocked] = useLocalStorage(key, true)
 
   useEffect(() => {
-    window.localStorage.setItem(key, JSON.stringify(locked))
+    if (typeof window !== 'undefined') {
+      window.localStorage.setItem(key, JSON.stringify(locked))
+    }
   }, [locked])
 
   return [locked, setLocked]
