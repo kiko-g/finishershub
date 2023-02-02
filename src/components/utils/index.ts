@@ -1,4 +1,4 @@
-import Carousel from './Carousel'
-import Pagination from './Pagination'
+import FullAccessBadge from './FullAccessBadge'
+import LimitedAccessBadge from './LimitedAccessBadge'
 
-export { Carousel, Pagination }
+export { FullAccessBadge, LimitedAccessBadge }

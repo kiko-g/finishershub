@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect, useMemo } from 'react'
 import { useMediaQuery } from 'usehooks-ts'
 import Layout from '../components/layout'
 import AccessModal from '../components/layout/AccessModal'
@@ -18,6 +18,7 @@ import {
   DeleteCookiesButton,
 } from '../components/casino'
 import InvisbleTopLayer from '../components/layout/InvisbleTopLayer'
+import { FullAccessBadge, LimitedAccessBadge } from '../components/utils'
 
 const CasinoPage = () => {
   const sensitive = process.env.GATSBY_SENSITIVE === 'false' ? false : true
@@ -28,6 +29,7 @@ const CasinoPage = () => {
   const [accessDenied, setAccessDenied] = useAccessDenied() // control access to content
   const [muted, setMuted] = useState(true) //muted videos or not
   const [autoplay, setAutoplay] = useState(true) //play automatically videos or not
+  const limitedAccess = useMemo(() => sensitive && accessDenied, [sensitive, accessDenied])
 
   const prevVideo = () => setIndex(prev => prev - 1)
 
@@ -72,12 +74,15 @@ const CasinoPage = () => {
               </p>
             </div>
 
-            <div className="flex items-end justify-end gap-2">
-              {sensitive ? <AccessModal lockedHook={[accessDenied, setAccessDenied]} /> : null}
-              <DeleteCookiesButton />
-              <ShuffleButton shuffle={shuffleAndSetVideos} />
-              <AutoplayToggler hook={[autoplay, setAutoplay]} />
-              {sensitive && accessDenied ? null : <MuteToggler hook={[muted, setMuted]} />}
+            <div className="flex flex-col items-end justify-end gap-2">
+              {limitedAccess ? <LimitedAccessBadge /> : <FullAccessBadge />}
+              <div className="flex items-center justify-end gap-x-2">
+                {limitedAccess ? <AccessModal lockedHook={[accessDenied, setAccessDenied]} /> : null}
+                <DeleteCookiesButton />
+                <ShuffleButton shuffle={shuffleAndSetVideos} />
+                <AutoplayToggler hook={[autoplay, setAutoplay]} />
+                {limitedAccess ? null : <MuteToggler hook={[muted, setMuted]} />}
+              </div>
             </div>
           </header>
 
@@ -88,7 +93,7 @@ const CasinoPage = () => {
             <main className="flex w-full flex-col gap-6">
               {/* Video */}
               <div className="relative w-full">
-                {sensitive && accessDenied ? <InvisbleTopLayer /> : null}
+                {limitedAccess ? <InvisbleTopLayer /> : null}
                 <TwitchVideoClip
                   muted={muted}
                   video={videos[index]}

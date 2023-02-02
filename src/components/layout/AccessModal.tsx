@@ -83,7 +83,7 @@ const AccessModal = ({ lockedHook }: Props) => {
                 leaveTo="opacity-0 scale-95"
               >
                 <Dialog.Panel
-                  className="w-full max-w-2xl transform overflow-hidden rounded-2xl bg-white 
+                  className="w-full max-w-xl transform overflow-hidden rounded-2xl bg-white 
                   p-6 text-left align-middle shadow-xl transition-all"
                 >
                   <header className="flex items-center justify-between">
@@ -95,17 +95,26 @@ const AccessModal = ({ lockedHook }: Props) => {
                     </button>
                   </header>
 
-                  <div className="mt-3">
-                    <p className="text-sm font-normal tracking-tight text-gray-600 lg:text-base">
-                      Enter the codephrase to prove you are worthy of viewing the content. You can{' '}
-                      <strong>close the modal</strong> and have <strong>limited access</strong> to the site.
-                    </p>
+                  <div className="mt-2">
+                    <div className="text-sm font-normal tracking-tight text-gray-600 lg:text-base">
+                      <p>Enter the codephrase to prove you are worthy of viewing the content.</p>
+                      <ul className="ml-4 list-disc">
+                        <li>
+                          You can <strong>close the modal</strong> and have{' '}
+                          <strong className="text-rose-800">limited access</strong> to the site.
+                        </li>
+                        <li>
+                          Tou can click the <strong className="text-teal-700">green fingerprint</strong> to reopen the
+                          modal.
+                        </li>
+                      </ul>
+                    </div>
                   </div>
 
-                  <p className="mt-1 text-right text-xs tracking-tight text-gray-700 dark:text-gray-400 lg:text-sm">
+                  <p className="mt-3 text-right text-xs tracking-tight text-gray-600 dark:text-gray-400 lg:text-sm">
                     <strong>Hints</strong>:{' '}
                     {secretHints.map((hint, hintIdx) => (
-                      <span key={`hint-${hintIdx}`} className="text-primary dark:text-white">
+                      <span key={`hint-${hintIdx}`}>
                         <span>{hint}</span>
                         {hintIdx < secretHints.length - 1 ? ', ' : ''}
                       </span>

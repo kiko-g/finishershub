@@ -14,7 +14,7 @@ const TotalFinishersDisclaimer = ({ count }: Props) => {
   return (
     <div
       className="mx-auto my-4 flex flex-wrap items-center justify-between rounded border-2 
-    border-emerald-600/90 bg-emerald-600/70 p-4 text-light dark:border-light/10 dark:bg-emerald-600/60"
+    border-teal-700/90 bg-teal-700/80 p-4 text-light dark:border-light/10 dark:bg-teal-600/60"
     >
       <div className="flex flex-1 items-start justify-between">
         <div className="flex">

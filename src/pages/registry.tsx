@@ -27,8 +27,11 @@ const RegistryPage = () => {
       <div className="mt-2">
         <header>
           <h2 className="text-4xl font-extrabold tracking-tight sm:text-5xl">Finishers Club</h2>
-          <section className="mt-4 flex justify-between space-x-2 md:space-x-3">
-            <p>The profiles and stats of the criminals like never seen before.</p>
+          <section className="mt-4">
+            <p>
+              Welcome to the Mount Rushmore of finishers. Take a look at the profiles and stats of the criminals like
+              never seen before.
+            </p>
           </section>
           <DataDisclaimer />
           <TotalFinishersDisclaimer count={totalFinishers} />

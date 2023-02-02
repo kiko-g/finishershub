@@ -1,13 +1,15 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect, useMemo } from 'react'
 import classNames from 'classnames'
-import Layout from '../components/layout'
-import useAccessDenied from '../hooks/useAccessDenied'
-import AccessModal from '../components/layout/AccessModal'
 import TwitchAPI from '../api/twitch'
-import Seo from '../components/Seo'
+import useAccessDenied from '../hooks/useAccessDenied'
+import { useMediaQuery } from 'usehooks-ts'
 import { shuffle } from '../utils'
 import { clearCache, isStorageValid, writeVideosStorage } from '../utils/storage'
 import { useStaticQuery, graphql } from 'gatsby'
+import Seo from '../components/Seo'
+import Layout from '../components/layout'
+import InvisbleTopLayer from '../components/layout/InvisbleTopLayer'
+import AccessModal from '../components/layout/AccessModal'
 import { PlusIcon } from '@heroicons/react/24/solid'
 import {
   ViewToggler,
@@ -19,8 +21,7 @@ import {
   DeleteCookiesButton,
   Skeleton,
 } from '../components/home'
-import { useMediaQuery } from 'usehooks-ts'
-import InvisbleTopLayer from '../components/layout/InvisbleTopLayer'
+import { FullAccessBadge, LimitedAccessBadge } from '../components/utils'
 
 const IndexPage = () => {
   const data = useStaticQuery(homeQuery) // query for site metadata
@@ -37,6 +38,7 @@ const IndexPage = () => {
   const [muted, setMuted] = useState(true) // muted videos or not
   const [autoplay, setAutoplay] = useState(false) // play automatically videos or not
   const [showMoreCount, setShowMoreCount] = useState(0) // counts when show more is pressed
+  const limitedAccess = useMemo(() => sensitive && accessDenied, [sensitive, accessDenied])
 
   const shuffleAndSetVideos = () => {
     setVideos(shuffle(JSON.parse(localStorage.getItem('finishershub.videos'))))
@@ -82,13 +84,16 @@ const IndexPage = () => {
             <h2 className="text-4xl font-extrabold tracking-tight sm:text-5xl">{title}</h2>
             <p className="grow text-lg font-normal">{description}</p>
           </div>
-          <div className="flex items-end justify-end gap-2">
-            {sensitive && accessDenied ? <AccessModal lockedHook={[accessDenied, setAccessDenied]} /> : null}
-            <DeleteCookiesButton />
-            <ShuffleButton shuffle={shuffleAndSetVideos} />
-            <AutoplayToggler hook={[autoplay, setAutoplay]} />
-            {sensitive && accessDenied ? null : <MuteToggler hook={[muted, setMuted]} />}
-            <ViewToggler hook={[view, setView]} />
+          <div className="flex flex-col items-end justify-end gap-2">
+            {limitedAccess ? <LimitedAccessBadge /> : <FullAccessBadge />}
+            <div className="flex items-center justify-end gap-x-2">
+              {limitedAccess ? <AccessModal lockedHook={[accessDenied, setAccessDenied]} /> : null}
+              <DeleteCookiesButton />
+              <ShuffleButton shuffle={shuffleAndSetVideos} />
+              <AutoplayToggler hook={[autoplay, setAutoplay]} />
+              {limitedAccess ? null : <MuteToggler hook={[muted, setMuted]} />}
+              <ViewToggler hook={[view, setView]} />
+            </div>
           </div>
         </header>
 
@@ -103,7 +108,7 @@ const IndexPage = () => {
             'mb-2 grid grid-cols-1 gap-6 py-2 md:mt-0 md:gap-5 md:py-4'
           )}
         >
-          {sensitive && accessDenied ? <InvisbleTopLayer /> : null}
+          {limitedAccess ? <InvisbleTopLayer /> : null}
           {videos.slice(0, shown).map((video: string, videoIdx: number) => {
             const play = isMobile ? (videoIdx <= showMoreCount ? true : autoplay) : videoIdx === 0 ? true : autoplay
             return (
