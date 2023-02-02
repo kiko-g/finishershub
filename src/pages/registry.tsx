@@ -25,19 +25,17 @@ const RegistryPage = () => {
     <Layout location="Registry">
       <Seo title="Registry" />
       <div className="mt-2">
-        <header>
+        <header className="flex flex-col gap-y-4">
           <h2 className="text-4xl font-extrabold tracking-tight sm:text-5xl">Finishers Club</h2>
-          <div className="mt-2">
-            <p className="text-lg font-normal">
-              Welcome to the Mount Rushmore of finishers. Take a look at the profiles and stats of the criminals like
-              never seen before.
-            </p>
-          </div>
+          <p className="text-lg font-normal">
+            Welcome to the Mount Rushmore of finishers. Take a look at the profiles and stats of the criminals like
+            never seen before.
+          </p>
           <DataDisclaimer />
           <TotalFinishersDisclaimer count={totalFinishers} />
         </header>
 
-        <main className="mb-16 flex flex-col gap-4 2xl:grid 2xl:grid-cols-2">
+        <main className="mt-4 mb-16 flex flex-col gap-4 2xl:grid 2xl:grid-cols-2">
           {members.length !== 0
             ? members // descending order
                 .sort((a, b) => {

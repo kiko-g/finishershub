@@ -21,15 +21,17 @@ export default function Layout({ children, location = 'Unknown', background = fa
     }
   `)
 
+  const siteTitle = data.site.siteMetadata?.title || `Title`
+
   return (
     <div
       className="background flex min-h-screen flex-col scroll-smooth bg-light font-prose 
-      font-medium text-dark opacity-[99%] dark:bg-darkest dark:text-white"
+      font-medium text-gray-800 opacity-[99%] dark:bg-darkest dark:text-white"
     >
-      <Navbar location={location} siteTitle={data.site.siteMetadata?.title} />
+      <Navbar location={location} siteTitle={siteTitle} />
       {background ? <Background /> : null}
       <div className="container z-10 mx-auto mb-auto p-4">{children}</div>
-      <Footer siteTitle={data.site.siteMetadata?.title} />
+      <Footer siteTitle={siteTitle} />
     </div>
   )
 }

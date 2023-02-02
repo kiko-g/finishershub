@@ -6,8 +6,9 @@ type Props = {}
 export default function DataDisclaimer({}: Props) {
   return (
     <div
-      className="mx-auto my-4 flex flex-wrap items-center justify-between rounded border-2 
-      border-blue-500/90 bg-blue-500/80 px-3 py-3 text-light dark:border-blue-500/40 dark:bg-blue-500/40 lg:px-4 lg:py-4"
+      className="flex w-full flex-wrap items-center justify-between rounded border-2 
+      border-blue-500/90 bg-blue-500/80 px-3 py-2 text-light dark:border-blue-500/40 
+      dark:bg-blue-500/40 lg:px-4 lg:py-3"
     >
       <div className="flex flex-1 items-start justify-between">
         <div className="flex">

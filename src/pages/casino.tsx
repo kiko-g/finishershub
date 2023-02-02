@@ -65,7 +65,7 @@ const CasinoPage = () => {
       <Seo title="Casino" />
       <div className="mx-auto max-w-5xl">
         <div className="flex flex-col gap-4">
-          <header className="mt-4 flex flex-col justify-between gap-2 md:space-x-3 lg:flex-row">
+          <header className="mt-4 flex flex-col justify-between gap-y-2 lg:flex-row lg:gap-x-6">
             <div className="text-lg font-normal">
               <h2 className="mb-2 text-4xl font-extrabold tracking-tight sm:text-5xl">Slot Machine</h2>
               <p>
@@ -74,7 +74,7 @@ const CasinoPage = () => {
               </p>
             </div>
 
-            <div className="mt-1 flex flex-row items-center justify-end gap-3 lg:mt-0 lg:flex-col">
+            <div className="mt-1 flex flex-row items-center justify-end gap-4 lg:mt-0 lg:flex-col">
               {limitedAccess ? <LimitedAccessBadge /> : <FullAccessBadge />}
               <div className="flex items-center justify-end gap-x-2">
                 {limitedAccess ? <AccessModal lockedHook={[accessDenied, setAccessDenied]} /> : null}

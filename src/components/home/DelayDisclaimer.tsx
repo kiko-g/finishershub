@@ -6,8 +6,9 @@ type Props = {}
 export default function DelayDisclaimer({}: Props) {
   return (
     <div
-      className="flex flex-wrap items-center justify-between rounded border-2 
-      border-primary/90 bg-primary/75 p-2 text-light dark:border-light/10 dark:bg-primary lg:p-4"
+      className="mt-2 flex w-full flex-wrap items-center justify-between rounded border-2 
+      border-blue-500/90 bg-blue-500/80 px-3 py-2 text-light dark:border-blue-500/40 
+      dark:bg-blue-500/40 lg:px-4 lg:py-3"
     >
       <div className="flex items-center justify-center">
         <InformationCircleIcon className="h-5 w-5 lg:h-6 lg:w-6" aria-hidden="true" />

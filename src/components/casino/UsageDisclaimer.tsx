@@ -6,14 +6,17 @@ type Props = {}
 export default function UsageDisclaimer({}: Props) {
   return (
     <div
-      className="flex items-start justify-start rounded border-2 border-primary/90 bg-primary/75 px-3 
-      py-2 text-sm text-light dark:border-light/10 dark:bg-primary lg:px-4 lg:py-3 lg:text-base"
+      className="flex w-full flex-wrap items-center justify-between rounded border-2 
+      border-blue-500/90 bg-blue-500/80 px-3 py-2 text-light dark:border-blue-500/40 
+      dark:bg-blue-500/40 lg:px-4 lg:py-3"
     >
-      <InformationCircleIcon className="inline-flex h-6 w-6 min-w-[1.25rem]" aria-hidden="true" />
-      <p className="ml-3 font-normal">
-        Tap the right arrow to get a <strong>new random highlight</strong> and use the left one to{' '}
-        <strong>go back</strong>.
-      </p>
+      <div className="flex items-center justify-center">
+        <InformationCircleIcon className="h-5 w-5 lg:h-6 lg:w-6" aria-hidden="true" />
+        <p className="ml-2 flex-1 font-normal tracking-tighter lg:ml-3 lg:font-medium lg:tracking-normal">
+          Tap the right arrow to get a <strong>new random highlight</strong> and use the left one to{' '}
+          <strong>go back</strong>.
+        </p>
+      </div>
     </div>
   )
 }
