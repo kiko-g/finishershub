@@ -4,7 +4,6 @@ import Seo from '../components/Seo'
 import RegistryAPI from '../api/registry'
 import { FinishersClubMember } from '../@types'
 import { MemberCard, DataDisclaimer, TotalFinishersDisclaimer, MemberCardSkeleton } from '../components/registry'
-import '../styles/pages/registry.css'
 
 const RegistryPage = () => {
   const [members, setMembers] = useState<FinishersClubMember[]>([])
@@ -25,7 +24,7 @@ const RegistryPage = () => {
   return (
     <Layout location="Registry">
       <Seo title="Registry" />
-      <div className="registry">
+      <div className="mt-2">
         <header>
           <h2 className="text-4xl font-extrabold tracking-tight sm:text-5xl">Finishers Club</h2>
           <section className="mt-4 flex justify-between space-x-2 md:space-x-3">
@@ -35,7 +34,7 @@ const RegistryPage = () => {
           <TotalFinishersDisclaimer count={totalFinishers} />
         </header>
 
-        <main className="member-list mb-16">
+        <main className="mb-16 flex flex-col gap-4 2xl:grid 2xl:grid-cols-2">
           {members.length !== 0
             ? members // descending order
                 .sort((a, b) => {

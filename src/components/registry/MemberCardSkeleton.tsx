@@ -1,7 +1,7 @@
 import React from 'react'
 
 const MemberCardSkeleton = () => (
-  <div className="member-card">
+  <div className="flex w-full flex-col space-y-3 rounded-xl bg-lightest p-3 shadow dark:bg-dark lg:flex-row lg:space-y-0">
     <aside className="relative rounded-l-xl md:rounded-xl">
       <div className="h-64 w-full animate-pulse rounded-xl bg-lightish shadow dark:bg-darkish lg:h-48 lg:w-72"></div>
     </aside>
@@ -14,9 +14,9 @@ const MemberCardSkeleton = () => (
         <span className="h-16 w-48 animate-pulse rounded bg-lightish dark:bg-darkish" />
 
         <div className="flex items-center gap-2">
-          <button className="action h-8 w-24 animate-pulse bg-lightish dark:bg-darkish"></button>
-          <button className="action h-8 w-24 animate-pulse bg-lightish dark:bg-darkish"></button>
-          <button className="action h-8 w-24 animate-pulse bg-lightish dark:bg-darkish"></button>
+          <button className="inline-flex h-8 w-24 animate-pulse items-center space-x-2 rounded bg-lightish p-2 text-center text-sm font-medium text-white transition hover:opacity-80 disabled:cursor-not-allowed disabled:opacity-50 dark:bg-darkish"></button>
+          <button className="inline-flex h-8 w-24 animate-pulse items-center space-x-2 rounded bg-lightish p-2 text-center text-sm font-medium text-white transition hover:opacity-80 disabled:cursor-not-allowed disabled:opacity-50 dark:bg-darkish"></button>
+          <button className="inline-flex h-8 w-24 animate-pulse items-center space-x-2 rounded bg-lightish p-2 text-center text-sm font-medium text-white transition hover:opacity-80 disabled:cursor-not-allowed disabled:opacity-50 dark:bg-darkish"></button>
         </div>
       </div>
     </section>

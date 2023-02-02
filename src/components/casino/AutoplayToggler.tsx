@@ -13,7 +13,7 @@ const AutoplayToggler = ({ hook }: Props) => {
         <button title="Turn autoplay off" className="transition hover:opacity-75" onClick={() => setAutoplay(false)}>
           <svg
             xmlns="http://www.w3.org/2000/svg"
-            className="h-10 w-10 lg:h-8 lg:w-8"
+            className="h-7 w-7 lg:h-8 lg:w-8"
             viewBox="0 0 20 20"
             fill="currentColor"
           >
@@ -28,7 +28,7 @@ const AutoplayToggler = ({ hook }: Props) => {
         <button title="Turn autoplay on" className="transition hover:opacity-75" onClick={() => setAutoplay(true)}>
           <svg
             xmlns="http://www.w3.org/2000/svg"
-            className="h-10 w-10 lg:h-8 lg:w-8"
+            className="h-7 w-7 lg:h-8 lg:w-8"
             fill="none"
             viewBox="0 0 24 24"
             stroke="currentColor"

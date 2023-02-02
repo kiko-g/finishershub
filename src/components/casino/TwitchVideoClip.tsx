@@ -1,14 +1,16 @@
 import React, { useState } from 'react'
 import Skeleton from './Skeleton'
+import classNames from 'classnames'
 
 type Props = {
   video: string
   parent: string
   muted?: boolean
   autoplay?: boolean
+  rounded?: boolean
 }
 
-const TwitchVideoClip = ({ video, parent, muted = false, autoplay = false }: Props) => {
+const TwitchVideoClip = ({ video, parent, muted = false, autoplay = false, rounded = true }: Props) => {
   const [loaded, setLoaded] = useState(false)
 
   return (
@@ -16,7 +18,7 @@ const TwitchVideoClip = ({ video, parent, muted = false, autoplay = false }: Pro
       <div className={`${loaded ? 'flex' : 'hidden'} h-full w-full rounded-xl shadow`}>
         <div className="relative h-full w-full">
           <iframe
-            className="aspect-video w-full rounded-xl"
+            className={classNames(rounded ? 'rounded-xl' : 'rounded-none', 'aspect-video w-full')}
             src={`${video}&parent=${parent}&muted=${muted.toString()}&autoplay=${autoplay.toString()}`}
             onLoad={() => setLoaded(true)}
             allowFullScreen

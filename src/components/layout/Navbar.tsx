@@ -85,10 +85,7 @@ const Hamburger = ({ open }) => (
 )
 
 const Header = ({ title, location }) => (
-  <div
-    className="flex flex-1 items-center justify-between
-  md:items-stretch md:justify-between"
-  >
+  <div className="z-50 flex flex-1 items-center justify-between md:items-stretch md:justify-between">
     <div className="relative hidden h-auto space-x-12 self-center duration-200 hover:opacity-75 md:inline-flex">
       <Link to="/" className="flex items-center space-x-2">
         <StaticImage className="z-20 inline-flex h-6 w-6 rounded-full transition" src={avatar} alt="Finishers Hub" />

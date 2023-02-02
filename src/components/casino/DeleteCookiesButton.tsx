@@ -15,7 +15,7 @@ const DeleteCookiesButton = () => {
       >
         <svg
           xmlns="http://www.w3.org/2000/svg"
-          className="h-10 w-10 lg:h-8 lg:w-8"
+          className="h-7 w-7 lg:h-8 lg:w-8"
           fill="none"
           viewBox="0 0 24 24"
           stroke="currentColor"

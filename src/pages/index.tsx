@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react'
+import classNames from 'classnames'
 import Layout from '../components/layout'
 import useAccessDenied from '../hooks/useAccessDenied'
 import AccessModal from '../components/layout/AccessModal'
@@ -18,7 +19,6 @@ import {
   DeleteCookiesButton,
   Skeleton,
 } from '../components/home'
-import '../styles/pages/index.css'
 import { useMediaQuery } from 'usehooks-ts'
 
 const IndexPage = () => {
@@ -54,6 +54,12 @@ const IndexPage = () => {
     }
   }
 
+  const loadMore = () => {
+    setShowMoreCount(prev => prev + 1)
+    if (isMobile) setShown(prev => prev + 1)
+    else setShown(prev => prev + 3)
+  }
+
   useEffect(() => requestLoadAll(), [])
 
   useEffect(() => {
@@ -66,13 +72,13 @@ const IndexPage = () => {
     <Layout location="Home" background={false}>
       <Seo title="Home" />
       {sensitive ? <AccessModal lockedHook={[accessDenied, setAccessDenied]} /> : null}
-      <div className="home">
-        <header>
-          <div className="left">
-            <h2>{title}</h2>
-            <p>{description}</p>
+      <div className="flex flex-col gap-2">
+        <header className="mt-4 flex flex-col justify-between gap-2 md:space-x-3 lg:flex-row">
+          <div className="flex flex-col justify-center gap-2">
+            <h2 className="text-4xl font-extrabold tracking-tight sm:text-5xl">{title}</h2>
+            <p className="grow text-lg font-normal">{description}</p>
           </div>
-          <div className="right">
+          <div className="flex items-end justify-end gap-2">
             <DeleteCookiesButton />
             <ShuffleButton shuffle={shuffleAndSetVideos} />
             <AutoplayToggler hook={[autoplay, setAutoplay]} />
@@ -81,9 +87,16 @@ const IndexPage = () => {
           </div>
         </header>
 
-        <DelayDisclaimer />
+        <div className="mt-2">
+          <DelayDisclaimer />
+        </div>
 
-        <main className={view ? 'video-list' : 'video-grid'}>
+        <main
+          className={classNames(
+            view ? 'grid-cols-1' : 'sm:grid-cols-1 lg:grid-cols-2 xl:grid-cols-3',
+            'mb-2 grid grid-cols-1 gap-6 py-2 md:mt-0 md:gap-5 md:py-4'
+          )}
+        >
           {videos.slice(0, shown).map((video: string, videoIdx: number) => (
             <TwitchVideoClip
               muted={muted}
@@ -99,16 +112,14 @@ const IndexPage = () => {
               .map((_, skeletonIdx) => <Skeleton key={`skeleton-${skeletonIdx}`} />)}
         </main>
 
-        <footer>
+        <footer className="flex items-center justify-center">
           <button
             type="button"
-            className={`load-more ${videos.length === 0 ? 'hidden' : 'inline-flex'}`}
-            onClick={() => {
-              setShowMoreCount(prev => prev + 1)
-
-              if (isMobile) setShown(prev => prev + 1)
-              else setShown(prev => prev + 3)
-            }}
+            onClick={loadMore}
+            className={classNames(
+              videos.length === 0 ? 'hidden' : 'inline-flex',
+              'items-center rounded-md border border-transparent bg-primary px-4 py-2 text-sm font-medium text-white shadow-sm transition hover:bg-primary/90 focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2'
+            )}
           >
             <PlusIcon className="-ml-1 mr-2 h-5 w-5" aria-hidden="true" />
             Load More Videos

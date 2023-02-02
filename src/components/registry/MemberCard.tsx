@@ -38,7 +38,10 @@ const MemberCard = ({ member, updateMembers }: Props) => {
   }
 
   return (
-    <div className="member-card">
+    <div
+      className="flex w-full flex-col space-y-3 rounded-xl 
+    bg-lightest p-3 shadow dark:bg-dark lg:flex-row lg:space-y-0"
+    >
       <aside className="relative rounded-l-xl md:rounded-xl">
         {member.imgurUrl ? (
           <img
@@ -84,7 +87,7 @@ const MemberCard = ({ member, updateMembers }: Props) => {
               <button
                 disabled={locked || arenaIndex === 0}
                 onClick={addFinisher}
-                className="action bg-sky-800 text-white"
+                className="inline-flex items-center space-x-2 rounded bg-sky-800 p-2 text-center text-sm font-medium text-white transition hover:opacity-80 disabled:cursor-not-allowed disabled:opacity-50"
                 title={locked ? `You need to prove you are ${member.name} first` : `Add 1 finisher to ${member.name}`}
               >
                 <span>Add</span>
@@ -93,7 +96,7 @@ const MemberCard = ({ member, updateMembers }: Props) => {
               <button
                 disabled={locked || arenaIndex === 0 || member.finishers[arenaIndex - 1] === 0}
                 onClick={removeFinisher}
-                className="action bg-rose-800 text-white"
+                className="inline-flex items-center space-x-2 rounded bg-rose-800 p-2 text-center text-sm font-medium text-white transition hover:opacity-80 disabled:cursor-not-allowed disabled:opacity-50"
                 title={
                   locked ? `You need to prove you are ${member.name} first` : `Remove 1 finisher to ${member.name}`
                 }

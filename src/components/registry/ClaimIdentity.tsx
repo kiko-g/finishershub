@@ -42,7 +42,7 @@ const ClaimIdentity = ({ member, lockedHook }: Props) => {
         onClick={openModal}
         disabled={!locked}
         title={locked ? `Prove you are ${member.name}` : `You already have access to ${member.name}'s data`}
-        className="action bg-slate-700 text-white dark:bg-gray-100 dark:text-slate-700"
+        className="inline-flex items-center space-x-2 rounded bg-slate-700 p-2 text-center text-sm font-medium text-white transition hover:opacity-80 disabled:cursor-not-allowed disabled:opacity-50 dark:bg-gray-100 dark:text-slate-700"
       >
         <span>Claim identity</span>
         <FingerPrintIcon className="h-5 w-5" />
