@@ -30,7 +30,7 @@ export default function Layout({ children, location = 'Unknown', background = fa
     >
       <Navbar location={location} siteTitle={siteTitle} />
       {background ? <Background /> : null}
-      <div className="container z-10 mx-auto mb-auto p-4">{children}</div>
+      <div className="container z-10 mx-auto mb-auto px-4 py-0">{children}</div>
       <Footer siteTitle={siteTitle} />
     </div>
   )

@@ -24,34 +24,32 @@ const RegistryPage = () => {
   return (
     <Layout location="Registry">
       <Seo title="Registry" />
-      <div className="mt-2">
-        <header className="flex flex-col gap-y-4">
-          <h2 className="text-4xl font-extrabold tracking-tight sm:text-5xl">Finishers Club</h2>
-          <p className="text-lg font-normal">
-            Welcome to the Mount Rushmore of finishers. Take a look at the profiles and stats of the criminals like
-            never seen before.
-          </p>
-          <DataDisclaimer />
-          <TotalFinishersDisclaimer count={totalFinishers} />
-        </header>
+      <header className="mt-1 flex flex-col gap-y-4 lg:mt-3">
+        <h2 className="text-4xl font-extrabold tracking-tight sm:text-5xl">Finishers Club</h2>
+        <p className="text-lg font-normal">
+          Welcome to the Mount Rushmore of finishers. Take a look at the profiles and stats of the criminals like never
+          seen before.
+        </p>
+        <DataDisclaimer />
+        <TotalFinishersDisclaimer count={totalFinishers} />
+      </header>
 
-        <main className="mt-4 mb-16 flex flex-col gap-4 2xl:grid 2xl:grid-cols-2">
-          {members.length !== 0
-            ? members // descending order
-                .sort((a, b) => {
-                  let x = a.finishers[a.finishers.length - 1]
-                  let y = b.finishers[b.finishers.length - 1]
+      <main className="mt-4 mb-16 grid grid-cols-1 gap-4 lg:grid-cols-2">
+        {members.length !== 0
+          ? members // descending order
+              .sort((a, b) => {
+                let x = a.finishers[a.finishers.length - 1]
+                let y = b.finishers[b.finishers.length - 1]
 
-                  return x === y ? a.name.localeCompare(b.name) : y - x
-                })
-                .map((member: FinishersClubMember, memberIdx: number) => (
-                  <MemberCard key={`member-${memberIdx}`} member={member} updateMembers={updateMembers} />
-                ))
-            : Array(6)
-                .fill(0)
-                .map((_, idx) => <MemberCardSkeleton key={`member-skeleton-${idx}`} />)}
-        </main>
-      </div>
+                return x === y ? a.name.localeCompare(b.name) : y - x
+              })
+              .map((member: FinishersClubMember, memberIdx: number) => (
+                <MemberCard key={`member-${memberIdx}`} member={member} updateMembers={updateMembers} />
+              ))
+          : Array(6)
+              .fill(0)
+              .map((_, idx) => <MemberCardSkeleton key={`member-skeleton-${idx}`} />)}
+      </main>
     </Layout>
   )
 }

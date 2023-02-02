@@ -6,8 +6,8 @@ import { Link } from 'gatsby'
 const AboutPage = () => (
   <Layout location="About" background>
     <Seo title="About" />
-    <div className="my-auto mx-auto max-w-7xl">
-      <h2 className="mt-4 text-4xl font-extrabold tracking-tight sm:text-5xl">About</h2>
+    <div className="my-auto mx-auto mt-1 max-w-7xl lg:mt-3">
+      <h2 className="text-4xl font-extrabold tracking-tight sm:text-5xl">About</h2>
       <ul className="mt-3 grid grid-cols-1 gap-y-4 gap-x-4 text-base font-normal tracking-tight lg:mt-6 lg:grid-cols-3 lg:text-lg">
         {/* Description */}
         <li className="rounded bg-white px-4 py-4 dark:bg-gray-800/90">

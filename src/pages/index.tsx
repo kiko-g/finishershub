@@ -79,7 +79,7 @@ const IndexPage = () => {
     <Layout location="Home" background={false}>
       <Seo title="Home" />
       <div className="flex flex-col gap-2 px-0 lg:px-4">
-        <header className="mt-4 flex flex-col justify-between gap-y-2 lg:flex-row lg:gap-x-6">
+        <header className="mt-1 flex flex-col justify-between gap-y-2 lg:mt-3 lg:flex-row lg:gap-x-6">
           <div className="flex flex-col justify-center gap-2">
             <h2 className="text-4xl font-extrabold tracking-tight sm:text-5xl">{title}</h2>
             <p className="grow text-lg font-normal">{description}</p>
