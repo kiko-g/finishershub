@@ -52,8 +52,8 @@ module.exports = {
       blur: {
         xxs: '1px',
         xs: '2px',
-      }
+      },
     },
   },
-  plugins: ['gatsby-plugin-postcss'],
+  plugins: [require('@tailwindcss/forms')],
 }
