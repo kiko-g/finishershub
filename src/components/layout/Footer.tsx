@@ -57,7 +57,8 @@ export default function Footer({ siteTitle }: Props) {
               target="_blank"
               href={social.url}
               key={`social-${socialIdx}`}
-              aria-labelledby={social.label}
+              title={social.label}
+              aria-label={social.label}
               className={`transition ${social.label}`}
             >
               <svg

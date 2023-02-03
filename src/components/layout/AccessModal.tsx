@@ -1,12 +1,14 @@
 import React, { Dispatch, Fragment, SetStateAction, useState } from 'react'
+import classNames from 'classnames'
 import { Dialog, Transition } from '@headlessui/react'
-import { EyeIcon, EyeSlashIcon, XMarkIcon } from '@heroicons/react/24/outline'
+import { EyeIcon, EyeSlashIcon, XMarkIcon, FingerPrintIcon } from '@heroicons/react/24/outline'
 
 type Props = {
   lockedHook: [boolean, Dispatch<SetStateAction<boolean>>]
+  special?: boolean
 }
 
-export default function AccessModal({ lockedHook }: Props) {
+export default function AccessModal({ lockedHook, special = false }: Props) {
   const secret = 'Doeu'
   const secretHints = ['Levels', 'Bio', 'Window', 'Clip']
   const [locked, setLocked] = lockedHook
@@ -37,24 +39,19 @@ export default function AccessModal({ lockedHook }: Props) {
   return (
     <>
       {/* Button */}
-      <div className="flex items-end justify-center space-x-2 text-teal-700 dark:text-teal-600">
-        <button title="Open access modal" className="transition hover:opacity-75" onClick={() => setIsOpen(true)}>
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            fill="none"
-            viewBox="0 0 24 24"
-            strokeWidth={2}
-            stroke="currentColor"
-            className="h-7 w-7 lg:h-8 lg:w-8"
-          >
-            <path
-              stroke-linecap="round"
-              stroke-linejoin="round"
-              d="M7.864 4.243A7.5 7.5 0 0119.5 10.5c0 2.92-.556 5.709-1.568 8.268M5.742 6.364A7.465 7.465 0 004.5 10.5a7.464 7.464 0 01-1.15 3.993m1.989 3.559A11.209 11.209 0 008.25 10.5a3.75 3.75 0 117.5 0c0 .527-.021 1.049-.064 1.565M12 10.5a14.94 14.94 0 01-3.6 9.75m6.633-4.596a18.666 18.666 0 01-2.485 5.33"
-            />
-          </svg>
-        </button>
-      </div>
+      <button
+        title="Open access modal"
+        className={classNames(
+          'flex items-end justify-center gap-x-2 transition',
+          special
+            ? 'hover w-full rounded border-2 border-teal-600/50 bg-teal-600/50 px-3 py-2 text-white hover:bg-teal-600/80'
+            : 'text-teal-700 hover:opacity-50 dark:text-teal-600'
+        )}
+        onClick={() => setIsOpen(true)}
+      >
+        <FingerPrintIcon className={classNames(special ? 'h-5 w-5 lg:h-6 lg:w-6' : 'h-7 w-7 lg:h-8 lg:w-8')} />
+        {special ? <span>Get access</span> : null}
+      </button>
 
       {/* Modal */}
       <Transition appear show={isOpen} as={Fragment}>

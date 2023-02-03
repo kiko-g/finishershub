@@ -10,6 +10,7 @@ import {
   BoltIcon,
   Bars3Icon,
   XMarkIcon,
+  BuildingLibraryIcon,
 } from '@heroicons/react/24/outline'
 
 const avatar = '../../../static/images/avatar.png'
@@ -18,6 +19,7 @@ const navigation = [
   { title: 'Home', location: '/', icon: <HomeModernIcon className="mr-1.5 h-5 w-5" /> },
   { title: 'Casino', location: '/casino', icon: <BoltIcon className="mr-1.5 h-5 w-5" /> },
   { title: 'Registry', location: '/registry', icon: <ChartBarSquareIcon className="mr-1.5 h-5 w-5" /> },
+  { title: 'Admin', location: '/admin', icon: <BuildingLibraryIcon className="mr-1.5 h-5 w-5" /> },
   { title: 'About', location: '/about', icon: <CubeTransparentIcon className="mr-1.5 h-5 w-5" /> },
 ]
 
@@ -30,7 +32,7 @@ export default function Navbar({ siteTitle, location }: Props) {
   return (
     <Disclosure
       as="nav"
-      className="background sticky top-0 z-20 space-x-4 bg-light/80 px-3 py-2 text-dark 
+      className="background sticky top-0 z-20 bg-light/80 px-3 py-2 text-dark 
       dark:bg-darkest/80 dark:text-white md:py-0 md:px-3"
     >
       {({ open }) => {
@@ -93,7 +95,7 @@ const Header = ({ title, location }) => (
       </Link>
     </div>
 
-    <div className="hidden space-x-6 self-center md:inline-flex md:space-x-10">
+    <div className="hidden space-x-6 self-center md:inline-flex md:space-x-9">
       {navigation.map((link, index) => (
         <Link to={link.location} key={`nav-${index}`} className="relative py-1">
           <button

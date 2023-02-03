@@ -25,7 +25,7 @@ export default function Layout({ children, location = 'Unknown', background = fa
 
   return (
     <div
-      className="background flex min-h-screen flex-col scroll-smooth bg-light font-prose 
+      className="flex min-h-screen flex-col scroll-smooth bg-light font-prose 
       font-medium text-gray-800 opacity-[99%] dark:bg-darkest dark:text-white"
     >
       <Navbar location={location} siteTitle={siteTitle} />
