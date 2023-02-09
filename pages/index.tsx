@@ -1,7 +1,6 @@
 import React, { useState, useEffect, useMemo } from 'react'
 import classNames from 'classnames'
 import useAccessDenied from '../hooks/useAccessDenied'
-import { useRouter } from 'next/router'
 import { useMediaQuery } from 'usehooks-ts'
 import { shuffle } from '../utils'
 import { clearCache, isStorageValid, writeVideosStorage } from '../utils/storage'
@@ -22,13 +21,10 @@ import {
 import { FullAccessBadge, LimitedAccessBadge } from '../components/utils'
 
 export default function IndexPage() {
-  const router = useRouter()
-
   const isMobile = useMediaQuery('(max-width: 768px)')
   const sensitive = process.env.NEXT_PUBLIC_SENSITIVE! === 'false' ? false : true
-  const parentURL =
-    router.query.hostname === undefined ? 'localhost' : (router.query.hostname as string)
 
+  const [hostname, setHostname] = useState<string>('')
   const [videos, setVideos] = useState<string[]>([])
   const [clipsShown, setClipsShown] = useState<number>(isMobile ? 1 : 3)
   const [accessDenied, setAccessDenied] = useAccessDenied()
@@ -64,17 +60,20 @@ export default function IndexPage() {
           writeVideosStorage(shuffledVideos)
         })
     }
+
+    // get hostname if not in ssr
+    if (typeof window !== 'undefined') setHostname(window.location.hostname)
   }, [])
 
   useEffect(() => {
-    if (accessDenied) {
+    if (limitedAccess) {
       setMuted(true)
       setAutoplay(true)
     } else {
       setMuted(false)
       setAutoplay(false)
     }
-  }, [accessDenied])
+  }, [limitedAccess])
 
   return (
     <Layout location="Home" background={false}>
@@ -124,7 +123,7 @@ export default function IndexPage() {
               <TwitchVideoClip
                 muted={muted}
                 video={video}
-                parent={parentURL}
+                parent={hostname}
                 key={`video-${videoIdx}`}
                 autoplay={play}
               />

@@ -2,7 +2,6 @@ import React, { useState, useEffect, useMemo } from 'react'
 import Layout from '../components/layout'
 import AccessModal from '../components/layout/AccessModal'
 import useAccessDenied from '../hooks/useAccessDenied'
-import { useRouter } from 'next/router'
 import { shuffle } from '../utils'
 import { clearCache, isStorageValid, writeVideosStorage } from '../utils/storage'
 import {
@@ -18,12 +17,9 @@ import { FullAccessBadge, LimitedAccessBadge } from '../components/utils'
 import { ArrowLongLeftIcon, ArrowLongRightIcon } from '@heroicons/react/24/outline'
 
 export default function CasinoPage() {
-  const router = useRouter()
-
   const sensitive = process.env.NEXT_PUBLIC_SENSITIVE === 'false' ? false : true
-  const parentURL =
-    router.query.hostname === undefined ? 'localhost' : (router.query.hostname as string)
 
+  const [hostname, setHostname] = useState<string>('')
   const [index, setIndex] = useState<number>(0)
   const [videos, setVideos] = useState<string[]>([])
   const [accessDenied, setAccessDenied] = useAccessDenied()
@@ -55,13 +51,19 @@ export default function CasinoPage() {
           writeVideosStorage(shuffledVideos)
         })
     }
+    // get hostname if not in ssr
+    if (typeof window !== 'undefined') setHostname(window.location.hostname)
   }, [])
 
   useEffect(() => {
-    if (!accessDenied) {
+    if (limitedAccess) {
+      setMuted(true)
+      setAutoplay(true)
+    } else {
       setMuted(false)
+      setAutoplay(true)
     }
-  }, [accessDenied])
+  }, [limitedAccess])
 
   return (
     <Layout location="Casino">
@@ -101,7 +103,7 @@ export default function CasinoPage() {
               <TwitchVideoClip
                 muted={muted}
                 video={videos[index]}
-                parent={parentURL}
+                parent={hostname}
                 autoplay={index === 0 ? true : autoplay}
               />
             </div>
