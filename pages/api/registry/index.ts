@@ -10,7 +10,6 @@ export default async function getAllFinishers(req: NextApiRequest, res: NextApiR
   await connectMongoDB()
   try {
     const allStats = await Registry.find()
-    console.log(allStats)
     res.status(200).json(allStats)
   } catch (error) {
     const errorMessage = error instanceof Error ? error.message : 'Something went wrong'

@@ -46,7 +46,6 @@ export default function CasinoPage() {
       fetch('/api/twitch')
         .then((res) => res.json())
         .then((allEmbedUrls) => {
-          console.log(allEmbedUrls)
           const shuffledVideos = shuffle(allEmbedUrls)
           setVideos(shuffledVideos)
           writeVideosStorage(shuffledVideos)
