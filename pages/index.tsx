@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useMemo } from 'react'
 import classNames from 'classnames'
 import useAccessDenied from '../hooks/useAccessDenied'
+import { useRouter } from 'next/router'
 import { useMediaQuery } from 'usehooks-ts'
 import { shuffle } from '../utils'
 import { clearCache, isStorageValid, writeVideosStorage } from '../utils/storage'
@@ -21,9 +22,12 @@ import {
 import { FullAccessBadge, LimitedAccessBadge } from '../components/utils'
 
 export default function IndexPage() {
-  const sensitive = process.env.NEXT_PUBLIC_SENSITIVE! === 'false' ? false : true
-  const parentURL = process.env.NEXT_PUBLIC_DOMAIN!
+  const router = useRouter()
+
   const isMobile = useMediaQuery('(max-width: 768px)')
+  const sensitive = process.env.NEXT_PUBLIC_SENSITIVE! === 'false' ? false : true
+  const parentURL =
+    router.query.hostname === undefined ? 'localhost' : (router.query.hostname as string)
 
   const [videos, setVideos] = useState<string[]>([])
   const [clipsShown, setClipsShown] = useState<number>(isMobile ? 1 : 3)
