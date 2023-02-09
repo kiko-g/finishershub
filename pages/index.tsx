@@ -138,7 +138,9 @@ export default function IndexPage() {
             onClick={loadMore}
             className={classNames(
               videos.length === 0 ? 'hidden' : 'inline-flex',
-              'items-center rounded-md border border-transparent bg-primary px-4 py-2 text-sm font-medium text-white shadow-sm transition hover:bg-primary/90 focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2'
+              `items-center rounded border-2 border-primary bg-primary/70 px-4 py-2 
+              text-white shadow-sm transition hover:bg-primary/90 hover:bg-primary focus:outline-none focus:ring-2 focus:ring-primary 
+              focus:ring-offset-2 dark:border-secondary dark:bg-secondary/50 dark:hover:bg-secondary/80`
             )}
           >
             <PlusIcon className="-ml-1 mr-2 h-5 w-5" aria-hidden="true" />

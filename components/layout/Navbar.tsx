@@ -135,10 +135,10 @@ const Header = ({ title, location }: HeaderProps) => (
         <Link href={link.location} key={`nav-${index}`} className="relative py-1">
           <button
             type="button"
-            className={`flex h-12 items-center justify-center font-normal lowercase transition ${
+            className={`flex h-12 items-center justify-center lowercase transition ${
               location === link.title
                 ? 'font-bold text-primary dark:text-white'
-                : 'text-dark/50 hover:text-dark dark:text-white/40 dark:hover:text-white'
+                : 'font-normal text-dark/50 hover:text-dark dark:text-white/40 dark:hover:text-white'
             }`}
           >
             <span className="flex items-center justify-center">
@@ -166,10 +166,10 @@ const Mobile = ({ location }: MobileProps) => (
       <Link href={link.location} className="relative h-auto" key={`mobile-nav-${index}`}>
         <button
           type="button"
-          className={`flex h-auto items-center justify-center font-normal lowercase transition ${
+          className={`flex h-auto items-center justify-center lowercase transition ${
             location === link.title
               ? 'font-bold text-primary dark:text-white'
-              : 'text-dark/50 hover:text-dark dark:text-white/40 dark:hover:text-white'
+              : 'font-normal text-dark/50 hover:text-dark dark:text-white/40 dark:hover:text-white'
           }`}
         >
           <span className="flex items-center justify-center">

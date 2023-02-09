@@ -82,11 +82,14 @@ export default function AccessModal({ lockedHook, special = false }: Props) {
                 leaveTo="opacity-0 scale-95"
               >
                 <Dialog.Panel
-                  className="w-full max-w-xl transform overflow-hidden rounded-2xl bg-white 
-                  p-6 text-left align-middle shadow-xl transition-all"
+                  className="w-full max-w-xl transform overflow-hidden rounded-2xl bg-white p-6 text-left 
+                  align-middle text-gray-600 shadow-xl transition-all dark:bg-dark dark:text-white"
                 >
                   <div className="flex items-center justify-between">
-                    <Dialog.Title as="h3" className="text-xl font-semibold leading-6 text-primary">
+                    <Dialog.Title
+                      as="h3"
+                      className="text-xl font-semibold leading-6 text-primary dark:text-secondary"
+                    >
                       Prove your identity
                     </Dialog.Title>
                     <button
@@ -98,7 +101,7 @@ export default function AccessModal({ lockedHook, special = false }: Props) {
                   </div>
 
                   <div className="mt-2">
-                    <div className="text-sm font-normal text-gray-600 lg:text-base">
+                    <div className="text-sm font-normal lg:text-base">
                       <p>Enter the codephrase to prove you are worthy of viewing the content.</p>
                       <ul className="ml-4 list-disc">
                         <li>
@@ -107,14 +110,14 @@ export default function AccessModal({ lockedHook, special = false }: Props) {
                         </li>
                         <li>
                           Tou can click the{' '}
-                          <strong className="text-teal-700">green fingerprint</strong> to reopen the
-                          modal.
+                          <strong className="text-emerald-500">green fingerprint</strong> to reopen
+                          the modal.
                         </li>
                       </ul>
                     </div>
                   </div>
 
-                  <p className="mt-3 text-right text-xs text-gray-600 dark:text-gray-400 lg:text-sm">
+                  <p className="mt-2 text-right tracking-wide text-gray-500 dark:text-gray-400">
                     <strong>Hints</strong>:{' '}
                     {secretHints.map((hint, hintIdx) => (
                       <span key={`hint-${hintIdx}`}>
@@ -124,7 +127,7 @@ export default function AccessModal({ lockedHook, special = false }: Props) {
                     ))}
                   </p>
 
-                  <div className="relative mt-3 flex flex-col gap-1">
+                  <div className="relative mt-4 flex flex-col gap-1">
                     <label htmlFor="password" className="sr-only">
                       Identity Codephrase for general access
                     </label>
@@ -133,7 +136,8 @@ export default function AccessModal({ lockedHook, special = false }: Props) {
                       name="password"
                       type={codephraseShown ? 'text' : 'password'}
                       autoComplete="current-password"
-                      className="relative block w-full appearance-none rounded border px-3 py-2 focus:accent-primary"
+                      className="relative block w-full appearance-none rounded border px-3 py-2 
+                      focus:accent-primary dark:focus:accent-secondary"
                       placeholder="Password"
                       value={codephrase}
                       onKeyDown={(e) => e.key === 'Enter' && submitPassword()}
@@ -144,7 +148,8 @@ export default function AccessModal({ lockedHook, special = false }: Props) {
                       onClick={togglePasswordShown}
                       title={`${codephraseShown ? 'Hide' : 'Show'} password`}
                       aria-label={`${codephraseShown ? 'Hide' : 'Show'} password`}
-                      className="absolute right-[12px] top-[11px] text-primary  transition hover:opacity-80"
+                      className="absolute right-[12px] top-[11px] text-primary transition 
+                      hover:opacity-80 dark:text-secondary"
                     >
                       {codephraseShown ? (
                         <EyeSlashIcon className="h-5 w-5" />
@@ -158,7 +163,8 @@ export default function AccessModal({ lockedHook, special = false }: Props) {
                     <button
                       type="button"
                       onClick={submitPassword}
-                      className="w-full rounded bg-primary p-2 text-white transition hover:opacity-80"
+                      className="w-full rounded bg-primary p-2 text-white 
+                      transition hover:opacity-80 dark:bg-secondary"
                     >
                       Submit
                     </button>
