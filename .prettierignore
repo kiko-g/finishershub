@@ -1,4 +1,9 @@
-.cache
-package.json
+# next
+.next
+
+# Ignore build artifacts
+build
+coverage
+
+# Ignore long lock file
 package-lock.json
-public
