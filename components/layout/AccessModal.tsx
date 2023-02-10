@@ -1,4 +1,4 @@
-import React, { Dispatch, Fragment, SetStateAction, useState } from 'react'
+import React, { Dispatch, Fragment, SetStateAction, memo, useState } from 'react'
 import classNames from 'classnames'
 import { Dialog, Transition } from '@headlessui/react'
 import { EyeIcon, EyeSlashIcon, XMarkIcon, FingerPrintIcon } from '@heroicons/react/24/outline'
@@ -13,6 +13,7 @@ export default function AccessModal({ lockedHook, special = false }: Props) {
   const secretHints = ['Levels', 'Bio', 'Window', 'Clip']
   const [locked, setLocked] = lockedHook
   const [isOpen, setIsOpen] = useState(locked)
+  const [wrong, setWrong] = useState(false)
   const [codephrase, setCodephrase] = useState('')
   const [codephraseShown, setCodephraseShown] = useState(true)
 
@@ -31,6 +32,8 @@ export default function AccessModal({ lockedHook, special = false }: Props) {
       setIsOpen(false)
     } else {
       setCodephrase('')
+      setWrong(true)
+      setTimeout(() => setWrong(false), 4000)
     }
   }
 
@@ -88,7 +91,7 @@ export default function AccessModal({ lockedHook, special = false }: Props) {
                   <div className="flex items-center justify-between">
                     <Dialog.Title
                       as="h3"
-                      className="text-xl font-semibold leading-6 text-primary dark:text-secondary"
+                      className="text-xl font-semibold leading-6 text-primary dark:text-white"
                     >
                       Prove your identity
                     </Dialog.Title>
@@ -103,32 +106,31 @@ export default function AccessModal({ lockedHook, special = false }: Props) {
                     </button>
                   </div>
 
-                  <div className="mt-2">
+                  <div className="mt-3">
                     <div className="text-sm font-normal lg:text-base">
                       <p>Enter the codephrase to prove you are worthy of viewing the content.</p>
-                      <ul className="ml-4 list-disc">
+                      <ul className="mt-2 ml-3 list-disc lg:ml-4 lg:mt-1">
                         <li>
                           You can <strong>close the modal</strong> and have{' '}
-                          <strong className="text-rose-600">limited access</strong> to the site.
+                          <span className="text-amber-600">limited access</span> to the site.
                         </li>
                         <li>
                           Tou can click the{' '}
-                          <strong className="text-emerald-500">green fingerprint</strong> to reopen
-                          the modal.
+                          <span className="text-emerald-500">green fingerprint</span> to reopen the
+                          modal.
+                        </li>
+                        <li>
+                          <strong className="underline">Hints</strong>:{' '}
+                          {secretHints.map((hint, hintIdx) => (
+                            <span key={`hint-${hintIdx}`}>
+                              <span>{hint}</span>
+                              {hintIdx < secretHints.length - 1 ? ', ' : ''}
+                            </span>
+                          ))}
                         </li>
                       </ul>
                     </div>
                   </div>
-
-                  <p className="mt-2 text-right tracking-wide text-gray-500 dark:text-gray-300">
-                    <strong>Hints</strong>:{' '}
-                    {secretHints.map((hint, hintIdx) => (
-                      <span key={`hint-${hintIdx}`}>
-                        <span>{hint}</span>
-                        {hintIdx < secretHints.length - 1 ? ', ' : ''}
-                      </span>
-                    ))}
-                  </p>
 
                   <div className="relative mt-4 flex flex-col gap-1">
                     <label htmlFor="password" className="sr-only">
@@ -163,6 +165,12 @@ export default function AccessModal({ lockedHook, special = false }: Props) {
                       )}
                     </button>
                   </div>
+
+                  {wrong ? (
+                    <p className="mt-0.5 text-sm text-rose-600 dark:text-rose-500">
+                      Wrong codephrase. Try again.
+                    </p>
+                  ) : null}
 
                   <div className="mt-4">
                     <button

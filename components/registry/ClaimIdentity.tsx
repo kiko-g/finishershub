@@ -17,6 +17,7 @@ type Props = {
 export default function ClaimIdentity({ member, lockedHook }: Props) {
   const [locked, setLocked] = lockedHook
   const [isOpen, setIsOpen] = useState(false)
+  const [wrong, setWrong] = useState(false)
   const [password, setPassword] = useState('')
   const [passwordShown, setPasswordShown] = useState(true)
 
@@ -39,6 +40,8 @@ export default function ClaimIdentity({ member, lockedHook }: Props) {
       setIsOpen(false)
     } else {
       setPassword('')
+      setWrong(true)
+      setTimeout(() => setWrong(false), 4000)
     }
   }
 
@@ -145,6 +148,12 @@ export default function ClaimIdentity({ member, lockedHook }: Props) {
                       )}
                     </button>
                   </div>
+
+                  {wrong ? (
+                    <p className="mt-0.5 text-sm text-rose-600 dark:text-rose-500">
+                      Wrong codephrase. Try again.
+                    </p>
+                  ) : null}
 
                   <div className="mt-4">
                     <button
