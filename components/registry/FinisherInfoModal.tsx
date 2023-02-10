@@ -65,20 +65,22 @@ const FinisherInfoModal = ({ custom }: Props) => {
                   text-sm font-normal text-gray-700 shadow-xl transition-all dark:bg-dark dark:text-white
                   lg:max-w-[52rem] lg:p-6 lg:text-base"
                 >
-                  <div className="flex items-center justify-between">
+                  <div className="flex items-center justify-between gap-x-2">
                     <Dialog.Title
                       as="h3"
-                      className="text-xl font-semibold leading-6 text-primary dark:text-white lg:text-2xl"
+                      className="text-xl font-semibold leading-6 tracking-tight text-primary dark:text-white lg:text-2xl lg:tracking-normal"
                     >
                       Lifetime Finisher Count
                     </Dialog.Title>
 
                     <button
-                      type="button"
                       onClick={closeModal}
-                      className="rounded p-0.5 text-white transition hover:bg-rose-700 hover:text-white lg:p-1"
+                      className="flex items-center gap-x-1 rounded border border-rose-600/50 
+                      bg-rose-600/10 px-2 py-1 text-sm text-rose-800 transition 
+                      hover:bg-rose-600 hover:text-white dark:bg-rose-600/20 dark:text-white dark:hover:bg-rose-600"
                     >
-                      <XMarkIcon className="h-5 w-5" />
+                      <span>Close</span>
+                      <XMarkIcon className="h-4 w-4" />{' '}
                     </button>
                   </div>
 
@@ -118,11 +120,11 @@ const FinisherInfoModal = ({ custom }: Props) => {
                     </ul>
                   </div>
 
-                  <div className="mt-8">
+                  <div className="mt-6 flex w-full items-center justify-end">
                     <button
                       type="button"
-                      className="flex items-center space-x-2 rounded bg-primary px-3 py-2 text-center text-sm font-medium text-white 
-                      transition hover:opacity-80 disabled:cursor-not-allowed disabled:opacity-50"
+                      className="flex w-full items-center justify-center space-x-2 rounded bg-primary px-3 py-2 text-center text-sm font-medium text-white transition 
+                      hover:opacity-80 disabled:cursor-not-allowed disabled:opacity-50 lg:w-auto"
                       onClick={closeModal}
                     >
                       <span>Got it, thanks!</span>

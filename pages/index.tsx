@@ -26,11 +26,11 @@ export default function IndexPage() {
 
   const [hostname, setHostname] = useState<string>('')
   const [videos, setVideos] = useState<string[]>([])
-  const [clipsShown, setClipsShown] = useState<number>(isMobile ? 1 : 3)
   const [accessDenied, setAccessDenied] = useAccessDenied()
-  const [view, setView] = useState<boolean>(false)
+  const [view, setView] = useState<boolean>(true)
   const [muted, setMuted] = useState<boolean>(true)
   const [autoplay, setAutoplay] = useState<boolean>(false)
+  const [clipsShown, setClipsShown] = useState<number>(isMobile ? 1 : view ? 2 : 3)
   const [showMoreCount, setShowMoreCount] = useState<number>(0)
   const limitedAccess = useMemo(() => sensitive && accessDenied, [sensitive, accessDenied])
 
@@ -43,7 +43,7 @@ export default function IndexPage() {
   const loadMore = () => {
     setShowMoreCount((prev) => prev + 1)
     if (isMobile) setClipsShown((prev) => prev + 1)
-    else setClipsShown((prev) => prev + 3)
+    else setClipsShown((prev) => prev + (view ? 2 : 3))
   }
 
   useEffect(() => {
