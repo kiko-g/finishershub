@@ -41,13 +41,13 @@ export default function AccessModal({ lockedHook, special = false }: Props) {
       {/* Button */}
       <button
         title="Open access modal"
+        onClick={() => setIsOpen(true)}
         className={classNames(
           'flex items-end justify-center gap-x-2 transition',
           special
             ? 'hover w-full rounded border-2 border-teal-600/50 bg-teal-600/50 px-3 py-2 text-white hover:bg-teal-600/80'
-            : 'text-teal-700 hover:opacity-50 dark:text-teal-600'
+            : 'text-teal-600 hover:opacity-50 dark:text-teal-500'
         )}
-        onClick={() => setIsOpen(true)}
       >
         <FingerPrintIcon
           className={classNames(special ? 'h-5 w-5 lg:h-6 lg:w-6' : 'h-7 w-7 lg:h-8 lg:w-8')}
@@ -67,7 +67,7 @@ export default function AccessModal({ lockedHook, special = false }: Props) {
             leaveFrom="opacity-100"
             leaveTo="opacity-0"
           >
-            <div className="fixed inset-0 bg-black bg-opacity-75" />
+            <div className="fixed inset-0 bg-black bg-opacity-80" />
           </Transition.Child>
 
           <div className="fixed inset-0 overflow-y-auto">
@@ -94,9 +94,12 @@ export default function AccessModal({ lockedHook, special = false }: Props) {
                     </Dialog.Title>
                     <button
                       onClick={closeModal}
-                      className="rounded p-1 transition hover:bg-rose-600 hover:text-white"
+                      className="flex items-center gap-x-1 rounded border border-rose-600/50 
+                      bg-rose-600/10 px-2 py-1 text-sm text-rose-800 transition 
+                      hover:bg-rose-600 hover:text-white dark:bg-rose-600/20 dark:text-white dark:hover:bg-rose-600"
                     >
-                      <XMarkIcon className="h-5 w-5" />{' '}
+                      <span>Close</span>
+                      <XMarkIcon className="h-4 w-4" />{' '}
                     </button>
                   </div>
 
@@ -117,7 +120,7 @@ export default function AccessModal({ lockedHook, special = false }: Props) {
                     </div>
                   </div>
 
-                  <p className="mt-2 text-right tracking-wide text-gray-500 dark:text-gray-400">
+                  <p className="mt-2 text-right tracking-wide text-gray-500 dark:text-gray-300">
                     <strong>Hints</strong>:{' '}
                     {secretHints.map((hint, hintIdx) => (
                       <span key={`hint-${hintIdx}`}>
@@ -135,9 +138,11 @@ export default function AccessModal({ lockedHook, special = false }: Props) {
                       required
                       name="password"
                       type={codephraseShown ? 'text' : 'password'}
-                      autoComplete="current-password"
-                      className="relative block w-full appearance-none rounded border px-3 py-2 
-                      focus:accent-primary dark:focus:accent-secondary"
+                      autoComplete="new-password"
+                      className="relative block w-full appearance-none rounded border bg-white px-3 py-2 
+                      text-gray-800 ring-primary focus:border-primary focus:accent-primary 
+                      dark:bg-white/10 dark:text-white dark:ring-secondary 
+                      dark:focus:border-secondary dark:focus:accent-secondary"
                       placeholder="Password"
                       value={codephrase}
                       onKeyDown={(e) => e.key === 'Enter' && submitPassword()}

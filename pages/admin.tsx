@@ -63,7 +63,7 @@ export default function AdminPage() {
                 {/* Drag video area */}
                 <div
                   className="hidden w-full items-center justify-center self-stretch rounded border-2 border-dashed 
-                  border-gray-500 bg-slate-800/5 py-6 dark:border-white/50 dark:bg-white/5 lg:flex"
+                  border-gray-500 bg-gray-800/5 py-6 dark:border-white/50 dark:bg-white/5 lg:flex"
                 >
                   <span className="font-normal text-gray-700 dark:text-gray-200">
                     Drag your video highlight here.
@@ -167,7 +167,7 @@ export default function AdminPage() {
                                     classNames(
                                       'relative cursor-pointer select-none py-2 pl-10 pr-4',
                                       isSelected
-                                        ? 'bg-teal-200/50 font-semibold text-teal-700 hover:opacity-75 dark:bg-teal-200/50 dark:text-white'
+                                        ? 'bg-teal-200/50 font-semibold text-teal-700 hover:opacity-80 dark:bg-teal-200/50 dark:text-white'
                                         : '',
                                       active
                                         ? 'bg-teal-100 text-teal-900 dark:bg-teal-600/50 dark:text-white'

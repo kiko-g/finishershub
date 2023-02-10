@@ -12,7 +12,7 @@ export default function MuteToggler({ hook }: Props) {
       {mute ? (
         <button
           title="Turn default mute off"
-          className="transition hover:opacity-75"
+          className="transition hover:opacity-80"
           onClick={() => setMuted(false)}
         >
           <svg
@@ -39,7 +39,7 @@ export default function MuteToggler({ hook }: Props) {
       ) : (
         <button
           title="Turn default mute on"
-          className="transition hover:opacity-75"
+          className="transition hover:opacity-80"
           onClick={() => setMuted(true)}
         >
           <svg

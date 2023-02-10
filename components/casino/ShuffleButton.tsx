@@ -14,12 +14,13 @@ export default function MuteToggler({ shuffle }: Props) {
   }
 
   return (
-    <div className="flex items-end justify-center space-x-2 text-primary dark:text-light">
+    <div className="flex items-end justify-center space-x-2 text-gray-700 dark:text-light">
       {shuffling ? (
         <button disabled>
           <svg
             xmlns="http://www.w3.org/2000/svg"
-            className="h-7 w-7 animate-spin fill-primary text-gray-300 dark:fill-white dark:text-gray-500 lg:h-8 lg:w-8"
+            className="h-7 w-7 animate-spin fill-primary text-gray-300 dark:fill-white 
+            dark:text-gray-500 lg:h-8 lg:w-8"
             fill="none"
             viewBox="0 0 100 101"
             stroke="currentColor"
@@ -38,7 +39,7 @@ export default function MuteToggler({ shuffle }: Props) {
       ) : (
         <button
           title="Shuffle all videos"
-          className="transition hover:opacity-75"
+          className="transition hover:opacity-80"
           onClick={shuffleAction}
         >
           <svg

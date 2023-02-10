@@ -78,7 +78,7 @@ export default function IndexPage() {
   return (
     <Layout location="Home" background={false}>
       <main className="flex flex-col gap-2 px-0 lg:px-4">
-        <div className="mt-1 flex flex-col justify-between gap-y-2 lg:mt-3 lg:flex-row lg:gap-x-6">
+        <div className="mt-1 flex flex-col justify-between gap-y-2 lg:mt-2 lg:flex-row lg:gap-x-6">
           <div className="flex flex-col justify-center gap-2">
             <h2 className="text-4xl font-extrabold tracking-tight sm:text-5xl">Finishers Hub</h2>
             <p className="grow text-lg font-normal">
@@ -106,7 +106,7 @@ export default function IndexPage() {
         <div
           className={classNames(
             'relative',
-            view ? 'grid-cols-1' : 'sm:grid-cols-1 lg:grid-cols-2 xl:grid-cols-3',
+            view ? 'lg:grid-cols-2' : 'lg:grid-cols-3',
             'mb-2 grid grid-cols-1 gap-6 py-2 md:mt-0 md:gap-5 md:py-4'
           )}
         >

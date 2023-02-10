@@ -8,7 +8,7 @@ type Props = {
 
 export default function TotalFinishersDisclaimer({ count }: Props) {
   const customElement = (
-    <span className="inline-flex whitespace-nowrap underline hover:opacity-90">
+    <span className="inline-flex whitespace-nowrap underline hover:opacity-80">
       valid finishers
     </span>
   )

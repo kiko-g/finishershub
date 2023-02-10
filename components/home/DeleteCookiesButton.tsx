@@ -8,7 +8,7 @@ export default function DeleteCookiesButton({}: Props) {
     <div className="flex items-end justify-center space-x-2 text-rose-800 dark:text-rose-600">
       <button
         title="Clear all cookies (helps if page does not load)"
-        className="transition hover:opacity-75"
+        className="transition hover:opacity-80"
         onClick={() => {
           clearCache()
           alert('Do you want to clear all cookies and reload the page?')

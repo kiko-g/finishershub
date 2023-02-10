@@ -69,7 +69,7 @@ export default function CasinoPage() {
     <Layout location="Casino">
       <div className="mx-auto max-w-xl lg:max-w-2xl xl:max-w-3xl 2xl:max-w-4xl">
         <main className="flex flex-col gap-3">
-          <div className="mt-1 flex flex-col justify-between gap-y-2 lg:mt-3 lg:flex-row lg:gap-x-6">
+          <div className="mt-1 flex flex-col justify-between gap-y-2 lg:mt-2 lg:flex-row lg:gap-x-6">
             <div className="text-lg font-normal">
               <h2 className="mb-2 text-4xl font-extrabold tracking-tight sm:text-5xl">
                 Slot Machine
@@ -96,7 +96,7 @@ export default function CasinoPage() {
 
           <UsageDisclaimer />
 
-          <div className="flex w-full flex-col gap-y-3">
+          <div className="flex w-full flex-col gap-y-2">
             {/* Video */}
             <div className="relative w-full">
               {limitedAccess ? <InvisbleTopLayer /> : null}
@@ -116,15 +116,15 @@ export default function CasinoPage() {
                 title="Go to the previous highlight"
                 className="rounded-l-xl border-2 border-r-0 border-black/40 bg-black/40 px-6 py-2 text-white 
                 transition enabled:hover:bg-black/70 disabled:cursor-not-allowed disabled:opacity-25 
-                dark:border-white/20 dark:bg-white/10 enabled:dark:hover:bg-white/50 lg:px-6 lg:py-1.5"
+                dark:border-white/20 dark:bg-white/10 enabled:dark:hover:bg-white/50 lg:px-6 lg:py-1"
               >
                 <ArrowLongLeftIcon className="inline-flex h-7 w-7" />
               </button>
 
               <div
                 className="flex w-full items-center justify-center self-stretch 
-                  border-2 border-black/40 bg-black/40 py-2 px-4 
-                  text-white dark:border-white/20 dark:bg-white/10"
+                  border-2 border-black/40 bg-black/40 py-2 px-4 text-white 
+                  dark:border-white/20 dark:bg-white/10 lg:py-1"
               >
                 Clip {index + 1}/{videos.length}
               </div>
@@ -135,7 +135,7 @@ export default function CasinoPage() {
                 title="Go to the next highlight"
                 className="rounded-r-xl border-2 border-l-0 border-black/40 bg-black/40 px-6 py-2 text-white 
                 transition enabled:hover:bg-black/70 disabled:cursor-not-allowed disabled:opacity-25 
-                dark:border-white/20 dark:bg-white/10 enabled:dark:hover:bg-white/50 lg:px-6 lg:py-1.5"
+                dark:border-white/20 dark:bg-white/10 enabled:dark:hover:bg-white/50 lg:px-6 lg:py-1"
               >
                 <ArrowLongRightIcon className="inline-flex h-7 w-7" />
               </button>

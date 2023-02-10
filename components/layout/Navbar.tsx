@@ -117,7 +117,7 @@ type HeaderProps = {
 
 const Header = ({ title, location }: HeaderProps) => (
   <div className="z-50 flex flex-1 items-center justify-between md:items-stretch md:justify-between">
-    <div className="relative hidden h-auto space-x-12 self-center duration-200 hover:opacity-75 md:inline-flex">
+    <div className="relative hidden h-auto space-x-12 self-center duration-200 hover:opacity-80 md:inline-flex">
       <Link href="/" className="flex items-center space-x-2">
         <Image
           src={avatar}
