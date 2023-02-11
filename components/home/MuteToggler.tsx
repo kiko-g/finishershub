@@ -8,7 +8,7 @@ export default function MuteToggler({ hook }: Props) {
   const [mute, setMuted] = hook
 
   return (
-    <div className="flex items-end justify-center space-x-2 text-primary dark:text-light">
+    <div className="flex items-end justify-center space-x-2 text-gray-700 dark:text-light">
       {mute ? (
         <button
           title="Turn default mute off"

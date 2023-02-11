@@ -5,7 +5,7 @@ type Props = {}
 
 export default function DeleteCookiesButton({}: Props) {
   return (
-    <div className="flex items-end justify-center space-x-2 text-rose-800 dark:text-rose-600">
+    <div className="flex items-end justify-center space-x-2 text-rose-700 dark:text-rose-600">
       <button
         title="Clear all cookies (helps if page does not load)"
         className="transition hover:opacity-80"

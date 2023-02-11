@@ -14,7 +14,7 @@ export default function MuteToggler({ shuffle }: Props) {
   }
 
   return (
-    <div className="flex items-end justify-center space-x-2 text-primary dark:text-light">
+    <div className="flex items-end justify-center space-x-2 text-gray-700 dark:text-light">
       {shuffling ? (
         <button disabled>
           <svg

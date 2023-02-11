@@ -8,7 +8,7 @@ export default function ViewToggler({ hook }: Props) {
   const [view, setView] = hook
 
   return (
-    <div className="hidden items-end justify-center space-x-2 text-primary dark:text-light md:flex">
+    <div className="hidden items-end justify-center space-x-2 text-gray-700 dark:text-light md:flex">
       {view ? (
         <button
           title="Change to grid view"
