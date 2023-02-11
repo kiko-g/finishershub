@@ -96,7 +96,7 @@ export default function CasinoPage() {
 
           <UsageDisclaimer />
 
-          <div className="flex w-full flex-col gap-y-2">
+          <div className="flex w-full flex-col gap-y-3">
             {/* Video */}
             <div className="relative w-full">
               {limitedAccess ? <InvisbleTopLayer /> : null}
@@ -109,33 +109,34 @@ export default function CasinoPage() {
             </div>
 
             {/* Left Arrow, Clip index, Right Arrow */}
-            <div className="z-20 flex w-full items-center justify-between">
+            <div className="z-20 flex w-full items-center justify-between font-normal text-white">
               <button
                 onClick={prevVideo}
                 disabled={index === 0}
                 title="Go to the previous highlight"
-                className="rounded-l-xl border-2 border-r-0 border-black/40 bg-black/40 px-6 py-2 text-white 
-                transition enabled:hover:bg-black/70 disabled:cursor-not-allowed disabled:opacity-25 
-                dark:border-white/20 dark:bg-white/10 enabled:dark:hover:bg-white/50 lg:px-6 lg:py-1"
+                className="rounded-l-xl border border-r-0 border-slate-800/60 bg-slate-800/60 px-6 py-2
+                transition enabled:hover:bg-slate-800/80 disabled:cursor-not-allowed 
+                disabled:opacity-25 dark:border-sky-200/30 dark:bg-sky-200/20 enabled:dark:hover:bg-sky-200/50 
+                lg:px-6 lg:py-1"
               >
                 <ArrowLongLeftIcon className="inline-flex h-7 w-7" />
               </button>
 
               <div
                 className="flex w-full items-center justify-center self-stretch 
-                  border-2 border-black/40 bg-black/40 py-2 px-4 text-white 
-                  dark:border-white/20 dark:bg-white/10 lg:py-1"
+                  border border-slate-800/60 bg-slate-800/60 py-2 px-4 
+                  dark:border-sky-200/30 dark:bg-sky-200/20 lg:py-1"
               >
-                Clip {index + 1}/{videos.length}
+                {index + 1}/{videos.length}
               </div>
 
               <button
                 onClick={nextVideo}
                 disabled={index === videos.length - 1}
                 title="Go to the next highlight"
-                className="rounded-r-xl border-2 border-l-0 border-black/40 bg-black/40 px-6 py-2 text-white 
-                transition enabled:hover:bg-black/70 disabled:cursor-not-allowed disabled:opacity-25 
-                dark:border-white/20 dark:bg-white/10 enabled:dark:hover:bg-white/50 lg:px-6 lg:py-1"
+                className="rounded-r-xl border border-l-0 border-slate-800/60 bg-slate-800/60 px-6 py-2
+                transition enabled:hover:bg-slate-800/80 disabled:cursor-not-allowed disabled:opacity-25 
+                dark:border-sky-200/30 dark:bg-sky-200/20 enabled:dark:hover:bg-sky-200/50 lg:px-6 lg:py-1"
               >
                 <ArrowLongRightIcon className="inline-flex h-7 w-7" />
               </button>

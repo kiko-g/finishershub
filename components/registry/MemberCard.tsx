@@ -44,7 +44,7 @@ export default function MemberCard({ member, updateMembers }: Props) {
   return (
     <div
       className="flex w-full flex-col gap-y-3 rounded-xl 
-    bg-lightest p-3 shadow dark:bg-dark xl:flex-row xl:gap-y-0"
+    bg-lightest p-3 shadow dark:bg-sky-300/5 xl:flex-row xl:gap-y-0"
     >
       <aside className="relative rounded-l-xl md:rounded-xl">
         {member.imgurUrl ? (

@@ -90,7 +90,7 @@ export default function ClaimIdentity({ member, lockedHook }: Props) {
               >
                 <Dialog.Panel
                   className="w-full max-w-xl transform overflow-hidden rounded-2xl bg-white p-6 text-left 
-                  align-middle text-gray-600 shadow-xl transition-all dark:bg-dark dark:text-white"
+                  align-middle text-gray-600 shadow-xl transition-all dark:bg-white/5 dark:text-white"
                 >
                   <div className="flex items-center justify-between">
                     <Dialog.Title
@@ -127,7 +127,7 @@ export default function ClaimIdentity({ member, lockedHook }: Props) {
                       autoComplete="new-password"
                       className="relative block w-full appearance-none rounded border bg-white
                       px-3 py-2 text-gray-800 ring-primary focus:border-primary 
-                      focus:accent-primary dark:bg-white/10 dark:text-white 
+                      focus:accent-primary dark:bg-white/5 dark:text-white 
                       dark:ring-secondary dark:focus:border-secondary 
                       dark:focus:accent-secondary"
                       placeholder="Password"

@@ -53,7 +53,7 @@ export default function AdminPage() {
           </div>
         </div>
 
-        <section className="relative mt-4 min-h-[24rem] lg:mt-0 lg:min-h-[36rem]">
+        <section className="relative mt-4 lg:mt-0">
           {accessDenied ? (
             <DummyLockedContent />
           ) : (
@@ -63,7 +63,7 @@ export default function AdminPage() {
                 {/* Drag video area */}
                 <div
                   className="hidden w-full items-center justify-center self-stretch rounded border-2 border-dashed 
-                  border-gray-500 bg-gray-800/5 py-6 dark:border-white/50 dark:bg-white/5 lg:flex"
+                  border-gray-500 bg-gray-800/5 py-6 dark:border-sky-300/40 dark:bg-sky-200/5 lg:flex"
                 >
                   <span className="font-normal text-gray-700 dark:text-gray-200">
                     Drag your video highlight here.
@@ -75,9 +75,9 @@ export default function AdminPage() {
                   <input className="sr-only" type="file" accept="video/mp4" id="upload-video" />
                   <label
                     htmlFor="upload-video"
-                    className="flex cursor-pointer items-center justify-center gap-x-3 rounded border-2 
-                  border-blue-500/90 bg-blue-500/60 px-6 py-4 text-white transition hover:bg-blue-500/90 dark:bg-blue-500/40 
-                  dark:hover:bg-blue-500/80 lg:px-8 lg:py-6"
+                    className="flex cursor-pointer items-center justify-center gap-x-3 rounded border
+                  border-blue-500/90 bg-blue-500/60 px-6 py-4 text-white transition hover:bg-blue-500/90 
+                  dark:bg-blue-500/40 dark:hover:bg-blue-500/80 lg:px-8 lg:py-6"
                   >
                     <ArrowUpTrayIcon className="h-7 w-7" />
                     <span className="whitespace-nowrap font-normal">Upload your highlight</span>
@@ -87,8 +87,8 @@ export default function AdminPage() {
 
               {/* Form for uploaded video */}
               <div
-                className="flex h-full w-full flex-col gap-4 rounded border-2 border-gray-500/0 
-                bg-white px-4 py-4 dark:border-white/0 dark:bg-white/5 lg:flex-row"
+                className="flex h-full w-full flex-col gap-4 rounded border border-gray-500/0 
+                bg-white px-4 py-4 dark:border-sky-300/5 dark:bg-sky-200/5 lg:flex-row"
               >
                 {/* Desktop image */}
                 <Image
@@ -96,7 +96,7 @@ export default function AdminPage() {
                   width={512}
                   height={512}
                   src="https://images.unsplash.com/photo-1568158951683-b5dadda4cd8a"
-                  className="hidden max-h-[32rem] rounded object-cover lg:flex"
+                  className="hidden max-h-[28rem] rounded object-cover lg:flex"
                 />
 
                 <form className="flex w-full flex-col items-center justify-between gap-4">
@@ -113,11 +113,11 @@ export default function AdminPage() {
                         onChange={(e) => setClipTitle(e.target.value)}
                         placeholder="Que escândalo na verdoca!"
                         className="mt-1 w-full rounded border border-gray-300 bg-gray-50 px-3 py-3 
-                        text-base font-normal placeholder:font-normal placeholder:text-gray-500
-                        focus:border-teal-600 
+                        text-base font-normal placeholder:font-normal placeholder:text-gray-400
+                        hover:border-teal-600/80 hover:bg-teal-600/10 focus:border-teal-600
                         focus:accent-teal-600 focus:ring-teal-600 focus:ring-offset-0 
-                        dark:border-white/10 dark:bg-white/10 dark:placeholder:text-gray-400 
-                        dark:focus:border-teal-500"
+                        dark:border-sky-300/10 dark:bg-sky-200/5 dark:placeholder:text-gray-300 
+                        dark:hover:bg-sky-400/10 dark:focus:border-sky-500"
                       />
                     </label>
 
@@ -131,7 +131,7 @@ export default function AdminPage() {
                           as="button"
                           className="relative mt-1 w-full rounded border border-gray-300 bg-gray-50 
                           py-3 pl-3 pr-10 text-left transition hover:border-teal-600/50 hover:bg-teal-600/20 
-                          dark:border-white/10 dark:bg-white/10 dark:hover:border-teal-400/50 dark:hover:bg-teal-400/20"
+                          dark:border-sky-300/10 dark:bg-sky-200/5 dark:hover:border-sky-400/50 dark:hover:bg-sky-400/20"
                         >
                           {selected !== null ? (
                             <span className="block truncate font-normal">{selected.name}</span>
@@ -155,8 +155,8 @@ export default function AdminPage() {
                         >
                           <Listbox.Options
                             className="absolute mt-2 max-h-72 w-full overflow-auto rounded 
-                          bg-white py-1 text-base shadow ring-opacity-5 
-                          dark:bg-[#3c3f48] sm:text-sm"
+                          bg-white py-3 text-base shadow ring-opacity-5 
+                          dark:bg-darkest/95 sm:text-sm"
                           >
                             {members.map((member, memberIdx) => {
                               const isSelected = selected !== null && selected.name === member.name
@@ -167,10 +167,10 @@ export default function AdminPage() {
                                     classNames(
                                       'relative cursor-pointer select-none py-2 pl-10 pr-4',
                                       isSelected
-                                        ? 'bg-teal-200/50 font-semibold text-teal-700 hover:opacity-80 dark:bg-teal-200/50 dark:text-white'
+                                        ? 'bg-teal-300/30 font-semibold text-teal-700 hover:opacity-80 dark:bg-sky-300/80 dark:text-white'
                                         : '',
                                       active
-                                        ? 'bg-teal-100 text-teal-900 dark:bg-teal-600/50 dark:text-white'
+                                        ? 'bg-teal-100 text-teal-900 dark:bg-sky-600/50 dark:text-white'
                                         : ''
                                     )
                                   }
@@ -211,7 +211,7 @@ export default function AdminPage() {
                       {/* Checkboxes */}
                       <div
                         className="flex flex-col items-start gap-y-3 rounded border border-gray-300 
-                      bg-gray-50 px-4 py-4 dark:border-white/0 dark:bg-white/10"
+                      bg-gray-50 px-4 py-4 dark:border-sky-300/10 dark:bg-sky-200/5"
                       >
                         {/* Pernoca */}
                         <div className="flex w-full items-center justify-start gap-x-2.5 text-sm">
@@ -266,7 +266,7 @@ export default function AdminPage() {
 
                   <button
                     type="submit"
-                    className="w-full rounded border-2 border-teal-600/90 bg-teal-600/60 px-4 py-2 
+                    className="w-full rounded border border-teal-600/90 bg-teal-600/60 px-4 py-2 
                   text-white transition hover:bg-teal-600/90 dark:bg-teal-600/40 dark:hover:bg-teal-600/80"
                   >
                     Submit
