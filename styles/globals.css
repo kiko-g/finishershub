@@ -19,12 +19,24 @@ h6 {
   @apply font-headings;
 }
 
+.leinput,
+input[type='text'],
+input[type='password'] {
+  @apply rounded border border-gray-300 bg-gray-50 px-3.5 py-3 font-normal 
+  placeholder:font-light placeholder:text-gray-400 hover:border-primary/80
+  hover:bg-primary/5 focus:border-primary focus:accent-primary
+  focus:ring-0 focus:ring-primary focus:ring-offset-0 dark:border-gray-200/10 dark:bg-gray-100/5 
+  dark:placeholder:text-gray-400 dark:hover:border-secondary/70 dark:hover:bg-secondary/5 
+  dark:focus:border-secondary/80 dark:focus:ring-0 dark:focus:ring-secondary;
+}
+
 input[type='checkbox'] {
-  @apply cursor-pointer rounded border border-gray-300 bg-white p-2 font-normal 
-  text-teal-600 hover:border-teal-500 hover:bg-teal-600/25 focus:border-teal-600 
-  focus:ring-teal-600 dark:border-sky-300/40 dark:bg-sky-300/10 dark:text-sky-500
-  dark:checked:bg-sky-500/80 dark:hover:bg-sky-500/40 dark:focus:border-sky-500 
-  dark:focus:ring-sky-500 lg:p-2.5;
+  @apply cursor-pointer rounded border border-gray-300 bg-white px-2.5 py-2.5 font-normal 
+  placeholder:font-normal placeholder:text-gray-400 hover:border-primary/80
+  hover:bg-primary/5 focus:border-primary focus:accent-primary
+  focus:ring-0 focus:ring-primary focus:ring-offset-0 dark:border-gray-200/10 dark:bg-gray-100/5 
+  dark:placeholder:text-gray-500 dark:hover:border-secondary/70 dark:hover:bg-secondary/50 
+  dark:focus:border-secondary/80 dark:focus:ring-0 dark:focus:ring-secondary;
 }
 
 .twitch:hover {

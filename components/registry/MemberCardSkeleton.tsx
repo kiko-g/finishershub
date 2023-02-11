@@ -6,18 +6,18 @@ export default function MemberCardSkeleton({}: Props) {
   return (
     <div
       className="flex w-full flex-col space-y-3 rounded-xl bg-lightest p-3 shadow 
-    dark:bg-white/5 lg:flex-row lg:space-y-0"
+    dark:bg-white/5 xl:flex-row xl:space-y-0"
     >
       <aside className="relative rounded-l-xl md:rounded-xl">
         <div
           className="h-64 w-full animate-pulse rounded-xl bg-lightish shadow 
-          dark:bg-white/20 lg:h-48 lg:w-72"
+          dark:bg-white/20 xl:h-48 xl:w-72"
         ></div>
       </aside>
 
       <section
         className="relative flex w-auto grow flex-col justify-between space-y-6 rounded-r-xl 
-        px-1 py-1 text-base font-normal lg:h-auto lg:max-h-full lg:w-3/4 lg:py-0 lg:pl-4 lg:pr-0"
+        px-1 py-1 text-base font-normal xl:h-auto xl:max-h-full xl:w-3/4 xl:py-0 xl:pl-4 xl:pr-0"
       >
         <div className="flex h-48 flex-col justify-between">
           <span className="h-6 w-36 animate-pulse rounded bg-lightish dark:bg-white/20" />

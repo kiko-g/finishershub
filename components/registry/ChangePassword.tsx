@@ -78,22 +78,30 @@ export default function ClaimIdentity({ member, lockedHook }: Props) {
                 leaveFrom="opacity-100 scale-100"
                 leaveTo="opacity-0 scale-95"
               >
-                <Dialog.Panel className="w-full max-w-xl transform overflow-hidden rounded-2xl bg-white p-6 text-left align-middle shadow-xl transition-all">
+                <Dialog.Panel
+                  className="w-full max-w-xl transform overflow-hidden rounded-2xl bg-white p-6 text-left 
+                  align-middle text-gray-600 shadow-xl transition-all dark:bg-navy dark:text-white"
+                >
                   <div className="flex items-center justify-between">
-                    <Dialog.Title as="h3" className="text-xl font-semibold leading-6 text-primary">
+                    <Dialog.Title
+                      as="h3"
+                      className="text-xl font-semibold leading-6 text-primary dark:text-secondary"
+                    >
                       Change Password
                     </Dialog.Title>
 
                     <button
-                      type="button"
                       onClick={closeModal}
-                      className="rounded p-1 text-primary transition hover:bg-primary hover:text-white"
+                      className="flex items-center gap-x-1 rounded border border-rose-600/50 
+                      bg-rose-600/10 px-2 py-1 text-sm text-rose-800 transition 
+                      hover:bg-rose-600 hover:text-white dark:bg-rose-600/20 dark:text-white dark:hover:bg-rose-600"
                     >
-                      <XMarkIcon className="h-6 w-6" />
+                      <span>Close</span>
+                      <XMarkIcon className="h-4 w-4" />{' '}
                     </button>
                   </div>
 
-                  <p className="mt-2 text-gray-600 ">
+                  <p className="mt-2">
                     Type your new password for <strong>{member.name}</strong> and then submit your
                     changes to <strong>replace the previous one</strong>.
                   </p>
@@ -103,19 +111,22 @@ export default function ClaimIdentity({ member, lockedHook }: Props) {
                       New Identity password for <strong>{member.name}</strong>
                     </label>
                     <input
+                      required
                       name="password"
                       type={passwordShown ? 'text' : 'password'}
-                      autoComplete="current-password"
-                      required
-                      className="relative block w-full appearance-none rounded border px-3 py-2 focus:accent-primary"
+                      autoComplete="new-password"
+                      className="relative block w-full"
                       placeholder="New password"
                       value={newPassword}
+                      onKeyDown={(e) => e.key === 'Enter' && submitNewPassword()}
                       onChange={(e) => setNewPassword(e.target.value)}
                     />
                     <button
                       type="button"
                       onClick={togglePasswordShown}
-                      className="absolute right-[12px] top-[11px] text-primary  transition hover:opacity-80"
+                      className="absolute right-[11px] top-[11px] rounded-full p-1 
+                      text-primary transition hover:bg-primary hover:text-white 
+                      dark:text-secondary dark:hover:bg-secondary dark:hover:text-white"
                     >
                       {passwordShown ? (
                         <EyeSlashIcon className="h-5 w-5" />
@@ -129,7 +140,7 @@ export default function ClaimIdentity({ member, lockedHook }: Props) {
                     <button
                       type="button"
                       onClick={submitNewPassword}
-                      className="w-full rounded bg-primary p-2 text-white transition hover:opacity-80"
+                      className="w-full rounded bg-primary p-2 text-white transition hover:opacity-80 dark:bg-secondary"
                     >
                       Submit
                     </button>

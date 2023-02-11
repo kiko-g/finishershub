@@ -44,7 +44,7 @@ export default function AdminPage() {
             </p>
           </div>
           <div className="mt-1 flex flex-col items-center justify-end gap-2 lg:mt-0 lg:flex-col">
-            <LimitedAccessBadge />
+            {accessDenied ? <LimitedAccessBadge /> : <FullAccessBadge />}
             <div className="flex w-full items-center justify-end gap-x-2">
               {accessDenied ? (
                 <AccessModal special lockedHook={[accessDenied, setAccessDenied]} />
@@ -88,7 +88,7 @@ export default function AdminPage() {
               {/* Form for uploaded video */}
               <div
                 className="flex h-full w-full flex-col gap-4 rounded border border-gray-500/0 
-                bg-white px-4 py-4 dark:border-sky-300/5 dark:bg-sky-200/5 lg:flex-row"
+                bg-white px-4 py-4 dark:border-gray-200/10 dark:bg-gray-100/5 lg:flex-row"
               >
                 {/* Desktop image */}
                 <Image
@@ -112,12 +112,7 @@ export default function AdminPage() {
                         value={clipTitle}
                         onChange={(e) => setClipTitle(e.target.value)}
                         placeholder="Que escândalo na verdoca!"
-                        className="mt-1 w-full rounded border border-gray-300 bg-gray-50 px-3 py-3 
-                        text-base font-normal placeholder:font-normal placeholder:text-gray-400
-                        hover:border-teal-600/80 hover:bg-teal-600/10 focus:border-teal-600
-                        focus:accent-teal-600 focus:ring-teal-600 focus:ring-offset-0 
-                        dark:border-sky-300/10 dark:bg-sky-200/5 dark:placeholder:text-gray-300 
-                        dark:hover:bg-sky-400/10 dark:focus:border-sky-500"
+                        className="mt-1 w-full text-base"
                       />
                     </label>
 
@@ -129,14 +124,14 @@ export default function AdminPage() {
                         </Listbox.Label>
                         <Listbox.Button
                           as="button"
-                          className="relative mt-1 w-full rounded border border-gray-300 bg-gray-50 
-                          py-3 pl-3 pr-10 text-left transition hover:border-teal-600/50 hover:bg-teal-600/20 
-                          dark:border-sky-300/10 dark:bg-sky-200/5 dark:hover:border-sky-400/50 dark:hover:bg-sky-400/20"
+                          className="leinput relative mt-1 flex w-full justify-between bg-gray-50 dark:bg-gray-100/5"
                         >
                           {selected !== null ? (
-                            <span className="block truncate font-normal">{selected.name}</span>
+                            <span className="block truncate font-light text-gray-400 dark:text-gray-400">
+                              {selected.name}
+                            </span>
                           ) : (
-                            <span className="block truncate font-normal text-gray-500 dark:text-gray-400">
+                            <span className="block truncate font-light text-gray-400 dark:text-gray-400">
                               Select a member
                             </span>
                           )}
@@ -167,11 +162,13 @@ export default function AdminPage() {
                                     classNames(
                                       'relative cursor-pointer select-none py-2 pl-10 pr-4',
                                       isSelected
-                                        ? 'bg-teal-300/30 font-semibold text-teal-700 hover:opacity-80 dark:bg-sky-300/80 dark:text-white'
-                                        : '',
+                                        ? `bg-primary/75 font-semibold text-white 
+                                        hover:opacity-80 dark:bg-secondary/75 dark:text-white`
+                                        : ``,
                                       active
-                                        ? 'bg-teal-100 text-teal-900 dark:bg-sky-600/50 dark:text-white'
-                                        : ''
+                                        ? `bg-primary/20 text-primary dark:bg-secondary/50 
+                                        dark:text-white`
+                                        : ``
                                     )
                                   }
                                   value={member}
@@ -188,7 +185,7 @@ export default function AdminPage() {
                                       <>
                                         <span
                                           className="absolute inset-y-0 left-0 flex items-center pl-3 
-                                        text-teal-700 dark:text-white"
+                                        text-white dark:text-white"
                                         >
                                           <CheckIcon className="h-5 w-5" aria-hidden="true" />
                                         </span>
@@ -211,7 +208,7 @@ export default function AdminPage() {
                       {/* Checkboxes */}
                       <div
                         className="flex flex-col items-start gap-y-3 rounded border border-gray-300 
-                      bg-gray-50 px-4 py-4 dark:border-sky-300/10 dark:bg-sky-200/5"
+                      bg-gray-50 px-4 py-4 dark:border-gray-200/10 dark:bg-gray-100/5"
                       >
                         {/* Pernoca */}
                         <div className="flex w-full items-center justify-start gap-x-2.5 text-sm">
@@ -266,8 +263,9 @@ export default function AdminPage() {
 
                   <button
                     type="submit"
-                    className="w-full rounded border border-teal-600/90 bg-teal-600/60 px-4 py-2 
-                  text-white transition hover:bg-teal-600/90 dark:bg-teal-600/40 dark:hover:bg-teal-600/80"
+                    className="w-full rounded border border-primary/90 bg-primary/60 px-4 py-2 
+                  text-white transition hover:bg-primary/90 dark:border-secondary/90
+                  dark:bg-secondary/40 dark:hover:bg-secondary/80"
                   >
                     Submit
                   </button>

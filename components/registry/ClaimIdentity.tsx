@@ -90,7 +90,7 @@ export default function ClaimIdentity({ member, lockedHook }: Props) {
               >
                 <Dialog.Panel
                   className="w-full max-w-xl transform overflow-hidden rounded-2xl bg-white p-6 text-left 
-                  align-middle text-gray-600 shadow-xl transition-all dark:bg-white/5 dark:text-white"
+                  align-middle text-gray-600 shadow-xl transition-all dark:bg-navy dark:text-white"
                 >
                   <div className="flex items-center justify-between">
                     <Dialog.Title
@@ -111,7 +111,7 @@ export default function ClaimIdentity({ member, lockedHook }: Props) {
                     </button>
                   </div>
 
-                  <p className="mt-2 ">
+                  <p className="mt-2">
                     Type your password to prove you are <strong>{member.name}</strong> and get
                     access to data controls.
                   </p>
@@ -125,11 +125,7 @@ export default function ClaimIdentity({ member, lockedHook }: Props) {
                       name="password"
                       type={passwordShown ? 'text' : 'password'}
                       autoComplete="new-password"
-                      className="relative block w-full appearance-none rounded border bg-white
-                      px-3 py-2 text-gray-800 ring-primary focus:border-primary 
-                      focus:accent-primary dark:bg-white/5 dark:text-white 
-                      dark:ring-secondary dark:focus:border-secondary 
-                      dark:focus:accent-secondary"
+                      className="relative block w-full"
                       placeholder="Password"
                       value={password}
                       onKeyDown={(e) => e.key === 'Enter' && submitPassword()}
@@ -138,8 +134,9 @@ export default function ClaimIdentity({ member, lockedHook }: Props) {
                     <button
                       type="button"
                       onClick={togglePasswordShown}
-                      className="absolute right-[12px] top-[11px] text-primary transition 
-                      hover:opacity-80 dark:text-secondary"
+                      className="absolute right-[11px] top-[11px] rounded-full p-1 
+                      text-primary transition hover:bg-primary hover:text-white 
+                      dark:text-secondary dark:hover:bg-secondary dark:hover:text-white"
                     >
                       {passwordShown ? (
                         <EyeSlashIcon className="h-5 w-5" />

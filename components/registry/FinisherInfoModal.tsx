@@ -62,7 +62,7 @@ const FinisherInfoModal = ({ custom }: Props) => {
               >
                 <Dialog.Panel
                   className="w-full max-w-xl transform overflow-hidden rounded-2xl bg-lightest p-5 text-left align-middle
-                  text-sm font-normal text-gray-700 shadow-xl transition-all dark:bg-white/5 dark:text-white
+                  text-sm font-normal text-gray-700 shadow-xl transition-all dark:bg-navy dark:text-white
                   lg:max-w-[52rem] lg:p-6 lg:text-base"
                 >
                   <div className="flex items-center justify-between gap-x-2">
