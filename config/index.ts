@@ -9,7 +9,7 @@ export const connectMongoDB = async () => {
 
   try {
     const db = await mongoose.connect(mongoURI)
-    console.log(`MongoDB connect: ${db.connection.host}`.cyan)
+    console.log(colors.green(`MongoDB connected: ${db.connection.host}`))
   } catch (error) {
     const errorMessage =
       error instanceof Error ? error.message : 'Something went wrong in connection to MongoDB'

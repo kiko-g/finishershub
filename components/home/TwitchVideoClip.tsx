@@ -16,6 +16,7 @@ export default function TwitchVideoClip({ video, parent, muted = false, autoplay
       <div className={`${loaded ? 'flex' : 'hidden'} h-full w-full rounded-xl shadow`}>
         <div className="relative h-full w-full">
           <iframe
+            sandbox="allow-scripts allow-same-origin"
             title="Twitch video clip embed"
             className="aspect-video w-full rounded"
             src={`${video}&parent=${parent}&muted=${muted.toString()}&autoplay=${autoplay.toString()}`}

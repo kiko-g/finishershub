@@ -8,11 +8,11 @@ export default function AutoplayToggler({ hook }: Props) {
   const [autoplay, setAutoplay] = hook
 
   return (
-    <div className="flex items-end justify-center space-x-2 text-primary dark:text-light">
+    <div className="flex items-end justify-center space-x-2 text-gray-700 dark:text-light">
       {autoplay ? (
         <button
           title="Turn autoplay off"
-          className="transition hover:opacity-75"
+          className="transition hover:opacity-80"
           onClick={() => setAutoplay(false)}
         >
           <svg
@@ -31,7 +31,7 @@ export default function AutoplayToggler({ hook }: Props) {
       ) : (
         <button
           title="Turn autoplay on"
-          className="transition hover:opacity-75"
+          className="transition hover:opacity-80"
           onClick={() => setAutoplay(true)}
         >
           <svg

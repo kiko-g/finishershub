@@ -12,7 +12,7 @@ export default function ViewToggler({ hook }: Props) {
       {view ? (
         <button
           title="Change to grid view"
-          className="transition hover:opacity-75"
+          className="transition hover:opacity-80"
           onClick={() => setView(false)}
         >
           <svg
@@ -33,7 +33,7 @@ export default function ViewToggler({ hook }: Props) {
       ) : (
         <button
           title="Change to list view"
-          className="transition hover:opacity-75"
+          className="transition hover:opacity-80"
           onClick={() => setView(true)}
         >
           <svg

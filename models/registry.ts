@@ -1,4 +1,6 @@
-import { Schema, model } from 'mongoose'
+import mongoose, { Schema, model } from 'mongoose'
+
+if (typeof mongoose.models.Registry !== undefined) delete mongoose.models.Registry
 
 const schema = new Schema(
   {

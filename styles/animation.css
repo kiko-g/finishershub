@@ -25,19 +25,19 @@
 }
 
 .background-circles li:nth-child(odd) {
-  @apply bg-primary/50 dark:bg-white/10;
+  @apply bg-blue-400/50 dark:bg-blue-400/20;
 }
 
 .background-circles li:nth-child(even) {
-  @apply bg-secondary/50 dark:bg-white/10;
+  @apply bg-rose-600/50 dark:bg-rose-500/20;
 }
 
 .background-circles li:nth-child(3n) {
-  @apply bg-tertiary/50 dark:bg-white/10;
+  @apply bg-emerald-500/50 dark:bg-emerald-400/20;
 }
 
 .background-circles li:nth-child(4n) {
-  @apply bg-fourth/50 dark:bg-white/10;
+  @apply bg-orange-500/50 dark:bg-orange-400/20;
 }
 
 .background-circles li:nth-child(1) {

@@ -17,6 +17,7 @@ type Props = {
 export default function ClaimIdentity({ member, lockedHook }: Props) {
   const [locked, setLocked] = lockedHook
   const [isOpen, setIsOpen] = useState(false)
+  const [wrong, setWrong] = useState(false)
   const [password, setPassword] = useState('')
   const [passwordShown, setPasswordShown] = useState(true)
 
@@ -39,6 +40,8 @@ export default function ClaimIdentity({ member, lockedHook }: Props) {
       setIsOpen(false)
     } else {
       setPassword('')
+      setWrong(true)
+      setTimeout(() => setWrong(false), 4000)
     }
   }
 
@@ -71,7 +74,7 @@ export default function ClaimIdentity({ member, lockedHook }: Props) {
             leaveFrom="opacity-100"
             leaveTo="opacity-0"
           >
-            <div className="fixed inset-0 bg-black bg-opacity-75" />
+            <div className="fixed inset-0 bg-black bg-opacity-80" />
           </Transition.Child>
 
           <div className="fixed inset-0 overflow-y-auto">
@@ -85,22 +88,30 @@ export default function ClaimIdentity({ member, lockedHook }: Props) {
                 leaveFrom="opacity-100 scale-100"
                 leaveTo="opacity-0 scale-95"
               >
-                <Dialog.Panel className="w-full max-w-xl transform overflow-hidden rounded-2xl bg-white p-6 text-left align-middle shadow-xl transition-all">
+                <Dialog.Panel
+                  className="w-full max-w-xl transform overflow-hidden rounded-2xl bg-white p-6 text-left 
+                  align-middle text-gray-600 shadow-xl transition-all dark:bg-navy dark:text-white"
+                >
                   <div className="flex items-center justify-between">
-                    <Dialog.Title as="h3" className="text-xl font-semibold leading-6 text-primary">
+                    <Dialog.Title
+                      as="h3"
+                      className="text-xl font-semibold leading-6 text-primary dark:text-secondary"
+                    >
                       Claim Identity
                     </Dialog.Title>
 
                     <button
-                      type="button"
                       onClick={closeModal}
-                      className="rounded p-1 text-primary transition hover:bg-primary hover:text-white"
+                      className="flex items-center gap-x-1 rounded border border-rose-600/50 
+                      bg-rose-600/10 px-2 py-1 text-sm text-rose-800 transition 
+                      hover:bg-rose-600 hover:text-white dark:bg-rose-600/20 dark:text-white dark:hover:bg-rose-600"
                     >
-                      <XMarkIcon className="h-6 w-6" />
+                      <span>Close</span>
+                      <XMarkIcon className="h-4 w-4" />{' '}
                     </button>
                   </div>
 
-                  <p className="mt-2 text-gray-600 ">
+                  <p className="mt-2">
                     Type your password to prove you are <strong>{member.name}</strong> and get
                     access to data controls.
                   </p>
@@ -113,9 +124,8 @@ export default function ClaimIdentity({ member, lockedHook }: Props) {
                       required
                       name="password"
                       type={passwordShown ? 'text' : 'password'}
-                      autoComplete="current-password"
-                      className="relative block w-full appearance-none rounded border border-gray-200 
-                      bg-gray-50 px-3 py-2 focus:accent-primary"
+                      autoComplete="new-password"
+                      className="relative block w-full"
                       placeholder="Password"
                       value={password}
                       onKeyDown={(e) => e.key === 'Enter' && submitPassword()}
@@ -124,7 +134,9 @@ export default function ClaimIdentity({ member, lockedHook }: Props) {
                     <button
                       type="button"
                       onClick={togglePasswordShown}
-                      className="absolute right-[12px] top-[11px] text-primary  transition hover:opacity-80"
+                      className="absolute right-[11px] top-[11px] rounded-full p-1 
+                      text-primary transition hover:bg-primary hover:text-white 
+                      dark:text-secondary dark:hover:bg-secondary dark:hover:text-white"
                     >
                       {passwordShown ? (
                         <EyeSlashIcon className="h-5 w-5" />
@@ -134,11 +146,17 @@ export default function ClaimIdentity({ member, lockedHook }: Props) {
                     </button>
                   </div>
 
+                  {wrong ? (
+                    <p className="mt-0.5 text-sm text-rose-600 dark:text-rose-500">
+                      Wrong codephrase. Try again.
+                    </p>
+                  ) : null}
+
                   <div className="mt-4">
                     <button
                       type="button"
                       onClick={submitPassword}
-                      className="w-full rounded bg-primary p-2 text-white transition hover:opacity-80"
+                      className="w-full rounded bg-primary p-2 text-white transition hover:opacity-80 dark:bg-secondary"
                     >
                       Submit
                     </button>

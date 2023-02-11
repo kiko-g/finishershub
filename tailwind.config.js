@@ -7,10 +7,9 @@ module.exports = {
   theme: {
     extend: {
       colors: {
-        primary: '#075985', // #115E59
-        secondary: '#155E75',
-        tertiary: '#075985',
-        fourth: '#1F2937',
+        primary: '#0d9488',
+        secondary: '#3b82f6',
+        navy: '#1a202c',
         dark: '#242936',
         darker: '#1e222c',
         darkest: '#1a1e28',
@@ -19,7 +18,6 @@ module.exports = {
         lighter: '#f7f7f7',
         lightest: '#fcfcfc',
         lightish: '#ebedf0',
-        navydark: '#1a202c',
       },
       maxWidth: {
         screen: '100vw',

@@ -38,7 +38,7 @@ export default function MuteToggler({ shuffle }: Props) {
       ) : (
         <button
           title="Shuffle all videos"
-          className="transition hover:opacity-75"
+          className="transition hover:opacity-80"
           onClick={shuffleAction}
         >
           <svg
