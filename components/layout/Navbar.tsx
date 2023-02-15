@@ -10,7 +10,7 @@ import {
   BoltIcon,
   Bars3Icon,
   XMarkIcon,
-  BuildingLibraryIcon,
+  WrenchScrewdriverIcon,
 } from '@heroicons/react/24/outline'
 
 const navigation = [
@@ -62,7 +62,7 @@ export default function Navbar({ siteTitle, location }: Props) {
                 open ? 'p-0' : 'p-2'
               } relative flex items-center justify-between md:py-0`}
             >
-              <Hamburger open={open} />
+              <Hamburger title={siteTitle} open={open} />
               <Header title={siteTitle} location={location} />
             </div>
             <Mobile location={location} />
@@ -74,28 +74,21 @@ export default function Navbar({ siteTitle, location }: Props) {
 }
 
 type HamburgerProps = {
+  title: string
   open: boolean
 }
 
-function Hamburger({ open }: HamburgerProps) {
+function Hamburger({ title, open }: HamburgerProps) {
   return (
     <div
       className={`z-50 md:hidden ${
         open
-          ? 'absolute top-2 right-2 my-auto flex h-6 items-center justify-end gap-x-2'
-          : 'flex w-full items-center justify-between'
+          ? 'absolute top-2 right-2 my-auto flex h-6 items-center justify-end gap-x-3'
+          : 'flex w-full items-center justify-between gap-x-3'
       }`}
     >
-      <Link href="/">
-        {open ? (
-          <Image
-            className="avatar top-0.5 rounded-full"
-            width={20}
-            height={20}
-            src={avatar}
-            alt="Finishers Hub"
-          />
-        ) : (
+      {open ? null : (
+        <Link href="/" className="flex items-center gap-x-2">
           <Image
             className="avatar rounded-full"
             width={24}
@@ -103,23 +96,34 @@ function Hamburger({ open }: HamburgerProps) {
             src={avatar}
             alt="Finishers Hub"
           />
-        )}
-      </Link>
-
+          <h3 className="tracking-tight">{title}</h3>
+        </Link>
+      )}
       <div className="flex items-center gap-x-2">
+        {open ? (
+          <Link href="/admin" className="group">
+            <WrenchScrewdriverIcon
+              className="h-7 w-7 py-[1px] text-slate-600 transition group-hover:text-primary 
+          dark:text-slate-300 dark:group-hover:text-primary"
+            />
+          </Link>
+        ) : null}
         <DarkModeSwitch />
-        <Disclosure.Button className="group text-gray-800 transition duration-200 ease-in dark:text-white md:hidden">
+        <Disclosure.Button
+          className="group -ml-[3px] py-[3px] text-gray-800 transition duration-200 
+        ease-in dark:text-white md:hidden"
+        >
           <span className="sr-only">Open nav menu</span>
           {open ? (
             <XMarkIcon
-              className="ease block h-6 w-6 transition duration-200 
-              group-hover:text-sky-500 dark:group-hover:text-sky-300"
+              className="ease block h-7 w-7 transition duration-200 
+              group-hover:text-rose-600 dark:group-hover:text-rose-500"
               aria-hidden="true"
             />
           ) : (
             <Bars3Icon
-              className="ease block h-6 w-6 transition duration-200 
-            group-hover:text-sky-500 dark:group-hover:text-sky-300"
+              className="ease block h-7 w-7 transition duration-200 
+            group-hover:text-primary dark:group-hover:text-secondary"
               aria-hidden="true"
             />
           )}
@@ -146,7 +150,7 @@ function Header({ title, location }: HeaderProps) {
             height={24}
             className="z-20 inline-flex rounded-full transition"
           />
-          <h3 className="text-xs font-bold tracking-tighter duration-150 lg:text-base">{title}</h3>
+          <h3 className="text-sm font-bold tracking-tighter duration-150 lg:text-base">{title}</h3>
         </Link>
       </div>
 
@@ -172,7 +176,13 @@ function Header({ title, location }: HeaderProps) {
         )}
       </div>
 
-      <div className="hidden self-center md:inline-flex">
+      <div className="hidden self-center md:inline-flex md:items-center md:justify-center md:gap-x-2">
+        <Link href="/admin" className="group">
+          <WrenchScrewdriverIcon
+            className="h-7 w-7 text-slate-600
+          transition group-hover:text-primary dark:text-slate-300 dark:group-hover:text-primary"
+          />
+        </Link>
         <DarkModeSwitch />
       </div>
     </div>
