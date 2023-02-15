@@ -36,7 +36,7 @@ const socials = [
   {
     shown: true,
     label: 'youtube',
-    url: 'https://www.youtube.com/channel/UC0ZVY3wY8QeQGy2YjZwq8jw',
+    url: 'https://www.youtube.com/@scumbag_kiko/videos',
     svg: [
       'M549.655 124.083c-6.281-23.65-24.787-42.276-48.284-48.597C458.781 64 288 64 288 64S117.22 64 74.629 75.486c-23.497 6.322-42.003 24.947-48.284 48.597-11.412 42.867-11.412 132.305-11.412 132.305s0 89.438 11.412 132.305c6.281 23.65 24.787 41.5 48.284 47.821C117.22 448 288 448 288 448s170.78 0 213.371-11.486c23.497-6.321 42.003-24.171 48.284-47.821 11.412-42.867 11.412-132.305 11.412-132.305s0-89.438-11.412-132.305zm-317.51 213.508V175.185l142.739 81.205-142.739 81.201z',
     ],
@@ -47,7 +47,7 @@ const socials = [
 export default function Footer({ siteTitle }: Props) {
   return (
     <footer
-      className="z-10 flex items-center justify-between px-4 py-2 
+      className="z-10 flex items-center justify-between px-4 py-3 
       text-xs text-gray-500 opacity-80 dark:text-gray-300 md:px-6 md:py-4 md:text-sm"
     >
       <span className="text-gray-700 dark:text-gray-300 sm:text-center">© 2022 {siteTitle}™</span>
@@ -64,7 +64,7 @@ export default function Footer({ siteTitle }: Props) {
               className={`transition ${social.label}`}
             >
               <svg
-                className="h-7 w-7"
+                className="h-6 w-6 md:h-7 md:w-7"
                 fill="currentColor"
                 viewBox={social.viewBox ? social.viewBox : '0 0 24 24'}
                 aria-hidden="true"
