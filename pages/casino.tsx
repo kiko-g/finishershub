@@ -69,7 +69,7 @@ export default function CasinoPage() {
     <Layout location="Casino">
       <div className="mx-auto max-w-xl lg:max-w-2xl xl:max-w-3xl 2xl:max-w-4xl">
         <main className="flex flex-col gap-3">
-          <div className="mt-1 flex flex-col justify-between gap-y-2 lg:mt-2 lg:flex-row lg:gap-x-6">
+          <div className="flex flex-col justify-between gap-y-2 lg:flex-row lg:gap-x-6">
             <div className="text-lg font-normal">
               <h2 className="mb-2 text-4xl font-extrabold tracking-tight sm:text-5xl">
                 Slot Machine

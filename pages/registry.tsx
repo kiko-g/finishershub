@@ -32,7 +32,7 @@ export default function RegistryPage() {
   return (
     <Layout location="Registry">
       <main>
-        <div className="mt-1 flex flex-col gap-y-4 lg:mt-3">
+        <div className="flex flex-col gap-y-4">
           <h2 className="text-4xl font-extrabold tracking-tight sm:text-5xl">Finishers Club</h2>
           <p className="text-lg font-normal">
             Welcome to the Mount Rushmore of finishers. Take a look at the profiles and stats of the

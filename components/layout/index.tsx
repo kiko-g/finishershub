@@ -18,7 +18,7 @@ export default function Layout({ children, location = 'Unknown', background = fa
       <Seo title={location} />
       <div
         className="flex min-h-screen flex-col scroll-smooth bg-light font-prose 
-      font-medium text-gray-800 opacity-[99%] dark:bg-navy dark:text-white"
+        font-medium text-gray-800 opacity-[99%] dark:bg-navy dark:text-white"
       >
         <Navbar location={location} siteTitle={siteTitle} />
         {background ? <Background /> : null}

@@ -1,0 +1,72 @@
+/* Twitch */
+.twitch {
+  color: #6441a570;
+}
+
+.dark .twitch {
+  color: #ffffff70;
+}
+
+.twitch:hover {
+  color: #6441a5;
+}
+
+/* Twitter */
+.twitter {
+  color: #1da1f270;
+}
+
+.dark .twitter {
+  color: #ffffff70;
+}
+
+.twitter:hover {
+  color: #1da1f2;
+}
+
+/* Youtube */
+.youtube {
+  color: #ff000070;
+}
+
+.dark .youtube {
+  color: #ffffff70;
+}
+
+.youtube:hover {
+  color: #ff0000;
+}
+
+/* Linktree */
+.linktree {
+  color: #40e09e70;
+}
+
+.dark .linktree {
+  color: #ffffff70;
+}
+
+.linktree:hover {
+  color: #40e09e;
+}
+
+/* Github */
+.github {
+  color: #33333370;
+}
+
+.github:hover {
+  color: #333333;
+}
+
+.dark .github {
+  color: #ffffff70;
+  background-color: #33333370;
+  border-radius: 9999px;
+}
+
+.dark .github:hover {
+  color: #ffffff;
+  background-color: #333333;
+  border-radius: 9999px;
+}

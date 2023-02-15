@@ -15,8 +15,8 @@ export default function TotalFinishersDisclaimer({ count }: Props) {
 
   return (
     <div
-      className="flex w-full flex-wrap items-center justify-between rounded border-2 border-teal-700/90
-    bg-teal-700/80 px-3 py-2 tracking-tight text-light dark:border-light/10 dark:bg-teal-600/60 lg:px-4 lg:py-3"
+      className="flex w-full flex-wrap items-center justify-between rounded border-2 border-[#aa4a44]/70
+    bg-[#aa4a44]/60 px-3 py-2 tracking-tight text-light dark:border-[#aa4a44]/60 dark:bg-[#aa4a44]/50 lg:px-4 lg:py-3"
     >
       <div className="flex flex-1 items-start justify-between">
         <div className="flex">

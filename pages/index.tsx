@@ -78,7 +78,7 @@ export default function IndexPage() {
   return (
     <Layout location="Home" background={false}>
       <main className="flex flex-col gap-2 px-0 lg:px-4">
-        <div className="mt-1 flex flex-col justify-between gap-y-2 lg:mt-2 lg:flex-row lg:gap-x-6">
+        <div className="flex flex-col justify-between gap-y-2 lg:flex-row lg:gap-x-6">
           <div className="flex flex-col justify-center gap-2">
             <h2 className="text-4xl font-extrabold tracking-tight sm:text-5xl">Finishers Hub</h2>
             <p className="grow text-lg font-normal">
@@ -107,7 +107,7 @@ export default function IndexPage() {
           className={classNames(
             'relative',
             view ? 'lg:grid-cols-2' : 'lg:grid-cols-3',
-            'mb-2 grid grid-cols-1 gap-6 py-2 md:mt-0 md:gap-5 md:py-4'
+            'grid grid-cols-1 gap-6 py-2 md:mt-0 md:gap-5 md:py-3'
           )}
         >
           {limitedAccess ? <InvisbleTopLayer /> : null}
@@ -135,15 +135,16 @@ export default function IndexPage() {
               .map((_, skeletonIdx) => <Skeleton key={`skeleton-${skeletonIdx}`} />)}
         </div>
 
-        <div className="mb-8 flex items-center justify-center">
+        <div className="mb-4 flex items-center justify-center">
           <button
             type="button"
             onClick={loadMore}
             className={classNames(
               videos.length === 0 ? 'hidden' : 'inline-flex',
-              `items-center rounded border-2 border-primary bg-primary/70 px-4 py-2 
-              text-white shadow-sm transition hover:bg-primary/90 hover:bg-primary focus:outline-none focus:ring-2 focus:ring-primary 
-              focus:ring-offset-2 dark:border-secondary dark:bg-secondary/50 dark:hover:bg-secondary/80`
+              `items-center rounded border-2 border-transparent bg-primary/70 px-4 py-2 
+              text-white shadow-sm transition hover:bg-primary/90 hover:bg-primary focus:outline-none 
+              focus:ring-2 focus:ring-primary focus:ring-offset-2 dark:border-transparent 
+              dark:bg-secondary/50 dark:hover:bg-secondary/80`
             )}
           >
             <PlusIcon className="-ml-1 mr-2 h-5 w-5" aria-hidden="true" />

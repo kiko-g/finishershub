@@ -39,19 +39,3 @@ input[type='checkbox'] {
   dark:hover:border-secondary/70 dark:hover:bg-secondary/50 dark:focus:border-secondary/80 
   dark:focus:ring-0 dark:focus:ring-secondary;
 }
-
-.twitch:hover {
-  color: #6441a5;
-}
-
-.linktree:hover {
-  color: #40e09e;
-}
-
-.linkedin:hover {
-  color: #0a66c2;
-}
-
-.github:hover {
-  color: #333;
-}
