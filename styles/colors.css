@@ -4,7 +4,7 @@
 }
 
 .dark .twitch {
-  color: #ffffff70;
+  color: #6441a5a0;
 }
 
 .twitch:hover {
@@ -17,7 +17,7 @@
 }
 
 .dark .twitter {
-  color: #ffffff70;
+  color: #1da1f2a0;
 }
 
 .twitter:hover {
@@ -30,7 +30,7 @@
 }
 
 .dark .youtube {
-  color: #ffffff70;
+  color: #ff0000a0;
 }
 
 .youtube:hover {
@@ -43,7 +43,7 @@
 }
 
 .dark .linktree {
-  color: #ffffff70;
+  color: #40e09ea0;
 }
 
 .linktree:hover {
@@ -56,12 +56,12 @@
 }
 
 .github:hover {
-  color: #333333;
+  color: #333333a0;
 }
 
 .dark .github {
-  color: #ffffff70;
-  background-color: #33333370;
+  color: #ffffffa0;
+  background-color: #333333a0;
   border-radius: 9999px;
 }
 

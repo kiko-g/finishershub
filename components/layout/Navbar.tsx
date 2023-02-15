@@ -51,7 +51,7 @@ export default function Navbar({ siteTitle, location }: Props) {
   return (
     <Disclosure
       as="nav"
-      className="background sticky top-0 z-20 bg-light/80 px-4 py-3 text-gray-800 
+      className="background sticky top-0 z-20 bg-light/90 px-4 py-3 text-gray-800 
       dark:bg-navy/90 dark:text-white md:py-0 md:px-4"
     >
       {({ open }) => {
@@ -246,7 +246,7 @@ function Mobile({ location }: MobileProps) {
       )}
       <div
         className="relative flex h-auto items-center justify-end gap-x-4 border-t border-primary/25 
-      py-4 dark:border-secondary/25"
+        pt-4 dark:border-secondary/25"
       >
         {socials.map((social, socialIdx) =>
           social.shown ? (
