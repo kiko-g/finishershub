@@ -5,14 +5,6 @@ import classNames from 'classnames'
 type Props = {}
 
 export default function InfoPage({}: Props) {
-  const GOOGLE_PRIVATE_KEY = process.env.GOOGLE_PRIVATE_KEY!.replace(/\\n/gm, '\n')
-  const GOOGLE_SPREADSHEET_ID = process.env.GOOGLE_SHEET_ID!
-  const GOOGLE_SERVICE_ACCOUNT_EMAIL = process.env.GOOGLE_SERVICE_ACCOUNT_EMAIL!
-
-  console.log('GOOGLE_PRIVATE_KEY', GOOGLE_PRIVATE_KEY)
-  console.log('GOOGLE_SPREADSHEET_ID', GOOGLE_SPREADSHEET_ID)
-  console.log('GOOGLE_SERVICE_ACCOUNT_EMAIL', GOOGLE_SERVICE_ACCOUNT_EMAIL)
-
   const [headers, setHeaders] = useState<string[]>([])
   const [catalogue, setCatalogue] = useState<(string | number)[][]>([])
 
