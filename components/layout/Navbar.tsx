@@ -11,6 +11,7 @@ import {
   Bars3Icon,
   XMarkIcon,
   WrenchScrewdriverIcon,
+  CircleStackIcon,
 } from '@heroicons/react/24/outline'
 
 const navigation = [
@@ -32,6 +33,13 @@ const navigation = [
     icon: <ChartBarSquareIcon className="h-5 w-5" />,
     shown: true,
   },
+  {
+    title: 'Info',
+    location: '/info',
+    icon: <CircleStackIcon className="h-5 w-5" />,
+    shown: true,
+  },
+
   {
     title: 'About',
     location: '/about',
