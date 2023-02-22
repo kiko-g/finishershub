@@ -14,6 +14,10 @@ type Data = {
 // @route    GET /api/mw2/catalogue
 // @access   Public
 export default async function getSheetsData(req: NextApiRequest, res: NextApiResponse<Data>) {
+  console.log('GOOGLE_PRIVATE_KEY', GOOGLE_PRIVATE_KEY)
+  console.log('GOOGLE_SPREADSHEET_ID', GOOGLE_SPREADSHEET_ID)
+  console.log('GOOGLE_SERVICE_ACCOUNT_EMAIL', GOOGLE_SERVICE_ACCOUNT_EMAIL)
+
   try {
     const doc = new GoogleSpreadsheet(GOOGLE_SPREADSHEET_ID)
     await doc.useServiceAccountAuth({
