@@ -6,7 +6,7 @@ type Props = {}
 export default function LimitedAccessBadge({}: Props) {
   return (
     <div
-      className="flex w-full items-center justify-center gap-x-1 rounded border-2 
+      className="flex w-full items-center justify-center gap-x-1 rounded border 
     border-amber-600/60 bg-amber-600/60 px-3 py-2 text-white"
     >
       <ExclamationTriangleIcon className="h-5 w-5" />

@@ -62,7 +62,7 @@ export default function AdminPage() {
               <div className="flex w-full flex-col items-center justify-center gap-4 lg:flex-row">
                 {/* Drag video area */}
                 <div
-                  className="hidden w-full items-center justify-center self-stretch rounded border-2 border-dashed 
+                  className="hidden w-full items-center justify-center self-stretch rounded border border-dashed 
                   border-gray-500 bg-gray-800/5 py-6 dark:border-sky-300/40 dark:bg-sky-200/5 lg:flex"
                 >
                   <span className="font-normal text-gray-700 dark:text-gray-200">

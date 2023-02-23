@@ -12,7 +12,7 @@ export default function CardLI({ children, emoji, extraClassNames = '' }: Props)
     <li
       className={classNames(
         extraClassNames,
-        `rounded border-2 border-slate-400 bg-slate-200/80 px-4 py-4 hover:border-primary 
+        `rounded border border-slate-400 bg-slate-200/80 px-4 py-4 hover:border-primary 
         dark:border-slate-700 dark:bg-slate-800/75 dark:hover:border-secondary`
       )}
     >

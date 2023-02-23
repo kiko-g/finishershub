@@ -32,14 +32,18 @@ export default function RegistryPage() {
   return (
     <Layout location="Registry">
       <main>
-        <div className="flex flex-col gap-y-4">
-          <h2 className="text-4xl font-extrabold tracking-tight sm:text-5xl">Finishers Club</h2>
-          <p className="text-lg font-normal">
+        <div className="flex flex-col">
+          <h2 className="mb-1 text-4xl font-extrabold tracking-tight sm:text-5xl">
+            Finishers Club
+          </h2>
+          <p className="mb-3 text-lg font-normal">
             Welcome to the Mount Rushmore of finishers. Take a look at the profiles and stats of the
             criminals like never seen before.
           </p>
-          <DataDisclaimer />
-          <TotalFinishersDisclaimer count={totalFinishers} />
+          <div className="space-y-3">
+            <DataDisclaimer />
+            <TotalFinishersDisclaimer count={totalFinishers} />
+          </div>
         </div>
 
         <div className="mt-4 mb-16 grid grid-cols-1 gap-4 lg:grid-cols-2">

@@ -24,6 +24,9 @@ export default function IndexPage() {
   const isMobile = useMediaQuery('(max-width: 768px)')
   const sensitive = process.env.NEXT_PUBLIC_SENSITIVE! === 'false' ? false : true
 
+  const [loading, setLoading] = useState<boolean>(true)
+  const [fetchError, setFetchError] = useState<boolean>(false)
+
   const [hostname, setHostname] = useState<string>('')
   const [videos, setVideos] = useState<string[]>([])
   const [accessDenied, setAccessDenied] = useAccessDenied()
@@ -32,7 +35,14 @@ export default function IndexPage() {
   const [autoplay, setAutoplay] = useState<boolean>(false)
   const [clipsShown, setClipsShown] = useState<number>(isMobile ? 1 : view ? 2 : 3)
   const [showMoreCount, setShowMoreCount] = useState<number>(0)
+
   const limitedAccess = useMemo(() => sensitive && accessDenied, [sensitive, accessDenied])
+  const toastType = useMemo(() => {
+    if (fetchError) return 'error'
+    else if (loading) return 'warning'
+    else if (!loading && !fetchError) return 'success'
+    else return ''
+  }, [loading, fetchError])
 
   const shuffleAndSetVideos = () => {
     const videosStr = localStorage.getItem('finishershub.videos') as string
@@ -49,15 +59,22 @@ export default function IndexPage() {
   useEffect(() => {
     // request loading all twitch clips
     if (isStorageValid()) {
+      setLoading(false)
       shuffleAndSetVideos()
     } else {
       clearCache(true)
       fetch('/api/twitch')
         .then((res) => res.json())
         .then((allEmbedUrls) => {
+          setLoading(false)
           const shuffledVideos = shuffle(allEmbedUrls)
           setVideos(shuffledVideos)
           writeVideosStorage(shuffledVideos)
+        })
+        .catch((err) => {
+          setLoading(false)
+          setFetchError(true)
+          console.error(err)
         })
     }
 
@@ -100,7 +117,7 @@ export default function IndexPage() {
         </div>
 
         <div className="mt-2">
-          <DelayDisclaimer />
+          <DelayDisclaimer type={toastType} />
         </div>
 
         <div
@@ -111,28 +128,28 @@ export default function IndexPage() {
           )}
         >
           {limitedAccess ? <InvisbleTopLayer /> : null}
-          {videos.slice(0, clipsShown).map((video: string, videoIdx: number) => {
-            const play = isMobile
-              ? videoIdx <= showMoreCount
-                ? true
-                : autoplay
-              : videoIdx === 0
-              ? true
-              : autoplay
-            return (
-              <TwitchVideoClip
-                muted={muted}
-                video={video}
-                parent={hostname}
-                key={`video-${videoIdx}`}
-                autoplay={play}
-              />
-            )
-          })}
-          {videos.length === 0 &&
-            Array(clipsShown)
-              .fill(null)
-              .map((_, skeletonIdx) => <Skeleton key={`skeleton-${skeletonIdx}`} />)}
+          {videos.length > 0
+            ? videos.slice(0, clipsShown).map((video: string, videoIdx: number) => {
+                const play = isMobile
+                  ? videoIdx <= showMoreCount
+                    ? true
+                    : autoplay
+                  : videoIdx === 0
+                  ? true
+                  : autoplay
+                return (
+                  <TwitchVideoClip
+                    muted={muted}
+                    video={video}
+                    parent={hostname}
+                    key={`video-${videoIdx}`}
+                    autoplay={play}
+                  />
+                )
+              })
+            : Array(clipsShown)
+                .fill(null)
+                .map((_, skeletonIdx) => <Skeleton key={`skeleton-${skeletonIdx}`} />)}
         </div>
 
         <div className="mb-4 flex items-center justify-center">
@@ -141,7 +158,7 @@ export default function IndexPage() {
             onClick={loadMore}
             className={classNames(
               videos.length === 0 ? 'hidden' : 'inline-flex',
-              `items-center rounded border-2 border-transparent bg-primary/60 px-4 
+              `items-center rounded border border-transparent bg-primary/60 px-4 
               py-2 text-white shadow-sm transition hover:bg-primary/90 
               hover:bg-primary focus:border-transparent focus:ring-2 
               focus:ring-primary focus:ring-offset-2 dark:border-transparent dark:bg-secondary/50 

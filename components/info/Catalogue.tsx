@@ -22,11 +22,11 @@ export default function Catalogue({}: Props) {
     <div className="flex flex-col">
       <div className="-my-2 overflow-x-auto sm:-mx-6 lg:-mx-8">
         <div className="inline-block min-w-full py-2 align-middle sm:px-6 lg:px-8">
-          <div className="overflow-hidden rounded-md border border-slate-900 dark:border-white">
+          <div className="overflow-hidden rounded-md border border-slate-900 shadow dark:border-gray-200">
             <div
               className="mx-auto grid w-full grid-cols-7 divide-x divide-slate-900 rounded-t
-              border-b border-slate-900 bg-slate-700/75 dark:divide-white 
-              dark:border-white dark:bg-secondary/60"
+              border-b border-slate-900 bg-slate-700/75 dark:divide-gray-200 
+              dark:border-gray-200 dark:bg-secondary/30"
             >
               {headers.map((header, headerIdx) => (
                 <span
@@ -48,7 +48,7 @@ export default function Catalogue({}: Props) {
                   key={`row-${rowIdx}`}
                   className={classNames(
                     `grid w-full grid-cols-7 divide-x divide-slate-900
-                    border-slate-900 dark:divide-white dark:border-gray-100`,
+                    border-slate-900 dark:divide-gray-200 dark:border-gray-200`,
                     rowIdx % 2 === 0
                       ? 'bg-white dark:bg-secondary/5'
                       : 'bg-primary/10 dark:bg-secondary/20',
@@ -73,20 +73,20 @@ export default function Catalogue({}: Props) {
                           `whitespace-nowrap px-2 py-1.5 text-xs`,
                           first ? 'text-left font-medium' : 'text-center font-normal',
                           available ? 'bg-teal-600/90 text-white' : '',
-                          sourceBP ? 'bg-cyan-500/90 text-white' : '',
+                          sourceBP ? 'bg-lime-500/90 text-white' : '',
                           sourceBundle ? 'bg-violet-400/90 text-white' : '',
                           no ? 'bg-slate-700 text-white dark:bg-slate-600/90' : '',
-                          yes ? 'bg-cyan-600 text-white dark:bg-cyan-500/90' : '',
-                          almost ? 'bg-orange-400 text-white dark:bg-orange-400/80' : '',
+                          yes ? 'bg-sky-600 text-white dark:bg-sky-600' : '',
+                          almost ? 'bg-orange-500/80 text-white dark:bg-orange-400/80' : '',
                           ultra ? 'bg-violet-500 text-white' : '',
                           isNumber
                             ? Number(cell) < 2.3
-                              ? 'bg-blue-500 text-white'
+                              ? 'bg-blue-500/90 text-white dark:bg-blue-500/80'
                               : Number(cell) < 2.7
                               ? 'bg-emerald-500 text-white'
                               : Number(cell) < 3.0
-                              ? 'bg-amber-500 text-white'
-                              : 'bg-rose-700 text-white'
+                              ? 'bg-amber-500/90 text-white dark:bg-amber-500/90'
+                              : 'bg-rose-600 text-white dark:bg-rose-700/90'
                             : ''
                         )}
                       >

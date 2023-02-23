@@ -17,7 +17,7 @@ export default function Skeleton({}: Props) {
             </div>
             <div className="h-2 rounded bg-gray-300 dark:bg-sky-100/20"></div>
           </div>
-          <div className="h-44 w-full rounded bg-gray-300 dark:bg-sky-100/20"></div>
+          <div className="h-40 w-full rounded bg-gray-300 dark:bg-sky-100/20 lg:h-56"></div>
         </div>
       </div>
     </div>

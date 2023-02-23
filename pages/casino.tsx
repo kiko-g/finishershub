@@ -11,6 +11,7 @@ import {
   TwitchVideoClip,
   ShuffleButton,
   DeleteCookiesButton,
+  DelayDisclaimer,
 } from '../components/casino'
 import InvisbleTopLayer from '../components/layout/InvisbleTopLayer'
 import { FullAccessBadge, LimitedAccessBadge } from '../components/utils'
@@ -19,16 +20,25 @@ import { ArrowLongLeftIcon, ArrowLongRightIcon } from '@heroicons/react/24/outli
 export default function CasinoPage() {
   const sensitive = process.env.NEXT_PUBLIC_SENSITIVE === 'false' ? false : true
 
+  const [loading, setLoading] = useState<boolean>(true)
+  const [fetchError, setFetchError] = useState<boolean>(false)
+
   const [hostname, setHostname] = useState<string>('')
   const [index, setIndex] = useState<number>(0)
   const [videos, setVideos] = useState<string[]>([])
   const [accessDenied, setAccessDenied] = useAccessDenied()
   const [muted, setMuted] = useState<boolean>(true)
   const [autoplay, setAutoplay] = useState<boolean>(true)
+
   const limitedAccess = useMemo(() => sensitive && accessDenied, [sensitive, accessDenied])
+  const toastType = useMemo(() => {
+    if (fetchError) return 'error'
+    else if (loading) return 'warning'
+    else if (!loading && !fetchError) return 'success'
+    else return ''
+  }, [loading, fetchError])
 
   const prevVideo = () => setIndex((prev) => prev - 1)
-
   const nextVideo = () => setIndex((prev) => prev + 1)
 
   const shuffleAndSetVideos = () => {
@@ -40,15 +50,22 @@ export default function CasinoPage() {
   useEffect(() => {
     // request loading all twitch clips
     if (isStorageValid()) {
+      setLoading(false)
       shuffleAndSetVideos()
     } else {
       clearCache(true)
       fetch('/api/twitch')
         .then((res) => res.json())
         .then((allEmbedUrls) => {
+          setLoading(false)
           const shuffledVideos = shuffle(allEmbedUrls)
           setVideos(shuffledVideos)
           writeVideosStorage(shuffledVideos)
+        })
+        .catch((err) => {
+          setLoading(false)
+          setFetchError(true)
+          console.error(err)
         })
     }
     // get hostname if not in ssr
@@ -67,20 +84,20 @@ export default function CasinoPage() {
 
   return (
     <Layout location="Casino">
-      <div className="mx-auto max-w-xl lg:max-w-2xl xl:max-w-3xl 2xl:max-w-4xl">
+      <div className="mx-auto max-w-full lg:max-w-3xl">
         <main className="flex flex-col gap-3">
           <div className="flex flex-col justify-between gap-y-2 lg:flex-row lg:gap-x-6">
             <div className="text-lg font-normal">
               <h2 className="mb-2 text-4xl font-extrabold tracking-tight sm:text-5xl">
                 Slot Machine
               </h2>
-              <p>
+              <p className="leading-normal">
                 More fun than a casino, especially because we don&apos;t take your money. Not sure
                 about the addiction part though.
               </p>
             </div>
 
-            <div className="mt-1 flex flex-row items-center justify-end gap-4 lg:mt-0 lg:flex-col">
+            <div className="flex flex-row items-center justify-center gap-2 lg:mt-0 lg:flex-col">
               {limitedAccess ? <LimitedAccessBadge /> : <FullAccessBadge />}
               <div className="flex items-center justify-end gap-x-2">
                 {limitedAccess ? (
@@ -94,6 +111,7 @@ export default function CasinoPage() {
             </div>
           </div>
 
+          <DelayDisclaimer type={toastType} />
           <UsageDisclaimer />
 
           <div className="flex w-full flex-col gap-y-3">

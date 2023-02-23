@@ -48,7 +48,7 @@ export default function AccessModal({ lockedHook, special = false }: Props) {
         className={classNames(
           'flex items-end justify-center gap-x-2 transition',
           special
-            ? 'hover w-full rounded border-2 border-teal-600/50 bg-teal-600/50 px-3 py-2 text-white hover:bg-teal-600/80'
+            ? 'hover w-full rounded border border-teal-600/50 bg-teal-600/50 px-3 py-2 text-white hover:bg-teal-600/80'
             : 'text-teal-600 hover:opacity-50 dark:text-teal-500'
         )}
       >
