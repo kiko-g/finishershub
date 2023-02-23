@@ -19,3 +19,18 @@ export const shuffle = (array: any[]) => {
   }
   return result
 }
+
+export function transpose<T>(arr: T[][]): T[][] {
+  const numRows = arr.length
+  const numCols = arr[0].length
+
+  const transposed = new Array(numCols)
+  for (let i = 0; i < numCols; i++) {
+    transposed[i] = new Array(numRows)
+    for (let j = 0; j < numRows; j++) {
+      transposed[i][j] = arr[j][i]
+    }
+  }
+
+  return transposed
+}

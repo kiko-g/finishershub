@@ -7,7 +7,7 @@ html {
 }
 
 *::selection {
-  @apply bg-primary text-white dark:bg-secondary/75;
+  @apply bg-fuchsia-600/75 text-white dark:bg-pink-600/60;
 }
 
 h1,
