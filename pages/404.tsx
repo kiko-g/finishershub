@@ -1,13 +1,10 @@
 import React from 'react'
 import Link from 'next/link'
 import Layout from '../components/layout'
-import { useMediaQuery } from 'usehooks-ts'
-import { OhNo, TheRock, Turtle, Saul, Doeu, Blush } from '../components/404'
+import { OhNo, TheRock, Frankie, Turtle, Saul, Doeu, Blush } from '../components/404'
 import { ArrowLongRightIcon } from '@heroicons/react/24/outline'
 
 export default function NotFoundPage() {
-  const isMobile = useMediaQuery('(max-width: 768px)') // whether the screen is mobile or not
-
   const memes = [
     <Turtle key="turtle" />,
     <TheRock key="rock" />,
@@ -19,7 +16,7 @@ export default function NotFoundPage() {
 
   return (
     <Layout location="Oops">
-      <main className="mx-auto mt-3 flex h-full max-w-3xl flex-col items-start justify-start gap-y-4">
+      <main className="mx-auto mt-0 flex h-full max-w-3xl flex-col items-start justify-start gap-y-4 md:mt-3">
         <div className="flex w-full flex-col items-start justify-between gap-3 lg:flex-row lg:items-center">
           <div className="flex flex-col gap-y-2">
             <h2 className="text-3xl font-extrabold tracking-tight sm:text-5xl">404: Not Found</h2>
@@ -39,7 +36,11 @@ export default function NotFoundPage() {
           </div>
         </div>
 
-        <div className="grid w-full grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-3 lg:gap-5">
+        <div className="mb-2 flex w-full md:hidden">
+          <Frankie />
+        </div>
+
+        <div className="hidden w-full gap-4 md:grid md:grid-cols-2 lg:grid lg:grid-cols-3 lg:gap-5">
           {memes.map((meme, memeIdx) => (
             <div key={`block-${memeIdx}`}>{meme}</div>
           ))}
