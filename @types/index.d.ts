@@ -34,3 +34,15 @@ export type FinishersClubMember = {
   code: string
   imgurUrl: string
 }
+
+export type CatalogueItemStatus = 'Yes' | 'No' | 'Almost' | ''
+
+export type CatalogueItem = {
+  name: string
+  source: string
+  season: number
+  unlocked: CatalogueItemStatus
+  accurate: CatalogueItemStatus
+  ttrk: number
+  ttca: number
+}

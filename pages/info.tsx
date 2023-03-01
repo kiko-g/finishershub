@@ -1,10 +1,12 @@
 import React from 'react'
 import Layout from '../components/layout'
-import { Catalogue } from '../components/info'
+import { Catalogue, ViewTypeToggler } from '../components/info'
 
 type Props = {}
 
 export default function InfoPage({}: Props) {
+  const [viewType, setViewType] = React.useState(true)
+
   return (
     <Layout location="Info">
       <main className="mb-12 flex flex-col gap-6 px-0 lg:px-4">
@@ -16,13 +18,24 @@ export default function InfoPage({}: Props) {
         </header>
 
         <div className="flex flex-col py-3">
-          <h2 className="mb-1 text-2xl font-bold tracking-tight sm:text-3xl">
-            MW2 Finishers Catalogue
-          </h2>
-          <p className="mb-4 grow text-base font-normal">
-            A comprehensive list of all the finishers in MW2 2022.
-          </p>
-          <Catalogue />
+          <div className="flex items-start justify-between">
+            {/* Catalogue Header */}
+            <div>
+              <h2 className="mb-1 text-2xl font-bold tracking-tight sm:text-3xl">
+                MW2 Finishers Catalogue
+              </h2>
+              <p className="mb-4 grow text-base font-normal">
+                A comprehensive list of all the finishers in MW2 (released in 2022).
+              </p>
+            </div>
+
+            {/* Catalogue Buttons */}
+            <div>
+              <ViewTypeToggler hook={[viewType, setViewType]} />
+            </div>
+          </div>
+
+          <Catalogue hook={[viewType, setViewType]} />
         </div>
       </main>
     </Layout>
