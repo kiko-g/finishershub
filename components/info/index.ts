@@ -4,6 +4,7 @@ import CatalogueGrid from './CatalogueGrid'
 import CatalogueTable from './CatalogueTable'
 import LoadingCatalogue from './LoadingCatalogue'
 import ViewTypeToggler from './ViewTypeToggler'
+import FilterByName from './FilterByName'
 
 export {
   Catalogue,
@@ -12,4 +13,5 @@ export {
   CatalogueTable,
   LoadingCatalogue,
   ViewTypeToggler,
+  FilterByName,
 }
