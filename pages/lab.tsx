@@ -1,14 +1,14 @@
 import React from 'react'
 import Layout from '../components/layout'
-import { Catalogue, ViewTypeToggler } from '../components/info'
+import { Catalogue, ViewTypeToggler } from '../components/lab'
 
 type Props = {}
 
-export default function InfoPage({}: Props) {
+export default function LabPage({}: Props) {
   const [viewType, setViewType] = React.useState(true)
 
   return (
-    <Layout location="Info">
+    <Layout location="Lab">
       <main className="mb-12 flex flex-col gap-6 px-0 lg:px-4">
         <header className="flex flex-col justify-center gap-2">
           <h2 className="text-4xl font-extrabold tracking-tight sm:text-5xl">Finishers Arsenal</h2>

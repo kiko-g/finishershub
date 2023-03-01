@@ -10,7 +10,7 @@ import {
   BoltIcon,
   Bars3Icon,
   XMarkIcon,
-  CircleStackIcon,
+  ChartPieIcon,
 } from '@heroicons/react/24/outline'
 import { BeakerIcon } from '@heroicons/react/24/solid'
 
@@ -34,9 +34,9 @@ const navigation = [
     shown: true,
   },
   {
-    title: 'Info',
-    location: '/info',
-    icon: <CircleStackIcon className="h-5 w-5" />,
+    title: 'Lab',
+    location: '/lab',
+    icon: <ChartPieIcon className="h-5 w-5" />,
     shown: true,
   },
 
