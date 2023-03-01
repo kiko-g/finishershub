@@ -10,9 +10,9 @@ import {
   BoltIcon,
   Bars3Icon,
   XMarkIcon,
-  WrenchScrewdriverIcon,
   CircleStackIcon,
 } from '@heroicons/react/24/outline'
+import { BeakerIcon } from '@heroicons/react/24/solid'
 
 const navigation = [
   {
@@ -110,9 +110,9 @@ function Hamburger({ title, open }: HamburgerProps) {
       <div className="flex items-center gap-x-2">
         {open ? (
           <Link href="/admin" className="group">
-            <WrenchScrewdriverIcon
-              className="h-7 w-7 py-[1px] text-slate-600 transition group-hover:text-primary 
-          dark:text-slate-300 dark:group-hover:text-primary"
+            <BeakerIcon
+              className="h-6 w-6 py-[1px] text-slate-600 transition 
+              group-hover:text-primary dark:text-slate-300 dark:group-hover:text-primary"
             />
           </Link>
         ) : null}
@@ -186,9 +186,10 @@ function Header({ title, location }: HeaderProps) {
 
       <div className="hidden self-center md:inline-flex md:items-center md:justify-center md:gap-x-2">
         <Link href="/admin" className="group">
-          <WrenchScrewdriverIcon
-            className="h-7 w-7 text-slate-600
-          transition group-hover:text-primary dark:text-slate-300 dark:group-hover:text-primary"
+          <BeakerIcon
+            className="h-8 w-8 text-slate-600
+            transition group-hover:text-primary dark:text-slate-300 
+            dark:group-hover:text-primary"
           />
         </Link>
         <DarkModeSwitch />
