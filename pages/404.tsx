@@ -19,7 +19,7 @@ export default function NotFoundPage() {
 
   return (
     <Layout location="Oops">
-      <main className="mx-auto mt-3 flex h-full max-w-4xl flex-col items-start justify-start gap-y-4">
+      <main className="mx-auto mt-3 flex h-full max-w-3xl flex-col items-start justify-start gap-y-4">
         <div className="flex w-full flex-col items-start justify-between gap-3 lg:flex-row lg:items-center">
           <div className="flex flex-col gap-y-2">
             <h2 className="text-3xl font-extrabold tracking-tight sm:text-5xl">404: Not Found</h2>
