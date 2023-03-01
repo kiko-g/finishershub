@@ -57,7 +57,7 @@ export default function RegistryPage() {
                 })
                 .map((member: FinishersClubMember, memberIdx: number) => (
                   <MemberCard
-                    key={`member-${memberIdx}`}
+                    key={`member-${member._id}`}
                     member={member}
                     updateMembers={updateMembers}
                   />
