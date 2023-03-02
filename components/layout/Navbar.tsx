@@ -11,6 +11,7 @@ import {
   Bars3Icon,
   XMarkIcon,
   ChartPieIcon,
+  PlusSmallIcon,
 } from '@heroicons/react/24/outline'
 import { BeakerIcon } from '@heroicons/react/24/solid'
 
@@ -39,7 +40,12 @@ const navigation = [
     icon: <ChartPieIcon className="h-5 w-5" />,
     shown: true,
   },
-
+  {
+    title: 'More',
+    location: '/more',
+    icon: <PlusSmallIcon className="h-5 w-5" />,
+    shown: true,
+  },
   {
     title: 'About',
     location: '/about',
