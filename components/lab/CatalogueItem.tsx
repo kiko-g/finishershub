@@ -9,9 +9,9 @@ type Props = {
 
 export default function CatalogueItem({ item }: Props) {
   const speedText =
-    Number(item.ttrk) < 2
+    Number(item.ttrk) < 2.3
       ? 'Ultra'
-      : Number(item.ttrk) < 2.5
+      : Number(item.ttrk) < 2.8
       ? 'Fast'
       : Number(item.ttrk) < 3
       ? 'Ok'
@@ -20,8 +20,8 @@ export default function CatalogueItem({ item }: Props) {
   const uncertainty = item.accurate === 'Yes' ? 0.1 : item.accurate === 'Almost' ? 0.2 : 0.4
 
   return (
-    <div className="flex items-center justify-center gap-x-3 rounded bg-white p-3 shadow dark:bg-sky-200/5">
-      <div className="aspect-square h-32 rounded bg-gradient-to-br from-sky-400 to-blue-500"></div>
+    <div className="flex items-center justify-center gap-x-3 rounded border border-gray-300 bg-white p-3 hover:border-primary hover:bg-primary/10 dark:border-secondary/20 dark:bg-secondary/10 dark:hover:border-secondary dark:hover:bg-secondary/20">
+      <div className="aspect-square h-32 rounded bg-gradient-to-br from-slate-400 to-slate-500  dark:from-blue-500 dark:to-blue-600"></div>
       <div className="flex h-full w-full flex-col justify-between">
         {/* Top */}
         <div className="flex flex-col">
