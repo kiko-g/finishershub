@@ -1,13 +1,15 @@
-import React from 'react'
+import React, { Dispatch, SetStateAction, useMemo } from 'react'
 import classNames from 'classnames'
 import { CatalogueItem as CatalogueItemType } from '../../@types'
 import { BoltIcon, LockClosedIcon } from '@heroicons/react/24/solid'
 
 type Props = {
   item: CatalogueItemType
+  chosen: string | null
+  setChosen: Dispatch<SetStateAction<string | null>>
 }
 
-export default function CatalogueItem({ item }: Props) {
+export default function CatalogueItem({ item, chosen, setChosen }: Props) {
   const speedText =
     Number(item.ttrk) < 2.3
       ? 'Ultra'
@@ -18,9 +20,18 @@ export default function CatalogueItem({ item }: Props) {
       : 'Slow'
 
   const uncertainty = item.accurate === 'Yes' ? 0.1 : item.accurate === 'Almost' ? 0.2 : 0.4
+  const isChosen = useMemo(() => chosen === item.name, [chosen, item.name])
 
   return (
-    <div className="flex items-center justify-center gap-x-3 rounded border border-gray-300 bg-white p-3 hover:border-primary hover:bg-primary/10 dark:border-secondary/20 dark:bg-secondary/10 dark:hover:border-secondary dark:hover:bg-secondary/20">
+    <div
+      onClick={() => setChosen(isChosen ? null : item.name)}
+      className={classNames(
+        'flex cursor-pointer items-center justify-center gap-x-3 rounded border p-3',
+        isChosen
+          ? 'border-pink-600 bg-rose-600/10 hover:bg-rose-600/5 dark:bg-pink-600/40 dark:hover:bg-pink-600/25'
+          : 'border-gray-300 bg-white hover:border-primary hover:bg-primary/10 dark:border-secondary/20 dark:bg-secondary/10 dark:hover:border-secondary dark:hover:bg-secondary/20'
+      )}
+    >
       <div className="aspect-square h-32 rounded bg-gradient-to-br from-slate-400 to-slate-500  dark:from-blue-500 dark:to-blue-600"></div>
       <div className="flex h-full w-full flex-col justify-between">
         {/* Top */}

@@ -7,6 +7,8 @@ type Props = {
 }
 
 export default function CatalogueGrid({ catalogue }: Props) {
+  const [chosen, setChosen] = useState<string | null>(null)
+
   return (
     <div className="grid grid-cols-1 gap-4 lg:grid-cols-2 xl:grid-cols-3">
       {catalogue.map((row, index) => {
@@ -20,7 +22,14 @@ export default function CatalogueGrid({ catalogue }: Props) {
           ttca: row[6] as number,
         }
 
-        return <CatalogueItem key={`item-${index}`} item={finisher} />
+        return (
+          <CatalogueItem
+            key={`item-${index}`}
+            item={finisher}
+            chosen={chosen}
+            setChosen={setChosen}
+          />
+        )
       })}
     </div>
   )
