@@ -43,10 +43,8 @@ export default function MorePage({}: Props) {
             <div className="flex flex-col gap-y-3">
               <p>
                 While we are working on getting Finishers Hub to the{' '}
-                <strong className="font-bold text-slate-700 dark:text-pink-600">next level</strong>,
-                you can check out{' '}
-                <strong className="font-bold text-slate-700 dark:text-pink-600">new content</strong>{' '}
-                on our{' '}
+                <span className="text-slate-700 dark:text-pink-600">next level</span>, you can check
+                out <span className="text-slate-700 dark:text-pink-600">new content</span> on our{' '}
                 <Link
                   target="_blank"
                   href="https://twitter.com/finishershub"

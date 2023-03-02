@@ -21,7 +21,7 @@ export default function TotalFinishersDisclaimer({ count }: Props) {
         <div className="flex w-full items-center justify-between">
           <CakeIcon className="h-5 w-5 lg:h-6 lg:w-6" aria-hidden="true" />
 
-          <p className="ml-3 inline-flex flex-1 gap-x-1 text-sm font-normal tracking-tight lg:font-normal lg:tracking-normal">
+          <p className="ml-3 inline-flex flex-1 flex-wrap gap-x-1 text-sm font-normal tracking-tight lg:font-normal lg:tracking-normal">
             Total <FinisherInfoModal custom={customElement} /> by all member across all arenas:{' '}
             <strong>{count}</strong>
           </p>
