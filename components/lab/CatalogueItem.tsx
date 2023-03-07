@@ -134,7 +134,7 @@ export default function CatalogueItem({ item, chosen, setChosen }: Props) {
                 leaveFrom="opacity-100 scale-100"
                 leaveTo="opacity-0 scale-95"
               >
-                <Dialog.Panel className="flex h-screen w-full min-w-[24rem] max-w-md transform flex-col justify-between gap-4 overflow-hidden bg-white p-6 text-left align-middle shadow-xl transition-all dark:bg-navy">
+                <Dialog.Panel className="flex h-screen w-full transform flex-col justify-between gap-4 overflow-hidden bg-white p-6 text-left align-middle shadow-xl transition-all dark:bg-navy md:max-w-md">
                   <div className="flex flex-col">
                     <Dialog.Title
                       as="h3"
