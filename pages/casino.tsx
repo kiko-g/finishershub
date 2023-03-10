@@ -17,7 +17,7 @@ import InvisbleTopLayer from '../components/layout/InvisbleTopLayer'
 import { FullAccessBadge, LimitedAccessBadge } from '../components/utils'
 import { ArrowLongLeftIcon, ArrowLongRightIcon } from '@heroicons/react/24/outline'
 import VideoPlayer from '../components/VideoPlayer'
-import Skeleton from '../components/home/Skeleton'
+import VideoSkeleton from '../components/VideoSkeleton'
 
 export default function CasinoPage() {
   const sensitive = process.env.NEXT_PUBLIC_SENSITIVE === 'false' ? false : true
@@ -30,8 +30,6 @@ export default function CasinoPage() {
   const [accessDenied, setAccessDenied] = useAccessDenied()
   const [muted, setMuted] = useState<boolean>(true)
   const [autoplay, setAutoplay] = useState<boolean>(true)
-
-  const videoUrl = useMemo(() => videoUrls[index], [videoUrls, index])
 
   const limitedAccess = useMemo(() => sensitive && accessDenied, [sensitive, accessDenied])
   const toastType = useMemo(() => {
@@ -103,16 +101,16 @@ export default function CasinoPage() {
           </div>
 
           <DelayDisclaimer type={toastType} />
-          <UsageDisclaimer />
+          <UsageDisclaimer type="info" />
 
           <div className="flex w-full flex-col gap-y-3">
             {/* Video */}
             <div className="relative w-full">
               {limitedAccess ? <InvisbleTopLayer /> : null}
               {!loading && !fetchError ? (
-                <VideoPlayer src={videoUrl} play={autoplay} limitedAccess={limitedAccess} />
+                <VideoPlayer index={index} src={videoUrls[index]} play={autoplay} muted={muted} />
               ) : (
-                <Skeleton />
+                <VideoSkeleton />
               )}
             </div>
 

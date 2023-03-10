@@ -1,27 +1,23 @@
-import React, { useRef, useState } from 'react'
+import React from 'react'
 
 type Props = {
+  index: number
   src: string
   play: boolean
-  limitedAccess: boolean
+  muted: boolean
 }
 
-export default function VideoPlayer({ src, play, limitedAccess }: Props) {
-  const [muted, setMuted] = useState(limitedAccess)
-  const videoRef = useRef<HTMLVideoElement>(null)
-
+export default function VideoPlayer({ index, src, play, muted }: Props) {
   return (
-    <div className="relative">
-      <video
-        ref={videoRef}
-        controls={true}
-        muted={muted}
-        autoPlay={play}
-        className="rounded shadow"
-        onChange={() => console.log('change')}
-      >
-        <source src={src} type="video/mp4" />
-      </video>
-    </div>
+    <video
+      loop
+      controls
+      muted={index === 0 || muted}
+      autoPlay={index === 0 ? false : play}
+      className="rounded shadow"
+      key={`video-element-${index}`}
+    >
+      <source src={src} type="video/mp4" />
+    </video>
   )
 }

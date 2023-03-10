@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import Skeleton from './Skeleton'
+import VideoSkeleton from '../VideoSkeleton'
 
 type Props = {
   video: string
@@ -25,7 +25,7 @@ export default function TwitchVideoClip({ video, parent, muted = false, autoplay
           ></iframe>
         </div>
       </div>
-      {loaded ? null : <Skeleton />}
+      {loaded ? null : <VideoSkeleton />}
     </>
   )
 }

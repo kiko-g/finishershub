@@ -1,4 +1,3 @@
-import Skeleton from './Skeleton'
 import MuteToggler from './MuteToggler'
 import ShuffleButton from './ShuffleButton'
 import AutoplayToggler from './AutoplayToggler'
@@ -11,7 +10,6 @@ export {
   ShuffleButton,
   MuteToggler,
   AutoplayToggler,
-  Skeleton,
   DeleteCookiesButton,
   DelayDisclaimer,
   UsageDisclaimer,

@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import Skeleton from './Skeleton'
+import VideoSkeleton from '../VideoSkeleton'
 import classNames from 'classnames'
 
 type Props = {
@@ -32,7 +32,7 @@ export default function TwitchVideoClip({
           ></iframe>
         </div>
       </div>
-      {loaded ? null : <Skeleton />}
+      {loaded ? null : <VideoSkeleton />}
     </>
   )
 }

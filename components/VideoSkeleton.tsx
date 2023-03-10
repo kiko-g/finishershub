@@ -5,7 +5,7 @@ type Props = {}
 export default function Skeleton({}: Props) {
   return (
     <div
-      className="flex h-64 items-center justify-center rounded border border-primary/50
+      className="flex h-72 items-center justify-center rounded border border-primary/50
     bg-primary/10 dark:border-secondary/50 dark:bg-secondary/10"
     >
       <svg

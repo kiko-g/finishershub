@@ -7,6 +7,7 @@ import { clearCache, isStorageValid, writeVideosStorage } from '../../utils/stor
 import Layout from '../../components/layout'
 import InvisbleTopLayer from '../../components/layout/InvisbleTopLayer'
 import AccessModal from '../../components/layout/AccessModal'
+import { FullAccessBadge, LimitedAccessBadge } from '../../components/utils'
 import { PlusIcon } from '@heroicons/react/24/solid'
 import {
   ViewToggler,
@@ -16,9 +17,8 @@ import {
   DelayDisclaimer,
   TwitchVideoClip,
   DeleteCookiesButton,
-  Skeleton,
 } from '../../components/home'
-import { FullAccessBadge, LimitedAccessBadge } from '../../components/utils'
+import VideoSkeleton from '../../components/VideoSkeleton'
 
 export default function IndexPage() {
   const isMobile = useMediaQuery('(max-width: 768px)')
@@ -93,8 +93,8 @@ export default function IndexPage() {
   }, [limitedAccess])
 
   return (
-    <Layout location="Home" background={false}>
-      <main className="flex flex-col gap-2 px-0 lg:px-4">
+    <Layout location="Twitch" background={false}>
+      <main className="flex flex-col gap-y-4 px-0 lg:px-4">
         <div className="flex flex-col justify-between gap-y-2 lg:flex-row lg:gap-x-6">
           <div className="flex flex-col justify-center gap-2">
             <h2 className="text-4xl font-extrabold tracking-tight sm:text-5xl">Finishers Hub</h2>
@@ -116,7 +116,7 @@ export default function IndexPage() {
           </div>
         </div>
 
-        <div className="mt-2">
+        <div>
           <DelayDisclaimer type={toastType} />
         </div>
 
@@ -124,7 +124,7 @@ export default function IndexPage() {
           className={classNames(
             'relative',
             view ? 'lg:grid-cols-2' : 'lg:grid-cols-3',
-            'grid grid-cols-1 gap-6 py-2 md:mt-0 md:gap-5 md:py-3'
+            'grid grid-cols-1 gap-6 md:mt-0 md:gap-5'
           )}
         >
           {limitedAccess ? <InvisbleTopLayer /> : null}
@@ -149,7 +149,7 @@ export default function IndexPage() {
               })
             : Array(clipsShown)
                 .fill(null)
-                .map((_, skeletonIdx) => <Skeleton key={`skeleton-${skeletonIdx}`} />)}
+                .map((_, skeletonIdx) => <VideoSkeleton key={`skeleton-${skeletonIdx}`} />)}
         </div>
 
         <div className="mb-4 flex items-center justify-center">

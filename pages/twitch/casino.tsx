@@ -83,7 +83,7 @@ export default function CasinoPage() {
   }, [limitedAccess])
 
   return (
-    <Layout location="Casino">
+    <Layout location="Twitch Casino">
       <div className="mx-auto max-w-full lg:max-w-3xl">
         <main className="flex flex-col gap-3">
           <div className="flex flex-col justify-between gap-y-2 lg:flex-row lg:gap-x-6">
@@ -112,7 +112,7 @@ export default function CasinoPage() {
           </div>
 
           <DelayDisclaimer type={toastType} />
-          <UsageDisclaimer />
+          <UsageDisclaimer type="info" />
 
           <div className="flex w-full flex-col gap-y-3">
             {/* Video */}

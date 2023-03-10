@@ -1,4 +1,3 @@
-import Skeleton from './Skeleton'
 import MuteToggler from './MuteToggler'
 import ViewToggler from './ViewToggler'
 import AutoplayToggler from './AutoplayToggler'
@@ -15,5 +14,4 @@ export {
   DelayDisclaimer,
   DeleteCookiesButton,
   TwitchVideoClip,
-  Skeleton,
 }
