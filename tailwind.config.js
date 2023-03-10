@@ -27,12 +27,8 @@ module.exports = {
       },
       fontFamily: {
         prose: ['Inter', ...defaultTheme.fontFamily.sans],
-        headings: ['Lexend', ...defaultTheme.fontFamily.sans],
+        lexend: ['Lexend', ...defaultTheme.fontFamily.sans],
         mono: ['Fira Code', ...defaultTheme.fontFamily.mono],
-        source: ['Source Sans Pro', ...defaultTheme.fontFamily.sans],
-        'ubuntu-mono': ['Ubuntu Mono', ...defaultTheme.fontFamily.mono],
-        system: defaultTheme.fontFamily.sans,
-        flow: 'Flow',
       },
       keyframes: {
         dark: {

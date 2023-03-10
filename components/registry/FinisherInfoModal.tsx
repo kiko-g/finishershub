@@ -29,7 +29,7 @@ const FinisherInfoModal = ({ custom }: Props) => {
           custom
         ) : (
           <>
-            <span className="whitespace-nowrap font-headings">Lifetime finisher count</span>
+            <span className="font-lexend whitespace-nowrap">Lifetime finisher count</span>
             <InformationCircleIcon className="mt-[1px] inline-flex h-4 w-4" />
           </>
         )}

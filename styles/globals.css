@@ -7,7 +7,7 @@ html {
 }
 
 *::selection {
-  @apply bg-fuchsia-600/75 text-white dark:bg-pink-600/60;
+  @apply bg-rose-600/60 text-white dark:bg-pink-600/60;
 }
 
 h1,
@@ -16,7 +16,7 @@ h3,
 h4,
 h5,
 h6 {
-  @apply font-headings;
+  @apply font-lexend;
 }
 
 .leinput,

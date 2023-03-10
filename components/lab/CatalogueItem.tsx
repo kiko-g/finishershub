@@ -42,7 +42,7 @@ export default function CatalogueItem({ item, chosen, setChosen }: Props) {
           <div className="flex flex-col">
             {/* Header */}
             <div className="flex w-full items-center justify-between gap-x-2">
-              <p className="font-headings font-light tracking-tight">{item.name}</p>
+              <p className="font-lexend font-light tracking-tight">{item.name}</p>
               <div className="flex gap-x-1.5">
                 <span
                   className={classNames(
@@ -75,7 +75,7 @@ export default function CatalogueItem({ item, chosen, setChosen }: Props) {
               {item.source}
             </p>
 
-            <p className="font-headings text-2xl font-normal tracking-tight text-slate-700 dark:text-blue-200">
+            <p className="font-lexend text-2xl font-normal tracking-tight text-slate-700 dark:text-blue-200">
               {item.ttrk} ± {uncertainty}s
             </p>
           </div>
@@ -210,7 +210,7 @@ export default function CatalogueItem({ item, chosen, setChosen }: Props) {
                         registered. We use the final frame right as the kill register sound is
                         queued.
                       </p>
-                      <p className="mt-0.5 font-headings text-2xl font-normal tracking-tight text-slate-700 dark:text-blue-200">
+                      <p className="font-lexend mt-0.5 text-2xl font-normal tracking-tight text-slate-700 dark:text-blue-200">
                         {item.ttrk} ± {uncertainty}s
                       </p>
                     </div>
@@ -223,7 +223,7 @@ export default function CatalogueItem({ item, chosen, setChosen }: Props) {
                         The time between the first frame of the animation and the final frame, also
                         known has the moment when the player regains control.
                       </p>
-                      <p className="mt-0.5 font-headings text-2xl font-normal tracking-tight text-slate-700 dark:text-blue-200">
+                      <p className="font-lexend mt-0.5 text-2xl font-normal tracking-tight text-slate-700 dark:text-blue-200">
                         {item.ttca.toString() === '?' ? 'Unknown' : item.ttca}
                       </p>
                     </div>

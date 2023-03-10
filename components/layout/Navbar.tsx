@@ -7,25 +7,33 @@ import {
   HomeModernIcon,
   ChartBarSquareIcon,
   CubeTransparentIcon,
+  RocketLaunchIcon,
   BoltIcon,
   Bars3Icon,
   XMarkIcon,
-  ChartPieIcon,
+  BeakerIcon,
   PlusSmallIcon,
+  FilmIcon,
+  Square3Stack3DIcon,
 } from '@heroicons/react/24/outline'
-import { BeakerIcon } from '@heroicons/react/24/solid'
 
 const navigation = [
   {
-    title: 'Home',
+    title: 'Hub',
     location: '/',
-    icon: <HomeModernIcon className="h-5 w-5" />,
+    icon: <Square3Stack3DIcon className="h-5 w-5" />,
     shown: true,
   },
   {
     title: 'Casino',
     location: '/casino',
     icon: <BoltIcon className="h-5 w-5" />,
+    shown: true,
+  },
+  {
+    title: 'Gallery',
+    location: '/gallery',
+    icon: <FilmIcon className="h-5 w-5" />,
     shown: true,
   },
   {
@@ -37,19 +45,13 @@ const navigation = [
   {
     title: 'Lab',
     location: '/lab',
-    icon: <ChartPieIcon className="h-5 w-5" />,
+    icon: <BeakerIcon className="h-5 w-5" />,
     shown: true,
   },
   {
     title: 'More',
     location: '/more',
     icon: <PlusSmallIcon className="h-5 w-5" />,
-    shown: true,
-  },
-  {
-    title: 'About',
-    location: '/about',
-    icon: <CubeTransparentIcon className="h-5 w-5" />,
     shown: true,
   },
 ]
@@ -116,7 +118,7 @@ function Hamburger({ title, open }: HamburgerProps) {
       <div className="flex items-center gap-x-2">
         {open ? (
           <Link href="/admin" className="group">
-            <BeakerIcon
+            <RocketLaunchIcon
               className="h-6 w-6 py-[1px] text-slate-600 transition 
               group-hover:text-primary dark:text-slate-300 dark:group-hover:text-primary"
             />
@@ -192,7 +194,7 @@ function Header({ title, location }: HeaderProps) {
 
       <div className="hidden self-center md:inline-flex md:items-center md:justify-center md:gap-x-2">
         <Link href="/admin" className="group">
-          <BeakerIcon
+          <RocketLaunchIcon
             className="h-8 w-8 text-slate-600
             transition group-hover:text-primary dark:text-slate-300 
             dark:group-hover:text-primary"

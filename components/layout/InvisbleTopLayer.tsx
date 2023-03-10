@@ -17,8 +17,8 @@ export default function InvisbleTopLayer({}: Props) {
       <span
         className={classNames(
           help ? 'block' : 'hidden',
-          `z-[60] mx-auto mt-6 w-1/2 animate-pulse rounded
-        bg-black/80 px-4 py-4 text-center font-headings font-normal text-white`
+          `font-lexend z-[60] mx-auto mt-6 w-1/2 animate-pulse
+        rounded bg-black/80 px-4 py-4 text-center font-normal text-white`
         )}
       >
         Click the green fingerprint icon to open the access modal and gain full access to{' '}

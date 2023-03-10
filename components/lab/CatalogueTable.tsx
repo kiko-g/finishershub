@@ -22,7 +22,7 @@ export default function Catalogue({ headers, catalogue }: Props) {
                 <span
                   key={`header-${headerIdx}`}
                   className={classNames(
-                    `whitespace-nowrap px-2 py-2 font-headings text-sm font-medium uppercase 
+                    `font-lexend whitespace-nowrap px-2 py-2 text-sm font-medium uppercase 
                 tracking-tighter text-white`,
                     headerIdx === 0 ? 'text-left' : 'text-center'
                   )}
