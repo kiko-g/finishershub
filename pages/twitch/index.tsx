@@ -14,11 +14,11 @@ import {
   AutoplayToggler,
   MuteToggler,
   ShuffleButton,
-  DelayDisclaimer,
   TwitchVideoClip,
   DeleteCookiesButton,
 } from '../../components/home'
 import VideoSkeleton from '../../components/VideoSkeleton'
+import DelayDisclaimer from '../../components/DelayDisclaimer'
 
 export default function IndexPage() {
   const isMobile = useMediaQuery('(max-width: 768px)')

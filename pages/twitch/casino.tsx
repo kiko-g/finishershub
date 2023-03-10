@@ -11,11 +11,11 @@ import {
   TwitchVideoClip,
   ShuffleButton,
   DeleteCookiesButton,
-  DelayDisclaimer,
 } from '../../components/casino'
 import InvisbleTopLayer from '../../components/layout/InvisbleTopLayer'
 import { FullAccessBadge, LimitedAccessBadge } from '../../components/utils'
 import { ArrowLongLeftIcon, ArrowLongRightIcon } from '@heroicons/react/24/outline'
+import DelayDisclaimer from '../../components/DelayDisclaimer'
 
 export default function CasinoPage() {
   const sensitive = process.env.NEXT_PUBLIC_SENSITIVE === 'false' ? false : true

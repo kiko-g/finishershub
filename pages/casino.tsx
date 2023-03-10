@@ -3,21 +3,19 @@ import Layout from '../components/layout'
 import AccessModal from '../components/layout/AccessModal'
 import useAccessDenied from '../hooks/useAccessDenied'
 import { shuffle } from '../utils'
-import { clearCache, isStorageValid, writeVideosStorage } from '../utils/storage'
 import {
   AutoplayToggler,
   MuteToggler,
   UsageDisclaimer,
-  TwitchVideoClip,
   ShuffleButton,
   DeleteCookiesButton,
-  DelayDisclaimer,
 } from '../components/casino'
 import InvisbleTopLayer from '../components/layout/InvisbleTopLayer'
 import { FullAccessBadge, LimitedAccessBadge } from '../components/utils'
 import { ArrowLongLeftIcon, ArrowLongRightIcon } from '@heroicons/react/24/outline'
 import VideoPlayer from '../components/VideoPlayer'
 import VideoSkeleton from '../components/VideoSkeleton'
+import DelayDisclaimer from '../components/DelayDisclaimer'
 
 export default function CasinoPage() {
   const sensitive = process.env.NEXT_PUBLIC_SENSITIVE === 'false' ? false : true
