@@ -17,6 +17,7 @@ import InvisbleTopLayer from '../components/layout/InvisbleTopLayer'
 import { FullAccessBadge, LimitedAccessBadge } from '../components/utils'
 import { ArrowLongLeftIcon, ArrowLongRightIcon } from '@heroicons/react/24/outline'
 import VideoPlayer from '../components/VideoPlayer'
+import Skeleton from '../components/home/Skeleton'
 
 export default function CasinoPage() {
   const sensitive = process.env.NEXT_PUBLIC_SENSITIVE === 'false' ? false : true
@@ -91,7 +92,7 @@ export default function CasinoPage() {
               {limitedAccess ? <LimitedAccessBadge /> : <FullAccessBadge />}
               <div className="flex items-center justify-end gap-x-2">
                 {limitedAccess ? (
-                  <AccessModal lockedHook={[accessDenied, setAccessDenied]} />
+                  <AccessModal lockedHook={[accessDenied, setAccessDenied]} startOpen={false} />
                 ) : null}
                 <DeleteCookiesButton />
                 <ShuffleButton shuffle={shuffleVideos} />
@@ -108,7 +109,11 @@ export default function CasinoPage() {
             {/* Video */}
             <div className="relative w-full">
               {limitedAccess ? <InvisbleTopLayer /> : null}
-              <VideoPlayer src={videoUrl} play={autoplay} limitedAccess={limitedAccess} />
+              {!loading && !fetchError ? (
+                <VideoPlayer src={videoUrl} play={autoplay} limitedAccess={limitedAccess} />
+              ) : (
+                <Skeleton />
+              )}
             </div>
 
             {/* Left Arrow, Clip index, Right Arrow */}
@@ -117,31 +122,33 @@ export default function CasinoPage() {
                 onClick={prevVideo}
                 disabled={index === 0}
                 title="Go to the previous highlight"
-                className="rounded-l-xl border border-r-0 border-slate-800/60 bg-slate-800/60 px-6 py-2
+                className="rounded-l border border-r-0 border-slate-800/60 bg-slate-800/60 px-4 py-2
                 transition enabled:hover:bg-slate-800/80 disabled:cursor-not-allowed 
-                disabled:opacity-25 dark:border-sky-200/30 dark:bg-sky-200/20 enabled:dark:hover:bg-sky-200/50 
-                lg:px-6 lg:py-1"
+                disabled:opacity-25 dark:border-blue-200/30 dark:bg-blue-200/20 enabled:dark:hover:bg-blue-200/50 
+                lg:px-4 lg:py-1"
               >
-                <ArrowLongLeftIcon className="inline-flex h-7 w-7" />
+                <ArrowLongLeftIcon className="inline-flex h-6 w-6" />
               </button>
 
               <div
                 className="flex w-full items-center justify-center self-stretch 
                   border border-slate-800/60 bg-slate-800/60 py-2 px-4 
-                  dark:border-sky-200/30 dark:bg-sky-200/20 lg:py-1"
+                  dark:border-blue-200/30 dark:bg-blue-200/20 lg:py-1"
               >
-                {index + 1}/{videoUrls.length}
+                <span className="text-sm font-bold">
+                  {index + 1}/{videoUrls.length}
+                </span>
               </div>
 
               <button
                 onClick={nextVideo}
                 disabled={index === videoUrls.length - 1}
                 title="Go to the next highlight"
-                className="rounded-r-xl border border-l-0 border-slate-800/60 bg-slate-800/60 px-6 py-2
+                className="rounded-r border border-l-0 border-slate-800/60 bg-slate-800/60 px-4 py-2
                 transition enabled:hover:bg-slate-800/80 disabled:cursor-not-allowed disabled:opacity-25 
-                dark:border-sky-200/30 dark:bg-sky-200/20 enabled:dark:hover:bg-sky-200/50 lg:px-6 lg:py-1"
+                dark:border-blue-200/30 dark:bg-blue-200/20 enabled:dark:hover:bg-blue-200/50 lg:px-4 lg:py-1"
               >
-                <ArrowLongRightIcon className="inline-flex h-7 w-7" />
+                <ArrowLongRightIcon className="inline-flex h-6 w-6" />
               </button>
             </div>
           </div>
