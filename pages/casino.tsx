@@ -16,6 +16,7 @@ import {
 import InvisbleTopLayer from '../components/layout/InvisbleTopLayer'
 import { FullAccessBadge, LimitedAccessBadge } from '../components/utils'
 import { ArrowLongLeftIcon, ArrowLongRightIcon } from '@heroicons/react/24/outline'
+import VideoPlayer from '../components/VideoPlayer'
 
 export default function CasinoPage() {
   const sensitive = process.env.NEXT_PUBLIC_SENSITIVE === 'false' ? false : true
@@ -23,12 +24,13 @@ export default function CasinoPage() {
   const [loading, setLoading] = useState<boolean>(true)
   const [fetchError, setFetchError] = useState<boolean>(false)
 
-  const [hostname, setHostname] = useState<string>('')
   const [index, setIndex] = useState<number>(0)
-  const [videos, setVideos] = useState<string[]>([])
+  const [videoUrls, setVideoUrls] = useState<string[]>([])
   const [accessDenied, setAccessDenied] = useAccessDenied()
   const [muted, setMuted] = useState<boolean>(true)
   const [autoplay, setAutoplay] = useState<boolean>(true)
+
+  const videoUrl = useMemo(() => videoUrls[index], [videoUrls, index])
 
   const limitedAccess = useMemo(() => sensitive && accessDenied, [sensitive, accessDenied])
   const toastType = useMemo(() => {
@@ -41,35 +43,23 @@ export default function CasinoPage() {
   const prevVideo = () => setIndex((prev) => prev - 1)
   const nextVideo = () => setIndex((prev) => prev + 1)
 
-  const shuffleAndSetVideos = () => {
-    const videosStr = localStorage.getItem('finishershub.videos') as string
-    const videosParsed = JSON.parse(videosStr) as string[]
-    setVideos(shuffle(videosParsed))
+  const shuffleVideos = () => {
+    setVideoUrls((prev) => shuffle(prev))
   }
 
   useEffect(() => {
-    // request loading all twitch clips
-    if (isStorageValid()) {
-      setLoading(false)
-      shuffleAndSetVideos()
-    } else {
-      clearCache(true)
-      fetch('/api/twitch')
-        .then((res) => res.json())
-        .then((allEmbedUrls) => {
-          setLoading(false)
-          const shuffledVideos = shuffle(allEmbedUrls)
-          setVideos(shuffledVideos)
-          writeVideosStorage(shuffledVideos)
-        })
-        .catch((err) => {
-          setLoading(false)
-          setFetchError(true)
-          console.error(err)
-        })
-    }
-    // get hostname if not in ssr
-    if (typeof window !== 'undefined') setHostname(window.location.hostname)
+    fetch('/api/s3/videos')
+      .then((res) => res.json())
+      .then((allEmbedUrls) => {
+        setLoading(false)
+        const shuffledVideos = shuffle(allEmbedUrls)
+        setVideoUrls(shuffledVideos)
+      })
+      .catch((err) => {
+        setLoading(false)
+        setFetchError(true)
+        console.error(err)
+      })
   }, [])
 
   useEffect(() => {
@@ -104,7 +94,7 @@ export default function CasinoPage() {
                   <AccessModal lockedHook={[accessDenied, setAccessDenied]} />
                 ) : null}
                 <DeleteCookiesButton />
-                <ShuffleButton shuffle={shuffleAndSetVideos} />
+                <ShuffleButton shuffle={shuffleVideos} />
                 <AutoplayToggler hook={[autoplay, setAutoplay]} />
                 {limitedAccess ? null : <MuteToggler hook={[muted, setMuted]} />}
               </div>
@@ -118,12 +108,7 @@ export default function CasinoPage() {
             {/* Video */}
             <div className="relative w-full">
               {limitedAccess ? <InvisbleTopLayer /> : null}
-              <TwitchVideoClip
-                muted={muted}
-                video={videos[index]}
-                parent={hostname}
-                autoplay={index === 0 ? true : autoplay}
-              />
+              <VideoPlayer src={videoUrl} play={autoplay} limitedAccess={limitedAccess} />
             </div>
 
             {/* Left Arrow, Clip index, Right Arrow */}
@@ -145,12 +130,12 @@ export default function CasinoPage() {
                   border border-slate-800/60 bg-slate-800/60 py-2 px-4 
                   dark:border-sky-200/30 dark:bg-sky-200/20 lg:py-1"
               >
-                {index + 1}/{videos.length}
+                {index + 1}/{videoUrls.length}
               </div>
 
               <button
                 onClick={nextVideo}
-                disabled={index === videos.length - 1}
+                disabled={index === videoUrls.length - 1}
                 title="Go to the next highlight"
                 className="rounded-r-xl border border-l-0 border-slate-800/60 bg-slate-800/60 px-6 py-2
                 transition enabled:hover:bg-slate-800/80 disabled:cursor-not-allowed disabled:opacity-25 

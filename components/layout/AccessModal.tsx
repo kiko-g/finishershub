@@ -5,14 +5,15 @@ import { EyeIcon, EyeSlashIcon, XMarkIcon, FingerPrintIcon } from '@heroicons/re
 
 type Props = {
   lockedHook: [boolean, Dispatch<SetStateAction<boolean>>]
+  startOpen?: boolean
   special?: boolean
 }
 
-export default function AccessModal({ lockedHook, special = false }: Props) {
+export default function AccessModal({ lockedHook, startOpen, special = false }: Props) {
   const secret = 'Doeu'
   const secretHints = ['Levels', 'Bio', 'Window', 'Clip']
   const [locked, setLocked] = lockedHook
-  const [isOpen, setIsOpen] = useState(locked)
+  const [isOpen, setIsOpen] = useState(startOpen !== undefined ? startOpen : locked)
   const [wrong, setWrong] = useState(false)
   const [codephrase, setCodephrase] = useState('')
   const [codephraseShown, setCodephraseShown] = useState(true)

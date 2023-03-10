@@ -3,22 +3,21 @@ import classNames from 'classnames'
 import useAccessDenied from '../hooks/useAccessDenied'
 import { useMediaQuery } from 'usehooks-ts'
 import { shuffle } from '../utils'
-import { clearCache, isStorageValid, writeVideosStorage } from '../utils/storage'
 import Layout from '../components/layout'
-import InvisbleTopLayer from '../components/layout/InvisbleTopLayer'
 import AccessModal from '../components/layout/AccessModal'
+import InvisbleTopLayer from '../components/layout/InvisbleTopLayer'
 import { PlusIcon } from '@heroicons/react/24/solid'
+import { FullAccessBadge, LimitedAccessBadge } from '../components/utils'
 import {
   ViewToggler,
   AutoplayToggler,
   MuteToggler,
   ShuffleButton,
   DelayDisclaimer,
-  TwitchVideoClip,
   DeleteCookiesButton,
   Skeleton,
 } from '../components/home'
-import { FullAccessBadge, LimitedAccessBadge } from '../components/utils'
+import VideoPlayer from '../components/VideoPlayer'
 
 export default function IndexPage() {
   const isMobile = useMediaQuery('(max-width: 768px)')
@@ -27,8 +26,7 @@ export default function IndexPage() {
   const [loading, setLoading] = useState<boolean>(true)
   const [fetchError, setFetchError] = useState<boolean>(false)
 
-  const [hostname, setHostname] = useState<string>('')
-  const [videos, setVideos] = useState<string[]>([])
+  const [videoUrls, setVideoUrls] = useState<string[]>([])
   const [accessDenied, setAccessDenied] = useAccessDenied()
   const [view, setView] = useState<boolean>(true)
   const [muted, setMuted] = useState<boolean>(true)
@@ -44,10 +42,8 @@ export default function IndexPage() {
     else return ''
   }, [loading, fetchError])
 
-  const shuffleAndSetVideos = () => {
-    const videosStr = localStorage.getItem('finishershub.videos') as string
-    const videosParsed = JSON.parse(videosStr) as string[]
-    setVideos(shuffle(videosParsed))
+  const shuffleVideos = () => {
+    setVideoUrls((prev) => shuffle(prev))
   }
 
   const loadMore = () => {
@@ -57,29 +53,18 @@ export default function IndexPage() {
   }
 
   useEffect(() => {
-    // request loading all twitch clips
-    if (isStorageValid()) {
-      setLoading(false)
-      shuffleAndSetVideos()
-    } else {
-      clearCache(true)
-      fetch('/api/twitch')
-        .then((res) => res.json())
-        .then((allEmbedUrls) => {
-          setLoading(false)
-          const shuffledVideos = shuffle(allEmbedUrls)
-          setVideos(shuffledVideos)
-          writeVideosStorage(shuffledVideos)
-        })
-        .catch((err) => {
-          setLoading(false)
-          setFetchError(true)
-          console.error(err)
-        })
-    }
-
-    // get hostname if not in ssr
-    if (typeof window !== 'undefined') setHostname(window.location.hostname)
+    fetch('/api/s3/videos')
+      .then((res) => res.json())
+      .then((allEmbedUrls) => {
+        setLoading(false)
+        const shuffledVideos = shuffle(allEmbedUrls)
+        setVideoUrls(shuffledVideos)
+      })
+      .catch((err) => {
+        setLoading(false)
+        setFetchError(true)
+        console.error(err)
+      })
   }, [])
 
   useEffect(() => {
@@ -106,9 +91,11 @@ export default function IndexPage() {
           <div className="mt-1 flex flex-row items-center justify-end gap-3 lg:mt-0 lg:flex-col">
             {limitedAccess ? <LimitedAccessBadge /> : <FullAccessBadge />}
             <div className="flex items-center justify-end gap-x-2">
-              {limitedAccess ? <AccessModal lockedHook={[accessDenied, setAccessDenied]} /> : null}
+              {limitedAccess ? (
+                <AccessModal lockedHook={[accessDenied, setAccessDenied]} startOpen={false} />
+              ) : null}
               <DeleteCookiesButton />
-              <ShuffleButton shuffle={shuffleAndSetVideos} />
+              <ShuffleButton shuffle={shuffleVideos} />
               <AutoplayToggler hook={[autoplay, setAutoplay]} />
               {limitedAccess ? null : <MuteToggler hook={[muted, setMuted]} />}
               <ViewToggler hook={[view, setView]} />
@@ -128,8 +115,8 @@ export default function IndexPage() {
           )}
         >
           {limitedAccess ? <InvisbleTopLayer /> : null}
-          {videos.length > 0
-            ? videos.slice(0, clipsShown).map((video: string, videoIdx: number) => {
+          {videoUrls.length > 0
+            ? videoUrls.slice(0, clipsShown).map((videoSrc: string, videoIdx: number) => {
                 const play = isMobile
                   ? videoIdx <= showMoreCount
                     ? true
@@ -138,12 +125,11 @@ export default function IndexPage() {
                   ? true
                   : autoplay
                 return (
-                  <TwitchVideoClip
-                    muted={muted}
-                    video={video}
-                    parent={hostname}
+                  <VideoPlayer
                     key={`video-${videoIdx}`}
-                    autoplay={play}
+                    src={videoSrc}
+                    play={play}
+                    limitedAccess={limitedAccess}
                   />
                 )
               })
@@ -157,7 +143,7 @@ export default function IndexPage() {
             type="button"
             onClick={loadMore}
             className={classNames(
-              videos.length === 0 ? 'hidden' : 'inline-flex',
+              videoUrls.length === 0 ? 'hidden' : 'inline-flex',
               `items-center rounded border border-transparent bg-primary/60 px-4 
               py-2 text-white shadow-sm transition hover:bg-primary/90 
               hover:bg-primary focus:border-transparent focus:ring-2 
