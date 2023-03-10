@@ -1,7 +1,14 @@
 import React, { Dispatch, Fragment, SetStateAction, memo, useState } from 'react'
 import classNames from 'classnames'
 import { Dialog, Transition } from '@headlessui/react'
-import { EyeIcon, EyeSlashIcon, XMarkIcon, FingerPrintIcon } from '@heroicons/react/24/outline'
+import {
+  EyeIcon,
+  EyeSlashIcon,
+  XMarkIcon,
+  FingerPrintIcon,
+  ArrowTopRightOnSquareIcon,
+} from '@heroicons/react/24/outline'
+import Link from 'next/link'
 
 type Props = {
   lockedHook: [boolean, Dispatch<SetStateAction<boolean>>]
@@ -110,7 +117,7 @@ export default function AccessModal({ lockedHook, startOpen, special = false }: 
                   <div className="mt-3">
                     <div className="text-sm font-normal lg:text-base">
                       <p>Enter the codephrase to prove you are worthy of viewing the content.</p>
-                      <ul className="mt-2 ml-3 list-disc lg:ml-4 lg:mt-1">
+                      <ul className="mt-2 ml-3 flex list-disc flex-col gap-y-0.5 lg:ml-4 lg:mt-1">
                         <li>
                           You can <strong>close the modal</strong> and have{' '}
                           <span className="text-amber-600">limited access</span> to the site.
@@ -128,6 +135,13 @@ export default function AccessModal({ lockedHook, startOpen, special = false }: 
                               {hintIdx < secretHints.length - 1 ? ', ' : ''}
                             </span>
                           ))}
+                          <Link
+                            target="_blank"
+                            href="https://clips.twitch.tv/TardyPleasantTildeKappaClaus-jWplZLiwxcoOi6vP"
+                            className="hover:text-primary dark:hover:text-secondary"
+                          >
+                            <ArrowTopRightOnSquareIcon className="ml-2 mb-1 inline-flex h-5 w-5" />
+                          </Link>
                         </li>
                       </ul>
                     </div>
