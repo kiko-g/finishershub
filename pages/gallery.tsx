@@ -28,7 +28,7 @@ export default function Gallery() {
 
   const [videoUrls, setVideoUrls] = useState<string[]>([])
   const [accessDenied, setAccessDenied] = useAccessDenied()
-  const [view, setView] = useState<boolean>(true)
+  const [view, setView] = useState<boolean>(false)
   const [muted, setMuted] = useState<boolean>(true)
   const [autoplay, setAutoplay] = useState<boolean>(false)
   const [clipsShown, setClipsShown] = useState<number>(isMobile ? 1 : view ? 2 : 3)
@@ -76,6 +76,21 @@ export default function Gallery() {
       setAutoplay(false)
     }
   }, [limitedAccess])
+
+  useEffect(() => {
+    if (isMobile) return
+    if (view === true) {
+      setClipsShown((prev) => {
+        const rest = prev % 2
+        return rest !== 0 ? prev + (2 - rest) : prev
+      })
+    } else {
+      setClipsShown((prev) => {
+        const rest = prev % 3
+        return rest !== 0 ? prev + (3 - rest) : prev
+      })
+    }
+  }, [view, isMobile])
 
   return (
     <Layout location="Gallery" background={false}>

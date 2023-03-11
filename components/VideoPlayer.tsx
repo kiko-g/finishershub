@@ -14,7 +14,8 @@ export default function VideoPlayer({ index, src, play, muted }: Props) {
       controls
       muted={index === 0 || muted}
       autoPlay={index === 0 ? false : play}
-      className="rounded shadow"
+      preload="preload"
+      className="h-full w-full rounded bg-primary/10 shadow dark:bg-secondary/10"
       key={`video-element-${index}`}
     >
       <source src={src} type="video/mp4" />
