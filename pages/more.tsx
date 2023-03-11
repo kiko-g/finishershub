@@ -1,6 +1,6 @@
 import React from 'react'
 import Layout from '../components/layout'
-import { TwitterAdBanner } from '../components/more'
+import { TwitterAdBanner, YoutubeAdBanner } from '../components/more'
 
 type Props = {}
 
@@ -16,6 +16,7 @@ export default function More({}: Props) {
         </header>
 
         <TwitterAdBanner />
+        <YoutubeAdBanner />
       </main>
     </Layout>
   )

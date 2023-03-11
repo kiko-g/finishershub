@@ -11,8 +11,8 @@ export default function TwitterAdBanner({}: Props) {
       <Link
         target="_blank"
         href="https://twitter.com/finishershub"
-        className="flex h-auto max-w-full rounded bg-gradient-to-br from-[#1da1f2] to-blue-500 
-            py-16 px-16 text-white transition hover:opacity-80 lg:max-w-xs"
+        className="hidden h-auto max-w-full rounded bg-gradient-to-br from-[#1da1f2] to-blue-500 py-16 
+        px-16 text-white transition hover:opacity-80 lg:flex lg:max-w-xs"
       >
         <svg className="h-full w-full" fill="currentColor" viewBox="0 0 512 512" aria-hidden="true">
           <path
@@ -44,15 +44,22 @@ export default function TwitterAdBanner({}: Props) {
             near future we are planning on:
           </p>
 
-          <ul className="ml-4 list-disc font-light">
-            <li>Adding user accounts to allow greater access management to content.</li>
-            <li>Adding admin users that can upload content to the platform.</li>
+          <ul className="ml-0.5 font-light">
             <li>
-              Metadata and information for the clips that will make them easier to find in the
+              <span className="mr-1">✅</span> Fully remove Twitch dependency. No more Twitch
+              embeds, just browser video elements.
+            </li>
+            <li>
+              <span className="mr-1">⏳</span> Adding user accounts to allow greater access
+              management to content.
+            </li>
+            <li>
+              <span className="mr-1">⏳</span> Adding admin users that can upload content to the
               platform.
             </li>
             <li>
-              Fully remove Twitch dependency. No more Twitch embeds, just browser video elements.
+              <span className="mr-1">⏳</span> Metadata and information for the clips that will make
+              them easier to find in the platform.
             </li>
           </ul>
         </div>
@@ -62,7 +69,7 @@ export default function TwitterAdBanner({}: Props) {
           href="https://twitter.com/finishershub"
           className="flex items-center justify-center gap-x-2 self-stretch rounded bg-gradient-to-br from-[#1da1f2] to-blue-600 px-4 py-2 font-normal text-white transition hover:opacity-90 lg:justify-start lg:self-end"
         >
-          <span>Show me some of that new content!</span>
+          <span>Show me some of that new content on Twitter!</span>
           <ArrowLongRightIcon className="h-5 w-5 transition group-hover:translate-x-1" />
         </Link>
       </div>

@@ -1,3 +1,4 @@
 import TwitterAdBanner from './TwitterAdBanner'
+import YoutubeAdBanner from './YoutubeAdBanner'
 
-export { TwitterAdBanner }
+export { TwitterAdBanner, YoutubeAdBanner }
