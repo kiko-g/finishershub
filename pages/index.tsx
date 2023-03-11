@@ -51,8 +51,7 @@ export default function IndexPage() {
       description: (
         <>
           Navigate to the registry where you can see and manage stats related to the the deiabolic
-          profession that is performing finishing moves. This is a never seen before view of the
-          team of Finishers Hub.
+          profession that is performing finishing moves.
         </>
       ),
     },
@@ -77,43 +76,44 @@ export default function IndexPage() {
         className="flex min-h-screen flex-col scroll-smooth bg-teal-50 font-prose 
         font-medium text-gray-800 opacity-[99%] dark:bg-navy dark:text-white"
       >
-        <main className="flex w-full flex-col gap-y-12">
+        <main className="flex w-full flex-col gap-y-12 px-4 py-8 md:py-0 md:px-0">
           {/* Hero */}
-          <header className="my-auto flex h-screen w-full flex-col items-center justify-center gap-y-4 self-center align-middle">
+          <header className="my-auto flex min-h-full w-full flex-col items-center justify-center gap-y-4 self-center align-middle md:min-h-screen">
             <div className="max-w-2xl space-y-2">
               <h2 className="text-center text-5xl font-extrabold tracking-tight sm:text-6xl">
                 Finishers Hub
               </h2>
-              <p className="text-center text-lg font-normal">
+              <p className="text-center text-base font-normal leading-tight md:text-lg md:leading-normal">
                 The place for all finisher related content. Chaotic, outrageous, lawless on the
                 fence of criminality. Perfectly unbalanced. As all things should be.
               </p>
             </div>
 
-            <nav className="flex max-w-5xl flex-wrap items-center justify-center gap-6">
+            <nav className="flex max-w-full flex-wrap items-center justify-center gap-3 md:max-w-5xl md:gap-6">
               {nav.map((item) => (
                 <Link
                   key={`nav-${item.name}`}
                   href={item.href}
-                  className="relative flex max-w-xs scale-100 flex-col gap-y-1 self-stretch rounded-md border-2 border-primary/40 bg-primary/10 p-4 font-light text-gray-800 duration-100 hover:border-primary hover:bg-primary/40 dark:border-secondary/40 dark:bg-secondary/20 dark:text-white dark:hover:border-secondary dark:hover:bg-secondary/40"
+                  className="relative flex max-w-[10rem] scale-100 flex-col gap-y-1 self-stretch rounded-md border border-primary/40 bg-primary/10 px-2 py-1.5 font-light text-gray-800 duration-100 hover:border-primary hover:bg-primary/40 dark:border-secondary/40 dark:bg-secondary/20 dark:text-white dark:hover:border-secondary dark:hover:bg-secondary/40 md:max-w-xs md:border-2 md:px-4 md:py-4"
                 >
-                  <div className="absolute -inset-px rounded-xl border-2 border-transparent opacity-0 [background:linear-gradient(var(theme(colors.violet.50),theme(colors.sky.50)),var(theme(colors.violet.50),theme(colors.sky.50)))_padding-box,linear-gradient(to_top,theme(colors.indigo.400),theme(colors.cyan.400),theme(colors.sky.500))_border-box] group-hover:opacity-100 dark:[--quick-links-hover-bg:theme(colors.slate.800)]" />
                   <div className="group flex flex-row items-center justify-between gap-x-2 font-medium">
-                    <span className="space-x-2">
-                      <span className="text-xl">{item.emoji}</span>
-                      <span className="text-lg">{item.name}</span>
+                    <span className="space-x-1 md:space-x-2">
+                      <span className="text-sm md:text-lg">{item.emoji}</span>
+                      <span className="text-sm md:text-lg">{item.name}</span>
                     </span>
 
                     <span>
-                      <ArrowLongRightIcon className="h-6 w-6" />
+                      <ArrowLongRightIcon className="h-5 w-5 md:h-6 md:w-6" />
                     </span>
                   </div>
-                  <p className="text-left text-sm">{item.description}</p>
+                  <p className="text-left text-xs leading-snug tracking-tight md:text-left md:text-sm md:leading-normal md:tracking-normal">
+                    {item.description}
+                  </p>
                 </Link>
               ))}
             </nav>
 
-            <div className="flex items-center gap-x-6">
+            <div className="mt-3 flex items-center gap-x-6">
               <div className="flex gap-x-2 sm:justify-center md:mt-0 md:gap-x-2">
                 {socials
                   .filter((social) => social.shown)
@@ -170,17 +170,20 @@ export default function IndexPage() {
               </AboutCardLI>
 
               {/* Home page */}
-              <AboutCardLI emoji="🏠">
+              <AboutCardLI emoji="🍿">
                 The{' '}
                 <Link
                   className="text-primary underline hover:opacity-80 dark:text-teal-500"
-                  href="/"
+                  href="/gallery"
                 >
-                  Home page
+                  gallery page
                 </Link>{' '}
                 will show you a museum of highlights, that are pulled from{' '}
-                <span className="text-[#6441a5] dark:text-[#976fe1]">Twitch</span> with the help of
-                the TwitchAPI.
+                <span className="line-through">
+                  <span className="text-[#6441a5] dark:text-[#976fe1]">Twitch</span> with the help
+                  of the TwitchAPI
+                </span>{' '}
+                an S3 Bucket, where we manage our media content 🆕
               </AboutCardLI>
 
               {/* Casino page */}
@@ -213,16 +216,15 @@ export default function IndexPage() {
 
               {/* Fact #1 */}
               <AboutCardLI emoji="🤯">
-                <strong>Fun fact</strong>: all the content in the home page comes from a pool of
-                around <strong>600 clips</strong>. However, they only capture around{' '}
-                <strong>10%</strong> of all the finishing moves performed by Finishers Club as of
-                September 2021.
+                <strong>Fun fact</strong>: all the video content comes from a pool of around{' '}
+                <strong>700 clips</strong>. However, they only capture around <strong>5%</strong> of
+                all the finishing moves performed by Finishers Club as of March 2023.
               </AboutCardLI>
 
               {/* Fact #2 */}
               <AboutCardLI emoji="💻">
                 Finishers Club will keep growing, and there are plans to add new sources of media,
-                and further admin features like adding clips manually.
+                and further admin features like <strong>adding clips manually</strong>.
               </AboutCardLI>
 
               {/* Disclaimer */}
