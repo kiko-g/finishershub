@@ -4,7 +4,7 @@ import { Catalogue, ViewTypeToggler } from '../components/lab'
 
 type Props = {}
 
-export default function LabPage({}: Props) {
+export default function Lab({}: Props) {
   const [viewType, setViewType] = React.useState(true)
 
   return (

@@ -19,7 +19,7 @@ import VideoPlayer from '../components/VideoPlayer'
 import VideoSkeleton from '../components/VideoSkeleton'
 import DelayDisclaimer from '../components/DelayDisclaimer'
 
-export default function IndexPage() {
+export default function Gallery() {
   const isMobile = useMediaQuery('(max-width: 768px)')
   const sensitive = process.env.NEXT_PUBLIC_SENSITIVE! === 'false' ? false : true
 

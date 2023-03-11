@@ -9,7 +9,7 @@ import {
   MemberCardSkeleton,
 } from '../components/registry'
 
-export default function RegistryPage() {
+export default function Registry() {
   const [members, setMembers] = useState<FinishersClubMember[]>([])
   const totalFinishers = members
     .map((member) => member.finishers.reduce((a, b) => a + b, 0))

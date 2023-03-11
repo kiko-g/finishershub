@@ -17,19 +17,16 @@ import VideoPlayer from '../components/VideoPlayer'
 import VideoSkeleton from '../components/VideoSkeleton'
 import DelayDisclaimer from '../components/DelayDisclaimer'
 
-export default function CasinoPage() {
-  const sensitive = process.env.NEXT_PUBLIC_SENSITIVE === 'false' ? false : true
-
-  const [loading, setLoading] = useState<boolean>(true)
-  const [fetchError, setFetchError] = useState<boolean>(false)
-
+export default function Casino() {
   const [index, setIndex] = useState<number>(0)
   const [videoUrls, setVideoUrls] = useState<string[]>([])
   const [accessDenied, setAccessDenied] = useAccessDenied()
   const [muted, setMuted] = useState<boolean>(true)
   const [autoplay, setAutoplay] = useState<boolean>(true)
+  const [loading, setLoading] = useState<boolean>(true)
+  const [fetchError, setFetchError] = useState<boolean>(false)
+  const limitedAccess = useMemo(() => accessDenied, [accessDenied])
 
-  const limitedAccess = useMemo(() => sensitive && accessDenied, [sensitive, accessDenied])
   const toastType = useMemo(() => {
     if (fetchError) return 'error'
     else if (loading) return 'warning'
@@ -39,7 +36,6 @@ export default function CasinoPage() {
 
   const prevVideo = () => setIndex((prev) => prev - 1)
   const nextVideo = () => setIndex((prev) => prev + 1)
-
   const shuffleVideos = () => {
     setVideoUrls((prev) => shuffle(prev))
   }
@@ -58,16 +54,6 @@ export default function CasinoPage() {
         console.error(err)
       })
   }, [])
-
-  useEffect(() => {
-    if (limitedAccess) {
-      setMuted(true)
-      setAutoplay(true)
-    } else {
-      setMuted(false)
-      setAutoplay(true)
-    }
-  }, [limitedAccess])
 
   return (
     <Layout location="Casino">

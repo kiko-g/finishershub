@@ -13,7 +13,7 @@ export default function OhNo({}: Props) {
       height={2000}
       title={title}
       src="/images/404/saul.jpg"
-      className="aspect-square h-full w-full rounded object-cover shadow lg:w-full"
+      className="aspect-square h-full w-full rounded bg-black object-contain shadow lg:w-full"
     />
   )
 }

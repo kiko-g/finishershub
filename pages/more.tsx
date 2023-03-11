@@ -4,7 +4,7 @@ import { TwitterAdBanner } from '../components/more'
 
 type Props = {}
 
-export default function MorePage({}: Props) {
+export default function More({}: Props) {
   return (
     <Layout location="More">
       <main className="mb-12 flex flex-col gap-6 px-0 lg:px-4">

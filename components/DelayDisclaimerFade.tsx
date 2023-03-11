@@ -12,13 +12,42 @@ type ToastType = 'success' | 'error' | 'warning' | 'info' | ''
 
 type Props = {
   type?: ToastType
+  willFade?: boolean
 }
 
-export default function DelayDisclaimer({ type }: Props) {
+export default function DelayDisclaimerFade({ type, willFade = false }: Props) {
   const [shown, setShown] = React.useState(true)
+  const [fading, setFading] = React.useState(false)
+
+  useEffect(() => {
+    if (type === 'success') {
+      if (willFade) setFading(true)
+    }
+  }, [type, willFade])
+
+  useEffect(() => {
+    if (fading === true && shown) {
+      const delayDisclaimer = document.getElementById('delay-disclaimer')
+      if (delayDisclaimer) {
+        delayDisclaimer.style.opacity = '1.00'
+        const interval = setInterval(() => {
+          if (parseFloat(delayDisclaimer.style.opacity) <= 0.25) {
+            setShown(false)
+            setFading(false)
+            clearInterval(interval)
+            return
+          }
+
+          const newValue = parseFloat(delayDisclaimer.style.opacity) - 0.01
+          delayDisclaimer.style.opacity = newValue.toString()
+        }, 150)
+      }
+    }
+  }, [fading, shown])
 
   return shown ? (
     <div
+      id="delay-disclaimer"
       className={classNames(
         `flex w-full flex-wrap items-center justify-between rounded border 
         px-3 py-2 text-light lg:px-3 lg:py-2`,

@@ -1,13 +1,13 @@
 import React from 'react'
 import Link from 'next/link'
 import Seo from '../components/Seo'
-import { AboutCardLI } from '../components/hub'
 import Footer from '../components/layout/Footer'
-import { ArrowLongRightIcon } from '@heroicons/react/24/outline'
 import DarkModeSwitch from '../components/layout/DarkModeSwitch'
+import { AboutCardLI } from '../components/hub'
+import { ArrowLongRightIcon } from '@heroicons/react/24/outline'
 import { socials } from '../utils/data'
 
-export default function IndexPage() {
+export default function Hub() {
   const nav = [
     {
       name: 'Casino',
@@ -94,7 +94,7 @@ export default function IndexPage() {
                 <Link
                   key={`nav-${item.name}`}
                   href={item.href}
-                  className="relative flex max-w-[10rem] scale-100 flex-col gap-y-1 self-stretch rounded-md border border-primary/40 bg-primary/10 px-2 py-1.5 font-light text-gray-800 duration-100 hover:border-primary hover:bg-primary/40 dark:border-secondary/40 dark:bg-secondary/20 dark:text-white dark:hover:border-secondary dark:hover:bg-secondary/40 md:max-w-xs md:border-2 md:px-4 md:py-4"
+                  className="relative flex max-w-[10rem] scale-100 flex-col gap-y-1 self-stretch rounded-md border border-primary/40 bg-primary/5 px-2 py-1.5 font-light text-gray-800 duration-100 hover:border-primary hover:bg-primary/30 dark:border-secondary/40 dark:bg-secondary/20 dark:text-white dark:hover:border-secondary dark:hover:bg-secondary/40 md:max-w-xs md:border-2 md:px-4 md:py-4"
                 >
                   <div className="group flex flex-row items-center justify-between gap-x-2 font-medium">
                     <span className="space-x-1 md:space-x-2">
