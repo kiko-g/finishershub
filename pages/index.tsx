@@ -3,7 +3,7 @@ import Link from 'next/link'
 import Seo from '../components/Seo'
 import Footer from '../components/layout/Footer'
 import DarkModeSwitch from '../components/layout/DarkModeSwitch'
-import { AboutCardLI } from '../components/hub'
+import { AboutCardLI, NavCard } from '../components/hub'
 import { ArrowLongRightIcon } from '@heroicons/react/24/outline'
 import { socials } from '../utils/data'
 
@@ -50,7 +50,7 @@ export default function Hub() {
       emoji: '📊',
       description: (
         <>
-          Navigate to the registry where you can see and manage stats related to the the deiabolic
+          Navigate to the registry where you can see and manage stats related to the the diabolic
           profession that is performing finishing moves.
         </>
       ),
@@ -61,8 +61,8 @@ export default function Hub() {
       emoji: '🧪',
       description: (
         <>
-          Visit the laboratory of finishers. This is where you can see stats for finishing moves and
-          get a closer insight on why we pick the animations we do. If they let us cook, oh{' '}
+          Visit the laboratory of finishers. This is where you can consult premium research findings
+          and gain insight on our unholy and wicked methodology. If they let us cook, oh{' '}
           <span className="font-bold">we will cook</span>.
         </>
       ),
@@ -76,11 +76,11 @@ export default function Hub() {
         className="flex min-h-screen flex-col scroll-smooth bg-teal-50 font-prose 
         font-medium text-gray-800 opacity-[99%] dark:bg-navy dark:text-white"
       >
-        <main className="flex w-full flex-col gap-y-12 px-4 py-8 md:py-0 md:px-0">
+        <main className="flex w-full flex-col gap-y-16 px-4 py-8 md:py-0 md:px-0">
           {/* Hero */}
-          <header className="my-auto flex min-h-full w-full flex-col items-center justify-center gap-y-4 self-center align-middle md:min-h-screen">
+          <header className="my-auto flex min-h-full w-full flex-col items-center justify-center gap-y-8 self-center align-middle md:min-h-screen">
             <div className="max-w-2xl space-y-2">
-              <h2 className="text-center text-5xl font-extrabold tracking-tight sm:text-6xl">
+              <h2 className="bg-gradient-to-r from-primary to-secondary bg-clip-text text-center text-5xl font-extrabold tracking-tight text-transparent dark:bg-gradient-to-r dark:from-slate-200 dark:to-slate-300 sm:text-6xl">
                 Finishers Hub
               </h2>
               <p className="text-center text-base font-normal leading-tight md:text-lg md:leading-normal">
@@ -90,26 +90,8 @@ export default function Hub() {
             </div>
 
             <nav className="flex max-w-full flex-wrap items-center justify-center gap-3 md:max-w-5xl md:gap-6">
-              {nav.map((item) => (
-                <Link
-                  key={`nav-${item.name}`}
-                  href={item.href}
-                  className="relative flex max-w-[10rem] scale-100 flex-col gap-y-1 self-stretch rounded-md border border-primary/40 bg-primary/5 px-2 py-1.5 font-light text-gray-800 duration-100 hover:border-primary hover:bg-primary/30 dark:border-secondary/40 dark:bg-secondary/20 dark:text-white dark:hover:border-secondary dark:hover:bg-secondary/40 md:max-w-xs md:border-2 md:px-4 md:py-4"
-                >
-                  <div className="group flex flex-row items-center justify-between gap-x-2 font-medium">
-                    <span className="space-x-1 md:space-x-2">
-                      <span className="text-sm md:text-lg">{item.emoji}</span>
-                      <span className="text-sm md:text-lg">{item.name}</span>
-                    </span>
-
-                    <span>
-                      <ArrowLongRightIcon className="h-5 w-5 md:h-6 md:w-6" />
-                    </span>
-                  </div>
-                  <p className="text-left text-xs leading-snug tracking-tight md:text-left md:text-sm md:leading-normal md:tracking-normal">
-                    {item.description}
-                  </p>
-                </Link>
+              {nav.map((item, itemIdx) => (
+                <NavCard key={`nav-${itemIdx}`} item={item} />
               ))}
             </nav>
 

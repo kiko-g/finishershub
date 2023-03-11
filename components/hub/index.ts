@@ -1,3 +1,4 @@
+import NavCard from './NavCard'
 import AboutCardLI from './AboutCardLI'
 
-export { AboutCardLI }
+export { NavCard, AboutCardLI }
