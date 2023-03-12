@@ -17,9 +17,15 @@ import VideoPlayer from '../components/VideoPlayer'
 import VideoSkeleton from '../components/VideoSkeleton'
 import DelayDisclaimer from '../components/DelayDisclaimer'
 
+type FilterType =
+  | { name: 'All'; value: '' }
+  | { name: 'Warzone 1'; value: '/mw2019' }
+  | { name: 'Warzone 2'; value: '/mw2022' }
+
 export default function Casino() {
   const [index, setIndex] = useState<number>(0)
   const [videoUrls, setVideoUrls] = useState<string[]>([])
+  const [filter, setFilter] = useState<FilterType>({ name: 'All', value: '' })
   const [accessDenied, setAccessDenied] = useAccessDenied()
   const [muted, setMuted] = useState<boolean>(true)
   const [autoplay, setAutoplay] = useState<boolean>(true)
@@ -41,7 +47,7 @@ export default function Casino() {
   }
 
   useEffect(() => {
-    fetch('/api/s3/videos')
+    fetch(`/api/s3${filter.value}/videos`)
       .then((res) => res.json())
       .then((allEmbedUrls) => {
         setLoading(false)
@@ -53,18 +59,18 @@ export default function Casino() {
         setFetchError(true)
         console.error(err)
       })
-  }, [])
+  }, [filter])
 
   return (
     <Layout location="Casino">
       <div className="mx-auto max-w-full lg:max-w-3xl">
-        <main className="flex flex-col gap-3">
+        <main className="flex flex-col gap-2.5">
           <div className="flex flex-col justify-between gap-y-2 lg:flex-row lg:gap-x-6">
             <div className="text-lg font-normal">
-              <h2 className="mb-2 text-4xl font-extrabold tracking-tight sm:text-5xl">
+              <h2 className="mb-1 text-4xl font-extrabold tracking-tight sm:text-5xl">
                 Slot Machine
               </h2>
-              <p className="leading-normal">
+              <p className="text-sm leading-snug">
                 More fun than a casino, especially because we don&apos;t take your money. Not sure
                 about the addiction part though.
               </p>
@@ -84,55 +90,52 @@ export default function Casino() {
             </div>
           </div>
 
-          <DelayDisclaimer type={toastType} />
-          <UsageDisclaimer type="info" />
+          <UsageDisclaimer type={toastType} />
 
-          <div className="flex w-full flex-col gap-y-3">
-            {/* Video */}
-            <div className="relative w-full">
-              {limitedAccess ? <InvisbleTopLayer /> : null}
-              {!loading && !fetchError ? (
-                <VideoPlayer index={index} src={videoUrls[index]} play={autoplay} muted={muted} />
-              ) : (
-                <VideoSkeleton />
-              )}
-            </div>
+          {/* Video */}
+          <div className="relative w-full">
+            {limitedAccess ? <InvisbleTopLayer /> : null}
+            {!loading && !fetchError ? (
+              <VideoPlayer index={index} src={videoUrls[index]} play={autoplay} muted={muted} />
+            ) : (
+              <VideoSkeleton />
+            )}
+          </div>
 
-            {/* Left Arrow, Clip index, Right Arrow */}
-            <div className="z-20 flex w-full items-center justify-between font-normal text-white">
-              <button
-                onClick={prevVideo}
-                disabled={index === 0}
-                title="Go to the previous highlight"
-                className="rounded-l border border-r-0 border-slate-800/60 bg-slate-800/60 px-4 py-2
+          {/* Left Arrow, Clip index, Right Arrow */}
+          <div className="z-20 flex w-full items-center justify-between font-normal text-white">
+            <button
+              onClick={prevVideo}
+              disabled={index === 0}
+              title="Go to the previous highlight"
+              className="rounded-l border border-r-0 border-slate-800/60 bg-slate-800/60 px-4 py-2
                 transition enabled:hover:bg-slate-800/80 disabled:cursor-not-allowed 
                 disabled:opacity-25 dark:border-blue-200/30 dark:bg-blue-200/20 enabled:dark:hover:bg-blue-200/50 
                 lg:px-4 lg:py-1"
-              >
-                <ArrowLongLeftIcon className="inline-flex h-6 w-6" />
-              </button>
+            >
+              <ArrowLongLeftIcon className="inline-flex h-6 w-6" />
+            </button>
 
-              <div
-                className="flex w-full items-center justify-center self-stretch 
+            <div
+              className="flex w-full items-center justify-center self-stretch 
                   border border-slate-800/60 bg-slate-800/60 py-2 px-4 
                   dark:border-blue-200/30 dark:bg-blue-200/20 lg:py-1"
-              >
-                <span className="text-sm font-bold">
-                  {index + 1}/{videoUrls.length}
-                </span>
-              </div>
+            >
+              <span className="text-sm font-bold">
+                {index + 1}/{videoUrls.length}
+              </span>
+            </div>
 
-              <button
-                onClick={nextVideo}
-                disabled={index === videoUrls.length - 1}
-                title="Go to the next highlight"
-                className="rounded-r border border-l-0 border-slate-800/60 bg-slate-800/60 px-4 py-2
+            <button
+              onClick={nextVideo}
+              disabled={index === videoUrls.length - 1}
+              title="Go to the next highlight"
+              className="rounded-r border border-l-0 border-slate-800/60 bg-slate-800/60 px-4 py-2
                 transition enabled:hover:bg-slate-800/80 disabled:cursor-not-allowed disabled:opacity-25 
                 dark:border-blue-200/30 dark:bg-blue-200/20 enabled:dark:hover:bg-blue-200/50 lg:px-4 lg:py-1"
-              >
-                <ArrowLongRightIcon className="inline-flex h-6 w-6" />
-              </button>
-            </div>
+            >
+              <ArrowLongRightIcon className="inline-flex h-6 w-6" />
+            </button>
           </div>
         </main>
       </div>

@@ -54,7 +54,10 @@ export default function UsageDisclaimer({ type }: Props) {
         {/* Text */}
         <p className="ml-3 flex-1 text-sm font-normal tracking-tight lg:font-normal lg:tracking-normal">
           {type === 'success' ? (
-            <span>All clips fetched.</span>
+            <span>
+              Tap the right arrow to get a <strong>new random highlight</strong> and use the left
+              one to <strong>go back</strong>.
+            </span>
           ) : type === 'error' ? (
             <span>
               There has been an error in fetching clips. Please reload your page and try again.

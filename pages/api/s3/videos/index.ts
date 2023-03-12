@@ -1,4 +1,4 @@
-import { estabilishS3Connection } from '../../../utils/api/s3'
+import { estabilishS3Connection } from '../../../../utils/api/s3'
 import type { NextApiRequest, NextApiResponse } from 'next'
 
 const s3 = estabilishS3Connection()
@@ -17,9 +17,27 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
 
     const filenamesMW2019 = objectsMW2019.Contents.map((object) => object.Key)
     const filenamesMW2022 = objectsMW2022.Contents.map((object) => object.Key)
-    const filenames = [filenamesMW2019, filenamesMW2022].flat()
 
-    res.status(200).json({ filenames })
+    const videoUrls = []
+    for (const filename of filenamesMW2019) {
+      const videoUrl = await s3.getSignedUrlPromise('getObject', {
+        Bucket: bucketMW2019,
+        Key: filename,
+        Expires: 60 * 60 * 24, // 1 days
+      })
+      videoUrls.push(videoUrl)
+    }
+
+    for (const filename of filenamesMW2022) {
+      const videoUrl = await s3.getSignedUrlPromise('getObject', {
+        Bucket: bucketMW2022,
+        Key: filename,
+        Expires: 60 * 60 * 24, // 1 days
+      })
+      videoUrls.push(videoUrl)
+    }
+
+    res.status(200).json(videoUrls)
   } catch (error) {
     console.error(error)
     const errorMessage = error instanceof Error ? error.message : 'Internal server error'
