@@ -5,7 +5,7 @@ const s3 = estabilishS3Connection()
 
 export default async function handler(req: NextApiRequest, res: NextApiResponse) {
   try {
-    const bucketName = process.env.NEXT_PUBLIC_AWS_S3_BUCKET_NAME || 'finishershub'
+    const bucketName = process.env.NEXT_PUBLIC_AWS_S3_BUCKET_NAME_MW2019 || 'finishershub.mw2019'
     const objects = await s3.listObjectsV2({ Bucket: bucketName }).promise()
 
     if (!objects.Contents) {

@@ -28,20 +28,32 @@ export default function TwitterAdBanner({}: Props) {
           <ul className="ml-0.5 font-light">
             <li>
               <span className="mr-2">🔨</span>
-              <Link href="https://youtu.be/ds0LFOKbDZg" className="font-normal hover:underline">
+              <Link
+                target="_blank"
+                href="https://youtu.be/ds0LFOKbDZg"
+                className="font-normal hover:underline"
+              >
                 3 Hours of Raw Finisher Footage (2021)
               </Link>
             </li>
             <li>
               <span className="mr-2">🩹</span>
-              <Link href="https://youtu.be/psAOI1KyIyA" className="font-normal hover:underline">
+              <Link
+                target="_blank"
+                href="https://youtu.be/psAOI1KyIyA"
+                className="font-normal hover:underline"
+              >
                 The lost files of the International Finisher&apos; Day (19 July 2021){' '}
                 <span className="font-light text-gray-600 dark:text-gray-400">w/ chapters</span>.
               </Link>
             </li>
             <li>
               <span className="mr-2">💨</span>
-              <Link href="https://youtu.be/FaMvNffuhQQ" className="font-normal hover:underline">
+              <Link
+                target="_blank"
+                href="https://youtu.be/FaMvNffuhQQ"
+                className="font-normal hover:underline"
+              >
                 Typical hectic 8 minute session of finishers at HQ/Greenie
               </Link>
             </li>
@@ -63,7 +75,7 @@ export default function TwitterAdBanner({}: Props) {
         target="_blank"
         href="https://www.youtube.com/@scumbag_kiko/videos"
         className="hidden h-auto max-w-full rounded bg-gradient-to-br from-rose-700 
-          to-rose-600 py-16 px-16 text-white transition hover:opacity-80 lg:flex lg:max-w-xs"
+          to-rose-600 py-16 px-16 text-white transition hover:opacity-80 lg:flex lg:max-w-[16rem]"
       >
         <svg className="h-full w-full" fill="currentColor" viewBox="0 0 576 512" aria-hidden="true">
           <path

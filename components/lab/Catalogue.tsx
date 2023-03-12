@@ -18,7 +18,7 @@ export default function Catalogue({ hook }: Props) {
   )
 
   useEffect(() => {
-    fetch('/api/mw2/catalogue').then((res) => {
+    fetch('/api/catalogue/mw2').then((res) => {
       res.json().then((data) => {
         setHeaders(data.table.headers)
         setCatalogue(data.table.rows)

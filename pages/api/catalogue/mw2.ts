@@ -12,9 +12,9 @@ type Data = {
 }
 
 // @desc     Get finishers catalogue for mw2 from google sheets
-// @route    GET /api/mw2/catalogue
+// @route    GET /api/catalogue/mw2
 // @access   Public
-export default async function getSheetsData(req: NextApiRequest, res: NextApiResponse<Data>) {
+export default async function getSheetsDataMW2(req: NextApiRequest, res: NextApiResponse<Data>) {
   try {
     const doc = new GoogleSpreadsheet(GOOGLE_SPREADSHEET_ID)
     await doc.useServiceAccountAuth({
