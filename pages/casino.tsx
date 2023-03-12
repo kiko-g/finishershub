@@ -16,15 +16,21 @@ import { ArrowLongLeftIcon, ArrowLongRightIcon } from '@heroicons/react/24/outli
 import VideoPlayer from '../components/VideoPlayer'
 import VideoSkeleton from '../components/VideoSkeleton'
 import DelayDisclaimer from '../components/DelayDisclaimer'
+import ShareVideo from '../components/ShareVideo'
 
 type FilterType =
   | { name: 'All'; value: '' }
   | { name: 'Warzone 1'; value: '/mw2019' }
   | { name: 'Warzone 2'; value: '/mw2022' }
 
+type VideoType = {
+  url: string
+  index: number
+}
+
 export default function Casino() {
   const [index, setIndex] = useState<number>(0)
-  const [videoUrls, setVideoUrls] = useState<string[]>([])
+  const [videos, setVideos] = useState<VideoType[]>([])
   const [filter, setFilter] = useState<FilterType>({ name: 'All', value: '' })
   const [accessDenied, setAccessDenied] = useAccessDenied()
   const [muted, setMuted] = useState<boolean>(true)
@@ -32,6 +38,11 @@ export default function Casino() {
   const [loading, setLoading] = useState<boolean>(true)
   const [fetchError, setFetchError] = useState<boolean>(false)
   const limitedAccess = useMemo(() => accessDenied, [accessDenied])
+  const video = useMemo(() => videos[index], [index, videos])
+  const ready = useMemo(
+    () => !loading && !fetchError && video.url !== undefined,
+    [loading, fetchError, video]
+  )
 
   const toastType = useMemo(() => {
     if (fetchError) return 'error'
@@ -43,16 +54,22 @@ export default function Casino() {
   const prevVideo = () => setIndex((prev) => prev - 1)
   const nextVideo = () => setIndex((prev) => prev + 1)
   const shuffleVideos = () => {
-    setVideoUrls((prev) => shuffle(prev))
+    setVideos((prev) => shuffle(prev))
   }
 
   useEffect(() => {
     fetch(`/api/s3${filter.value}/videos`)
       .then((res) => res.json())
-      .then((allEmbedUrls) => {
+      .then((urls) => {
         setLoading(false)
-        const shuffledVideos = shuffle(allEmbedUrls)
-        setVideoUrls(shuffledVideos)
+        return urls.map((url: string, index: number) => ({
+          url: urls[index],
+          index: index,
+        }))
+      })
+      .then((shuffledUrls) => {
+        const shuffledVideos: VideoType[] = shuffle(shuffledUrls)
+        setVideos(shuffledVideos)
       })
       .catch((err) => {
         setLoading(false)
@@ -82,10 +99,11 @@ export default function Casino() {
                 {limitedAccess ? (
                   <AccessModal lockedHook={[accessDenied, setAccessDenied]} startOpen={false} />
                 ) : null}
-                <DeleteCookiesButton />
+                {/* <DeleteCookiesButton /> */}
                 <ShuffleButton shuffle={shuffleVideos} />
                 <AutoplayToggler hook={[autoplay, setAutoplay]} />
                 {limitedAccess ? null : <MuteToggler hook={[muted, setMuted]} />}
+                {ready ? <ShareVideo index={video.index} /> : null}
               </div>
             </div>
           </div>
@@ -95,8 +113,8 @@ export default function Casino() {
           {/* Video */}
           <div className="relative w-full">
             {limitedAccess ? <InvisbleTopLayer /> : null}
-            {!loading && !fetchError ? (
-              <VideoPlayer index={index} src={videoUrls[index]} play={autoplay} muted={muted} />
+            {ready ? (
+              <VideoPlayer index={index} src={video.url} play={autoplay} muted={muted} />
             ) : (
               <VideoSkeleton />
             )}
@@ -122,13 +140,13 @@ export default function Casino() {
                   dark:border-blue-200/30 dark:bg-blue-200/20 lg:py-1"
             >
               <span className="text-sm font-bold">
-                {index + 1}/{videoUrls.length}
+                {index + 1}/{videos.length}
               </span>
             </div>
 
             <button
               onClick={nextVideo}
-              disabled={index === videoUrls.length - 1}
+              disabled={index === videos.length - 1}
               title="Go to the next highlight"
               className="rounded-r border border-l-0 border-slate-800/60 bg-slate-800/60 px-4 py-2
                 transition enabled:hover:bg-slate-800/80 disabled:cursor-not-allowed disabled:opacity-25 
