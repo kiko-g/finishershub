@@ -1,22 +1,22 @@
 import React, { useState, useEffect, useMemo } from 'react'
-import Layout from '../components/layout'
-import AccessModal from '../components/layout/AccessModal'
 import useAccessDenied from '../hooks/useAccessDenied'
 import { shuffle } from '../utils'
+import Layout from '../components/layout'
+import AccessModal from '../components/layout/AccessModal'
+import InvisbleTopLayer from '../components/layout/InvisbleTopLayer'
+import { FullAccessBadge, LimitedAccessBadge } from '../components/utils'
+import { ArrowLongLeftIcon, ArrowLongRightIcon } from '@heroicons/react/24/outline'
 import {
   AutoplayToggler,
   MuteToggler,
   UsageDisclaimer,
   ShuffleButton,
   DeleteCookiesButton,
-} from '../components/casino'
-import InvisbleTopLayer from '../components/layout/InvisbleTopLayer'
-import { FullAccessBadge, LimitedAccessBadge } from '../components/utils'
-import { ArrowLongLeftIcon, ArrowLongRightIcon } from '@heroicons/react/24/outline'
-import VideoPlayer from '../components/VideoPlayer'
-import VideoSkeleton from '../components/VideoSkeleton'
-import DelayDisclaimer from '../components/DelayDisclaimer'
-import ShareVideo from '../components/ShareVideo'
+  VideoPlayer,
+  VideoSkeleton,
+  DelayDisclaimer,
+  ShareVideo,
+} from '../components/videos'
 
 type FilterType =
   | { name: 'All'; value: '' }

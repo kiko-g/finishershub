@@ -24,8 +24,8 @@ export default function TwitterAdBanner({}: Props) {
       </Link>
 
       {/* Content */}
-      <div className="flex flex-1 flex-col justify-between gap-4 font-light">
-        <div className="flex flex-col gap-y-3">
+      <div className="flex flex-1 flex-col justify-between gap-2 font-light">
+        <div className="flex flex-col gap-2">
           <p>
             While we are working on getting Finishers Hub to the{' '}
             <span className="text-slate-700 dark:text-pink-600">next level</span>, you can check out{' '}

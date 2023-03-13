@@ -16,7 +16,7 @@ export default function TotalFinishersDisclaimer({ count }: Props) {
   )
 
   return shown ? (
-    <div className="flex w-full flex-wrap items-center justify-between rounded border border-[#aa4a44]/70 bg-[#aa4a44]/70 px-3 py-2 text-light dark:border-[#aa4a44]/60 dark:bg-[#aa4a44]/50 lg:px-3 lg:py-2">
+    <div className="flex w-full flex-wrap items-center justify-between rounded border border-cyan-600/70 bg-cyan-600/60 px-3 py-2 text-light dark:border-cyan-600/60 dark:bg-cyan-600/50 lg:px-3 lg:py-2">
       <div className="flex w-full flex-1 items-center justify-between">
         <div className="flex w-full items-center justify-between">
           <CakeIcon className="h-5 w-5 lg:h-6 lg:w-6" aria-hidden="true" />

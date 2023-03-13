@@ -1,12 +1,11 @@
 import React, { useState, useEffect, useMemo } from 'react'
 import classNames from 'classnames'
-import useAccessDenied from '../hooks/useAccessDenied'
-import { useMediaQuery } from 'usehooks-ts'
 import { shuffle } from '../utils'
+import { useMediaQuery } from 'usehooks-ts'
+import useAccessDenied from '../hooks/useAccessDenied'
 import Layout from '../components/layout'
 import AccessModal from '../components/layout/AccessModal'
 import InvisbleTopLayer from '../components/layout/InvisbleTopLayer'
-import { PlusIcon } from '@heroicons/react/24/solid'
 import { FullAccessBadge, LimitedAccessBadge } from '../components/utils'
 import {
   ViewToggler,
@@ -14,10 +13,11 @@ import {
   MuteToggler,
   ShuffleButton,
   DeleteCookiesButton,
-} from '../components/gallery'
-import VideoPlayer from '../components/VideoPlayer'
-import VideoSkeleton from '../components/VideoSkeleton'
-import DelayDisclaimer from '../components/DelayDisclaimer'
+  VideoPlayer,
+  VideoSkeleton,
+  DelayDisclaimer,
+} from '../components/videos'
+import { PlusIcon } from '@heroicons/react/24/solid'
 
 export default function Gallery() {
   const isMobile = useMediaQuery('(max-width: 768px)')

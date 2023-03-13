@@ -16,9 +16,9 @@ import {
   ShuffleButton,
   TwitchVideoClip,
   DeleteCookiesButton,
-} from '../../components/gallery'
-import VideoSkeleton from '../../components/VideoSkeleton'
-import DelayDisclaimer from '../../components/DelayDisclaimer'
+  VideoSkeleton,
+} from '../../components/videos'
+import DelayDisclaimer from '../../components/videos/DelayDisclaimer'
 
 export default function IndexPage() {
   const isMobile = useMediaQuery('(max-width: 768px)')
