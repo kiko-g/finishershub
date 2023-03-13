@@ -3,9 +3,7 @@ import classNames from 'classnames'
 import { shuffle } from '../utils'
 import { useMediaQuery } from 'usehooks-ts'
 import useAccessDenied from '../hooks/useAccessDenied'
-import Layout from '../components/layout'
-import AccessModal from '../components/layout/AccessModal'
-import InvisbleTopLayer from '../components/layout/InvisbleTopLayer'
+import { Layout, AccessModal, InvisbleTopLayer } from '../components/layout'
 import { FullAccessBadge, LimitedAccessBadge } from '../components/utils'
 import {
   ViewToggler,

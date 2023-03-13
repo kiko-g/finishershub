@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import { type FinishersClubMember } from '../@types'
-import Layout from '../components/layout'
 import RegistryAPI from '../utils/api/registry'
+import { Layout } from '../components/layout'
 import {
   MemberCard,
   DataDisclaimer,

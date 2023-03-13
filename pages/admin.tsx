@@ -1,14 +1,13 @@
 import React, { Fragment, useState } from 'react'
+import classNames from 'classnames'
 import Image from 'next/image'
-import Layout from '../components/layout'
+import { Listbox, Transition } from '@headlessui/react'
 import useAccessDenied from '../hooks/useAccessDenied'
-import AccessModal from '../components/layout/AccessModal'
+import { Layout, AccessModal } from '../components/layout'
 import { FullAccessBadge, LimitedAccessBadge } from '../components/utils'
 import { DummyLockedContent } from '../components/admin'
 import { ArrowUpTrayIcon } from '@heroicons/react/24/outline'
-import { Listbox, Transition } from '@headlessui/react'
 import { CheckIcon, ChevronUpDownIcon } from '@heroicons/react/20/solid'
-import classNames from 'classnames'
 
 type Member = {
   name: string

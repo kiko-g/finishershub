@@ -1,11 +1,9 @@
 import React from 'react'
 import Link from 'next/link'
 import Seo from '../components/Seo'
-import Footer from '../components/layout/Footer'
-import DarkModeSwitch from '../components/layout/DarkModeSwitch'
-import { AboutCardLI, NavCard } from '../components/hub'
-import { ArrowLongRightIcon } from '@heroicons/react/24/outline'
 import { socials } from '../utils/data'
+import { Footer, DarkModeSwitch } from '../components/layout'
+import { AboutCardLI, NavCard } from '../components/hub'
 
 export default function Hub() {
   const nav = [

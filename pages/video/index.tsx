@@ -1,6 +1,5 @@
 import React, { useEffect, useMemo, useState } from 'react'
 import Link from 'next/link'
-import { useRouter } from 'next/router'
 import Seo from '../../components/Seo'
 import { Navbar, Footer } from '../../components/layout'
 import { VideoPlayer, VideoSkeleton, VideoNotFound, ShareVideo } from '../../components/videos'
@@ -8,8 +7,7 @@ import { VideoPlayer, VideoSkeleton, VideoNotFound, ShareVideo } from '../../com
 type Props = {}
 
 export default function Video({}: Props) {
-  const router = useRouter()
-  const { pid } = router.query
+  const vid = 0
   const [video, setVideo] = useState<string>('')
   const [videoId, setVideoId] = useState<number>(-1)
   const [loading, setLoading] = useState<boolean>(true)
@@ -17,13 +15,7 @@ export default function Video({}: Props) {
   const ready = useMemo(() => !loading && !fetchError && video !== '', [loading, fetchError, video])
 
   useEffect(() => {
-    if (pid === undefined) return
-    else if (isNaN(parseInt(pid as string))) {
-      setFetchError(true)
-    }
-
-    const videoIndex = parseInt(pid as string)
-    fetch(`/api/s3/videos/${videoIndex}}`)
+    fetch(`/api/s3/videos/${vid}`)
       .then((res) => {
         if (res.status === 404) {
           setFetchError(true)
@@ -34,14 +26,14 @@ export default function Video({}: Props) {
       .then((url) => {
         setLoading(false)
         setVideo(url)
-        setVideoId(parseInt(pid as string))
+        setVideoId(vid)
       })
       .catch((err) => {
         setLoading(false)
         setFetchError(true)
         console.error(err)
       })
-  }, [pid])
+  }, [vid])
 
   return (
     <div className="flex min-h-screen flex-col bg-light dark:bg-navy">

@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import classNames from 'classnames'
+import { getVideoUrlFromIndex } from '../../utils'
 import { ClipboardIcon } from '@heroicons/react/24/outline'
 import { ClipboardDocumentCheckIcon } from '@heroicons/react/24/solid'
 
@@ -9,10 +10,11 @@ type Props = {
 }
 
 export default function ShareVideo({ index, alt }: Props) {
+  const url = getVideoUrlFromIndex(index)
   const [copied, setCopied] = useState(false)
   const handleCopied = () => {
     setCopied(!copied)
-    navigator.clipboard.writeText(`https://finishershub.vercel.app/video/${index}`)
+    navigator.clipboard.writeText(url)
   }
 
   useEffect(() => {

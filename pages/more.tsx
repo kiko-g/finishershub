@@ -1,5 +1,5 @@
 import React from 'react'
-import Layout from '../components/layout'
+import { Layout } from '../components/layout'
 import { TwitterAdBanner, YoutubeAdBanner } from '../components/more'
 
 type Props = {}

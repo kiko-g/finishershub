@@ -1,9 +1,7 @@
 import React, { useState, useEffect, useMemo } from 'react'
 import useAccessDenied from '../hooks/useAccessDenied'
 import { shuffle } from '../utils'
-import Layout from '../components/layout'
-import AccessModal from '../components/layout/AccessModal'
-import InvisbleTopLayer from '../components/layout/InvisbleTopLayer'
+import { Layout, AccessModal, InvisbleTopLayer } from '../components/layout'
 import { FullAccessBadge, LimitedAccessBadge } from '../components/utils'
 import { ArrowLongLeftIcon, ArrowLongRightIcon } from '@heroicons/react/24/outline'
 import {

@@ -1,9 +1,9 @@
 import React, { useState, useEffect, useMemo } from 'react'
-import Layout from '../../components/layout'
-import AccessModal from '../../components/layout/AccessModal'
-import useAccessDenied from '../../hooks/useAccessDenied'
 import { shuffle } from '../../utils'
 import { clearCache, isStorageValid, writeVideosStorage } from '../../utils/storage'
+import useAccessDenied from '../../hooks/useAccessDenied'
+import { FullAccessBadge, LimitedAccessBadge } from '../../components/utils'
+import { Layout, AccessModal, InvisbleTopLayer } from '../../components/layout'
 import {
   AutoplayToggler,
   MuteToggler,
@@ -13,8 +13,6 @@ import {
   DeleteCookiesButton,
   DelayDisclaimer,
 } from '../../components/videos'
-import InvisbleTopLayer from '../../components/layout/InvisbleTopLayer'
-import { FullAccessBadge, LimitedAccessBadge } from '../../components/utils'
 import { ArrowLongLeftIcon, ArrowLongRightIcon } from '@heroicons/react/24/outline'
 
 export default function CasinoPage() {

@@ -53,3 +53,7 @@ export const strIncludes = (str: string, query: string, strict?: boolean) =>
         .replace('.', '')
         .replace(':', '')
         .includes(query.toLowerCase().replace(/\s+/g, ''))
+
+export const getVideoUrlFromIndex = (index: number) => {
+  return `https://finishershub.vercel.app/video/${index}`
+}
