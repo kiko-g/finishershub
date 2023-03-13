@@ -1,12 +1,14 @@
 import React, { useEffect, useState } from 'react'
 import classNames from 'classnames'
-import { ClipboardDocumentCheckIcon, ClipboardIcon, ShareIcon } from '@heroicons/react/24/outline'
+import { ClipboardIcon } from '@heroicons/react/24/outline'
+import { ClipboardDocumentCheckIcon } from '@heroicons/react/24/solid'
 
 type Props = {
   index: number
+  alt?: boolean
 }
 
-export default function ShareVideo({ index }: Props) {
+export default function ShareVideo({ index, alt }: Props) {
   const [copied, setCopied] = useState(false)
   const handleCopied = () => {
     setCopied(!copied)
@@ -24,14 +26,23 @@ export default function ShareVideo({ index }: Props) {
     <button
       onClick={handleCopied}
       className={classNames(
-        `transition hover:opacity-80`,
-        copied ? `text-rose-500` : `text-primary dark:text-secondary`
+        `transition`,
+        copied
+          ? `text-emerald-500`
+          : alt
+          ? `text-white hover:opacity-80 dark:text-white`
+          : `text-gray-700 hover:opacity-80 dark:text-white`
       )}
     >
       {copied ? (
-        <ClipboardDocumentCheckIcon className="h-7 w-7 lg:h-8 lg:w-8" />
+        <ClipboardDocumentCheckIcon
+          fillRule="evenodd"
+          className={classNames(alt ? `h-5 w-5 lg:h-6 lg:w-6` : `h-7 w-7 lg:h-8 lg:w-8`)}
+        />
       ) : (
-        <ClipboardIcon className="h-7 w-7 lg:h-8 lg:w-8" />
+        <ClipboardIcon
+          className={classNames(alt ? `h-5 w-5 lg:h-6 lg:w-6` : `h-7 w-7 lg:h-8 lg:w-8`)}
+        />
       )}
     </button>
   )

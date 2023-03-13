@@ -114,7 +114,7 @@ export default function Casino() {
           <div className="relative w-full">
             {limitedAccess ? <InvisbleTopLayer /> : null}
             {ready ? (
-              <VideoPlayer index={index} src={video.url} play={autoplay} muted={muted} />
+              <VideoPlayer index={video.index} src={video.url} play={autoplay} muted={muted} />
             ) : (
               <VideoSkeleton />
             )}
