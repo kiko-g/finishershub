@@ -9,7 +9,9 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
     const videoIndex = parseInt(idStr)
 
     if (isNaN(videoIndex)) {
-      throw new Error('Invalid video index requested')
+      res.status(404).json({
+        message: 'Video id provided is invalid',
+      })
     }
 
     const bucketMW2019 = process.env.NEXT_PUBLIC_AWS_S3_BUCKET_NAME_MW2019 || 'finishershub.mw2019'
@@ -19,6 +21,9 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
     const objectsMW2022 = await s3.listObjectsV2({ Bucket: bucketMW2022 }).promise()
 
     if (!objectsMW2019.Contents || !objectsMW2022.Contents) {
+      res.status(404).json({
+        message: 'No object found',
+      })
       throw new Error('Error requesting objects from S3')
     }
 
@@ -27,7 +32,9 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
     const filenames = [...filenamesMW2019, ...filenamesMW2022]
 
     if (videoIndex < 0 || videoIndex >= filenames.length) {
-      throw new Error('Invalid video index requested')
+      res.status(404).json({
+        message: 'Video index is out of valid bounds',
+      })
     }
 
     const bucketName = videoIndex < filenamesMW2019.length ? bucketMW2019 : bucketMW2022
