@@ -1,4 +1,5 @@
 import React, { useState, useEffect, useMemo } from 'react'
+import type { FilterType, VideoType } from '../@types'
 import useAccessDenied from '../hooks/useAccessDenied'
 import { shuffle } from '../utils'
 import { Layout, AccessModal, InvisbleTopLayer } from '../components/layout'
@@ -12,36 +13,32 @@ import {
   DeleteCookiesButton,
   VideoPlayer,
   VideoSkeleton,
-  DelayDisclaimer,
-  ShareVideo,
+  FilterVideos,
 } from '../components/videos'
 
-type FilterType =
-  | { name: 'All'; value: '' }
-  | { name: 'Warzone 1'; value: '/mw2019' }
-  | { name: 'Warzone 2'; value: '/mw2022' }
-
-type VideoType = {
-  url: string
-  index: number
-}
-
 export default function Casino() {
+  const arenas: FilterType[] = [
+    { name: 'All', value: '/' },
+    { name: 'Warzone 1', value: '/mw2019' },
+    { name: 'Warzone 2', value: '/mw2022' },
+  ]
+
+  const [loading, setLoading] = useState<boolean>(true)
+  const [fetchError, setFetchError] = useState<boolean>(false)
+
   const [index, setIndex] = useState<number>(0)
   const [videos, setVideos] = useState<VideoType[]>([])
-  const [filter, setFilter] = useState<FilterType>({ name: 'All', value: '' })
+  const [filter, setFilter] = useState<FilterType>(arenas[0])
   const [accessDenied, setAccessDenied] = useAccessDenied()
   const [muted, setMuted] = useState<boolean>(true)
   const [autoplay, setAutoplay] = useState<boolean>(true)
-  const [loading, setLoading] = useState<boolean>(true)
-  const [fetchError, setFetchError] = useState<boolean>(false)
+
   const limitedAccess = useMemo(() => accessDenied, [accessDenied])
   const video = useMemo(() => videos[index], [index, videos])
   const ready = useMemo(
     () => !loading && !fetchError && video.url !== undefined,
     [loading, fetchError, video]
   )
-
   const toastType = useMemo(() => {
     if (fetchError) return 'error'
     else if (loading) return 'warning'
@@ -56,7 +53,7 @@ export default function Casino() {
   }
 
   useEffect(() => {
-    fetch(`/api/s3${filter.value}/videos`)
+    fetch(`/api/s3/videos${filter.value}`)
       .then((res) => res.json())
       .then((urls) => {
         setLoading(false)
@@ -82,27 +79,29 @@ export default function Casino() {
         <main className="flex flex-col gap-2.5">
           <div className="flex flex-col justify-between gap-y-2 lg:flex-row lg:gap-x-6">
             <div className="text-lg font-normal">
-              <h2 className="mb-1 text-4xl font-extrabold tracking-tight sm:text-5xl">
-                Slot Machine
-              </h2>
-              <p className="text-sm leading-snug">
+              <div className="flex flex-wrap items-center justify-start gap-x-3 gap-y-1">
+                <h2 className="whitespace-nowrap text-4xl font-extrabold tracking-tight sm:text-5xl">
+                  Slot Machine
+                </h2>
+                {limitedAccess ? <LimitedAccessBadge /> : <LimitedAccessBadge />}
+              </div>
+              <p className="mt-2 text-sm">
                 More fun than a casino, especially because we don&apos;t take your money. Not sure
                 about the addiction part though.
               </p>
             </div>
 
-            <div className="flex flex-row items-center justify-center gap-2 lg:mt-0 lg:flex-col">
-              {limitedAccess ? <LimitedAccessBadge /> : <FullAccessBadge />}
-              <div className="flex items-center justify-end gap-x-2">
+            <div className="flex flex-row flex-wrap items-center justify-center gap-2 lg:mt-0 lg:flex-col">
+              <div className="flex w-full items-center justify-end gap-x-2">
                 {limitedAccess ? (
                   <AccessModal lockedHook={[accessDenied, setAccessDenied]} startOpen={false} />
                 ) : null}
-                {/* <DeleteCookiesButton /> */}
+                <DeleteCookiesButton />
                 <ShuffleButton shuffle={shuffleVideos} />
                 <AutoplayToggler hook={[autoplay, setAutoplay]} />
                 {limitedAccess ? null : <MuteToggler hook={[muted, setMuted]} />}
-                {ready ? <ShareVideo index={video.index} /> : null}
               </div>
+              <FilterVideos arenas={arenas} pickedHook={[filter, setFilter]} />
             </div>
           </div>
 

@@ -74,7 +74,7 @@ export default function Hub() {
         className="flex min-h-screen flex-col scroll-smooth bg-teal-50 font-prose 
         font-medium text-gray-800 opacity-[99%] dark:bg-navy dark:text-white"
       >
-        <main className="flex w-full flex-col gap-y-16 px-4 py-8 md:py-0 md:px-0">
+        <main className="flex w-full flex-col gap-y-16 px-4 pt-8 md:py-0 md:px-0">
           {/* Hero */}
           <header className="my-auto flex min-h-full w-full flex-col items-center justify-center gap-y-8 self-center align-middle md:min-h-screen">
             <div className="max-w-2xl space-y-2">
@@ -213,9 +213,8 @@ export default function Hub() {
               </AboutCardLI>
             </ul>
           </div>
-
-          <Footer siteTitle="Finishers Hub" />
         </main>
+        <Footer siteTitle="Finishers Hub" />
       </div>
     </>
   )

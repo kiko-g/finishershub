@@ -23,7 +23,7 @@ export default function VideoPlayer({ src, index, play = false, muted = true }: 
       >
         <source src={src} type="video/mp4" />
       </video>
-      <div className="absolute top-0 right-0 z-50 hidden rounded-bl rounded-tr bg-black/70 px-2 py-2 font-normal text-white transition group-hover:flex group-hover:gap-2">
+      <div className="absolute top-0 right-0 z-50 hidden rounded-bl rounded-tr bg-slate-900/80 px-2 py-2 font-normal text-white transition group-hover:flex group-hover:gap-2">
         <ShareVideo index={index} alt />
         <PopOpenVideo index={index} />
       </div>

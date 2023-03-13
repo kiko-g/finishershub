@@ -5,7 +5,7 @@ import { Listbox, Transition } from '@headlessui/react'
 import useAccessDenied from '../hooks/useAccessDenied'
 import { Layout, AccessModal } from '../components/layout'
 import { FullAccessBadge, LimitedAccessBadge } from '../components/utils'
-import { DummyLockedContent } from '../components/admin'
+import { DummyLockedContent } from '../components/videos'
 import { ArrowUpTrayIcon } from '@heroicons/react/24/outline'
 import { CheckIcon, ChevronUpDownIcon } from '@heroicons/react/20/solid'
 

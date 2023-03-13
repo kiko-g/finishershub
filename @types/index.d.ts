@@ -46,3 +46,13 @@ export type CatalogueItem = {
   ttrk: number
   ttca: number
 }
+
+export type VideoType = {
+  url: string
+  index: number
+}
+
+export type FilterType =
+  | { name: 'All'; value: '/' }
+  | { name: 'Warzone 1'; value: '/mw2019' }
+  | { name: 'Warzone 2'; value: '/mw2022' }

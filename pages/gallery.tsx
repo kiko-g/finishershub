@@ -1,4 +1,5 @@
 import React, { useState, useEffect, useMemo } from 'react'
+import type { FilterType, VideoType } from '../@types'
 import classNames from 'classnames'
 import { shuffle } from '../utils'
 import { useMediaQuery } from 'usehooks-ts'
@@ -11,6 +12,7 @@ import {
   MuteToggler,
   ShuffleButton,
   DeleteCookiesButton,
+  FilterVideos,
   VideoPlayer,
   VideoSkeleton,
   DelayDisclaimer,
@@ -19,12 +21,17 @@ import { PlusIcon } from '@heroicons/react/24/solid'
 
 export default function Gallery() {
   const isMobile = useMediaQuery('(max-width: 768px)')
-  const sensitive = process.env.NEXT_PUBLIC_SENSITIVE! === 'false' ? false : true
+  const arenas: FilterType[] = [
+    { name: 'All', value: '/' },
+    { name: 'Warzone 1', value: '/mw2019' },
+    { name: 'Warzone 2', value: '/mw2022' },
+  ]
 
   const [loading, setLoading] = useState<boolean>(true)
   const [fetchError, setFetchError] = useState<boolean>(false)
 
-  const [videoUrls, setVideoUrls] = useState<string[]>([])
+  const [videos, setVideos] = useState<VideoType[]>([])
+  const [filter, setFilter] = useState<FilterType>(arenas[0])
   const [accessDenied, setAccessDenied] = useAccessDenied()
   const [view, setView] = useState<boolean>(false)
   const [muted, setMuted] = useState<boolean>(true)
@@ -32,7 +39,7 @@ export default function Gallery() {
   const [clipsShown, setClipsShown] = useState<number>(isMobile ? 1 : view ? 2 : 3)
   const [showMoreCount, setShowMoreCount] = useState<number>(0)
 
-  const limitedAccess = useMemo(() => sensitive && accessDenied, [sensitive, accessDenied])
+  const limitedAccess = useMemo(() => accessDenied, [accessDenied])
   const toastType = useMemo(() => {
     if (fetchError) return 'error'
     else if (loading) return 'warning'
@@ -41,7 +48,7 @@ export default function Gallery() {
   }, [loading, fetchError])
 
   const shuffleVideos = () => {
-    setVideoUrls((prev) => shuffle(prev))
+    setVideos((prev) => shuffle(prev))
   }
 
   const loadMore = () => {
@@ -51,19 +58,25 @@ export default function Gallery() {
   }
 
   useEffect(() => {
-    fetch('/api/s3/videos')
+    fetch(`/api/s3/videos${filter.value}`)
       .then((res) => res.json())
-      .then((allEmbedUrls) => {
+      .then((urls) => {
         setLoading(false)
-        const shuffledVideos = shuffle(allEmbedUrls)
-        setVideoUrls(shuffledVideos)
+        return urls.map((url: string, index: number) => ({
+          url: urls[index],
+          index: index,
+        }))
+      })
+      .then((shuffledUrls) => {
+        const shuffledVideos: VideoType[] = shuffle(shuffledUrls)
+        setVideos(shuffledVideos)
       })
       .catch((err) => {
         setLoading(false)
         setFetchError(true)
         console.error(err)
       })
-  }, [])
+  }, [filter])
 
   useEffect(() => {
     if (limitedAccess) {
@@ -95,14 +108,18 @@ export default function Gallery() {
       <main className="flex flex-col gap-y-4 px-0 lg:px-4">
         <div className="flex flex-col justify-between gap-y-2 lg:flex-row lg:gap-x-6">
           <div className="flex flex-col justify-center gap-2">
-            <h2 className="text-4xl font-extrabold tracking-tight sm:text-5xl">Finishers Hub</h2>
-            <p className="grow text-lg font-normal">
+            <div className="flex flex-wrap items-center justify-start gap-3">
+              <h2 className="mb-1 whitespace-nowrap text-4xl font-extrabold tracking-tight sm:text-5xl">
+                Finishers Hub
+              </h2>
+              {limitedAccess ? <LimitedAccessBadge /> : <LimitedAccessBadge />}
+            </div>
+            <p className="text-sm font-normal">
               The place for all finisher related content. Chaotic, outrageous, lawless on the fence
               of criminality. Perfectly unbalanced. As all things should be.
             </p>
           </div>
           <div className="mt-1 flex flex-row items-center justify-end gap-3 lg:mt-0 lg:flex-col">
-            {limitedAccess ? <LimitedAccessBadge /> : <FullAccessBadge />}
             <div className="flex items-center justify-end gap-x-2">
               {limitedAccess ? (
                 <AccessModal lockedHook={[accessDenied, setAccessDenied]} startOpen={false} />
@@ -113,6 +130,7 @@ export default function Gallery() {
               {limitedAccess ? null : <MuteToggler hook={[muted, setMuted]} />}
               <ViewToggler hook={[view, setView]} />
             </div>
+            <FilterVideos arenas={arenas} pickedHook={[filter, setFilter]} />
           </div>
         </div>
 
@@ -128,8 +146,8 @@ export default function Gallery() {
           )}
         >
           {limitedAccess ? <InvisbleTopLayer /> : null}
-          {videoUrls.length > 0
-            ? videoUrls.slice(0, clipsShown).map((videoSrc: string, videoIdx: number) => {
+          {videos.length > 0
+            ? videos.slice(0, clipsShown).map((video: VideoType, videoIdx: number) => {
                 const play = isMobile
                   ? videoIdx <= showMoreCount
                     ? true
@@ -139,8 +157,8 @@ export default function Gallery() {
                   : autoplay
                 return (
                   <VideoPlayer
-                    index={videoIdx}
-                    src={videoSrc}
+                    index={video.index}
+                    src={video.url}
                     play={play}
                     muted={muted}
                     key={`video-${videoIdx}`}
@@ -157,12 +175,12 @@ export default function Gallery() {
             type="button"
             onClick={loadMore}
             className={classNames(
-              videoUrls.length === 0 ? 'hidden' : 'inline-flex',
+              videos.length === 0 ? 'hidden' : 'inline-flex',
               `items-center rounded border border-transparent bg-primary/60 px-4 
               py-2 text-white shadow-sm transition hover:bg-primary/90 
               hover:bg-primary focus:border-transparent focus:ring-2 
-              focus:ring-primary focus:ring-offset-2 dark:border-transparent dark:bg-secondary/50 
-              dark:hover:bg-secondary/80 dark:focus:ring-secondary dark:focus:ring-offset-2`
+              focus:ring-primary focus:ring-offset-2 dark:border-transparent 
+              dark:bg-secondary/50 dark:hover:bg-secondary/80 dark:focus:ring-secondary dark:focus:ring-offset-2`
             )}
           >
             <PlusIcon className="-ml-1 mr-2 h-5 w-5" aria-hidden="true" />
