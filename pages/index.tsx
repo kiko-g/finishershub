@@ -124,8 +124,19 @@ export default function Hub() {
                     </Link>
                   ))}
               </div>
-
               <DarkModeSwitch />
+            </div>
+
+            <div>
+              <p className="text-sm font-normal text-gray-400 dark:text-white">
+                by{' '}
+                <Link
+                  href="https://kikogoncalves.com"
+                  className="transition hover:text-primary hover:underline dark:hover:text-secondary"
+                >
+                  Francisco Gonçalves
+                </Link>
+              </p>
             </div>
           </header>
 
