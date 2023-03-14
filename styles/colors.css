@@ -1,10 +1,36 @@
+/* Background */
+.blob,
+.dark .blob {
+  @apply fixed right-[25%] top-0 z-[-1] h-screen w-[60%] translate-y-[30%] rotate-180 blur-[200px] transition md:w-[50%];
+}
+
+.blob {
+  background: conic-gradient(
+    from 180deg at 50% 50%,
+    #88d2fa 0deg,
+    #21a4dc 133.12deg,
+    #64a5e1 208.13deg,
+    #b9b3fe 360deg
+  );
+}
+
+.dark .blob {
+  background: conic-gradient(
+    from 180deg at 50% 50%,
+    #25729c 0deg,
+    #21a4dc 133.12deg,
+    #64a5e1 208.13deg,
+    #b9b3fe 360deg
+  );
+}
+
 /* Twitch */
 .twitch {
-  color: #6441a570;
+  color: #6441a5b0;
 }
 
 .dark .twitch {
-  color: #6441a5a0;
+  color: #6441a5c0;
 }
 
 .twitch:hover {
@@ -13,11 +39,11 @@
 
 /* Twitter */
 .twitter {
-  color: #1da1f270;
+  color: #1da1f2b0;
 }
 
 .dark .twitter {
-  color: #1da1f2a0;
+  color: #1da1f2c0;
 }
 
 .twitter:hover {
@@ -26,11 +52,11 @@
 
 /* Youtube */
 .youtube {
-  color: #ff000070;
+  color: #ff0000b0;
 }
 
 .dark .youtube {
-  color: #ff0000a0;
+  color: #ff0000c0;
 }
 
 .youtube:hover {
@@ -39,11 +65,11 @@
 
 /* Linktree */
 .linktree {
-  color: #40e09e70;
+  color: #40e09eb0;
 }
 
 .dark .linktree {
-  color: #40e09ea0;
+  color: #40e09ec0;
 }
 
 .linktree:hover {
@@ -52,7 +78,7 @@
 
 /* Github */
 .github {
-  color: #33333370;
+  color: #333333b0;
 }
 
 .github:hover {
@@ -60,13 +86,9 @@
 }
 
 .dark .github {
-  color: #ffffffa0;
-  background-color: #333333a0;
-  border-radius: 9999px;
+  color: #333333c0;
 }
 
 .dark .github:hover {
-  color: #ffffff;
-  background-color: #333333;
-  border-radius: 9999px;
+  color: #333333;
 }

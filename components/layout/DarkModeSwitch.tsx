@@ -2,8 +2,13 @@ import React from 'react'
 import { Switch } from '@headlessui/react'
 import { MoonIcon, SunIcon } from '@heroicons/react/24/solid'
 import useDarkMode from '../../hooks/useDarkMode'
+import classNames from 'classnames'
 
-export default function DarkModeSwitch() {
+type Props = {
+  alt?: boolean
+}
+
+export default function DarkModeSwitch({ alt = false }: Props) {
   const [enabled, setEnabled] = useDarkMode()
 
   return (
@@ -19,14 +24,20 @@ export default function DarkModeSwitch() {
           {enabled ? (
             <MoonIcon
               aria-hidden="true"
-              className="ease block h-6 w-6 text-blue-400 transition duration-150 
-              hover:text-blue-300 md:h-8 md:w-8"
+              className={classNames(
+                alt ? 'text-slate-700 hover:opacity-80' : 'text-blue-400 hover:text-blue-200',
+                `ease block h-6 w-6  transition duration-150 md:h-8 md:w-8`
+              )}
             />
           ) : (
             <SunIcon
               aria-hidden="true"
-              className="ease block h-6 w-6 text-orange-400/70 transition duration-150 
-              hover:text-orange-500/90 md:h-8 md:w-8"
+              className={classNames(
+                alt
+                  ? 'text-orange-400 hover:text-orange-500'
+                  : 'text-orange-400/70 hover:text-orange-500/90',
+                `ease block h-6 w-6  transition duration-150 md:h-8 md:w-8`
+              )}
             />
           )}
         </Switch>

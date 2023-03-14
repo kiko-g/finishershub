@@ -74,11 +74,12 @@ export default function Hub() {
         className="flex min-h-screen flex-col scroll-smooth bg-teal-50 font-prose 
         font-medium text-gray-800 opacity-[99%] dark:bg-navy dark:text-white"
       >
-        <main className="flex w-full flex-col gap-y-16 px-4 pt-8 md:py-0 md:px-0">
+        <div className="blob" />
+        <main className="flex w-full flex-col gap-y-16 px-4 pt-8 md:py-0 md:px-4">
           {/* Hero */}
           <header className="my-auto flex min-h-full w-full flex-col items-center justify-center gap-y-8 self-center align-middle md:min-h-screen">
             <div className="max-w-2xl space-y-2">
-              <h2 className="bg-gradient-to-r from-primary to-secondary bg-clip-text text-center text-5xl font-extrabold tracking-tight text-transparent dark:bg-gradient-to-r dark:from-slate-200 dark:to-slate-300 sm:text-6xl">
+              <h2 className="bg-gradient-to-r from-violet-400 to-sky-400 bg-clip-text text-center text-5xl font-extrabold tracking-tight text-transparent dark:bg-gradient-to-r dark:from-slate-200 dark:to-slate-300 sm:text-6xl">
                 Finishers Hub
               </h2>
               <p className="text-center text-base font-normal leading-tight md:text-lg md:leading-normal">
@@ -93,7 +94,7 @@ export default function Hub() {
               ))}
             </nav>
 
-            <div className="mt-3 flex items-center gap-x-6">
+            <div className="mt-2 flex items-center gap-x-6 rounded-full bg-light/75 px-4 py-2 dark:bg-light/50">
               <div className="flex gap-x-2 sm:justify-center md:mt-0 md:gap-x-2">
                 {socials
                   .filter((social) => social.shown)
@@ -124,15 +125,16 @@ export default function Hub() {
                     </Link>
                   ))}
               </div>
-              <DarkModeSwitch />
+              <DarkModeSwitch alt />
             </div>
 
             <div>
-              <p className="text-sm font-normal text-gray-400 dark:text-white">
+              <p className="rounded-full bg-navy/50 px-2.5 py-1.5 text-sm font-normal text-gray-100 dark:text-white">
                 by{' '}
                 <Link
+                  target="_blank"
                   href="https://kikogoncalves.com"
-                  className="transition hover:text-primary hover:underline dark:hover:text-secondary"
+                  className="transition hover:underline"
                 >
                   Francisco Gonçalves
                 </Link>

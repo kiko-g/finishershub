@@ -39,10 +39,15 @@ module.exports = {
           '0%, 100%': { transform: 'rotate(5deg)' },
           '50%': { transform: 'rotate(-5deg)' },
         },
+        'bounce-horizontal': {
+          '0%, 100%': { transform: 'translateX(25%)' },
+          '50%': { transform: 'translateX(0)' },
+        },
       },
       animation: {
         dark: 'dark 400ms ease-in-out',
         light: 'light 400ms ease-in-out',
+        'bounce-horizontal': 'bounce-horizontal 1s infinite',
       },
       blur: {
         xxs: '1px',
