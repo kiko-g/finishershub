@@ -112,7 +112,7 @@ export default function Gallery() {
               <h2 className="mb-1 whitespace-nowrap text-4xl font-extrabold tracking-tight sm:text-5xl">
                 Finishers Hub
               </h2>
-              {limitedAccess ? <LimitedAccessBadge /> : <LimitedAccessBadge />}
+              {limitedAccess ? <LimitedAccessBadge /> : <FullAccessBadge />}
             </div>
             <p className="text-sm font-normal">
               The place for all finisher related content. Chaotic, outrageous, lawless on the fence

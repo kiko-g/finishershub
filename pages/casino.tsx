@@ -83,7 +83,7 @@ export default function Casino() {
                 <h2 className="whitespace-nowrap text-4xl font-extrabold tracking-tight sm:text-5xl">
                   Slot Machine
                 </h2>
-                {limitedAccess ? <LimitedAccessBadge /> : <LimitedAccessBadge />}
+                {limitedAccess ? <LimitedAccessBadge /> : <FullAccessBadge />}
               </div>
               <p className="mt-2 text-sm">
                 More fun than a casino, especially because we don&apos;t take your money. Not sure

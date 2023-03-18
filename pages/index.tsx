@@ -143,7 +143,7 @@ export default function Hub() {
           </header>
 
           {/* About */}
-          <div className="my-auto mx-auto mb-8 max-w-7xl">
+          <section id="about" className="my-auto mx-auto mb-16 max-w-7xl">
             <h2 className="text-3xl font-extrabold tracking-tight sm:text-4xl">About</h2>
             <ul className="mt-3 grid grid-cols-1 gap-y-4 gap-x-4 text-base font-normal tracking-tight lg:mt-6 lg:grid-cols-3 lg:text-lg">
               {/* Description */}
@@ -225,7 +225,7 @@ export default function Hub() {
                 Don&apos;t take anything too seriously, this is just for fun!
               </AboutCardLI>
             </ul>
-          </div>
+          </section>
         </main>
         <Footer siteTitle="Finishers Hub" />
       </div>
