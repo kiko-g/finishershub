@@ -157,9 +157,8 @@ export default function Gallery() {
                   : autoplay
                 return (
                   <VideoPlayer
-                    index={video.index}
-                    src={video.url}
-                    play={play}
+                    video={video}
+                    play={autoplay}
                     muted={muted}
                     key={`video-${videoIdx}`}
                   />

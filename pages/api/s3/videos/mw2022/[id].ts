@@ -19,14 +19,15 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
       throw new Error('Error requesting objects from S3')
     }
 
-    const filenamesMW2022 = objectsMW2022.Contents.map((object) => object.Key)
-    if (videoIndex < 0 || videoIndex >= filenamesMW2022.length) {
-      throw new Error('Invalid video index requested')
-    }
+    const videoDataMW2022 = objectsMW2022.Contents.map((object) => ({
+      bucketName: bucketMW2022,
+      filename: object.Key,
+      lastModified: object.LastModified,
+    })).sort((a, b) => (a.lastModified! > b.lastModified! ? -1 : 1))
 
     const videoUrl = await s3.getSignedUrlPromise('getObject', {
       Bucket: bucketMW2022,
-      Key: filenamesMW2022[videoIndex],
+      Key: videoDataMW2022[videoIndex].filename as string,
       Expires: 60 * 60 * 24, // 1 days
     })
 

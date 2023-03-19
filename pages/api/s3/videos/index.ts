@@ -12,27 +12,34 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
     const objectsMW2022 = await s3.listObjectsV2({ Bucket: bucketMW2022 }).promise()
 
     if (!objectsMW2019.Contents || !objectsMW2022.Contents) {
+      res.status(404).json({
+        message: 'No object found',
+      })
       throw new Error('Error requesting objects from S3')
     }
 
-    const filenamesMW2019 = objectsMW2019.Contents.map((object) => object.Key)
-    const filenamesMW2022 = objectsMW2022.Contents.map((object) => object.Key)
+    const videoDataMW2019 = objectsMW2019.Contents.map((object) => ({
+      bucketName: bucketMW2019,
+      filename: object.Key,
+      lastModified: object.LastModified,
+    }))
+
+    const videoDataMW2022 = objectsMW2022.Contents.map((object) => ({
+      bucketName: bucketMW2022,
+      filename: object.Key as string,
+      lastModified: object.LastModified,
+    }))
+
+    const allVideosSorted = [...videoDataMW2019, ...videoDataMW2022].sort((a, b) =>
+      a.lastModified! > b.lastModified! ? -1 : 1
+    )
 
     const videoUrls = []
-    for (const filename of filenamesMW2019) {
+    for (const video of allVideosSorted) {
       const videoUrl = await s3.getSignedUrlPromise('getObject', {
-        Bucket: bucketMW2019,
-        Key: filename,
-        Expires: 60 * 60 * 24, // 1 days
-      })
-      videoUrls.push(videoUrl)
-    }
-
-    for (const filename of filenamesMW2022) {
-      const videoUrl = await s3.getSignedUrlPromise('getObject', {
-        Bucket: bucketMW2022,
-        Key: filename,
-        Expires: 60 * 60 * 24, // 1 days
+        Bucket: video.bucketName,
+        Key: video.filename,
+        Expires: 60 * 60 * 24, // 1 day
       })
       videoUrls.push(videoUrl)
     }

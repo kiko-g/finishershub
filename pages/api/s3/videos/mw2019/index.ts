@@ -12,13 +12,17 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
       throw new Error('Error requesting objects from S3')
     }
 
-    const filenamesMW2019 = objectsMW2019.Contents.map((object) => object.Key)
+    const videoDataMW2019 = objectsMW2019.Contents.map((object) => ({
+      bucketName: bucketMW2019,
+      filename: object.Key as string,
+      lastModified: object.LastModified,
+    })).sort((a, b) => (a.lastModified! > b.lastModified! ? -1 : 1))
 
     const videoUrls = []
-    for (const filename of filenamesMW2019) {
+    for (const video of videoDataMW2019) {
       const videoUrl = await s3.getSignedUrlPromise('getObject', {
         Bucket: bucketMW2019,
-        Key: filename,
+        Key: video.filename,
         Expires: 60 * 60 * 24, // 1 days
       })
       videoUrls.push(videoUrl)

@@ -27,20 +27,30 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
       throw new Error('Error requesting objects from S3')
     }
 
-    const filenamesMW2019 = objectsMW2019.Contents.map((object) => object.Key)
-    const filenamesMW2022 = objectsMW2022.Contents.map((object) => object.Key)
-    const filenames = [...filenamesMW2019, ...filenamesMW2022]
+    const videoDataMW2019 = objectsMW2019.Contents.map((object) => ({
+      bucketName: bucketMW2019,
+      filename: object.Key,
+      lastModified: object.LastModified,
+    })).sort((a, b) => (a.lastModified! > b.lastModified! ? -1 : 1))
 
-    if (videoIndex < 0 || videoIndex >= filenames.length) {
+    const videoDataMW2022 = objectsMW2022.Contents.map((object) => ({
+      bucketName: bucketMW2022,
+      filename: object.Key as string,
+      lastModified: object.LastModified,
+    })).sort((a, b) => (a.lastModified! > b.lastModified! ? -1 : 1))
+
+    const allVideosSorted = [...videoDataMW2019, ...videoDataMW2022]
+
+    if (videoIndex < 0 || videoIndex >= allVideosSorted.length) {
       res.status(404).json({
         message: 'Video index is out of valid bounds',
       })
     }
 
-    const bucketName = videoIndex < filenamesMW2019.length ? bucketMW2019 : bucketMW2022
+    const video = allVideosSorted[videoIndex]
     const videoUrl = await s3.getSignedUrlPromise('getObject', {
-      Bucket: bucketName,
-      Key: filenames[videoIndex],
+      Bucket: video.bucketName,
+      Key: video.filename,
       Expires: 60 * 60 * 24, // 1 days
     })
 
