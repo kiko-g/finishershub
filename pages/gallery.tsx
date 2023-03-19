@@ -174,7 +174,7 @@ export default function Gallery() {
             type="button"
             onClick={loadMore}
             className={classNames(
-              videos.length === 0 ? 'hidden' : 'inline-flex',
+              videos.length === 0 || clipsShown >= videos.length ? 'hidden' : 'inline-flex',
               `items-center rounded border border-transparent bg-primary/60 px-4 
               py-2 text-white shadow-sm transition hover:bg-primary/90 
               hover:bg-primary focus:border-transparent focus:ring-2 
