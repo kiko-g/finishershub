@@ -7,6 +7,7 @@ import FilterVideos from './FilterVideos'
 import MuteToggler from './MuteToggler'
 import ShareVideo from './ShareVideo'
 import ShuffleButton from './ShuffleButton'
+import SingleVideoShowcase from './SingleVideoShowcase'
 import TwitchVideoClip from './TwitchVideoClip'
 import UsageDisclaimer from './UsageDisclaimer'
 import VideoNotFound from './VideoNotFound'
@@ -24,6 +25,7 @@ export {
   MuteToggler,
   ShareVideo,
   ShuffleButton,
+  SingleVideoShowcase,
   TwitchVideoClip,
   UsageDisclaimer,
   VideoNotFound,
