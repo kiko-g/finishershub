@@ -4,17 +4,18 @@ import { useRouter } from 'next/router'
 import Seo from '../../components/Seo'
 import { Navbar, Footer } from '../../components/layout'
 import { VideoPlayer, VideoSkeleton, VideoNotFound, ShareVideo } from '../../components/videos'
+import { VideoType } from '../../@types'
 
 type Props = {}
 
 export default function Video({}: Props) {
   const router = useRouter()
   const { pid } = router.query
-  const [video, setVideo] = useState<string>('')
+  const [video, setVideo] = useState<VideoType | null>(null)
   const [videoId, setVideoId] = useState<number>(-1)
   const [loading, setLoading] = useState<boolean>(true)
   const [fetchError, setFetchError] = useState<boolean>(false)
-  const ready = useMemo(() => !loading && !fetchError && video !== '', [loading, fetchError, video])
+  const ready = useMemo(() => !loading && !fetchError, [loading, fetchError])
 
   useEffect(() => {
     if (pid === undefined) return
@@ -33,7 +34,10 @@ export default function Video({}: Props) {
       })
       .then((url) => {
         setLoading(false)
-        setVideo(url)
+        setVideo({
+          url: url,
+          index: videoIndex,
+        })
         setVideoId(parseInt(pid as string))
       })
       .catch((err) => {
@@ -49,9 +53,9 @@ export default function Video({}: Props) {
       <Navbar siteTitle="Finishers Hub" location="Video" />
       <div className="flex flex-1 items-start justify-center md:items-center">
         <div className="mx-auto w-full max-w-full px-4 lg:max-w-5xl lg:px-0">
-          {ready ? (
+          {ready && video !== null ? (
             <div className="flex flex-col space-y-4 md:space-y-3">
-              <VideoPlayer index={videoId} muted={true} play={true} src={video} />
+              <VideoPlayer video={video} muted={true} play={true} />
               <div className="flex w-full items-center justify-between">
                 <Link
                   href="/"
