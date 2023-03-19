@@ -48,8 +48,18 @@ export type CatalogueItem = {
 }
 
 export type VideoType = {
-  url: string
   index: number
+  url: string
+  date: string
+  game: 'mw2019' | 'mw2022'
+  filename?: string
+}
+
+export type VideoTypeAPI = {
+  url: string
+  date: string
+  game: 'mw2019' | 'mw2022'
+  filename: string
 }
 
 export type FilterType =

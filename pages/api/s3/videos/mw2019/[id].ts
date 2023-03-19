@@ -33,13 +33,21 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
       })
     }
 
+    const video = videoDataMW2019[videoIndex]
     const videoUrl = await s3.getSignedUrlPromise('getObject', {
       Bucket: bucketMW2019,
-      Key: videoDataMW2019[videoIndex].filename as string,
+      Key: video.filename as string,
       Expires: 60 * 60 * 24, // 1 days
     })
 
-    res.status(200).json(videoUrl)
+    const videoRes = {
+      game: video.bucketName.split('.'),
+      url: videoUrl,
+      date: video.lastModified,
+      filename: video.filename,
+    }
+
+    res.status(200).json(videoRes)
   } catch (error) {
     console.error(error)
     const errorMessage = error instanceof Error ? error.message : 'Internal server error'

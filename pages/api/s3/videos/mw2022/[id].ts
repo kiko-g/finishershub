@@ -28,18 +28,24 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
     })).sort((a, b) => (a.lastModified! < b.lastModified! ? -1 : 1))
 
     if (videoIndex < 0 || videoIndex >= videoDataMW2022.length) {
-      res.status(404).json({
-        message: 'Video index is out of valid bounds',
-      })
+      res.status(404).json({ message: 'Video index is out of valid bounds' })
     }
 
+    const video = videoDataMW2022[videoIndex]
     const videoUrl = await s3.getSignedUrlPromise('getObject', {
       Bucket: bucketMW2022,
-      Key: videoDataMW2022[videoIndex].filename as string,
+      Key: video.filename as string,
       Expires: 60 * 60 * 24, // 1 days
     })
 
-    res.status(200).json(videoUrl)
+    const videoRes = {
+      game: video.bucketName.split('.'),
+      url: videoUrl,
+      date: video.lastModified,
+      filename: video.filename,
+    }
+
+    res.status(200).json(videoRes)
   } catch (error) {
     console.error(error)
     const errorMessage = error instanceof Error ? error.message : 'Internal server error'

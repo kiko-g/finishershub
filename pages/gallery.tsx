@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useMemo } from 'react'
-import type { FilterType, VideoType } from '../@types'
+import type { FilterType, VideoType, VideoTypeAPI } from '../@types'
 import classNames from 'classnames'
 import { shuffle } from '../utils'
 import { useMediaQuery } from 'usehooks-ts'
@@ -60,15 +60,18 @@ export default function Gallery() {
   useEffect(() => {
     fetch(`/api/s3/videos${filter.value}`)
       .then((res) => res.json())
-      .then((urls) => {
+      .then((vids: VideoTypeAPI[]) => {
         setLoading(false)
-        return urls.map((url: string, index: number) => ({
-          url: urls[index],
+        return vids.map((vid: VideoTypeAPI, index: number) => ({
+          url: vid.url,
           index: index,
+          date: vid.date,
+          game: vid.game,
+          filename: vid.filename,
         }))
       })
-      .then((shuffledUrls) => {
-        const shuffledVideos: VideoType[] = shuffle(shuffledUrls)
+      .then((videos) => {
+        const shuffledVideos = shuffle(videos) as VideoType[]
         setVideos(shuffledVideos)
       })
       .catch((err) => {
@@ -175,15 +178,15 @@ export default function Gallery() {
             onClick={loadMore}
             className={classNames(
               videos.length === 0 || clipsShown >= videos.length ? 'hidden' : 'inline-flex',
-              `items-center rounded border border-transparent bg-primary/60 px-4 
+              `items-center gap-2 rounded border border-transparent bg-primary/60 px-4 
               py-2 text-white shadow-sm transition hover:bg-primary/90 
               hover:bg-primary focus:border-transparent focus:ring-2 
               focus:ring-primary focus:ring-offset-2 dark:border-transparent 
               dark:bg-secondary/50 dark:hover:bg-secondary/80 dark:focus:ring-secondary dark:focus:ring-offset-2`
             )}
           >
-            <PlusIcon className="-ml-1 mr-2 h-5 w-5" aria-hidden="true" />
-            Load More Videos
+            <PlusIcon className="h-5 w-5" aria-hidden="true" />
+            <span>Load More Videos</span>
           </button>
         </div>
       </main>

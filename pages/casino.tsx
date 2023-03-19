@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useMemo } from 'react'
-import type { FilterType, VideoType } from '../@types'
+import type { FilterType, VideoType, VideoTypeAPI } from '../@types'
 import useAccessDenied from '../hooks/useAccessDenied'
 import { shuffle } from '../utils'
 import { Layout, AccessModal, InvisbleTopLayer } from '../components/layout'
@@ -55,15 +55,18 @@ export default function Casino() {
   useEffect(() => {
     fetch(`/api/s3/videos${filter.value}`)
       .then((res) => res.json())
-      .then((urls) => {
+      .then((vids: VideoTypeAPI[]) => {
         setLoading(false)
-        return urls.map((url: string, index: number) => ({
-          url: urls[index],
+        return vids.map((vid: VideoTypeAPI, index: number) => ({
+          url: vid.url,
           index: index,
+          date: vid.date,
+          game: vid.game,
+          filename: vid.filename,
         }))
       })
-      .then((shuffledUrls) => {
-        const shuffledVideos: VideoType[] = shuffle(shuffledUrls)
+      .then((videos) => {
+        const shuffledVideos = shuffle(videos) as VideoType[]
         setVideos(shuffledVideos)
       })
       .catch((err) => {
@@ -123,10 +126,7 @@ export default function Casino() {
               onClick={prevVideo}
               disabled={index === 0}
               title="Go to the previous highlight"
-              className="rounded-l border border-r-0 border-slate-800/60 bg-slate-800/60 px-4 py-2
-                transition enabled:hover:bg-slate-800/80 disabled:cursor-not-allowed 
-                disabled:opacity-25 dark:border-blue-200/30 dark:bg-blue-200/20 enabled:dark:hover:bg-blue-200/50 
-                lg:px-4 lg:py-1"
+              className="rounded-l border border-r-0 border-slate-800/60 bg-slate-800/60 px-4 py-2 transition enabled:hover:bg-slate-800/80 disabled:cursor-not-allowed disabled:opacity-25 dark:border-blue-200/30 dark:bg-blue-200/20 enabled:dark:hover:bg-blue-200/50 lg:px-4 lg:py-1"
             >
               <ArrowLongLeftIcon className="inline-flex h-6 w-6" />
             </button>
@@ -145,9 +145,7 @@ export default function Casino() {
               onClick={nextVideo}
               disabled={index === videos.length - 1}
               title="Go to the next highlight"
-              className="rounded-r border border-l-0 border-slate-800/60 bg-slate-800/60 px-4 py-2
-                transition enabled:hover:bg-slate-800/80 disabled:cursor-not-allowed disabled:opacity-25 
-                dark:border-blue-200/30 dark:bg-blue-200/20 enabled:dark:hover:bg-blue-200/50 lg:px-4 lg:py-1"
+              className="rounded-r border border-l-0 border-slate-800/60 bg-slate-800/60 px-4 py-2 transition enabled:hover:bg-slate-800/80 disabled:cursor-not-allowed disabled:opacity-25 dark:border-blue-200/30 dark:bg-blue-200/20 enabled:dark:hover:bg-blue-200/50 lg:px-4 lg:py-1"
             >
               <ArrowLongRightIcon className="inline-flex h-6 w-6" />
             </button>

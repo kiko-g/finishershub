@@ -4,7 +4,7 @@ import { useRouter } from 'next/router'
 import Seo from '../../../components/Seo'
 import { Navbar, Footer } from '../../../components/layout'
 import { VideoPlayer, VideoSkeleton, VideoNotFound, ShareVideo } from '../../../components/videos'
-import { VideoType } from '../../../@types'
+import { VideoType, VideoTypeAPI } from '../../../@types'
 
 type Props = {}
 
@@ -32,13 +32,16 @@ export default function Video({}: Props) {
           return res.json()
         }
       })
-      .then((url) => {
+      .then((vid: VideoTypeAPI) => {
         setLoading(false)
         setVideo({
-          url: url,
+          url: vid.url,
           index: videoIndex,
+          date: vid.date,
+          game: vid.game,
+          filename: vid.filename,
         })
-        setVideoId(parseInt(vid as string))
+        setVideoId(videoIndex)
       })
       .catch((err) => {
         setLoading(false)

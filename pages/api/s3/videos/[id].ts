@@ -1,4 +1,5 @@
 import { estabilishS3Connection } from '../../../../utils/api/s3'
+import type { S3 } from 'aws-sdk'
 import type { NextApiRequest, NextApiResponse } from 'next'
 
 const s3 = estabilishS3Connection()
@@ -9,9 +10,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
     const videoIndex = parseInt(idStr)
 
     if (isNaN(videoIndex)) {
-      res.status(404).json({
-        message: 'Video id provided is invalid',
-      })
+      res.status(404).json({ message: 'Video id provided is invalid' })
     }
 
     const bucketMW2019 = process.env.NEXT_PUBLIC_AWS_S3_BUCKET_NAME_MW2019 || 'finishershub.mw2019'
@@ -31,7 +30,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
       lastModified: object.LastModified,
     })).sort((a, b) => (a.lastModified! < b.lastModified! ? -1 : 1))
 
-    const videoDataMW2022 = objectsMW2022.Contents.map((object) => ({
+    const videoDataMW2022 = objectsMW2022.Contents.map((object: S3.Object) => ({
       bucketName: bucketMW2022,
       filename: object.Key as string,
       lastModified: object.LastModified,
@@ -52,7 +51,14 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
       Expires: 60 * 60 * 24, // 1 days
     })
 
-    res.status(200).json(videoUrl)
+    const videoRes = {
+      game: video.bucketName.split('.'),
+      url: videoUrl,
+      date: video.lastModified,
+      filename: video.filename,
+    }
+
+    res.status(200).json(videoRes)
   } catch (error) {
     console.error(error)
     const errorMessage = error instanceof Error ? error.message : 'Internal server error'

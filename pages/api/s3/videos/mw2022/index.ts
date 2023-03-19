@@ -13,23 +13,31 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
       return
     }
 
-    const videoDataMW2022 = objectsMW2022.Contents.map((object) => ({
+    const videoData = objectsMW2022.Contents.map((object) => ({
       bucketName: bucketMW2022,
       filename: object.Key as string,
       lastModified: object.LastModified,
     })).sort((a, b) => (a.lastModified! < b.lastModified! ? -1 : 1))
 
-    const videoUrls = []
-    for (const video of videoDataMW2022) {
+    const videosRes = []
+    for (const video of videoData) {
       const videoUrl = await s3.getSignedUrlPromise('getObject', {
-        Bucket: bucketMW2022,
+        Bucket: video.bucketName,
         Key: video.filename,
-        Expires: 60 * 60 * 24, // 1 days
+        Expires: 60 * 60 * 24, // 1 day
       })
-      videoUrls.push(videoUrl)
+
+      const videoRes = {
+        game: video.bucketName.split('.'),
+        url: videoUrl,
+        date: video.lastModified,
+        filename: video.filename,
+      }
+
+      videosRes.push(videoRes)
     }
 
-    res.status(200).json(videoUrls)
+    res.status(200).json(videosRes)
   } catch (error) {
     console.error(error)
     const errorMessage = error instanceof Error ? error.message : 'Internal server error'
