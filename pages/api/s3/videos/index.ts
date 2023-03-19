@@ -29,7 +29,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
     }))
 
     const allVideosSorted = [...videoDataMW2019, ...videoDataMW2022].sort((a, b) =>
-      a.lastModified! > b.lastModified! ? -1 : 1
+      a.lastModified! < b.lastModified! ? -1 : 1
     )
 
     const videoUrls = []

@@ -29,13 +29,13 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
       bucketName: bucketMW2019,
       filename: object.Key,
       lastModified: object.LastModified,
-    })).sort((a, b) => (a.lastModified! > b.lastModified! ? -1 : 1))
+    })).sort((a, b) => (a.lastModified! < b.lastModified! ? -1 : 1))
 
     const videoDataMW2022 = objectsMW2022.Contents.map((object) => ({
       bucketName: bucketMW2022,
       filename: object.Key as string,
       lastModified: object.LastModified,
-    })).sort((a, b) => (a.lastModified! > b.lastModified! ? -1 : 1))
+    })).sort((a, b) => (a.lastModified! < b.lastModified! ? -1 : 1))
 
     const allVideosSorted = [...videoDataMW2019, ...videoDataMW2022]
 
