@@ -1,3 +1,4 @@
+import { VideoType } from '../@types/index'
 export const daysDifference = (before: Date, after: Date) => {
   let a = new Date(after.toString())
   let b = new Date(before.toString())
@@ -54,6 +55,10 @@ export const strIncludes = (str: string, query: string, strict?: boolean) =>
         .replace(':', '')
         .includes(query.toLowerCase().replace(/\s+/g, ''))
 
-export const getVideoUrlFromIndex = (index: number) => {
-  return `https://finishershub.vercel.app/video/${index}`
+export const getVideoUrlFromVideo = (video: VideoType) => {
+  // TODO: share video by game and not just in general order
+  // return `${url}/video/${video.game}/${video.index}
+
+  const url = typeof window !== 'undefined' ? window.location.origin : ''
+  return `${url}/video/${video.index}`
 }

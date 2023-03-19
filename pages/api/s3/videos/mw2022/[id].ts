@@ -39,7 +39,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
     })
 
     const videoRes = {
-      game: video.bucketName.split('.'),
+      game: video.bucketName.split('.')[1],
       url: videoUrl,
       date: video.lastModified,
       filename: video.filename,

@@ -1,16 +1,24 @@
 import React from 'react'
 import Link from 'next/link'
-import { getVideoUrlFromIndex } from '../../utils'
+import { getVideoUrlFromVideo } from '../../utils'
 import { ArrowTopRightOnSquareIcon } from '@heroicons/react/24/outline'
+import { VideoType } from '../../@types/index'
 
 type Props = {
-  index: number
+  video: VideoType
 }
 
-export default function PopOpenVideo({ index }: Props) {
-  const url = getVideoUrlFromIndex(index)
+export default function PopOpenVideo({ video }: Props) {
+  const [url, setUrl] = React.useState<string>('')
 
-  return (
+  React.useEffect(() => {
+    if (!video) return
+
+    const videoUrl = getVideoUrlFromVideo(video)
+    setUrl(videoUrl)
+  }, [video])
+
+  return url === '' ? null : (
     <Link
       href={url}
       target="_blank"

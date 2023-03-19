@@ -24,8 +24,8 @@ export default function VideoPlayer({ video, play = false, muted = true }: Props
         <source src={video.url} type="video/mp4" />
       </video>
       <div className="absolute top-0 right-0 z-50 hidden rounded-bl rounded-tr bg-slate-900/80 px-2 py-2 font-normal text-white transition group-hover:flex group-hover:gap-2">
-        <ShareVideo index={video.index} alt />
-        <PopOpenVideo index={video.index} />
+        <ShareVideo video={video} alt />
+        <PopOpenVideo video={video} />
       </div>
     </div>
   )
