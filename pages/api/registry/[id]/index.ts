@@ -13,8 +13,7 @@ export default async function getFinishers(req: NextApiRequest, res: NextApiResp
     const stats = await Registry.findById(id)
 
     if (!stats) {
-      res.status(400).json({ message: 'Member not found' })
-      throw new Error('Member not found')
+      res.status(404).json({ message: 'Member not found' })
     }
 
     res.status(200).json(stats)

@@ -12,7 +12,8 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
     const objectsMW2022 = await s3.listObjectsV2({ Bucket: bucketMW2022 }).promise()
 
     if (!objectsMW2019.Contents || !objectsMW2022.Contents) {
-      throw new Error('Error requesting objects from S3')
+      res.status(404).json({ message: 'Error requesting objects from S3' })
+      return
     }
 
     const filenamesMW2019 = objectsMW2019.Contents.map((object) => object.Key)

@@ -14,8 +14,8 @@ export default async function decrementFinishers(req: NextApiRequest, res: NextA
     const stats = await Registry.findById(id)
 
     if (!stats) {
-      res.status(400).json({ message: 'Member not found' })
-      throw new Error('Member not found')
+      res.status(404).json({ message: 'Member not found' })
+      return
     }
 
     const increment = {

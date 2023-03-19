@@ -1,16 +1,16 @@
 import React, { useEffect, useMemo, useState } from 'react'
 import Link from 'next/link'
 import { useRouter } from 'next/router'
-import Seo from '../../components/Seo'
-import { Navbar, Footer } from '../../components/layout'
-import { VideoPlayer, VideoSkeleton, VideoNotFound, ShareVideo } from '../../components/videos'
-import { VideoType } from '../../@types'
+import Seo from '../../../components/Seo'
+import { Navbar, Footer } from '../../../components/layout'
+import { VideoPlayer, VideoSkeleton, VideoNotFound, ShareVideo } from '../../../components/videos'
+import { VideoType } from '../../../@types'
 
 type Props = {}
 
 export default function Video({}: Props) {
   const router = useRouter()
-  const { pid } = router.query
+  const { vid } = router.query
   const [video, setVideo] = useState<VideoType | null>(null)
   const [videoId, setVideoId] = useState<number>(-1)
   const [loading, setLoading] = useState<boolean>(true)
@@ -18,13 +18,13 @@ export default function Video({}: Props) {
   const ready = useMemo(() => !loading && !fetchError, [loading, fetchError])
 
   useEffect(() => {
-    if (pid === undefined) return
-    else if (isNaN(parseInt(pid as string))) {
+    if (vid === undefined) return
+    else if (isNaN(parseInt(vid as string))) {
       setFetchError(true)
     }
 
-    const videoIndex = parseInt(pid as string)
-    fetch(`/api/s3/videos/${videoIndex}}`)
+    const videoIndex = parseInt(vid as string)
+    fetch(`/api/s3/videos/mw2022/${videoIndex}}`)
       .then((res) => {
         if (res.status === 404) {
           setFetchError(true)
@@ -38,14 +38,14 @@ export default function Video({}: Props) {
           url: url,
           index: videoIndex,
         })
-        setVideoId(parseInt(pid as string))
+        setVideoId(parseInt(vid as string))
       })
       .catch((err) => {
         setLoading(false)
         setFetchError(true)
         console.error(err)
       })
-  }, [pid])
+  }, [vid])
 
   return (
     <div className="flex min-h-screen flex-col bg-light dark:bg-navy">

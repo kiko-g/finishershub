@@ -9,7 +9,8 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
     const objectsMW2019 = await s3.listObjectsV2({ Bucket: bucketMW2019 }).promise()
 
     if (!objectsMW2019.Contents) {
-      throw new Error('Error requesting objects from S3')
+      res.status(404).json({ message: 'Error requesting objects from S3' })
+      return
     }
 
     const videoDataMW2019 = objectsMW2019.Contents.map((object) => ({
