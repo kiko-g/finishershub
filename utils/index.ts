@@ -56,10 +56,10 @@ export const strIncludes = (str: string, query: string, strict?: boolean) =>
         .replace(':', '')
         .includes(query.toLowerCase().replace(/\s+/g, ''))
 
-export const getVideoUrlFromVideo = (video: VideoType) => {
+export const getVideoUrlFromVideo = (video: VideoType, offset?: number) => {
   // TODO: share video by game and not just in general order
   // return `${url}/video/${video.game}/${video.index}
 
   const url = typeof window !== 'undefined' ? window.location.origin : ''
-  return `${url}/video/${video.index}`
+  return offset ? `${url}/video/${video.index + offset}` : `${url}/video/${video.index}`
 }
