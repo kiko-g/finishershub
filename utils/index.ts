@@ -1,4 +1,5 @@
-import { VideoType } from '../@types/index'
+import type { VideoType } from '../@types'
+
 export const daysDifference = (before: Date, after: Date) => {
   let a = new Date(after.toString())
   let b = new Date(before.toString())

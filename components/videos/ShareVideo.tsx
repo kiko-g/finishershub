@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from 'react'
 import classNames from 'classnames'
+import type { VideoType } from '../../@types'
 import { getVideoUrlFromVideo } from '../../utils'
 import { ClipboardIcon } from '@heroicons/react/24/outline'
 import { ClipboardDocumentCheckIcon } from '@heroicons/react/24/solid'
-import { VideoType } from '../../@types/index'
 
 type Props = {
   video: VideoType
@@ -48,11 +48,11 @@ export default function ShareVideo({ video, alt }: Props) {
       {copied ? (
         <ClipboardDocumentCheckIcon
           fillRule="evenodd"
-          className={classNames(alt ? `h-5 w-5 lg:h-6 lg:w-6` : `h-7 w-7 lg:h-8 lg:w-8`)}
+          className={classNames(alt ? `h-7 w-7 lg:h-8 lg:w-8` : `h-5 w-5 lg:h-6 lg:w-6`)}
         />
       ) : (
         <ClipboardIcon
-          className={classNames(alt ? `h-5 w-5 lg:h-6 lg:w-6` : `h-7 w-7 lg:h-8 lg:w-8`)}
+          className={classNames(alt ? `h-7 w-7 lg:h-8 lg:w-8` : `h-5 w-5 lg:h-6 lg:w-6`)}
         />
       )}
     </button>

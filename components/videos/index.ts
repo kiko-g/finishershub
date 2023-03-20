@@ -5,6 +5,7 @@ import DeleteCookiesButton from './DeleteCookiesButton'
 import DummyLockedContent from './DummyLockedContent'
 import FilterVideos from './FilterVideos'
 import MuteToggler from './MuteToggler'
+import PopOpenVideo from './PopOpenVideo'
 import ShareVideo from './ShareVideo'
 import ShuffleButton from './ShuffleButton'
 import SingleVideoShowcase from './SingleVideoShowcase'
@@ -23,6 +24,7 @@ export {
   DummyLockedContent,
   FilterVideos,
   MuteToggler,
+  PopOpenVideo,
   ShareVideo,
   ShuffleButton,
   SingleVideoShowcase,
