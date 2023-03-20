@@ -22,8 +22,12 @@ export default function SingleVideoShowcase({ video }: Props) {
             <AccessModal lockedHook={[accessDenied, setAccessDenied]} startOpen={false} />
           ) : null}
         </div>
-        <div className="rounded border border-violet-500 bg-violet-500/50 px-4 py-2 text-sm uppercase text-white">
-          {video.date}
+        <div className="rounded border border-violet-500 bg-violet-500/50 px-4 py-2 text-sm text-white">
+          {new Date(video.date).toLocaleDateString('en-US', {
+            day: 'numeric',
+            month: 'long',
+            year: 'numeric',
+          })}
         </div>
       </div>
 
