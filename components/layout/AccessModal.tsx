@@ -17,31 +17,33 @@ type Props = {
 }
 
 export default function AccessModal({ lockedHook, startOpen, special = false }: Props) {
-  const secret = 'Doeu'
+  const secretCode = 'Doeu'
   const secretHints = ['Levels', 'Bio', 'Window', 'Clip']
+
+  const [accessCode, setAccessCode] = useState('')
+  const [accessCodeShown, setAccessCodeShown] = useState(true)
+  const [accessCodeError, setAccessCodeError] = useState(false)
+
   const [locked, setLocked] = lockedHook
   const [isOpen, setIsOpen] = useState(startOpen !== undefined ? startOpen : locked)
-  const [wrong, setWrong] = useState(false)
-  const [codephrase, setCodephrase] = useState('')
-  const [codephraseShown, setCodephraseShown] = useState(true)
 
   const closeModal = () => {
     setIsOpen(false)
   }
 
   const togglePasswordShown = () => {
-    setCodephraseShown(!codephraseShown)
+    setAccessCodeShown(!accessCodeShown)
   }
 
   const submitPassword = () => {
-    if (codephrase.toLowerCase() === secret.toLowerCase()) {
-      setCodephrase('')
+    if (accessCode.toLowerCase() === secretCode.toLowerCase()) {
+      setAccessCode('')
       setLocked(false)
       setIsOpen(false)
     } else {
-      setCodephrase('')
-      setWrong(true)
-      setTimeout(() => setWrong(false), 4000)
+      setAccessCode('')
+      setAccessCodeError(true)
+      setTimeout(() => setAccessCodeError(false), 4000)
     }
   }
 
@@ -154,24 +156,24 @@ export default function AccessModal({ lockedHook, startOpen, special = false }: 
                     <input
                       required
                       name="password"
-                      type={codephraseShown ? 'text' : 'password'}
+                      type={accessCodeShown ? 'text' : 'password'}
                       autoComplete="new-password"
                       className="relative block w-full"
                       placeholder="Password"
-                      value={codephrase}
+                      value={accessCode}
                       onKeyDown={(e) => e.key === 'Enter' && submitPassword()}
-                      onChange={(e) => setCodephrase(e.target.value)}
+                      onChange={(e) => setAccessCode(e.target.value)}
                     />
                     <button
                       type="button"
                       onClick={togglePasswordShown}
-                      title={`${codephraseShown ? 'Hide' : 'Show'} password`}
-                      aria-label={`${codephraseShown ? 'Hide' : 'Show'} password`}
+                      title={`${accessCodeShown ? 'Hide' : 'Show'} password`}
+                      aria-label={`${accessCodeShown ? 'Hide' : 'Show'} password`}
                       className="absolute right-[11px] top-[11px] rounded-full p-1 
                       text-primary transition hover:bg-primary hover:text-white 
                       dark:text-secondary dark:hover:bg-secondary dark:hover:text-white"
                     >
-                      {codephraseShown ? (
+                      {accessCodeShown ? (
                         <EyeSlashIcon className="h-5 w-5" />
                       ) : (
                         <EyeIcon className="h-5 w-5" />
@@ -179,7 +181,7 @@ export default function AccessModal({ lockedHook, startOpen, special = false }: 
                     </button>
                   </div>
 
-                  {wrong ? (
+                  {accessCodeError ? (
                     <p className="mt-0.5 text-sm text-rose-600 dark:text-rose-500">
                       Wrong codephrase. Try again.
                     </p>
