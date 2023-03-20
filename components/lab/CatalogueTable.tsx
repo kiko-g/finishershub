@@ -7,7 +7,7 @@ type Props = {
   catalogue: (string | number)[][]
 }
 
-export default function Catalogue({ headers, catalogue }: Props) {
+export default function CatalogueTable({ headers, catalogue }: Props) {
   return (
     <div className="flex flex-col">
       <div className="-my-2 overflow-x-auto sm:-mx-6 lg:-mx-8">
@@ -22,7 +22,7 @@ export default function Catalogue({ headers, catalogue }: Props) {
                 <span
                   key={`header-${headerIdx}`}
                   className={classNames(
-                    `font-lexend whitespace-nowrap px-2 py-2 text-sm font-medium uppercase 
+                    `whitespace-nowrap px-2 py-2 font-lexend text-sm font-medium uppercase 
                 tracking-tighter text-white`,
                     headerIdx === 0 ? 'text-left' : 'text-center'
                   )}

@@ -4,7 +4,7 @@ type Props = {
   shuffle: Function
 }
 
-export default function MuteToggler({ shuffle }: Props) {
+export default function ShuffleButton({ shuffle }: Props) {
   const [shuffling, setShuffling] = useState(false)
 
   const shuffleAction = () => {

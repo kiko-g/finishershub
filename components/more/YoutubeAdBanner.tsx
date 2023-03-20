@@ -4,7 +4,7 @@ import { ArrowLongRightIcon } from '@heroicons/react/24/outline'
 
 type Props = {}
 
-export default function TwitterAdBanner({}: Props) {
+export default function YoutubeAdBanner({}: Props) {
   return (
     <div className="flex flex-col gap-4 rounded bg-rose-600/10 px-4 py-4 lg:flex-row">
       {/* Content */}

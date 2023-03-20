@@ -3,7 +3,7 @@ import Image from 'next/image'
 
 type Props = {}
 
-export default function OhNo({}: Props) {
+export default function Doeu({}: Props) {
   const title = 'If you know you know.'
 
   return (
