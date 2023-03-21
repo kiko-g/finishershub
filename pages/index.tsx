@@ -3,7 +3,7 @@ import Link from 'next/link'
 import Seo from '../components/Seo'
 import { socials } from '../utils/data'
 import { Footer, DarkModeSwitch } from '../components/layout'
-import { AboutCardLI, AccessModal, NavCard } from '../components/hub'
+import { AboutCardLI, AccessModalCTA, NavCard } from '../components/hub'
 import useAccessDenied from '../hooks/useAccessDenied'
 import { FullAccessBadge, LimitedAccessBadge } from '../components/utils'
 import DeleteData from '../components/hub/DeleteData'
@@ -168,7 +168,7 @@ export default function Hub() {
 
             <div className="flex justify-end">
               {accessDenied ? (
-                <AccessModal lockedHook={[accessDenied, setAccessDenied]} startOpen={false} />
+                <AccessModalCTA lockedHook={[accessDenied, setAccessDenied]} startOpen={false} />
               ) : (
                 <DeleteData />
               )}

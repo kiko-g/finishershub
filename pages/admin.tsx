@@ -43,9 +43,7 @@ export default function AdminPage() {
           <div className="mt-1 flex flex-col items-center justify-end gap-2 lg:mt-0 lg:flex-col">
             {accessDenied ? <LimitedAccessBadge /> : <FullAccessBadge />}
             <div className="flex w-full items-center justify-end gap-x-2">
-              {accessDenied ? (
-                <AccessModal special lockedHook={[accessDenied, setAccessDenied]} />
-              ) : null}
+              {accessDenied ? <AccessModal lockedHook={[accessDenied, setAccessDenied]} /> : null}
             </div>
           </div>
         </div>

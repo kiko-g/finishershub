@@ -1,3 +1,4 @@
+import { ArrowPathRoundedSquareIcon } from '@heroicons/react/24/outline'
 import React, { useState, useEffect } from 'react'
 
 type Props = {
@@ -10,7 +11,7 @@ export default function ShuffleButton({ shuffle }: Props) {
   const shuffleAction = () => {
     shuffle()
     setShuffling(true)
-    setTimeout(() => setShuffling(false), 1500)
+    setTimeout(() => setShuffling(false), 1000)
   }
 
   return (
@@ -19,7 +20,7 @@ export default function ShuffleButton({ shuffle }: Props) {
         <button disabled>
           <svg
             xmlns="http://www.w3.org/2000/svg"
-            className="h-7 w-7 animate-spin fill-primary text-gray-300 dark:fill-white dark:text-gray-500 lg:h-8 lg:w-8"
+            className="h-6 w-6 animate-spin fill-primary text-gray-300 dark:fill-white dark:text-gray-500 lg:h-7 lg:w-7"
             fill="none"
             viewBox="0 0 100 101"
             stroke="currentColor"
@@ -41,20 +42,7 @@ export default function ShuffleButton({ shuffle }: Props) {
           className="transition hover:opacity-80"
           onClick={shuffleAction}
         >
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            className="h-7 w-7 lg:h-8 lg:w-8"
-            fill="none"
-            viewBox="0 0 24 24"
-            stroke="currentColor"
-            strokeWidth={2}
-          >
-            <path
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              d="M8 7h12m0 0l-4-4m4 4l-4 4m0 6H4m0 0l4 4m-4-4l4-4"
-            />
-          </svg>
+          <ArrowPathRoundedSquareIcon className="h-6 w-6 lg:h-7 lg:w-7" />
         </button>
       )}
     </div>

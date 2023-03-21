@@ -5,18 +5,17 @@ import {
   EyeIcon,
   EyeSlashIcon,
   XMarkIcon,
-  FingerPrintIcon,
   ArrowTopRightOnSquareIcon,
+  KeyIcon,
 } from '@heroicons/react/24/outline'
 import Link from 'next/link'
 
 type Props = {
   lockedHook: [boolean, Dispatch<SetStateAction<boolean>>]
   startOpen?: boolean
-  special?: boolean
 }
 
-export default function AccessModal({ lockedHook, startOpen, special = false }: Props) {
+export default function AccessModal({ lockedHook, startOpen }: Props) {
   const secretCode = 'Doeu'
   const secretHints = ['Levels', 'Bio', 'Window', 'Clip']
 
@@ -55,17 +54,9 @@ export default function AccessModal({ lockedHook, startOpen, special = false }: 
       <button
         title="Open access modal"
         onClick={() => setIsOpen(true)}
-        className={classNames(
-          'flex items-end justify-center gap-x-2 transition',
-          special
-            ? 'hover w-full rounded border border-teal-600/50 bg-teal-600/50 px-3 py-2 text-white hover:bg-teal-600/80'
-            : 'text-teal-600 hover:opacity-50 dark:text-teal-500'
-        )}
+        className="text-teal-500 transition hover:opacity-80 dark:text-teal-400"
       >
-        <FingerPrintIcon
-          className={classNames(special ? 'h-5 w-5 lg:h-6 lg:w-6' : 'h-7 w-7 lg:h-8 lg:w-8')}
-        />
-        {special ? <span>Get access</span> : null}
+        <KeyIcon className="h-6 w-6 lg:h-7 lg:w-7" />
       </button>
 
       {/* Modal */}
@@ -125,9 +116,8 @@ export default function AccessModal({ lockedHook, startOpen, special = false }: 
                           <span className="text-amber-600">limited access</span> to the site.
                         </li>
                         <li>
-                          Tou can click the{' '}
-                          <span className="text-emerald-500">green fingerprint</span> to reopen the
-                          modal.
+                          Tou can click the <span className="text-teal-500">green key</span> to
+                          reopen the modal.
                         </li>
                         <li>
                           <strong className="underline">Hints</strong>:{' '}

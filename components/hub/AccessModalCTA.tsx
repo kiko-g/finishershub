@@ -5,7 +5,7 @@ import {
   EyeIcon,
   EyeSlashIcon,
   XMarkIcon,
-  FingerPrintIcon,
+  KeyIcon,
   ArrowTopRightOnSquareIcon,
 } from '@heroicons/react/24/outline'
 import Link from 'next/link'
@@ -16,7 +16,7 @@ type Props = {
   special?: boolean
 }
 
-export default function AccessModal({ lockedHook, startOpen, special = false }: Props) {
+export default function AccessModalCTA({ lockedHook, startOpen, special = false }: Props) {
   const secretCode = 'Doeu'
   const secretHints = ['Levels', 'Bio', 'Window', 'Clip']
 
@@ -57,7 +57,7 @@ export default function AccessModal({ lockedHook, startOpen, special = false }: 
         onClick={() => setIsOpen(true)}
         className="flex w-min items-center justify-start gap-2 rounded border border-teal-600 bg-teal-600/60 py-4 px-5 text-white transition hover:bg-teal-600"
       >
-        <FingerPrintIcon className="h-5 w-5 lg:h-6 lg:w-6" />
+        <KeyIcon className="h-5 w-5 lg:h-6 lg:w-6" />
         <span className="whitespace-nowrap">Claim full access by entering the secret code</span>
       </button>
 
@@ -118,9 +118,8 @@ export default function AccessModal({ lockedHook, startOpen, special = false }: 
                           <span className="text-amber-600">limited access</span> to the site.
                         </li>
                         <li>
-                          Tou can click the{' '}
-                          <span className="text-emerald-500">green fingerprint</span> to reopen the
-                          modal.
+                          Tou can click the <span className="text-teal-500">green key icon</span> to
+                          reopen the modal.
                         </li>
                         <li>
                           <strong className="underline">Hints</strong>:{' '}

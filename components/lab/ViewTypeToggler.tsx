@@ -1,5 +1,5 @@
 import React, { Dispatch, SetStateAction } from 'react'
-import { TableCellsIcon, Squares2X2Icon } from '@heroicons/react/24/outline'
+import { Bars2Icon, Bars3Icon } from '@heroicons/react/24/outline'
 
 type Props = {
   hook: [boolean, Dispatch<SetStateAction<boolean>>]
@@ -16,7 +16,7 @@ export default function ViewTypeToggler({ hook }: Props) {
           className="transition hover:opacity-80"
           onClick={() => setType(false)}
         >
-          <TableCellsIcon className="h-7 w-7 lg:h-8 lg:w-8" />
+          <Bars2Icon className="h-6 w-6 lg:h-7 lg:w-7" />
         </button>
       ) : (
         <button
@@ -24,7 +24,7 @@ export default function ViewTypeToggler({ hook }: Props) {
           className="transition hover:opacity-80"
           onClick={() => setType(true)}
         >
-          <Squares2X2Icon className="h-7 w-7 lg:h-8 lg:w-8" />
+          <Bars3Icon className="h-6 w-6 lg:h-7 lg:w-7" />
         </button>
       )}
     </div>
