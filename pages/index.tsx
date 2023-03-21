@@ -7,6 +7,7 @@ import { AboutCardLI, AccessModal, NavCard } from '../components/hub'
 import useAccessDenied from '../hooks/useAccessDenied'
 import { FullAccessBadge, LimitedAccessBadge } from '../components/utils'
 import DeleteData from '../components/hub/DeleteData'
+import FinishersInfo from '../components/hub/FinishersInfo'
 
 export default function Hub() {
   const [accessDenied, setAccessDenied] = useAccessDenied()
@@ -172,6 +173,11 @@ export default function Hub() {
                 <DeleteData />
               )}
             </div>
+          </section>
+
+          <section id="info" className="my-auto mx-auto mb-16 flex max-w-6xl flex-col space-y-6">
+            <h2 className="text-3xl font-bold tracking-tight sm:text-4xl">Facts and figures</h2>
+            <FinishersInfo />
           </section>
 
           {/* About */}
