@@ -66,6 +66,7 @@ export default function Casino() {
         }))
       })
       .then((videos) => {
+        setIndex(0)
         const shuffledVideos = shuffle(videos) as VideoType[]
         setVideos(shuffledVideos)
       })

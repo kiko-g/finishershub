@@ -1,3 +1,5 @@
+import { GetObjectCommand, ListObjectsV2Command } from '@aws-sdk/client-s3'
+import { getSignedUrl } from '@aws-sdk/s3-request-presigner'
 import { estabilishS3Connection } from '../../../../../utils/api/s3'
 import type { NextApiRequest, NextApiResponse } from 'next'
 
@@ -6,35 +8,40 @@ const s3 = estabilishS3Connection()
 export default async function handler(req: NextApiRequest, res: NextApiResponse) {
   try {
     const bucketMW2022 = process.env.NEXT_PUBLIC_AWS_S3_BUCKET_NAME_MW2022 || 'finishershub.mw2022'
-    const objectsMW2022 = await s3.listObjectsV2({ Bucket: bucketMW2022 }).promise()
+    const objectsMW2022 = new ListObjectsV2Command({ Bucket: bucketMW2022 })
 
-    if (!objectsMW2022.Contents) {
+    const mw2022Response = await s3.send(objectsMW2022)
+
+    if (!mw2022Response.Contents) {
       res.status(404).json({ message: 'Error requesting objects from S3' })
       return
     }
 
-    const videoData = objectsMW2022.Contents.map((object) => ({
+    const videoDataMW2022 = mw2022Response.Contents.map((object) => ({
       bucketName: bucketMW2022,
       filename: object.Key as string,
       lastModified: object.LastModified,
     })).sort((a, b) => (a.lastModified! < b.lastModified! ? -1 : 1))
 
     const videosRes = []
-    for (const video of videoData) {
-      const videoUrl = await s3.getSignedUrlPromise('getObject', {
+    for (const video of videoDataMW2022) {
+      const getObjectCommandInput = new GetObjectCommand({
         Bucket: video.bucketName,
         Key: video.filename,
-        Expires: 60 * 60 * 24, // 1 day
       })
 
-      const videoRes = {
-        game: video.bucketName.split('.')[1],
-        url: videoUrl,
-        date: video.lastModified,
-        filename: video.filename,
+      const getObjectCommandOutput = {
+        expiresIn: 60 * 60 * 24, // 1 day
       }
 
-      videosRes.push(videoRes)
+      const signedUrl = await getSignedUrl(s3, getObjectCommandInput, getObjectCommandOutput)
+
+      videosRes.push({
+        game: video.bucketName.split('.')[1],
+        url: signedUrl,
+        date: video.lastModified,
+        filename: video.filename,
+      })
     }
 
     res.status(200).json(videosRes)

@@ -69,10 +69,16 @@ export default function SingleVideoShowcase({ video }: Props) {
         </div>
 
         <div className="flex items-center gap-2">
-          <div className="self-stretch rounded border border-blue-600 bg-blue-600/50 px-4 py-2 text-sm uppercase text-white">
+          <div
+            title="Game"
+            className="self-stretch rounded border border-blue-600 bg-blue-600/50 px-4 py-2 text-sm uppercase text-white"
+          >
             {video.game}
           </div>
-          <div className="self-stretch rounded border border-violet-500 bg-violet-500/50 px-4 py-2 text-sm text-white">
+          <div
+            title="Upload Date"
+            className="self-stretch rounded border border-violet-500 bg-violet-500/50 px-4 py-2 text-sm text-white"
+          >
             {new Date(video.date).toLocaleDateString('en-US', {
               day: 'numeric',
               month: 'long',
