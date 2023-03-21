@@ -11,7 +11,7 @@ export default function Lab({}: Props) {
     <Layout location="Lab">
       <main className="mb-12 flex flex-col gap-6 px-0 lg:px-4">
         <header className="flex flex-col justify-center gap-2">
-          <h2 className="text-4xl font-extrabold tracking-tight sm:text-5xl">Finishers Lab</h2>
+          <h2 className="text-4xl font-bold tracking-tight sm:text-5xl">Finishers Lab</h2>
           <p className="grow text-lg font-normal">
             Resources and information related to the sick profession of performing finishers.
           </p>

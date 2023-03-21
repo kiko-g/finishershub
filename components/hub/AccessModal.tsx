@@ -55,17 +55,10 @@ export default function AccessModal({ lockedHook, startOpen, special = false }: 
       <button
         title="Open access modal"
         onClick={() => setIsOpen(true)}
-        className={classNames(
-          'flex items-end justify-center gap-x-2 transition',
-          special
-            ? 'hover w-full rounded border border-teal-600/50 bg-teal-600/50 px-3 py-2 text-white hover:bg-teal-600/80'
-            : 'text-teal-600 hover:opacity-50 dark:text-teal-500'
-        )}
+        className="flex w-min items-center justify-start gap-2 rounded border border-teal-600 bg-teal-600/60 py-4 px-5 text-white transition hover:bg-teal-600"
       >
-        <FingerPrintIcon
-          className={classNames(special ? 'h-5 w-5 lg:h-6 lg:w-6' : 'h-7 w-7 lg:h-8 lg:w-8')}
-        />
-        {special ? <span>Get access</span> : null}
+        <FingerPrintIcon className="h-5 w-5 lg:h-6 lg:w-6" />
+        <span className="whitespace-nowrap">Claim full access by entering the secret code</span>
       </button>
 
       {/* Modal */}

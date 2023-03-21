@@ -86,9 +86,7 @@ export default function CasinoPage() {
         <main className="flex flex-col gap-3">
           <div className="flex flex-col justify-between gap-y-2 lg:flex-row lg:gap-x-6">
             <div className="text-lg font-normal">
-              <h2 className="mb-2 text-4xl font-extrabold tracking-tight sm:text-5xl">
-                Slot Machine
-              </h2>
+              <h2 className="mb-2 text-4xl font-bold tracking-tight sm:text-5xl">Slot Machine</h2>
               <p className="leading-normal">
                 More fun than a casino, especially because we don&apos;t take your money. Not sure
                 about the addiction part though.

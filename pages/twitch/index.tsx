@@ -95,7 +95,7 @@ export default function IndexPage() {
       <main className="flex flex-col gap-y-4 px-0 lg:px-4">
         <div className="flex flex-col justify-between gap-y-2 lg:flex-row lg:gap-x-6">
           <div className="flex flex-col justify-center gap-2">
-            <h2 className="text-4xl font-extrabold tracking-tight sm:text-5xl">Finishers Hub</h2>
+            <h2 className="text-4xl font-bold tracking-tight sm:text-5xl">Finishers Hub</h2>
             <p className="grow text-lg font-normal">
               The place for all finisher related content. Chaotic, outrageous, lawless on the fence
               of criminality. Perfectly unbalanced. As all things should be.

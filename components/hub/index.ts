@@ -1,4 +1,5 @@
-import NavCard from './NavCard'
 import AboutCardLI from './AboutCardLI'
+import AccessModal from './AccessModal'
+import NavCard from './NavCard'
 
-export { NavCard, AboutCardLI }
+export { AboutCardLI, AccessModal, NavCard }

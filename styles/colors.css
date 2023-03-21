@@ -1,7 +1,7 @@
 /* Background */
 .blob,
 .dark .blob {
-  @apply fixed right-[25%] top-0 z-[-1] h-screen w-[60%] translate-y-[30%] rotate-180 blur-[200px] transition md:w-[50%];
+  @apply fixed right-[10%] top-0 z-[-1] h-screen w-[80%] translate-y-[60%] rotate-180 rounded-[200px] opacity-70 blur-[200px] transition;
 }
 
 .blob {

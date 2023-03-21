@@ -25,8 +25,8 @@ export default function DarkModeSwitch({ alt = false }: Props) {
             <MoonIcon
               aria-hidden="true"
               className={classNames(
-                alt ? 'text-slate-700 hover:opacity-80' : 'text-blue-400 hover:text-blue-200',
-                `ease block h-6 w-6  transition duration-150 md:h-8 md:w-8`
+                alt ? 'text-gray-800 hover:opacity-80' : 'text-blue-400 hover:text-blue-200',
+                `ease block h-6 w-6 transition duration-150 md:h-7 md:w-7`
               )}
             />
           ) : (
@@ -36,7 +36,7 @@ export default function DarkModeSwitch({ alt = false }: Props) {
                 alt
                   ? 'text-orange-400 hover:text-orange-500'
                   : 'text-orange-400/70 hover:text-orange-500/90',
-                `ease block h-6 w-6  transition duration-150 md:h-8 md:w-8`
+                `ease block h-6 w-6 transition duration-150 md:h-7 md:w-7`
               )}
             />
           )}

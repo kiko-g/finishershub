@@ -35,9 +35,7 @@ export default function AdminPage() {
       <main className="flex flex-col gap-y-3 px-0 lg:px-4">
         <div className="flex flex-col justify-between gap-y-2 lg:flex-row lg:gap-x-6">
           <div className="flex flex-col justify-center gap-2">
-            <h2 className="text-4xl font-extrabold tracking-tight sm:text-5xl">
-              Finishers Management
-            </h2>
+            <h2 className="text-4xl font-bold tracking-tight sm:text-5xl">Finishers Management</h2>
             <p className="grow text-lg font-normal">
               For members and members only. Let&apos;s build something great, shall we?
             </p>

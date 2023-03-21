@@ -83,7 +83,7 @@ export default function Casino() {
           <div className="flex flex-col justify-between gap-y-2 lg:flex-row lg:gap-x-6">
             <div className="text-lg font-normal">
               <div className="flex flex-wrap items-center justify-start gap-x-3 gap-y-1">
-                <h2 className="whitespace-nowrap text-4xl font-extrabold tracking-tight sm:text-5xl">
+                <h2 className="whitespace-nowrap text-4xl font-bold tracking-tight sm:text-5xl">
                   Slot Machine
                 </h2>
                 {limitedAccess ? <LimitedAccessBadge /> : <FullAccessBadge />}

@@ -3,9 +3,13 @@ import Link from 'next/link'
 import Seo from '../components/Seo'
 import { socials } from '../utils/data'
 import { Footer, DarkModeSwitch } from '../components/layout'
-import { AboutCardLI, NavCard } from '../components/hub'
+import { AboutCardLI, AccessModal, NavCard } from '../components/hub'
+import useAccessDenied from '../hooks/useAccessDenied'
+import { FullAccessBadge, LimitedAccessBadge } from '../components/utils'
+import DeleteData from '../components/hub/DeleteData'
 
 export default function Hub() {
+  const [accessDenied, setAccessDenied] = useAccessDenied()
   const nav = [
     {
       name: 'Casino',
@@ -79,7 +83,7 @@ export default function Hub() {
           {/* Hero */}
           <header className="my-auto flex min-h-full w-full flex-col items-center justify-center gap-y-8 self-center align-middle md:min-h-screen">
             <div className="max-w-2xl space-y-2">
-              <h2 className="bg-gradient-to-r from-violet-400 to-sky-400 bg-clip-text text-center text-5xl font-extrabold tracking-tight text-transparent dark:bg-gradient-to-r dark:from-slate-200 dark:to-slate-300 sm:text-6xl">
+              <h2 className="bg-gradient-to-r from-violet-400 to-sky-400 bg-clip-text text-center text-5xl font-bold tracking-tight text-transparent dark:bg-gradient-to-r dark:from-slate-200 dark:to-slate-300 sm:text-6xl">
                 Finishers Hub
               </h2>
               <p className="text-center text-base font-normal leading-tight md:text-lg md:leading-normal">
@@ -94,7 +98,7 @@ export default function Hub() {
               ))}
             </nav>
 
-            <div className="mt-2 flex items-center gap-x-6 rounded-full bg-light/75 px-4 py-2 dark:bg-light/50">
+            <div className="mt-2 flex items-center gap-x-6 rounded-full bg-blue-50 px-4 py-2 dark:bg-blue-100/70">
               <div className="flex gap-x-2 sm:justify-center md:mt-0 md:gap-x-2">
                 {socials
                   .filter((social) => social.shown)
@@ -129,22 +133,50 @@ export default function Hub() {
             </div>
 
             <div>
-              <p className="rounded-full bg-navy/50 px-2.5 py-1.5 text-sm font-normal text-gray-100 dark:text-white">
-                by{' '}
-                <Link
-                  target="_blank"
-                  href="https://kikogoncalves.com"
-                  className="transition hover:underline"
-                >
-                  Francisco Gonçalves
-                </Link>
-              </p>
+              <Link
+                target="_blank"
+                href="https://kikogoncalves.com"
+                className="rounded-full bg-navy/50 px-2.5 py-1.5 text-sm font-normal text-gray-100 transition hover:bg-cyan-700/50 dark:text-white dark:hover:bg-violet-400/50"
+              >
+                by Francisco Gonçalves
+              </Link>
             </div>
           </header>
 
+          {/* Get full access */}
+          <section id="access" className="my-auto mx-auto mb-16 flex max-w-6xl flex-col space-y-4">
+            <div className="flex items-center justify-start gap-3">
+              <h2 className="text-3xl font-bold tracking-tight sm:text-4xl">
+                {accessDenied ? (
+                  <span className="text-rose-700 dark:text-rose-600">Get</span>
+                ) : (
+                  <span className="text-teal-700 dark:text-teal-500">You have</span>
+                )}{' '}
+                full access
+              </h2>
+            </div>
+
+            <p className="font-normal">
+              Performing finishing moves is hectic, intense, and on a very gray moral area. As one
+              can imagine things get a little out of hand and the heat of the moment can only be
+              reviewed by worthy visitors that are capable of embracing the beauty and tragic nature
+              of finishers. For that matter, we have protected our audio content, so that guests can
+              view only a limited amount of content on this platform of pure joy and insanity. Enter
+              the secret code on the form to gain full access to Finishers Hub.
+            </p>
+
+            <div className="flex justify-end">
+              {accessDenied ? (
+                <AccessModal lockedHook={[accessDenied, setAccessDenied]} startOpen={false} />
+              ) : (
+                <DeleteData />
+              )}
+            </div>
+          </section>
+
           {/* About */}
-          <section id="about" className="my-auto mx-auto mb-16 max-w-7xl">
-            <h2 className="text-3xl font-extrabold tracking-tight sm:text-4xl">About</h2>
+          <section id="about" className="my-auto mx-auto mb-16 max-w-6xl">
+            <h2 className="text-3xl font-bold tracking-tight sm:text-4xl">About</h2>
             <ul className="mt-3 grid grid-cols-1 gap-y-4 gap-x-4 text-base font-normal tracking-tight lg:mt-6 lg:grid-cols-3 lg:text-lg">
               {/* Description */}
               <AboutCardLI emoji="👋">

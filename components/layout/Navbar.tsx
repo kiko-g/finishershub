@@ -4,9 +4,7 @@ import Link from 'next/link'
 import Image from 'next/image'
 import { Disclosure } from '@headlessui/react'
 import {
-  HomeModernIcon,
   ChartBarSquareIcon,
-  CubeTransparentIcon,
   RocketLaunchIcon,
   BoltIcon,
   Bars3Icon,
@@ -194,11 +192,7 @@ function Header({ title, location }: HeaderProps) {
 
       <div className="hidden self-center md:inline-flex md:items-center md:justify-center md:gap-x-2">
         <Link href="/admin" className="group">
-          <RocketLaunchIcon
-            className="h-8 w-8 text-slate-600
-            transition group-hover:text-primary dark:text-slate-300 
-            dark:group-hover:text-primary"
-          />
+          <RocketLaunchIcon className="h-6 w-6 text-slate-600 transition group-hover:text-primary dark:text-slate-300 dark:group-hover:text-primary md:h-7 md:w-7" />
         </Link>
         <DarkModeSwitch />
       </div>

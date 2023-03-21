@@ -33,9 +33,7 @@ export default function Registry() {
     <Layout location="Registry">
       <main>
         <div className="flex flex-col">
-          <h2 className="mb-1 text-4xl font-extrabold tracking-tight sm:text-5xl">
-            Finishers Club
-          </h2>
+          <h2 className="mb-1 text-4xl font-bold tracking-tight sm:text-5xl">Finishers Club</h2>
           <p className="mb-3 text-lg font-normal">
             Welcome to the Mount Rushmore of finishers. Take a look at the profiles and stats of the
             criminals like never seen before.

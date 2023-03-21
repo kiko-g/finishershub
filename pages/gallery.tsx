@@ -112,7 +112,7 @@ export default function Gallery() {
         <div className="flex flex-col justify-between gap-y-2 lg:flex-row lg:gap-x-6">
           <div className="flex flex-col justify-center gap-2">
             <div className="flex flex-wrap items-center justify-start gap-3">
-              <h2 className="mb-1 whitespace-nowrap text-4xl font-extrabold tracking-tight sm:text-5xl">
+              <h2 className="mb-1 whitespace-nowrap text-4xl font-bold tracking-tight sm:text-5xl">
                 Finishers Hub
               </h2>
               {limitedAccess ? <LimitedAccessBadge /> : <FullAccessBadge />}

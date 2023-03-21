@@ -21,7 +21,7 @@ export default function NotFound() {
         <div className="max-w-4xl">
           <div className="flex w-full flex-col items-start justify-between gap-4 lg:flex-row lg:items-center">
             <div className="flex flex-col gap-y-1">
-              <h2 className="text-3xl font-extrabold tracking-tight sm:text-5xl">404: Not Found</h2>
+              <h2 className="text-3xl font-bold tracking-tight sm:text-5xl">404: Not Found</h2>
               <p className="font-normal">Not much too see here...</p>
             </div>
 
