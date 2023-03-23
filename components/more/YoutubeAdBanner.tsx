@@ -14,7 +14,7 @@ export default function YoutubeAdBanner({}: Props) {
             We also made some{' '}
             <Link
               target="_blank"
-              href="https://www.youtube.com/@scumbag_kiko/videos"
+              href="https://www.youtube.com/@finishershub/videos"
               className="text-rose-700 hover:underline"
             >
               compilations on YouTube
@@ -30,17 +30,17 @@ export default function YoutubeAdBanner({}: Props) {
               <span className="mr-2">🔨</span>
               <Link
                 target="_blank"
-                href="https://youtu.be/ds0LFOKbDZg"
+                href="https://www.youtube.com/watch?v=ff8WXiRfsXE"
                 className="font-normal hover:underline"
               >
-                3 Hours of Raw Finisher Footage (2021)
+                Grotesque 3 Hour compilation of Raw Finisher Footage (2021)
               </Link>
             </li>
             <li>
               <span className="mr-2">🩹</span>
               <Link
                 target="_blank"
-                href="https://youtu.be/psAOI1KyIyA"
+                href="https://www.youtube.com/watch?v=MmGCN5L4kuo"
                 className="font-normal hover:underline"
               >
                 The lost files of the International Finisher&apos; Day (19 July 2021){' '}
@@ -51,10 +51,20 @@ export default function YoutubeAdBanner({}: Props) {
               <span className="mr-2">💨</span>
               <Link
                 target="_blank"
-                href="https://youtu.be/FaMvNffuhQQ"
+                href="https://www.youtube.com/watch?v=B7rbNC265WY"
                 className="font-normal hover:underline"
               >
-                Typical hectic 8 minute session of finishers at HQ/Greenie
+                Your classic <span className="italic">Verdoca</span> session
+              </Link>
+            </li>
+            <li>
+              <span className="mr-2">🎙️</span>
+              <Link
+                target="_blank"
+                href="https://www.youtube.com/watch?v=ZMOp6p_sRAE"
+                className="font-normal hover:underline"
+              >
+                Hot mic finishing moves
               </Link>
             </li>
           </ul>
@@ -62,7 +72,7 @@ export default function YoutubeAdBanner({}: Props) {
 
         <Link
           target="_blank"
-          href="https://www.youtube.com/@scumbag_kiko/videos"
+          href="https://www.youtube.com/@finishershub/videos"
           className="flex items-center justify-center gap-x-2 self-stretch rounded bg-gradient-to-br from-rose-700 to-rose-600 px-4 py-2 font-normal text-white transition hover:opacity-90 lg:justify-start lg:self-start"
         >
           <span>I definitely have to checkout this YouTube stuff</span>
@@ -73,7 +83,7 @@ export default function YoutubeAdBanner({}: Props) {
       {/* Logo */}
       <Link
         target="_blank"
-        href="https://www.youtube.com/@scumbag_kiko/videos"
+        href="https://www.youtube.com/@finishershub/videos"
         className="hidden h-auto max-w-full rounded bg-gradient-to-br from-rose-700 
           to-rose-600 py-16 px-16 text-white transition hover:opacity-80 lg:flex lg:max-w-[16rem]"
       >

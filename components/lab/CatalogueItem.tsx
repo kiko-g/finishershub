@@ -22,6 +22,17 @@ export default function CatalogueItem({ item, chosen, setChosen }: Props) {
       ? 'Ok'
       : 'Slow'
 
+  const motionText =
+    Number(item.motion) === 1
+      ? 'A'
+      : Number(item.motion) === 2
+      ? 'B'
+      : Number(item.motion) === 3
+      ? 'C'
+      : Number(item.motion) === 4
+      ? 'D'
+      : 'E'
+
   const exitFocus = () => setChosen(null)
 
   return (
@@ -44,6 +55,24 @@ export default function CatalogueItem({ item, chosen, setChosen }: Props) {
             <div className="flex w-full items-center justify-between gap-x-2">
               <p className="font-lexend font-light tracking-tight">{item.name}</p>
               <div className="flex gap-x-1.5">
+                <span
+                  className={classNames(
+                    'flex items-center justify-center rounded-full px-[0.2rem]',
+                    motionText === 'A'
+                      ? 'bg-blue-500'
+                      : motionText === 'B'
+                      ? 'bg-teal-500'
+                      : motionText === 'C'
+                      ? 'bg-amber-500'
+                      : motionText === 'D'
+                      ? 'bg-orange-500'
+                      : 'bg-rose-600'
+                  )}
+                >
+                  <span className="h-4 w-4 text-center text-xs font-normal text-white">
+                    {motionText}
+                  </span>
+                </span>
                 <span
                   className={classNames(
                     'rounded-full p-1',
@@ -102,7 +131,7 @@ export default function CatalogueItem({ item, chosen, setChosen }: Props) {
                 'bg-slate-700 py-1 px-2 text-sm font-normal text-white dark:bg-slate-500'
               )}
             >
-              0/100
+              {item.score}/100
             </span>
           </div>
         </div>
@@ -134,11 +163,11 @@ export default function CatalogueItem({ item, chosen, setChosen }: Props) {
                 leaveFrom="opacity-100 scale-100"
                 leaveTo="opacity-0 scale-95"
               >
-                <Dialog.Panel className="flex h-screen w-full transform flex-col justify-between gap-4 overflow-hidden bg-white p-6 text-left align-middle shadow-xl transition-all dark:bg-navy md:max-w-md">
+                <Dialog.Panel className="flex h-screen w-full transform flex-col justify-between gap-4 overflow-scroll bg-white p-6 text-left align-middle shadow-xl transition-all dark:bg-navy md:max-w-lg">
                   <div className="flex flex-col">
                     <Dialog.Title
                       as="h3"
-                      className="text-lg font-medium leading-6 text-gray-800 dark:text-white"
+                      className="text-2xl font-medium leading-6 text-gray-800 dark:text-white"
                     >
                       {item.name}
                     </Dialog.Title>
@@ -146,8 +175,6 @@ export default function CatalogueItem({ item, chosen, setChosen }: Props) {
                     <p className="mt-0.5 text-sm text-gray-500 dark:text-gray-400">
                       Source of finishing move: <strong>{item.source}</strong>
                     </p>
-
-                    <div className="mt-2 h-48 w-full rounded bg-gradient-to-br from-slate-400 via-slate-500 to-slate-600  dark:from-pink-500 dark:via-pink-600 dark:to-pink-700"></div>
 
                     <div className="mt-4 flex flex-wrap items-center gap-4">
                       <div
@@ -197,34 +224,66 @@ export default function CatalogueItem({ item, chosen, setChosen }: Props) {
                           'bg-slate-700 py-2 px-3 text-sm font-light text-white dark:bg-slate-500'
                         )}
                       >
-                        0/100
+                        {item.score}/100
                       </div>
                     </div>
 
                     <div className="mt-4">
                       <h4 className="text-base font-medium leading-6 text-gray-800 dark:text-white">
-                        Time to Register Kill
+                        Time to Register Kill (TTRK)
                       </h4>
-                      <p className="mt-0.5 text-sm font-normal text-gray-500 dark:text-gray-400">
+                      <p className="mt-0.5 text-sm font-normal leading-4 text-gray-500 dark:text-gray-400">
                         The time between the first frame of the animation and the moment the kill is
                         registered. We use the final frame right as the kill register sound is
                         queued.
                       </p>
-                      <p className="font-lexend mt-0.5 text-2xl font-normal tracking-tight text-slate-700 dark:text-blue-200">
+                      <p className="mt-0.5 font-lexend text-2xl font-normal tracking-tight text-slate-700 dark:text-blue-200">
                         {item.ttrk} ± {uncertainty}s
                       </p>
                     </div>
 
-                    <div className="mt-8">
+                    <div className="mt-5">
                       <h4 className="text-base font-medium leading-6 text-gray-800 dark:text-white">
-                        Time to Complete Animation
+                        Time to Complete Animation (TTCA)
                       </h4>
-                      <p className="mt-0.5 text-sm font-normal text-gray-500 dark:text-gray-400">
+                      <p className="mt-0.5 text-sm font-normal leading-4 text-gray-500 dark:text-gray-400">
                         The time between the first frame of the animation and the final frame, also
                         known has the moment when the player regains control.
                       </p>
-                      <p className="font-lexend mt-0.5 text-2xl font-normal tracking-tight text-slate-700 dark:text-blue-200">
+                      <p className="mt-0.5 font-lexend text-2xl font-normal tracking-tight text-slate-700 dark:text-blue-200">
                         {item.ttca.toString() === '?' ? 'Unknown' : item.ttca}
+                      </p>
+                    </div>
+
+                    <div className="mt-5">
+                      <h4 className="text-base font-medium leading-6 text-gray-800 dark:text-white">
+                        Motion
+                      </h4>
+                      <p className="mt-0.5 text-sm font-normal leading-4 text-gray-500 dark:text-gray-400">
+                        A classification of the motion of the character during the animation from A
+                        (best) to E (worst).{' '}
+                        <span className="font-bold underline">
+                          Finishing moves with high motion are less likely to be interrputed
+                        </span>
+                        .
+                      </p>
+                      <p className="mt-0.5 font-lexend text-2xl font-normal tracking-tight text-slate-700 dark:text-blue-200">
+                        Class {motionText}
+                      </p>
+                    </div>
+
+                    <div className="mt-5">
+                      <h4 className="text-base font-medium leading-6 text-gray-800 dark:text-white">
+                        Score
+                      </h4>
+                      <p className="mt-0.5 text-sm font-normal leading-4 text-gray-500 dark:text-gray-400">
+                        A function that determines score based on the TTRK and Motion.
+                        <code className="mt-1.5 block text-pink-500">
+                          score = 100 - ((motion-1) * 2) - 10*ttrk
+                        </code>
+                      </p>
+                      <p className="mt-0.5 font-lexend text-2xl font-normal tracking-tight text-slate-700 dark:text-blue-200">
+                        {item.score}
                       </p>
                     </div>
                   </div>

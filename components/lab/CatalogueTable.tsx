@@ -14,7 +14,7 @@ export default function CatalogueTable({ headers, catalogue }: Props) {
         <div className="inline-block min-w-full py-2 align-middle sm:px-6 lg:px-8">
           <div className="overflow-hidden rounded-md border border-slate-900 shadow dark:border-gray-200">
             <div
-              className="mx-auto grid w-full grid-cols-7 divide-x divide-slate-900 rounded-t
+              className="mx-auto grid w-full grid-cols-9 divide-x divide-slate-900 rounded-t
               border-b border-slate-900 bg-slate-700/75 dark:divide-gray-200 
               dark:border-gray-200 dark:bg-secondary/30"
             >
@@ -37,7 +37,7 @@ export default function CatalogueTable({ headers, catalogue }: Props) {
                 <div
                   key={`row-${rowIdx}`}
                   className={classNames(
-                    `grid w-full grid-cols-7 divide-x divide-slate-900
+                    `grid w-full grid-cols-9 divide-x divide-slate-900
                 border-slate-900 dark:divide-gray-200 dark:border-gray-200`,
                     rowIdx % 2 === 0
                       ? 'bg-white dark:bg-secondary/5'

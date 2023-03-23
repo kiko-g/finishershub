@@ -45,6 +45,8 @@ export type CatalogueItem = {
   accurate: CatalogueItemStatus
   ttrk: number
   ttca: number
+  motion: 1 | 2 | 3 | 4 | 5
+  score: number
 }
 
 export type VideoType = {
