@@ -1,13 +1,10 @@
-import React, { Dispatch, SetStateAction, useEffect, useMemo, useState } from 'react'
-import { CatalogueGrid, CatalogueTable, LoadingCatalogue, FilterByName } from '.'
+import React, { useEffect, useMemo, useState } from 'react'
+import { CatalogueGrid, LoadingCatalogue, FilterByName } from '.'
 import { strIncludes } from '../../utils'
 
-type Props = {
-  hook: [boolean, Dispatch<SetStateAction<boolean>>]
-}
+type Props = {}
 
-export default function Catalogue({ hook }: Props) {
-  const [viewType] = hook
+export default function Catalogue({}: Props) {
   const [filteredName, setFilteredName] = useState('')
   const [headers, setHeaders] = useState<string[]>([])
   const [catalogue, setCatalogue] = useState<(string | number)[][]>([])
@@ -29,12 +26,7 @@ export default function Catalogue({ hook }: Props) {
   return ready ? (
     <div className="flex flex-col gap-y-4">
       <FilterByName hook={[filteredName, setFilteredName]} />
-
-      {viewType ? (
-        <CatalogueGrid catalogue={catalogueFiltered} />
-      ) : (
-        <CatalogueTable headers={headers} catalogue={catalogueFiltered} />
-      )}
+      <CatalogueGrid catalogue={catalogueFiltered} />
     </div>
   ) : (
     <LoadingCatalogue />

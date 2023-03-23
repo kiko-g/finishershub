@@ -1,6 +1,8 @@
 import React from 'react'
 import { Layout } from '../components/layout'
 import { Catalogue, ViewTypeToggler } from '../components/lab'
+import Link from 'next/link'
+import { ArrowTopRightOnSquareIcon } from '@heroicons/react/24/outline'
 
 type Props = {}
 
@@ -31,11 +33,17 @@ export default function Lab({}: Props) {
 
             {/* Catalogue Buttons */}
             <div>
-              <ViewTypeToggler hook={[viewType, setViewType]} />
+              <Link
+                target="_blank"
+                href="https://docs.google.com/spreadsheets/u/0/d/140Cg-yQp-X84AX0LAgkANIngvCSUKgXUhze9mOyi_mk/htmlview"
+                className="flex items-center justify-center gap-2 font-normal transition hover:opacity-80"
+              >
+                <ArrowTopRightOnSquareIcon className="h-8 w-8" />
+              </Link>
             </div>
           </div>
 
-          <Catalogue hook={[viewType, setViewType]} />
+          <Catalogue />
         </div>
       </main>
     </Layout>
