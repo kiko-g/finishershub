@@ -39,27 +39,21 @@ export default function TwitterAdBanner({}: Props) {
             </Link>
             , where we post new clips regularly. This content is not available on the website yet,
             so make sure to follow us. This page represents a big breakthrough for us, and we are
-            excited to announce it as a temporary solution to delivering new content. As of now, the
-            website&apos;s only source of clips is Twitch, and we want to migrate from that. In the
-            near future we are planning on:
+            excited to announce it as a temporary solution to delivering new content. In the near
+            future we are planning on:
           </p>
 
           <ul className="ml-0.5 font-light">
             <li>
-              <span className="mr-1">✅</span> Fully remove Twitch dependency. No more Twitch
-              embeds, just browser video elements.
-            </li>
-            <li>
-              <span className="mr-1">⏳</span> Adding user accounts to allow greater access
-              management to content.
-            </li>
-            <li>
-              <span className="mr-1">⏳</span> Adding admin users that can upload content to the
-              platform.
+              <span className="mr-1">⏳</span> Adding admin functionality for users to upload
+              content to the platform.
             </li>
             <li>
               <span className="mr-1">⏳</span> Metadata and information for the clips that will make
               them easier to find in the platform.
+            </li>
+            <li>
+              <span className="mr-1">⏳</span> JS Cookies to store the user session.
             </li>
           </ul>
         </div>
@@ -69,7 +63,7 @@ export default function TwitterAdBanner({}: Props) {
           href="https://twitter.com/finishershub"
           className="flex items-center justify-center gap-x-2 self-stretch rounded bg-gradient-to-br from-[#1da1f2] to-blue-600 px-4 py-2 font-normal text-white transition hover:opacity-90 lg:justify-start lg:self-end"
         >
-          <span>Show me some of that new content on Twitter!</span>
+          <span>Show me that new content on Twitter!</span>
           <ArrowLongRightIcon className="h-5 w-5 transition group-hover:translate-x-1" />
         </Link>
       </div>

@@ -7,10 +7,9 @@ import { ClipboardDocumentCheckIcon } from '@heroicons/react/24/solid'
 
 type Props = {
   video: VideoType
-  alt?: boolean
 }
 
-export default function ShareVideo({ video, alt }: Props) {
+export default function ShareVideo({ video }: Props) {
   const [copied, setCopied] = useState(false)
   const [url, setUrl] = React.useState<string>('')
 
@@ -37,23 +36,14 @@ export default function ShareVideo({ video, alt }: Props) {
     <button
       onClick={handleCopied}
       className={classNames(
-        `transition`,
-        copied
-          ? `text-emerald-500`
-          : alt
-          ? `text-white hover:opacity-80 dark:text-white`
-          : `text-gray-700 hover:opacity-80 dark:text-white`
+        `transition hover:opacity-80`,
+        copied ? `text-emerald-500` : `text-white`
       )}
     >
       {copied ? (
-        <ClipboardDocumentCheckIcon
-          fillRule="evenodd"
-          className={classNames(alt ? `h-7 w-7 lg:h-8 lg:w-8` : `h-5 w-5 lg:h-6 lg:w-6`)}
-        />
+        <ClipboardDocumentCheckIcon fillRule="evenodd" className="h-5 w-5 lg:h-6 lg:w-6" />
       ) : (
-        <ClipboardIcon
-          className={classNames(alt ? `h-7 w-7 lg:h-8 lg:w-8` : `h-5 w-5 lg:h-6 lg:w-6`)}
-        />
+        <ClipboardIcon fillRule="evenodd" className="h-5 w-5 lg:h-6 lg:w-6" />
       )}
     </button>
   )
