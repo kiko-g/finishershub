@@ -22,9 +22,9 @@ import { PlusIcon } from '@heroicons/react/24/solid'
 export default function Gallery() {
   const isMobile = useMediaQuery('(max-width: 768px)')
   const arenas: FilterType[] = [
-    { name: 'All', value: '/' },
-    { name: 'Warzone 1', value: '/mw2019' },
-    { name: 'Warzone 2', value: '/mw2022' },
+    { name: 'All', value: '' },
+    { name: 'Warzone 1', value: 'mw2019' },
+    { name: 'Warzone 2', value: 'mw2022' },
   ]
 
   const [loading, setLoading] = useState<boolean>(true)
@@ -62,13 +62,18 @@ export default function Gallery() {
       .then((res) => res.json())
       .then((vids: VideoTypeAPI[]) => {
         setLoading(false)
-        return vids.map((vid: VideoTypeAPI, index: number) => ({
-          url: vid.url,
-          index: index,
-          date: vid.date,
-          game: vid.game,
-          filename: vid.filename,
-        }))
+        return vids.map((vid: VideoTypeAPI, index: number) => {
+          const video: VideoType = {
+            url: vid.url,
+            index: index,
+            date: vid.date,
+            game: vid.game,
+            filteredGame: filter.value,
+            filename: vid.filename,
+          }
+
+          return video
+        })
       })
       .then((videos) => {
         const shuffledVideos = shuffle(videos) as VideoType[]

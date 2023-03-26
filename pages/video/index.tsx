@@ -14,21 +14,13 @@ import { VideoType, VideoTypeAPI } from '../../@types'
 type Props = {}
 
 export default function Video({}: Props) {
-  const router = useRouter()
-  const { vid } = router.query
   const [video, setVideo] = useState<VideoType | null>(null)
-  const [videoId, setVideoId] = useState<number>(-1)
   const [loading, setLoading] = useState<boolean>(true)
   const [fetchError, setFetchError] = useState<boolean>(false)
   const ready = useMemo(() => !loading && !fetchError, [loading, fetchError])
 
   useEffect(() => {
-    if (vid === undefined) return
-    else if (isNaN(parseInt(vid as string))) {
-      setFetchError(true)
-    }
-
-    const videoIndex = parseInt(vid as string)
+    const videoIndex = 0
     fetch(`/api/s3/${videoIndex}}`)
       .then((res) => {
         if (res.status === 404) {
@@ -47,14 +39,13 @@ export default function Video({}: Props) {
           filteredGame: '',
           filename: vid.filename,
         })
-        setVideoId(videoIndex)
       })
       .catch((err) => {
         setLoading(false)
         setFetchError(true)
         console.error(err)
       })
-  }, [vid])
+  }, [])
 
   return (
     <div className="flex min-h-screen flex-col bg-light dark:bg-navy">

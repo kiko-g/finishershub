@@ -54,6 +54,7 @@ export type VideoType = {
   url: string
   date: string
   game: 'mw2019' | 'mw2022'
+  filteredGame: 'mw2019' | 'mw2022' | ''
   filename?: string
 }
 
@@ -65,6 +66,6 @@ export type VideoTypeAPI = {
 }
 
 export type FilterType =
-  | { name: 'All'; value: '/' }
-  | { name: 'Warzone 1'; value: '/mw2019' }
-  | { name: 'Warzone 2'; value: '/mw2022' }
+  | { name: 'All'; value: '' }
+  | { name: 'Warzone 1'; value: 'mw2019' }
+  | { name: 'Warzone 2'; value: 'mw2022' }

@@ -57,9 +57,11 @@ export const strIncludes = (str: string, query: string, strict?: boolean) =>
         .includes(query.toLowerCase().replace(/\s+/g, ''))
 
 export const getVideoUrlFromVideo = (video: VideoType, offset?: number) => {
-  // TODO: share video by game and not just in general order
-  // return `${url}/video/${video.game}/${video.index}
-
   const url = typeof window !== 'undefined' ? window.location.origin : ''
-  return offset ? `${url}/video/${video.index + offset}` : `${url}/video/${video.index}`
+  const index = offset ? video.index + offset : video.index
+  const game = video.filteredGame === '' ? '' : '/' + video.filteredGame
+
+  console.log(video.filteredGame)
+
+  return `${url}/video${game}/${index}`
 }

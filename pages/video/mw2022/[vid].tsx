@@ -44,6 +44,7 @@ export default function Video({}: Props) {
           index: videoIndex,
           date: vid.date,
           game: vid.game,
+          filteredGame: 'mw2022',
           filename: vid.filename,
         })
         setVideoId(videoIndex)

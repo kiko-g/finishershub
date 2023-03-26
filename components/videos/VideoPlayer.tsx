@@ -22,7 +22,7 @@ export default function VideoPlayer({ video, play = false, muted = true }: Props
       >
         <source src={video.url} type="video/mp4" />
       </video>
-      <div className="absolute top-0 right-0 z-50 hidden rounded-bl rounded-tr bg-slate-900/80 px-2 py-2 font-normal text-white transition group-hover:flex group-hover:gap-2">
+      <div className="absolute top-0 right-0 z-40 hidden rounded-bl rounded-tr bg-slate-900/80 px-2 py-2 font-normal text-white transition group-hover:flex group-hover:gap-2">
         <div className="flex items-center gap-2">
           <ShareVideo video={video} />
           <PopOpenVideo video={video} />
