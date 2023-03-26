@@ -6,10 +6,10 @@ type Props = {}
 
 export default function DeleteData({}: Props) {
   const deleteData = () => {
-    clearCache()
-    alert('Do you want to clear all cookies and reload the page?')
+    if (typeof window === 'undefined') return
 
-    if (typeof window !== 'undefined') {
+    if (window.confirm('Clear all site data and reload the page?')) {
+      clearCache()
       window.location.reload()
     }
   }
