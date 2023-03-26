@@ -168,13 +168,13 @@ function Header({ title, location }: HeaderProps) {
         </Link>
       </div>
 
-      <div className="hidden self-center md:flex md:gap-x-8">
+      <div className="hidden self-center sm:gap-x-4 md:flex md:gap-x-6">
         {navigation.map((link, index) =>
           link.shown ? (
             <Link href={link.location} key={`nav-${index}`} className="relative py-1">
               <button
                 type="button"
-                className={`flex h-12 items-center justify-center lowercase transition ${
+                className={`flex h-12 items-center justify-center lowercase tracking-tight transition ${
                   location === link.title
                     ? 'font-bold text-primary dark:text-white'
                     : 'font-normal text-gray-800/50 hover:text-gray-800 dark:text-white/40 dark:hover:text-white'

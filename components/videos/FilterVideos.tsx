@@ -1,7 +1,8 @@
-import { Listbox, Transition } from '@headlessui/react'
-import { CheckIcon, ChevronUpDownIcon } from '@heroicons/react/24/outline'
 import React, { Dispatch, Fragment, SetStateAction } from 'react'
-import { FilterType } from '../../@types'
+import type { FilterType } from '../../@types'
+import { Listbox, Transition } from '@headlessui/react'
+import { ChevronUpDownIcon } from '@heroicons/react/24/outline'
+import { CheckCircleIcon } from '@heroicons/react/24/solid'
 
 type Props = {
   arenas: FilterType[]
@@ -32,7 +33,7 @@ export default function FilterVideos({ arenas, pickedHook }: Props) {
               <Listbox.Option
                 key={arenaIdx}
                 className={({ active }) =>
-                  `relative cursor-pointer select-none py-1.5 pl-10 pr-5 font-normal ${
+                  `relative cursor-pointer select-none py-1.5 pl-10 pr-5 text-sm font-normal tracking-tight ${
                     active ? 'bg-secondary/10 text-secondary' : 'text-gray-800'
                   }`
                 }
@@ -47,7 +48,7 @@ export default function FilterVideos({ arenas, pickedHook }: Props) {
                 </span>
                 {picked.name === arena.name ? (
                   <span className="absolute inset-y-0 left-0 flex items-center pl-3 text-secondary">
-                    <CheckIcon className="h-5 w-5" aria-hidden="true" />
+                    <CheckCircleIcon className="h-5 w-5" aria-hidden="true" />
                   </span>
                 ) : null}
               </Listbox.Option>
