@@ -73,7 +73,7 @@ export default function AccessModalCTA({ lockedHook, startOpen, special = false 
             leaveFrom="opacity-100"
             leaveTo="opacity-0"
           >
-            <div className="fixed inset-0 bg-black bg-opacity-80 backdrop-blur" />
+            <div className="fixed inset-0 bg-black/80 backdrop-blur dark:bg-white/5" />
           </Transition.Child>
 
           <div className="fixed inset-0 overflow-y-auto">
@@ -89,7 +89,7 @@ export default function AccessModalCTA({ lockedHook, startOpen, special = false 
               >
                 <Dialog.Panel
                   className="w-full max-w-xl transform overflow-hidden rounded-2xl bg-white p-6 text-left 
-                  align-middle text-gray-600 shadow-xl transition-all dark:bg-navy dark:text-white"
+                  align-middle text-gray-600 shadow-xl transition-all dark:bg-gray-800 dark:text-white"
                 >
                   <div className="flex items-center justify-between">
                     <Dialog.Title

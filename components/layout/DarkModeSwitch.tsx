@@ -1,15 +1,26 @@
 import React from 'react'
 import { Switch } from '@headlessui/react'
 import { MoonIcon, SunIcon } from '@heroicons/react/24/solid'
-import useDarkMode from '../../hooks/useDarkMode'
 import classNames from 'classnames'
+import { useDarkMode } from 'usehooks-ts'
 
 type Props = {
   alt?: boolean
 }
 
 export default function DarkModeSwitch({ alt = false }: Props) {
-  const [enabled, setEnabled] = useDarkMode()
+  const { isDarkMode, toggle } = useDarkMode()
+
+  React.useEffect(() => {
+    if (typeof window !== 'undefined') {
+      const className = 'dark'
+      const bodyClass = window.document.body.classList
+
+      // @ts-ignore
+      const isEnabled = typeof enabledState === 'undefined' && isDarkMode
+      isEnabled ? bodyClass.add(className) : bodyClass.remove(className)
+    }
+  }, [isDarkMode])
 
   return (
     <Switch.Group>
@@ -17,11 +28,11 @@ export default function DarkModeSwitch({ alt = false }: Props) {
         <Switch
           title="Toggle Dark Mode"
           aria-label="Toggle Dark Mode"
-          checked={enabled}
-          onChange={() => setEnabled(!enabled)}
-          className={`${enabled ? 'animate-dark' : 'animate-light'} rounded-full p-0 md:p-[4px]`}
+          checked={isDarkMode}
+          onChange={() => toggle()}
+          className={`${isDarkMode ? 'animate-dark' : 'animate-light'} rounded-full p-0 md:p-[4px]`}
         >
-          {enabled ? (
+          {isDarkMode ? (
             <MoonIcon
               aria-hidden="true"
               className={classNames(
