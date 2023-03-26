@@ -28,7 +28,7 @@ export default function Casino() {
 
   const [index, setIndex] = useState<number>(0)
   const [videos, setVideos] = useState<VideoType[]>([])
-  const [filter, setFilter] = useState<FilterType>(arenas[0])
+  const [filter, setFilter] = useState<FilterType>(arenas[arenas.length - 1])
   const [accessDenied, setAccessDenied] = useAccessDenied()
   const [muted, setMuted] = useState<boolean>(true)
   const [autoplay, setAutoplay] = useState<boolean>(true)

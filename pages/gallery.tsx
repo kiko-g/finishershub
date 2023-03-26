@@ -31,7 +31,7 @@ export default function Gallery() {
   const [fetchError, setFetchError] = useState<boolean>(false)
 
   const [videos, setVideos] = useState<VideoType[]>([])
-  const [filter, setFilter] = useState<FilterType>(arenas[0])
+  const [filter, setFilter] = useState<FilterType>(arenas[arenas.length - 1])
   const [accessDenied, setAccessDenied] = useAccessDenied()
   const [view, setView] = useState<boolean>(false)
   const [muted, setMuted] = useState<boolean>(true)
