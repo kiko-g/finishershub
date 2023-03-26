@@ -1,6 +1,6 @@
 import { GetObjectCommand, ListObjectsV2Command } from '@aws-sdk/client-s3'
 import { getSignedUrl } from '@aws-sdk/s3-request-presigner'
-import { estabilishS3Connection } from '../../../../../utils/api/s3'
+import { estabilishS3Connection } from '../../../../utils/api/s3'
 import type { NextApiRequest, NextApiResponse } from 'next'
 
 const s3 = estabilishS3Connection()

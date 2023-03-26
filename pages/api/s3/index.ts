@@ -1,4 +1,5 @@
-import { ListObjectsV2Command } from '@aws-sdk/client-s3'
+import { GetObjectCommand, ListObjectsV2Command } from '@aws-sdk/client-s3'
+import { getSignedUrl } from '@aws-sdk/s3-request-presigner'
 import { estabilishS3Connection } from '../../../utils/api/s3'
 import type { NextApiRequest, NextApiResponse } from 'next'
 
@@ -22,11 +23,44 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
       return
     }
 
-    const filenamesMW2019 = mw2019Response.Contents.map((object) => object.Key)
-    const filenamesMW2022 = mw2022Response.Contents.map((object) => object.Key)
-    const filenames = [filenamesMW2019, filenamesMW2022].flat()
+    const videoDataMW2019 = mw2019Response.Contents.map((object) => ({
+      bucketName: bucketMW2019,
+      filename: object.Key,
+      lastModified: object.LastModified,
+    }))
 
-    res.status(200).json({ filenames })
+    const videoDataMW2022 = mw2022Response.Contents.map((object) => ({
+      bucketName: bucketMW2022,
+      filename: object.Key as string,
+      lastModified: object.LastModified,
+    }))
+
+    const allVideosSorted = [...videoDataMW2019, ...videoDataMW2022].sort((a, b) =>
+      a.lastModified! < b.lastModified! ? -1 : 1
+    )
+
+    const videosRes = []
+    for (const video of allVideosSorted) {
+      const getObjectCommandInput = new GetObjectCommand({
+        Bucket: video.bucketName,
+        Key: video.filename,
+      })
+
+      const getObjectCommandOutput = {
+        expiresIn: 60 * 60 * 24, // 1 day
+      }
+
+      const signedUrl = await getSignedUrl(s3, getObjectCommandInput, getObjectCommandOutput)
+
+      videosRes.push({
+        game: video.bucketName.split('.')[1],
+        url: signedUrl,
+        date: video.lastModified,
+        filename: video.filename,
+      })
+    }
+
+    res.status(200).json(videosRes)
   } catch (error) {
     console.error(error)
     const errorMessage = error instanceof Error ? error.message : 'Internal server error'

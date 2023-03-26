@@ -52,9 +52,6 @@ export default function TwitterAdBanner({}: Props) {
               <span className="mr-1">⏳</span> Metadata and information for the clips that will make
               them easier to find in the platform.
             </li>
-            <li>
-              <span className="mr-1">⏳</span> JS Cookies to store the user session.
-            </li>
           </ul>
         </div>
 

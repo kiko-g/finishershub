@@ -1,19 +1,12 @@
 import { GetObjectCommand, ListObjectsV2Command } from '@aws-sdk/client-s3'
 import { getSignedUrl } from '@aws-sdk/s3-request-presigner'
-import { estabilishS3Connection } from '../../../../utils/api/s3'
+import { estabilishS3Connection } from '../../../utils/api/s3'
 import type { NextApiRequest, NextApiResponse } from 'next'
 
 const s3 = estabilishS3Connection()
 
 export default async function handler(req: NextApiRequest, res: NextApiResponse) {
   try {
-    const idStr = req.query.id as string
-    const videoIndex = parseInt(idStr)
-
-    if (isNaN(videoIndex)) {
-      res.status(404).json({ message: 'Video id provided is invalid' })
-    }
-
     const bucketMW2019 = process.env.NEXT_PUBLIC_AWS_S3_BUCKET_NAME_MW2019 || 'finishershub.mw2019'
     const bucketMW2022 = process.env.NEXT_PUBLIC_AWS_S3_BUCKET_NAME_MW2022 || 'finishershub.mw2022'
 
@@ -46,13 +39,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
       a.lastModified! < b.lastModified! ? -1 : 1
     )
 
-    if (videoIndex < 0 || videoIndex >= allVideosSorted.length) {
-      res.status(404).json({
-        message: 'Video index is out of valid bounds',
-      })
-    }
-
-    const video = allVideosSorted[videoIndex]
+    const video = allVideosSorted[allVideosSorted.length - 1]
     const getObjectCommandInput = new GetObjectCommand({
       Bucket: video.bucketName,
       Key: video.filename,

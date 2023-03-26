@@ -58,7 +58,7 @@ export default function Gallery() {
   }
 
   useEffect(() => {
-    fetch(`/api/s3/videos${filter.value}`)
+    fetch(`/api/s3/${filter.value}`)
       .then((res) => res.json())
       .then((vids: VideoTypeAPI[]) => {
         setLoading(false)

@@ -29,7 +29,7 @@ export default function Video({}: Props) {
     }
 
     const videoIndex = parseInt(vid as string)
-    fetch(`/api/s3/videos/${videoIndex}}`)
+    fetch(`/api/s3/${videoIndex}}`)
       .then((res) => {
         if (res.status === 404) {
           setFetchError(true)
