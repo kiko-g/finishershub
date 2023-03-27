@@ -42,10 +42,7 @@ export default function MemberCard({ member, updateMembers }: Props) {
   }
 
   return (
-    <div
-      className="flex w-full flex-col gap-y-3 rounded-xl 
-    bg-lightest p-3 shadow dark:bg-sky-300/5 xl:flex-row xl:gap-y-0"
-    >
+    <div className="flex w-full flex-col gap-y-3 rounded-xl bg-lightest p-3 shadow dark:bg-sky-300/5 xl:flex-row xl:gap-y-0">
       <aside className="relative rounded-l-xl md:rounded-xl">
         {member.imgurUrl ? (
           <div className="h-64 w-full rounded shadow xl:h-full xl:max-h-64 xl:w-full xl:max-w-xs 2xl:max-w-md">
@@ -58,24 +55,15 @@ export default function MemberCard({ member, updateMembers }: Props) {
             />
           </div>
         ) : (
-          <div
-            className="h-64 w-full rounded bg-gradient-to-br from-primary 
-            via-primary to-primary shadow xl:h-full xl:w-72"
-          />
+          <div className="h-64 w-full rounded bg-gradient-to-br from-primary via-primary to-primary shadow xl:h-full xl:w-72" />
         )}
       </aside>
 
-      <section
-        className="relative flex w-auto grow flex-col justify-between space-y-6 rounded-r-xl px-1 py-1 
-        text-base font-normal xl:h-auto xl:max-h-full xl:w-3/4 xl:py-0 xl:pl-4 xl:pr-0"
-      >
+      <section className="relative flex w-auto grow flex-col justify-between space-y-6 rounded-r-xl px-1 py-1 text-base font-normal xl:h-auto xl:max-h-full xl:w-3/4 xl:py-0 xl:pl-4 xl:pr-0">
         <div className="flex h-full flex-col justify-between gap-4">
           {/* Header */}
           <div>
-            <h3
-              className="text-2xl font-medium capitalize 
-              text-teal-700 dark:text-teal-400"
-            >
+            <h3 className="text-2xl font-medium capitalize text-teal-700 dark:text-teal-400">
               {member.name}
             </h3>
             <p className="font-normal lowercase tracking-tight text-gray-500 dark:text-white">
@@ -104,9 +92,7 @@ export default function MemberCard({ member, updateMembers }: Props) {
               <button
                 disabled={locked || arenaIndex === 0}
                 onClick={addFinisher}
-                className="inline-flex w-full items-center justify-center gap-x-2 rounded bg-blue-500 
-                p-2 text-center text-sm font-medium tracking-tight text-white transition hover:opacity-80 
-                disabled:cursor-not-allowed disabled:opacity-50"
+                className="inline-flex w-full items-center justify-center gap-x-2 rounded bg-blue-500 p-2 text-center text-sm font-medium tracking-tight text-white transition hover:opacity-80 disabled:cursor-not-allowed disabled:opacity-50"
                 title={
                   locked
                     ? `You need to prove you are ${member.name} first`
@@ -121,9 +107,7 @@ export default function MemberCard({ member, updateMembers }: Props) {
               <button
                 disabled={locked || arenaIndex === 0 || member.finishers[arenaIndex - 1] === 0}
                 onClick={removeFinisher}
-                className="inline-flex w-full items-center justify-center gap-x-2 rounded bg-rose-600 
-                p-2 text-center text-sm font-medium tracking-tight text-white transition hover:opacity-80 
-                disabled:cursor-not-allowed disabled:opacity-50"
+                className="inline-flex w-full items-center justify-center gap-x-2 rounded bg-rose-600 p-2 text-center text-sm font-medium tracking-tight text-white transition hover:opacity-80 disabled:cursor-not-allowed disabled:opacity-50"
                 title={
                   locked
                     ? `You need to prove you are ${member.name} first`

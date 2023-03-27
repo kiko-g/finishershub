@@ -84,8 +84,7 @@ export default function YoutubeAdBanner({}: Props) {
       <Link
         target="_blank"
         href="https://www.youtube.com/@finishershub/videos"
-        className="hidden h-auto max-w-full rounded bg-gradient-to-br from-rose-700 
-          to-rose-600 py-16 px-16 text-white transition hover:opacity-80 lg:flex lg:max-w-[16rem]"
+        className="hidden h-auto max-w-full rounded bg-gradient-to-br from-rose-700 to-rose-600 py-16 px-16 text-white transition hover:opacity-80 lg:flex lg:max-w-[16rem]"
       >
         <svg className="h-full w-full" fill="currentColor" viewBox="0 0 576 512" aria-hidden="true">
           <path

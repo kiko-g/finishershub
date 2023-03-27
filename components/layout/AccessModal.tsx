@@ -85,10 +85,7 @@ export default function AccessModal({ lockedHook, startOpen }: Props) {
                 leaveFrom="opacity-100 scale-100"
                 leaveTo="opacity-0 scale-95"
               >
-                <Dialog.Panel
-                  className="w-full max-w-xl transform overflow-hidden rounded-2xl bg-white p-6 text-left 
-                  align-middle text-gray-600 shadow-xl transition-all dark:bg-gray-800 dark:text-white"
-                >
+                <Dialog.Panel className="w-full max-w-xl transform overflow-hidden rounded-2xl bg-white p-6 text-left align-middle text-gray-600 shadow-xl transition-all dark:bg-gray-800 dark:text-white">
                   <div className="flex items-center justify-between">
                     <Dialog.Title
                       as="h3"
@@ -98,9 +95,7 @@ export default function AccessModal({ lockedHook, startOpen }: Props) {
                     </Dialog.Title>
                     <button
                       onClick={closeModal}
-                      className="flex items-center gap-x-1 rounded border border-rose-600/50 
-                      bg-rose-600/10 px-2 py-1 text-sm text-rose-800 transition 
-                      hover:bg-rose-600 hover:text-white dark:bg-rose-600/20 dark:text-white dark:hover:bg-rose-600"
+                      className="flex items-center gap-x-1 rounded border border-rose-600/50 bg-rose-600/10 px-2 py-1 text-sm text-rose-800 transition hover:bg-rose-600 hover:text-white dark:bg-rose-600/20 dark:text-white dark:hover:bg-rose-600"
                     >
                       <span>Close</span>
                       <XMarkIcon className="h-4 w-4" />{' '}
@@ -159,9 +154,7 @@ export default function AccessModal({ lockedHook, startOpen }: Props) {
                       onClick={togglePasswordShown}
                       title={`${accessCodeShown ? 'Hide' : 'Show'} password`}
                       aria-label={`${accessCodeShown ? 'Hide' : 'Show'} password`}
-                      className="absolute right-[11px] top-[11px] rounded-full p-1 
-                      text-primary transition hover:bg-primary hover:text-white 
-                      dark:text-secondary dark:hover:bg-secondary dark:hover:text-white"
+                      className="absolute right-[11px] top-[11px] rounded-full p-1 text-primary transition hover:bg-primary hover:text-white dark:text-secondary dark:hover:bg-secondary dark:hover:text-white"
                     >
                       {accessCodeShown ? (
                         <EyeSlashIcon className="h-5 w-5" />
@@ -181,8 +174,7 @@ export default function AccessModal({ lockedHook, startOpen }: Props) {
                     <button
                       type="button"
                       onClick={submitPassword}
-                      className="w-full rounded bg-primary p-2 text-white 
-                      transition hover:opacity-80 dark:bg-secondary"
+                      className="w-full rounded bg-primary p-2 text-white transition hover:opacity-80 dark:bg-secondary"
                     >
                       Submit
                     </button>

@@ -4,15 +4,9 @@ type Props = {}
 
 export default function MemberCardSkeleton({}: Props) {
   return (
-    <div
-      className="flex w-full flex-col space-y-3 rounded-xl bg-lightest p-3 shadow 
-    dark:bg-white/5 xl:flex-row xl:space-y-0"
-    >
+    <div className="flex w-full flex-col space-y-3 rounded-xl bg-lightest p-3 shadow dark:bg-white/5 xl:flex-row xl:space-y-0">
       <aside className="relative rounded-l-xl md:rounded-xl">
-        <div
-          className="h-64 w-full animate-pulse rounded-xl bg-lightish shadow 
-          dark:bg-white/20 xl:h-48 xl:w-72"
-        ></div>
+        <div className="h-64 w-full animate-pulse rounded-xl bg-lightish shadow dark:bg-white/20 xl:h-48 xl:w-72" />
       </aside>
 
       <section

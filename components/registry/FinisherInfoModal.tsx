@@ -22,8 +22,7 @@ const FinisherInfoModal = ({ custom }: Props) => {
       <button
         onClick={openModal}
         title="Further information about counting"
-        className="flex w-min items-center gap-1 text-center font-medium transition 
-        hover:opacity-80 disabled:cursor-not-allowed disabled:opacity-50"
+        className="flex w-min items-center gap-1 text-center font-medium transition hover:opacity-80 disabled:cursor-not-allowed disabled:opacity-50"
       >
         {custom ? (
           custom
@@ -60,11 +59,7 @@ const FinisherInfoModal = ({ custom }: Props) => {
                 leaveFrom="opacity-100 scale-100"
                 leaveTo="opacity-0 scale-95"
               >
-                <Dialog.Panel
-                  className="w-full max-w-xl transform overflow-hidden rounded-2xl bg-lightest p-5 text-left align-middle
-                  text-sm font-normal text-gray-700 shadow-xl transition-all dark:bg-navy dark:text-white
-                  lg:max-w-[52rem] lg:p-6 lg:text-base"
-                >
+                <Dialog.Panel className="align-middletext-sm dark:text-whitelg:max-w-[52rem] w-full max-w-xl transform overflow-hidden rounded-2xl bg-lightest p-5 text-left font-normal text-gray-700 shadow-xl transition-all dark:bg-navy lg:p-6 lg:text-base">
                   <div className="flex items-center justify-between gap-x-2">
                     <Dialog.Title
                       as="h3"
@@ -75,9 +70,7 @@ const FinisherInfoModal = ({ custom }: Props) => {
 
                     <button
                       onClick={closeModal}
-                      className="flex items-center gap-x-1 rounded border border-rose-600/50 
-                      bg-rose-600/10 px-2 py-1 text-sm text-rose-800 transition 
-                      hover:bg-rose-600 hover:text-white dark:bg-rose-600/20 dark:text-white dark:hover:bg-rose-600"
+                      className="flex items-center gap-x-1 rounded border border-rose-600/50 bg-rose-600/10 px-2 py-1 text-sm text-rose-800 transition hover:bg-rose-600 hover:text-white dark:bg-rose-600/20 dark:text-white dark:hover:bg-rose-600"
                     >
                       <span>Close</span>
                       <XMarkIcon className="h-4 w-4" />{' '}
@@ -123,8 +116,7 @@ const FinisherInfoModal = ({ custom }: Props) => {
                   <div className="mt-6 flex w-full items-center justify-end">
                     <button
                       type="button"
-                      className="flex w-full items-center justify-center space-x-2 rounded bg-primary px-3 py-2 text-center text-sm font-medium text-white transition 
-                      hover:opacity-80 disabled:cursor-not-allowed disabled:opacity-50 lg:w-auto"
+                      className="flex w-full items-center justify-center space-x-2 rounded bg-primary px-3 py-2 text-center text-sm font-medium text-white transition hover:opacity-80 disabled:cursor-not-allowed disabled:opacity-50 lg:w-auto"
                       onClick={closeModal}
                     >
                       <span>Got it, thanks!</span>

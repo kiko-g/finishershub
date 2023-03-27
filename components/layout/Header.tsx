@@ -130,14 +130,12 @@ function Hamburger({ title, open }: HamburgerProps) {
           <span className="sr-only">Open nav menu</span>
           {open ? (
             <XMarkIcon
-              className="ease block h-7 w-7 transition duration-200 
-              group-hover:text-rose-600 dark:group-hover:text-rose-500"
+              className="ease block h-7 w-7 transition duration-200 group-hover:text-rose-600 dark:group-hover:text-rose-500"
               aria-hidden="true"
             />
           ) : (
             <Bars3Icon
-              className="ease block h-7 w-7 transition duration-200 
-            group-hover:text-primary dark:group-hover:text-secondary"
+              className="ease block h-7 w-7 transition duration-200 group-hover:text-primary dark:group-hover:text-secondary"
               aria-hidden="true"
             />
           )}
@@ -271,10 +269,7 @@ function Mobile({ location }: MobileProps) {
           </Link>
         ) : null
       )}
-      <div
-        className="relative flex h-auto items-center justify-end gap-x-4 border-t border-primary/25 
-        pt-4 dark:border-secondary/25"
-      >
+      <div className="relative flex h-auto items-center justify-end gap-x-4 border-t border-primary/25 pt-4 dark:border-secondary/25">
         {socials.map((social, socialIdx) =>
           social.shown ? (
             <Link

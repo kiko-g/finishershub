@@ -47,7 +47,7 @@ export default function CatalogueItem({ item, chosen, setChosen }: Props) {
             : 'border-gray-300 bg-white hover:border-primary hover:bg-primary/10 dark:border-secondary/20 dark:bg-secondary/10 dark:hover:border-secondary dark:hover:bg-secondary/20'
         )}
       >
-        <div className="aspect-square h-32 rounded bg-gradient-to-br from-slate-400 to-slate-500  dark:from-blue-500 dark:to-blue-600"></div>
+        <div className="aspect-square h-32 rounded bg-gradient-to-br from-slate-400 to-slate-500  dark:from-blue-500 dark:to-blue-600" />
         <div className="flex h-full w-full flex-col justify-between">
           {/* Top */}
           <div className="flex flex-col">
@@ -126,11 +126,7 @@ export default function CatalogueItem({ item, chosen, setChosen }: Props) {
               {speedText}
             </span>
 
-            <span
-              className={classNames(
-                'bg-slate-700 py-1 px-2 text-sm font-normal text-white dark:bg-slate-500'
-              )}
-            >
+            <span className="bg-slate-700 py-1 px-2 text-sm font-normal text-white dark:bg-slate-500">
               {item.score}/100
             </span>
           </div>
@@ -219,11 +215,7 @@ export default function CatalogueItem({ item, chosen, setChosen }: Props) {
                         {speedText}
                       </div>
 
-                      <div
-                        className={classNames(
-                          'bg-slate-700 py-2 px-3 text-sm font-light text-white dark:bg-slate-500'
-                        )}
-                      >
+                      <div className="bg-slate-700 py-2 px-3 text-sm font-light text-white dark:bg-slate-500">
                         {item.score}/100
                       </div>
                     </div>

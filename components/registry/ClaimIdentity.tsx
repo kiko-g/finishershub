@@ -55,9 +55,7 @@ export default function ClaimIdentity({ member, lockedHook }: Props) {
             ? `Prove you are ${member.name}`
             : `You already have access to ${member.name}'s data`
         }
-        className="inline-flex w-full items-center justify-center gap-x-2 rounded bg-slate-500
-        p-2 text-center text-sm font-medium tracking-tight text-white transition hover:opacity-80 
-        disabled:cursor-not-allowed disabled:opacity-50 dark:bg-slate-100 dark:text-gray-700"
+        className="bg-slate-500p-2 inline-flex w-full items-center justify-center gap-x-2 rounded text-center text-sm font-medium tracking-tight text-white transition hover:opacity-80 disabled:cursor-not-allowed disabled:opacity-50 dark:bg-slate-100 dark:text-gray-700"
       >
         <span className="whitespace-nowrap">Claim identity</span>
         {locked ? <LockClosedIcon className="h-5 w-5" /> : <LockOpenIcon className="h-5 w-5" />}
@@ -88,10 +86,7 @@ export default function ClaimIdentity({ member, lockedHook }: Props) {
                 leaveFrom="opacity-100 scale-100"
                 leaveTo="opacity-0 scale-95"
               >
-                <Dialog.Panel
-                  className="w-full max-w-xl transform overflow-hidden rounded-2xl bg-white p-6 text-left 
-                  align-middle text-gray-600 shadow-xl transition-all dark:bg-navy dark:text-white"
-                >
+                <Dialog.Panel className="w-full max-w-xl transform overflow-hidden rounded-2xl bg-white p-6 text-left align-middle text-gray-600 shadow-xl transition-all dark:bg-navy dark:text-white">
                   <div className="flex items-center justify-between">
                     <Dialog.Title
                       as="h3"
@@ -102,9 +97,7 @@ export default function ClaimIdentity({ member, lockedHook }: Props) {
 
                     <button
                       onClick={closeModal}
-                      className="flex items-center gap-x-1 rounded border border-rose-600/50 
-                      bg-rose-600/10 px-2 py-1 text-sm text-rose-800 transition 
-                      hover:bg-rose-600 hover:text-white dark:bg-rose-600/20 dark:text-white dark:hover:bg-rose-600"
+                      className="flex items-center gap-x-1 rounded border border-rose-600/50 bg-rose-600/10 px-2 py-1 text-sm text-rose-800 transition hover:bg-rose-600 hover:text-white dark:bg-rose-600/20 dark:text-white dark:hover:bg-rose-600"
                     >
                       <span>Close</span>
                       <XMarkIcon className="h-4 w-4" />{' '}
@@ -134,9 +127,7 @@ export default function ClaimIdentity({ member, lockedHook }: Props) {
                     <button
                       type="button"
                       onClick={togglePasswordShown}
-                      className="absolute right-[11px] top-[11px] rounded-full p-1 
-                      text-primary transition hover:bg-primary hover:text-white 
-                      dark:text-secondary dark:hover:bg-secondary dark:hover:text-white"
+                      className="absolute right-[11px] top-[11px] rounded-full p-1 text-primary transition hover:bg-primary hover:text-white dark:text-secondary dark:hover:bg-secondary dark:hover:text-white"
                     >
                       {passwordShown ? (
                         <EyeSlashIcon className="h-5 w-5" />

@@ -15,9 +15,7 @@ export default function MemberCardSelectArena({ arenas, selectedHook }: Props) {
       <div className="relative z-20 w-full">
         <Listbox.Button
           as="button"
-          className="inline-flex w-full items-center justify-center gap-x-1 rounded bg-teal-600 
-          py-2 pl-3 pr-2 text-center text-sm font-medium tracking-tight text-white transition hover:opacity-80 
-          disabled:cursor-not-allowed disabled:opacity-50"
+          className="inline-flex w-full items-center justify-center gap-x-1 rounded bg-teal-600 py-2 pl-3 pr-2 text-center text-sm font-medium tracking-tight text-white transition hover:opacity-80 disabled:cursor-not-allowed disabled:opacity-50"
         >
           <span className="block truncate">{picked.name}</span>
           <ChevronUpDownIcon className="h-5 w-5" aria-hidden="true" />
@@ -28,10 +26,7 @@ export default function MemberCardSelectArena({ arenas, selectedHook }: Props) {
           leaveFrom="opacity-100"
           leaveTo="opacity-0"
         >
-          <Listbox.Options
-            className="absolute mt-1 max-h-60 w-full overflow-auto rounded 
-            border border-gray-300 bg-gray-100 py-2 shadow lg:w-auto"
-          >
+          <Listbox.Options className="absolute mt-1 max-h-60 w-full overflow-auto rounded border border-gray-300 bg-gray-100 py-2 shadow lg:w-auto">
             {arenas.map((arena: any, arenaIdx: number) => (
               <Listbox.Option
                 key={arenaIdx}

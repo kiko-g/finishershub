@@ -13,7 +13,6 @@ export default function FilterByName({ hook }: Props) {
       id="searchProduct"
       name="searchProduct"
       placeholder="Search by finishing move name"
-      className=""
       value={searchQuery}
       onChange={(e) => setSearchQuery(e.target.value)}
     />

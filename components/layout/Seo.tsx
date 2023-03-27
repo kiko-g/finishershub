@@ -48,7 +48,9 @@ export default function Seo({ title }: Props) {
   return (
     <Head>
       <title>{`${title} | ${siteTitle}`}</title>
-      <meta name="description" content={description} />
+      {meta.map((meta, metaIdx) => (
+        <meta key={`meta-tag-${metaIdx}`} name={meta.name} content={meta.content} />
+      ))}
     </Head>
   )
 }
