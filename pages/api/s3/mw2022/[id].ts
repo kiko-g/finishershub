@@ -28,7 +28,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
       bucketName: bucketMW2022,
       filename: object.Key as string,
       lastModified: object.LastModified,
-    })).sort((a, b) => (a.lastModified! < b.lastModified! ? -1 : 1))
+    })).sort((a, b) => (a.filename! < b.filename! ? -1 : 1))
 
     if (videoIndex < 0 || videoIndex >= videoDataMW2022.length) {
       res.status(404).json({

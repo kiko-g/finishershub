@@ -15,17 +15,11 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
     }
 
     const bucketMW2019 = process.env.NEXT_PUBLIC_AWS_S3_BUCKET_NAME_MW2019 || 'finishershub.mw2019'
-    const bucketMW2022 = process.env.NEXT_PUBLIC_AWS_S3_BUCKET_NAME_MW2022 || 'finishershub.mw2022'
-
     const objectsMW2019 = new ListObjectsV2Command({ Bucket: bucketMW2019 })
-    const objectsMW2022 = new ListObjectsV2Command({ Bucket: bucketMW2022 })
 
-    const [mw2019Response, mw2022Response] = await Promise.all([
-      s3.send(objectsMW2019),
-      s3.send(objectsMW2022),
-    ])
+    const mw2019Response = await s3.send(objectsMW2019)
 
-    if (!mw2019Response.Contents || !mw2022Response.Contents) {
+    if (!mw2019Response.Contents) {
       res.status(404).json({ message: 'Error requesting objects from S3' })
       return
     }
@@ -34,7 +28,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
       bucketName: bucketMW2019,
       filename: object.Key,
       lastModified: object.LastModified,
-    })).sort((a, b) => (a.lastModified! < b.lastModified! ? -1 : 1))
+    })).sort((a, b) => (a.filename! < b.filename! ? -1 : 1))
 
     if (videoIndex < 0 || videoIndex >= videoDataMW2019.length) {
       res.status(404).json({

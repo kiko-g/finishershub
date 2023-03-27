@@ -20,7 +20,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
       bucketName: bucketMW2019,
       filename: object.Key,
       lastModified: object.LastModified,
-    })).sort((a, b) => (a.lastModified! < b.lastModified! ? -1 : 1))
+    })).sort((a, b) => (a.filename! < b.filename! ? -1 : 1))
 
     const videosRes = []
     for (const video of videoDataMW2019) {

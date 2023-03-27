@@ -1,4 +1,4 @@
-import { estabilishS3Connection } from '../../../utils/api/s3'
+import { estabilishS3Connection } from '../../../../utils/api/s3'
 import type { NextApiRequest, NextApiResponse } from 'next'
 import { GetObjectCommand, ListObjectsV2Command } from '@aws-sdk/client-s3'
 import { getSignedUrl } from '@aws-sdk/s3-request-presigner'
@@ -20,7 +20,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
       bucketName: bucket,
       filename: object.Key as string,
       lastModified: object.LastModified,
-    })).sort((a, b) => (a.lastModified! < b.lastModified! ? -1 : 1))
+    })).sort((a, b) => (a.filename! < b.filename! ? -1 : 1))
 
     const allSignedUrls = []
     for (const video of videoData) {
