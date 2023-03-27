@@ -18,7 +18,7 @@ export default function NavCard({ item }: Props) {
     <Link
       key={`nav-${item.name}`}
       href={item.href}
-      className="group relative flex max-w-[10rem] scale-100 flex-col gap-y-1 self-stretch rounded-md border border-sky-900 bg-sky-800/70 px-2 py-1.5 font-light text-white duration-100 hover:scale-105 hover:border-slate-700 hover:bg-sky-600/60 dark:border-slate-200 dark:bg-slate-800/60 dark:text-white dark:hover:border-white dark:hover:bg-violet-400/50 md:max-w-xs md:border-2 md:px-4 md:py-4"
+      className="group relative flex max-w-[10rem] scale-100 flex-col gap-y-1 self-stretch rounded-md border border-sky-900/70 bg-sky-700/70 px-2 py-1.5 font-light text-white duration-100 hover:scale-105 hover:border-sky-900 hover:bg-sky-600/60 dark:border-slate-200 dark:bg-slate-800/60 dark:text-white dark:hover:border-white dark:hover:bg-violet-400/50 md:max-w-xs md:border-2 md:px-4 md:py-4"
     >
       <div className="group flex flex-row items-center justify-between gap-x-2 font-medium">
         <span className="space-x-1 md:space-x-2">
@@ -26,7 +26,7 @@ export default function NavCard({ item }: Props) {
           <span className="text-sm md:text-lg">{item.name}</span>
         </span>
         <span>
-          <ArrowLongRightIcon className="h-5 w-5 group-hover:animate-bounce-horizontal md:h-6 md:w-6" />
+          <ArrowLongRightIcon className="h-5 w-5 transition group-hover:-rotate-45 md:h-6 md:w-6" />
         </span>
       </div>
       <p className="text-left text-xs leading-snug tracking-tight md:text-left md:text-sm md:leading-normal md:tracking-normal">

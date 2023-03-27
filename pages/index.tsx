@@ -150,9 +150,18 @@ export default function Hub() {
           {/* Most recent highlight */}
           <section
             id="showcase"
-            className="my-auto mx-auto mb-16 flex max-w-5xl flex-col space-y-3"
+            className="my-auto mx-auto mb-8 flex max-w-5xl flex-col space-y-3 py-4"
           >
-            <h2 className="text-3xl font-bold tracking-tight sm:text-4xl">Most recent highlight</h2>
+            <Link
+              href="#showcase"
+              scroll={false}
+              className="group flex items-center gap-x-4 transition hover:opacity-80"
+            >
+              <h2 className="text-3xl font-bold tracking-tight sm:text-4xl">
+                Most recent highlight
+              </h2>
+              <span className="hidden text-2xl group-hover:flex sm:text-3xl">🔗</span>
+            </Link>
             <p className="font-normal">
               Here is the most recently uploaded highlight to the platform. Check back here to stay
               in touch with the latest content.
@@ -161,16 +170,26 @@ export default function Hub() {
           </section>
 
           {/* Get full access */}
-          <section id="access" className="my-auto mx-auto mb-16 flex max-w-5xl flex-col space-y-4">
+          <section
+            id="access"
+            className="my-auto mx-auto mb-8 flex max-w-5xl flex-col space-y-3 py-4"
+          >
             <div className="flex items-center justify-start gap-3">
-              <h2 className="text-3xl font-bold tracking-tight sm:text-4xl">
-                {accessDenied ? (
-                  <span className="text-rose-700 dark:text-rose-600">Get</span>
-                ) : (
-                  <span className="text-teal-700 dark:text-teal-500">You have</span>
-                )}{' '}
-                full access
-              </h2>
+              <Link
+                href="#access"
+                scroll={false}
+                className="group flex items-center gap-x-4 transition hover:opacity-80"
+              >
+                <h2 className="text-3xl font-bold tracking-tight sm:text-4xl">
+                  {accessDenied ? (
+                    <span className="text-rose-700 dark:text-rose-600">Get</span>
+                  ) : (
+                    <span className="text-teal-700 dark:text-teal-500">You have</span>
+                  )}{' '}
+                  full access
+                </h2>
+                <span className="hidden text-2xl group-hover:flex sm:text-3xl">🔗</span>
+              </Link>
             </div>
 
             <p className="font-normal">
@@ -191,14 +210,34 @@ export default function Hub() {
             </div>
           </section>
 
-          <section id="info" className="my-auto mx-auto mb-16 flex max-w-5xl flex-col space-y-6">
-            <h2 className="text-3xl font-bold tracking-tight sm:text-4xl">Facts and figures</h2>
+          <section
+            id="info"
+            className="my-auto mx-auto mb-8 flex max-w-5xl flex-col space-y-3 py-4"
+          >
+            <Link
+              href="#info"
+              scroll={false}
+              className="group flex items-center gap-x-4 transition hover:opacity-80"
+            >
+              <h2 className="text-3xl font-bold tracking-tight sm:text-4xl">Facts and figures</h2>
+              <span className="hidden text-2xl group-hover:flex sm:text-3xl">🔗</span>
+            </Link>
             <FinishersInfo />
           </section>
 
           {/* About */}
-          <section id="about" className="my-auto mx-auto mb-16 max-w-5xl">
-            <h2 className="text-3xl font-bold tracking-tight sm:text-4xl">About</h2>
+          <section
+            id="about"
+            className="my-auto mx-auto mb-8 flex max-w-5xl flex-col space-y-3 py-4"
+          >
+            <Link
+              href="#about"
+              scroll={false}
+              className="group flex items-center gap-x-4 transition hover:opacity-80"
+            >
+              <h2 className="text-3xl font-bold tracking-tight sm:text-4xl">About us</h2>
+              <span className="hidden text-2xl group-hover:flex sm:text-3xl">🔗</span>
+            </Link>
             <ul className="mt-3 grid grid-cols-1 gap-y-4 gap-x-4 text-base font-normal tracking-tight lg:mt-6 lg:grid-cols-3 lg:text-lg">
               {/* Description */}
               <AboutCardLI emoji="👋">
