@@ -1,19 +1,19 @@
-import ClaimIdentity from './ClaimIdentity'
 import ChangePassword from './ChangePassword'
+import ClaimIdentity from './ClaimIdentity'
 import DataDisclaimer from './DataDisclaimer'
-import TotalFinishersDisclaimer from './TotalFinishersDisclaimer'
 import FinisherInfoModal from './FinisherInfoModal'
 import MemberCard from './MemberCard'
-import MemberCardSkeleton from './MemberCardSkeleton'
 import MemberCardSelectArena from './MemberCardSelectArena'
+import MemberCardSkeleton from './MemberCardSkeleton'
+import TotalFinishersDisclaimer from './TotalFinishersDisclaimer'
 
 export {
-  ClaimIdentity,
   ChangePassword,
-  FinisherInfoModal,
+  ClaimIdentity,
   DataDisclaimer,
-  TotalFinishersDisclaimer,
+  FinisherInfoModal,
   MemberCard,
-  MemberCardSkeleton,
   MemberCardSelectArena,
+  MemberCardSkeleton,
+  TotalFinishersDisclaimer,
 }
