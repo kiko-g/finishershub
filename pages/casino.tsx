@@ -14,6 +14,7 @@ import {
   VideoPlayer,
   VideoSkeleton,
   FilterVideos,
+  VideoNotFound,
 } from '../components/videos'
 
 export default function Casino() {
@@ -120,10 +121,16 @@ export default function Casino() {
           <div className="relative w-full">
             {limitedAccess ? <InvisbleTopLayer /> : null}
             {ready ? (
-              <VideoPlayer video={video} play={autoplay} muted={muted} />
+              <VideoPlayer
+                video={video}
+                play={autoplay}
+                muted={muted}
+                key={`video-element-${video.index}`}
+              />
             ) : (
               <VideoSkeleton />
             )}
+            {fetchError && <VideoNotFound />}
           </div>
 
           {/* Left Arrow, Clip index, Right Arrow */}
