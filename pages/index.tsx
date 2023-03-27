@@ -2,7 +2,14 @@ import React from 'react'
 import Link from 'next/link'
 import { socials } from '../utils/data'
 import { Footer, DarkModeSwitch, Seo } from '../components/layout'
-import { AboutCardLI, AccessModalCTA, NavCard, DeleteData, FinishersInfo } from '../components/hub'
+import {
+  AboutCardLI,
+  AccessModalCTA,
+  NavCard,
+  DeleteData,
+  FinishersInfo,
+  MostRecentVideoShowcase,
+} from '../components/hub'
 import useAccessDenied from '../hooks/useAccessDenied'
 
 export default function Hub() {
@@ -140,8 +147,21 @@ export default function Hub() {
             </div>
           </header>
 
+          {/* Most recent highlight */}
+          <section
+            id="showcase"
+            className="my-auto mx-auto mb-16 flex max-w-5xl flex-col space-y-3"
+          >
+            <h2 className="text-3xl font-bold tracking-tight sm:text-4xl">Most recent highlight</h2>
+            <p className="font-normal">
+              Here is the most recently uploaded highlight to the platform. Check back here to stay
+              in touch with the latest content.
+            </p>
+            <MostRecentVideoShowcase />
+          </section>
+
           {/* Get full access */}
-          <section id="access" className="my-auto mx-auto mb-16 flex max-w-6xl flex-col space-y-4">
+          <section id="access" className="my-auto mx-auto mb-16 flex max-w-5xl flex-col space-y-4">
             <div className="flex items-center justify-start gap-3">
               <h2 className="text-3xl font-bold tracking-tight sm:text-4xl">
                 {accessDenied ? (
@@ -171,13 +191,13 @@ export default function Hub() {
             </div>
           </section>
 
-          <section id="info" className="my-auto mx-auto mb-16 flex max-w-6xl flex-col space-y-6">
+          <section id="info" className="my-auto mx-auto mb-16 flex max-w-5xl flex-col space-y-6">
             <h2 className="text-3xl font-bold tracking-tight sm:text-4xl">Facts and figures</h2>
             <FinishersInfo />
           </section>
 
           {/* About */}
-          <section id="about" className="my-auto mx-auto mb-16 max-w-6xl">
+          <section id="about" className="my-auto mx-auto mb-16 max-w-5xl">
             <h2 className="text-3xl font-bold tracking-tight sm:text-4xl">About</h2>
             <ul className="mt-3 grid grid-cols-1 gap-y-4 gap-x-4 text-base font-normal tracking-tight lg:mt-6 lg:grid-cols-3 lg:text-lg">
               {/* Description */}

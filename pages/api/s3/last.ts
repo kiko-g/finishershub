@@ -35,9 +35,10 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
       lastModified: object.LastModified,
     }))
 
-    const allVideosSorted = [...videoDataMW2019, ...videoDataMW2022].sort((a, b) =>
-      a.lastModified! < b.lastModified! ? -1 : 1
-    )
+    const allVideosSorted = [...videoDataMW2022].sort((a, b) => {
+      if (a.filename! < b.filename!) return -1
+      else return 1
+    })
 
     const video = allVideosSorted[allVideosSorted.length - 1]
     const getObjectCommandInput = new GetObjectCommand({
