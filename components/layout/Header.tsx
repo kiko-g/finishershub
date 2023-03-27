@@ -5,7 +5,7 @@ import Image from 'next/image'
 import { Disclosure } from '@headlessui/react'
 import {
   ChartBarSquareIcon,
-  RocketLaunchIcon,
+  ArrowUpTrayIcon,
   BoltIcon,
   Bars3Icon,
   XMarkIcon,
@@ -47,6 +47,12 @@ const navigation = [
     shown: true,
   },
   {
+    title: 'Create',
+    location: '/create',
+    icon: <ArrowUpTrayIcon className="h-5 w-5" />,
+    shown: true,
+  },
+  {
     title: 'More',
     location: '/more',
     icon: <PlusSmallIcon className="h-5 w-5" />,
@@ -61,12 +67,12 @@ type Props = {
   location: string
 }
 
-export default function Navbar({ siteTitle, location }: Props) {
+export default function Header({ siteTitle, location }: Props) {
   return (
     <Disclosure
       as="nav"
-      className="background sticky top-0 z-20 bg-light/90 px-4 py-3 text-gray-800 
-      dark:bg-navy/90 dark:text-white md:py-0 md:px-4"
+      className="background sticky top-0 z-20 bg-light/90 px-3 py-3 text-gray-800 
+      dark:bg-navy/90 dark:text-white lg:py-2 lg:px-4"
     >
       {({ open }) => {
         return (
@@ -74,10 +80,10 @@ export default function Navbar({ siteTitle, location }: Props) {
             <div
               className={`${
                 open ? 'p-0' : 'p-2'
-              } relative flex items-center justify-between md:py-0`}
+              } relative flex items-center justify-between lg:py-0`}
             >
               <Hamburger title={siteTitle} open={open} />
-              <Header title={siteTitle} location={location} />
+              <Navbar title={siteTitle} location={location} />
             </div>
             <Mobile location={location} />
           </header>
@@ -95,7 +101,7 @@ type HamburgerProps = {
 function Hamburger({ title, open }: HamburgerProps) {
   return (
     <div
-      className={`z-50 md:hidden ${
+      className={`z-50 lg:hidden ${
         open
           ? 'absolute top-2 right-2 my-auto flex h-6 items-center justify-end gap-x-3'
           : 'flex w-full items-center justify-between gap-x-3'
@@ -103,29 +109,23 @@ function Hamburger({ title, open }: HamburgerProps) {
     >
       {open ? null : (
         <Link href="/" className="flex items-center gap-x-2">
-          <Image
-            className="avatar rounded-full"
-            width={24}
-            height={24}
-            src={avatar}
-            alt="Finishers Hub"
-          />
-          <h3 className="tracking-tight">{title}</h3>
+          <div className="h-7 w-7 rounded-full bg-gradient-to-br from-teal-500 to-teal-600 shadow dark:bg-gradient-to-br dark:from-blue-500 dark:to-blue-600">
+            <Image
+              className="avatar z-20 rounded-full"
+              width={256}
+              height={256}
+              src={avatar}
+              alt="Finishers Hub"
+            />
+          </div>
+          <span className="whitespace-nowrap font-bold tracking-tight">{title}</span>
         </Link>
       )}
       <div className="flex items-center gap-x-2">
-        {open ? (
-          <Link href="/admin" className="group">
-            <RocketLaunchIcon
-              className="h-6 w-6 py-[1px] text-slate-600 transition 
-              group-hover:text-primary dark:text-slate-300 dark:group-hover:text-primary"
-            />
-          </Link>
-        ) : null}
         <DarkModeSwitch />
         <Disclosure.Button
           className="group -ml-[3px] py-[3px] text-gray-800 transition duration-200 
-        ease-in dark:text-white md:hidden"
+        ease-in dark:text-white lg:hidden"
         >
           <span className="sr-only">Open nav menu</span>
           {open ? (
@@ -152,48 +152,54 @@ type HeaderProps = {
   location: string
 }
 
-function Header({ title, location }: HeaderProps) {
+function Navbar({ title, location }: HeaderProps) {
   return (
-    <div className="z-50 flex flex-1 items-center justify-between md:items-stretch md:justify-between">
-      <div className="relative hidden h-auto self-center duration-200 hover:opacity-80 md:flex md:gap-x-8">
-        <Link href="/" className="flex items-center gap-x-2">
+    <div className="z-50 flex flex-1 items-center justify-between lg:items-stretch lg:justify-between">
+      <div className="relative hidden h-auto self-center duration-200 hover:opacity-80 lg:flex lg:gap-x-8">
+        <Link
+          href="/"
+          className="relative flex h-7 w-7 items-center gap-x-2 rounded-full bg-gradient-to-br from-teal-500 to-teal-600 dark:bg-gradient-to-br dark:from-blue-500 dark:to-blue-600"
+        >
           <Image
             src={avatar}
             alt="Finishers Hub"
-            width={24}
-            height={24}
+            width={256}
+            height={256}
             className="z-20 inline-flex rounded-full transition"
           />
-          <h3 className="text-sm font-bold tracking-tighter duration-150 lg:text-base">{title}</h3>
+          <h3 className="whitespace-nowrap text-sm font-bold tracking-tighter duration-150 lg:text-base">
+            {title}
+          </h3>
         </Link>
       </div>
 
-      <div className="hidden self-center sm:gap-x-4 md:flex md:gap-x-6">
-        {navigation.map((link, index) =>
-          link.shown ? (
-            <Link href={link.location} key={`nav-${index}`} className="relative py-1">
+      <div className="hidden self-center lg:flex lg:gap-x-8">
+        {navigation.map((link, index) => {
+          if (link.shown === false) return null
+          const isActive = location === link.title
+
+          return (
+            <Link key={`nav-${index}`} href={link.location}>
               <button
                 type="button"
-                className={`flex h-12 items-center justify-center lowercase tracking-tight transition ${
-                  location === link.title
+                className={`relative flex items-center justify-center gap-x-[5px] py-2 lowercase tracking-tight transition ${
+                  isActive
                     ? 'font-bold text-primary dark:text-white'
                     : 'font-normal text-gray-800/50 hover:text-gray-800 dark:text-white/40 dark:hover:text-white'
                 }`}
               >
-                <span className="flex items-center justify-center gap-x-1.5">
-                  <span>{link.icon}</span>
-                  <span>{link.title}</span>
-                </span>
+                {/* <span>{link.icon}</span> */}
+                <span>{link.title}</span>
+                {isActive && (
+                  <span className="dark:via-secondary420 absolute bottom-0 h-[2px] w-full rounded-xl bg-primary/50 dark:bg-secondary/50" />
+                )}
               </button>
             </Link>
-          ) : null
-        )}
+          )
+        })}
       </div>
 
-      <div className="hidden self-center md:inline-flex md:items-center md:justify-center md:gap-x-2">
-        <Link href="/admin" className="group">
-          <RocketLaunchIcon className="h-6 w-6 text-slate-600 transition group-hover:text-primary dark:text-slate-300 dark:group-hover:text-primary md:h-7 md:w-7" />
-        </Link>
+      <div className="hidden self-center lg:inline-flex lg:items-center lg:justify-center lg:gap-x-2">
         <DarkModeSwitch />
       </div>
     </div>
@@ -245,7 +251,7 @@ const socials = [
 
 function Mobile({ location }: MobileProps) {
   return (
-    <Disclosure.Panel className="flex flex-col gap-y-3 py-2 md:hidden">
+    <Disclosure.Panel className="flex flex-col gap-y-3 py-2 lg:hidden">
       {navigation.map((link, index) =>
         link.shown ? (
           <Link href={link.location} className="relative h-auto" key={`mobile-nav-${index}`}>

@@ -13,7 +13,7 @@ type Member = {
   name: string
 }
 
-export default function AdminPage() {
+export default function CreatePage() {
   const members: Member[] = [
     { name: 'Frankie' },
     { name: 'Levels' },
@@ -31,11 +31,11 @@ export default function AdminPage() {
   const [sensititveAudio, setSensitiveAudio] = useState(false)
 
   return (
-    <Layout location="Admin">
+    <Layout location="Create">
       <main className="flex flex-col gap-y-3 px-0 lg:px-4">
         <div className="flex flex-col justify-between gap-y-2 lg:flex-row lg:gap-x-6">
           <div className="flex flex-col justify-center gap-2">
-            <h2 className="text-4xl font-bold tracking-tight sm:text-5xl">Finishers Management</h2>
+            <h2 className="text-4xl font-bold tracking-tight sm:text-5xl">Upload your finishers</h2>
             <p className="grow text-lg font-normal">
               For members and members only. Let&apos;s build something great, shall we?
             </p>

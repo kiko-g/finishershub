@@ -58,7 +58,7 @@ export default function AccessModalCTA({ lockedHook, startOpen, special = false 
         className="flex w-min items-center justify-start gap-2 rounded border border-teal-600 bg-teal-600/60 py-4 px-5 text-white transition hover:bg-teal-600"
       >
         <KeyIcon className="h-5 w-5 lg:h-6 lg:w-6" />
-        <span className="whitespace-nowrap">Claim full access by entering the secret code</span>
+        <span className="whitespace-nowrap">Claim your full access</span>
       </button>
 
       {/* Modal */}

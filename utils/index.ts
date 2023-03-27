@@ -61,7 +61,5 @@ export const getVideoUrlFromVideo = (video: VideoType, offset?: number) => {
   const index = offset ? video.index + offset : video.index
   const game = video.filteredGame === '' ? '' : '/' + video.filteredGame
 
-  console.log(video.filteredGame)
-
   return `${url}/video${game}/${index}`
 }

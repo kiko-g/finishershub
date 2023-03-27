@@ -36,7 +36,7 @@ export default function DarkModeSwitch({ alt = false }: Props) {
             <MoonIcon
               aria-hidden="true"
               className={classNames(
-                alt ? 'text-gray-800 hover:opacity-80' : 'text-blue-400 hover:text-blue-200',
+                alt ? 'text-teal-700 hover:opacity-80' : 'text-blue-400 hover:text-blue-200',
                 `ease block h-6 w-6 transition duration-150 md:h-7 md:w-7`
               )}
             />

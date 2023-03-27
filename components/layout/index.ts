@@ -4,6 +4,6 @@ import DarkModeSwitch from './DarkModeSwitch'
 import Footer from './Footer'
 import InvisbleTopLayer from './InvisbleTopLayer'
 import Layout from './Layout'
-import Navbar from './Navbar'
+import Header from './Header'
 
-export { AccessModal, Background, DarkModeSwitch, Footer, InvisbleTopLayer, Layout, Navbar }
+export { AccessModal, Background, DarkModeSwitch, Footer, InvisbleTopLayer, Layout, Header }

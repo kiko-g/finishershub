@@ -1,8 +1,6 @@
 import React from 'react'
 import Seo from '../Seo'
-import Navbar from './Navbar'
-import Footer from './Footer'
-import Background from './Background'
+import { Header, Footer, Background } from './'
 
 type Props = {
   children: JSX.Element[] | JSX.Element
@@ -20,7 +18,7 @@ export default function Layout({ children, location = 'Unknown', background = fa
         className="flex min-h-screen flex-col scroll-smooth bg-light font-prose 
         font-medium text-gray-800 opacity-[99%] dark:bg-navy dark:text-white"
       >
-        <Navbar location={location} siteTitle={siteTitle} />
+        <Header location={location} siteTitle={siteTitle} />
         {background ? <Background /> : null}
         <div className="container z-10 mx-auto mt-4 mb-auto max-w-7xl px-4 py-0">{children}</div>
         <Footer siteTitle={siteTitle} />

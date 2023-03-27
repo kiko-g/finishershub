@@ -159,9 +159,9 @@ export default function Hub() {
 
             <p className="font-normal">
               Performing finishing moves is hectic, intense, and on a very gray moral area. As one
-              can imagine things get a little out of hand and the heat of the moment can only be
-              reviewed by worthy visitors that are capable of embracing the beauty and tragic nature
-              of finishers. For that matter, we have protected our audio content, so that guests can
+              can imagine things get a little out of hand. The heat of the moment can only be
+              reviewed by worthy visitors, capable of embracing the beauty and tragic nature of
+              finishers. For that matter, we have protected our audio content, so that guests can
               view only a limited amount of content on this platform of pure joy and insanity. Enter
               the secret code on the form to gain full access to Finishers Hub.
             </p>
