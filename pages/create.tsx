@@ -62,10 +62,7 @@ export default function CreatePage() {
                 {/* Upload video */}
                 <div className="flex w-full flex-col items-center justify-center gap-4 lg:flex-row">
                   {/* Drag video area */}
-                  <div
-                    className="hidden w-full items-center justify-center self-stretch rounded border border-dashed 
-                  border-gray-500 bg-gray-800/5 py-6 dark:border-sky-300/40 dark:bg-sky-200/5 lg:flex"
-                  >
+                  <div className="hidden w-full items-center justify-center self-stretch rounded border border-dashed border-gray-500 bg-gray-800/5 py-6 dark:border-sky-300/40 dark:bg-sky-200/5 lg:flex">
                     <span className="font-normal text-gray-700 dark:text-gray-200">
                       Drag your video highlight here.
                     </span>
@@ -76,9 +73,7 @@ export default function CreatePage() {
                     <input className="sr-only" type="file" accept="video/mp4" id="upload-video" />
                     <label
                       htmlFor="upload-video"
-                      className="flex cursor-pointer items-center justify-center gap-x-3 rounded border
-                  border-blue-500/90 bg-blue-500/60 px-6 py-4 text-white transition hover:bg-blue-500/90 
-                  dark:bg-blue-500/40 dark:hover:bg-blue-500/80 lg:px-8 lg:py-6"
+                      className="flex cursor-pointer items-center justify-center gap-x-3 rounded border border-blue-500/90 bg-blue-500/60 px-6 py-4 text-white transition hover:bg-blue-500/90 dark:bg-blue-500/40 dark:hover:bg-blue-500/80 lg:px-8 lg:py-6"
                     >
                       <ArrowUpTrayIcon className="h-7 w-7" />
                       <span className="whitespace-nowrap font-normal">Upload your highlight</span>
@@ -87,10 +82,7 @@ export default function CreatePage() {
                 </div>
 
                 {/* Form for uploaded video */}
-                <div
-                  className="flex h-full w-full flex-col gap-4 rounded border border-gray-500/0 
-                bg-white px-4 py-4 dark:border-gray-200/10 dark:bg-gray-100/5 lg:flex-row"
-                >
+                <div className="flex h-full w-full flex-col gap-4 rounded border border-gray-500/0 bg-white px-4 py-4 dark:border-gray-200/10 dark:bg-gray-100/5 lg:flex-row">
                   {/* Desktop image */}
                   <Image
                     alt="Art"
@@ -125,7 +117,7 @@ export default function CreatePage() {
                           </Listbox.Label>
                           <Listbox.Button
                             as="button"
-                            className="leinput relative mt-1 flex w-full justify-between bg-gray-50 dark:bg-gray-100/5"
+                            className="custom-input relative mt-1 flex w-full justify-between bg-gray-50 dark:bg-gray-100/5"
                           >
                             {selected !== null ? (
                               <span className="block truncate font-light text-gray-400 dark:text-gray-400">
@@ -208,10 +200,7 @@ export default function CreatePage() {
                         <span className="block text-sm font-medium">Parameters</span>
 
                         {/* Checkboxes */}
-                        <div
-                          className="flex flex-col items-start gap-y-3 rounded border border-gray-300 
-                      bg-gray-50 px-4 py-4 dark:border-gray-200/10 dark:bg-gray-100/5"
-                        >
+                        <div className="flex flex-col items-start gap-y-3 rounded border border-gray-300 bg-gray-50 px-4 py-4 dark:border-gray-200/10 dark:bg-gray-100/5">
                           {/* Pernoca */}
                           <div className="flex w-full items-center justify-start gap-x-2.5 text-sm">
                             <input
@@ -265,9 +254,7 @@ export default function CreatePage() {
 
                     <button
                       type="submit"
-                      className="w-full rounded border border-primary/90 bg-primary/60 px-4 py-2 
-                  text-white transition hover:bg-primary/90 dark:border-secondary/90
-                  dark:bg-secondary/40 dark:hover:bg-secondary/80"
+                      className="w-full rounded border border-primary/90 bg-primary/60 px-4 py-2 text-white transition hover:bg-primary/90 dark:border-secondary/90 dark:bg-secondary/40 dark:hover:bg-secondary/80"
                     >
                       Submit
                     </button>

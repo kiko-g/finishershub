@@ -19,7 +19,7 @@ h6 {
   @apply font-lexend;
 }
 
-.leinput,
+.custom-input,
 input[type='text'],
 input[type='search'],
 input[type='password'] {

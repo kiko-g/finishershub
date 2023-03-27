@@ -28,9 +28,7 @@ export default function NotFound() {
             <div className="w-full self-stretch lg:w-auto lg:self-auto">
               <Link
                 href="/"
-                className="group flex h-full w-full items-center justify-center gap-x-2 rounded 
-              bg-gradient-to-br from-teal-500 via-teal-600 to-teal-700 px-6 py-4 text-white 
-              transition hover:opacity-80 lg:w-auto"
+                className="group flex h-full w-full items-center justify-center gap-x-2 rounded bg-gradient-to-br from-teal-500 via-teal-600 to-teal-700 px-6 py-4 text-white transition hover:opacity-80 lg:w-auto"
               >
                 <span className="font-normal tracking-tight">Country roads, take me home!</span>
                 <ArrowLongRightIcon className="h-5 w-5 transition group-hover:translate-x-1" />

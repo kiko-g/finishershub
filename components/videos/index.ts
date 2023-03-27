@@ -12,6 +12,7 @@ import SingleVideoShowcase from './SingleVideoShowcase'
 import TwitchVideoClip from './TwitchVideoClip'
 import UsageDisclaimer from './UsageDisclaimer'
 import VideoNotFound from './VideoNotFound'
+import VideoPage from './VideoPage'
 import VideoPlayer from './VideoPlayer'
 import VideoSkeleton from './VideoSkeleton'
 import ViewToggler from './ViewToggler'
@@ -31,6 +32,7 @@ export {
   TwitchVideoClip,
   UsageDisclaimer,
   VideoNotFound,
+  VideoPage,
   VideoPlayer,
   VideoSkeleton,
   ViewToggler,
