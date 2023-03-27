@@ -1,8 +1,7 @@
 import React from 'react'
 import Link from 'next/link'
-import Seo from '../components/Seo'
 import { socials } from '../utils/data'
-import { Footer, DarkModeSwitch } from '../components/layout'
+import { Footer, DarkModeSwitch, Seo } from '../components/layout'
 import { AboutCardLI, AccessModalCTA, NavCard, DeleteData, FinishersInfo } from '../components/hub'
 import useAccessDenied from '../hooks/useAccessDenied'
 

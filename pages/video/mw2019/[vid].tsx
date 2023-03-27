@@ -1,8 +1,7 @@
 import React, { useEffect, useMemo, useState } from 'react'
 import type { VideoType, VideoTypeAPI } from '../../../@types'
-import Seo from '../../../components/Seo'
 import { useRouter } from 'next/router'
-import { Header, Footer } from '../../../components/layout'
+import { Header, Footer, Seo } from '../../../components/layout'
 import { VideoSkeleton, VideoNotFound, SingleVideoShowcase } from '../../../components/videos'
 
 type Props = {}
@@ -11,7 +10,6 @@ export default function Video({}: Props) {
   const router = useRouter()
   const { vid } = router.query
   const [video, setVideo] = useState<VideoType | null>(null)
-  const [videoId, setVideoId] = useState<number>(-1)
   const [loading, setLoading] = useState<boolean>(true)
   const [fetchError, setFetchError] = useState<boolean>(false)
   const ready = useMemo(() => !loading && !fetchError, [loading, fetchError])
@@ -41,7 +39,6 @@ export default function Video({}: Props) {
           filteredGame: 'mw2019',
           filename: vid.filename,
         })
-        setVideoId(videoIndex)
       })
       .catch((err) => {
         setLoading(false)

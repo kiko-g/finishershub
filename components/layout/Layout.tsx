@@ -1,6 +1,5 @@
 import React from 'react'
-import Seo from '../Seo'
-import { Header, Footer, Background } from './'
+import { Background, Footer, Header, Seo } from './'
 
 type Props = {
   children: JSX.Element[] | JSX.Element

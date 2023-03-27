@@ -1,6 +1,6 @@
 import React from 'react'
 import Link from 'next/link'
-import Seo from '../components/Seo'
+import { Seo } from '../components/layout'
 import { OhNo, TheRock, Frankie, Turtle, Saul, Doeu, Blush } from '../components/404'
 import { ArrowLongRightIcon } from '@heroicons/react/24/outline'
 

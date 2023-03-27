@@ -1,6 +1,5 @@
 import React, { useEffect, useMemo, useState } from 'react'
-import Seo from '../../components/Seo'
-import { Header, Footer } from '../../components/layout'
+import { Header, Footer, Seo } from '../../components/layout'
 import { VideoSkeleton, VideoNotFound, SingleVideoShowcase } from '../../components/videos'
 import { VideoType, VideoTypeAPI } from '../../@types'
 
