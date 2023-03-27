@@ -1,7 +1,7 @@
 import React, { useEffect, useMemo, useState } from 'react'
 import { useRouter } from 'next/router'
 import Seo from '../../../components/Seo'
-import { Navbar, Footer } from '../../../components/layout'
+import { Header, Footer } from '../../../components/layout'
 import {
   VideoPlayer,
   VideoSkeleton,
@@ -59,7 +59,7 @@ export default function Video({}: Props) {
   return (
     <div className="flex min-h-screen flex-col bg-light dark:bg-navy">
       <Seo title="Video" />
-      <Navbar siteTitle="Finishers Hub" location="Video" />
+      <Header siteTitle="Finishers Hub" location="Video" />
       <div className="flex flex-1 items-start justify-center md:items-center">
         <div className="mx-auto w-full max-w-full px-4 lg:max-w-5xl lg:px-0">
           {ready && video !== null ? (
