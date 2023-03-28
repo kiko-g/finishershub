@@ -35,6 +35,18 @@ export default function Hub() {
       ),
     },
     {
+      name: 'Lab',
+      href: '/lab',
+      emoji: '🧪',
+      description: (
+        <>
+          Visit the laboratory of finishers. This is where you can consult premium research findings
+          and gain insight on our unholy and wicked methodology. If they let us cook, oh{' '}
+          <span className="font-bold">we will cook</span>.
+        </>
+      ),
+    },
+    {
       name: 'Gallery',
       href: '/gallery',
       emoji: '🖼️',
@@ -42,18 +54,6 @@ export default function Hub() {
         <>
           Head over to the gallery. It&apos;s like a museum, but with heinous highlights of
           individuals performing the most gruesome and relentless finishing moves ever recorded.
-        </>
-      ),
-    },
-    {
-      name: 'More',
-      href: '/more',
-      emoji: '✨',
-      description: (
-        <>
-          Check out the more page to view <span className="font-bold">premium</span> content and
-          keep up with updates on the platform. This is a portal to the future and the new
-          generation of Finishers Hub.
         </>
       ),
     },
@@ -69,14 +69,14 @@ export default function Hub() {
       ),
     },
     {
-      name: 'Lab',
-      href: '/lab',
-      emoji: '🧪',
+      name: 'More',
+      href: '/more',
+      emoji: '✨',
       description: (
         <>
-          Visit the laboratory of finishers. This is where you can consult premium research findings
-          and gain insight on our unholy and wicked methodology. If they let us cook, oh{' '}
-          <span className="font-bold">we will cook</span>.
+          Check out the more page to view <span className="font-bold">premium</span> content and
+          keep up with updates on the platform. This is a portal to the future and the new
+          generation of Finishers Hub.
         </>
       ),
     },
@@ -106,13 +106,13 @@ export default function Hub() {
               </p>
             </div>
 
-            <div className="flex max-w-4xl flex-wrap items-center gap-4">
+            <div className="flex max-w-full flex-wrap items-center gap-2 md:max-w-4xl md:gap-4">
               {scrollers.map((item, itemIdx) => (
                 <Link
                   scroll={false}
                   href={item.href}
                   key={`scroller-${itemIdx}`}
-                  className="space-x-1 rounded bg-slate-700/70 px-3 py-2 text-sm font-normal text-white shadow-xl transition hover:-translate-y-1 hover:bg-slate-700/80 dark:bg-slate-500/70 dark:text-white dark:hover:bg-slate-500/60"
+                  className="space-x-1 rounded bg-slate-700/70 px-2 py-1.5 text-xs font-normal tracking-tight text-white shadow-xl transition hover:-translate-y-1 hover:bg-slate-700/80 dark:bg-slate-500/70 dark:text-white dark:hover:bg-slate-500/60 md:px-3 md:py-2 md:text-sm"
                 >
                   <span>{item.icon}</span>
                   <span>{item.name}</span>
