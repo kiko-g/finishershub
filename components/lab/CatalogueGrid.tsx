@@ -21,7 +21,8 @@ export default function CatalogueGrid({ catalogue }: Props) {
           ttrk: row[5] as number,
           ttca: row[6] as number,
           motion: row[7] as 1 | 2 | 3 | 4 | 5,
-          score: row[8] as number,
+          radius: row[8] as 1 | 2 | 3 | 4 | 5,
+          score: row[9] as number,
         }
 
         return (
