@@ -6,8 +6,8 @@ import DummyLockedContent from './DummyLockedContent'
 import FilterVideos from './FilterVideos'
 import MuteToggler from './MuteToggler'
 import PopOpenVideo from './PopOpenVideo'
+import ReshuffleButton from './ReshuffleButton'
 import ShareVideo from './ShareVideo'
-import ShuffleButton from './ShuffleButton'
 import SingleVideoShowcase from './SingleVideoShowcase'
 import TwitchVideoClip from './TwitchVideoClip'
 import UsageDisclaimer from './UsageDisclaimer'
@@ -26,8 +26,8 @@ export {
   FilterVideos,
   MuteToggler,
   PopOpenVideo,
+  ReshuffleButton,
   ShareVideo,
-  ShuffleButton,
   SingleVideoShowcase,
   TwitchVideoClip,
   UsageDisclaimer,

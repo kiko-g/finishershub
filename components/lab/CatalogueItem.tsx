@@ -103,10 +103,10 @@ export default function CatalogueItem({ item, chosen, setChosen }: Props) {
           </div>
 
           {/* Right */}
-          <div className="grid grid-cols-2 gap-1.5">
+          <div className="grid grid-cols-2 gap-x-2 gap-y-1">
             <span
               className={classNames(
-                'flex h-6 w-6 items-center justify-center rounded-full p-[0.2rem]',
+                'flex h-5 w-5 items-center justify-center rounded-full p-[0.2rem] lg:h-6 lg:w-6',
                 radiusText === 'A'
                   ? 'bg-blue-500'
                   : radiusText === 'B'
@@ -124,7 +124,7 @@ export default function CatalogueItem({ item, chosen, setChosen }: Props) {
             </span>
             <span
               className={classNames(
-                'flex h-6 w-6 items-center justify-center rounded-full p-[0.2rem]',
+                'flex h-5 w-5 items-center justify-center rounded-full p-[0.2rem] lg:h-6 lg:w-6',
                 motionText === 'A'
                   ? 'bg-blue-500'
                   : motionText === 'B'
@@ -142,7 +142,7 @@ export default function CatalogueItem({ item, chosen, setChosen }: Props) {
             </span>
             <span
               className={classNames(
-                'flex h-6 w-6 items-center justify-center rounded-full p-1',
+                'flex h-5 w-5 items-center justify-center rounded-full p-1 lg:h-6 lg:w-6',
                 item.accurate === 'Yes'
                   ? 'bg-teal-500'
                   : item.accurate === 'Almost'
@@ -154,7 +154,7 @@ export default function CatalogueItem({ item, chosen, setChosen }: Props) {
             </span>
             <span
               className={classNames(
-                'flex h-6 w-6 items-center justify-center rounded-full p-1',
+                'flex h-5 w-5 items-center justify-center rounded-full p-1 lg:h-6 lg:w-6',
                 item.unlocked === 'Yes'
                   ? 'bg-teal-500'
                   : item.unlocked === 'Almost'

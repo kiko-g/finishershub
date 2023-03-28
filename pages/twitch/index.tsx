@@ -11,7 +11,7 @@ import {
   ViewToggler,
   AutoplayToggler,
   MuteToggler,
-  ShuffleButton,
+  ReshuffleButton,
   TwitchVideoClip,
   DeleteCookiesButton,
   VideoSkeleton,
@@ -106,7 +106,7 @@ export default function IndexPage() {
             <div className="flex items-center justify-end gap-x-2">
               {limitedAccess ? <AccessModal lockedHook={[accessDenied, setAccessDenied]} /> : null}
               <DeleteCookiesButton />
-              <ShuffleButton shuffle={shuffleAndSetVideos} />
+              <ReshuffleButton shuffle={shuffleAndSetVideos} />
               <AutoplayToggler hook={[autoplay, setAutoplay]} />
               {limitedAccess ? null : <MuteToggler hook={[muted, setMuted]} />}
               <ViewToggler hook={[view, setView]} />

@@ -71,8 +71,8 @@ export default function Header({ siteTitle, location }: Props) {
   return (
     <Disclosure
       as="nav"
-      className="background sticky top-0 z-20 bg-light/90 px-3 py-3 text-gray-800 
-      dark:bg-navy/90 dark:text-white lg:py-2 lg:px-4"
+      className="background sticky top-0 z-20 bg-light/70 px-3 py-3 text-gray-800 
+      backdrop-blur dark:bg-navy/80 dark:text-white lg:py-2 lg:px-4"
     >
       {({ open }) => {
         return (

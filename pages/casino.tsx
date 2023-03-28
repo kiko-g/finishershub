@@ -9,7 +9,7 @@ import {
   AutoplayToggler,
   MuteToggler,
   UsageDisclaimer,
-  ShuffleButton,
+  ReshuffleButton,
   DeleteCookiesButton,
   VideoPlayer,
   VideoSkeleton,
@@ -33,6 +33,7 @@ export default function Casino() {
   const [accessDenied, setAccessDenied] = useAccessDenied()
   const [muted, setMuted] = useState<boolean>(true)
   const [autoplay, setAutoplay] = useState<boolean>(true)
+  const [shuffled, setShuffled] = useState<boolean>(true)
 
   const limitedAccess = useMemo(() => accessDenied, [accessDenied])
   const video = useMemo(() => videos[index], [index, videos])
@@ -73,15 +74,16 @@ export default function Casino() {
       })
       .then((videos) => {
         setIndex(0)
-        const shuffledVideos = shuffle(videos) as VideoType[]
-        setVideos(shuffledVideos)
+        const typedVideos = videos as VideoType[]
+        const newVideos = shuffled ? shuffle(typedVideos) : typedVideos
+        setVideos(newVideos)
       })
       .catch((err) => {
         setLoading(false)
         setFetchError(true)
         console.error(err)
       })
-  }, [filter])
+  }, [filter, shuffled])
 
   return (
     <Layout location="Casino">
@@ -107,7 +109,7 @@ export default function Casino() {
                   <AccessModal lockedHook={[accessDenied, setAccessDenied]} startOpen={false} />
                 ) : null}
                 <DeleteCookiesButton />
-                <ShuffleButton shuffle={shuffleVideos} />
+                <ReshuffleButton shuffle={shuffleVideos} />
                 <AutoplayToggler hook={[autoplay, setAutoplay]} />
                 {limitedAccess ? null : <MuteToggler hook={[muted, setMuted]} />}
               </div>

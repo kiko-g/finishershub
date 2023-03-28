@@ -1,11 +1,11 @@
+import React, { useState } from 'react'
 import { ArrowPathRoundedSquareIcon } from '@heroicons/react/24/outline'
-import React, { useState, useEffect } from 'react'
 
 type Props = {
   shuffle: Function
 }
 
-export default function ShuffleButton({ shuffle }: Props) {
+export default function ReshuffleButton({ shuffle }: Props) {
   const [shuffling, setShuffling] = useState(false)
 
   const shuffleAction = () => {

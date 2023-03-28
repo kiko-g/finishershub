@@ -55,7 +55,7 @@ export default function ClaimIdentity({ member, lockedHook }: Props) {
             ? `Prove you are ${member.name}`
             : `You already have access to ${member.name}'s data`
         }
-        className="bg-slate-500p-2 inline-flex w-full items-center justify-center gap-x-2 rounded text-center text-sm font-medium tracking-tight text-white transition hover:opacity-80 disabled:cursor-not-allowed disabled:opacity-50 dark:bg-slate-100 dark:text-gray-700"
+        className="inline-flex w-full items-center justify-center gap-x-2 rounded bg-slate-500 p-2 text-center text-sm font-medium tracking-tight text-white transition hover:opacity-80 disabled:cursor-not-allowed disabled:opacity-50 dark:bg-slate-100 dark:text-gray-700"
       >
         <span className="whitespace-nowrap">Claim identity</span>
         {locked ? <LockClosedIcon className="h-5 w-5" /> : <LockOpenIcon className="h-5 w-5" />}

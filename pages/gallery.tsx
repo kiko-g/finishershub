@@ -10,7 +10,7 @@ import {
   ViewToggler,
   AutoplayToggler,
   MuteToggler,
-  ShuffleButton,
+  ReshuffleButton,
   DeleteCookiesButton,
   FilterVideos,
   VideoPlayer,
@@ -37,7 +37,6 @@ export default function Gallery() {
   const [muted, setMuted] = useState<boolean>(true)
   const [autoplay, setAutoplay] = useState<boolean>(false)
   const [clipsShown, setClipsShown] = useState<number>(isMobile ? 1 : view ? 2 : 3)
-  const [showMoreCount, setShowMoreCount] = useState<number>(0)
 
   const limitedAccess = useMemo(() => accessDenied, [accessDenied])
   const toastType = useMemo(() => {
@@ -52,7 +51,6 @@ export default function Gallery() {
   }
 
   const loadMore = () => {
-    setShowMoreCount((prev) => prev + 1)
     if (isMobile) setClipsShown((prev) => prev + 1)
     else setClipsShown((prev) => prev + (view ? 2 : 3))
   }
@@ -133,7 +131,7 @@ export default function Gallery() {
                 <AccessModal lockedHook={[accessDenied, setAccessDenied]} startOpen={false} />
               ) : null}
               <DeleteCookiesButton />
-              <ShuffleButton shuffle={shuffleVideos} />
+              <ReshuffleButton shuffle={shuffleVideos} />
               <AutoplayToggler hook={[autoplay, setAutoplay]} />
               {limitedAccess ? null : <MuteToggler hook={[muted, setMuted]} />}
               <ViewToggler hook={[view, setView]} />
@@ -162,7 +160,7 @@ export default function Gallery() {
                     video={video}
                     play={autoplay}
                     muted={muted}
-                    key={`video-${videoIdx}`}
+                    key={`video-gallery-${video.index}`}
                   />
                 ))
             : Array(clipsShown)

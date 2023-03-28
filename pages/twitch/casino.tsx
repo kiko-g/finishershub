@@ -9,7 +9,7 @@ import {
   MuteToggler,
   UsageDisclaimer,
   TwitchVideoClip,
-  ShuffleButton,
+  ReshuffleButton,
   DeleteCookiesButton,
   DelayDisclaimer,
 } from '../../components/videos'
@@ -100,7 +100,7 @@ export default function CasinoPage() {
                   <AccessModal lockedHook={[accessDenied, setAccessDenied]} />
                 ) : null}
                 <DeleteCookiesButton />
-                <ShuffleButton shuffle={shuffleAndSetVideos} />
+                <ReshuffleButton shuffle={shuffleAndSetVideos} />
                 <AutoplayToggler hook={[autoplay, setAutoplay]} />
                 {limitedAccess ? null : <MuteToggler hook={[muted, setMuted]} />}
               </div>
