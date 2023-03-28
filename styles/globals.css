@@ -40,3 +40,29 @@ input[type='checkbox'] {
   dark:hover:border-secondary/70 dark:hover:bg-secondary/50 dark:focus:border-secondary/80 
   dark:focus:ring-0 dark:focus:ring-secondary;
 }
+
+/* Blurry blobs */
+.blob,
+.dark .blob {
+  @apply fixed right-[10%] top-0 z-[-1] h-screen w-[80%] translate-y-[60%] rotate-180 animate-pulse rounded-[200px] opacity-70 blur-[200px] transition;
+}
+
+.blob {
+  background: conic-gradient(
+    from 180deg at 50% 50%,
+    #88d2fa 0deg,
+    #21a4dc 133.12deg,
+    #64a5e1 208.13deg,
+    #b9b3fe 360deg
+  );
+}
+
+.dark .blob {
+  background: conic-gradient(
+    from 180deg at 50% 50%,
+    #25729c 0deg,
+    #21a4dc 133.12deg,
+    #64a5e1 208.13deg,
+    #b9b3fe 360deg
+  );
+}

@@ -19,6 +19,11 @@ module.exports = {
         lighter: '#f7f7f7',
         lightest: '#fcfcfc',
         lightish: '#ebedf0',
+        twitch: '#6441a5',
+        twitter: '#1da1f2',
+        youtube: '#ff0000',
+        github: '#333333',
+        linktree: '#40e09e',
       },
       maxWidth: {
         screen: '100vw',

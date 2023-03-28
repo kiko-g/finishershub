@@ -3,6 +3,7 @@ import classNames from 'classnames'
 import { CatalogueItem as CatalogueItemType } from '../../@types'
 import { BoltIcon, LockClosedIcon } from '@heroicons/react/24/solid'
 import { Dialog, Transition } from '@headlessui/react'
+import { XMarkIcon } from '@heroicons/react/24/outline'
 
 type Props = {
   item: CatalogueItemType
@@ -61,24 +62,18 @@ export default function CatalogueItem({ item, chosen, setChosen }: Props) {
         <div className="flex aspect-square h-32 rounded bg-gradient-to-br from-slate-400 to-slate-500 dark:from-blue-500 dark:to-blue-600" />
 
         <section className="flex w-full items-start justify-between">
-          {/* Left */}
+          {/* Left (name, source, ttrk, score) */}
           <div className="flex h-32 w-full flex-col justify-between">
-            {/* Top */}
             <div className="flex flex-col">
-              {/* Header */}
               <p className="font-lexend font-light tracking-tight">{item.name}</p>
-
               <p className="-mt-0.5 text-sm font-light tracking-tight text-gray-500 dark:text-gray-400">
                 {item.source}
               </p>
             </div>
-
-            {/* Bottom */}
             <div className="flex flex-col gap-1">
               <p className="font-lexend text-2xl font-normal tracking-tight text-slate-700 dark:text-blue-200">
                 {item.ttrk} ± {uncertainty}s
               </p>
-
               <div className="flex gap-2">
                 <span
                   className={classNames(
@@ -102,8 +97,8 @@ export default function CatalogueItem({ item, chosen, setChosen }: Props) {
             </div>
           </div>
 
-          {/* Right */}
-          <div className="grid grid-cols-2 gap-x-2 gap-y-1">
+          {/* Right (symbols) */}
+          <div className="mr-1 grid grid-cols-2 gap-x-2 gap-y-1">
             <span
               className={classNames(
                 'flex h-5 w-5 items-center justify-center rounded-full p-[0.2rem] lg:h-6 lg:w-6',
@@ -196,12 +191,20 @@ export default function CatalogueItem({ item, chosen, setChosen }: Props) {
               >
                 <Dialog.Panel className="flex h-screen w-full transform flex-col justify-between gap-4 overflow-scroll bg-white p-6 text-left align-middle shadow-xl transition-all dark:bg-navy md:max-w-xl">
                   <div className="flex flex-col">
-                    <Dialog.Title
-                      as="h3"
-                      className="text-2xl font-medium leading-6 text-gray-800 dark:text-white"
-                    >
-                      {item.name}
-                    </Dialog.Title>
+                    <div className="flex items-start justify-between">
+                      <Dialog.Title
+                        as="h3"
+                        className="text-2xl font-medium leading-6 text-gray-800 dark:text-white"
+                      >
+                        {item.name}
+                      </Dialog.Title>
+                      <button
+                        onClick={exitFocus}
+                        className="flex items-center gap-x-1 rounded border border-rose-600/50 bg-rose-600/10 px-1.5 py-1.5 text-sm text-rose-800 transition hover:bg-rose-600 hover:text-white dark:bg-rose-600/20 dark:text-white dark:hover:bg-rose-600"
+                      >
+                        <XMarkIcon className="h-4 w-4" />{' '}
+                      </button>
+                    </div>
 
                     <p className="mt-0.5 text-sm text-gray-500 dark:text-gray-400">
                       Source of finishing move: <strong>{item.source}</strong>

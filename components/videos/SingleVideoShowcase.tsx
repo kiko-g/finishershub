@@ -29,7 +29,12 @@ export default function SingleVideoShowcase({ video }: Props) {
   return (
     <section className="flex flex-col gap-y-4 md:gap-y-3">
       <div className="relative">
-        <VideoPlayer video={video} muted={muted} play={autoplay} />
+        <VideoPlayer
+          video={video}
+          muted={muted}
+          play={autoplay}
+          key={`single-video-${video.url}`}
+        />
         {accessDenied ? <InvisbleTopLayer /> : null}
       </div>
 

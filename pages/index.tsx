@@ -1,15 +1,16 @@
 import React from 'react'
 import Link from 'next/link'
-import { socials } from '../utils/data'
-import { Footer, DarkModeSwitch, Seo } from '../components/layout'
 import {
   AboutCardLI,
   AccessModalCTA,
-  NavCard,
+  AuthorCredits,
   DeleteData,
   FinishersInfo,
   MostRecentVideoShowcase,
+  NavCard,
+  Socials,
 } from '../components/hub'
+import { Footer, Seo } from '../components/layout'
 import useAccessDenied from '../hooks/useAccessDenied'
 
 export default function Hub() {
@@ -85,7 +86,10 @@ export default function Hub() {
         <div className="blob" />
         <main className="flex w-full flex-col gap-y-16 px-4 pt-8 md:py-0 md:px-4">
           {/* Hero */}
-          <header className="my-auto flex min-h-full w-full flex-col items-center justify-center gap-y-8 self-center align-middle md:min-h-screen">
+          <header
+            id="hero"
+            className="my-auto flex min-h-full w-full flex-col items-center justify-center gap-y-8 self-center align-middle md:min-h-screen"
+          >
             <div className="max-w-2xl space-y-2">
               <h2 className="bg-gradient-to-r from-violet-400 to-sky-400 bg-clip-text text-center text-5xl font-bold tracking-tight text-transparent dark:bg-gradient-to-r dark:from-slate-200 dark:to-slate-300 sm:text-6xl">
                 Finishers Hub
@@ -102,49 +106,8 @@ export default function Hub() {
               ))}
             </nav>
 
-            <div className="mt-2 flex items-center gap-x-6 rounded-full bg-blue-50 px-4 py-2 dark:bg-blue-100/70">
-              <div className="flex gap-x-2 sm:justify-center md:mt-0 md:gap-x-2">
-                {socials
-                  .filter((social) => social.shown)
-                  .map((social, socialIdx) => (
-                    <Link
-                      target="_blank"
-                      href={social.url}
-                      key={`social-${socialIdx}`}
-                      title={social.label}
-                      aria-label={social.label}
-                      className={`transition ${social.label}`}
-                    >
-                      <svg
-                        className="h-6 w-6 md:h-7 md:w-7"
-                        fill="currentColor"
-                        viewBox={social.viewBox ? social.viewBox : '0 0 24 24'}
-                        aria-hidden="true"
-                      >
-                        {social.svg.map((d, dIdx) => (
-                          <path
-                            fillRule="evenodd"
-                            d={d}
-                            clipRule="evenodd"
-                            key={`social-${socialIdx}-svg-${dIdx}`}
-                          />
-                        ))}
-                      </svg>
-                    </Link>
-                  ))}
-              </div>
-              <DarkModeSwitch alt />
-            </div>
-
-            <div>
-              <Link
-                target="_blank"
-                href="https://kikogoncalves.com"
-                className="rounded-full bg-navy/50 px-2.5 py-1.5 text-sm font-normal text-gray-100 transition hover:bg-cyan-700/50 dark:text-white dark:hover:bg-violet-400/50"
-              >
-                by Francisco Gonçalves
-              </Link>
-            </div>
+            <Socials />
+            <AuthorCredits />
           </header>
 
           {/* Most recent highlight */}
@@ -210,6 +173,7 @@ export default function Hub() {
             </div>
           </section>
 
+          {/* Facts and figures */}
           <section
             id="info"
             className="my-auto mx-auto mb-8 flex max-w-5xl flex-col space-y-3 py-4"

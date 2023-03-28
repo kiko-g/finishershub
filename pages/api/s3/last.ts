@@ -7,27 +7,14 @@ const s3 = estabilishS3Connection()
 
 export default async function handler(req: NextApiRequest, res: NextApiResponse) {
   try {
-    const bucketMW2019 = process.env.NEXT_PUBLIC_AWS_S3_BUCKET_NAME_MW2019 || 'finishershub.mw2019'
     const bucketMW2022 = process.env.NEXT_PUBLIC_AWS_S3_BUCKET_NAME_MW2022 || 'finishershub.mw2022'
-
-    const objectsMW2019 = new ListObjectsV2Command({ Bucket: bucketMW2019 })
     const objectsMW2022 = new ListObjectsV2Command({ Bucket: bucketMW2022 })
+    const mw2022Response = await s3.send(objectsMW2022)
 
-    const [mw2019Response, mw2022Response] = await Promise.all([
-      s3.send(objectsMW2019),
-      s3.send(objectsMW2022),
-    ])
-
-    if (!mw2019Response.Contents || !mw2022Response.Contents) {
+    if (!mw2022Response.Contents) {
       res.status(404).json({ message: 'Error requesting objects from S3' })
       return
     }
-
-    const videoDataMW2019 = mw2019Response.Contents.map((object) => ({
-      bucketName: bucketMW2019,
-      filename: object.Key,
-      lastModified: object.LastModified,
-    }))
 
     const videoDataMW2022 = mw2022Response.Contents.map((object) => ({
       bucketName: bucketMW2022,
@@ -35,12 +22,13 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
       lastModified: object.LastModified,
     }))
 
-    const allVideosSorted = [...videoDataMW2022].sort((a, b) => {
+    const allVideosSorted = videoDataMW2022.sort((a, b) => {
       if (a.filename! < b.filename!) return -1
       else return 1
     })
 
-    const video = allVideosSorted[allVideosSorted.length - 1]
+    const lastIndex = allVideosSorted.length - 1
+    const video = allVideosSorted[lastIndex]
     const getObjectCommandInput = new GetObjectCommand({
       Bucket: video.bucketName,
       Key: video.filename,
@@ -53,10 +41,13 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
     const signedUrl = await getSignedUrl(s3, getObjectCommandInput, getObjectCommandOutput)
 
     const videoRes = {
-      game: video.bucketName.split('.')[1],
-      url: signedUrl,
-      date: video.lastModified,
-      filename: video.filename,
+      index: lastIndex,
+      video: {
+        game: video.bucketName.split('.')[1],
+        url: signedUrl,
+        date: video.lastModified,
+        filename: video.filename,
+      },
     }
 
     res.status(200).json(videoRes)

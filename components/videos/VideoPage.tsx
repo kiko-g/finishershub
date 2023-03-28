@@ -13,10 +13,10 @@ export default function VideoPage({ game, videoIndex }: Props) {
   const [loading, setLoading] = useState<boolean>(true)
   const [fetchError, setFetchError] = useState<boolean>(false)
   const ready = useMemo(() => !loading && !fetchError, [loading, fetchError])
-  const gameRoute = useMemo(() => (game === '' ? '' : `/${game}`), [game])
 
   useEffect(() => {
     if (videoIndex === -1) return
+    const gameRoute = game === '' ? '' : `/${game}`
     const url = `/api/s3${gameRoute}/${videoIndex}`
 
     fetch(url)
@@ -34,7 +34,7 @@ export default function VideoPage({ game, videoIndex }: Props) {
           index: videoIndex,
           date: vid.date,
           game: vid.game,
-          filteredGame: '',
+          filteredGame: game,
           filename: vid.filename,
         })
       })
@@ -43,7 +43,7 @@ export default function VideoPage({ game, videoIndex }: Props) {
         setFetchError(true)
         console.error(err)
       })
-  }, [videoIndex, gameRoute])
+  }, [videoIndex, game])
 
   return (
     <div className="flex min-h-screen flex-col bg-light dark:bg-navy">

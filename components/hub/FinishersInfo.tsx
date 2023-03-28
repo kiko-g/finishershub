@@ -73,32 +73,40 @@ export default function FinishersInfo({}: Props) {
             The lifetime finisher count is the sum of all the valid finishing moves performed by any
             member of the finishers club. This metric also applies to all players across the world.
           </p>
-          <p className="mt-4">A valid and truthful finisher must meet the following criteria:</p>
-          <ul className="mt-1 ml-4 flex list-disc flex-col gap-y-1 lg:gap-y-0.5">
-            <li>✅ Finishing move is performed on non-downed players </li>
-            <li>✅ Finishing move is performed on Warzone (Battle Royale or Resurgence)</li>
+
+          <p className="mt-4">
+            A <span className="font-bold">valid finisher</span> must meet the following criteria:
+          </p>
+
+          <ul className="mt-1 ml-1 flex list-inside list-disc flex-col gap-y-1 lg:gap-y-0.5">
+            <li>Finishing move is performed on non-downed players ✅</li>
+            <li>Finishing move is performed on Warzone (Battle Royale or Resurgence) ✅</li>
           </ul>
-          <p className="mt-4">Other key notes to keep in mind:</p>
-          <ul className="mt-1 ml-5 flex list-decimal flex-col gap-y-1 lg:gap-y-0.5">
+
+          <p className="mt-4">
+            Other <span className="font-bold">key notes</span> to keep in mind:
+          </p>
+
+          <ol className="mt-1 ml-1 flex list-inside list-decimal flex-col gap-y-1 lg:gap-y-0.5">
             <li>
-              ⚠️ Finishing moves on downed players are not counted and often considered frowned upon
+              Finishing moves on downed players are not counted and often considered frowned upon ⚠️
             </li>
             <li>
-              🥇 Finishing moves performed on players that have recently used their self-revive are
-              allowed and considered a noble practice
+              Finishing moves performed on players that have recently used their self-revive are
+              allowed and considered a noble practice 🥇
             </li>
             <li>
-              ℹ️ Even though finishing moves performed on arenas like Multiplayer do not count
-              towards the lifetime finisher count, we still highly encourage performing them
-              whenever possible, depending on the situation.
+              Even though finishing moves performed on arenas like Multiplayer do not count towards
+              the lifetime finisher count, we still highly encourage performing them whenever
+              possible, depending on the situation ℹ️
             </li>
             <li>
-              🪓 A <span className="font-bold italic underline">pernoca</span> is a finishing move
-              performed on opps laying prone. Any lover of finishing moves will tell you how
-              riveting and delicious a <span className="font-bold">pernoca</span> is, as your
-              opponent is caught lacking to the extreme.
+              A <span className="italic underline">pernoca</span> is a finishing move performed on
+              opps laying prone. Any lover of finishing moves will tell you how riveting and
+              delicious a <span className="italic underline">pernoca</span> is, as your opponent is
+              caught lacking to the extreme 🪓
             </li>
-          </ul>
+          </ol>
         </div>
       </div>
     </div>

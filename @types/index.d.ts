@@ -66,6 +66,11 @@ export type VideoTypeAPI = {
   filename: string
 }
 
+export type VideoAPIAndIndex = {
+  index: number
+  video: VideoTypeAPI
+}
+
 export type FilterType =
   | { name: 'All'; value: '' }
   | { name: 'Warzone 1'; value: 'mw2019' }
