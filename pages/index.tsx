@@ -15,6 +15,12 @@ import useAccessDenied from '../hooks/useAccessDenied'
 
 export default function Hub() {
   const [accessDenied, setAccessDenied] = useAccessDenied()
+  const scrollers = [
+    { name: 'Showcase', icon: '🖼️', href: '#showcase' },
+    { name: 'Access', icon: '🔐', href: '#access' },
+    { name: 'Facts', icon: '✅', href: '#info' },
+    { name: 'About', icon: '🔍', href: '#about' },
+  ]
   const nav = [
     {
       name: 'Casino',
@@ -88,7 +94,7 @@ export default function Hub() {
           {/* Hero */}
           <header
             id="hero"
-            className="my-auto flex min-h-full w-full flex-col items-center justify-center gap-y-8 self-center align-middle md:min-h-screen"
+            className="my-auto flex min-h-full w-full flex-col items-center justify-center gap-y-6 self-center align-middle md:min-h-screen"
           >
             <div className="max-w-2xl space-y-2">
               <h2 className="bg-gradient-to-r from-violet-400 to-sky-400 bg-clip-text text-center text-5xl font-bold tracking-tight text-transparent dark:bg-gradient-to-r dark:from-slate-200 dark:to-slate-300 sm:text-6xl">
@@ -98,6 +104,20 @@ export default function Hub() {
                 The place for all finisher related content. Chaotic, outrageous, lawless on the
                 fence of criminality. Perfectly unbalanced. As all things should be.
               </p>
+            </div>
+
+            <div className="flex max-w-4xl flex-wrap items-center gap-4">
+              {scrollers.map((item, itemIdx) => (
+                <Link
+                  scroll={false}
+                  href={item.href}
+                  key={`scroller-${itemIdx}`}
+                  className="space-x-1 rounded bg-slate-700/70 px-3 py-2 text-sm font-normal text-white shadow-xl transition hover:-translate-y-1 hover:bg-slate-700/80 dark:bg-slate-500/70 dark:text-white dark:hover:bg-slate-500/60"
+                >
+                  <span>{item.icon}</span>
+                  <span>{item.name}</span>
+                </Link>
+              ))}
             </div>
 
             <nav className="flex max-w-full flex-wrap items-center justify-center gap-3 md:max-w-5xl md:gap-6">

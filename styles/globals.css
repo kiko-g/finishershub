@@ -19,6 +19,10 @@ h6 {
   @apply font-lexend;
 }
 
+li::marker {
+  @apply font-bold;
+}
+
 .custom-input,
 input[type='text'],
 input[type='search'],
