@@ -336,7 +336,8 @@ export default function CatalogueItem({ item, chosen, setChosen }: Props) {
                         Score
                       </h4>
                       <p className="mt-0.5 text-sm font-normal leading-4 text-gray-500 dark:text-gray-400">
-                        A function that determines score based on the TTRK and Motion.
+                        A function that determines score based on the TTRK, Slippery Coeffiecient
+                        (1-5) and Ledge Danger Coefficient (1-5)
                         <code className="mt-1.5 block tracking-tighter text-pink-500">
                           score = 100-(slippery^2-1)-(ledgeDanger^2-1)-(4*ttrk^2)
                         </code>
