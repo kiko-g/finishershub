@@ -40,5 +40,5 @@
 }
 
 .dark .github {
-  @apply fill-github text-github opacity-100 transition hover:opacity-80;
+  @apply fill-white text-white opacity-100 transition hover:opacity-80;
 }

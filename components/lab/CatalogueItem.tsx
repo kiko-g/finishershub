@@ -1,7 +1,7 @@
 import React, { Dispatch, Fragment, SetStateAction, useMemo } from 'react'
 import classNames from 'classnames'
 import { CatalogueItem as CatalogueItemType } from '../../@types'
-import { BoltIcon, LockClosedIcon } from '@heroicons/react/24/solid'
+import { BoltIcon, LockClosedIcon, CheckCircleIcon } from '@heroicons/react/24/solid'
 import { Dialog, Transition } from '@headlessui/react'
 import { XMarkIcon } from '@heroicons/react/24/outline'
 
@@ -182,7 +182,7 @@ export default function CatalogueItem({ item, chosen, setChosen }: Props) {
             leaveFrom="opacity-100"
             leaveTo="opacity-0"
           >
-            <div className="fixed inset-0 bg-black/50 dark:bg-black/25" />
+            <div className="fixed inset-0 bg-black/50 backdrop-blur-xs dark:bg-white/10" />
           </Transition.Child>
 
           <div className="fixed right-0 top-0 overflow-y-auto">
@@ -207,9 +207,9 @@ export default function CatalogueItem({ item, chosen, setChosen }: Props) {
                       </Dialog.Title>
                       <button
                         onClick={exitFocus}
-                        className="flex items-center gap-x-1 rounded border border-rose-600/50 bg-rose-600/10 px-1.5 py-1.5 text-sm text-rose-800 transition hover:bg-rose-600 hover:text-white dark:bg-rose-600/20 dark:text-white dark:hover:bg-rose-600"
+                        className="flex items-center gap-x-1 bg-pink-600/20 px-2 py-2 text-sm text-pink-800 transition hover:bg-pink-600 hover:text-white dark:bg-pink-600/40 dark:text-white dark:hover:bg-pink-600"
                       >
-                        <XMarkIcon className="h-4 w-4" />{' '}
+                        <XMarkIcon className="h-5 w-5" />
                       </button>
                     </div>
 
@@ -352,10 +352,11 @@ export default function CatalogueItem({ item, chosen, setChosen }: Props) {
                   <div className="flex flex-col gap-3">
                     <button
                       type="button"
-                      className="inline-flex w-full justify-center border border-transparent bg-pink-100 px-4 py-2 text-sm font-medium text-pink-900 hover:bg-pink-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-pink-500 focus-visible:ring-offset-2"
+                      className="inline-flex w-full justify-center border border-transparent bg-pink-100 px-4 py-2 text-sm font-medium text-pink-900 transition hover:bg-pink-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-pink-500 focus-visible:ring-offset-2"
                       onClick={exitFocus}
                     >
-                      Roger that
+                      <span>Roger that</span>
+                      <CheckCircleIcon className="ml-1 h-5 w-5" />
                     </button>
                   </div>
                 </Dialog.Panel>
