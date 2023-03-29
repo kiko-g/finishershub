@@ -23,25 +23,25 @@ export default function CatalogueItem({ item, chosen, setChosen }: Props) {
       ? 'Ok'
       : 'Slow'
 
-  const motionText =
-    Number(item.motion) === 1
+  const slipperyText =
+    Number(item.slippery) === 1
       ? 'A'
-      : Number(item.motion) === 2
+      : Number(item.slippery) === 2
       ? 'B'
-      : Number(item.motion) === 3
+      : Number(item.slippery) === 3
       ? 'C'
-      : Number(item.motion) === 4
+      : Number(item.slippery) === 4
       ? 'D'
       : 'E'
 
-  const radiusText =
-    Number(item.radius) === 1
+  const ledgeDangerText =
+    Number(item.ledgeDanger) === 1
       ? 'A'
-      : Number(item.radius) === 2
+      : Number(item.ledgeDanger) === 2
       ? 'B'
-      : Number(item.radius) === 3
+      : Number(item.ledgeDanger) === 3
       ? 'C'
-      : Number(item.radius) === 4
+      : Number(item.ledgeDanger) === 4
       ? 'D'
       : 'E'
 
@@ -76,8 +76,9 @@ export default function CatalogueItem({ item, chosen, setChosen }: Props) {
               </p>
               <div className="flex gap-2">
                 <span
+                  title="TTRK Speed Badge"
                   className={classNames(
-                    'py-1 px-2 text-sm font-normal text-white',
+                    'px-2 py-1 text-sm font-normal text-white',
                     speedText === 'Ultra'
                       ? 'bg-blue-600'
                       : speedText === 'Fast'
@@ -89,8 +90,10 @@ export default function CatalogueItem({ item, chosen, setChosen }: Props) {
                 >
                   {speedText}
                 </span>
-
-                <span className="bg-slate-700 py-1 px-2 text-sm font-normal text-white dark:bg-slate-500">
+                <span
+                  title="Finishing Move Score Badge"
+                  className="bg-slate-700 px-2 py-1 text-sm font-normal text-white dark:bg-slate-500"
+                >
                   {item.score}/100
                 </span>
               </div>
@@ -100,42 +103,45 @@ export default function CatalogueItem({ item, chosen, setChosen }: Props) {
           {/* Right (symbols) */}
           <div className="mr-1 grid grid-cols-2 gap-x-2 gap-y-1">
             <span
+              title="Ledge Danger Class"
               className={classNames(
                 'flex h-5 w-5 items-center justify-center rounded-full p-[0.2rem] lg:h-6 lg:w-6',
-                radiusText === 'A'
+                ledgeDangerText === 'A'
                   ? 'bg-blue-500'
-                  : radiusText === 'B'
+                  : ledgeDangerText === 'B'
                   ? 'bg-teal-500'
-                  : radiusText === 'C'
+                  : ledgeDangerText === 'C'
                   ? 'bg-amber-500'
-                  : radiusText === 'D'
+                  : ledgeDangerText === 'D'
                   ? 'bg-orange-500'
                   : 'bg-rose-600'
               )}
             >
               <span className="h-4 w-4 text-center text-xs font-normal text-white">
-                {radiusText}
+                {ledgeDangerText}
               </span>
             </span>
             <span
+              title="Slippery Class"
               className={classNames(
                 'flex h-5 w-5 items-center justify-center rounded-full p-[0.2rem] lg:h-6 lg:w-6',
-                motionText === 'A'
+                slipperyText === 'A'
                   ? 'bg-blue-500'
-                  : motionText === 'B'
+                  : slipperyText === 'B'
                   ? 'bg-teal-500'
-                  : motionText === 'C'
+                  : slipperyText === 'C'
                   ? 'bg-amber-500'
-                  : motionText === 'D'
+                  : slipperyText === 'D'
                   ? 'bg-orange-500'
                   : 'bg-rose-600'
               )}
             >
               <span className="h-4 w-4 text-center text-xs font-normal text-white">
-                {motionText}
+                {slipperyText}
               </span>
             </span>
             <span
+              title="Accuracy of Measurement Badge"
               className={classNames(
                 'flex h-5 w-5 items-center justify-center rounded-full p-1 lg:h-6 lg:w-6',
                 item.accurate === 'Yes'
@@ -148,6 +154,7 @@ export default function CatalogueItem({ item, chosen, setChosen }: Props) {
               {<BoltIcon className="h-3.5 w-3.5 text-white" />}
             </span>
             <span
+              title="Unlocked by a FH member Badge"
               className={classNames(
                 'flex h-5 w-5 items-center justify-center rounded-full p-1 lg:h-6 lg:w-6',
                 item.unlocked === 'Yes'
@@ -212,8 +219,9 @@ export default function CatalogueItem({ item, chosen, setChosen }: Props) {
 
                     <div className="mt-1.5 flex flex-wrap items-center gap-3">
                       <div
+                        title="Accuracy of Measurement Badge"
                         className={classNames(
-                          'flex items-center gap-2 py-2 px-3 text-sm font-light text-white',
+                          'flex items-center gap-2 px-3 py-2 text-sm font-light text-white',
                           item.accurate === 'Yes'
                             ? 'bg-teal-500'
                             : item.accurate === 'Almost'
@@ -225,8 +233,9 @@ export default function CatalogueItem({ item, chosen, setChosen }: Props) {
                         <BoltIcon className="h-3.5 w-3.5 text-white" />
                       </div>
                       <span
+                        title="Unlocked by a FH member Badge"
                         className={classNames(
-                          'flex items-center gap-2 py-2 px-3 text-sm font-light text-white',
+                          'flex items-center gap-2 px-3 py-2 text-sm font-light text-white',
                           item.unlocked === 'Yes'
                             ? 'bg-teal-500'
                             : item.unlocked === 'Almost'
@@ -237,10 +246,10 @@ export default function CatalogueItem({ item, chosen, setChosen }: Props) {
                         <span>{item.unlocked === 'Yes' ? 'Unlocked' : 'Locked'}</span>
                         <LockClosedIcon className="h-3.5 w-3.5 text-white" />
                       </span>
-
                       <div
+                        title="TTRK Speed Badge"
                         className={classNames(
-                          'py-2 px-3 text-sm font-light text-white',
+                          'px-3 py-2 text-sm font-light text-white',
                           speedText === 'Ultra'
                             ? 'bg-blue-600'
                             : speedText === 'Fast'
@@ -253,7 +262,10 @@ export default function CatalogueItem({ item, chosen, setChosen }: Props) {
                         {speedText}
                       </div>
 
-                      <div className="bg-slate-700 py-2 px-3 text-sm font-light text-white dark:bg-slate-500">
+                      <div
+                        title="Finishing Move Score Badge"
+                        className="bg-slate-700 px-3 py-2 text-sm font-light text-white dark:bg-slate-500"
+                      >
                         {item.score}/100
                       </div>
                     </div>
@@ -287,7 +299,7 @@ export default function CatalogueItem({ item, chosen, setChosen }: Props) {
 
                     <div className="mt-4">
                       <h4 className="text-base font-medium leading-6 text-gray-800 dark:text-white">
-                        Motion
+                        Slippery Coefficient
                       </h4>
                       <p className="mt-0.5 text-sm font-normal leading-4 text-gray-500 dark:text-gray-400">
                         A classification of the motion of the character during the animation from A
@@ -298,13 +310,13 @@ export default function CatalogueItem({ item, chosen, setChosen }: Props) {
                         .
                       </p>
                       <p className="mt-0.5 font-lexend text-2xl font-normal tracking-tight text-slate-700 dark:text-blue-200">
-                        Class {motionText}
+                        Class {slipperyText}
                       </p>
                     </div>
 
                     <div className="mt-4">
                       <h4 className="text-base font-medium leading-6 text-gray-800 dark:text-white">
-                        Motion
+                        Ledge Danger Coefficient
                       </h4>
                       <p className="mt-0.5 text-sm font-normal leading-4 text-gray-500 dark:text-gray-400">
                         If the radius is low, the finishing move is more confined to a small area
@@ -312,10 +324,10 @@ export default function CatalogueItem({ item, chosen, setChosen }: Props) {
                         <span className="font-bold underline">
                           Finishing moves with small radius are less likely to be interrputed
                         </span>
-                        .
+                        . This can negate the effect of the slippery coefficient.
                       </p>
                       <p className="mt-0.5 font-lexend text-2xl font-normal tracking-tight text-slate-700 dark:text-blue-200">
-                        Class {radiusText}
+                        Class {ledgeDangerText}
                       </p>
                     </div>
 
@@ -326,7 +338,7 @@ export default function CatalogueItem({ item, chosen, setChosen }: Props) {
                       <p className="mt-0.5 text-sm font-normal leading-4 text-gray-500 dark:text-gray-400">
                         A function that determines score based on the TTRK and Motion.
                         <code className="mt-1.5 block tracking-tighter text-pink-500">
-                          score = 100 - ((motion-1) * 2) ((radius-1) * 2) - 10*ttrk
+                          score = 100-(slippery^2-1)-(ledgeDanger^2-1)-(4*ttrk^2)
                         </code>
                       </p>
                       <p className="mt-0.5 font-lexend text-2xl font-normal tracking-tight text-slate-700 dark:text-blue-200">

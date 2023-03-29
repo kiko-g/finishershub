@@ -146,7 +146,7 @@ export default function Casino() {
               <ArrowLongLeftIcon className="inline-flex h-6 w-6" />
             </button>
 
-            <div className="flex w-full items-center justify-center self-stretch border border-slate-800/60 bg-slate-800/60 py-2 px-4 dark:border-blue-200/30 dark:bg-blue-200/20 lg:py-1">
+            <div className="flex w-full items-center justify-center self-stretch border border-slate-800/60 bg-slate-800/60 px-4 py-2 dark:border-blue-200/30 dark:bg-blue-200/20 lg:py-1">
               <span className="text-sm font-bold">
                 {index + 1}/{videos.length}
               </span>

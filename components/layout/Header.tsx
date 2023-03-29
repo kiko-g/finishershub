@@ -72,7 +72,7 @@ export default function Header({ siteTitle, location }: Props) {
     <Disclosure
       as="nav"
       className="background sticky top-0 z-20 bg-light/70 px-3 py-3 text-gray-800 
-      backdrop-blur dark:bg-navy/80 dark:text-white lg:py-2 lg:px-4"
+      backdrop-blur dark:bg-navy/80 dark:text-white lg:px-4 lg:py-2"
     >
       {({ open }) => {
         return (
@@ -103,7 +103,7 @@ function Hamburger({ title, open }: HamburgerProps) {
     <div
       className={`z-50 lg:hidden ${
         open
-          ? 'absolute top-2 right-2 my-auto flex h-6 items-center justify-end gap-x-3'
+          ? 'absolute right-2 top-2 my-auto flex h-6 items-center justify-end gap-x-3'
           : 'flex w-full items-center justify-between gap-x-3'
       }`}
     >

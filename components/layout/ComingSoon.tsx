@@ -9,9 +9,9 @@ const ComingSoon = ({}: Props) => {
         Coming soon
       </h1>
       <div className="relative mx-auto w-full max-w-lg">
-        <div className="animate-blob absolute -top-4 -left-12 h-72 w-72 rounded-full bg-primary opacity-70 mix-blend-multiply blur-xl filter" />
+        <div className="animate-blob absolute -left-12 -top-4 h-72 w-72 rounded-full bg-primary opacity-70 mix-blend-multiply blur-xl filter" />
         <div className="animate-blob animation-delay-4000 absolute -bottom-24 left-20 h-72 w-72 rounded-full bg-secondary opacity-70 mix-blend-multiply blur-xl filter" />
-        <div className="animate-blob animation-delay-2000 absolute -top-8 -right-4 h-72 w-72 rounded-full bg-tertiary opacity-70 mix-blend-multiply blur-xl filter" />
+        <div className="animate-blob animation-delay-2000 absolute -right-4 -top-8 h-72 w-72 rounded-full bg-tertiary opacity-70 mix-blend-multiply blur-xl filter" />
         <div className="relative m-8 space-y-4">
           <div className="flex items-center justify-between space-x-8 rounded-lg bg-white p-5">
             <div className="flex-1">

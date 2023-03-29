@@ -36,7 +36,7 @@ export default function NotFound() {
             </div>
           </div>
 
-          <div className="mt-2 mb-2 flex w-full md:hidden">
+          <div className="mb-2 mt-2 flex w-full md:hidden">
             <Frankie />
           </div>
 

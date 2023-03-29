@@ -157,8 +157,8 @@ export default function IndexPage() {
             className={classNames(
               videos.length === 0 ? 'hidden' : 'inline-flex',
               `items-center rounded border border-transparent bg-primary/60 px-4 
-              py-2 text-white shadow-sm transition hover:bg-primary/90 
-              hover:bg-primary focus:border-transparent focus:ring-2 
+              py-2 text-white shadow-sm transition hover:bg-primary 
+              hover:bg-primary/90 focus:border-transparent focus:ring-2 
               focus:ring-primary focus:ring-offset-2 dark:border-transparent dark:bg-secondary/50 
               dark:hover:bg-secondary/80 dark:focus:ring-secondary dark:focus:ring-offset-2`
             )}

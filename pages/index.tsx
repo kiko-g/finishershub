@@ -90,7 +90,7 @@ export default function Hub() {
         font-medium text-gray-800 opacity-[99%] dark:bg-navy dark:text-white"
       >
         <div className="blob" />
-        <main className="flex w-full flex-col gap-y-16 px-4 pt-8 md:py-0 md:px-4">
+        <main className="flex w-full flex-col gap-y-16 px-4 pt-8 md:px-4 md:py-0">
           {/* Hero */}
           <header
             id="hero"
@@ -133,7 +133,7 @@ export default function Hub() {
           {/* Most recent highlight */}
           <section
             id="showcase"
-            className="my-auto mx-auto mb-8 flex max-w-5xl flex-col space-y-3 py-4"
+            className="mx-auto my-auto mb-8 flex max-w-5xl flex-col space-y-3 py-4"
           >
             <Link
               href="#showcase"
@@ -155,7 +155,7 @@ export default function Hub() {
           {/* Get full access */}
           <section
             id="access"
-            className="my-auto mx-auto mb-8 flex max-w-5xl flex-col space-y-3 py-4"
+            className="mx-auto my-auto mb-8 flex max-w-5xl flex-col space-y-3 py-4"
           >
             <div className="flex items-center justify-start gap-3">
               <Link
@@ -196,7 +196,7 @@ export default function Hub() {
           {/* Facts and figures */}
           <section
             id="info"
-            className="my-auto mx-auto mb-8 flex max-w-5xl flex-col space-y-3 py-4"
+            className="mx-auto my-auto mb-8 flex max-w-5xl flex-col space-y-3 py-4"
           >
             <Link
               href="#info"
@@ -212,7 +212,7 @@ export default function Hub() {
           {/* About */}
           <section
             id="about"
-            className="my-auto mx-auto mb-8 flex max-w-5xl flex-col space-y-3 py-4"
+            className="mx-auto my-auto mb-8 flex max-w-5xl flex-col space-y-3 py-4"
           >
             <Link
               href="#about"
@@ -222,7 +222,7 @@ export default function Hub() {
               <h2 className="text-3xl font-bold tracking-tight sm:text-4xl">About us</h2>
               <span className="hidden text-2xl group-hover:flex sm:text-3xl">🔗</span>
             </Link>
-            <ul className="mt-3 grid grid-cols-1 gap-y-4 gap-x-4 text-base font-normal tracking-tight lg:mt-6 lg:grid-cols-3 lg:text-lg">
+            <ul className="mt-3 grid grid-cols-1 gap-x-4 gap-y-4 text-base font-normal tracking-tight lg:mt-6 lg:grid-cols-3 lg:text-lg">
               {/* Description */}
               <AboutCardLI emoji="👋">
                 Finishers Hub is a passion project developed by{' '}

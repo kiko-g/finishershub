@@ -138,7 +138,7 @@ export default function CasinoPage() {
 
               <div
                 className="flex w-full items-center justify-center self-stretch 
-                  border border-slate-800/60 bg-slate-800/60 py-2 px-4 
+                  border border-slate-800/60 bg-slate-800/60 px-4 py-2 
                   dark:border-sky-200/30 dark:bg-sky-200/20 lg:py-1"
               >
                 {index + 1}/{videos.length}

@@ -45,8 +45,8 @@ export type CatalogueItem = {
   accurate: CatalogueItemStatus
   ttrk: number
   ttca: number
-  motion: 1 | 2 | 3 | 4 | 5
-  radius: 1 | 2 | 3 | 4 | 5
+  slippery: 1 | 2 | 3 | 4 | 5
+  ledgeDanger: 1 | 2 | 3 | 4 | 5
   score: number
 }
 

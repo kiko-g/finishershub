@@ -90,12 +90,12 @@ const FinisherInfoModal = ({ custom }: Props) => {
                     <p className="mt-3 font-bold">
                       A valid and truthful finisher must meet the following criteria:
                     </p>
-                    <ul className="mt-1 ml-4 flex list-disc flex-col gap-y-1 lg:gap-y-0.5">
+                    <ul className="ml-4 mt-1 flex list-disc flex-col gap-y-1 lg:gap-y-0.5">
                       <li>Finishing move is performed on Warzone. ✅</li>
                       <li>Finishing move is performed on non-downed players. ✅</li>
                     </ul>
                     <p className="mt-3 font-bold">Other key notes to keep in mind:</p>
-                    <ul className="mt-1 ml-4 flex list-decimal flex-col gap-y-1 lg:gap-y-0.5">
+                    <ul className="ml-4 mt-1 flex list-decimal flex-col gap-y-1 lg:gap-y-0.5">
                       <li>
                         Finishing moves on downed players are <strong>not counted</strong> and{' '}
                         <strong>often considered frowned upon</strong>. ⚠️

@@ -55,7 +55,7 @@ export default function AccessModalCTA({ lockedHook, startOpen, special = false 
       <button
         title="Open access modal"
         onClick={() => setIsOpen(true)}
-        className="flex w-min items-center justify-start gap-2 rounded border border-teal-600 bg-teal-600/60 py-4 px-5 text-white transition hover:bg-teal-600"
+        className="flex w-min items-center justify-start gap-2 rounded border border-teal-600 bg-teal-600/60 px-5 py-4 text-white transition hover:bg-teal-600"
       >
         <KeyIcon className="h-5 w-5 lg:h-6 lg:w-6" />
         <span className="whitespace-nowrap">Claim your full access</span>
@@ -107,7 +107,7 @@ export default function AccessModalCTA({ lockedHook, startOpen, special = false 
                   <div className="mt-3">
                     <div className="text-sm font-normal lg:text-base">
                       <p>Enter the codephrase to prove you are worthy of viewing the content.</p>
-                      <ul className="mt-2 ml-3 flex list-disc flex-col gap-y-0.5 lg:ml-4 lg:mt-1">
+                      <ul className="ml-3 mt-2 flex list-disc flex-col gap-y-0.5 lg:ml-4 lg:mt-1">
                         <li>
                           You can <strong>close the modal</strong> and have{' '}
                           <span className="text-amber-600">limited access</span> to the site.
@@ -129,7 +129,7 @@ export default function AccessModalCTA({ lockedHook, startOpen, special = false 
                             href="https://clips.twitch.tv/TardyPleasantTildeKappaClaus-jWplZLiwxcoOi6vP"
                             className="hover:text-primary dark:hover:text-secondary"
                           >
-                            <ArrowTopRightOnSquareIcon className="ml-2 mb-1 inline-flex h-5 w-5" />
+                            <ArrowTopRightOnSquareIcon className="mb-1 ml-2 inline-flex h-5 w-5" />
                           </Link>
                         </li>
                       </ul>

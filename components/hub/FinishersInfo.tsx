@@ -9,7 +9,7 @@ export default function FinishersInfo({}: Props) {
         aria-hidden="true"
         viewBox="0 0 32 32"
         fill="none"
-        className="h-8 w-8 flex-none [--icon-foreground:theme(colors.slate.900)] [--icon-background:theme(colors.white)]"
+        className="h-8 w-8 flex-none [--icon-background:theme(colors.white)] [--icon-foreground:theme(colors.slate.900)]"
       >
         <defs>
           <radialGradient
@@ -78,7 +78,7 @@ export default function FinishersInfo({}: Props) {
             A <span className="font-bold">valid finisher</span> must meet the following criteria:
           </p>
 
-          <ul className="mt-1 ml-1 flex list-inside list-disc flex-col gap-y-1 lg:gap-y-0.5">
+          <ul className="ml-1 mt-1 flex list-inside list-disc flex-col gap-y-1 lg:gap-y-0.5">
             <li>Finishing move is performed on non-downed players ✅</li>
             <li>Finishing move is performed on Warzone (Battle Royale or Resurgence) ✅</li>
           </ul>
@@ -87,7 +87,7 @@ export default function FinishersInfo({}: Props) {
             Other <span className="font-bold">key notes</span> to keep in mind:
           </p>
 
-          <ol className="mt-1 ml-1 flex list-inside list-decimal flex-col gap-y-1 lg:gap-y-0.5">
+          <ol className="ml-1 mt-1 flex list-inside list-decimal flex-col gap-y-1 lg:gap-y-0.5">
             <li>
               Finishing moves on downed players are not counted and often considered frowned upon ⚠️
             </li>

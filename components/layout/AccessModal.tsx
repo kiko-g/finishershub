@@ -105,7 +105,7 @@ export default function AccessModal({ lockedHook, startOpen }: Props) {
                   <div className="mt-3">
                     <div className="text-sm font-normal lg:text-base">
                       <p>Enter the codephrase to prove you are worthy of viewing the content.</p>
-                      <ul className="mt-2 ml-3 flex list-disc flex-col gap-y-0.5 lg:ml-4 lg:mt-1">
+                      <ul className="ml-3 mt-2 flex list-disc flex-col gap-y-0.5 lg:ml-4 lg:mt-1">
                         <li>
                           You can <strong>close the modal</strong> and have{' '}
                           <span className="text-amber-600">limited access</span> to the site.
@@ -127,7 +127,7 @@ export default function AccessModal({ lockedHook, startOpen }: Props) {
                             href="https://clips.twitch.tv/TardyPleasantTildeKappaClaus-jWplZLiwxcoOi6vP"
                             className="hover:text-primary dark:hover:text-secondary"
                           >
-                            <ArrowTopRightOnSquareIcon className="ml-2 mb-1 inline-flex h-5 w-5" />
+                            <ArrowTopRightOnSquareIcon className="mb-1 ml-2 inline-flex h-5 w-5" />
                           </Link>
                         </li>
                       </ul>

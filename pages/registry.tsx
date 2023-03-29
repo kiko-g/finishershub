@@ -44,7 +44,7 @@ export default function Registry() {
           </div>
         </div>
 
-        <div className="mt-4 mb-16 grid grid-cols-1 gap-4 lg:grid-cols-2">
+        <div className="mb-16 mt-4 grid grid-cols-1 gap-4 lg:grid-cols-2">
           {members.length !== 0
             ? members // descending order
                 .sort((a, b) => {

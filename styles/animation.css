@@ -11,7 +11,7 @@
 }
 
 .background-circles {
-  @apply absolute top-0 left-0 h-full w-full overflow-hidden;
+  @apply absolute left-0 top-0 h-full w-full overflow-hidden;
 }
 
 .background-circles li {
@@ -135,14 +135,14 @@
   0% {
     transform: translateY(0) rotate(0deg);
     opacity: 1;
-    border-radius: 0;
+    border-ledgedanger: 0;
     @apply blur-0;
   }
 
   100% {
     transform: translateY(-1200px) rotate(720deg);
     opacity: 0.5;
-    border-radius: 50%;
+    border-ledgedanger: 50%;
     @apply blur-0;
   }
 }

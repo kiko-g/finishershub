@@ -11,8 +11,8 @@ export default function TwitterAdBanner({}: Props) {
       <Link
         target="_blank"
         href="https://twitter.com/finishershub"
-        className="hidden h-auto max-w-full rounded bg-gradient-to-br from-[#1da1f2] to-blue-500 py-16 
-        px-16 text-white transition hover:opacity-80 lg:flex lg:max-w-[16rem]"
+        className="hidden h-auto max-w-full rounded bg-gradient-to-br from-[#1da1f2] to-blue-500 px-16 
+        py-16 text-white transition hover:opacity-80 lg:flex lg:max-w-[16rem]"
       >
         <svg className="h-full w-full" fill="currentColor" viewBox="0 0 512 512" aria-hidden="true">
           <path
