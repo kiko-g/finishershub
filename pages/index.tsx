@@ -49,7 +49,7 @@ export default function Hub() {
     {
       name: 'Gallery',
       href: '/gallery',
-      emoji: '🖼️',
+      emoji: '🪟',
       description: (
         <>
           Head over to the gallery. It&apos;s like a museum, but with heinous highlights of
@@ -85,16 +85,13 @@ export default function Hub() {
   return (
     <>
       <Seo title="Hub" />
-      <div
-        className="flex min-h-screen flex-col scroll-smooth bg-teal-50 font-prose 
-        font-medium text-gray-800 opacity-[99%] dark:bg-navy dark:text-white"
-      >
+      <div className="flex min-h-screen flex-col scroll-smooth bg-teal-50 font-prose font-medium text-gray-800 opacity-[99%] dark:bg-navy dark:text-white">
         <div className="blob" />
         <main className="flex w-full flex-col gap-y-16 px-4 pt-8 md:px-4 md:py-0">
           {/* Hero */}
           <header
             id="hero"
-            className="my-auto flex min-h-full w-full flex-col items-center justify-center gap-y-6 self-center align-middle md:min-h-screen"
+            className="my-auto flex min-h-full w-full flex-col items-center justify-center gap-y-6 self-center py-4 align-middle md:min-h-screen"
           >
             <div className="max-w-2xl space-y-2">
               <h2 className="bg-gradient-to-r from-violet-400 to-sky-400 bg-clip-text text-center text-5xl font-bold tracking-tight text-transparent dark:bg-gradient-to-r dark:from-slate-200 dark:to-slate-300 sm:text-6xl">

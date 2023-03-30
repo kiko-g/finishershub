@@ -4,6 +4,7 @@ import { CatalogueItem as CatalogueItemType } from '../../@types'
 import { BoltIcon, LockClosedIcon, CheckCircleIcon } from '@heroicons/react/24/solid'
 import { Dialog, Transition } from '@headlessui/react'
 import { XMarkIcon } from '@heroicons/react/24/outline'
+import Image from 'next/image'
 
 type Props = {
   item: CatalogueItemType
@@ -53,13 +54,26 @@ export default function CatalogueItem({ item, chosen, setChosen }: Props) {
       <div
         onClick={() => setChosen(isChosen ? null : item.name)}
         className={classNames(
-          'flex cursor-pointer items-start justify-center gap-x-3 rounded border p-3',
+          'flex cursor-pointer flex-wrap items-start justify-center gap-3 rounded border p-3 xl:flex-nowrap',
           isChosen
             ? 'border-pink-600 bg-rose-600/10 hover:bg-rose-600/5 dark:bg-pink-600/40 dark:hover:bg-pink-600/25'
             : 'border-gray-300 bg-white hover:border-primary hover:bg-primary/10 dark:border-secondary/20 dark:bg-secondary/10 dark:hover:border-secondary dark:hover:bg-secondary/20'
         )}
       >
-        <div className="flex aspect-square h-32 rounded bg-gradient-to-br from-slate-400 to-slate-500 dark:from-blue-500 dark:to-blue-600" />
+        {item.video ? (
+          <video
+            loop
+            muted
+            autoPlay
+            controls={false}
+            preload="preload"
+            className="h-auto w-full rounded object-cover xl:h-32 xl:w-32"
+          >
+            <source src={item.video} type="video/mp4" />
+          </video>
+        ) : (
+          <div className="flex aspect-video w-full rounded bg-gradient-to-br from-slate-400 to-slate-500 dark:from-blue-500 dark:to-blue-600 xl:h-32 xl:w-32" />
+        )}
 
         <section className="flex w-full items-start justify-between">
           {/* Left (name, source, ttrk, score) */}

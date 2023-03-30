@@ -48,6 +48,7 @@ export type CatalogueItem = {
   slippery: 1 | 2 | 3 | 4 | 5
   ledgeDanger: 1 | 2 | 3 | 4 | 5
   score: number
+  video: string
 }
 
 export type VideoType = {

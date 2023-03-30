@@ -23,6 +23,7 @@ export default function CatalogueGrid({ catalogue }: Props) {
           slippery: row[7] as 1 | 2 | 3 | 4 | 5,
           ledgeDanger: row[8] as 1 | 2 | 3 | 4 | 5,
           score: row[9] as number,
+          video: row[10] as string,
         }
 
         return (
