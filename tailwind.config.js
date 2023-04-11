@@ -32,6 +32,13 @@ module.exports = {
         xxs: '0.6rem',
       },
       fontFamily: {
+        sans: [
+          'Inter var, sans-serif',
+          {
+            fontFeatureSettings: '"cv11", "ss01"',
+            fontVariationSettings: '"opsz" 32',
+          },
+        ],
         prose: ['Inter', ...defaultTheme.fontFamily.sans],
         lexend: ['Lexend', ...defaultTheme.fontFamily.sans],
         mono: ['Fira Code', ...defaultTheme.fontFamily.mono],
