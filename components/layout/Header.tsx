@@ -32,7 +32,7 @@ const navigation = [
     title: 'Gallery',
     location: '/gallery',
     icon: <FilmIcon className="h-5 w-5" />,
-    shown: true,
+    shown: false,
   },
   {
     title: 'Registry',
