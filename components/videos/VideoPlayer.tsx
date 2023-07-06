@@ -16,7 +16,7 @@ export default function VideoPlayer({ video, play = false, muted = true }: Props
         controls
         muted={video.index === 0 || muted}
         autoPlay={video.index === 0 ? false : play}
-        preload="preload"
+        preload="auto"
         className="h-full w-full rounded bg-primary/10 shadow dark:bg-secondary/10"
       >
         <source src={video.url} type="video/mp4" />

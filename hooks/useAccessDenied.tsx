@@ -1,17 +1,19 @@
 import { useEffect, useState } from 'react'
 
-const useLocalStorage = (key: string, initialValue?: any) => {
-  const [storedValue, setStoredValue] = useState(() => {
+const useLocalStorage = (key: string, initialValue: any) => {
+  const [storedValue, setStoredValue] = useState(initialValue)
+
+  useEffect(() => {
     try {
       if (typeof window !== 'undefined') {
         const item = window.localStorage.getItem(key)
-        return item ? JSON.parse(item) : initialValue
+        setStoredValue(item ? JSON.parse(item) : initialValue)
       }
     } catch (error) {
       console.warn(error)
-      return initialValue
+      setStoredValue(initialValue)
     }
-  })
+  }, [key, initialValue])
 
   const setValue = (value: any) => {
     try {
@@ -25,18 +27,13 @@ const useLocalStorage = (key: string, initialValue?: any) => {
       console.warn(error)
     }
   }
+
   return [storedValue, setValue]
 }
 
 export default function useAccessDenied() {
   const key = `finishershub.access`
   const [accessDenied, setAccessDenied] = useLocalStorage(key, true)
-
-  useEffect(() => {
-    if (typeof window !== 'undefined') {
-      window.localStorage.setItem(key, JSON.stringify(accessDenied))
-    }
-  }, [accessDenied, key])
 
   return [accessDenied, setAccessDenied]
 }

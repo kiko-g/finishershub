@@ -4,6 +4,7 @@ import DelayDisclaimerFade from './DelayDisclaimerFade'
 import DeleteCookiesButton from './DeleteCookiesButton'
 import DummyLockedContent from './DummyLockedContent'
 import FilterVideos from './FilterVideos'
+import FocusViewToggler from './FocusViewToggler'
 import MuteToggler from './MuteToggler'
 import PopOpenVideo from './PopOpenVideo'
 import ReshuffleButton from './ReshuffleButton'
@@ -23,8 +24,7 @@ export {
   DelayDisclaimerFade,
   DeleteCookiesButton,
   DummyLockedContent,
-  FilterVideos,
-  MuteToggler,
+  FilterVideos, FocusViewToggler, MuteToggler,
   PopOpenVideo,
   ReshuffleButton,
   ShareVideo,
@@ -35,5 +35,6 @@ export {
   VideoPage,
   VideoPlayer,
   VideoSkeleton,
-  ViewToggler,
+  ViewToggler
 }
+

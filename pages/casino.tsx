@@ -1,10 +1,15 @@
-import React, { useState, useEffect, useMemo } from 'react'
+import React, { useState, useEffect, useMemo, useCallback } from 'react'
 import type { FilterType, VideoType, VideoTypeAPI } from '../@types'
 import useAccessDenied from '../hooks/useAccessDenied'
 import { shuffle } from '../utils'
 import { Layout, AccessModal, InvisbleTopLayer } from '../components/layout'
 import { FullAccessBadge, LimitedAccessBadge } from '../components/utils'
-import { ArrowLongLeftIcon, ArrowLongRightIcon } from '@heroicons/react/24/outline'
+import {
+  ArrowLongLeftIcon,
+  ArrowLongRightIcon,
+  ChevronDoubleLeftIcon,
+  ChevronDoubleRightIcon,
+} from '@heroicons/react/24/outline'
 import {
   AutoplayToggler,
   MuteToggler,
@@ -15,6 +20,7 @@ import {
   VideoSkeleton,
   FilterVideos,
   VideoNotFound,
+  FocusViewToggler,
 } from '../components/videos'
 
 export default function Casino() {
@@ -27,6 +33,7 @@ export default function Casino() {
   const [loading, setLoading] = useState<boolean>(true)
   const [fetchError, setFetchError] = useState<boolean>(false)
 
+  const [view, setView] = useState<boolean>(true)
   const [index, setIndex] = useState<number>(0)
   const [videos, setVideos] = useState<VideoType[]>([])
   const [filter, setFilter] = useState<FilterType>(arenas[arenas.length - 1])
@@ -48,8 +55,8 @@ export default function Casino() {
     else return ''
   }, [loading, fetchError])
 
-  const prevVideo = () => setIndex((prev) => prev - 1)
-  const nextVideo = () => setIndex((prev) => prev + 1)
+  const prevVideo = useCallback(() => setIndex((prev) => prev - 1), [])
+  const nextVideo = useCallback(() => setIndex((prev) => prev + 1), [])
   const shuffleVideos = () => {
     setVideos((prev) => shuffle(prev))
   }
@@ -85,7 +92,18 @@ export default function Casino() {
       })
   }, [filter, shuffled])
 
-  return (
+  useEffect(() => {
+    const handleKeyDown = (event: any) => {
+      if (event.keyCode === 39) nextVideo()
+      if (event.keyCode === 37) prevVideo()
+    }
+    window.addEventListener('keydown', handleKeyDown)
+    return () => {
+      window.removeEventListener('keydown', handleKeyDown)
+    }
+  }, [nextVideo, prevVideo])
+
+  return view ? (
     <Layout location="Casino">
       <div className="mx-auto max-w-full lg:max-w-3xl">
         <main className="flex flex-col gap-2.5">
@@ -109,6 +127,7 @@ export default function Casino() {
                   <AccessModal lockedHook={[accessDenied, setAccessDenied]} startOpen={false} />
                 ) : null}
                 <DeleteCookiesButton />
+                <FocusViewToggler hook={[view, setView]} />
                 <ReshuffleButton shuffle={shuffleVideos} />
                 <AutoplayToggler hook={[autoplay, setAutoplay]} />
                 {limitedAccess ? null : <MuteToggler hook={[muted, setMuted]} />}
@@ -164,5 +183,43 @@ export default function Casino() {
         </main>
       </div>
     </Layout>
+  ) : (
+    <main className="flex flex-col space-y-3 p-4">
+      {/* Buttons for Focused View */}
+      <div className="flex items-center gap-x-2 self-end">
+        <FocusViewToggler hook={[view, setView]} />
+        <button
+          onClick={prevVideo}
+          disabled={index === 0}
+          title="Go to the previous highlight"
+          className="transition hover:opacity-80"
+        >
+          <ChevronDoubleLeftIcon className="inline-flex h-6 w-6" />
+        </button>
+        <button
+          onClick={nextVideo}
+          disabled={index === videos.length - 1}
+          title="Go to the next highlight"
+          className="transition hover:opacity-80"
+        >
+          <ChevronDoubleRightIcon className="inline-flex h-6 w-6" />
+        </button>
+      </div>
+
+      <div className="relative w-full">
+        {limitedAccess ? <InvisbleTopLayer /> : null}
+        {ready ? (
+          <VideoPlayer
+            video={video}
+            play={autoplay}
+            muted={muted}
+            key={`video-element-${video.index}`}
+          />
+        ) : (
+          <VideoSkeleton />
+        )}
+        {fetchError && <VideoNotFound />}
+      </div>
+    </main>
   )
 }

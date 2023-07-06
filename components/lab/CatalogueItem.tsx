@@ -1,10 +1,10 @@
 import React, { Dispatch, Fragment, SetStateAction, useMemo } from 'react'
+import Image from 'next/image'
 import classNames from 'classnames'
 import { CatalogueItem as CatalogueItemType } from '../../@types'
 import { BoltIcon, LockClosedIcon, CheckCircleIcon } from '@heroicons/react/24/solid'
 import { Dialog, Transition } from '@headlessui/react'
 import { XMarkIcon } from '@heroicons/react/24/outline'
-import Image from 'next/image'
 
 type Props = {
   item: CatalogueItemType

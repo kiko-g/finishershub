@@ -43,7 +43,7 @@ export default function MostRecentVideoShowcase({}: Props) {
         muted
         controls={false}
         autoPlay={true}
-        preload="preload"
+        preload="auto"
         className="h-full w-full rounded bg-primary/10 shadow dark:bg-secondary/10"
       >
         <source src={video.url} type="video/mp4" />
