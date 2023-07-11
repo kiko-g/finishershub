@@ -38,7 +38,7 @@ export default function Socials({}: Props) {
             </Link>
           ))}
       </div>
-      <DarkModeSwitch alt />
+      <DarkModeSwitch />
     </div>
   )
 }
