@@ -61,6 +61,7 @@ module.exports = {
         dark: 'dark 400ms ease-in-out',
         light: 'light 400ms ease-in-out',
         'bounce-horizontal': 'bounce-horizontal 1s infinite',
+        'pulse-500': 'pulse 500ms cubic-bezier(0.4, 0, 0.6, 1) infinite',
       },
       blur: {
         xxs: '1px',
