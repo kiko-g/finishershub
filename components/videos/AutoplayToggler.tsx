@@ -1,4 +1,4 @@
-import React, { Dispatch, SetStateAction } from 'react'
+import React, { Dispatch, SetStateAction, useCallback, useEffect } from 'react'
 
 type Props = {
   hook: [boolean, Dispatch<SetStateAction<boolean>>]
@@ -7,8 +7,25 @@ type Props = {
 export default function AutoplayToggler({ hook }: Props) {
   const [autoplay, setAutoplay] = hook
 
+  const toggleAutoplay = useCallback(() => {
+    setAutoplay((prev) => !prev)
+  }, [setAutoplay])
+
+  useEffect(() => {
+    const handleKeyDown = (event: any) => {
+      if (event.keyCode === 75) {
+        // K key
+        toggleAutoplay()
+      }
+    }
+    window.addEventListener('keydown', handleKeyDown)
+    return () => {
+      window.removeEventListener('keydown', handleKeyDown)
+    }
+  }, [toggleAutoplay])
+
   return (
-    <div className="flex items-end justify-center space-x-2 text-gray-700 dark:text-light">
+    <div className="flex items-end justify-center space-x-2">
       {autoplay ? (
         <button
           title="Turn autoplay off"

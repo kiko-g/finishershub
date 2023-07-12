@@ -1,4 +1,4 @@
-import React, { Dispatch, SetStateAction } from 'react'
+import React, { Dispatch, SetStateAction, useCallback, useEffect } from 'react'
 
 type Props = {
   hook: [boolean, Dispatch<SetStateAction<boolean>>]
@@ -7,11 +7,28 @@ type Props = {
 export default function MuteToggler({ hook }: Props) {
   const [mute, setMuted] = hook
 
+  const toggleMute = useCallback(() => {
+    setMuted((prev) => !prev)
+  }, [setMuted])
+
+  useEffect(() => {
+    const handleKeyDown = (event: any) => {
+      if (event.keyCode === 77) {
+        // M key
+        toggleMute()
+      }
+    }
+    window.addEventListener('keydown', handleKeyDown)
+    return () => {
+      window.removeEventListener('keydown', handleKeyDown)
+    }
+  }, [toggleMute])
+
   return (
-    <div className="flex items-end justify-center space-x-2 text-gray-700 dark:text-light">
+    <div className="flex items-end justify-center space-x-2">
       {mute ? (
         <button
-          title="Turn default mute off"
+          title="Turn default mute off (or press M)"
           className="transition hover:opacity-80"
           onClick={() => setMuted(false)}
         >
