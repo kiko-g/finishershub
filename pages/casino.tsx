@@ -21,6 +21,8 @@ import {
   FilterVideos,
   VideoNotFound,
   FocusViewToggler,
+  PopOpenVideo,
+  ShareVideo,
 } from '../components/videos'
 
 export default function Casino() {
@@ -184,15 +186,17 @@ export default function Casino() {
       </div>
     </Layout>
   ) : (
-    <main className="flex flex-col space-y-3 p-4">
+    <main className="relative h-screen">
       {/* Buttons for Focused View */}
-      <div className="flex items-center gap-x-2 self-end">
+      <div className="absolute left-4 top-4 z-[100] flex items-center gap-x-2 self-end bg-slate-800 bg-opacity-70 p-3 text-white transition hover:bg-opacity-100 dark:bg-secondary lg:p-4">
         <FocusViewToggler hook={[view, setView]} />
+        <ShareVideo video={video} />
+        <PopOpenVideo video={video} />
         <button
           onClick={prevVideo}
           disabled={index === 0}
           title="Go to the previous highlight"
-          className="transition hover:opacity-80"
+          className="transition hover:opacity-80 disabled:cursor-not-allowed disabled:opacity-25"
         >
           <ChevronDoubleLeftIcon className="inline-flex h-6 w-6" />
         </button>
@@ -200,7 +204,7 @@ export default function Casino() {
           onClick={nextVideo}
           disabled={index === videos.length - 1}
           title="Go to the next highlight"
-          className="transition hover:opacity-80"
+          className="transition hover:opacity-80 disabled:cursor-not-allowed disabled:opacity-25"
         >
           <ChevronDoubleRightIcon className="inline-flex h-6 w-6" />
         </button>
@@ -213,6 +217,7 @@ export default function Casino() {
             video={video}
             play={autoplay}
             muted={muted}
+            special={true}
             key={`video-element-${video.index}`}
           />
         ) : (

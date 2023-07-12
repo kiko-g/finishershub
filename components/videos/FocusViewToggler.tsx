@@ -9,7 +9,7 @@ export default function FocusViewToggler({ hook }: Props) {
   const [unfocused, setFocused] = hook
 
   return (
-    <div className="flex items-end justify-center space-x-2 text-gray-700 dark:text-light">
+    <div className="flex items-end justify-center space-x-2">
       {unfocused ? (
         <button
           title="Turn focus view on"
