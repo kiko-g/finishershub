@@ -189,7 +189,7 @@ export default function Casino() {
   ) : (
     <main className="relative h-screen">
       {/* Buttons for Focused View */}
-      <div className="absolute left-0 top-0 z-[100] flex items-center gap-x-2 self-end bg-slate-800 bg-opacity-70 p-3 text-white transition hover:bg-opacity-100 dark:bg-secondary lg:p-4">
+      <div className="absolute left-0 top-0 z-50 flex items-center gap-x-2 self-end bg-white bg-opacity-70 p-3 text-gray-800 transition hover:bg-opacity-100 dark:bg-secondary lg:p-4">
         <FocusViewToggler hook={[view, setView]} />
         <AutoplayToggler hook={[autoplay, setAutoplay]} />
         {limitedAccess ? null : <MuteToggler hook={[muted, setMuted]} />}

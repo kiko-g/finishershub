@@ -46,15 +46,16 @@ export default function ShareVideo({ video }: Props) {
     <button
       onClick={handleCopied}
       title="Copy video link (or press C)"
-      className={classNames(
-        'transition hover:opacity-80',
-        copied ? 'text-emerald-500' : 'text-white'
-      )}
+      className={classNames('transition hover:opacity-80', copied ? 'text-emerald-500' : '')}
     >
       {copied ? (
-        <ClipboardDocumentCheckIcon fillRule="evenodd" className="h-5 w-5 lg:h-6 lg:w-6" />
+        <ClipboardDocumentCheckIcon
+          fillRule="evenodd"
+          strokeWidth="1.5"
+          className="h-6 w-6 lg:h-7 lg:w-7"
+        />
       ) : (
-        <ClipboardIcon fillRule="evenodd" className="h-5 w-5 lg:h-6 lg:w-6" />
+        <ClipboardIcon fillRule="evenodd" strokeWidth="1.5" className="h-6 w-6 lg:h-7 lg:w-7" />
       )}
     </button>
   )

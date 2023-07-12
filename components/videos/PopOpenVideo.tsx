@@ -38,10 +38,12 @@ export default function PopOpenVideo({ video, alt = false }: Props) {
       href={url}
       target="_blank"
       title="Open video in new tab (or press P)"
-      className="text-white transition hover:opacity-80 dark:text-white"
+      className="transition hover:opacity-80"
     >
       <ArrowTopRightOnSquareIcon
-        className={classNames(alt ? `h-7 w-7 lg:h-8 lg:w-8` : `h-5 w-5 lg:h-6 lg:w-6`)}
+        fillRule="evenodd"
+        strokeWidth="1.5"
+        className={classNames(alt ? 'h-7 w-7 lg:h-8 lg:w-8' : 'h-6 w-6 lg:h-7 lg:w-7')}
       />
     </Link>
   )
