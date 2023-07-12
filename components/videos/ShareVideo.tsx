@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, { useCallback, useEffect, useState } from 'react'
 import classNames from 'classnames'
 import type { VideoType } from '../../@types'
 import { getVideoUrlFromVideo } from '../../utils'
@@ -13,10 +13,20 @@ export default function ShareVideo({ video }: Props) {
   const [copied, setCopied] = useState(false)
   const [url, setUrl] = React.useState<string>('')
 
-  const handleCopied = () => {
+  const handleCopied = useCallback(() => {
     setCopied(!copied)
     navigator.clipboard.writeText(url)
-  }
+  }, [copied, url])
+
+  useEffect(() => {
+    const handleKeyDown = (event: any) => {
+      if (event.keyCode === 67) handleCopied() // C key
+    }
+    window.addEventListener('keydown', handleKeyDown)
+    return () => {
+      window.removeEventListener('keydown', handleKeyDown)
+    }
+  }, [handleCopied])
 
   React.useEffect(() => {
     if (!video) return
@@ -35,9 +45,10 @@ export default function ShareVideo({ video }: Props) {
   return (
     <button
       onClick={handleCopied}
+      title="Copy video link (or press C)"
       className={classNames(
-        `transition hover:opacity-80`,
-        copied ? `text-emerald-500` : `text-white`
+        'transition hover:opacity-80',
+        copied ? 'text-emerald-500' : 'text-white'
       )}
     >
       {copied ? (

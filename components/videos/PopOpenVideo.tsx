@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import Link from 'next/link'
 import type { VideoType } from '../../@types'
 import { getVideoUrlFromVideo } from '../../utils'
@@ -13,6 +13,19 @@ type Props = {
 export default function PopOpenVideo({ video, alt = false }: Props) {
   const [url, setUrl] = React.useState<string>('')
 
+  useEffect(() => {
+    const handleKeyDown = (event: any) => {
+      if (event.keyCode === 80) {
+        // P key
+        window.open(url, '_blank')
+      }
+    }
+    window.addEventListener('keydown', handleKeyDown)
+    return () => {
+      window.removeEventListener('keydown', handleKeyDown)
+    }
+  }, [url])
+
   React.useEffect(() => {
     if (!video) return
 
@@ -24,6 +37,7 @@ export default function PopOpenVideo({ video, alt = false }: Props) {
     <Link
       href={url}
       target="_blank"
+      title="Open video in new tab (or press P)"
       className="text-white transition hover:opacity-80 dark:text-white"
     >
       <ArrowTopRightOnSquareIcon

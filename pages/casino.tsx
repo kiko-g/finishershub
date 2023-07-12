@@ -96,8 +96,9 @@ export default function Casino() {
 
   useEffect(() => {
     const handleKeyDown = (event: any) => {
-      if (event.keyCode === 39) nextVideo()
-      if (event.keyCode === 37) prevVideo()
+      if (event.keyCode === 39) nextVideo() // right arrow
+      if (event.keyCode === 37) prevVideo() // left arrow
+      if (event.keyCode === 69) setView((prev) => !prev) // E key
     }
     window.addEventListener('keydown', handleKeyDown)
     return () => {
@@ -195,7 +196,7 @@ export default function Casino() {
         <button
           onClick={prevVideo}
           disabled={index === 0}
-          title="Go to the previous highlight"
+          title="Go to the previous highlight (or press the left arrow key)"
           className="transition hover:opacity-80 disabled:cursor-not-allowed disabled:opacity-25"
         >
           <ChevronDoubleLeftIcon className="inline-flex h-6 w-6" />
@@ -203,7 +204,7 @@ export default function Casino() {
         <button
           onClick={nextVideo}
           disabled={index === videos.length - 1}
-          title="Go to the next highlight"
+          title="Go to the next highlight (or press the right arrow key)"
           className="transition hover:opacity-80 disabled:cursor-not-allowed disabled:opacity-25"
         >
           <ChevronDoubleRightIcon className="inline-flex h-6 w-6" />
