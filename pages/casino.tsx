@@ -23,6 +23,7 @@ import {
   FocusViewToggler,
   PopOpenVideo,
   ShareVideo,
+  KeyUsageNotification,
 } from '../components/videos'
 
 export default function Casino() {
@@ -107,6 +108,7 @@ export default function Casino() {
   }, [nextVideo, prevVideo])
 
   return view ? (
+    // unfocused view
     <Layout location="Casino">
       <div className="mx-auto max-w-full lg:max-w-3xl">
         <main className="flex flex-col gap-2.5">
@@ -187,9 +189,10 @@ export default function Casino() {
       </div>
     </Layout>
   ) : (
+    // focused view
     <main className="relative h-screen">
       {/* Buttons for Focused View */}
-      <div className="absolute left-0 top-0 z-50 flex items-center gap-x-2 self-end bg-white bg-opacity-70 p-3 text-gray-800 transition hover:bg-opacity-100 dark:bg-secondary lg:p-4">
+      <div className="absolute left-0 top-0 z-50 flex items-center gap-x-2 self-end bg-white bg-opacity-70 p-3 text-gray-800 transition hover:bg-opacity-100 dark:bg-slate-800 dark:text-white lg:p-4">
         <FocusViewToggler hook={[view, setView]} />
         <AutoplayToggler hook={[autoplay, setAutoplay]} />
         {limitedAccess ? null : <MuteToggler hook={[muted, setMuted]} />}
@@ -201,7 +204,7 @@ export default function Casino() {
           title="Go to the previous highlight (or press the left arrow key)"
           className="transition hover:opacity-80 disabled:cursor-not-allowed disabled:opacity-25"
         >
-          <ChevronDoubleLeftIcon className="inline-flex h-6 w-6" />
+          <ChevronDoubleLeftIcon className="inline-flex h-6 w-6 lg:h-7 lg:w-7" />
         </button>
         <button
           onClick={nextVideo}
@@ -209,8 +212,9 @@ export default function Casino() {
           title="Go to the next highlight (or press the right arrow key)"
           className="transition hover:opacity-80 disabled:cursor-not-allowed disabled:opacity-25"
         >
-          <ChevronDoubleRightIcon className="inline-flex h-6 w-6" />
+          <ChevronDoubleRightIcon className="inline-flex h-6 w-6 lg:h-7 lg:w-7" />
         </button>
+        <KeyUsageNotification />
       </div>
 
       <div className="relative w-full">
