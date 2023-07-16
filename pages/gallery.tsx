@@ -36,6 +36,7 @@ export default function Gallery() {
   const [view, setView] = useState<boolean>(false)
   const [muted, setMuted] = useState<boolean>(true)
   const [autoplay, setAutoplay] = useState<boolean>(false)
+  const [shuffled, setShuffled] = useState<boolean>(true)
   const [clipsShown, setClipsShown] = useState<number>(isMobile ? 1 : view ? 2 : 3)
 
   const limitedAccess = useMemo(() => accessDenied, [accessDenied])
@@ -131,7 +132,7 @@ export default function Gallery() {
                 <AccessModal lockedHook={[accessDenied, setAccessDenied]} startOpen={false} />
               ) : null}
               <DeleteCookiesButton />
-              <ReshuffleButton shuffle={shuffleVideos} />
+              <ReshuffleButton hook={[shuffled, setShuffled]} shuffle={shuffleVideos} />
               <AutoplayToggler hook={[autoplay, setAutoplay]} />
               {limitedAccess ? null : <MuteToggler hook={[muted, setMuted]} />}
               <ViewToggler hook={[view, setView]} />
