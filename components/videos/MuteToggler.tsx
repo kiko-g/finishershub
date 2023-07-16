@@ -34,7 +34,7 @@ export default function MuteToggler({ hook }: Props) {
         >
           <svg
             xmlns="http://www.w3.org/2000/svg"
-            className="h-6 w-6 lg:h-7 lg:w-7"
+            className="h-5 w-5 lg:h-6 lg:w-6"
             fill="none"
             viewBox="0 0 24 24"
             stroke="currentColor"
@@ -61,7 +61,7 @@ export default function MuteToggler({ hook }: Props) {
         >
           <svg
             xmlns="http://www.w3.org/2000/svg"
-            className="h-6 w-6 lg:h-7 lg:w-7"
+            className="h-5 w-5 lg:h-6 lg:w-6"
             fill="none"
             viewBox="0 0 24 24"
             stroke="currentColor"

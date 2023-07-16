@@ -16,7 +16,7 @@ export default function ViewToggler({ hook }: Props) {
           className="transition hover:opacity-80"
           onClick={() => setType(false)}
         >
-          <Bars3Icon className="h-6 w-6 lg:h-7 lg:w-7" />
+          <Bars3Icon className="h-5 w-5 lg:h-6 lg:w-6" />
         </button>
       ) : (
         <button
@@ -24,7 +24,7 @@ export default function ViewToggler({ hook }: Props) {
           className="transition hover:opacity-80"
           onClick={() => setType(true)}
         >
-          <Bars4Icon className="h-6 w-6 lg:h-7 lg:w-7" />
+          <Bars4Icon className="h-5 w-5 lg:h-6 lg:w-6" />
         </button>
       )}
     </div>

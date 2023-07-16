@@ -21,7 +21,7 @@ export default function DeleteCookiesButton({}: Props) {
         title="Clear all cookies (helps if page does not load)"
         className="transition hover:opacity-80"
       >
-        <FireIcon className="h-6 w-6 lg:h-7 lg:w-7" />
+        <FireIcon className="h-5 w-5 lg:h-6 lg:w-6" />
       </button>
     </div>
   )

@@ -5,7 +5,9 @@ import DeleteCookiesButton from './DeleteCookiesButton'
 import DummyLockedContent from './DummyLockedContent'
 import FilterVideos from './FilterVideos'
 import FocusViewToggler from './FocusViewToggler'
-import KeyUsageNotification from './KeyUsageNotification'
+import KeyboardUsageButton from './KeyboardUsageButton'
+import KeyboardUsageInstructions from './KeyboardUsageInstructions'
+import MinimizeButtonControls from './MinimizeButtonControls'
 import MuteToggler from './MuteToggler'
 import PopOpenVideo from './PopOpenVideo'
 import ReshuffleButton from './ReshuffleButton'
@@ -14,11 +16,11 @@ import SingleVideoShowcase from './SingleVideoShowcase'
 import TwitchVideoClip from './TwitchVideoClip'
 import UsageDisclaimer from './UsageDisclaimer'
 import VideoNotFound from './VideoNotFound'
+import VideoOrderToggler from './VideoOrderToggler'
 import VideoPage from './VideoPage'
 import VideoPlayer from './VideoPlayer'
 import VideoSkeleton from './VideoSkeleton'
 import ViewToggler from './ViewToggler'
-
 export {
   AutoplayToggler,
   DelayDisclaimer,
@@ -27,17 +29,17 @@ export {
   DummyLockedContent,
   FilterVideos,
   FocusViewToggler,
-  KeyUsageNotification,
-  MuteToggler,
+  KeyboardUsageButton,
+  KeyboardUsageInstructions, MinimizeButtonControls, MuteToggler,
   PopOpenVideo,
   ReshuffleButton,
   ShareVideo,
   SingleVideoShowcase,
   TwitchVideoClip,
   UsageDisclaimer,
-  VideoNotFound,
-  VideoPage,
+  VideoNotFound, VideoOrderToggler, VideoPage,
   VideoPlayer,
   VideoSkeleton,
-  ViewToggler,
+  ViewToggler
 }
+

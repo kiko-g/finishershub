@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useMemo, useCallback } from 'react'
+import React, { useState, useEffect, useMemo, useCallback, useRef } from 'react'
 import type { FilterType, VideoType, VideoTypeAPI } from '../@types'
 import useAccessDenied from '../hooks/useAccessDenied'
 import { shuffle } from '../utils'
@@ -9,6 +9,8 @@ import {
   ArrowLongRightIcon,
   ChevronDoubleLeftIcon,
   ChevronDoubleRightIcon,
+  EyeIcon,
+  EyeSlashIcon,
 } from '@heroicons/react/24/outline'
 import {
   AutoplayToggler,
@@ -23,10 +25,13 @@ import {
   FocusViewToggler,
   PopOpenVideo,
   ShareVideo,
-  KeyUsageNotification,
+  KeyboardUsageInstructions,
+  KeyboardUsageButton,
+  VideoOrderToggler,
 } from '../components/videos'
 
 export default function Casino() {
+  const buttonControlsRef = useRef<HTMLDivElement | null>(null)
   const arenas: FilterType[] = [
     { name: 'All', value: '' },
     { name: 'Warzone 1', value: 'mw2019' },
@@ -35,7 +40,6 @@ export default function Casino() {
 
   const [loading, setLoading] = useState<boolean>(true)
   const [fetchError, setFetchError] = useState<boolean>(false)
-
   const [view, setView] = useState<boolean>(true)
   const [index, setIndex] = useState<number>(0)
   const [videos, setVideos] = useState<VideoType[]>([])
@@ -44,6 +48,7 @@ export default function Casino() {
   const [muted, setMuted] = useState<boolean>(true)
   const [autoplay, setAutoplay] = useState<boolean>(true)
   const [shuffled, setShuffled] = useState<boolean>(true)
+  const [showInstructions, setShowInstructions] = useState(true)
 
   const limitedAccess = useMemo(() => accessDenied, [accessDenied])
   const video = useMemo(() => videos[index], [index, videos])
@@ -51,6 +56,7 @@ export default function Casino() {
     () => !loading && !fetchError && video.url !== undefined,
     [loading, fetchError, video]
   )
+
   const toastType = useMemo(() => {
     if (fetchError) return 'error'
     else if (loading) return 'warning'
@@ -101,11 +107,28 @@ export default function Casino() {
       if (event.keyCode === 37) prevVideo() // left arrow
       if (event.keyCode === 69) setView((prev) => !prev) // E key
     }
+
     window.addEventListener('keydown', handleKeyDown)
     return () => {
       window.removeEventListener('keydown', handleKeyDown)
     }
   }, [nextVideo, prevVideo])
+
+  useEffect(() => {
+    const timerA = setTimeout(() => {
+      if (buttonControlsRef.current) buttonControlsRef.current.classList.add('opacity-50')
+    }, 4000)
+
+    const timerB = setTimeout(() => {
+      if (buttonControlsRef.current) buttonControlsRef.current.classList.remove('opacity-50')
+      if (buttonControlsRef.current) buttonControlsRef.current.classList.add('opacity-0')
+    }, 8000)
+
+    return () => {
+      clearTimeout(timerA)
+      clearTimeout(timerB)
+    }
+  }, [])
 
   return view ? (
     // unfocused view
@@ -133,7 +156,8 @@ export default function Casino() {
                 ) : null}
                 <DeleteCookiesButton />
                 <FocusViewToggler hook={[view, setView]} />
-                <ReshuffleButton shuffle={shuffleVideos} />
+                <VideoOrderToggler hook={[shuffled, setShuffled]} />
+                <ReshuffleButton hook={[shuffled, setShuffled]} shuffle={shuffleVideos} />
                 <AutoplayToggler hook={[autoplay, setAutoplay]} />
                 {limitedAccess ? null : <MuteToggler hook={[muted, setMuted]} />}
               </div>
@@ -191,8 +215,10 @@ export default function Casino() {
   ) : (
     // focused view
     <main className="relative h-screen">
-      {/* Buttons for Focused View */}
-      <div className="absolute left-0 top-0 z-50 flex items-center gap-x-2 self-end bg-white bg-opacity-70 p-3 text-gray-800 transition hover:bg-opacity-100 dark:bg-slate-800 dark:text-white lg:p-4">
+      <div
+        ref={buttonControlsRef}
+        className="absolute left-0 top-0 z-50 flex max-w-[38%] flex-wrap items-center gap-2 self-end rounded-br bg-white p-3 text-gray-800 transition-opacity duration-[2000] hover:opacity-100 dark:bg-slate-800 dark:text-white lg:max-w-full lg:flex-row lg:p-4"
+      >
         <FocusViewToggler hook={[view, setView]} />
         <AutoplayToggler hook={[autoplay, setAutoplay]} />
         {limitedAccess ? null : <MuteToggler hook={[muted, setMuted]} />}
@@ -204,7 +230,7 @@ export default function Casino() {
           title="Go to the previous highlight (or press the left arrow key)"
           className="transition hover:opacity-80 disabled:cursor-not-allowed disabled:opacity-25"
         >
-          <ChevronDoubleLeftIcon className="inline-flex h-6 w-6 lg:h-7 lg:w-7" />
+          <ChevronDoubleLeftIcon className="inline-flex h-5 w-5 lg:h-6 lg:w-6" />
         </button>
         <button
           onClick={nextVideo}
@@ -212,10 +238,12 @@ export default function Casino() {
           title="Go to the next highlight (or press the right arrow key)"
           className="transition hover:opacity-80 disabled:cursor-not-allowed disabled:opacity-25"
         >
-          <ChevronDoubleRightIcon className="inline-flex h-6 w-6 lg:h-7 lg:w-7" />
+          <ChevronDoubleRightIcon className="inline-flex h-5 w-5 lg:h-6 lg:w-6" />
         </button>
-        <KeyUsageNotification />
+        <KeyboardUsageButton showHook={[showInstructions, setShowInstructions]} />
       </div>
+
+      <KeyboardUsageInstructions showHook={[showInstructions, setShowInstructions]} />
 
       <div className="relative w-full">
         {limitedAccess ? <InvisbleTopLayer /> : null}

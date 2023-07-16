@@ -52,10 +52,10 @@ export default function ShareVideo({ video }: Props) {
         <ClipboardDocumentCheckIcon
           fillRule="evenodd"
           strokeWidth="1.5"
-          className="h-6 w-6 lg:h-7 lg:w-7"
+          className="h-5 w-5 lg:h-6 lg:w-6"
         />
       ) : (
-        <ClipboardIcon fillRule="evenodd" strokeWidth="1.5" className="h-6 w-6 lg:h-7 lg:w-7" />
+        <ClipboardIcon fillRule="evenodd" strokeWidth="1.5" className="h-5 w-5 lg:h-6 lg:w-6" />
       )}
     </button>
   )

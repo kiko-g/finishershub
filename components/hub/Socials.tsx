@@ -21,7 +21,7 @@ export default function Socials({}: Props) {
               className={`transition ${social.label}`}
             >
               <svg
-                className="h-6 w-6 md:h-7 md:w-7"
+                className="h-5 w-5 lg:h-6 lg:w-6"
                 fill="currentColor"
                 viewBox={social.viewBox ? social.viewBox : '0 0 24 24'}
                 aria-hidden="true"

@@ -17,7 +17,7 @@ export default function ShuffleToggler({ hook }: Props) {
           className="transition hover:opacity-80"
           onClick={() => setIsShuffled(false)}
         >
-          <ShuffleIcon className="h-6 w-6 lg:h-7 lg:w-7" />
+          <ShuffleIcon className="h-5 w-5 lg:h-6 lg:w-6" />
         </button>
       ) : (
         <button
@@ -25,7 +25,7 @@ export default function ShuffleToggler({ hook }: Props) {
           className="transition hover:opacity-80"
           onClick={() => setIsShuffled(true)}
         >
-          <ArrowsRightLeftIcon className="h-6 w-6 lg:h-7 lg:w-7" />
+          <ArrowsRightLeftIcon className="h-5 w-5 lg:h-6 lg:w-6" />
         </button>
       )}
     </div>

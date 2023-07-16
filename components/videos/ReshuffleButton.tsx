@@ -1,11 +1,13 @@
-import React, { useState } from 'react'
+import React, { Dispatch, SetStateAction, useState } from 'react'
 import { ArrowPathRoundedSquareIcon } from '@heroicons/react/24/outline'
 
 type Props = {
   shuffle: Function
+  hook: [boolean, Dispatch<SetStateAction<boolean>>]
 }
 
-export default function ReshuffleButton({ shuffle }: Props) {
+export default function ReshuffleButton({ shuffle, hook }: Props) {
+  const [shuffled, setShuffled] = hook
   const [shuffling, setShuffling] = useState(false)
 
   const shuffleAction = () => {
@@ -38,11 +40,12 @@ export default function ReshuffleButton({ shuffle }: Props) {
         </button>
       ) : (
         <button
+          disabled={!shuffled}
           title="Shuffle all videos"
-          className="transition hover:opacity-80"
+          className="transition hover:opacity-80 disabled:cursor-not-allowed disabled:opacity-25"
           onClick={shuffleAction}
         >
-          <ArrowPathRoundedSquareIcon className="h-6 w-6 lg:h-7 lg:w-7" />
+          <ArrowPathRoundedSquareIcon className="h-5 w-5 lg:h-6 lg:w-6" />
         </button>
       )}
     </div>
