@@ -27,6 +27,7 @@ export default function CasinoPage() {
   const [accessDenied, setAccessDenied] = useAccessDenied()
   const [muted, setMuted] = useState<boolean>(true)
   const [autoplay, setAutoplay] = useState<boolean>(true)
+  const [shuffled, setShuffled] = useState<boolean>(true)
 
   const limitedAccess = useMemo(() => sensitive && accessDenied, [sensitive, accessDenied])
   const toastType = useMemo(() => {
@@ -100,7 +101,8 @@ export default function CasinoPage() {
                   <AccessModal lockedHook={[accessDenied, setAccessDenied]} />
                 ) : null}
                 <DeleteCookiesButton />
-                <ReshuffleButton shuffle={shuffleAndSetVideos} />
+
+                <ReshuffleButton hook={[shuffled, setShuffled]} shuffle={shuffleAndSetVideos} />
                 <AutoplayToggler hook={[autoplay, setAutoplay]} />
                 {limitedAccess ? null : <MuteToggler hook={[muted, setMuted]} />}
               </div>
