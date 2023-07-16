@@ -31,6 +31,7 @@ export default function IndexPage() {
   const [view, setView] = useState<boolean>(true)
   const [muted, setMuted] = useState<boolean>(true)
   const [autoplay, setAutoplay] = useState<boolean>(false)
+  const [shuffled, setShuffled] = useState<boolean>(true)
   const [clipsShown, setClipsShown] = useState<number>(isMobile ? 1 : view ? 2 : 3)
   const [showMoreCount, setShowMoreCount] = useState<number>(0)
 
@@ -106,7 +107,7 @@ export default function IndexPage() {
             <div className="flex items-center justify-end gap-x-2">
               {limitedAccess ? <AccessModal lockedHook={[accessDenied, setAccessDenied]} /> : null}
               <DeleteCookiesButton />
-              <ReshuffleButton shuffle={shuffleAndSetVideos} />
+              <ReshuffleButton hook={[shuffled, setShuffled]} shuffle={shuffleAndSetVideos} />
               <AutoplayToggler hook={[autoplay, setAutoplay]} />
               {limitedAccess ? null : <MuteToggler hook={[muted, setMuted]} />}
               <ViewToggler hook={[view, setView]} />
