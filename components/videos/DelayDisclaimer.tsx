@@ -36,7 +36,7 @@ export default function DelayDisclaimer({ type }: Props) {
           : ``,
         type === undefined || type === ''
           ? `border-primary/90 bg-primary/80 dark:border-secondary/40 dark:bg-secondary/40`
-          : ``
+          : ``,
       )}
     >
       <div className="flex w-full items-center justify-between">

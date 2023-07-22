@@ -54,7 +54,7 @@ export default function Casino() {
   const video = useMemo(() => videos[index], [index, videos])
   const ready = useMemo(
     () => !loading && !fetchError && video.url !== undefined,
-    [loading, fetchError, video]
+    [loading, fetchError, video],
   )
 
   const toastType = useMemo(() => {

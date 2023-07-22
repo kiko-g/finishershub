@@ -19,8 +19,8 @@ export default function Registry() {
   const updateMembers = (newEntry: FinishersClubMember) => {
     setMembers(
       members.map((oldEntry: FinishersClubMember) =>
-        oldEntry._id === newEntry._id ? newEntry : oldEntry
-      )
+        oldEntry._id === newEntry._id ? newEntry : oldEntry,
+      ),
     )
   }
 

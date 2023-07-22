@@ -43,7 +43,7 @@ export default function DarkModeSwitch({}: Props) {
             '[@media(prefers-color-scheme:dark)]:stroke-orange-400',
             'group-hover:fill-orange-400',
             '[@media(prefers-color-scheme:dark)]:group-hover:fill-orange-200',
-            '[@media(prefers-color-scheme:dark)]:group-hover:stroke-orange-400'
+            '[@media(prefers-color-scheme:dark)]:group-hover:stroke-orange-400',
           )}
         >
           <path d="M8 12.25A4.25 4.25 0 0 1 12.25 8v0a4.25 4.25 0 0 1 4.25 4.25v0a4.25 4.25 0 0 1-4.25 4.25v0A4.25 4.25 0 0 1 8 12.25v0Z"></path>
@@ -64,7 +64,7 @@ export default function DarkModeSwitch({}: Props) {
             '[@media(prefers-color-scheme:dark)]:stroke-blue-400',
             'group-hover:fill-blue-400',
             '[@media(prefers-color-scheme:dark)]:group-hover:fill-blue-50',
-            '[@media(prefers-color-scheme:dark)]:group-hover:stroke-blue-400'
+            '[@media(prefers-color-scheme:dark)]:group-hover:stroke-blue-400',
           )}
         >
           <path

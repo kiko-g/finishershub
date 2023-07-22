@@ -20,7 +20,7 @@ export default function MemberCard({ member, updateMembers }: Props) {
       { name: 'All' },
       ...member.finishers.map((count, index) => ({ name: `Warzone ${index + 1}` })),
     ],
-    [member]
+    [member],
   )
 
   const [locked, setLocked] = useLocked(member)
@@ -31,13 +31,13 @@ export default function MemberCard({ member, updateMembers }: Props) {
 
   const addFinisher = () => {
     RegistryAPI.incrementFinishers(member._id, arenaIndex - 1, (newEntry: FinishersClubMember) =>
-      updateMembers(newEntry)
+      updateMembers(newEntry),
     )
   }
 
   const removeFinisher = () => {
     RegistryAPI.decrementFinishers(member._id, arenaIndex - 1, (newEntry: FinishersClubMember) =>
-      updateMembers(newEntry)
+      updateMembers(newEntry),
     )
   }
 

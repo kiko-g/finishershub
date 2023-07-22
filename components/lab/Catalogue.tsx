@@ -11,7 +11,7 @@ export default function Catalogue({}: Props) {
   const ready = useMemo(() => headers.length > 0 && catalogue.length > 0, [headers, catalogue])
   const catalogueFiltered = useMemo(
     () => catalogue.filter((item) => strIncludes(item[0] as string, filteredName)),
-    [catalogue, filteredName]
+    [catalogue, filteredName],
   )
 
   useEffect(() => {

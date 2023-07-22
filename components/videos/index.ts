@@ -30,16 +30,19 @@ export {
   FilterVideos,
   FocusViewToggler,
   KeyboardUsageButton,
-  KeyboardUsageInstructions, MinimizeButtonControls, MuteToggler,
+  KeyboardUsageInstructions,
+  MinimizeButtonControls,
+  MuteToggler,
   PopOpenVideo,
   ReshuffleButton,
   ShareVideo,
   SingleVideoShowcase,
   TwitchVideoClip,
   UsageDisclaimer,
-  VideoNotFound, VideoOrderToggler, VideoPage,
+  VideoNotFound,
+  VideoOrderToggler,
+  VideoPage,
   VideoPlayer,
   VideoSkeleton,
-  ViewToggler
+  ViewToggler,
 }
-

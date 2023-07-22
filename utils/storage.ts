@@ -5,7 +5,7 @@ const resetCookies = () => {
       (cookie) =>
         (document.cookie = cookie
           .replace(/^ +/, '')
-          .replace(/=.*/, `=;expires=${new Date(0).toUTCString()};path=/`))
+          .replace(/=.*/, `=;expires=${new Date(0).toUTCString()};path=/`)),
     )
 }
 

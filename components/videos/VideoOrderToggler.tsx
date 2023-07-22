@@ -29,7 +29,7 @@ export default function VideoOrderToggler({ hook }: Props) {
         title={shuffle ? 'Turn shuffle off' : 'Turn shuffle on'}
         className={classNames(
           'transition hover:opacity-80',
-          shuffle ? 'text-primary dark:text-secondary' : 'text-gray-800 dark:text-white'
+          shuffle ? 'text-primary dark:text-secondary' : 'text-gray-800 dark:text-white',
         )}
         onClick={toggleShuffle}
       >

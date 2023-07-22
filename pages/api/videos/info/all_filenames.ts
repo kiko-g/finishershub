@@ -16,7 +16,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
     }
 
     const filenames = response.Contents.sort((a, b) =>
-      a.LastModified! < b.LastModified! ? -1 : 1
+      a.LastModified! < b.LastModified! ? -1 : 1,
     ).map((item) => item.Key)
 
     res.status(200).json(filenames)

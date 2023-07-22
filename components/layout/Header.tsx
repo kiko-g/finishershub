@@ -267,7 +267,7 @@ function Mobile({ location }: MobileProps) {
               </span>
             </button>
           </Link>
-        ) : null
+        ) : null,
       )}
       <div className="relative flex h-auto items-center justify-end gap-x-4 border-t border-primary/25 pt-4 dark:border-secondary/25">
         {socials.map((social, socialIdx) =>
@@ -296,7 +296,7 @@ function Mobile({ location }: MobileProps) {
                 ))}
               </svg>
             </Link>
-          ) : null
+          ) : null,
         )}
       </div>
     </Disclosure.Panel>

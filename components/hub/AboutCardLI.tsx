@@ -12,7 +12,7 @@ export default function AboutCardLI({ children, emoji, extraClassNames = '' }: P
     <li
       className={classNames(
         extraClassNames,
-        `rounded border-2 border-slate-400 bg-white/80 px-4 py-4 hover:border-primary dark:border-slate-800 dark:bg-slate-800/75 dark:hover:border-white`
+        `rounded border-2 border-slate-400 bg-white/80 px-4 py-4 hover:border-primary dark:border-slate-800 dark:bg-slate-800/75 dark:hover:border-white`,
       )}
     >
       <p>

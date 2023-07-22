@@ -162,7 +162,7 @@ export default function CreatePage() {
                                         active
                                           ? `bg-primary/20 text-primary dark:bg-secondary/50 
                                         dark:text-white`
-                                          : ``
+                                          : ``,
                                       )
                                     }
                                     value={member}

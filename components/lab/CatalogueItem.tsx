@@ -57,7 +57,7 @@ export default function CatalogueItem({ item, chosen, setChosen }: Props) {
           'flex cursor-pointer flex-wrap items-start justify-center gap-3 rounded border p-3 xl:flex-nowrap',
           isChosen
             ? 'border-pink-600 bg-rose-600/10 hover:bg-rose-600/5 dark:bg-pink-600/40 dark:hover:bg-pink-600/25'
-            : 'border-gray-300 bg-white hover:border-primary hover:bg-primary/10 dark:border-secondary/20 dark:bg-secondary/10 dark:hover:border-secondary dark:hover:bg-secondary/20'
+            : 'border-gray-300 bg-white hover:border-primary hover:bg-primary/10 dark:border-secondary/20 dark:bg-secondary/10 dark:hover:border-secondary dark:hover:bg-secondary/20',
         )}
       >
         {item.video ? (
@@ -99,7 +99,7 @@ export default function CatalogueItem({ item, chosen, setChosen }: Props) {
                       ? 'bg-teal-500'
                       : speedText === 'Ok'
                       ? 'bg-amber-500'
-                      : 'bg-rose-600'
+                      : 'bg-rose-600',
                   )}
                 >
                   {speedText}
@@ -128,7 +128,7 @@ export default function CatalogueItem({ item, chosen, setChosen }: Props) {
                   ? 'bg-amber-500'
                   : ledgeDangerText === 'D'
                   ? 'bg-orange-500'
-                  : 'bg-rose-600'
+                  : 'bg-rose-600',
               )}
             >
               <span className="h-4 w-4 text-center text-xs font-normal text-white">
@@ -147,7 +147,7 @@ export default function CatalogueItem({ item, chosen, setChosen }: Props) {
                   ? 'bg-amber-500'
                   : slipperyText === 'D'
                   ? 'bg-orange-500'
-                  : 'bg-rose-600'
+                  : 'bg-rose-600',
               )}
             >
               <span className="h-4 w-4 text-center text-xs font-normal text-white">
@@ -162,7 +162,7 @@ export default function CatalogueItem({ item, chosen, setChosen }: Props) {
                   ? 'bg-teal-500'
                   : item.accurate === 'Almost'
                   ? 'bg-amber-500'
-                  : 'bg-rose-600'
+                  : 'bg-rose-600',
               )}
             >
               {<BoltIcon className="h-3.5 w-3.5 text-white" />}
@@ -175,7 +175,7 @@ export default function CatalogueItem({ item, chosen, setChosen }: Props) {
                   ? 'bg-teal-500'
                   : item.unlocked === 'Almost'
                   ? 'bg-amber-500'
-                  : 'bg-rose-600'
+                  : 'bg-rose-600',
               )}
             >
               {<LockClosedIcon className="h-3.5 w-3.5 text-white" />}
@@ -240,7 +240,7 @@ export default function CatalogueItem({ item, chosen, setChosen }: Props) {
                             ? 'bg-teal-500'
                             : item.accurate === 'Almost'
                             ? 'bg-amber-500'
-                            : 'bg-rose-600'
+                            : 'bg-rose-600',
                         )}
                       >
                         <span>Accuracy</span>
@@ -254,7 +254,7 @@ export default function CatalogueItem({ item, chosen, setChosen }: Props) {
                             ? 'bg-teal-500'
                             : item.unlocked === 'Almost'
                             ? 'bg-amber-500'
-                            : 'bg-rose-600'
+                            : 'bg-rose-600',
                         )}
                       >
                         <span>{item.unlocked === 'Yes' ? 'Unlocked' : 'Locked'}</span>
@@ -270,7 +270,7 @@ export default function CatalogueItem({ item, chosen, setChosen }: Props) {
                             ? 'bg-teal-500'
                             : speedText === 'Ok'
                             ? 'bg-amber-500'
-                            : 'bg-rose-600'
+                            : 'bg-rose-600',
                         )}
                       >
                         {speedText}

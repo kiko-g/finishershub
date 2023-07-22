@@ -13,7 +13,7 @@ const schema = new Schema(
   },
   {
     collection: 'Registry',
-  }
+  },
 )
 
 const Model = model('Registry', schema)

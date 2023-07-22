@@ -123,7 +123,7 @@ export default function IndexPage() {
           className={classNames(
             'relative',
             view ? 'lg:grid-cols-2' : 'lg:grid-cols-3',
-            'grid grid-cols-1 gap-6 md:mt-0 md:gap-5'
+            'grid grid-cols-1 gap-6 md:mt-0 md:gap-5',
           )}
         >
           {limitedAccess ? <InvisbleTopLayer /> : null}
@@ -161,7 +161,7 @@ export default function IndexPage() {
               py-2 text-white shadow-sm transition hover:bg-primary 
               hover:bg-primary/90 focus:border-transparent focus:ring-2 
               focus:ring-primary focus:ring-offset-2 dark:border-transparent dark:bg-secondary/50 
-              dark:hover:bg-secondary/80 dark:focus:ring-secondary dark:focus:ring-offset-2`
+              dark:hover:bg-secondary/80 dark:focus:ring-secondary dark:focus:ring-offset-2`,
             )}
           >
             <PlusIcon className="-ml-1 mr-2 h-5 w-5" aria-hidden="true" />

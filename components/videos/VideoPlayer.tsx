@@ -24,7 +24,7 @@ export default function VideoPlayer({ video, play = false, muted = true, special
     <div
       className={classNames(
         'group relative z-20',
-        special ? 'h-screen bg-black' : 'rounded bg-primary/50 dark:bg-secondary/50'
+        special ? 'h-screen bg-black' : 'rounded bg-primary/50 dark:bg-secondary/50',
       )}
     >
       <div className={classNames(slide ? 'animate-pulse-500' : '')}>
@@ -36,7 +36,7 @@ export default function VideoPlayer({ video, play = false, muted = true, special
           preload="auto"
           className={classNames(
             'h-full w-full bg-primary/10 shadow dark:bg-secondary/10',
-            special ? 'h-screen' : 'rounded'
+            special ? 'h-screen' : 'rounded',
           )}
         >
           <source src={video.url} type="video/mp4" />
