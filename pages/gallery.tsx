@@ -31,7 +31,7 @@ export default function Gallery() {
   const [fetchError, setFetchError] = useState<boolean>(false)
 
   const [videos, setVideos] = useState<VideoType[]>([])
-  const [filter, setFilter] = useState<FilterType>(arenas[arenas.length - 1])
+  const [filter, setFilter] = useState<FilterType>(arenas[0]) // use all
   const [accessDenied, setAccessDenied] = useAccessDenied()
   const [view, setView] = useState<boolean>(false)
   const [muted, setMuted] = useState<boolean>(true)
@@ -134,7 +134,7 @@ export default function Gallery() {
               <DeleteCookiesButton />
               <ReshuffleButton hook={[shuffled, setShuffled]} shuffle={shuffleVideos} />
               <AutoplayToggler hook={[autoplay, setAutoplay]} />
-              {limitedAccess ? null : <MuteToggler hook={[muted, setMuted]} />}
+              <MuteToggler hook={[muted, setMuted]} limitedAccess={limitedAccess} />
               <ViewToggler hook={[view, setView]} />
             </div>
             <FilterVideos arenas={arenas} pickedHook={[filter, setFilter]} />
@@ -152,14 +152,13 @@ export default function Gallery() {
             'grid grid-cols-1 gap-6 md:mt-0 md:gap-5',
           )}
         >
-          {limitedAccess ? <InvisbleTopLayer /> : null}
           {videos.length > 0
             ? videos
                 .slice(0, clipsShown)
                 .map((video: VideoType, videoIdx: number) => (
                   <VideoPlayer
                     video={video}
-                    play={autoplay}
+                    autoplay={autoplay}
                     muted={muted}
                     key={`video-gallery-${video.index}`}
                   />

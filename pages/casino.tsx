@@ -4,30 +4,25 @@ import useAccessDenied from '../hooks/useAccessDenied'
 import { shuffle } from '../utils'
 import { Layout, AccessModal, InvisbleTopLayer } from '../components/layout'
 import { FullAccessBadge, LimitedAccessBadge } from '../components/utils'
-import {
-  ArrowLongLeftIcon,
-  ArrowLongRightIcon,
-  ChevronDoubleLeftIcon,
-  ChevronDoubleRightIcon,
-  EyeIcon,
-  EyeSlashIcon,
-} from '@heroicons/react/24/outline'
+import { ArrowLongLeftIcon, ArrowLongRightIcon } from '@heroicons/react/24/outline'
 import {
   AutoplayToggler,
-  MuteToggler,
-  UsageDisclaimer,
-  ReshuffleButton,
   DeleteCookiesButton,
+  FilterVideos,
+  FocusViewToggler,
+  KeyboardUsageButton,
+  KeyboardUsageInstructions,
+  MuteToggler,
+  NextVideo,
+  PopOpenVideo,
+  PreviousVideo,
+  ReshuffleButton,
+  ShareVideo,
+  UsageDisclaimer,
+  VideoNotFound,
+  VideoOrderToggler,
   VideoPlayer,
   VideoSkeleton,
-  FilterVideos,
-  VideoNotFound,
-  FocusViewToggler,
-  PopOpenVideo,
-  ShareVideo,
-  KeyboardUsageInstructions,
-  KeyboardUsageButton,
-  VideoOrderToggler,
 } from '../components/videos'
 
 export default function Casino() {
@@ -105,14 +100,14 @@ export default function Casino() {
     const handleKeyDown = (event: any) => {
       if (event.keyCode === 39) nextVideo() // right arrow
       if (event.keyCode === 37) prevVideo() // left arrow
-      if (event.keyCode === 69) setView((prev) => !prev) // E key
+      if (event.keyCode === 69 && limitedAccess === false) setView((prev) => !prev) // e key
     }
 
     window.addEventListener('keydown', handleKeyDown)
     return () => {
       window.removeEventListener('keydown', handleKeyDown)
     }
-  }, [nextVideo, prevVideo])
+  }, [nextVideo, prevVideo, limitedAccess])
 
   useEffect(() => {
     const timerA = setTimeout(() => {
@@ -159,7 +154,7 @@ export default function Casino() {
                 <VideoOrderToggler hook={[shuffled, setShuffled]} />
                 <ReshuffleButton hook={[shuffled, setShuffled]} shuffle={shuffleVideos} />
                 <AutoplayToggler hook={[autoplay, setAutoplay]} />
-                {limitedAccess ? null : <MuteToggler hook={[muted, setMuted]} />}
+                <MuteToggler hook={[muted, setMuted]} limitedAccess={limitedAccess} />
               </div>
               <FilterVideos arenas={arenas} pickedHook={[filter, setFilter]} />
             </div>
@@ -169,11 +164,10 @@ export default function Casino() {
 
           {/* Video */}
           <div className="relative w-full">
-            {limitedAccess ? <InvisbleTopLayer /> : null}
             {ready ? (
               <VideoPlayer
                 video={video}
-                play={autoplay}
+                autoplay={autoplay}
                 muted={muted}
                 key={`video-element-${video.index}`}
               />
@@ -214,43 +208,28 @@ export default function Casino() {
     </Layout>
   ) : (
     // focused view
-    <main className="relative h-screen">
+    <main className="group relative h-screen">
       <div
         ref={buttonControlsRef}
-        className="absolute left-0 top-0 z-50 flex max-w-[38%] flex-wrap items-center gap-2 self-end rounded-br bg-white p-3 text-gray-800 transition-opacity duration-[2000] hover:opacity-100 dark:bg-slate-800 dark:text-white lg:max-w-full lg:flex-row lg:p-4"
+        className="absolute right-2 bottom-2 z-50 flex opacity-0 max-w-[38%] flex-wrap flex-row items-center gap-2 self-end rounded-br bg-white p-3 text-gray-800 transition-opacity duration-[2000] group-hover:opacity-100 dark:bg-slate-800 dark:text-white lg:max-w-full lg:flex-col lg:p-4"
       >
-        <FocusViewToggler hook={[view, setView]} />
-        <AutoplayToggler hook={[autoplay, setAutoplay]} />
-        {limitedAccess ? null : <MuteToggler hook={[muted, setMuted]} />}
-        <ShareVideo video={video} />
-        <PopOpenVideo video={video} />
-        <button
-          onClick={prevVideo}
-          disabled={index === 0}
-          title="Go to the previous highlight (or press the left arrow key)"
-          className="transition hover:opacity-80 disabled:cursor-not-allowed disabled:opacity-25"
-        >
-          <ChevronDoubleLeftIcon className="inline-flex h-5 w-5 lg:h-6 lg:w-6" />
-        </button>
-        <button
-          onClick={nextVideo}
-          disabled={index === videos.length - 1}
-          title="Go to the next highlight (or press the right arrow key)"
-          className="transition hover:opacity-80 disabled:cursor-not-allowed disabled:opacity-25"
-        >
-          <ChevronDoubleRightIcon className="inline-flex h-5 w-5 lg:h-6 lg:w-6" />
-        </button>
-        <KeyboardUsageButton showHook={[showInstructions, setShowInstructions]} />
+        <FocusViewToggler hook={[view, setView]} size="md" />
+        <AutoplayToggler hook={[autoplay, setAutoplay]} size="md" />
+        <MuteToggler hook={[muted, setMuted]} size="md" limitedAccess={limitedAccess} />
+        <ShareVideo video={video} size="md" />
+        <PopOpenVideo video={video} size="md" />
+        <PreviousVideo prevVideo={prevVideo} disabled={index === 0} size="md" />
+        <NextVideo nextVideo={nextVideo} disabled={index === videos.length - 1} size="md" />
+        <KeyboardUsageButton showHook={[showInstructions, setShowInstructions]} size="md" />
       </div>
 
       <KeyboardUsageInstructions showHook={[showInstructions, setShowInstructions]} />
 
       <div className="relative w-full">
-        {limitedAccess ? <InvisbleTopLayer /> : null}
         {ready ? (
           <VideoPlayer
             video={video}
-            play={autoplay}
+            autoplay={autoplay}
             muted={muted}
             special={true}
             key={`video-element-${video.index}`}

@@ -61,7 +61,7 @@ export default function AccessModal({ lockedHook, startOpen }: Props) {
 
       {/* Modal */}
       <Transition appear show={isOpen} as={Fragment}>
-        <Dialog as="div" className="relative z-50" onClose={closeModal}>
+        <Dialog as="div" className="relative" onClose={closeModal}>
           <Transition.Child
             as={Fragment}
             enter="ease-out duration-300"
@@ -74,7 +74,7 @@ export default function AccessModal({ lockedHook, startOpen }: Props) {
             <div className="fixed inset-0 bg-black/80 backdrop-blur dark:bg-white/5" />
           </Transition.Child>
 
-          <div className="fixed inset-0 overflow-y-auto">
+          <div className="fixed inset-0 overflow-y-auto z-[999]">
             <div className="flex min-h-full items-center justify-center p-4 text-center">
               <Transition.Child
                 as={Fragment}
@@ -107,12 +107,12 @@ export default function AccessModal({ lockedHook, startOpen }: Props) {
                       <p>Enter the codephrase to prove you are worthy of viewing the content.</p>
                       <ul className="ml-3 mt-2 flex list-disc flex-col gap-y-0.5 lg:ml-4 lg:mt-1">
                         <li>
-                          You can <strong>close the modal</strong> and have{' '}
+                          <strong>Close the modal</strong> and have{' '}
                           <span className="text-amber-600">limited access</span> to the site.
                         </li>
                         <li>
-                          Tou can click the <span className="text-teal-500">green key</span> to
-                          reopen the modal.
+                          Click the <span className="text-teal-500">green key</span> to reopen the
+                          modal.
                         </li>
                         <li>
                           <strong className="underline">Hints</strong>:{' '}

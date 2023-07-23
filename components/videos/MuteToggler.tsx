@@ -1,10 +1,13 @@
+import classNames from 'classnames'
 import React, { Dispatch, SetStateAction, useCallback, useEffect } from 'react'
 
 type Props = {
   hook: [boolean, Dispatch<SetStateAction<boolean>>]
+  size?: 'sm' | 'md' | 'lg' | 'xl'
+  limitedAccess?: boolean
 }
 
-export default function MuteToggler({ hook }: Props) {
+export default function MuteToggler({ hook, size = 'sm', limitedAccess = true }: Props) {
   const [mute, setMuted] = hook
 
   const toggleMute = useCallback(() => {
@@ -13,10 +16,7 @@ export default function MuteToggler({ hook }: Props) {
 
   useEffect(() => {
     const handleKeyDown = (event: any) => {
-      if (event.keyCode === 77) {
-        // M key
-        toggleMute()
-      }
+      if (event.keyCode === 77) toggleMute()
     }
     window.addEventListener('keydown', handleKeyDown)
     return () => {
@@ -28,17 +28,23 @@ export default function MuteToggler({ hook }: Props) {
     <div className="flex items-end justify-center space-x-2">
       {mute ? (
         <button
+          disabled={limitedAccess}
           title="Turn default mute off (or press M)"
-          className="transition hover:opacity-80"
+          className="transition hover:opacity-80 disabled:cursor-not-allowed disabled:opacity-25"
           onClick={() => setMuted(false)}
         >
           <svg
             xmlns="http://www.w3.org/2000/svg"
-            className="h-5 w-5 lg:h-6 lg:w-6"
             fill="none"
             viewBox="0 0 24 24"
             stroke="currentColor"
             strokeWidth="1.5"
+            className={classNames(
+              size === 'sm' ? 'h-5 w-5 lg:h-6 lg:w-6' : '',
+              size === 'md' ? 'h-6 w-6 lg:h-7 lg:w-7' : '',
+              size === 'lg' ? 'h-7 w-7 lg:h-8 lg:w-8' : '',
+              size === 'xl' ? 'h-9 w-9 lg:h-10 lg:w-10' : '',
+            )}
           >
             <path
               strokeLinecap="round"
@@ -55,17 +61,23 @@ export default function MuteToggler({ hook }: Props) {
         </button>
       ) : (
         <button
+          disabled={limitedAccess}
           title="Turn default mute on"
-          className="transition hover:opacity-80"
+          className="transition hover:opacity-80 disabled:cursor-not-allowed disabled:opacity-25"
           onClick={() => setMuted(true)}
         >
           <svg
             xmlns="http://www.w3.org/2000/svg"
-            className="h-5 w-5 lg:h-6 lg:w-6"
             fill="none"
             viewBox="0 0 24 24"
             stroke="currentColor"
             strokeWidth="1.5"
+            className={classNames(
+              size === 'sm' ? 'h-5 w-5 lg:h-6 lg:w-6' : '',
+              size === 'md' ? 'h-6 w-6 lg:h-7 lg:w-7' : '',
+              size === 'lg' ? 'h-7 w-7 lg:h-8 lg:w-8' : '',
+              size === 'xl' ? 'h-9 w-9 lg:h-10 lg:w-10' : '',
+            )}
           >
             <path
               strokeLinecap="round"

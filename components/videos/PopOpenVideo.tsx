@@ -7,10 +7,10 @@ import classNames from 'classnames'
 
 type Props = {
   video: VideoType
-  alt?: boolean
+  size?: 'sm' | 'md' | 'lg' | 'xl'
 }
 
-export default function PopOpenVideo({ video, alt = false }: Props) {
+export default function PopOpenVideo({ video, size = 'sm' }: Props) {
   const [url, setUrl] = React.useState<string>('')
 
   useEffect(() => {
@@ -43,7 +43,12 @@ export default function PopOpenVideo({ video, alt = false }: Props) {
       <ArrowTopRightOnSquareIcon
         fillRule="evenodd"
         strokeWidth="1.5"
-        className={classNames(alt ? 'h-7 w-7 lg:h-8 lg:w-8' : 'h-5 w-5 lg:h-6 lg:w-6')}
+        className={classNames(
+          size === 'sm' ? 'h-5 w-5 lg:h-6 lg:w-6' : '',
+          size === 'md' ? 'h-6 w-6 lg:h-7 lg:w-7' : '',
+          size === 'lg' ? 'h-7 w-7 lg:h-8 lg:w-8' : '',
+          size === 'xl' ? 'h-9 w-9 lg:h-10 lg:w-10' : '',
+        )}
       />
     </Link>
   )

@@ -1,10 +1,12 @@
 import { useCallback, useEffect } from 'react'
 import { InformationCircleIcon } from '@heroicons/react/24/outline'
+import classNames from 'classnames'
 
 type Props = {
   showHook: [boolean, React.Dispatch<React.SetStateAction<boolean>>]
+  size?: 'sm' | 'md' | 'lg' | 'xl'
 }
-export default function KeyboardUsageButton({ showHook }: Props) {
+export default function KeyboardUsageButton({ showHook, size = 'sm' }: Props) {
   const [show, setShow] = showHook
 
   const toggleShow = useCallback(() => {
@@ -17,9 +19,7 @@ export default function KeyboardUsageButton({ showHook }: Props) {
 
   useEffect(() => {
     const handleKeyDown = (event: any) => {
-      if (event.keyCode === 73) {
-        toggleShow() // I key
-      }
+      if (event.keyCode === 73) toggleShow() // I key
     }
     window.addEventListener('keydown', handleKeyDown)
     return () => {
@@ -29,7 +29,15 @@ export default function KeyboardUsageButton({ showHook }: Props) {
 
   return (
     <button onClick={() => setShow((prev) => !prev)} className="transition hover:opacity-80">
-      <InformationCircleIcon className="h-5 w-5 lg:h-6 lg:w-6" aria-hidden="true" />
+      <InformationCircleIcon
+        className={classNames(
+          size === 'sm' ? 'h-5 w-5 lg:h-6 lg:w-6' : '',
+          size === 'md' ? 'h-6 w-6 lg:h-7 lg:w-7' : '',
+          size === 'lg' ? 'h-7 w-7 lg:h-8 lg:w-8' : '',
+          size === 'xl' ? 'h-9 w-9 lg:h-10 lg:w-10' : '',
+        )}
+        aria-hidden="true"
+      />
     </button>
   )
 }

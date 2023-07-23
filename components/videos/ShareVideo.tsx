@@ -7,9 +7,10 @@ import { ClipboardDocumentCheckIcon } from '@heroicons/react/24/solid'
 
 type Props = {
   video: VideoType
+  size?: 'sm' | 'md' | 'lg' | 'xl'
 }
 
-export default function ShareVideo({ video }: Props) {
+export default function ShareVideo({ video, size = 'sm' }: Props) {
   const [copied, setCopied] = useState(false)
   const [url, setUrl] = React.useState<string>('')
 
@@ -52,10 +53,24 @@ export default function ShareVideo({ video }: Props) {
         <ClipboardDocumentCheckIcon
           fillRule="evenodd"
           strokeWidth="1.5"
-          className="h-5 w-5 lg:h-6 lg:w-6"
+          className={classNames(
+            size === 'sm' ? 'h-5 w-5 lg:h-6 lg:w-6' : '',
+            size === 'md' ? 'h-6 w-6 lg:h-7 lg:w-7' : '',
+            size === 'lg' ? 'h-7 w-7 lg:h-8 lg:w-8' : '',
+            size === 'xl' ? 'h-9 w-9 lg:h-10 lg:w-10' : '',
+          )}
         />
       ) : (
-        <ClipboardIcon fillRule="evenodd" strokeWidth="1.5" className="h-5 w-5 lg:h-6 lg:w-6" />
+        <ClipboardIcon
+          fillRule="evenodd"
+          strokeWidth="1.5"
+          className={classNames(
+            size === 'sm' ? 'h-5 w-5 lg:h-6 lg:w-6' : '',
+            size === 'md' ? 'h-6 w-6 lg:h-7 lg:w-7' : '',
+            size === 'lg' ? 'h-7 w-7 lg:h-8 lg:w-8' : '',
+            size === 'xl' ? 'h-9 w-9 lg:h-10 lg:w-10' : '',
+          )}
+        />
       )}
     </button>
   )

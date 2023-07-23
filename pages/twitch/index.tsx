@@ -109,7 +109,7 @@ export default function IndexPage() {
               <DeleteCookiesButton />
               <ReshuffleButton hook={[shuffled, setShuffled]} shuffle={shuffleAndSetVideos} />
               <AutoplayToggler hook={[autoplay, setAutoplay]} />
-              {limitedAccess ? null : <MuteToggler hook={[muted, setMuted]} />}
+              <MuteToggler hook={[muted, setMuted]} limitedAccess={limitedAccess} />
               <ViewToggler hook={[view, setView]} />
             </div>
           </div>

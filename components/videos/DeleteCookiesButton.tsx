@@ -15,7 +15,7 @@ export default function DeleteCookiesButton({}: Props) {
   }
 
   return (
-    <div className="flex items-end justify-center space-x-2 text-orange-500 dark:text-orange-400">
+    <div className="flex items-end justify-center space-x-2 text-orange-500 dark:text-orange-500">
       <button
         onClick={deleteData}
         title="Clear all cookies (helps if page does not load)"

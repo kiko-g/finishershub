@@ -9,7 +9,9 @@ import KeyboardUsageButton from './KeyboardUsageButton'
 import KeyboardUsageInstructions from './KeyboardUsageInstructions'
 import MinimizeButtonControls from './MinimizeButtonControls'
 import MuteToggler from './MuteToggler'
+import NextVideo from './NextVideo'
 import PopOpenVideo from './PopOpenVideo'
+import PreviousVideo from './PreviousVideo'
 import ReshuffleButton from './ReshuffleButton'
 import ShareVideo from './ShareVideo'
 import SingleVideoShowcase from './SingleVideoShowcase'
@@ -21,6 +23,7 @@ import VideoPage from './VideoPage'
 import VideoPlayer from './VideoPlayer'
 import VideoSkeleton from './VideoSkeleton'
 import ViewToggler from './ViewToggler'
+
 export {
   AutoplayToggler,
   DelayDisclaimer,
@@ -33,7 +36,9 @@ export {
   KeyboardUsageInstructions,
   MinimizeButtonControls,
   MuteToggler,
+  NextVideo,
   PopOpenVideo,
+  PreviousVideo,
   ReshuffleButton,
   ShareVideo,
   SingleVideoShowcase,

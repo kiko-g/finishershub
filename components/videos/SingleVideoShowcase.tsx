@@ -32,10 +32,9 @@ export default function SingleVideoShowcase({ video }: Props) {
         <VideoPlayer
           video={video}
           muted={muted}
-          play={autoplay}
+          autoplay={autoplay}
           key={`single-video-${video.url}`}
         />
-        {accessDenied ? <InvisbleTopLayer /> : null}
       </div>
 
       <div className="flex flex-wrap items-center justify-center gap-2 md:justify-between">

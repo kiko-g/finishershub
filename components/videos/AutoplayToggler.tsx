@@ -1,10 +1,12 @@
+import classNames from 'classnames'
 import React, { Dispatch, SetStateAction, useCallback, useEffect } from 'react'
 
 type Props = {
   hook: [boolean, Dispatch<SetStateAction<boolean>>]
+  size?: 'sm' | 'md' | 'lg' | 'xl'
 }
 
-export default function AutoplayToggler({ hook }: Props) {
+export default function AutoplayToggler({ hook, size = 'sm' }: Props) {
   const [autoplay, setAutoplay] = hook
 
   const toggleAutoplay = useCallback(() => {
@@ -13,10 +15,7 @@ export default function AutoplayToggler({ hook }: Props) {
 
   useEffect(() => {
     const handleKeyDown = (event: any) => {
-      if (event.keyCode === 75) {
-        // K key
-        toggleAutoplay()
-      }
+      if (event.keyCode === 75) toggleAutoplay() // K key
     }
     window.addEventListener('keydown', handleKeyDown)
     return () => {
@@ -34,9 +33,14 @@ export default function AutoplayToggler({ hook }: Props) {
         >
           <svg
             xmlns="http://www.w3.org/2000/svg"
-            className="h-5 w-5 lg:h-6 lg:w-6"
             viewBox="0 0 20 20"
             fill="currentColor"
+            className={classNames(
+              size === 'sm' ? 'h-5 w-5 lg:h-6 lg:w-6' : '',
+              size === 'md' ? 'h-6 w-6 lg:h-7 lg:w-7' : '',
+              size === 'lg' ? 'h-7 w-7 lg:h-8 lg:w-8' : '',
+              size === 'xl' ? 'h-9 w-9 lg:h-10 lg:w-10' : '',
+            )}
           >
             <path
               fillRule="evenodd"
@@ -53,11 +57,16 @@ export default function AutoplayToggler({ hook }: Props) {
         >
           <svg
             xmlns="http://www.w3.org/2000/svg"
-            className="h-5 w-5 lg:h-6 lg:w-6"
             fill="none"
             viewBox="0 0 24 24"
             stroke="currentColor"
             strokeWidth="1.5"
+            className={classNames(
+              size === 'sm' ? 'h-5 w-5 lg:h-6 lg:w-6' : '',
+              size === 'md' ? 'h-6 w-6 lg:h-7 lg:w-7' : '',
+              size === 'lg' ? 'h-7 w-7 lg:h-8 lg:w-8' : '',
+              size === 'xl' ? 'h-9 w-9 lg:h-10 lg:w-10' : '',
+            )}
           >
             <path
               strokeLinecap="round"
