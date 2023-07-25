@@ -24,6 +24,7 @@ import {
   VideoPlayer,
   VideoSkeleton,
 } from '../components/videos'
+import { useSwipeable } from 'react-swipeable'
 
 export default function Casino() {
   const buttonControlsRef = useRef<HTMLDivElement | null>(null)
@@ -64,6 +65,11 @@ export default function Casino() {
   const shuffleVideos = () => {
     setVideos((prev) => shuffle(prev))
   }
+
+  const handlers = useSwipeable({
+    onSwipedUp: () => prevVideo,
+    onSwiped: () => nextVideo,
+  })
 
   useEffect(() => {
     fetch(`/api/s3/${filter.value}`)
@@ -163,7 +169,7 @@ export default function Casino() {
           <UsageDisclaimer type={toastType} />
 
           {/* Video */}
-          <div className="relative w-full">
+          <div className="relative w-full" {...handlers}>
             {ready ? (
               <VideoPlayer
                 video={video}
@@ -225,7 +231,7 @@ export default function Casino() {
 
       <KeyboardUsageInstructions showHook={[showInstructions, setShowInstructions]} />
 
-      <div className="relative w-full">
+      <div className="relative w-full" {...handlers}>
         {ready ? (
           <VideoPlayer
             video={video}
