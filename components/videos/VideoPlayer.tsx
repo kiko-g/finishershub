@@ -48,7 +48,9 @@ export default function VideoPlayer(props: Props) {
     <div
       className={classNames(
         'group relative z-20',
-        special ? 'h-screen bg-black' : 'rounded bg-primary/50 dark:bg-secondary/50',
+        special
+          ? 'mx-auto my-auto h-screen bg-black overflow-hidden'
+          : 'rounded bg-primary/50 dark:bg-secondary/50',
       )}
     >
       <div
@@ -67,7 +69,7 @@ export default function VideoPlayer(props: Props) {
           className={classNames(
             'bg-primary/10 shadow dark:bg-secondary/10',
             special
-              ? 'mx-auto my-auto overflow-hidden lg:overflow-auto lg:h-full h-screen scale-y-[3] scale-x-[3] lg:scale-x-100 lg:scale-y-100 lg:aspect-video aspect-[9/16]'
+              ? 'overflow-hidden lg:h-full h-screen scale-y-[3] scale-x-[3] lg:scale-x-100 lg:scale-y-100 lg:aspect-video aspect-[9/16]'
               : 'rounded',
           )}
         >
@@ -75,7 +77,7 @@ export default function VideoPlayer(props: Props) {
         </video>
         {special ? null : (
           <div className="absolute left-4 bottom-4 z-30 hidden font-normal text-white transition group-hover:flex group-hover:gap-2">
-            <div className="flex items-center flex-col gap-4 px-4 py-4 bg-black/50 rounded">
+            <div className="flex items-center flex-col gap-2 lg:gap-4 px-2 py-2 lg:px-4 lg:py-4 bg-black/50 rounded">
               <PlayPauseVideo playing={playing} size="md" />
               {/* <ToggleMuteVideo hook={[mute, setMute]} defaultMute={muted} size="md" /> */}
               <ShareVideo video={video} size="md" />
@@ -99,10 +101,10 @@ function PlayPauseVideo({ playing, size = 'sm' }: PlayPauseVideoProps) {
       fillRule="evenodd"
       strokeWidth="1.5"
       className={classNames(
-        size === 'sm' ? 'h-5 w-5 lg:h-6 lg:w-6' : '',
-        size === 'md' ? 'h-6 w-6 lg:h-7 lg:w-7' : '',
-        size === 'lg' ? 'h-7 w-7 lg:h-8 lg:w-8' : '',
-        size === 'xl' ? 'h-9 w-9 lg:h-10 lg:w-10' : '',
+        size === 'sm' ? 'h-4 w-4 lg:h-6 lg:w-6' : '',
+        size === 'md' ? 'h-5 w-5 lg:h-7 lg:w-7' : '',
+        size === 'lg' ? 'h-6 w-6 lg:h-8 lg:w-8' : '',
+        size === 'xl' ? 'h-8 w-8 lg:h-10 lg:w-10' : '',
       )}
     />
   ) : (
@@ -110,10 +112,10 @@ function PlayPauseVideo({ playing, size = 'sm' }: PlayPauseVideoProps) {
       fillRule="evenodd"
       strokeWidth="1.5"
       className={classNames(
-        size === 'sm' ? 'h-5 w-5 lg:h-6 lg:w-6' : '',
-        size === 'md' ? 'h-6 w-6 lg:h-7 lg:w-7' : '',
-        size === 'lg' ? 'h-7 w-7 lg:h-8 lg:w-8' : '',
-        size === 'xl' ? 'h-9 w-9 lg:h-10 lg:w-10' : '',
+        size === 'sm' ? 'h-4 w-4 lg:h-6 lg:w-6' : '',
+        size === 'md' ? 'h-5 w-5 lg:h-7 lg:w-7' : '',
+        size === 'lg' ? 'h-6 w-6 lg:h-8 lg:w-8' : '',
+        size === 'xl' ? 'h-8 w-8 lg:h-10 lg:w-10' : '',
       )}
     />
   )
@@ -144,10 +146,10 @@ function ToggleMuteVideo({ hook, defaultMute, size }: ToggleMuteVideoProps) {
         stroke="currentColor"
         strokeWidth="1.5"
         className={classNames(
-          size === 'sm' ? 'h-5 w-5 lg:h-6 lg:w-6' : '',
-          size === 'md' ? 'h-6 w-6 lg:h-7 lg:w-7' : '',
-          size === 'lg' ? 'h-7 w-7 lg:h-8 lg:w-8' : '',
-          size === 'xl' ? 'h-9 w-9 lg:h-10 lg:w-10' : '',
+          size === 'sm' ? 'h-4 w-4 lg:h-6 lg:w-6' : '',
+          size === 'md' ? 'h-5 w-5 lg:h-7 lg:w-7' : '',
+          size === 'lg' ? 'h-6 w-6 lg:h-8 lg:w-8' : '',
+          size === 'xl' ? 'h-8 w-8 lg:h-10 lg:w-10' : '',
         )}
       >
         <path
@@ -177,10 +179,10 @@ function ToggleMuteVideo({ hook, defaultMute, size }: ToggleMuteVideoProps) {
         stroke="currentColor"
         strokeWidth="1.5"
         className={classNames(
-          size === 'sm' ? 'h-5 w-5 lg:h-6 lg:w-6' : '',
-          size === 'md' ? 'h-6 w-6 lg:h-7 lg:w-7' : '',
-          size === 'lg' ? 'h-7 w-7 lg:h-8 lg:w-8' : '',
-          size === 'xl' ? 'h-9 w-9 lg:h-10 lg:w-10' : '',
+          size === 'sm' ? 'h-4 w-4 lg:h-6 lg:w-6' : '',
+          size === 'md' ? 'h-5 w-5 lg:h-7 lg:w-7' : '',
+          size === 'lg' ? 'h-6 w-6 lg:h-8 lg:w-8' : '',
+          size === 'xl' ? 'h-8 w-8 lg:h-10 lg:w-10' : '',
         )}
       >
         <path
