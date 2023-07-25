@@ -25,6 +25,7 @@ import {
   VideoSkeleton,
 } from '../components/videos'
 import { useSwipeable } from 'react-swipeable'
+import { useMediaQuery } from 'usehooks-ts'
 
 export default function Casino() {
   const buttonControlsRef = useRef<HTMLDivElement | null>(null)
@@ -34,9 +35,10 @@ export default function Casino() {
     { name: 'Warzone 2', value: 'mw2022' },
   ]
 
+  const isMobile = useMediaQuery('(max-width: 768px)')
   const [loading, setLoading] = useState<boolean>(true)
   const [fetchError, setFetchError] = useState<boolean>(false)
-  const [view, setView] = useState<boolean>(true)
+  const [expandedView, setExpandedView] = useState<boolean>(false)
   const [index, setIndex] = useState<number>(0)
   const [videos, setVideos] = useState<VideoType[]>([])
   const [filter, setFilter] = useState<FilterType>(arenas[arenas.length - 1])
@@ -70,6 +72,10 @@ export default function Casino() {
     onSwipedUp: () => prevVideo,
     onSwiped: () => nextVideo,
   })
+
+  useEffect(() => {
+    setExpandedView(isMobile)
+  }, [isMobile])
 
   useEffect(() => {
     fetch(`/api/s3/${filter.value}`)
@@ -106,7 +112,7 @@ export default function Casino() {
     const handleKeyDown = (event: any) => {
       if (event.keyCode === 39) nextVideo() // right arrow
       if (event.keyCode === 37) prevVideo() // left arrow
-      if (event.keyCode === 69 && limitedAccess === false) setView((prev) => !prev) // e key
+      if (event.keyCode === 69 && limitedAccess === false) setExpandedView((prev) => !prev) // e key
     }
 
     window.addEventListener('keydown', handleKeyDown)
@@ -131,7 +137,41 @@ export default function Casino() {
     }
   }, [])
 
-  return view ? (
+  return expandedView ? (
+    // focused view
+    <main className="group relative h-screen">
+      <div
+        ref={buttonControlsRef}
+        className="absolute right-2 top-auto bottom-0 lg:top-0 lg:bottom-auto z-50 flex opacity-10 flex-wrap flex-row items-center gap-2 self-end bg-white p-3 text-gray-800 transition-opacity duration-[2000] hover:opacity-100 dark:bg-slate-800 dark:text-white lg:max-w-full lg:flex-col lg:p-4"
+      >
+        <FocusViewToggler hook={[expandedView, setExpandedView]} size="md" />
+        <AutoplayToggler hook={[autoplay, setAutoplay]} size="md" />
+        <MuteToggler hook={[muted, setMuted]} size="md" limitedAccess={limitedAccess} />
+        <ShareVideo video={video} size="md" />
+        <PopOpenVideo video={video} size="md" />
+        <PreviousVideo prevVideo={prevVideo} disabled={index === 0} size="md" />
+        <NextVideo nextVideo={nextVideo} disabled={index === videos.length - 1} size="md" />
+        <KeyboardUsageButton showHook={[showInstructions, setShowInstructions]} size="md" />
+      </div>
+
+      <KeyboardUsageInstructions showHook={[showInstructions, setShowInstructions]} />
+
+      <div className="relative w-full" {...handlers}>
+        {ready ? (
+          <VideoPlayer
+            video={video}
+            autoplay={autoplay}
+            muted={muted}
+            special={true}
+            key={`video-element-${video.index}`}
+          />
+        ) : (
+          <VideoSkeleton />
+        )}
+        {fetchError && <VideoNotFound />}
+      </div>
+    </main>
+  ) : (
     // unfocused view
     <Layout location="Casino">
       <div className="mx-auto max-w-full lg:max-w-3xl">
@@ -156,7 +196,7 @@ export default function Casino() {
                   <AccessModal lockedHook={[accessDenied, setAccessDenied]} startOpen={false} />
                 ) : null}
                 <DeleteCookiesButton />
-                <FocusViewToggler hook={[view, setView]} />
+                <FocusViewToggler hook={[expandedView, setExpandedView]} />
                 <VideoOrderToggler hook={[shuffled, setShuffled]} />
                 <ReshuffleButton hook={[shuffled, setShuffled]} shuffle={shuffleVideos} />
                 <AutoplayToggler hook={[autoplay, setAutoplay]} />
@@ -212,39 +252,5 @@ export default function Casino() {
         </main>
       </div>
     </Layout>
-  ) : (
-    // focused view
-    <main className="group relative h-screen">
-      <div
-        ref={buttonControlsRef}
-        className="absolute right-2 top-auto bottom-0 lg:top-0 lg:bottom-auto z-50 flex opacity-10 flex-wrap flex-row items-center gap-2 self-end bg-white p-3 text-gray-800 transition-opacity duration-[2000] hover:opacity-100 dark:bg-slate-800 dark:text-white lg:max-w-full lg:flex-col lg:p-4"
-      >
-        <FocusViewToggler hook={[view, setView]} size="md" />
-        <AutoplayToggler hook={[autoplay, setAutoplay]} size="md" />
-        <MuteToggler hook={[muted, setMuted]} size="md" limitedAccess={limitedAccess} />
-        <ShareVideo video={video} size="md" />
-        <PopOpenVideo video={video} size="md" />
-        <PreviousVideo prevVideo={prevVideo} disabled={index === 0} size="md" />
-        <NextVideo nextVideo={nextVideo} disabled={index === videos.length - 1} size="md" />
-        <KeyboardUsageButton showHook={[showInstructions, setShowInstructions]} size="md" />
-      </div>
-
-      <KeyboardUsageInstructions showHook={[showInstructions, setShowInstructions]} />
-
-      <div className="relative w-full" {...handlers}>
-        {ready ? (
-          <VideoPlayer
-            video={video}
-            autoplay={autoplay}
-            muted={muted}
-            special={true}
-            key={`video-element-${video.index}`}
-          />
-        ) : (
-          <VideoSkeleton />
-        )}
-        {fetchError && <VideoNotFound />}
-      </div>
-    </main>
   )
 }

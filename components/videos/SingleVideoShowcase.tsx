@@ -6,6 +6,7 @@ import { VideoType } from '../../@types'
 import { AccessModal, InvisbleTopLayer } from '../layout'
 import { getVideoUrlFromVideo } from '../../utils'
 import {
+  ArrowsPointingOutIcon,
   BackwardIcon,
   ForwardIcon,
   PlayIcon,
@@ -13,20 +14,25 @@ import {
   SpeakerWaveIcon,
   SpeakerXMarkIcon,
 } from '@heroicons/react/24/outline'
+import classNames from 'classnames'
+import { FocusViewToggler, MuteToggler, ShareVideo } from './'
 
 type Props = {
   video: VideoType
+  expandedViewHook: [boolean, React.Dispatch<React.SetStateAction<boolean>>]
 }
 
-export default function SingleVideoShowcase({ video }: Props) {
+export default function SingleVideoShowcase({ video, expandedViewHook }: Props) {
   const next = getVideoUrlFromVideo(video, 1)
   const previous = getVideoUrlFromVideo(video, -1)
 
+  const buttonControlsRef = React.useRef<HTMLDivElement | null>(null)
   const [muted, setMuted] = React.useState(true)
   const [autoplay, setAutoplay] = React.useState(true)
   const [accessDenied, setAccessDenied] = useAccessDenied()
+  const [expandedView, setExpandedView] = expandedViewHook
 
-  return (
+  return expandedView ? (
     <section className="flex flex-col gap-y-4 md:gap-y-3">
       <div className="relative">
         <VideoPlayer
@@ -41,35 +47,42 @@ export default function SingleVideoShowcase({ video }: Props) {
         <div className="flex items-center gap-2">
           {accessDenied ? (
             <AccessModal lockedHook={[accessDenied, setAccessDenied]} startOpen={false} />
-          ) : (
-            <>
-              <Link
-                href={previous}
-                title="Previous video"
-                className="self-stretch rounded bg-slate-600 px-4 py-2 text-sm uppercase text-white transition hover:opacity-80"
-              >
-                <BackwardIcon className="h-5 w-5" />
-              </Link>
-              <Link
-                href={next}
-                title="Next video"
-                className="self-stretch rounded bg-slate-600 px-4 py-2 text-sm uppercase text-white transition hover:opacity-80"
-              >
-                <ForwardIcon className="h-5 w-5" />
-              </Link>
-              <button
-                onClick={() => setMuted(!muted)}
-                title="Toggle mute"
-                className="self-stretch rounded bg-teal-500 px-4 py-2 text-sm uppercase text-white transition hover:opacity-80"
-              >
-                {muted ? (
-                  <SpeakerXMarkIcon className="h-5 w-5" />
-                ) : (
-                  <SpeakerWaveIcon className="h-5 w-5" />
-                )}
-              </button>
-            </>
-          )}
+          ) : null}
+          <Link
+            href={previous}
+            title="Previous video"
+            className="self-stretch rounded bg-slate-600 px-4 py-2 text-sm uppercase text-white transition hover:opacity-80"
+          >
+            <BackwardIcon className="h-4 w-4 lg:h-6 lg:w-6" />
+          </Link>
+          <Link
+            href={next}
+            title="Next video"
+            className="self-stretch rounded bg-slate-600 px-4 py-2 text-sm uppercase text-white transition hover:opacity-80"
+          >
+            <ForwardIcon className="h-4 w-4 lg:h-6 lg:w-6" />
+          </Link>
+          <button
+            onClick={() => setMuted((prev) => !prev)}
+            title="Toggle mute"
+            className={classNames(
+              muted ? 'bg-rose-600' : 'bg-teal-600',
+              'self-stretch rounded px-4 py-2 text-sm uppercase text-white transition hover:opacity-80',
+            )}
+          >
+            {muted ? (
+              <SpeakerXMarkIcon className="h-4 w-4 lg:h-6 lg:w-6" />
+            ) : (
+              <SpeakerWaveIcon className="h-4 w-4 lg:h-6 lg:w-6" />
+            )}
+          </button>
+          <button
+            onClick={() => setExpandedView((prev) => !prev)}
+            title="Toggle expanded view"
+            className="self-stretch rounded bg-blue-500 px-4 py-2 text-sm uppercase text-white transition hover:opacity-80"
+          >
+            <ArrowsPointingOutIcon className="h-4 w-4 lg:h-6 lg:w-6" />
+          </button>
         </div>
 
         <div className="flex items-center gap-2">
@@ -92,5 +105,26 @@ export default function SingleVideoShowcase({ video }: Props) {
         </div>
       </div>
     </section>
+  ) : (
+    <main className="group relative h-screen">
+      <div
+        ref={buttonControlsRef}
+        className="absolute right-2 top-auto bottom-0 lg:top-0 lg:bottom-auto z-50 flex opacity-50 flex-wrap flex-row items-center gap-2 self-end bg-white p-3 text-gray-800 transition-opacity duration-[2000] hover:opacity-100 dark:bg-slate-800 dark:text-white lg:max-w-full lg:flex-col lg:p-4"
+      >
+        <FocusViewToggler hook={[expandedView, setExpandedView]} size="md" />
+        <MuteToggler hook={[muted, setMuted]} size="md" limitedAccess={accessDenied} />
+        <ShareVideo video={video} size="md" />
+      </div>
+
+      <div className="relative w-full">
+        <VideoPlayer
+          video={video}
+          autoplay={autoplay}
+          muted={muted}
+          special={true}
+          key={`video-element-${video.index}`}
+        />
+      </div>
+    </main>
   )
 }

@@ -12,6 +12,7 @@ export default function VideoPage({ game, videoIndex }: Props) {
   const [video, setVideo] = useState<VideoType | null>(null)
   const [loading, setLoading] = useState<boolean>(true)
   const [fetchError, setFetchError] = useState<boolean>(false)
+  const [expandedView, setExpandedView] = useState<boolean>(true)
   const ready = useMemo(() => !loading && !fetchError, [loading, fetchError])
 
   useEffect(() => {
@@ -45,14 +46,14 @@ export default function VideoPage({ game, videoIndex }: Props) {
       })
   }, [videoIndex, game])
 
-  return (
+  return expandedView ? (
     <div className="flex min-h-screen flex-col bg-light dark:bg-navy">
       <Seo title="Video" />
       <Header siteTitle="Finishers Hub" location="Video" />
       <div className="flex flex-1 items-start justify-center md:items-center">
         <div className="mx-auto w-full max-w-full px-4 lg:max-w-5xl lg:px-0">
           {ready && video !== null ? (
-            <SingleVideoShowcase video={video} />
+            <SingleVideoShowcase video={video} expandedViewHook={[expandedView, setExpandedView]} />
           ) : fetchError ? (
             <VideoNotFound />
           ) : (
@@ -62,5 +63,7 @@ export default function VideoPage({ game, videoIndex }: Props) {
       </div>
       <Footer siteTitle="Finishers Hub" />
     </div>
-  )
+  ) : ready && video !== null ? (
+    <SingleVideoShowcase video={video} expandedViewHook={[expandedView, setExpandedView]} />
+  ) : null
 }
