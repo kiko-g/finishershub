@@ -3,6 +3,7 @@ import type { VideoType } from '../../@types'
 import React, { useState, useEffect, useRef, SetStateAction, Dispatch } from 'react'
 import { ShareVideo, PopOpenVideo, VideoSkeleton } from './'
 import { PauseIcon, PlayIcon } from '@heroicons/react/24/solid'
+import { useMediaQuery } from 'usehooks-ts'
 
 type Props = {
   video: VideoType
@@ -50,7 +51,9 @@ export default function VideoPlayer(props: Props) {
         special ? 'h-screen bg-black' : 'rounded bg-primary/50 dark:bg-secondary/50',
       )}
     >
-      <div className={classNames(slide ? 'animate-pulse-500' : '')}>
+      <div
+        className={classNames(special ? 'absolute inset-0' : '', slide ? 'animate-pulse-500' : '')}
+      >
         <video
           ref={videoRef}
           loop
@@ -62,8 +65,10 @@ export default function VideoPlayer(props: Props) {
           onPlay={handlePlay}
           onPause={handlePause}
           className={classNames(
-            'h-full w-full bg-primary/10 shadow dark:bg-secondary/10',
-            special ? 'h-screen' : 'rounded',
+            'bg-primary/10 shadow dark:bg-secondary/10',
+            special
+              ? 'mx-auto my-auto overflow-hidden lg:overflow-auto lg:h-full h-screen scale-y-[3] scale-x-[3] lg:scale-x-100 lg:scale-y-100 lg:aspect-video aspect-[9/16]'
+              : 'rounded',
           )}
         >
           <source src={video.url} type="video/mp4" />

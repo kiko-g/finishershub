@@ -211,7 +211,7 @@ export default function Casino() {
     <main className="group relative h-screen">
       <div
         ref={buttonControlsRef}
-        className="absolute right-2 bottom-2 z-50 flex opacity-10 flex-wrap flex-row items-center gap-2 self-end rounded-br bg-white p-3 text-gray-800 transition-opacity duration-[2000] hover:opacity-100 dark:bg-slate-800 dark:text-white lg:max-w-full lg:flex-col lg:p-4"
+        className="absolute right-2 top-auto bottom-0 lg:top-0 lg:bottom-auto z-50 flex opacity-10 flex-wrap flex-row items-center gap-2 self-end bg-white p-3 text-gray-800 transition-opacity duration-[2000] hover:opacity-100 dark:bg-slate-800 dark:text-white lg:max-w-full lg:flex-col lg:p-4"
       >
         <FocusViewToggler hook={[view, setView]} size="md" />
         <AutoplayToggler hook={[autoplay, setAutoplay]} size="md" />

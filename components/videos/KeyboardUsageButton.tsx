@@ -28,7 +28,10 @@ export default function KeyboardUsageButton({ showHook, size = 'sm' }: Props) {
   }, [toggleShow])
 
   return (
-    <button onClick={() => setShow((prev) => !prev)} className="transition hover:opacity-80">
+    <button
+      onClick={() => setShow((prev) => !prev)}
+      className="transition hidden lg:inline-flex hover:opacity-80"
+    >
       <InformationCircleIcon
         className={classNames(
           size === 'sm' ? 'h-5 w-5 lg:h-6 lg:w-6' : '',
