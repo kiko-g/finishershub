@@ -63,11 +63,15 @@ export default function SingleVideoShowcase({ video, expandedViewHook }: Props) 
             <ForwardIcon className="h-4 w-4 lg:h-6 lg:w-6" />
           </Link>
           <button
-            onClick={() => setMuted((prev) => !prev)}
+            disabled={accessDenied}
+            onClick={() => {
+              if (accessDenied) return
+              setMuted((prev) => !prev)
+            }}
             title="Toggle mute"
             className={classNames(
               muted ? 'bg-rose-600' : 'bg-teal-600',
-              'self-stretch rounded px-4 py-2 text-sm uppercase text-white transition hover:opacity-80',
+              'self-stretch rounded px-4 py-2 text-sm uppercase text-white transition hover:opacity-80 disabled:cursor-not-allowed disabled:opacity-20',
             )}
           >
             {muted ? (
