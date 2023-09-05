@@ -1,3 +1,72 @@
+export const videoTags = [
+  'pernoca',
+  'self',
+  'public',
+  'coop',
+  'storm',
+  'insane',
+  'edited',
+  'hop varanda',
+]
+
+export const verdanskLocations = [
+  'Military Base',
+  'Gulag',
+  'Quarry',
+  'Dam',
+  'Downtown',
+  'Superstore',
+  'Airport',
+  'Storage Town',
+  'Farmland',
+  'Port',
+  'Park',
+  'Hospital',
+  'Hills',
+  'Lumber',
+  'Prison',
+  'Promenade East',
+  'Promenade West',
+  'Misc',
+]
+
+export const rebirthLocations = [
+  'Living Quarters Main',
+  'Living Quarters Street',
+  'Chemical Engineering',
+  'Nova 6 Factory',
+  'Decon Zone',
+  'Control Center',
+  'Security Area',
+  'Harbor',
+  'Bioweapon Labs',
+  'Prison Top',
+  'Prison Bottom',
+  'Prison Lobby',
+  'Prison Cafeteria',
+  'Prison Courtyard',
+  'Tower',
+  'Tower House',
+  'Greenie',
+  'HQ',
+  'Misc',
+]
+
+export const ashikaLocations = [
+  'Helicopter',
+  'Tsuki Main',
+  'Tsuki Dojo',
+  'Tsuki Outer',
+  'Factory',
+  'Port',
+  'Residential',
+  'Farms',
+  'Beach Club',
+  'Town Center',
+  'Shipwreck',
+  'Misc',
+]
+
 export const socials = [
   {
     shown: true,
