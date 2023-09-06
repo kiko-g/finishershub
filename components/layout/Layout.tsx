@@ -16,7 +16,7 @@ export default function Layout({ children, location = 'Unknown', background = fa
       <div className="flex min-h-screen flex-col scroll-smooth bg-light font-prose font-medium text-gray-800 opacity-[99%] dark:bg-navy dark:text-white">
         <Header location={location} siteTitle={siteTitle} />
         {background ? <Background /> : null}
-        <div className="container z-10 mx-auto mb-auto mt-4 max-w-7xl overflow-hidden px-4 py-0">
+        <div className="container flex-1 z-10 mx-auto mb-auto mt-4 max-w-7xl overflow-hidden px-4 py-0">
           {children}
         </div>
         <Footer siteTitle={siteTitle} />

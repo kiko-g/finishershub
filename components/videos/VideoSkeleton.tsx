@@ -1,12 +1,19 @@
+import classNames from 'classnames'
 import React from 'react'
 
-type Props = {}
+type Props = {
+  className?: string
+  rounded?: boolean
+}
 
-export default function Skeleton({}: Props) {
+export default function Skeleton({ className, rounded }: Props) {
   return (
     <div
-      className="flex h-72 items-center justify-center rounded border border-primary/50
-    bg-primary/10 dark:border-secondary/50 dark:bg-secondary/10"
+      className={classNames(
+        'flex items-center flex-1 self-stretch justify-center border-primary/50 bg-primary/10 dark:border-secondary/50 dark:bg-secondary/10 py-16 h-64 lg:h-96',
+        rounded && 'rounded',
+        className,
+      )}
     >
       <svg
         fill="none"

@@ -25,6 +25,7 @@ li::marker {
 
 .custom-input,
 input[type='text'],
+input[type='number'],
 input[type='search'],
 input[type='password'] {
   @apply rounded border border-gray-300 bg-gray-50 px-3.5 py-2.5 font-normal 
