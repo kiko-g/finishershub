@@ -1,11 +1,11 @@
 import type { NextApiRequest, NextApiResponse } from 'next'
-import { allowCors, connectMongoDB } from '../../config'
-import Videos from '../../models/videos'
+import { allowCors, connectMongoDB } from '../../../config'
+import Videos from '../../../models/videos'
 
-// @desc     Get finishers of all members
+// @desc     Get all videos
 // @route    GET /api/videos/
 // @access   Public
-export default async function getAllFinishers(req: NextApiRequest, res: NextApiResponse<any>) {
+export default async function getAllVideos(req: NextApiRequest, res: NextApiResponse<any>) {
   await allowCors(req, res)
   await connectMongoDB()
   try {

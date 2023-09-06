@@ -1,5 +1,6 @@
 # custom
 *.csv
+python
 
 # dependencies
 /node_modules

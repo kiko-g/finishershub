@@ -76,3 +76,20 @@ export type FilterType =
   | { name: 'All'; value: '' }
   | { name: 'Warzone 1'; value: 'mw2019' }
   | { name: 'Warzone 2'; value: 'mw2022' }
+
+export interface VideoMongoDB {
+  _id: string
+  id: number
+  authors: string[]
+  quantity: number
+  tags: string[]
+  map: string
+  location: string
+  game: string
+  bucket: string
+  s3_uri: string
+}
+
+export interface VideoMongoDBWithUrl extends VideoMongoDB {
+  url: string
+}
