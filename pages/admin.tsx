@@ -68,7 +68,7 @@ export default function Videos({}: Props) {
   }, [])
 
   return (
-    <Layout location="Videos">
+    <Layout location="Admin">
       <div className="min-w-full overflow-scroll">
         {loading && <VideoSkeleton />}
         {fetchError && <VideoNotFound />}
@@ -76,31 +76,31 @@ export default function Videos({}: Props) {
           <table className="min-w-full font-normal text-xs divide-y border divide-gray-200 dark:divide-gray-700 border-gray-200 dark:border-gray-700">
             <thead>
               <tr>
-                <th className="px-4 py-3 bg-gray-700 dark:bg-gray-800 text-left text-xs font-medium text-gray-100 dark:text-gray-300 uppercase tracking-wider">
+                <th className="px-2 py-2 lg:px-4 lg:py-3 bg-gray-700 dark:bg-gray-800 text-left text-xs font-medium text-gray-100 dark:text-gray-300 uppercase tracking-wider">
                   ID
                 </th>
-                <th className="px-4 py-3 bg-gray-700 dark:bg-gray-800 text-left text-xs font-medium text-gray-100 dark:text-gray-300 uppercase tracking-wider">
+                <th className="px-2 py-2 lg:px-4 lg:py-3 bg-gray-700 dark:bg-gray-800 text-left text-xs font-medium text-gray-100 dark:text-gray-300 uppercase tracking-wider">
                   Game
                 </th>
-                <th className="px-4 py-3 bg-gray-700 dark:bg-gray-800 text-left text-xs font-medium text-gray-100 dark:text-gray-300 uppercase tracking-wider">
+                <th className="px-2 py-2 lg:px-4 lg:py-3 bg-gray-700 dark:bg-gray-800 text-left text-xs font-medium text-gray-100 dark:text-gray-300 uppercase tracking-wider">
                   Map
                 </th>
-                <th className="px-4 py-3 bg-gray-700 dark:bg-gray-800 text-left text-xs font-medium text-gray-100 dark:text-gray-300 uppercase tracking-wider">
+                <th className="px-2 py-2 lg:px-4 lg:py-3 bg-gray-700 dark:bg-gray-800 text-left text-xs font-medium text-gray-100 dark:text-gray-300 uppercase tracking-wider">
                   Location
                 </th>
-                <th className="px-4 py-3 bg-gray-700 dark:bg-gray-800 text-left text-xs font-medium text-gray-100 dark:text-gray-300 uppercase tracking-wider">
+                <th className="px-2 py-2 lg:px-4 lg:py-3 bg-gray-700 dark:bg-gray-800 text-left text-xs font-medium text-gray-100 dark:text-gray-300 uppercase tracking-wider">
                   Authors
                 </th>
-                <th className="px-4 py-3 bg-gray-700 dark:bg-gray-800 text-left text-xs font-medium text-gray-100 dark:text-gray-300 uppercase tracking-wider">
-                  Quantity
-                </th>
-                <th className="px-4 py-3 bg-gray-700 dark:bg-gray-800 text-left text-xs font-medium text-gray-100 dark:text-gray-300 uppercase tracking-wider">
+                <th className="px-2 py-2 lg:px-4 lg:py-3 bg-gray-700 dark:bg-gray-800 text-left text-xs font-medium text-gray-100 dark:text-gray-300 uppercase tracking-wider">
                   Tags
                 </th>
-                <th className="px-4 py-3 bg-gray-700 dark:bg-gray-800 text-left text-xs font-medium text-gray-100 dark:text-gray-300 uppercase tracking-wider">
+                <th className="px-2 py-2 lg:px-4 lg:py-3 bg-gray-700 dark:bg-gray-800 text-left text-xs font-medium text-gray-100 dark:text-gray-300 uppercase tracking-wider">
+                  Quantity
+                </th>
+                <th className="px-2 py-2 lg:px-4 lg:py-3 bg-gray-700 dark:bg-gray-800 text-left text-xs font-medium text-gray-100 dark:text-gray-300 uppercase tracking-wider">
                   URL
                 </th>
-                <th className="px-4 py-3 bg-gray-700 dark:bg-gray-800 text-left text-xs font-medium text-gray-100 dark:text-gray-300 uppercase tracking-wider">
+                <th className="px-2 py-2 lg:px-4 lg:py-3 bg-gray-700 dark:bg-gray-800 text-left text-xs font-medium text-gray-100 dark:text-gray-300 uppercase tracking-wider">
                   Edit
                 </th>
               </tr>
@@ -165,62 +165,62 @@ function TableRow({ video, rowIndex, replaceRowAction }: TableRowProps) {
         hasRowChanged && !rowSaved ? 'bg-orange-500/[15%]' : '',
       )}
     >
-      <td className="px-4 py-2 whitespace-nowrap">{row.id}</td>
-      <td className="px-4 py-2 whitespace-nowrap">{row.game}</td>
-      <td className="px-4 py-2 whitespace-nowrap">{row.map}</td>
-      <td className="px-4 py-2 whitespace-nowrap">
+      <td className="px-2 py-1 lg:px-4 lg:py-2 whitespace-nowrap">{row.id}</td>
+      <td className="px-2 py-1 lg:px-4 lg:py-2 whitespace-nowrap">{row.game}</td>
+      <td className="px-2 py-1 lg:px-4 lg:py-2 whitespace-nowrap">{row.map}</td>
+      <td className="px-2 py-1 lg:px-4 lg:py-2 whitespace-nowrap">
         <input
           type="text"
           defaultValue={row.location || ''}
           placeholder="N/A"
-          className="w-full text-xs"
+          className="w-full min-w-[6rem] text-xs"
           onChange={(e) => {
             setRowSaved(false)
             setRow({ ...row, location: e.target.value })
           }}
         />
       </td>
-      <td className="px-4 py-2 whitespace-nowrap">
+      <td className="px-2 py-1 lg:px-4 lg:py-2 whitespace-nowrap">
         <input
           type="text"
           defaultValue={row.authors ? row.authors.join(', ') : ''}
           placeholder="N/A"
-          className="w-full text-xs"
+          className="w-full min-w-[6rem] text-xs"
           onChange={(e) => {
             setRowSaved(false)
             setRow({ ...row, authors: e.target.value.split(', ') })
           }}
         />
       </td>
-      <td className="px-4 py-2 whitespace-nowrap">
-        <input
-          type="number"
-          defaultValue={row.quantity}
-          className="w-full text-xs"
-          onChange={(e) => {
-            setRowSaved(false)
-            setRow({ ...row, quantity: parseInt(e.target.value) })
-          }}
-        />
-      </td>
-      <td className="px-4 py-2 whitespace-nowrap">
+      <td className="px-2 py-1 lg:px-4 lg:py-2 whitespace-nowrap">
         <input
           type="text"
           defaultValue={row.tags ? row.tags.join(', ') : ''}
           placeholder="N/A"
-          className="w-full text-xs"
+          className="w-full min-w-[6rem] text-xs"
           onChange={(e) => {
             setRowSaved(false)
             setRow({ ...row, tags: e.target.value.split(', ') })
           }}
         />
       </td>
-      <td className="px-4 py-2 whitespace-nowrap">
+      <td className="px-2 py-1 lg:px-4 lg:py-2 whitespace-nowrap">
+        <input
+          type="number"
+          defaultValue={row.quantity}
+          className="w-full min-w-[3rem] text-xs"
+          onChange={(e) => {
+            setRowSaved(false)
+            setRow({ ...row, quantity: parseInt(e.target.value) })
+          }}
+        />
+      </td>
+      <td className="px-2 py-1 lg:px-4 lg:py-2 whitespace-nowrap">
         <a href={row.url} target="_blank" className="hover:scale-125">
           <ArrowTopRightOnSquareIcon className="h-4 w-4" />
         </a>
       </td>
-      <td className="px-4 py-2 whitespace-nowrap">
+      <td className="px-2 py-1 lg:px-4 lg:py-2 whitespace-nowrap">
         <button
           className={classNames('hover:scale-125', isLoading && 'opacity-50 cursor-not-allowed')}
           disabled={isLoading}

@@ -13,6 +13,7 @@ import {
   PlusSmallIcon,
   FilmIcon,
   Square3Stack3DIcon,
+  BuildingLibraryIcon,
 } from '@heroicons/react/24/outline'
 
 const navigation = [
@@ -20,6 +21,12 @@ const navigation = [
     title: 'Hub',
     location: '/',
     icon: <Square3Stack3DIcon className="h-5 w-5" />,
+    shown: true,
+  },
+  {
+    title: 'Videos',
+    location: '/videos',
+    icon: <FilmIcon className="h-5 w-5" />,
     shown: true,
   },
   {
@@ -35,15 +42,21 @@ const navigation = [
     shown: false,
   },
   {
+    title: 'Lab',
+    location: '/lab',
+    icon: <BeakerIcon className="h-5 w-5" />,
+    shown: true,
+  },
+  {
     title: 'Registry',
     location: '/registry',
     icon: <ChartBarSquareIcon className="h-5 w-5" />,
     shown: true,
   },
   {
-    title: 'Lab',
-    location: '/lab',
-    icon: <BeakerIcon className="h-5 w-5" />,
+    title: 'Admin',
+    location: '/admin',
+    icon: <BuildingLibraryIcon className="h-5 w-5" />,
     shown: true,
   },
   {
