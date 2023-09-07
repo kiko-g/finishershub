@@ -1,11 +1,11 @@
 import type { NextApiRequest, NextApiResponse } from 'next'
-import { allowCors, connectMongoDB } from '../../../config'
-import { getVideoUrl } from '../../../utils/api/s3'
-import Videos from '../../../models/videos'
-import { VideoMongoDB } from '../../../@types'
+import { allowCors, connectMongoDB } from '../../../../config'
+import { getVideoUrl } from '../../../../utils/api/s3'
+import Videos from '../../../../models/videos'
+import { VideoMongoDB } from '../../../../@types'
 
 // @desc     Get all videos with url
-// @route    GET /api/videos/urls
+// @route    GET /api/mongo/videos/urls
 // @access   Public
 export default async function getAllVideosWithUrl(req: NextApiRequest, res: NextApiResponse<any>) {
   await allowCors(req, res)

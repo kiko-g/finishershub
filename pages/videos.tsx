@@ -15,7 +15,7 @@ export default function Videos({}: Props) {
   const ready = useMemo(() => !loading && !fetchError, [loading, fetchError])
 
   useEffect(() => {
-    fetch(`/api/videos/urls`)
+    fetch(`/api/mongo/videos/urls`)
       .then((res) => res.json())
       .then((vids: VideoMongoDBWithUrl[]) => {
         setData(vids)

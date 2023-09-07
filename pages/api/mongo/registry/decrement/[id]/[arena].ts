@@ -1,11 +1,11 @@
 import type { NextApiRequest, NextApiResponse } from 'next'
-import { allowCors, connectMongoDB } from '../../../../../config'
-import Registry from '../../../../../models/registry'
+import { allowCors, connectMongoDB } from '../../../../../../config'
+import Registry from '../../../../../../models/registry'
 
-// @desc     Increment finishers of a certain member
-// @route    PUT /registry/increment/:id/:arena/
+// @desc     Decrement finishers of a certain member
+// @route    GET /api/mongo/registry/decrement/:id/:arena
 // @access   Private
-export default async function incrementFinishers(req: NextApiRequest, res: NextApiResponse<any>) {
+export default async function decrementFinishers(req: NextApiRequest, res: NextApiResponse<any>) {
   await allowCors(req, res)
   await connectMongoDB()
   try {
@@ -19,7 +19,7 @@ export default async function incrementFinishers(req: NextApiRequest, res: NextA
     }
 
     const increment = {
-      finishers: stats.finishers.map((count, index) => (index === arena ? count + 1 : count)),
+      finishers: stats.finishers.map((count, index) => (index === arena ? count - 1 : count)),
     }
     const updatedStats = await Registry.findByIdAndUpdate(id, increment, { new: true })
     res.status(200).json(updatedStats)
