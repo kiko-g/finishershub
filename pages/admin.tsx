@@ -1,5 +1,7 @@
 import React, { useEffect, useMemo, useRef, useState } from 'react'
-import { Layout } from '../components/layout'
+import classNames from 'classnames'
+import useAccessDenied from '../hooks/useAccessDenied'
+import { AccessModal, Layout } from '../components/layout'
 import { useMediaQuery } from 'usehooks-ts'
 import { VideoNotFound, VideoSkeleton } from '../components/videos'
 import type { VideoMongoDBWithUrl } from '../@types'
@@ -9,12 +11,14 @@ import {
   CheckIcon,
   PencilIcon,
 } from '@heroicons/react/24/outline'
-import classNames from 'classnames'
+import { FullAccessBadge, LimitedAccessBadge } from '../components/utils'
+import { AccessModalCTA } from '../components/hub'
 
 type Props = {}
 
 export default function Videos({}: Props) {
   const isMobile = useMediaQuery('(max-width: 768px)')
+  const [accessDenied, setAccessDenied] = useAccessDenied()
   const [data, setData] = useState<VideoMongoDBWithUrl[]>([])
   const [loading, setLoading] = useState<boolean>(true)
   const [fetchError, setFetchError] = useState<boolean>(false)
@@ -22,7 +26,6 @@ export default function Videos({}: Props) {
   const ready = useMemo(() => !loading && !fetchError, [loading, fetchError])
 
   async function replaceRow(row: VideoMongoDBWithUrl, rowIndex: number) {
-    //console.log(`update row ${rowIndex}`)
     const newData = [...data]
     newData[rowIndex] = row
     setData(newData)
@@ -70,56 +73,85 @@ export default function Videos({}: Props) {
   return (
     <Layout location="Admin">
       <div className="min-w-full overflow-scroll">
-        {loading && <VideoSkeleton />}
-        {fetchError && <VideoNotFound />}
-        {ready ? (
-          <table className="min-w-full font-normal text-xs divide-y border divide-gray-200 dark:divide-gray-700 border-gray-200 dark:border-gray-700">
-            <thead>
-              <tr>
-                <th className="px-2 py-2 lg:px-4 lg:py-3 bg-gray-700 dark:bg-gray-800 text-left text-xs font-medium text-gray-100 dark:text-gray-300 uppercase tracking-wider">
-                  ID
-                </th>
-                <th className="px-2 py-2 lg:px-4 lg:py-3 bg-gray-700 dark:bg-gray-800 text-left text-xs font-medium text-gray-100 dark:text-gray-300 uppercase tracking-wider">
-                  Game
-                </th>
-                <th className="px-2 py-2 lg:px-4 lg:py-3 bg-gray-700 dark:bg-gray-800 text-left text-xs font-medium text-gray-100 dark:text-gray-300 uppercase tracking-wider">
-                  Map
-                </th>
-                <th className="px-2 py-2 lg:px-4 lg:py-3 bg-gray-700 dark:bg-gray-800 text-left text-xs font-medium text-gray-100 dark:text-gray-300 uppercase tracking-wider">
-                  Location
-                </th>
-                <th className="px-2 py-2 lg:px-4 lg:py-3 bg-gray-700 dark:bg-gray-800 text-left text-xs font-medium text-gray-100 dark:text-gray-300 uppercase tracking-wider">
-                  Authors
-                </th>
-                <th className="px-2 py-2 lg:px-4 lg:py-3 bg-gray-700 dark:bg-gray-800 text-left text-xs font-medium text-gray-100 dark:text-gray-300 uppercase tracking-wider">
-                  Tags
-                </th>
-                <th className="px-2 py-2 lg:px-4 lg:py-3 bg-gray-700 dark:bg-gray-800 text-left text-xs font-medium text-gray-100 dark:text-gray-300 uppercase tracking-wider">
-                  Quantity
-                </th>
-                <th className="px-2 py-2 lg:px-4 lg:py-3 bg-gray-700 dark:bg-gray-800 text-left text-xs font-medium text-gray-100 dark:text-gray-300 uppercase tracking-wider">
-                  URL
-                </th>
-                <th className="px-2 py-2 lg:px-4 lg:py-3 bg-gray-700 dark:bg-gray-800 text-left text-xs font-medium text-gray-100 dark:text-gray-300 uppercase tracking-wider">
-                  Edit
-                </th>
-              </tr>
-            </thead>
+        <div className="text-lg font-normal mb-3">
+          <div className="flex flex-wrap items-center justify-start gap-x-3 gap-y-1">
+            <h2 className="whitespace-nowrap text-4xl font-bold tracking-tight sm:text-5xl">
+              Admin
+            </h2>
+            {accessDenied ? <LimitedAccessBadge /> : <FullAccessBadge />}
+          </div>
+          <p className="mt-1 max-w-3xl">
+            Welcome to the back office of Finishers Hub. This is where we can document and report
+            all acts of ungodliness committed.
+          </p>
+        </div>
 
-            <tbody className="bg-white dark:bg-transparent divide-y divide-transparent dark:divide-gray-700">
-              {data
-                .sort((a, b) => (a.id > b.id ? 1 : -1))
-                .map((video, videoIdx) => (
-                  <TableRow
-                    video={video}
-                    rowIndex={videoIdx}
-                    replaceRowAction={replaceRow}
-                    key={`admin-video-${video.id}-${video._id}`}
-                  />
-                ))}
-            </tbody>
-          </table>
-        ) : null}
+        {accessDenied ? (
+          <div className="mt-2 max-w-3xl font-normal py-8 px-8 bg-gray-500/20 flex items-start justify-start flex-col border border-gray-600 rounded gap-4">
+            <p>
+              You <span className="font-bold underline">do not have access</span> to this page.
+              Please contact the administrator if you believe this is a mistake. To get full access
+              click on the button below.
+            </p>
+
+            <div className="flex justify-center">
+              <AccessModalCTA lockedHook={[accessDenied, setAccessDenied]} startOpen={false} />
+            </div>
+          </div>
+        ) : (
+          <>
+            {loading && <VideoSkeleton />}
+            {fetchError && <VideoNotFound />}
+            {ready ? (
+              <table className="min-w-full font-normal text-xs divide-y border divide-gray-200 dark:divide-gray-700 border-gray-200 dark:border-gray-700">
+                <thead>
+                  <tr>
+                    <th className="px-2 py-2 lg:px-4 lg:py-3 bg-gray-700 dark:bg-gray-800 text-left text-xs font-medium text-gray-100 dark:text-gray-300 uppercase tracking-wider">
+                      ID
+                    </th>
+                    <th className="px-2 py-2 lg:px-4 lg:py-3 bg-gray-700 dark:bg-gray-800 text-left text-xs font-medium text-gray-100 dark:text-gray-300 uppercase tracking-wider">
+                      Game
+                    </th>
+                    <th className="px-2 py-2 lg:px-4 lg:py-3 bg-gray-700 dark:bg-gray-800 text-left text-xs font-medium text-gray-100 dark:text-gray-300 uppercase tracking-wider">
+                      Map
+                    </th>
+                    <th className="px-2 py-2 lg:px-4 lg:py-3 bg-gray-700 dark:bg-gray-800 text-left text-xs font-medium text-gray-100 dark:text-gray-300 uppercase tracking-wider">
+                      Location
+                    </th>
+                    <th className="px-2 py-2 lg:px-4 lg:py-3 bg-gray-700 dark:bg-gray-800 text-left text-xs font-medium text-gray-100 dark:text-gray-300 uppercase tracking-wider">
+                      Authors
+                    </th>
+                    <th className="px-2 py-2 lg:px-4 lg:py-3 bg-gray-700 dark:bg-gray-800 text-left text-xs font-medium text-gray-100 dark:text-gray-300 uppercase tracking-wider">
+                      Tags
+                    </th>
+                    <th className="px-2 py-2 lg:px-4 lg:py-3 bg-gray-700 dark:bg-gray-800 text-left text-xs font-medium text-gray-100 dark:text-gray-300 uppercase tracking-wider">
+                      Quantity
+                    </th>
+                    <th className="px-2 py-2 lg:px-4 lg:py-3 bg-gray-700 dark:bg-gray-800 text-left text-xs font-medium text-gray-100 dark:text-gray-300 uppercase tracking-wider">
+                      URL
+                    </th>
+                    <th className="px-2 py-2 lg:px-4 lg:py-3 bg-gray-700 dark:bg-gray-800 text-left text-xs font-medium text-gray-100 dark:text-gray-300 uppercase tracking-wider">
+                      Edit
+                    </th>
+                  </tr>
+                </thead>
+
+                <tbody className="bg-white dark:bg-transparent divide-y divide-transparent dark:divide-gray-700">
+                  {data
+                    .sort((a, b) => (a.id > b.id ? 1 : -1))
+                    .map((video, videoIdx) => (
+                      <TableRow
+                        video={video}
+                        rowIndex={videoIdx}
+                        replaceRowAction={replaceRow}
+                        key={`admin-video-${video.id}-${video._id}`}
+                      />
+                    ))}
+                </tbody>
+              </table>
+            ) : null}
+          </>
+        )}
       </div>
     </Layout>
   )

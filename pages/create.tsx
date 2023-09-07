@@ -37,9 +37,7 @@ export default function CreatePage() {
         <div className="flex flex-col justify-between gap-y-2 lg:flex-row lg:gap-x-6">
           <div className="text-lg font-normal">
             <div className="flex flex-wrap items-center justify-start gap-x-3 gap-y-2">
-              <h2 className="text-4xl font-bold tracking-tight sm:text-5xl">
-                Upload your finishers
-              </h2>
+              <h2 className="text-4xl font-bold tracking-tight sm:text-5xl">Create</h2>
               {accessDenied ? <LimitedAccessBadge /> : <FullAccessBadge />}
             </div>
             <p className="mt-2">

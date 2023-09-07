@@ -35,6 +35,17 @@ export default function Hub() {
       ),
     },
     {
+      name: 'Gallery',
+      href: '/gallery',
+      emoji: '🪟',
+      description: (
+        <>
+          Head over to the gallery. It&apos;s like a museum, but with heinous highlights of
+          individuals performing the most gruesome and relentless finishing moves ever recorded.
+        </>
+      ),
+    },
+    {
       name: 'Lab',
       href: '/lab',
       emoji: '🧪',
@@ -47,17 +58,6 @@ export default function Hub() {
       ),
     },
     {
-      name: 'Gallery',
-      href: '/gallery',
-      emoji: '🪟',
-      description: (
-        <>
-          Head over to the gallery. It&apos;s like a museum, but with heinous highlights of
-          individuals performing the most gruesome and relentless finishing moves ever recorded.
-        </>
-      ),
-    },
-    {
       name: 'Registry',
       href: '/registry',
       emoji: '📊',
@@ -65,6 +65,31 @@ export default function Hub() {
         <>
           Navigate to the registry where you can see and manage stats related to the the diabolic
           profession that is performing finishing moves.
+        </>
+      ),
+    },
+    {
+      name: 'Create',
+      href: '/create',
+      emoji: '📁',
+      description: (
+        <>
+          Upload your own finishing move highlight to the platform. This is a{' '}
+          <span className="font-bold">members-only</span> space Finishers Club associates to
+          contribute to the platform and share their own content. You need full access to use the
+          features in this page.
+        </>
+      ),
+    },
+    {
+      name: 'Admin',
+      href: '/admin',
+      emoji: '🏢',
+      description: (
+        <>
+          Edit and manage the information associated to the videos on the platform. This is a{' '}
+          <span className="font-bold">members-only</span> space: you need full access to use the
+          features in this page.
         </>
       ),
     },

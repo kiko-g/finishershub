@@ -27,19 +27,19 @@ const navigation = [
     title: 'Videos',
     location: '/videos',
     icon: <FilmIcon className="h-5 w-5" />,
-    shown: true,
-  },
-  {
-    title: 'Casino',
-    location: '/casino',
-    icon: <BoltIcon className="h-5 w-5" />,
-    shown: true,
+    shown: false,
   },
   {
     title: 'Gallery',
     location: '/gallery',
     icon: <FilmIcon className="h-5 w-5" />,
     shown: false,
+  },
+  {
+    title: 'Casino',
+    location: '/casino',
+    icon: <BoltIcon className="h-5 w-5" />,
+    shown: true,
   },
   {
     title: 'Lab',
