@@ -2,9 +2,7 @@ import React from "react"
 import type { VideoAPIAndIndex, VideoType } from "../../@types"
 import { VideoSkeleton, VideoNotFound, ShareVideo, PopOpenVideo } from "../videos"
 
-type Props = {}
-
-export default function MostRecentVideoShowcase({}: Props) {
+export function MostRecentVideoShowcase() {
   const [loading, setLoading] = React.useState(true)
   const [error, setError] = React.useState(false)
   const [video, setVideo] = React.useState<VideoType | null>(null)

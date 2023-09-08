@@ -15,7 +15,7 @@ type Props = {
   border?: boolean
 }
 
-export default function NavCard({ item, border = false }: Props) {
+export function NavCard({ item, border = false }: Props) {
   return (
     <Link
       key={`nav-${item.name}`}

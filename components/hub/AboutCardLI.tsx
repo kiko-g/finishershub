@@ -7,7 +7,7 @@ type Props = {
   extraClassNames?: string
 }
 
-export default function AboutCardLI({ children, emoji, extraClassNames = "" }: Props) {
+export function AboutCardLI({ children, emoji, extraClassNames = "" }: Props) {
   return (
     <li
       className={classNames(
