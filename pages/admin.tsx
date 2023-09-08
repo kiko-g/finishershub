@@ -1,13 +1,12 @@
 import React, { useEffect, useMemo, useRef, useState } from "react"
 import classNames from "classnames"
 import useAccessDenied from "../hooks/useAccessDenied"
-import { AccessModal, Layout } from "../components/layout"
+import type { VideoMongoDBWithUrl } from "../@types"
+import { AccessModalCTA, Layout } from "../components/layout"
 import { useMediaQuery } from "usehooks-ts"
 import { VideoNotFound, VideoSkeleton } from "../components/videos"
-import type { VideoMongoDBWithUrl } from "../@types"
-import { ArrowPathIcon, ArrowTopRightOnSquareIcon, CheckIcon, PencilIcon } from "@heroicons/react/24/outline"
 import { FullAccessBadge, LimitedAccessBadge } from "../components/utils"
-import { AccessModalCTA } from "../components/hub"
+import { ArrowPathIcon, ArrowTopRightOnSquareIcon, CheckIcon } from "@heroicons/react/24/outline"
 
 type Props = {}
 

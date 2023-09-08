@@ -48,7 +48,7 @@ export default function Hub() {
 
 function Scrollers() {
   const scrollers = [
-    { name: "Showcase", icon: "🖼️", href: "#showcase" },
+    { name: "Catalogue", icon: "🖼️", href: "#showcase" },
     { name: "Access", icon: "🔐", href: "#access" },
     { name: "Facts", icon: "✅", href: "#info" },
     { name: "About", icon: "🔍", href: "#about" },

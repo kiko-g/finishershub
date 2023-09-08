@@ -1,6 +1,6 @@
 import React from "react"
 import { Layout } from "../components/layout"
-import { Catalogue, ViewTypeToggler } from "../components/lab"
+import { Catalogue } from "../components/lab"
 import Link from "next/link"
 import { ArrowTopRightOnSquareIcon } from "@heroicons/react/24/outline"
 
