@@ -1,10 +1,10 @@
-import React, { useState, useEffect, useMemo, useCallback, useRef } from 'react'
-import type { FilterType, VideoType, VideoTypeAPI } from '../@types'
-import useAccessDenied from '../hooks/useAccessDenied'
-import { shuffle } from '../utils'
-import { Layout, AccessModal, InvisbleTopLayer } from '../components/layout'
-import { FullAccessBadge, LimitedAccessBadge } from '../components/utils'
-import { ArrowLongLeftIcon, ArrowLongRightIcon } from '@heroicons/react/24/outline'
+import React, { useState, useEffect, useMemo, useCallback, useRef } from "react"
+import type { FilterType, VideoType, VideoTypeAPI } from "../@types"
+import useAccessDenied from "../hooks/useAccessDenied"
+import { shuffle } from "../utils"
+import { Layout, AccessModal, InvisbleTopLayer } from "../components/layout"
+import { FullAccessBadge, LimitedAccessBadge } from "../components/utils"
+import { ArrowLongLeftIcon, ArrowLongRightIcon } from "@heroicons/react/24/outline"
 import {
   AutoplayToggler,
   DeleteCookiesButton,
@@ -23,19 +23,19 @@ import {
   VideoOrderToggler,
   VideoPlayer,
   VideoSkeleton,
-} from '../components/videos'
-import { useSwipeable } from 'react-swipeable'
-import { useMediaQuery } from 'usehooks-ts'
+} from "../components/videos"
+import { useSwipeable } from "react-swipeable"
+import { useMediaQuery } from "usehooks-ts"
 
 export default function Casino() {
   const buttonControlsRef = useRef<HTMLDivElement | null>(null)
   const arenas: FilterType[] = [
-    { name: 'All', value: '' },
-    { name: 'Warzone 1', value: 'mw2019' },
-    { name: 'Warzone 2', value: 'mw2022' },
+    { name: "All", value: "" },
+    { name: "Warzone 1", value: "mw2019" },
+    { name: "Warzone 2", value: "mw2022" },
   ]
 
-  const isMobile = useMediaQuery('(max-width: 768px)')
+  const isMobile = useMediaQuery("(max-width: 768px)")
   const [loading, setLoading] = useState<boolean>(true)
   const [fetchError, setFetchError] = useState<boolean>(false)
   const [expandedView, setExpandedView] = useState<boolean>(false)
@@ -50,16 +50,13 @@ export default function Casino() {
 
   const limitedAccess = useMemo(() => accessDenied, [accessDenied])
   const video = useMemo(() => videos[index], [index, videos])
-  const ready = useMemo(
-    () => !loading && !fetchError && video.url !== undefined,
-    [loading, fetchError, video],
-  )
+  const ready = useMemo(() => !loading && !fetchError && video.url !== undefined, [loading, fetchError, video])
 
   const toastType = useMemo(() => {
-    if (fetchError) return 'error'
-    else if (loading) return 'warning'
-    else if (!loading && !fetchError) return 'success'
-    else return ''
+    if (fetchError) return "error"
+    else if (loading) return "warning"
+    else if (!loading && !fetchError) return "success"
+    else return ""
   }, [loading, fetchError])
 
   const prevVideo = useCallback(() => setIndex((prev) => prev - 1), [])
@@ -115,20 +112,20 @@ export default function Casino() {
       if (event.keyCode === 69 && limitedAccess === false) setExpandedView((prev) => !prev) // e key
     }
 
-    window.addEventListener('keydown', handleKeyDown)
+    window.addEventListener("keydown", handleKeyDown)
     return () => {
-      window.removeEventListener('keydown', handleKeyDown)
+      window.removeEventListener("keydown", handleKeyDown)
     }
   }, [nextVideo, prevVideo, limitedAccess])
 
   useEffect(() => {
     const timerA = setTimeout(() => {
-      if (buttonControlsRef.current) buttonControlsRef.current.classList.add('opacity-50')
+      if (buttonControlsRef.current) buttonControlsRef.current.classList.add("opacity-50")
     }, 4000)
 
     const timerB = setTimeout(() => {
-      if (buttonControlsRef.current) buttonControlsRef.current.classList.remove('opacity-50')
-      if (buttonControlsRef.current) buttonControlsRef.current.classList.add('opacity-0')
+      if (buttonControlsRef.current) buttonControlsRef.current.classList.remove("opacity-50")
+      if (buttonControlsRef.current) buttonControlsRef.current.classList.add("opacity-0")
     }, 8000)
 
     return () => {
@@ -142,7 +139,7 @@ export default function Casino() {
     <main className="group relative h-screen">
       <div
         ref={buttonControlsRef}
-        className="absolute right-2 top-auto bottom-0 lg:top-0 lg:bottom-auto z-50 flex opacity-10 flex-wrap flex-row items-center gap-2 self-end bg-white p-3 text-gray-800 transition-opacity duration-[2000] hover:opacity-100 dark:bg-slate-800 dark:text-white lg:max-w-full lg:flex-col lg:p-4"
+        className="absolute bottom-0 right-2 top-auto z-50 flex flex-row flex-wrap items-center gap-2 self-end bg-white p-3 text-gray-800 opacity-10 transition-opacity duration-[2000] hover:opacity-100 dark:bg-slate-800 dark:text-white lg:bottom-auto lg:top-0 lg:max-w-full lg:flex-col lg:p-4"
       >
         <FocusViewToggler hook={[expandedView, setExpandedView]} size="md" />
         <AutoplayToggler hook={[autoplay, setAutoplay]} size="md" />
@@ -179,22 +176,18 @@ export default function Casino() {
           <div className="flex flex-col justify-between gap-y-2 lg:flex-row lg:gap-x-6">
             <div className="text-lg font-normal">
               <div className="flex flex-wrap items-center justify-start gap-x-3 gap-y-1">
-                <h2 className="whitespace-nowrap text-4xl font-bold tracking-tight sm:text-5xl">
-                  Slot Machine
-                </h2>
+                <h2 className="whitespace-nowrap text-4xl font-bold tracking-tight sm:text-5xl">Slot Machine</h2>
                 {limitedAccess ? <LimitedAccessBadge /> : <FullAccessBadge />}
               </div>
               <p className="mt-2 text-sm">
-                More fun than a casino, especially because we don&apos;t take your money. Not sure
-                about the addiction part though.
+                More fun than a casino, especially because we don&apos;t take your money. Not sure about the addiction
+                part though.
               </p>
             </div>
 
             <div className="flex flex-row flex-wrap items-center justify-center gap-2 lg:mt-0 lg:flex-col">
               <div className="flex w-full items-center justify-end gap-x-2">
-                {limitedAccess ? (
-                  <AccessModal lockedHook={[accessDenied, setAccessDenied]} startOpen={false} />
-                ) : null}
+                {limitedAccess ? <AccessModal lockedHook={[accessDenied, setAccessDenied]} startOpen={false} /> : null}
                 <DeleteCookiesButton />
                 <FocusViewToggler hook={[expandedView, setExpandedView]} />
                 <VideoOrderToggler hook={[shuffled, setShuffled]} />
@@ -211,12 +204,7 @@ export default function Casino() {
           {/* Video */}
           <div className="relative w-full" {...handlers}>
             {ready ? (
-              <VideoPlayer
-                video={video}
-                autoplay={autoplay}
-                muted={muted}
-                key={`video-element-${video.index}`}
-              />
+              <VideoPlayer video={video} autoplay={autoplay} muted={muted} key={`video-element-${video.index}`} />
             ) : (
               <VideoSkeleton />
             )}

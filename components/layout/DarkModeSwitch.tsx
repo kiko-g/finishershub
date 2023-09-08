@@ -1,22 +1,22 @@
-import React, { useEffect } from 'react'
-import classNames from 'classnames'
+import React, { useEffect } from "react"
+import classNames from "classnames"
 
 type Props = {}
 
 export default function DarkModeSwitch({}: Props) {
   function disableTransitionsTemporarily() {
-    document.documentElement.classList.add('[&_*]:!transition-none')
+    document.documentElement.classList.add("[&_*]:!transition-none")
     window.setTimeout(() => {
-      document.documentElement.classList.remove('[&_*]:!transition-none')
+      document.documentElement.classList.remove("[&_*]:!transition-none")
     }, 0)
   }
 
   function toggleMode() {
     disableTransitionsTemporarily()
 
-    let darkModeMediaQuery = window.matchMedia('(prefers-color-scheme: dark)')
+    let darkModeMediaQuery = window.matchMedia("(prefers-color-scheme: dark)")
     let isSystemDarkMode = darkModeMediaQuery.matches
-    let isDarkMode = document.documentElement.classList.toggle('dark')
+    let isDarkMode = document.documentElement.classList.toggle("dark")
 
     if (isDarkMode === isSystemDarkMode) {
       delete window.localStorage.isDarkMode
@@ -36,14 +36,14 @@ export default function DarkModeSwitch({}: Props) {
           strokeLinejoin="round"
           aria-hidden="true"
           className={classNames(
-            'h-8 w-8 transition dark:hidden',
-            'fill-white',
-            'stroke-orange-400',
-            '[@media(prefers-color-scheme:dark)]:fill-orange-400',
-            '[@media(prefers-color-scheme:dark)]:stroke-orange-400',
-            'group-hover:fill-orange-400',
-            '[@media(prefers-color-scheme:dark)]:group-hover:fill-orange-50',
-            '[@media(prefers-color-scheme:dark)]:group-hover:stroke-orange-400',
+            "h-8 w-8 transition dark:hidden",
+            "fill-white",
+            "stroke-orange-400",
+            "[@media(prefers-color-scheme:dark)]:fill-orange-400",
+            "[@media(prefers-color-scheme:dark)]:stroke-orange-400",
+            "group-hover:fill-orange-400",
+            "[@media(prefers-color-scheme:dark)]:group-hover:fill-orange-50",
+            "[@media(prefers-color-scheme:dark)]:group-hover:stroke-orange-400",
           )}
         >
           <path d="M8 12.25A4.25 4.25 0 0 1 12.25 8v0a4.25 4.25 0 0 1 4.25 4.25v0a4.25 4.25 0 0 1-4.25 4.25v0A4.25 4.25 0 0 1 8 12.25v0Z"></path>
@@ -58,13 +58,13 @@ export default function DarkModeSwitch({}: Props) {
           viewBox="0 0 24 24"
           aria-hidden="true"
           className={classNames(
-            'hidden h-8 w-8 transition dark:block',
-            'stroke-blue-50',
-            '[@media(prefers-color-scheme:dark)]:fill-blue-400',
-            '[@media(prefers-color-scheme:dark)]:stroke-blue-400',
-            'group-hover:fill-blue-400',
-            '[@media(prefers-color-scheme:dark)]:group-hover:fill-blue-50',
-            '[@media(prefers-color-scheme:dark)]:group-hover:stroke-blue-400',
+            "hidden h-8 w-8 transition dark:block",
+            "stroke-blue-50",
+            "[@media(prefers-color-scheme:dark)]:fill-blue-400",
+            "[@media(prefers-color-scheme:dark)]:stroke-blue-400",
+            "group-hover:fill-blue-400",
+            "[@media(prefers-color-scheme:dark)]:group-hover:fill-blue-50",
+            "[@media(prefers-color-scheme:dark)]:group-hover:stroke-blue-400",
           )}
         >
           <path

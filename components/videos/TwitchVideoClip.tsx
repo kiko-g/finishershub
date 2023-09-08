@@ -1,5 +1,5 @@
-import React, { useState } from 'react'
-import VideoSkeleton from '../videos/VideoSkeleton'
+import React, { useState } from "react"
+import VideoSkeleton from "../videos/VideoSkeleton"
 
 type Props = {
   video: string
@@ -13,7 +13,7 @@ export default function TwitchVideoClip({ video, parent, muted = false, autoplay
 
   return (
     <>
-      <div className={`${loaded ? 'flex' : 'hidden'} h-full w-full rounded-xl shadow`}>
+      <div className={`${loaded ? "flex" : "hidden"} h-full w-full rounded-xl shadow`}>
         <div className="relative h-full w-full">
           <iframe
             sandbox="allow-scripts allow-same-origin"

@@ -1,5 +1,5 @@
-import { S3Client, GetObjectCommand } from '@aws-sdk/client-s3'
-import { getSignedUrl } from '@aws-sdk/s3-request-presigner'
+import { S3Client, GetObjectCommand } from "@aws-sdk/client-s3"
+import { getSignedUrl } from "@aws-sdk/s3-request-presigner"
 
 export const estabilishS3Connection = () => {
   return new S3Client({
@@ -15,7 +15,7 @@ export const getVideoUrl = async (s3Uri: string): Promise<string | null> => {
   // Extract bucket and key from the S3 URI
   const match = s3Uri.match(/^s3:\/\/([^/]+)\/(.+)$/)
   if (!match) {
-    console.error('Invalid S3 URI')
+    console.error("Invalid S3 URI")
     return null
   }
 

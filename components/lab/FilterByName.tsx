@@ -1,4 +1,4 @@
-import React from 'react'
+import React from "react"
 
 type Props = {
   hook: [string, React.Dispatch<React.SetStateAction<string>>]

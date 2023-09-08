@@ -1,6 +1,6 @@
-import React, { Fragment, useState } from 'react'
-import { Dialog, Transition } from '@headlessui/react'
-import { CheckIcon, InformationCircleIcon, XMarkIcon } from '@heroicons/react/24/outline'
+import React, { Fragment, useState } from "react"
+import { Dialog, Transition } from "@headlessui/react"
+import { CheckIcon, InformationCircleIcon, XMarkIcon } from "@heroicons/react/24/outline"
 
 type Props = {
   custom?: JSX.Element
@@ -73,23 +73,18 @@ const FinisherInfoModal = ({ custom }: Props) => {
                       className="flex items-center gap-x-1 rounded border border-rose-600/50 bg-rose-600/10 px-2 py-1 text-sm text-rose-800 transition hover:bg-rose-600 hover:text-white dark:bg-rose-600/20 dark:text-white dark:hover:bg-rose-600"
                     >
                       <span>Close</span>
-                      <XMarkIcon className="h-4 w-4" />{' '}
+                      <XMarkIcon className="h-4 w-4" />{" "}
                     </button>
                   </div>
 
                   <div className="mt-3 flex flex-col">
                     <p>
-                      The{' '}
-                      <strong className="text-primary dark:text-white dark:underline">
-                        lifetime finisher count
-                      </strong>{' '}
-                      is the <strong>sum of all the valid finishing moves</strong> performed by any
-                      member of the finishers club. This metric also applies to all players across
-                      the world.
+                      The{" "}
+                      <strong className="text-primary dark:text-white dark:underline">lifetime finisher count</strong>{" "}
+                      is the <strong>sum of all the valid finishing moves</strong> performed by any member of the
+                      finishers club. This metric also applies to all players across the world.
                     </p>
-                    <p className="mt-3 font-bold">
-                      A valid and truthful finisher must meet the following criteria:
-                    </p>
+                    <p className="mt-3 font-bold">A valid and truthful finisher must meet the following criteria:</p>
                     <ul className="ml-4 mt-1 flex list-disc flex-col gap-y-1 lg:gap-y-0.5">
                       <li>Finishing move is performed on Warzone. ✅</li>
                       <li>Finishing move is performed on non-downed players. ✅</li>
@@ -97,18 +92,17 @@ const FinisherInfoModal = ({ custom }: Props) => {
                     <p className="mt-3 font-bold">Other key notes to keep in mind:</p>
                     <ul className="ml-4 mt-1 flex list-decimal flex-col gap-y-1 lg:gap-y-0.5">
                       <li>
-                        Finishing moves on downed players are <strong>not counted</strong> and{' '}
+                        Finishing moves on downed players are <strong>not counted</strong> and{" "}
                         <strong>often considered frowned upon</strong>. ⚠️
                       </li>
                       <li>
-                        Finishing moves performed on players that have recently used their{' '}
-                        <strong>self-revive</strong> are allowed and considered a{' '}
-                        <strong>noble practice</strong>. 🥇
+                        Finishing moves performed on players that have recently used their <strong>self-revive</strong>{" "}
+                        are allowed and considered a <strong>noble practice</strong>. 🥇
                       </li>
                       <li>
-                        Even though finishing moves performed on arenas like Multiplayer{' '}
-                        <strong>do not count towards the lifetime finisher count</strong>, the
-                        Finisher Club still highly encourages performing them whenever possible. ℹ️
+                        Even though finishing moves performed on arenas like Multiplayer{" "}
+                        <strong>do not count towards the lifetime finisher count</strong>, the Finisher Club still
+                        highly encourages performing them whenever possible. ℹ️
                       </li>
                     </ul>
                   </div>

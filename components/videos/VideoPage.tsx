@@ -1,10 +1,10 @@
-import React, { useEffect, useMemo, useState } from 'react'
-import { Footer, Header, Seo } from '../layout'
-import { SingleVideoShowcase, VideoNotFound, VideoSkeleton } from '.'
-import type { VideoType, VideoTypeAPI } from '../../@types'
+import React, { useEffect, useMemo, useState } from "react"
+import { Footer, Header, Seo } from "../layout"
+import { SingleVideoShowcase, VideoNotFound, VideoSkeleton } from "."
+import type { VideoType, VideoTypeAPI } from "../../@types"
 
 type Props = {
-  game: 'mw2019' | 'mw2022' | ''
+  game: "mw2019" | "mw2022" | ""
   videoIndex: number
 }
 
@@ -17,7 +17,7 @@ export default function VideoPage({ game, videoIndex }: Props) {
 
   useEffect(() => {
     if (videoIndex === -1) return
-    const gameRoute = game === '' ? '' : `/${game}`
+    const gameRoute = game === "" ? "" : `/${game}`
     const url = `/api/s3${gameRoute}/${videoIndex}`
 
     fetch(url)

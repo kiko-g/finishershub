@@ -1,10 +1,10 @@
-import React from 'react'
-import Image from 'next/image'
+import React from "react"
+import Image from "next/image"
 
 type Props = {}
 
 export default function TheRock({}: Props) {
-  const title = 'The Rock is sus of you mate.'
+  const title = "The Rock is sus of you mate."
 
   return (
     <Image

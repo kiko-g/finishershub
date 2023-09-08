@@ -1,6 +1,6 @@
-import Link from 'next/link'
-import React from 'react'
-import { socials } from '../../utils/data'
+import Link from "next/link"
+import React from "react"
+import { socials } from "../../utils/data"
 
 type Props = {
   siteTitle: string
@@ -27,16 +27,11 @@ export default function Footer({ siteTitle }: Props) {
               <svg
                 className="h-5 w-5 lg:h-6 lg:w-6"
                 fill="currentColor"
-                viewBox={social.viewBox ? social.viewBox : '0 0 24 24'}
+                viewBox={social.viewBox ? social.viewBox : "0 0 24 24"}
                 aria-hidden="true"
               >
                 {social.svg.map((d, dIdx) => (
-                  <path
-                    fillRule="evenodd"
-                    d={d}
-                    clipRule="evenodd"
-                    key={`social-${socialIdx}-svg-${dIdx}`}
-                  />
+                  <path fillRule="evenodd" d={d} clipRule="evenodd" key={`social-${socialIdx}-svg-${dIdx}`} />
                 ))}
               </svg>
             </Link>

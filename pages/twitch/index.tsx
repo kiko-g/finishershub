@@ -1,12 +1,12 @@
-import React, { useState, useEffect, useMemo } from 'react'
-import classNames from 'classnames'
-import useAccessDenied from '../../hooks/useAccessDenied'
-import { useMediaQuery } from 'usehooks-ts'
-import { shuffle } from '../../utils'
-import { clearCache, isStorageValid, writeVideosStorage } from '../../utils/storage'
-import { Layout, AccessModal, InvisbleTopLayer } from '../../components/layout'
-import { FullAccessBadge, LimitedAccessBadge } from '../../components/utils'
-import { PlusIcon } from '@heroicons/react/24/solid'
+import React, { useState, useEffect, useMemo } from "react"
+import classNames from "classnames"
+import useAccessDenied from "../../hooks/useAccessDenied"
+import { useMediaQuery } from "usehooks-ts"
+import { shuffle } from "../../utils"
+import { clearCache, isStorageValid, writeVideosStorage } from "../../utils/storage"
+import { Layout, AccessModal, InvisbleTopLayer } from "../../components/layout"
+import { FullAccessBadge, LimitedAccessBadge } from "../../components/utils"
+import { PlusIcon } from "@heroicons/react/24/solid"
 import {
   ViewToggler,
   AutoplayToggler,
@@ -15,17 +15,17 @@ import {
   TwitchVideoClip,
   DeleteCookiesButton,
   VideoSkeleton,
-} from '../../components/videos'
-import DelayDisclaimer from '../../components/videos/DelayDisclaimer'
+} from "../../components/videos"
+import DelayDisclaimer from "../../components/videos/DelayDisclaimer"
 
 export default function IndexPage() {
-  const isMobile = useMediaQuery('(max-width: 768px)')
-  const sensitive = process.env.NEXT_PUBLIC_SENSITIVE! === 'false' ? false : true
+  const isMobile = useMediaQuery("(max-width: 768px)")
+  const sensitive = process.env.NEXT_PUBLIC_SENSITIVE! === "false" ? false : true
 
   const [loading, setLoading] = useState<boolean>(true)
   const [fetchError, setFetchError] = useState<boolean>(false)
 
-  const [hostname, setHostname] = useState<string>('')
+  const [hostname, setHostname] = useState<string>("")
   const [videos, setVideos] = useState<string[]>([])
   const [accessDenied, setAccessDenied] = useAccessDenied()
   const [view, setView] = useState<boolean>(true)
@@ -37,14 +37,14 @@ export default function IndexPage() {
 
   const limitedAccess = useMemo(() => sensitive && accessDenied, [sensitive, accessDenied])
   const toastType = useMemo(() => {
-    if (fetchError) return 'error'
-    else if (loading) return 'warning'
-    else if (!loading && !fetchError) return 'success'
-    else return ''
+    if (fetchError) return "error"
+    else if (loading) return "warning"
+    else if (!loading && !fetchError) return "success"
+    else return ""
   }, [loading, fetchError])
 
   const shuffleAndSetVideos = () => {
-    const videosStr = localStorage.getItem('finishershub.videos') as string
+    const videosStr = localStorage.getItem("finishershub.videos") as string
     const videosParsed = JSON.parse(videosStr) as string[]
     setVideos(shuffle(videosParsed))
   }
@@ -62,7 +62,7 @@ export default function IndexPage() {
       shuffleAndSetVideos()
     } else {
       clearCache(true)
-      fetch('/api/twitch')
+      fetch("/api/twitch")
         .then((res) => res.json())
         .then((allEmbedUrls) => {
           setLoading(false)
@@ -78,7 +78,7 @@ export default function IndexPage() {
     }
 
     // get hostname if not in ssr
-    if (typeof window !== 'undefined') setHostname(window.location.hostname)
+    if (typeof window !== "undefined") setHostname(window.location.hostname)
   }, [])
 
   useEffect(() => {
@@ -98,8 +98,8 @@ export default function IndexPage() {
           <div className="flex flex-col justify-center gap-2">
             <h2 className="text-4xl font-bold tracking-tight sm:text-5xl">Finishers Hub</h2>
             <p className="grow text-lg font-normal">
-              The place for all finisher related content. Chaotic, outrageous, lawless on the fence
-              of criminality. Perfectly unbalanced. As all things should be.
+              The place for all finisher related content. Chaotic, outrageous, lawless on the fence of criminality.
+              Perfectly unbalanced. As all things should be.
             </p>
           </div>
           <div className="mt-1 flex flex-row items-center justify-end gap-3 lg:mt-0 lg:flex-col">
@@ -121,21 +121,15 @@ export default function IndexPage() {
 
         <div
           className={classNames(
-            'relative',
-            view ? 'lg:grid-cols-2' : 'lg:grid-cols-3',
-            'grid grid-cols-1 gap-6 md:mt-0 md:gap-5',
+            "relative",
+            view ? "lg:grid-cols-2" : "lg:grid-cols-3",
+            "grid grid-cols-1 gap-6 md:mt-0 md:gap-5",
           )}
         >
           {limitedAccess ? <InvisbleTopLayer /> : null}
           {videos.length > 0
             ? videos.slice(0, clipsShown).map((video: string, videoIdx: number) => {
-                const play = isMobile
-                  ? videoIdx <= showMoreCount
-                    ? true
-                    : autoplay
-                  : videoIdx === 0
-                  ? true
-                  : autoplay
+                const play = isMobile ? (videoIdx <= showMoreCount ? true : autoplay) : videoIdx === 0 ? true : autoplay
                 return (
                   <TwitchVideoClip
                     muted={muted}
@@ -156,7 +150,7 @@ export default function IndexPage() {
             type="button"
             onClick={loadMore}
             className={classNames(
-              videos.length === 0 ? 'hidden' : 'inline-flex',
+              videos.length === 0 ? "hidden" : "inline-flex",
               `items-center rounded border border-transparent bg-primary/60 px-4 
               py-2 text-white shadow-sm transition hover:bg-primary 
               hover:bg-primary/90 focus:border-transparent focus:ring-2 

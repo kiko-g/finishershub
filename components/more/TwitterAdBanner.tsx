@@ -1,6 +1,6 @@
-import React from 'react'
-import Link from 'next/link'
-import { ArrowLongRightIcon } from '@heroicons/react/24/outline'
+import React from "react"
+import Link from "next/link"
+import { ArrowLongRightIcon } from "@heroicons/react/24/outline"
 
 type Props = {}
 
@@ -27,30 +27,24 @@ export default function TwitterAdBanner({}: Props) {
       <div className="flex flex-1 flex-col justify-between gap-2 font-light">
         <div className="flex flex-col gap-2">
           <p>
-            While we are working on getting Finishers Hub to the{' '}
-            <span className="text-slate-700 dark:text-pink-600">next level</span>, you can check out{' '}
-            <span className="text-slate-700 dark:text-pink-600">new content</span> on our{' '}
-            <Link
-              target="_blank"
-              href="https://twitter.com/finishershub"
-              className="text-[#1da1f2] hover:underline"
-            >
+            While we are working on getting Finishers Hub to the{" "}
+            <span className="text-slate-700 dark:text-pink-600">next level</span>, you can check out{" "}
+            <span className="text-slate-700 dark:text-pink-600">new content</span> on our{" "}
+            <Link target="_blank" href="https://twitter.com/finishershub" className="text-[#1da1f2] hover:underline">
               new twitter page
             </Link>
-            , where we post new clips regularly. This content is not available on the website yet,
-            so make sure to follow us. This page represents a big breakthrough for us, and we are
-            excited to announce it as a temporary solution to delivering new content. In the near
-            future we are planning on:
+            , where we post new clips regularly. This content is not available on the website yet, so make sure to
+            follow us. This page represents a big breakthrough for us, and we are excited to announce it as a temporary
+            solution to delivering new content. In the near future we are planning on:
           </p>
 
           <ul className="ml-0.5 font-light">
             <li>
-              <span className="mr-1">⏳</span> Adding admin functionality for users to upload
-              content to the platform.
+              <span className="mr-1">⏳</span> Adding admin functionality for users to upload content to the platform.
             </li>
             <li>
-              <span className="mr-1">⏳</span> Metadata and information for the clips that will make
-              them easier to find in the platform.
+              <span className="mr-1">⏳</span> Metadata and information for the clips that will make them easier to find
+              in the platform.
             </li>
           </ul>
         </div>

@@ -1,8 +1,8 @@
-import React from 'react'
-import { Layout } from '../components/layout'
-import { Catalogue, ViewTypeToggler } from '../components/lab'
-import Link from 'next/link'
-import { ArrowTopRightOnSquareIcon } from '@heroicons/react/24/outline'
+import React from "react"
+import { Layout } from "../components/layout"
+import { Catalogue, ViewTypeToggler } from "../components/lab"
+import Link from "next/link"
+import { ArrowTopRightOnSquareIcon } from "@heroicons/react/24/outline"
 
 type Props = {}
 
@@ -23,9 +23,7 @@ export default function Lab({}: Props) {
           <div className="flex items-start justify-between">
             {/* Catalogue Header */}
             <div>
-              <h2 className="mb-1 text-2xl font-bold tracking-tight sm:text-3xl">
-                MW2 Finishers Catalogue
-              </h2>
+              <h2 className="mb-1 text-2xl font-bold tracking-tight sm:text-3xl">MW2 Finishers Catalogue</h2>
               <p className="mb-4 grow text-base font-normal">
                 A comprehensive list of all the finishers in MW2 (released in 2022).
               </p>

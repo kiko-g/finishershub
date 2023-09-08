@@ -1,4 +1,4 @@
-import { VideoPage } from '../../components/videos'
+import { VideoPage } from "../../components/videos"
 
 type Props = {}
 

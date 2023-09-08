@@ -1,4 +1,4 @@
-import { LockClosedIcon } from '@heroicons/react/24/outline'
+import { LockClosedIcon } from "@heroicons/react/24/outline"
 
 type Props = {}
 
@@ -14,9 +14,7 @@ export default function DummyLockedContent({}: Props) {
         bg-gray-900/70 px-3 py-2 text-white dark:border-white/50 dark:bg-white/20"
       >
         <LockClosedIcon className="h-12 w-10" />
-        <span className="uppercase tracking-tight">
-          If you&apos;re a member, sign in and get on the grind.
-        </span>
+        <span className="uppercase tracking-tight">If you&apos;re a member, sign in and get on the grind.</span>
       </div>
     </div>
   )

@@ -1,11 +1,11 @@
-import React, { useEffect, useState } from 'react'
-import { useRouter } from 'next/router'
-import { VideoPage } from '../../../components/videos'
+import React, { useEffect, useState } from "react"
+import { useRouter } from "next/router"
+import { VideoPage } from "../../../components/videos"
 
 type Props = {}
 
 export default function VideoMW2019({}: Props) {
-  const game = 'mw2019'
+  const game = "mw2019"
   const [videoIndex, setVideoIndex] = useState<number>(-1)
 
   const router = useRouter()

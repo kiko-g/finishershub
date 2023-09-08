@@ -1,6 +1,6 @@
-import React from 'react'
-import Link from 'next/link'
-import { ArrowLongRightIcon } from '@heroicons/react/24/outline'
+import React from "react"
+import Link from "next/link"
+import { ArrowLongRightIcon } from "@heroicons/react/24/outline"
 
 type Props = {}
 
@@ -11,7 +11,7 @@ export default function YoutubeAdBanner({}: Props) {
       <div className="flex flex-1 flex-col justify-between gap-4 font-light">
         <div className="flex flex-col gap-y-3">
           <p>
-            We also made some{' '}
+            We also made some{" "}
             <Link
               target="_blank"
               href="https://www.youtube.com/@finishershub/videos"
@@ -19,11 +19,10 @@ export default function YoutubeAdBanner({}: Props) {
             >
               compilations on YouTube
             </Link>
-            , and some even have chapters with descriptions. Stop by and show some love, I&apos; am
-            confident you will not regret it, it&apos;s fun stuff. We hope to deliver more content
-            on YouTube, with good editing rather than just long highlight reels. Here are the{' '}
-            <span className="font-bold text-rose-800">amusingly obscene</span> videos you should not
-            miss out on:
+            , and some even have chapters with descriptions. Stop by and show some love, I&apos; am confident you will
+            not regret it, it&apos;s fun stuff. We hope to deliver more content on YouTube, with good editing rather
+            than just long highlight reels. Here are the{" "}
+            <span className="font-bold text-rose-800">amusingly obscene</span> videos you should not miss out on:
           </p>
           <ul className="ml-0.5 font-light">
             <li>
@@ -43,7 +42,7 @@ export default function YoutubeAdBanner({}: Props) {
                 href="https://www.youtube.com/watch?v=MmGCN5L4kuo"
                 className="font-normal hover:underline"
               >
-                The lost files of the International Finisher&apos; Day (19 July 2021){' '}
+                The lost files of the International Finisher&apos; Day (19 July 2021){" "}
                 <span className="font-light text-gray-600 dark:text-gray-400">w/ chapters</span>.
               </Link>
             </li>

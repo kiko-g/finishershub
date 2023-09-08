@@ -1,13 +1,13 @@
-import React, { useMemo, useState } from 'react'
-import Image from 'next/image'
-import ClaimIdentity from './ClaimIdentity'
-import ChangePassword from './ChangePassword'
-import FinisherInfoModal from './FinisherInfoModal'
-import MemberCardSelectArena from './MemberCardSelectArena'
-import RegistryAPI from '../../utils/api/registry'
-import useLocked from '../../hooks/useLocked'
-import { type FinishersClubMember } from '../../@types'
-import { MinusCircleIcon, PlusCircleIcon } from '@heroicons/react/24/outline'
+import React, { useMemo, useState } from "react"
+import Image from "next/image"
+import ClaimIdentity from "./ClaimIdentity"
+import ChangePassword from "./ChangePassword"
+import FinisherInfoModal from "./FinisherInfoModal"
+import MemberCardSelectArena from "./MemberCardSelectArena"
+import RegistryAPI from "../../utils/api/registry"
+import useLocked from "../../hooks/useLocked"
+import { type FinishersClubMember } from "../../@types"
+import { MinusCircleIcon, PlusCircleIcon } from "@heroicons/react/24/outline"
 
 type Props = {
   member: FinishersClubMember
@@ -16,10 +16,7 @@ type Props = {
 
 export default function MemberCard({ member, updateMembers }: Props) {
   const arenas = useMemo(
-    () => [
-      { name: 'All' },
-      ...member.finishers.map((count, index) => ({ name: `Warzone ${index + 1}` })),
-    ],
+    () => [{ name: "All" }, ...member.finishers.map((count, index) => ({ name: `Warzone ${index + 1}` }))],
     [member],
   )
 
@@ -63,15 +60,13 @@ export default function MemberCard({ member, updateMembers }: Props) {
         <div className="flex h-full flex-col justify-between gap-4">
           {/* Header */}
           <div>
-            <h3 className="text-2xl font-medium capitalize text-teal-700 dark:text-teal-400">
-              {member.name}
-            </h3>
+            <h3 className="text-2xl font-medium capitalize text-teal-700 dark:text-teal-400">{member.name}</h3>
             <p className="font-normal lowercase tracking-tight text-gray-500 dark:text-white">
               <span className="font-bold">aka&nbsp;</span>
               {member.aliases.map((alias: string, aliasIdx: number) => (
                 <span key={`alias-${member.id}.${aliasIdx}`}>
                   {alias}
-                  {member.aliases.length - 1 === aliasIdx ? '' : ', '}
+                  {member.aliases.length - 1 === aliasIdx ? "" : ", "}
                 </span>
               ))}
             </p>
@@ -93,11 +88,7 @@ export default function MemberCard({ member, updateMembers }: Props) {
                 disabled={locked || arenaIndex === 0}
                 onClick={addFinisher}
                 className="inline-flex w-full items-center justify-center gap-x-2 rounded bg-blue-500 p-2 text-center text-sm font-medium tracking-tight text-white transition hover:opacity-80 disabled:cursor-not-allowed disabled:opacity-50"
-                title={
-                  locked
-                    ? `You need to prove you are ${member.name} first`
-                    : `Add 1 finisher to ${member.name}`
-                }
+                title={locked ? `You need to prove you are ${member.name} first` : `Add 1 finisher to ${member.name}`}
               >
                 <span>Add</span>
                 <PlusCircleIcon className="h-5 w-5" />
@@ -109,9 +100,7 @@ export default function MemberCard({ member, updateMembers }: Props) {
                 onClick={removeFinisher}
                 className="inline-flex w-full items-center justify-center gap-x-2 rounded bg-rose-600 p-2 text-center text-sm font-medium tracking-tight text-white transition hover:opacity-80 disabled:cursor-not-allowed disabled:opacity-50"
                 title={
-                  locked
-                    ? `You need to prove you are ${member.name} first`
-                    : `Remove 1 finisher to ${member.name}`
+                  locked ? `You need to prove you are ${member.name} first` : `Remove 1 finisher to ${member.name}`
                 }
               >
                 <span>Remove</span>

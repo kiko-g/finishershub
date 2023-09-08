@@ -1,10 +1,10 @@
-import React from 'react'
-import Image from 'next/image'
+import React from "react"
+import Image from "next/image"
 
 type Props = {}
 
 export default function Doeu({}: Props) {
-  const title = 'If you know you know.'
+  const title = "If you know you know."
 
   return (
     <Image

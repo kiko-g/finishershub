@@ -1,13 +1,13 @@
-import React, { Fragment, useState } from 'react'
-import classNames from 'classnames'
-import Image from 'next/image'
-import { Listbox, Transition } from '@headlessui/react'
-import useAccessDenied from '../hooks/useAccessDenied'
-import { Layout, AccessModal, ComingSoon } from '../components/layout'
-import { FullAccessBadge, LimitedAccessBadge } from '../components/utils'
-import { DummyLockedContent } from '../components/videos'
-import { ArrowUpTrayIcon } from '@heroicons/react/24/outline'
-import { CheckIcon, ChevronUpDownIcon } from '@heroicons/react/20/solid'
+import React, { Fragment, useState } from "react"
+import classNames from "classnames"
+import Image from "next/image"
+import { Listbox, Transition } from "@headlessui/react"
+import useAccessDenied from "../hooks/useAccessDenied"
+import { Layout, AccessModal, ComingSoon } from "../components/layout"
+import { FullAccessBadge, LimitedAccessBadge } from "../components/utils"
+import { DummyLockedContent } from "../components/videos"
+import { ArrowUpTrayIcon } from "@heroicons/react/24/outline"
+import { CheckIcon, ChevronUpDownIcon } from "@heroicons/react/20/solid"
 
 type Member = {
   name: string
@@ -16,17 +16,17 @@ type Member = {
 export default function CreatePage() {
   const wip = true
   const members: Member[] = [
-    { name: 'Frankie' },
-    { name: 'Levels' },
-    { name: 'Reicalo' },
-    { name: 'David' },
-    { name: 'Koba' },
+    { name: "Frankie" },
+    { name: "Levels" },
+    { name: "Reicalo" },
+    { name: "David" },
+    { name: "Koba" },
   ]
 
   const [accessDenied, setAccessDenied] = useAccessDenied()
 
   const [selected, setSelected] = useState<Member | null>(null)
-  const [clipTitle, setClipTitle] = useState('')
+  const [clipTitle, setClipTitle] = useState("")
   const [pernoca, setPernoca] = useState(false)
   const [scandalous, setScandalous] = useState(false)
   const [sensititveAudio, setSensitiveAudio] = useState(false)
@@ -41,8 +41,7 @@ export default function CreatePage() {
               {accessDenied ? <LimitedAccessBadge /> : <FullAccessBadge />}
             </div>
             <p className="mt-2">
-              This is where we build memories. History needs to be written. For members and members
-              only.
+              This is where we build memories. History needs to be written. For members and members only.
             </p>
           </div>
         </div>
@@ -110,9 +109,7 @@ export default function CreatePage() {
                       {/* Protagonist */}
                       <Listbox value={selected} onChange={setSelected}>
                         <div className="relative">
-                          <Listbox.Label className="block text-sm font-medium">
-                            Protagonist
-                          </Listbox.Label>
+                          <Listbox.Label className="block text-sm font-medium">Protagonist</Listbox.Label>
                           <Listbox.Button
                             as="button"
                             className="custom-input relative mt-1 flex w-full justify-between bg-gray-50 dark:bg-gray-100/5"
@@ -127,10 +124,7 @@ export default function CreatePage() {
                               </span>
                             )}
                             <span className="pointer-events-none absolute inset-y-0 right-0 flex items-center pr-2">
-                              <ChevronUpDownIcon
-                                className="h-5 w-5 text-gray-400"
-                                aria-hidden="true"
-                              />
+                              <ChevronUpDownIcon className="h-5 w-5 text-gray-400" aria-hidden="true" />
                             </span>
                           </Listbox.Button>
                           <Transition
@@ -145,14 +139,13 @@ export default function CreatePage() {
                           dark:bg-darkest/95 sm:text-sm"
                             >
                               {members.map((member, memberIdx) => {
-                                const isSelected =
-                                  selected !== null && selected.name === member.name
+                                const isSelected = selected !== null && selected.name === member.name
                                 return (
                                   <Listbox.Option
                                     key={memberIdx}
                                     className={({ active }) =>
                                       classNames(
-                                        'relative cursor-pointer select-none py-2 pl-10 pr-4',
+                                        "relative cursor-pointer select-none py-2 pl-10 pr-4",
                                         isSelected
                                           ? `bg-primary/75 font-semibold text-white 
                                         hover:opacity-80 dark:bg-secondary/75 dark:text-white`
@@ -167,9 +160,7 @@ export default function CreatePage() {
                                   >
                                     <>
                                       <span
-                                        className={`block truncate ${
-                                          isSelected ? 'font-semibold' : 'font-normal'
-                                        }`}
+                                        className={`block truncate ${isSelected ? "font-semibold" : "font-normal"}`}
                                       >
                                         {member.name}
                                       </span>

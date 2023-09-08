@@ -35,7 +35,7 @@ export type FinishersClubMember = {
   imgurUrl: string
 }
 
-export type CatalogueItemStatus = 'Yes' | 'No' | 'Almost' | ''
+export type CatalogueItemStatus = "Yes" | "No" | "Almost" | ""
 
 export type CatalogueItem = {
   name: string
@@ -55,15 +55,15 @@ export type VideoType = {
   index: number
   url: string
   date: string
-  game: 'mw2019' | 'mw2022'
-  filteredGame: 'mw2019' | 'mw2022' | ''
+  game: "mw2019" | "mw2022"
+  filteredGame: "mw2019" | "mw2022" | ""
   filename?: string
 }
 
 export type VideoTypeAPI = {
   url: string
   date: string
-  game: 'mw2019' | 'mw2022'
+  game: "mw2019" | "mw2022"
   filename: string
 }
 
@@ -73,9 +73,9 @@ export type VideoAPIAndIndex = {
 }
 
 export type FilterType =
-  | { name: 'All'; value: '' }
-  | { name: 'Warzone 1'; value: 'mw2019' }
-  | { name: 'Warzone 2'; value: 'mw2022' }
+  | { name: "All"; value: "" }
+  | { name: "Warzone 1"; value: "mw2019" }
+  | { name: "Warzone 2"; value: "mw2022" }
 
 export interface VideoMongoDB {
   _id: string

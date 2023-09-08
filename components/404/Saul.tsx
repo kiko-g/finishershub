@@ -1,10 +1,10 @@
-import Image from 'next/image'
-import React from 'react'
+import Image from "next/image"
+import React from "react"
 
 type Props = {}
 
 export default function Saul({}: Props) {
-  const title = 'Your honor I think we got off on the wrong foot.'
+  const title = "Your honor I think we got off on the wrong foot."
 
   return (
     <Image

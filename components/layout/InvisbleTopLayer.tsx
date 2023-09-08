@@ -1,5 +1,5 @@
-import classNames from 'classnames'
-import React from 'react'
+import classNames from "classnames"
+import React from "react"
 
 type Props = {}
 
@@ -15,12 +15,11 @@ export default function InvisbleTopLayer({}: Props) {
     >
       <span
         className={classNames(
-          help ? 'block' : 'hidden',
+          help ? "block" : "hidden",
           `z-40 mx-auto mt-6 w-1/2 animate-pulse bg-navy/80 px-4 py-4 text-center font-lexend font-normal text-white`,
         )}
       >
-        Click the green key icon to open the access modal and gain full access to{' '}
-        <strong>Finishers Hub</strong>.
+        Click the green key icon to open the access modal and gain full access to <strong>Finishers Hub</strong>.
       </span>
     </div>
   )

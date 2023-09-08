@@ -1,14 +1,14 @@
-import React from 'react'
-import { clearCache } from '../../utils/storage'
-import { FireIcon } from '@heroicons/react/24/outline'
+import React from "react"
+import { clearCache } from "../../utils/storage"
+import { FireIcon } from "@heroicons/react/24/outline"
 
 type Props = {}
 
 export default function DeleteCookiesButton({}: Props) {
   const deleteData = () => {
-    if (typeof window === 'undefined') return
+    if (typeof window === "undefined") return
 
-    if (window.confirm('Clear all site data and reload the page?')) {
+    if (window.confirm("Clear all site data and reload the page?")) {
       clearCache()
       window.location.reload()
     }

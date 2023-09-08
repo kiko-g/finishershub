@@ -1,12 +1,12 @@
-import axios, { type AxiosInstance } from 'axios'
+import axios, { type AxiosInstance } from "axios"
 
 const backend: AxiosInstance = axios.create({
-  baseURL: '/api/mongo/registry',
+  baseURL: "/api/mongo/registry",
   headers: {
-    Accept: 'application/json',
-    'Access-Control-Allow-Origin': '*',
-    'Access-Control-Allow-Headers': '*',
-    'Access-Control-Allow-Methods': 'GET,PUT,POST,DELETE,PATCH,OPTIONS',
+    Accept: "application/json",
+    "Access-Control-Allow-Origin": "*",
+    "Access-Control-Allow-Headers": "*",
+    "Access-Control-Allow-Methods": "GET,PUT,POST,DELETE,PATCH,OPTIONS",
   },
 })
 

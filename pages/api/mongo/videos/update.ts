@@ -1,7 +1,7 @@
-import type { NextApiRequest, NextApiResponse } from 'next'
-import { allowCors, connectMongoDB } from '../../../../config'
-import Videos from '../../../../models/videos'
-import { VideoMongoDB } from '../../../../@types'
+import type { NextApiRequest, NextApiResponse } from "next"
+import { allowCors, connectMongoDB } from "../../../../config"
+import Videos from "../../../../models/videos"
+import { VideoMongoDB } from "../../../../@types"
 
 // @desc     Update a video document
 // @route    PUT /api/mongo/videos/urls
@@ -11,8 +11,8 @@ export default async function updateAllVideos(req: NextApiRequest, res: NextApiR
   await connectMongoDB()
 
   // Ensure the request method is PUT
-  if (req.method !== 'PUT') {
-    return res.status(405).json({ message: 'Method not allowed' })
+  if (req.method !== "PUT") {
+    return res.status(405).json({ message: "Method not allowed" })
   }
 
   // Parse the body
@@ -27,12 +27,12 @@ export default async function updateAllVideos(req: NextApiRequest, res: NextApiR
     )
 
     if (!updatedVideo) {
-      return res.status(404).json({ message: 'Video not found' })
+      return res.status(404).json({ message: "Video not found" })
     }
 
     res.status(200).json(updatedVideo)
   } catch (error) {
-    const errorMessage = error instanceof Error ? error.message : 'Something went wrong'
+    const errorMessage = error instanceof Error ? error.message : "Something went wrong"
     res.status(500).json({ message: errorMessage })
   }
 }

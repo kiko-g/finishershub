@@ -1,6 +1,6 @@
-import React from 'react'
-import type { VideoAPIAndIndex, VideoType } from '../../@types'
-import { VideoSkeleton, VideoNotFound, ShareVideo, PopOpenVideo } from '../videos'
+import React from "react"
+import type { VideoAPIAndIndex, VideoType } from "../../@types"
+import { VideoSkeleton, VideoNotFound, ShareVideo, PopOpenVideo } from "../videos"
 
 type Props = {}
 
@@ -10,7 +10,7 @@ export default function MostRecentVideoShowcase({}: Props) {
   const [video, setVideo] = React.useState<VideoType | null>(null)
 
   React.useEffect(() => {
-    fetch('/api/s3/last')
+    fetch("/api/s3/last")
       .then((res) => {
         if (res.status === 404) {
           setError(true)
@@ -26,7 +26,7 @@ export default function MostRecentVideoShowcase({}: Props) {
           index: res.index,
           date: res.video.date,
           game: res.video.game,
-          filteredGame: 'mw2022',
+          filteredGame: "mw2022",
           filename: res.video.filename,
         })
       })

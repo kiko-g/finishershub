@@ -1,10 +1,10 @@
-import React, { Dispatch, Fragment, SetStateAction, useMemo } from 'react'
-import Image from 'next/image'
-import classNames from 'classnames'
-import { CatalogueItem as CatalogueItemType } from '../../@types'
-import { BoltIcon, LockClosedIcon, CheckCircleIcon } from '@heroicons/react/24/solid'
-import { Dialog, Transition } from '@headlessui/react'
-import { XMarkIcon } from '@heroicons/react/24/outline'
+import React, { Dispatch, Fragment, SetStateAction, useMemo } from "react"
+import Image from "next/image"
+import classNames from "classnames"
+import { CatalogueItem as CatalogueItemType } from "../../@types"
+import { BoltIcon, LockClosedIcon, CheckCircleIcon } from "@heroicons/react/24/solid"
+import { Dialog, Transition } from "@headlessui/react"
+import { XMarkIcon } from "@heroicons/react/24/outline"
 
 type Props = {
   item: CatalogueItemType
@@ -13,38 +13,32 @@ type Props = {
 }
 
 export default function CatalogueItem({ item, chosen, setChosen }: Props) {
-  const uncertainty = item.accurate === 'Yes' ? 0.1 : item.accurate === 'Almost' ? 0.2 : 0.4
+  const uncertainty = item.accurate === "Yes" ? 0.1 : item.accurate === "Almost" ? 0.2 : 0.4
   const isChosen = useMemo(() => chosen === item.name, [chosen, item.name])
   const speedText =
-    Number(item.ttrk) < 2.3
-      ? 'Ultra'
-      : Number(item.ttrk) < 2.8
-      ? 'Fast'
-      : Number(item.ttrk) < 3
-      ? 'Ok'
-      : 'Slow'
+    Number(item.ttrk) < 2.3 ? "Ultra" : Number(item.ttrk) < 2.8 ? "Fast" : Number(item.ttrk) < 3 ? "Ok" : "Slow"
 
   const slipperyText =
     Number(item.slippery) === 1
-      ? 'A'
+      ? "A"
       : Number(item.slippery) === 2
-      ? 'B'
+      ? "B"
       : Number(item.slippery) === 3
-      ? 'C'
+      ? "C"
       : Number(item.slippery) === 4
-      ? 'D'
-      : 'E'
+      ? "D"
+      : "E"
 
   const ledgeDangerText =
     Number(item.ledgeDanger) === 1
-      ? 'A'
+      ? "A"
       : Number(item.ledgeDanger) === 2
-      ? 'B'
+      ? "B"
       : Number(item.ledgeDanger) === 3
-      ? 'C'
+      ? "C"
       : Number(item.ledgeDanger) === 4
-      ? 'D'
-      : 'E'
+      ? "D"
+      : "E"
 
   const exitFocus = () => setChosen(null)
 
@@ -54,10 +48,10 @@ export default function CatalogueItem({ item, chosen, setChosen }: Props) {
       <div
         onClick={() => setChosen(isChosen ? null : item.name)}
         className={classNames(
-          'flex cursor-pointer flex-wrap items-start justify-center gap-3 rounded border p-3 xl:flex-nowrap',
+          "flex cursor-pointer flex-wrap items-start justify-center gap-3 rounded border p-3 xl:flex-nowrap",
           isChosen
-            ? 'border-pink-600 bg-rose-600/10 hover:bg-rose-600/5 dark:bg-pink-600/40 dark:hover:bg-pink-600/25'
-            : 'border-gray-300 bg-white hover:border-primary hover:bg-primary/10 dark:border-secondary/20 dark:bg-secondary/10 dark:hover:border-secondary dark:hover:bg-secondary/20',
+            ? "border-pink-600 bg-rose-600/10 hover:bg-rose-600/5 dark:bg-pink-600/40 dark:hover:bg-pink-600/25"
+            : "border-gray-300 bg-white hover:border-primary hover:bg-primary/10 dark:border-secondary/20 dark:bg-secondary/10 dark:hover:border-secondary dark:hover:bg-secondary/20",
         )}
       >
         {item.video ? (
@@ -92,14 +86,14 @@ export default function CatalogueItem({ item, chosen, setChosen }: Props) {
                 <span
                   title="TTRK Speed Badge"
                   className={classNames(
-                    'px-2 py-1 text-sm font-normal text-white',
-                    speedText === 'Ultra'
-                      ? 'bg-blue-600'
-                      : speedText === 'Fast'
-                      ? 'bg-teal-500'
-                      : speedText === 'Ok'
-                      ? 'bg-amber-500'
-                      : 'bg-rose-600',
+                    "px-2 py-1 text-sm font-normal text-white",
+                    speedText === "Ultra"
+                      ? "bg-blue-600"
+                      : speedText === "Fast"
+                      ? "bg-teal-500"
+                      : speedText === "Ok"
+                      ? "bg-amber-500"
+                      : "bg-rose-600",
                   )}
                 >
                   {speedText}
@@ -119,50 +113,42 @@ export default function CatalogueItem({ item, chosen, setChosen }: Props) {
             <span
               title="Ledge Danger Class"
               className={classNames(
-                'flex h-5 w-5 items-center justify-center rounded-full p-[0.2rem] lg:h-6 lg:w-6',
-                ledgeDangerText === 'A'
-                  ? 'bg-blue-500'
-                  : ledgeDangerText === 'B'
-                  ? 'bg-teal-500'
-                  : ledgeDangerText === 'C'
-                  ? 'bg-amber-500'
-                  : ledgeDangerText === 'D'
-                  ? 'bg-orange-500'
-                  : 'bg-rose-600',
+                "flex h-5 w-5 items-center justify-center rounded-full p-[0.2rem] lg:h-6 lg:w-6",
+                ledgeDangerText === "A"
+                  ? "bg-blue-500"
+                  : ledgeDangerText === "B"
+                  ? "bg-teal-500"
+                  : ledgeDangerText === "C"
+                  ? "bg-amber-500"
+                  : ledgeDangerText === "D"
+                  ? "bg-orange-500"
+                  : "bg-rose-600",
               )}
             >
-              <span className="h-4 w-4 text-center text-xs font-normal text-white">
-                {ledgeDangerText}
-              </span>
+              <span className="h-4 w-4 text-center text-xs font-normal text-white">{ledgeDangerText}</span>
             </span>
             <span
               title="Slippery Class"
               className={classNames(
-                'flex h-5 w-5 items-center justify-center rounded-full p-[0.2rem] lg:h-6 lg:w-6',
-                slipperyText === 'A'
-                  ? 'bg-blue-500'
-                  : slipperyText === 'B'
-                  ? 'bg-teal-500'
-                  : slipperyText === 'C'
-                  ? 'bg-amber-500'
-                  : slipperyText === 'D'
-                  ? 'bg-orange-500'
-                  : 'bg-rose-600',
+                "flex h-5 w-5 items-center justify-center rounded-full p-[0.2rem] lg:h-6 lg:w-6",
+                slipperyText === "A"
+                  ? "bg-blue-500"
+                  : slipperyText === "B"
+                  ? "bg-teal-500"
+                  : slipperyText === "C"
+                  ? "bg-amber-500"
+                  : slipperyText === "D"
+                  ? "bg-orange-500"
+                  : "bg-rose-600",
               )}
             >
-              <span className="h-4 w-4 text-center text-xs font-normal text-white">
-                {slipperyText}
-              </span>
+              <span className="h-4 w-4 text-center text-xs font-normal text-white">{slipperyText}</span>
             </span>
             <span
               title="Accuracy of Measurement Badge"
               className={classNames(
-                'flex h-5 w-5 items-center justify-center rounded-full p-1 lg:h-6 lg:w-6',
-                item.accurate === 'Yes'
-                  ? 'bg-teal-500'
-                  : item.accurate === 'Almost'
-                  ? 'bg-amber-500'
-                  : 'bg-rose-600',
+                "flex h-5 w-5 items-center justify-center rounded-full p-1 lg:h-6 lg:w-6",
+                item.accurate === "Yes" ? "bg-teal-500" : item.accurate === "Almost" ? "bg-amber-500" : "bg-rose-600",
               )}
             >
               {<BoltIcon className="h-3.5 w-3.5 text-white" />}
@@ -170,12 +156,8 @@ export default function CatalogueItem({ item, chosen, setChosen }: Props) {
             <span
               title="Unlocked by a FH member Badge"
               className={classNames(
-                'flex h-5 w-5 items-center justify-center rounded-full p-1 lg:h-6 lg:w-6',
-                item.unlocked === 'Yes'
-                  ? 'bg-teal-500'
-                  : item.unlocked === 'Almost'
-                  ? 'bg-amber-500'
-                  : 'bg-rose-600',
+                "flex h-5 w-5 items-center justify-center rounded-full p-1 lg:h-6 lg:w-6",
+                item.unlocked === "Yes" ? "bg-teal-500" : item.unlocked === "Almost" ? "bg-amber-500" : "bg-rose-600",
               )}
             >
               {<LockClosedIcon className="h-3.5 w-3.5 text-white" />}
@@ -213,10 +195,7 @@ export default function CatalogueItem({ item, chosen, setChosen }: Props) {
                 <Dialog.Panel className="flex h-screen w-full transform flex-col justify-between gap-4 overflow-scroll bg-white p-6 text-left align-middle shadow-xl transition-all dark:bg-navy md:max-w-xl">
                   <div className="flex flex-col">
                     <div className="flex items-start justify-between">
-                      <Dialog.Title
-                        as="h3"
-                        className="text-2xl font-medium leading-6 text-gray-800 dark:text-white"
-                      >
+                      <Dialog.Title as="h3" className="text-2xl font-medium leading-6 text-gray-800 dark:text-white">
                         {item.name}
                       </Dialog.Title>
                       <button
@@ -235,12 +214,12 @@ export default function CatalogueItem({ item, chosen, setChosen }: Props) {
                       <div
                         title="Accuracy of Measurement Badge"
                         className={classNames(
-                          'flex items-center gap-2 px-3 py-2 text-sm font-light text-white',
-                          item.accurate === 'Yes'
-                            ? 'bg-teal-500'
-                            : item.accurate === 'Almost'
-                            ? 'bg-amber-500'
-                            : 'bg-rose-600',
+                          "flex items-center gap-2 px-3 py-2 text-sm font-light text-white",
+                          item.accurate === "Yes"
+                            ? "bg-teal-500"
+                            : item.accurate === "Almost"
+                            ? "bg-amber-500"
+                            : "bg-rose-600",
                         )}
                       >
                         <span>Accuracy</span>
@@ -249,28 +228,28 @@ export default function CatalogueItem({ item, chosen, setChosen }: Props) {
                       <span
                         title="Unlocked by a FH member Badge"
                         className={classNames(
-                          'flex items-center gap-2 px-3 py-2 text-sm font-light text-white',
-                          item.unlocked === 'Yes'
-                            ? 'bg-teal-500'
-                            : item.unlocked === 'Almost'
-                            ? 'bg-amber-500'
-                            : 'bg-rose-600',
+                          "flex items-center gap-2 px-3 py-2 text-sm font-light text-white",
+                          item.unlocked === "Yes"
+                            ? "bg-teal-500"
+                            : item.unlocked === "Almost"
+                            ? "bg-amber-500"
+                            : "bg-rose-600",
                         )}
                       >
-                        <span>{item.unlocked === 'Yes' ? 'Unlocked' : 'Locked'}</span>
+                        <span>{item.unlocked === "Yes" ? "Unlocked" : "Locked"}</span>
                         <LockClosedIcon className="h-3.5 w-3.5 text-white" />
                       </span>
                       <div
                         title="TTRK Speed Badge"
                         className={classNames(
-                          'px-3 py-2 text-sm font-light text-white',
-                          speedText === 'Ultra'
-                            ? 'bg-blue-600'
-                            : speedText === 'Fast'
-                            ? 'bg-teal-500'
-                            : speedText === 'Ok'
-                            ? 'bg-amber-500'
-                            : 'bg-rose-600',
+                          "px-3 py-2 text-sm font-light text-white",
+                          speedText === "Ultra"
+                            ? "bg-blue-600"
+                            : speedText === "Fast"
+                            ? "bg-teal-500"
+                            : speedText === "Ok"
+                            ? "bg-amber-500"
+                            : "bg-rose-600",
                         )}
                       >
                         {speedText}
@@ -289,9 +268,8 @@ export default function CatalogueItem({ item, chosen, setChosen }: Props) {
                         Time to Register Kill (TTRK)
                       </h4>
                       <p className="mt-0.5 text-sm font-normal leading-4 text-gray-500 dark:text-gray-400">
-                        The time between the first frame of the animation and the moment the kill is
-                        registered. We use the final frame right as the kill register sound is
-                        queued.
+                        The time between the first frame of the animation and the moment the kill is registered. We use
+                        the final frame right as the kill register sound is queued.
                       </p>
                       <p className="mt-0.5 font-lexend text-2xl font-normal tracking-tight text-slate-700 dark:text-blue-200">
                         {item.ttrk} ± {uncertainty}s
@@ -303,11 +281,11 @@ export default function CatalogueItem({ item, chosen, setChosen }: Props) {
                         Time to Complete Animation (TTCA)
                       </h4>
                       <p className="mt-0.5 text-sm font-normal leading-4 text-gray-500 dark:text-gray-400">
-                        The time between the first frame of the animation and the final frame, also
-                        known has the moment when the player regains control.
+                        The time between the first frame of the animation and the final frame, also known has the moment
+                        when the player regains control.
                       </p>
                       <p className="mt-0.5 font-lexend text-2xl font-normal tracking-tight text-slate-700 dark:text-blue-200">
-                        {item.ttca.toString() === '?' ? 'Unknown' : item.ttca}
+                        {item.ttca.toString() === "?" ? "Unknown" : item.ttca}
                       </p>
                     </div>
 
@@ -316,8 +294,7 @@ export default function CatalogueItem({ item, chosen, setChosen }: Props) {
                         Slippery Coefficient
                       </h4>
                       <p className="mt-0.5 text-sm font-normal leading-4 text-gray-500 dark:text-gray-400">
-                        A classification of the motion of the character during the animation from A
-                        (best) to E (worst).{' '}
+                        A classification of the motion of the character during the animation from A (best) to E (worst).{" "}
                         <span className="font-bold underline">
                           Finishing moves with high motion are less likely to be interrputed
                         </span>
@@ -333,8 +310,8 @@ export default function CatalogueItem({ item, chosen, setChosen }: Props) {
                         Ledge Danger Coefficient
                       </h4>
                       <p className="mt-0.5 text-sm font-normal leading-4 text-gray-500 dark:text-gray-400">
-                        If the radius is low, the finishing move is more confined to a small area
-                        and there is low risk of being interrupted by a ledge.{' '}
+                        If the radius is low, the finishing move is more confined to a small area and there is low risk
+                        of being interrupted by a ledge.{" "}
                         <span className="font-bold underline">
                           Finishing moves with small radius are less likely to be interrputed
                         </span>
@@ -346,12 +323,10 @@ export default function CatalogueItem({ item, chosen, setChosen }: Props) {
                     </div>
 
                     <div className="mt-4">
-                      <h4 className="text-base font-medium leading-6 text-gray-800 dark:text-white">
-                        Score
-                      </h4>
+                      <h4 className="text-base font-medium leading-6 text-gray-800 dark:text-white">Score</h4>
                       <p className="mt-0.5 text-sm font-normal leading-4 text-gray-500 dark:text-gray-400">
-                        A function that determines score based on the TTRK, Slippery Coeffiecient
-                        (1-5) and Ledge Danger Coefficient (1-5)
+                        A function that determines score based on the TTRK, Slippery Coeffiecient (1-5) and Ledge Danger
+                        Coefficient (1-5)
                         <code className="mt-1.5 block tracking-tighter text-pink-500">
                           score = 100-(slippery^2-1)-(ledgeDanger^2-1)-(4*ttrk^2)
                         </code>

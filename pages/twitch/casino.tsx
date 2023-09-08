@@ -1,9 +1,9 @@
-import React, { useState, useEffect, useMemo } from 'react'
-import { shuffle } from '../../utils'
-import { clearCache, isStorageValid, writeVideosStorage } from '../../utils/storage'
-import useAccessDenied from '../../hooks/useAccessDenied'
-import { FullAccessBadge, LimitedAccessBadge } from '../../components/utils'
-import { Layout, AccessModal, InvisbleTopLayer } from '../../components/layout'
+import React, { useState, useEffect, useMemo } from "react"
+import { shuffle } from "../../utils"
+import { clearCache, isStorageValid, writeVideosStorage } from "../../utils/storage"
+import useAccessDenied from "../../hooks/useAccessDenied"
+import { FullAccessBadge, LimitedAccessBadge } from "../../components/utils"
+import { Layout, AccessModal, InvisbleTopLayer } from "../../components/layout"
 import {
   AutoplayToggler,
   MuteToggler,
@@ -12,16 +12,16 @@ import {
   ReshuffleButton,
   DeleteCookiesButton,
   DelayDisclaimer,
-} from '../../components/videos'
-import { ArrowLongLeftIcon, ArrowLongRightIcon } from '@heroicons/react/24/outline'
+} from "../../components/videos"
+import { ArrowLongLeftIcon, ArrowLongRightIcon } from "@heroicons/react/24/outline"
 
 export default function CasinoPage() {
-  const sensitive = process.env.NEXT_PUBLIC_SENSITIVE === 'false' ? false : true
+  const sensitive = process.env.NEXT_PUBLIC_SENSITIVE === "false" ? false : true
 
   const [loading, setLoading] = useState<boolean>(true)
   const [fetchError, setFetchError] = useState<boolean>(false)
 
-  const [hostname, setHostname] = useState<string>('')
+  const [hostname, setHostname] = useState<string>("")
   const [index, setIndex] = useState<number>(0)
   const [videos, setVideos] = useState<string[]>([])
   const [accessDenied, setAccessDenied] = useAccessDenied()
@@ -31,17 +31,17 @@ export default function CasinoPage() {
 
   const limitedAccess = useMemo(() => sensitive && accessDenied, [sensitive, accessDenied])
   const toastType = useMemo(() => {
-    if (fetchError) return 'error'
-    else if (loading) return 'warning'
-    else if (!loading && !fetchError) return 'success'
-    else return ''
+    if (fetchError) return "error"
+    else if (loading) return "warning"
+    else if (!loading && !fetchError) return "success"
+    else return ""
   }, [loading, fetchError])
 
   const prevVideo = () => setIndex((prev) => prev - 1)
   const nextVideo = () => setIndex((prev) => prev + 1)
 
   const shuffleAndSetVideos = () => {
-    const videosStr = localStorage.getItem('finishershub.videos') as string
+    const videosStr = localStorage.getItem("finishershub.videos") as string
     const videosParsed = JSON.parse(videosStr) as string[]
     setVideos(shuffle(videosParsed))
   }
@@ -53,7 +53,7 @@ export default function CasinoPage() {
       shuffleAndSetVideos()
     } else {
       clearCache(true)
-      fetch('/api/twitch')
+      fetch("/api/twitch")
         .then((res) => res.json())
         .then((allEmbedUrls) => {
           setLoading(false)
@@ -68,7 +68,7 @@ export default function CasinoPage() {
         })
     }
     // get hostname if not in ssr
-    if (typeof window !== 'undefined') setHostname(window.location.hostname)
+    if (typeof window !== "undefined") setHostname(window.location.hostname)
   }, [])
 
   useEffect(() => {
@@ -89,17 +89,15 @@ export default function CasinoPage() {
             <div className="text-lg font-normal">
               <h2 className="mb-2 text-4xl font-bold tracking-tight sm:text-5xl">Slot Machine</h2>
               <p className="leading-normal">
-                More fun than a casino, especially because we don&apos;t take your money. Not sure
-                about the addiction part though.
+                More fun than a casino, especially because we don&apos;t take your money. Not sure about the addiction
+                part though.
               </p>
             </div>
 
             <div className="flex flex-row items-center justify-center gap-2 lg:mt-0 lg:flex-col">
               {limitedAccess ? <LimitedAccessBadge /> : <FullAccessBadge />}
               <div className="flex items-center justify-end gap-x-2">
-                {limitedAccess ? (
-                  <AccessModal lockedHook={[accessDenied, setAccessDenied]} />
-                ) : null}
+                {limitedAccess ? <AccessModal lockedHook={[accessDenied, setAccessDenied]} /> : null}
                 <DeleteCookiesButton />
 
                 <ReshuffleButton hook={[shuffled, setShuffled]} shuffle={shuffleAndSetVideos} />

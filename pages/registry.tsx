@@ -1,13 +1,8 @@
-import React, { useState, useEffect } from 'react'
-import { type FinishersClubMember } from '../@types'
-import RegistryAPI from '../utils/api/registry'
-import { Layout } from '../components/layout'
-import {
-  MemberCard,
-  DataDisclaimer,
-  TotalFinishersDisclaimer,
-  MemberCardSkeleton,
-} from '../components/registry'
+import React, { useState, useEffect } from "react"
+import { type FinishersClubMember } from "../@types"
+import RegistryAPI from "../utils/api/registry"
+import { Layout } from "../components/layout"
+import { MemberCard, DataDisclaimer, TotalFinishersDisclaimer, MemberCardSkeleton } from "../components/registry"
 
 export default function Registry() {
   const [members, setMembers] = useState<FinishersClubMember[]>([])
@@ -17,11 +12,7 @@ export default function Registry() {
     .reduce((a, b) => a + b, 0)
 
   const updateMembers = (newEntry: FinishersClubMember) => {
-    setMembers(
-      members.map((oldEntry: FinishersClubMember) =>
-        oldEntry._id === newEntry._id ? newEntry : oldEntry,
-      ),
-    )
+    setMembers(members.map((oldEntry: FinishersClubMember) => (oldEntry._id === newEntry._id ? newEntry : oldEntry)))
   }
 
   useEffect(() => {
@@ -35,8 +26,8 @@ export default function Registry() {
         <div className="flex flex-col">
           <h2 className="mb-1 text-4xl font-bold tracking-tight sm:text-5xl">Finishers Club</h2>
           <p className="mb-3 text-lg font-normal">
-            Welcome to the Mount Rushmore of finishers. Take a look at the profiles and stats of the
-            criminals like never seen before.
+            Welcome to the Mount Rushmore of finishers. Take a look at the profiles and stats of the criminals like
+            never seen before.
           </p>
           <div className="space-y-3">
             <DataDisclaimer />
@@ -54,11 +45,7 @@ export default function Registry() {
                   return x === y ? a.name.localeCompare(b.name) : y - x
                 })
                 .map((member: FinishersClubMember, memberIdx: number) => (
-                  <MemberCard
-                    key={`member-${member._id}`}
-                    member={member}
-                    updateMembers={updateMembers}
-                  />
+                  <MemberCard key={`member-${member._id}`} member={member} updateMembers={updateMembers} />
                 ))
             : Array(6)
                 .fill(0)

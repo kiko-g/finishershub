@@ -1,5 +1,5 @@
-import React from 'react'
-import Link from 'next/link'
+import React from "react"
+import Link from "next/link"
 import {
   AboutCardLI,
   AccessModalCTA,
@@ -9,118 +9,113 @@ import {
   MostRecentVideoShowcase,
   NavCard,
   Socials,
-} from '../components/hub'
-import { Footer, Seo } from '../components/layout'
-import useAccessDenied from '../hooks/useAccessDenied'
+} from "../components/hub"
+import { Footer, Seo } from "../components/layout"
+import useAccessDenied from "../hooks/useAccessDenied"
 
 export default function Hub() {
   const [accessDenied, setAccessDenied] = useAccessDenied()
   const scrollers = [
-    { name: 'Showcase', icon: '🖼️', href: '#showcase' },
-    { name: 'Access', icon: '🔐', href: '#access' },
-    { name: 'Facts', icon: '✅', href: '#info' },
-    { name: 'About', icon: '🔍', href: '#about' },
+    { name: "Showcase", icon: "🖼️", href: "#showcase" },
+    { name: "Access", icon: "🔐", href: "#access" },
+    { name: "Facts", icon: "✅", href: "#info" },
+    { name: "About", icon: "🔍", href: "#about" },
   ]
   const nav = [
     {
-      name: 'Casino',
-      href: '/casino',
-      emoji: '🎰',
+      name: "Casino",
+      href: "/casino",
+      emoji: "🎰",
       shown: true,
       description: (
         <>
-          Visit our casino, where you can enjoy a random sweet finishing move highlight. Instead of
-          losing your money, just press the arrows and get guaranteed entertainment{' '}
-          <span className="font-semibold">for free</span>.
+          Visit our casino, where you can enjoy a random sweet finishing move highlight. Instead of losing your money,
+          just press the arrows and get guaranteed entertainment <span className="font-semibold">for free</span>.
         </>
       ),
     },
     {
-      name: 'Videos',
-      href: '/videos',
-      emoji: '🎬',
+      name: "Videos",
+      href: "/videos",
+      emoji: "🎬",
       shown: true,
       description: (
         <>
-          Get the full experience and control what content you consume. Filter by tags, map,
-          location and artists. The possibilities aren&apos;t endless but this we get pretty damn
-          close.
+          Get the full experience and control what content you consume. Filter by tags, map, location and artists. The
+          possibilities aren&apos;t endless but this we get pretty damn close.
         </>
       ),
     },
     {
-      name: 'Gallery',
-      href: '/gallery',
-      emoji: '🪟',
+      name: "Gallery",
+      href: "/gallery",
+      emoji: "🪟",
       shown: false,
       description: (
         <>
-          Head over to the gallery. It&apos;s like a museum, but with heinous highlights of
-          individuals performing the most gruesome and relentless finishing moves ever recorded.
+          Head over to the gallery. It&apos;s like a museum, but with heinous highlights of individuals performing the
+          most gruesome and relentless finishing moves ever recorded.
         </>
       ),
     },
     {
-      name: 'Lab',
-      href: '/lab',
-      emoji: '🧪',
+      name: "Lab",
+      href: "/lab",
+      emoji: "🧪",
       shown: true,
       description: (
         <>
-          Visit the laboratory of finishers. This is where you can consult premium research findings
-          and gain insight on our unholy and wicked methodology. If they let us cook, oh{' '}
-          <span className="font-bold">we will cook</span>.
+          Visit the laboratory of finishers. This is where you can consult premium research findings and gain insight on
+          our unholy and wicked methodology. If they let us cook, oh <span className="font-bold">we will cook</span>.
         </>
       ),
     },
     {
-      name: 'Registry',
-      href: '/registry',
-      emoji: '📊',
+      name: "Registry",
+      href: "/registry",
+      emoji: "📊",
       shown: true,
       description: (
         <>
-          Navigate to the registry where you can see and manage stats related to the the diabolic
-          profession that is performing finishing moves.
+          Navigate to the registry where you can see and manage stats related to the the diabolic profession that is
+          performing finishing moves.
         </>
       ),
     },
     {
-      name: 'Create',
-      href: '/create',
-      emoji: '📁',
+      name: "Create",
+      href: "/create",
+      emoji: "📁",
       shown: true,
       description: (
         <>
-          Upload your own finishing move highlight to the platform. This is a{' '}
-          <span className="font-bold">members-only</span> space Finishers Club associates to
-          contribute to the platform and share their own content.
+          Upload your own finishing move highlight to the platform. This is a{" "}
+          <span className="font-bold">members-only</span> space Finishers Club associates to contribute to the platform
+          and share their own content.
         </>
       ),
     },
     {
-      name: 'Admin',
-      href: '/admin',
-      emoji: '🏢',
+      name: "Admin",
+      href: "/admin",
+      emoji: "🏢",
       shown: true,
       description: (
         <>
-          Edit and manage the information associated to the videos on the platform. This is a{' '}
-          <span className="font-bold">members-only</span> space: you need full access to use the
-          features in this page.
+          Edit and manage the information associated to the videos on the platform. This is a{" "}
+          <span className="font-bold">members-only</span> space: you need full access to use the features in this page.
         </>
       ),
     },
     {
-      name: 'More',
-      href: '/more',
-      emoji: '✨',
+      name: "More",
+      href: "/more",
+      emoji: "✨",
       shown: true,
       description: (
         <>
-          Check out the more page to view <span className="font-bold">premium</span> content and
-          keep up with updates on the platform. This is a portal to the future and the new
-          generation of Finishers Hub.
+          Check out the more page to view <span className="font-bold">premium</span> content and keep up with updates on
+          the platform. This is a portal to the future and the new generation of Finishers Hub.
         </>
       ),
     },
@@ -142,8 +137,8 @@ export default function Hub() {
                 Finishers Hub
               </h2>
               <p className="text-center text-base font-normal leading-tight md:text-lg md:leading-normal">
-                The place for all finisher related content. Chaotic, outrageous, lawless on the
-                fence of criminality. Perfectly unbalanced. As all things should be.
+                The place for all finisher related content. Chaotic, outrageous, lawless on the fence of criminality.
+                Perfectly unbalanced. As all things should be.
               </p>
             </div>
 
@@ -174,32 +169,24 @@ export default function Hub() {
           </header>
 
           {/* Most recent highlight */}
-          <section
-            id="showcase"
-            className="mx-auto my-auto mb-8 flex max-w-5xl flex-col space-y-3 py-4"
-          >
+          <section id="showcase" className="mx-auto my-auto mb-8 flex max-w-5xl flex-col space-y-3 py-4">
             <Link
               href="#showcase"
               scroll={false}
               className="group flex items-center gap-x-4 transition hover:opacity-80"
             >
-              <h2 className="text-3xl font-bold tracking-tight sm:text-4xl">
-                Most recent highlight
-              </h2>
+              <h2 className="text-3xl font-bold tracking-tight sm:text-4xl">Most recent highlight</h2>
               <span className="hidden text-2xl group-hover:flex sm:text-3xl">🔗</span>
             </Link>
             <p className="font-normal">
-              Here is the most recently uploaded highlight to the platform. Check back here to stay
-              in touch with the latest content.
+              Here is the most recently uploaded highlight to the platform. Check back here to stay in touch with the
+              latest content.
             </p>
             <MostRecentVideoShowcase />
           </section>
 
           {/* Get full access */}
-          <section
-            id="access"
-            className="mx-auto my-auto mb-8 flex max-w-5xl flex-col space-y-3 py-4"
-          >
+          <section id="access" className="mx-auto my-auto mb-8 flex max-w-5xl flex-col space-y-3 py-4">
             <div className="flex items-center justify-start gap-3">
               <Link
                 href="#access"
@@ -211,7 +198,7 @@ export default function Hub() {
                     <span className="text-rose-700 dark:text-rose-600">Get</span>
                   ) : (
                     <span className="text-teal-700 dark:text-teal-500">You have</span>
-                  )}{' '}
+                  )}{" "}
                   full access
                 </h2>
                 <span className="hidden text-2xl group-hover:flex sm:text-3xl">🔗</span>
@@ -219,11 +206,10 @@ export default function Hub() {
             </div>
 
             <p className="font-normal">
-              Performing finishing moves is hectic, intense, and on a very gray moral area. As one
-              can imagine things get a little out of hand. The heat of the moment can only be
-              reviewed by worthy visitors, capable of embracing the beauty and tragic nature of
-              finishers. For that matter, we have protected our audio content, so that guests can
-              view only a limited amount of content on this platform of pure joy and insanity. Enter
+              Performing finishing moves is hectic, intense, and on a very gray moral area. As one can imagine things
+              get a little out of hand. The heat of the moment can only be reviewed by worthy visitors, capable of
+              embracing the beauty and tragic nature of finishers. For that matter, we have protected our audio content,
+              so that guests can view only a limited amount of content on this platform of pure joy and insanity. Enter
               the secret code on the form to gain full access to Finishers Hub.
             </p>
 
@@ -237,15 +223,8 @@ export default function Hub() {
           </section>
 
           {/* Facts and figures */}
-          <section
-            id="info"
-            className="mx-auto my-auto mb-8 flex max-w-5xl flex-col space-y-3 py-4"
-          >
-            <Link
-              href="#info"
-              scroll={false}
-              className="group flex items-center gap-x-4 transition hover:opacity-80"
-            >
+          <section id="info" className="mx-auto my-auto mb-8 flex max-w-5xl flex-col space-y-3 py-4">
+            <Link href="#info" scroll={false} className="group flex items-center gap-x-4 transition hover:opacity-80">
               <h2 className="text-3xl font-bold tracking-tight sm:text-4xl">Facts and figures</h2>
               <span className="hidden text-2xl group-hover:flex sm:text-3xl">🔗</span>
             </Link>
@@ -253,22 +232,15 @@ export default function Hub() {
           </section>
 
           {/* About */}
-          <section
-            id="about"
-            className="mx-auto my-auto mb-8 flex max-w-5xl flex-col space-y-3 py-4"
-          >
-            <Link
-              href="#about"
-              scroll={false}
-              className="group flex items-center gap-x-4 transition hover:opacity-80"
-            >
+          <section id="about" className="mx-auto my-auto mb-8 flex max-w-5xl flex-col space-y-3 py-4">
+            <Link href="#about" scroll={false} className="group flex items-center gap-x-4 transition hover:opacity-80">
               <h2 className="text-3xl font-bold tracking-tight sm:text-4xl">About us</h2>
               <span className="hidden text-2xl group-hover:flex sm:text-3xl">🔗</span>
             </Link>
             <ul className="mt-3 grid grid-cols-1 gap-x-4 gap-y-4 text-base font-normal tracking-tight lg:mt-6 lg:grid-cols-3 lg:text-lg">
               {/* Description */}
               <AboutCardLI emoji="👋">
-                Finishers Hub is a passion project developed by{' '}
+                Finishers Hub is a passion project developed by{" "}
                 <Link
                   target="_blank"
                   rel="noopener"
@@ -277,67 +249,55 @@ export default function Hub() {
                 >
                   Francisco Gonçalves
                 </Link>
-                , as a result of awesome moments on Warzone that happened mostly between 2020 and
-                2021. Everything you can find on the website is related to finishing moves, the
-                heart and soul of Finishers Hub.
+                , as a result of awesome moments on Warzone that happened mostly between 2020 and 2021. Everything you
+                can find on the website is related to finishing moves, the heart and soul of Finishers Hub.
               </AboutCardLI>
 
               {/* Home page */}
               <AboutCardLI emoji="🍿">
-                The{' '}
-                <Link
-                  className="text-primary underline hover:opacity-80 dark:text-teal-500"
-                  href="/gallery"
-                >
+                The{" "}
+                <Link className="text-primary underline hover:opacity-80 dark:text-teal-500" href="/gallery">
                   gallery page
-                </Link>{' '}
-                will show you a museum of highlights, that are pulled from{' '}
+                </Link>{" "}
+                will show you a museum of highlights, that are pulled from{" "}
                 <span className="line-through">
-                  <span className="text-[#6441a5] dark:text-[#976fe1]">Twitch</span> with the help
-                  of the TwitchAPI
-                </span>{' '}
+                  <span className="text-[#6441a5] dark:text-[#976fe1]">Twitch</span> with the help of the TwitchAPI
+                </span>{" "}
                 an S3 Bucket, where we manage our media content 🆕
               </AboutCardLI>
 
               {/* Casino page */}
               <AboutCardLI emoji="🎰">
-                The{' '}
-                <Link
-                  className="text-primary underline hover:opacity-80 dark:text-teal-500"
-                  href="/casino"
-                >
+                The{" "}
+                <Link className="text-primary underline hover:opacity-80 dark:text-teal-500" href="/casino">
                   Casino page
-                </Link>{' '}
-                acts like the home page with a twist: instead of a museum you can view a random new
-                highlight by pressing the arrows. It&apos;s called casino because it acts like a
-                slot machine of finishing moves.
+                </Link>{" "}
+                acts like the home page with a twist: instead of a museum you can view a random new highlight by
+                pressing the arrows. It&apos;s called casino because it acts like a slot machine of finishing moves.
               </AboutCardLI>
 
               {/* Registry page */}
               <AboutCardLI emoji="📅">
-                The{' '}
-                <Link
-                  className="text-primary underline hover:opacity-80 dark:text-teal-500"
-                  href="/registry"
-                >
+                The{" "}
+                <Link className="text-primary underline hover:opacity-80 dark:text-teal-500" href="/registry">
                   Registry page
-                </Link>{' '}
-                is where you can find information and stats about the Finishers Club members. It
-                also works as a platform to register new finishing moves for official members of the
-                closed exclusive agency that is Finishers Club.
+                </Link>{" "}
+                is where you can find information and stats about the Finishers Club members. It also works as a
+                platform to register new finishing moves for official members of the closed exclusive agency that is
+                Finishers Club.
               </AboutCardLI>
 
               {/* Fact #1 */}
               <AboutCardLI emoji="🤯">
-                <strong>Fun fact</strong>: all the video content comes from a pool of around{' '}
-                <strong>900 clips</strong>. However, they only capture around <strong>5%</strong> of
-                all the finishing moves performed by Finishers Club as of March 2023.
+                <strong>Fun fact</strong>: all the video content comes from a pool of around <strong>900 clips</strong>.
+                However, they only capture around <strong>5%</strong> of all the finishing moves performed by Finishers
+                Club as of March 2023.
               </AboutCardLI>
 
               {/* Fact #2 */}
               <AboutCardLI emoji="💻">
-                Finishers Club will keep growing, and there are plans to add new sources of media,
-                and further admin features like <strong>adding clips manually</strong>.
+                Finishers Club will keep growing, and there are plans to add new sources of media, and further admin
+                features like <strong>adding clips manually</strong>.
               </AboutCardLI>
 
               {/* Disclaimer */}

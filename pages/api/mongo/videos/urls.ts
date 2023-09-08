@@ -1,8 +1,8 @@
-import type { NextApiRequest, NextApiResponse } from 'next'
-import { allowCors, connectMongoDB } from '../../../../config'
-import { getVideoUrl } from '../../../../utils/api/s3'
-import Videos from '../../../../models/videos'
-import { VideoMongoDB } from '../../../../@types'
+import type { NextApiRequest, NextApiResponse } from "next"
+import { allowCors, connectMongoDB } from "../../../../config"
+import { getVideoUrl } from "../../../../utils/api/s3"
+import Videos from "../../../../models/videos"
+import { VideoMongoDB } from "../../../../@types"
 
 // @desc     Get all videos with url
 // @route    GET /api/mongo/videos/urls
@@ -24,7 +24,7 @@ export default async function getAllVideosWithUrl(req: NextApiRequest, res: Next
 
     res.status(200).json(videosWithUrl)
   } catch (error) {
-    const errorMessage = error instanceof Error ? error.message : 'Something went wrong'
+    const errorMessage = error instanceof Error ? error.message : "Something went wrong"
     res.status(500).json({ message: errorMessage })
   }
 }

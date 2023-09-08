@@ -1,5 +1,5 @@
-import React, { Dispatch, SetStateAction } from 'react'
-import { Bars2Icon, Bars3Icon } from '@heroicons/react/24/outline'
+import React, { Dispatch, SetStateAction } from "react"
+import { Bars2Icon, Bars3Icon } from "@heroicons/react/24/outline"
 
 type Props = {
   hook: [boolean, Dispatch<SetStateAction<boolean>>]
@@ -11,19 +11,11 @@ export default function ViewTypeToggler({ hook }: Props) {
   return (
     <div className="hidden items-end justify-center space-x-2 text-gray-700 dark:text-light lg:flex">
       {type ? (
-        <button
-          title="Switch to table view"
-          className="transition hover:opacity-80"
-          onClick={() => setType(false)}
-        >
+        <button title="Switch to table view" className="transition hover:opacity-80" onClick={() => setType(false)}>
           <Bars2Icon className="h-5 w-5 lg:h-6 lg:w-6" />
         </button>
       ) : (
-        <button
-          title="Switch to grid view"
-          className="transition hover:opacity-80"
-          onClick={() => setType(true)}
-        >
+        <button title="Switch to grid view" className="transition hover:opacity-80" onClick={() => setType(true)}>
           <Bars3Icon className="h-5 w-5 lg:h-6 lg:w-6" />
         </button>
       )}

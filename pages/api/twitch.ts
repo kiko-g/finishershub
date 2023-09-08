@@ -1,9 +1,9 @@
-import axios, { AxiosInstance } from 'axios'
-import { type ClipsResponse } from '../../@types'
-import type { NextApiRequest, NextApiResponse } from 'next'
+import axios, { AxiosInstance } from "axios"
+import { type ClipsResponse } from "../../@types"
+import type { NextApiRequest, NextApiResponse } from "next"
 
-const TWITCH_API_URL = 'https://api.twitch.tv/helix'
-const TWITCH_API_TOKEN_URL = 'https://id.twitch.tv/oauth2/token'
+const TWITCH_API_URL = "https://api.twitch.tv/helix"
+const TWITCH_API_TOKEN_URL = "https://id.twitch.tv/oauth2/token"
 const TWITCH_API_MAX_CLIPS = 100
 const TWITCH_CLIENT_ID = process.env.NEXT_PUBLIC_TWITCH_CLIENT_ID
 const TWITCH_CLIENT_SECRET = process.env.NEXT_PUBLIC_TWITCH_CLIENT_SECRET
@@ -14,12 +14,12 @@ const twitchApiRequest = (url: string, callback: Function) => {
     .post(TWITCH_API_TOKEN_URL, {
       client_id: TWITCH_CLIENT_ID,
       client_secret: TWITCH_CLIENT_SECRET,
-      grant_type: 'client_credentials',
+      grant_type: "client_credentials",
     })
     .then((response) => {
       api = axios.create({
         headers: {
-          'Client-ID': TWITCH_CLIENT_ID,
+          "Client-ID": TWITCH_CLIENT_ID,
           Authorization: `Bearer ${response.data.access_token}`,
         },
       })
@@ -53,7 +53,7 @@ export default async function getAllClips(req: NextApiRequest, res: NextApiRespo
       paginationCycle(videos, url, cursor, (complete: string[]) => res.status(200).json(complete))
     })
   } catch (error) {
-    const errorMessage = error instanceof Error ? error.message : 'Something went wrong'
+    const errorMessage = error instanceof Error ? error.message : "Something went wrong"
     res.status(500).json({ message: errorMessage })
   }
 }

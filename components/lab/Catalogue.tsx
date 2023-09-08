@@ -1,11 +1,11 @@
-import React, { useEffect, useMemo, useState } from 'react'
-import { CatalogueGrid, LoadingCatalogue, FilterByName } from '.'
-import { strIncludes } from '../../utils'
+import React, { useEffect, useMemo, useState } from "react"
+import { CatalogueGrid, LoadingCatalogue, FilterByName } from "."
+import { strIncludes } from "../../utils"
 
 type Props = {}
 
 export default function Catalogue({}: Props) {
-  const [filteredName, setFilteredName] = useState('')
+  const [filteredName, setFilteredName] = useState("")
   const [headers, setHeaders] = useState<string[]>([])
   const [catalogue, setCatalogue] = useState<(string | number)[][]>([])
   const ready = useMemo(() => headers.length > 0 && catalogue.length > 0, [headers, catalogue])
@@ -15,7 +15,7 @@ export default function Catalogue({}: Props) {
   )
 
   useEffect(() => {
-    fetch('/api/catalogue/mw2').then((res) => {
+    fetch("/api/catalogue/mw2").then((res) => {
       res.json().then((data) => {
         setHeaders(data.table.headers)
         setCatalogue(data.table.rows)

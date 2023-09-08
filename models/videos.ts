@@ -1,4 +1,4 @@
-import mongoose, { Schema, model } from 'mongoose'
+import mongoose, { Schema, model } from "mongoose"
 
 if (typeof mongoose.models.Videos !== undefined) delete mongoose.models.Videos
 
@@ -15,10 +15,10 @@ const schema = new Schema(
     s3_uri: String,
   },
   {
-    collection: 'Videos',
+    collection: "Videos",
   },
 )
 
-const Model = model('Videos', schema)
+const Model = model("Videos", schema)
 
 export default Model

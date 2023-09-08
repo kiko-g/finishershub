@@ -1,7 +1,7 @@
-import { Fragment } from 'react'
-import { Transition } from '@headlessui/react'
-import { InformationCircleIcon } from '@heroicons/react/24/outline'
-import { XMarkIcon } from '@heroicons/react/20/solid'
+import { Fragment } from "react"
+import { Transition } from "@headlessui/react"
+import { InformationCircleIcon } from "@heroicons/react/24/outline"
+import { XMarkIcon } from "@heroicons/react/20/solid"
 
 type Props = {
   showHook: [boolean, React.Dispatch<React.SetStateAction<boolean>>]
@@ -10,15 +10,15 @@ type Props = {
 export default function KeyboardUsageInstructions({ showHook }: Props) {
   const [show, setShow] = showHook
   const keysMapping = [
-    { key: '<', description: 'Previous video' },
-    { key: '>', description: 'Next video' },
-    { key: 'q', description: 'Minimize button controls' },
-    { key: 'm', description: 'Toggle mute' },
-    { key: 'e', description: 'Toggle expanded view' },
-    { key: 'c', description: 'Copy video URL to clipboard' },
-    { key: 'p', description: 'Pop open video in new tab' },
-    { key: 'i', description: 'Toggle keyboard information' },
-    { key: 's', description: 'Toggle shuffle' },
+    { key: "<", description: "Previous video" },
+    { key: ">", description: "Next video" },
+    { key: "q", description: "Minimize button controls" },
+    { key: "m", description: "Toggle mute" },
+    { key: "e", description: "Toggle expanded view" },
+    { key: "c", description: "Copy video URL to clipboard" },
+    { key: "p", description: "Pop open video in new tab" },
+    { key: "i", description: "Toggle keyboard information" },
+    { key: "s", description: "Toggle shuffle" },
   ]
 
   return (
@@ -26,7 +26,7 @@ export default function KeyboardUsageInstructions({ showHook }: Props) {
       {/* Global notification live region, render this permanently at the end of the document */}
       <div
         aria-live="assertive"
-        className="pointer-events-none fixed inset-0 z-50 hidden lg:flex items-end px-4 py-6 opacity-100 sm:items-start sm:p-6"
+        className="pointer-events-none fixed inset-0 z-50 hidden items-end px-4 py-6 opacity-100 sm:items-start sm:p-6 lg:flex"
       >
         <div className="flex w-full flex-col items-center space-y-4 sm:items-end">
           {/* Notification panel, dynamically insert this into the live region when it needs to be displayed */}
@@ -47,15 +47,10 @@ export default function KeyboardUsageInstructions({ showHook }: Props) {
                     <InformationCircleIcon className="h-6 w-6 text-teal-600" aria-hidden="true" />
                   </div>
                   <div className="ml-3 w-0 flex-1 pt-0.5">
-                    <p className="text-left text-sm font-medium text-gray-900">
-                      Keyboard Shortcuts
-                    </p>
+                    <p className="text-left text-sm font-medium text-gray-900">Keyboard Shortcuts</p>
                     <ul className="mt-2 flex flex-col space-y-1 text-sm text-gray-500">
                       {keysMapping.map((keyMapping) => (
-                        <li
-                          key={`key-${keyMapping.key}`}
-                          className="flex items-center justify-start gap-x-2"
-                        >
+                        <li key={`key-${keyMapping.key}`} className="flex items-center justify-start gap-x-2">
                           <span className="w-4 self-stretch rounded bg-primary/10 text-center text-gray-900">
                             {keyMapping.key}
                           </span>

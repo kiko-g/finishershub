@@ -1,5 +1,5 @@
-import { EyeIcon, EyeSlashIcon } from '@heroicons/react/24/outline'
-import { useCallback, useEffect } from 'react'
+import { EyeIcon, EyeSlashIcon } from "@heroicons/react/24/outline"
+import { useCallback, useEffect } from "react"
 
 type Props = {
   buttonControlsRef: React.MutableRefObject<HTMLDivElement | null>
@@ -31,18 +31,18 @@ export default function MinimizeButtonControls({ buttonControlsRef, minimizeHook
     }
 
     const timerA = setTimeout(() => {
-      if (buttonControlsRef.current) buttonControlsRef.current.classList.add('opacity-50')
+      if (buttonControlsRef.current) buttonControlsRef.current.classList.add("opacity-50")
     }, 4000)
 
     const timerB = setTimeout(() => {
-      if (buttonControlsRef.current) buttonControlsRef.current.classList.remove('opacity-50')
-      if (buttonControlsRef.current) buttonControlsRef.current.classList.add('opacity-0')
+      if (buttonControlsRef.current) buttonControlsRef.current.classList.remove("opacity-50")
+      if (buttonControlsRef.current) buttonControlsRef.current.classList.add("opacity-0")
     }, 8000)
 
-    window.addEventListener('keydown', handleKeyDown)
+    window.addEventListener("keydown", handleKeyDown)
 
     return () => {
-      window.removeEventListener('keydown', handleKeyDown)
+      window.removeEventListener("keydown", handleKeyDown)
       clearTimeout(timerA)
       clearTimeout(timerB)
     }

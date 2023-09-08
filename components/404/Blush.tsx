@@ -1,10 +1,10 @@
-import React from 'react'
-import Image from 'next/image'
+import React from "react"
+import Image from "next/image"
 
 type Props = {}
 
 export default function Blush({}: Props) {
-  const title = 'You look cute and breedable.'
+  const title = "You look cute and breedable."
 
   return (
     <Image

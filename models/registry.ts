@@ -1,4 +1,4 @@
-import mongoose, { Schema, model } from 'mongoose'
+import mongoose, { Schema, model } from "mongoose"
 
 if (typeof mongoose.models.Registry !== undefined) delete mongoose.models.Registry
 
@@ -12,10 +12,10 @@ const schema = new Schema(
     imgurUrl: String,
   },
   {
-    collection: 'Registry',
+    collection: "Registry",
   },
 )
 
-const Model = model('Registry', schema)
+const Model = model("Registry", schema)
 
 export default Model

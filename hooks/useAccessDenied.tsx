@@ -1,11 +1,11 @@
-import { useEffect, useState } from 'react'
+import { useEffect, useState } from "react"
 
 const useLocalStorage = (key: string, initialValue: any) => {
   const [storedValue, setStoredValue] = useState(initialValue)
 
   useEffect(() => {
     try {
-      if (typeof window !== 'undefined') {
+      if (typeof window !== "undefined") {
         const item = window.localStorage.getItem(key)
         setStoredValue(item ? JSON.parse(item) : initialValue)
       }
@@ -20,7 +20,7 @@ const useLocalStorage = (key: string, initialValue: any) => {
       const valueToStore = value instanceof Function ? value(storedValue) : value
 
       setStoredValue(valueToStore)
-      if (typeof window !== 'undefined') {
+      if (typeof window !== "undefined") {
         window.localStorage.setItem(key, JSON.stringify(valueToStore))
       }
     } catch (error) {

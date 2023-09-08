@@ -1,9 +1,9 @@
-import classNames from 'classnames'
-import type { VideoType } from '../../@types'
-import React, { useState, useEffect, useRef, SetStateAction, Dispatch } from 'react'
-import { ShareVideo, PopOpenVideo, VideoSkeleton } from './'
-import { PauseIcon, PlayIcon } from '@heroicons/react/24/solid'
-import { useMediaQuery } from 'usehooks-ts'
+import classNames from "classnames"
+import type { VideoType } from "../../@types"
+import React, { useState, useEffect, useRef, SetStateAction, Dispatch } from "react"
+import { ShareVideo, PopOpenVideo, VideoSkeleton } from "./"
+import { PauseIcon, PlayIcon } from "@heroicons/react/24/solid"
+import { useMediaQuery } from "usehooks-ts"
 
 type Props = {
   video: VideoType
@@ -47,15 +47,11 @@ export default function VideoPlayer(props: Props) {
   return (
     <div
       className={classNames(
-        'group relative z-20',
-        special
-          ? 'mx-auto my-auto h-screen bg-black overflow-hidden'
-          : 'rounded bg-primary/50 dark:bg-secondary/50',
+        "group relative z-20",
+        special ? "mx-auto my-auto h-screen overflow-hidden bg-black" : "rounded bg-primary/50 dark:bg-secondary/50",
       )}
     >
-      <div
-        className={classNames(special ? 'absolute inset-0' : '', slide ? 'animate-pulse-500' : '')}
-      >
+      <div className={classNames(special ? "absolute inset-0" : "", slide ? "animate-pulse-500" : "")}>
         <video
           ref={videoRef}
           loop
@@ -67,17 +63,17 @@ export default function VideoPlayer(props: Props) {
           onPlay={handlePlay}
           onPause={handlePause}
           className={classNames(
-            'bg-primary/10 shadow dark:bg-secondary/10',
+            "bg-primary/10 shadow dark:bg-secondary/10",
             special
-              ? 'overflow-hidden lg:h-full h-screen scale-y-[3] scale-x-[3] lg:scale-x-100 lg:scale-y-100 lg:aspect-video aspect-[9/16]'
-              : 'rounded',
+              ? "aspect-[9/16] h-screen scale-x-[3] scale-y-[3] overflow-hidden lg:aspect-video lg:h-full lg:scale-x-100 lg:scale-y-100"
+              : "rounded",
           )}
         >
           <source src={video.url} type="video/mp4" />
         </video>
         {special ? null : (
-          <div className="absolute left-4 bottom-4 z-30 hidden font-normal text-white transition group-hover:flex group-hover:gap-2">
-            <div className="flex items-center flex-col gap-2 lg:gap-4 px-2 py-2 lg:px-4 lg:py-4 bg-black/50 rounded">
+          <div className="absolute bottom-4 left-4 z-30 hidden font-normal text-white transition group-hover:flex group-hover:gap-2">
+            <div className="flex flex-col items-center gap-2 rounded bg-black/50 px-2 py-2 lg:gap-4 lg:px-4 lg:py-4">
               <PlayPauseVideo playing={playing} size="md" />
               {/* <ToggleMuteVideo hook={[mute, setMute]} defaultMute={muted} size="md" /> */}
               <ShareVideo video={video} size="md" />
@@ -92,19 +88,19 @@ export default function VideoPlayer(props: Props) {
 
 type PlayPauseVideoProps = {
   playing: boolean
-  size?: 'sm' | 'md' | 'lg' | 'xl'
+  size?: "sm" | "md" | "lg" | "xl"
 }
 
-function PlayPauseVideo({ playing, size = 'sm' }: PlayPauseVideoProps) {
+function PlayPauseVideo({ playing, size = "sm" }: PlayPauseVideoProps) {
   return playing ? (
     <PlayIcon
       fillRule="evenodd"
       strokeWidth="1.5"
       className={classNames(
-        size === 'sm' ? 'h-4 w-4 lg:h-6 lg:w-6' : '',
-        size === 'md' ? 'h-5 w-5 lg:h-7 lg:w-7' : '',
-        size === 'lg' ? 'h-6 w-6 lg:h-8 lg:w-8' : '',
-        size === 'xl' ? 'h-8 w-8 lg:h-10 lg:w-10' : '',
+        size === "sm" ? "h-4 w-4 lg:h-6 lg:w-6" : "",
+        size === "md" ? "h-5 w-5 lg:h-7 lg:w-7" : "",
+        size === "lg" ? "h-6 w-6 lg:h-8 lg:w-8" : "",
+        size === "xl" ? "h-8 w-8 lg:h-10 lg:w-10" : "",
       )}
     />
   ) : (
@@ -112,10 +108,10 @@ function PlayPauseVideo({ playing, size = 'sm' }: PlayPauseVideoProps) {
       fillRule="evenodd"
       strokeWidth="1.5"
       className={classNames(
-        size === 'sm' ? 'h-4 w-4 lg:h-6 lg:w-6' : '',
-        size === 'md' ? 'h-5 w-5 lg:h-7 lg:w-7' : '',
-        size === 'lg' ? 'h-6 w-6 lg:h-8 lg:w-8' : '',
-        size === 'xl' ? 'h-8 w-8 lg:h-10 lg:w-10' : '',
+        size === "sm" ? "h-4 w-4 lg:h-6 lg:w-6" : "",
+        size === "md" ? "h-5 w-5 lg:h-7 lg:w-7" : "",
+        size === "lg" ? "h-6 w-6 lg:h-8 lg:w-8" : "",
+        size === "xl" ? "h-8 w-8 lg:h-10 lg:w-10" : "",
       )}
     />
   )
@@ -124,7 +120,7 @@ function PlayPauseVideo({ playing, size = 'sm' }: PlayPauseVideoProps) {
 type ToggleMuteVideoProps = {
   hook: [boolean, Dispatch<SetStateAction<boolean>>]
   defaultMute: boolean
-  size?: 'sm' | 'md' | 'lg' | 'xl'
+  size?: "sm" | "md" | "lg" | "xl"
 }
 
 function ToggleMuteVideo({ hook, defaultMute, size }: ToggleMuteVideoProps) {
@@ -146,10 +142,10 @@ function ToggleMuteVideo({ hook, defaultMute, size }: ToggleMuteVideoProps) {
         stroke="currentColor"
         strokeWidth="1.5"
         className={classNames(
-          size === 'sm' ? 'h-4 w-4 lg:h-6 lg:w-6' : '',
-          size === 'md' ? 'h-5 w-5 lg:h-7 lg:w-7' : '',
-          size === 'lg' ? 'h-6 w-6 lg:h-8 lg:w-8' : '',
-          size === 'xl' ? 'h-8 w-8 lg:h-10 lg:w-10' : '',
+          size === "sm" ? "h-4 w-4 lg:h-6 lg:w-6" : "",
+          size === "md" ? "h-5 w-5 lg:h-7 lg:w-7" : "",
+          size === "lg" ? "h-6 w-6 lg:h-8 lg:w-8" : "",
+          size === "xl" ? "h-8 w-8 lg:h-10 lg:w-10" : "",
         )}
       >
         <path
@@ -158,11 +154,7 @@ function ToggleMuteVideo({ hook, defaultMute, size }: ToggleMuteVideoProps) {
           d="M5.586 15H4a1 1 0 01-1-1v-4a1 1 0 011-1h1.586l4.707-4.707C10.923 3.663 12 4.109 12 5v14c0 .891-1.077 1.337-1.707.707L5.586 15z"
           clipRule="evenodd"
         />
-        <path
-          strokeLinecap="round"
-          strokeLinejoin="round"
-          d="M17 14l2-2m0 0l2-2m-2 2l-2-2m2 2l2 2"
-        />
+        <path strokeLinecap="round" strokeLinejoin="round" d="M17 14l2-2m0 0l2-2m-2 2l-2-2m2 2l2 2" />
       </svg>
     </button>
   ) : (
@@ -179,10 +171,10 @@ function ToggleMuteVideo({ hook, defaultMute, size }: ToggleMuteVideoProps) {
         stroke="currentColor"
         strokeWidth="1.5"
         className={classNames(
-          size === 'sm' ? 'h-4 w-4 lg:h-6 lg:w-6' : '',
-          size === 'md' ? 'h-5 w-5 lg:h-7 lg:w-7' : '',
-          size === 'lg' ? 'h-6 w-6 lg:h-8 lg:w-8' : '',
-          size === 'xl' ? 'h-8 w-8 lg:h-10 lg:w-10' : '',
+          size === "sm" ? "h-4 w-4 lg:h-6 lg:w-6" : "",
+          size === "md" ? "h-5 w-5 lg:h-7 lg:w-7" : "",
+          size === "lg" ? "h-6 w-6 lg:h-8 lg:w-8" : "",
+          size === "xl" ? "h-8 w-8 lg:h-10 lg:w-10" : "",
         )}
       >
         <path

@@ -1,5 +1,5 @@
-import React, { Dispatch, SetStateAction, useState } from 'react'
-import { ArrowPathRoundedSquareIcon } from '@heroicons/react/24/outline'
+import React, { Dispatch, SetStateAction, useState } from "react"
+import { ArrowPathRoundedSquareIcon } from "@heroicons/react/24/outline"
 
 type Props = {
   shuffle: Function

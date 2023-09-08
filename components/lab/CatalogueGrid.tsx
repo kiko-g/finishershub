@@ -1,6 +1,6 @@
-import React, { useEffect, useMemo, useState } from 'react'
-import { CatalogueItemStatus, type CatalogueItem as CatalogueItemType } from '../../@types'
-import CatalogueItem from './CatalogueItem'
+import React, { useEffect, useMemo, useState } from "react"
+import { CatalogueItemStatus, type CatalogueItem as CatalogueItemType } from "../../@types"
+import CatalogueItem from "./CatalogueItem"
 
 type Props = {
   catalogue: (string | number)[][]
@@ -26,14 +26,7 @@ export default function CatalogueGrid({ catalogue }: Props) {
           video: row[10] as string,
         }
 
-        return (
-          <CatalogueItem
-            key={`item-${index}`}
-            item={finisher}
-            chosen={chosen}
-            setChosen={setChosen}
-          />
-        )
+        return <CatalogueItem key={`item-${index}`} item={finisher} chosen={chosen} setChosen={setChosen} />
       })}
     </div>
   )

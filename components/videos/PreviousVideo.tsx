@@ -1,14 +1,14 @@
-import { ChevronDoubleLeftIcon } from '@heroicons/react/24/outline'
-import classNames from 'classnames'
-import React from 'react'
+import { ChevronDoubleLeftIcon } from "@heroicons/react/24/outline"
+import classNames from "classnames"
+import React from "react"
 
 type Props = {
   prevVideo: () => void
   disabled: boolean
-  size?: 'sm' | 'md' | 'lg' | 'xl'
+  size?: "sm" | "md" | "lg" | "xl"
 }
 
-export default function PreviousVideo({ prevVideo, disabled, size = 'sm' }: Props) {
+export default function PreviousVideo({ prevVideo, disabled, size = "sm" }: Props) {
   return (
     <button
       onClick={prevVideo}
@@ -18,10 +18,10 @@ export default function PreviousVideo({ prevVideo, disabled, size = 'sm' }: Prop
     >
       <ChevronDoubleLeftIcon
         className={classNames(
-          size === 'sm' ? 'h-4 w-4 lg:h-6 lg:w-6' : '',
-          size === 'md' ? 'h-5 w-5 lg:h-7 lg:w-7' : '',
-          size === 'lg' ? 'h-6 w-6 lg:h-8 lg:w-8' : '',
-          size === 'xl' ? 'h-8 w-8 lg:h-10 lg:w-10' : '',
+          size === "sm" ? "h-4 w-4 lg:h-6 lg:w-6" : "",
+          size === "md" ? "h-5 w-5 lg:h-7 lg:w-7" : "",
+          size === "lg" ? "h-6 w-6 lg:h-8 lg:w-8" : "",
+          size === "xl" ? "h-8 w-8 lg:h-10 lg:w-10" : "",
         )}
       />
     </button>

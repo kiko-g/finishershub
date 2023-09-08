@@ -1,14 +1,8 @@
-import React, { Dispatch, Fragment, SetStateAction, memo, useState } from 'react'
-import classNames from 'classnames'
-import { Dialog, Transition } from '@headlessui/react'
-import {
-  EyeIcon,
-  EyeSlashIcon,
-  XMarkIcon,
-  KeyIcon,
-  ArrowTopRightOnSquareIcon,
-} from '@heroicons/react/24/outline'
-import Link from 'next/link'
+import React, { Dispatch, Fragment, SetStateAction, memo, useState } from "react"
+import classNames from "classnames"
+import { Dialog, Transition } from "@headlessui/react"
+import { EyeIcon, EyeSlashIcon, XMarkIcon, KeyIcon, ArrowTopRightOnSquareIcon } from "@heroicons/react/24/outline"
+import Link from "next/link"
 
 type Props = {
   lockedHook: [boolean, Dispatch<SetStateAction<boolean>>]
@@ -17,10 +11,10 @@ type Props = {
 }
 
 export default function AccessModalCTA({ lockedHook, startOpen, special = false }: Props) {
-  const secretCode = 'Doeu'
-  const secretHints = ['Levels', 'Bio', 'Window', 'Clip']
+  const secretCode = "Doeu"
+  const secretHints = ["Levels", "Bio", "Window", "Clip"]
 
-  const [accessCode, setAccessCode] = useState('')
+  const [accessCode, setAccessCode] = useState("")
   const [accessCodeShown, setAccessCodeShown] = useState(true)
   const [accessCodeError, setAccessCodeError] = useState(false)
 
@@ -37,11 +31,11 @@ export default function AccessModalCTA({ lockedHook, startOpen, special = false 
 
   const submitPassword = () => {
     if (accessCode.toLowerCase() === secretCode.toLowerCase()) {
-      setAccessCode('')
+      setAccessCode("")
       setLocked(false)
       setIsOpen(false)
     } else {
-      setAccessCode('')
+      setAccessCode("")
       setAccessCodeError(true)
       setTimeout(() => setAccessCodeError(false), 4000)
     }
@@ -76,7 +70,7 @@ export default function AccessModalCTA({ lockedHook, startOpen, special = false 
             <div className="fixed inset-0 bg-black/80 backdrop-blur dark:bg-white/5" />
           </Transition.Child>
 
-          <div className="fixed inset-0 overflow-y-auto z-[999]">
+          <div className="fixed inset-0 z-[999] overflow-y-auto">
             <div className="flex min-h-full items-center justify-center p-4 text-center">
               <Transition.Child
                 as={Fragment}
@@ -89,10 +83,7 @@ export default function AccessModalCTA({ lockedHook, startOpen, special = false 
               >
                 <Dialog.Panel className="w-full max-w-xl transform overflow-hidden rounded-2xl bg-white p-6 text-left align-middle text-gray-600 shadow-xl transition-all dark:bg-gray-800 dark:text-white">
                   <div className="flex items-center justify-between">
-                    <Dialog.Title
-                      as="h3"
-                      className="text-xl font-semibold leading-6 text-primary dark:text-white"
-                    >
+                    <Dialog.Title as="h3" className="text-xl font-semibold leading-6 text-primary dark:text-white">
                       Prove your identity
                     </Dialog.Title>
                     <button
@@ -100,7 +91,7 @@ export default function AccessModalCTA({ lockedHook, startOpen, special = false 
                       className="flex items-center gap-x-1 rounded border border-rose-600/50 bg-rose-600/10 px-2 py-1 text-sm text-rose-800 transition hover:bg-rose-600 hover:text-white dark:bg-rose-600/20 dark:text-white dark:hover:bg-rose-600"
                     >
                       <span>Close</span>
-                      <XMarkIcon className="h-4 w-4" />{' '}
+                      <XMarkIcon className="h-4 w-4" />{" "}
                     </button>
                   </div>
 
@@ -109,19 +100,18 @@ export default function AccessModalCTA({ lockedHook, startOpen, special = false 
                       <p>Enter the codephrase to prove you are worthy of viewing the content.</p>
                       <ul className="ml-3 mt-2 flex list-disc flex-col gap-y-0.5 lg:ml-4 lg:mt-1">
                         <li>
-                          <strong>Close the modal</strong> to have{' '}
+                          <strong>Close the modal</strong> to have{" "}
                           <span className="text-amber-600">limited access</span> to the site.
                         </li>
                         <li>
-                          Click the <span className="text-teal-500">green key icon</span> to reopen
-                          the modal.
+                          Click the <span className="text-teal-500">green key icon</span> to reopen the modal.
                         </li>
                         <li>
-                          <strong className="underline">Hints</strong>:{' '}
+                          <strong className="underline">Hints</strong>:{" "}
                           {secretHints.map((hint, hintIdx) => (
                             <span key={`hint-${hintIdx}`}>
                               <span>{hint}</span>
-                              {hintIdx < secretHints.length - 1 ? ', ' : ''}
+                              {hintIdx < secretHints.length - 1 ? ", " : ""}
                             </span>
                           ))}
                           <Link
@@ -144,34 +134,32 @@ export default function AccessModalCTA({ lockedHook, startOpen, special = false 
                       <input
                         required
                         name="password"
-                        type={accessCodeShown ? 'text' : 'password'}
+                        type={accessCodeShown ? "text" : "password"}
                         autoComplete="new-password"
                         className="block w-full pl-3 pr-10"
                         placeholder="Password"
                         value={accessCode}
-                        onKeyDown={(e) => e.key === 'Enter' && submitPassword()}
+                        onKeyDown={(e) => e.key === "Enter" && submitPassword()}
                         onChange={(e) => setAccessCode(e.target.value)}
                       />
                       <button
                         type="button"
                         onClick={togglePasswordShown}
-                        title={`${accessCodeShown ? 'Hide' : 'Show'} password`}
-                        aria-label={`${accessCodeShown ? 'Hide' : 'Show'} password`}
+                        title={`${accessCodeShown ? "Hide" : "Show"} password`}
+                        aria-label={`${accessCodeShown ? "Hide" : "Show"} password`}
                         className="absolute inset-y-0 right-2 flex items-center justify-center rounded-full p-1 text-primary transition hover:opacity-50 dark:text-secondary dark:hover:opacity-50"
                       >
                         {accessCodeShown ? (
-                          <EyeSlashIcon className="h-4 lg:h-5 w-4 lg:w-5" />
+                          <EyeSlashIcon className="h-4 w-4 lg:h-5 lg:w-5" />
                         ) : (
-                          <EyeIcon className="h-4 lg:h-5 w-4 lg:w-5" />
+                          <EyeIcon className="h-4 w-4 lg:h-5 lg:w-5" />
                         )}
                       </button>
                     </div>
                   </div>
 
                   {accessCodeError ? (
-                    <p className="mt-0.5 text-sm text-rose-600 dark:text-rose-500">
-                      Wrong codephrase. Try again.
-                    </p>
+                    <p className="mt-0.5 text-sm text-rose-600 dark:text-rose-500">Wrong codephrase. Try again.</p>
                   ) : null}
 
                   <div className="mt-4">

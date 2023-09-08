@@ -1,3 +1,3 @@
-import ShuffleIcon from './ShuffleIcon'
+import ShuffleIcon from "./ShuffleIcon"
 
 export { ShuffleIcon }

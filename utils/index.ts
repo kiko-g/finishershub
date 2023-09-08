@@ -1,4 +1,4 @@
-import type { VideoType } from '../@types'
+import type { VideoType } from "../@types"
 
 export const daysDifference = (before: Date, after: Date) => {
   let a = new Date(after.toString())
@@ -46,20 +46,20 @@ export function transpose<T>(arr: T[][]): T[][] {
  */
 export const strIncludes = (str: string, query: string, strict?: boolean) =>
   strict
-    ? str.toLowerCase().replace(/\s+/g, '').includes(query.toLowerCase().replace(/\s+/g, ''))
+    ? str.toLowerCase().replace(/\s+/g, "").includes(query.toLowerCase().replace(/\s+/g, ""))
     : str
         .toLowerCase()
-        .normalize('NFD')
-        .replace(/\p{Diacritic}/gu, '')
-        .replace(/\s+/g, '')
-        .replace('.', '')
-        .replace(':', '')
-        .includes(query.toLowerCase().replace(/\s+/g, ''))
+        .normalize("NFD")
+        .replace(/\p{Diacritic}/gu, "")
+        .replace(/\s+/g, "")
+        .replace(".", "")
+        .replace(":", "")
+        .includes(query.toLowerCase().replace(/\s+/g, ""))
 
 export const getVideoUrlFromVideo = (video: VideoType, offset?: number) => {
-  const url = typeof window !== 'undefined' ? window.location.origin : ''
+  const url = typeof window !== "undefined" ? window.location.origin : ""
   const index = offset ? video.index + offset : video.index
-  const game = video.filteredGame === '' ? '' : '/' + video.filteredGame
+  const game = video.filteredGame === "" ? "" : "/" + video.filteredGame
 
   return `${url}/video${game}/${index}`
 }

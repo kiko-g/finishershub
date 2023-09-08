@@ -1,5 +1,5 @@
-import React from 'react'
-import classNames from 'classnames'
+import React from "react"
+import classNames from "classnames"
 
 type Props = {
   children: React.ReactNode
@@ -7,7 +7,7 @@ type Props = {
   extraClassNames?: string
 }
 
-export default function AboutCardLI({ children, emoji, extraClassNames = '' }: Props) {
+export default function AboutCardLI({ children, emoji, extraClassNames = "" }: Props) {
   return (
     <li
       className={classNames(
@@ -16,7 +16,7 @@ export default function AboutCardLI({ children, emoji, extraClassNames = '' }: P
       )}
     >
       <p>
-        <span>{emoji ? emoji : '👋'}&nbsp;&nbsp;</span>
+        <span>{emoji ? emoji : "👋"}&nbsp;&nbsp;</span>
         <span>{children}</span>
       </p>
     </li>

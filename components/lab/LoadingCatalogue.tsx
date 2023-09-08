@@ -1,4 +1,4 @@
-import React from 'react'
+import React from "react"
 
 type Props = {}
 
@@ -11,14 +11,7 @@ export default function LoadingCatalogue({}: Props) {
         viewBox="0 0 24 24"
         className="-ml-1 mr-3 h-12 w-12 animate-spin text-primary dark:text-secondary"
       >
-        <circle
-          className="opacity-25"
-          cx="12"
-          cy="12"
-          r="10"
-          stroke="currentColor"
-          strokeWidth="4"
-        ></circle>
+        <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle>
         <path
           className="opacity-75"
           fill="currentColor"

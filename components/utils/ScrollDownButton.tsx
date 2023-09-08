@@ -1,12 +1,12 @@
-import Link from 'next/link'
-import React from 'react'
+import Link from "next/link"
+import React from "react"
 
 type Props = {
   href: string
 }
 
 export default function ScrollDownButton({ href }: Props) {
-  if (!href || !href.startsWith('#')) return null
+  if (!href || !href.startsWith("#")) return null
 
   return (
     <Link
