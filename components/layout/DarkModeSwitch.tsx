@@ -38,11 +38,11 @@ export default function DarkModeSwitch({}: Props) {
           className={classNames(
             'h-8 w-8 transition dark:hidden',
             'fill-white',
-            'stroke-orange-500',
-            '[@media(prefers-color-scheme:dark)]:fill-orange-50',
+            'stroke-orange-400',
+            '[@media(prefers-color-scheme:dark)]:fill-orange-400',
             '[@media(prefers-color-scheme:dark)]:stroke-orange-400',
             'group-hover:fill-orange-400',
-            '[@media(prefers-color-scheme:dark)]:group-hover:fill-orange-200',
+            '[@media(prefers-color-scheme:dark)]:group-hover:fill-orange-50',
             '[@media(prefers-color-scheme:dark)]:group-hover:stroke-orange-400',
           )}
         >
@@ -60,7 +60,7 @@ export default function DarkModeSwitch({}: Props) {
           className={classNames(
             'hidden h-8 w-8 transition dark:block',
             'stroke-blue-50',
-            '[@media(prefers-color-scheme:dark)]:fill-blue-300',
+            '[@media(prefers-color-scheme:dark)]:fill-blue-400',
             '[@media(prefers-color-scheme:dark)]:stroke-blue-400',
             'group-hover:fill-blue-400',
             '[@media(prefers-color-scheme:dark)]:group-hover:fill-blue-50',

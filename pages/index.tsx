@@ -26,6 +26,7 @@ export default function Hub() {
       name: 'Casino',
       href: '/casino',
       emoji: '🎰',
+      shown: true,
       description: (
         <>
           Visit our casino, where you can enjoy a random sweet finishing move highlight. Instead of
@@ -35,9 +36,23 @@ export default function Hub() {
       ),
     },
     {
+      name: 'Videos',
+      href: '/videos',
+      emoji: '🎬',
+      shown: true,
+      description: (
+        <>
+          Get the full experience and control what content you consume. Filter by tags, map,
+          location and artists. The possibilities aren&apos;t endless but this we get pretty damn
+          close.
+        </>
+      ),
+    },
+    {
       name: 'Gallery',
       href: '/gallery',
       emoji: '🪟',
+      shown: false,
       description: (
         <>
           Head over to the gallery. It&apos;s like a museum, but with heinous highlights of
@@ -49,6 +64,7 @@ export default function Hub() {
       name: 'Lab',
       href: '/lab',
       emoji: '🧪',
+      shown: true,
       description: (
         <>
           Visit the laboratory of finishers. This is where you can consult premium research findings
@@ -61,6 +77,7 @@ export default function Hub() {
       name: 'Registry',
       href: '/registry',
       emoji: '📊',
+      shown: true,
       description: (
         <>
           Navigate to the registry where you can see and manage stats related to the the diabolic
@@ -72,12 +89,12 @@ export default function Hub() {
       name: 'Create',
       href: '/create',
       emoji: '📁',
+      shown: true,
       description: (
         <>
           Upload your own finishing move highlight to the platform. This is a{' '}
           <span className="font-bold">members-only</span> space Finishers Club associates to
-          contribute to the platform and share their own content. You need full access to use the
-          features in this page.
+          contribute to the platform and share their own content.
         </>
       ),
     },
@@ -85,6 +102,7 @@ export default function Hub() {
       name: 'Admin',
       href: '/admin',
       emoji: '🏢',
+      shown: true,
       description: (
         <>
           Edit and manage the information associated to the videos on the platform. This is a{' '}
@@ -97,6 +115,7 @@ export default function Hub() {
       name: 'More',
       href: '/more',
       emoji: '✨',
+      shown: true,
       description: (
         <>
           Check out the more page to view <span className="font-bold">premium</span> content and
@@ -143,9 +162,11 @@ export default function Hub() {
             </div>
 
             <nav className="flex max-w-full flex-wrap items-center justify-center gap-3 md:max-w-5xl md:gap-6">
-              {nav.map((item, itemIdx) => (
-                <NavCard key={`nav-${itemIdx}`} item={item} />
-              ))}
+              {nav
+                .filter(({ shown }) => shown)
+                .map((item, itemIdx) => (
+                  <NavCard key={`nav-${itemIdx}`} item={item} />
+                ))}
             </nav>
 
             <Socials />
@@ -309,7 +330,7 @@ export default function Hub() {
               {/* Fact #1 */}
               <AboutCardLI emoji="🤯">
                 <strong>Fun fact</strong>: all the video content comes from a pool of around{' '}
-                <strong>700 clips</strong>. However, they only capture around <strong>5%</strong> of
+                <strong>900 clips</strong>. However, they only capture around <strong>5%</strong> of
                 all the finishing moves performed by Finishers Club as of March 2023.
               </AboutCardLI>
 

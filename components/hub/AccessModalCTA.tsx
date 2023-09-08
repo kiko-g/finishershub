@@ -136,34 +136,36 @@ export default function AccessModalCTA({ lockedHook, startOpen, special = false 
                     </div>
                   </div>
 
-                  <div className="relative mt-4 flex flex-col gap-1">
+                  <div className="mt-4 flex flex-col gap-1">
                     <label htmlFor="password" className="sr-only">
                       Identity Codephrase for general access
                     </label>
-                    <input
-                      required
-                      name="password"
-                      type={accessCodeShown ? 'text' : 'password'}
-                      autoComplete="new-password"
-                      className="relative block w-full"
-                      placeholder="Password"
-                      value={accessCode}
-                      onKeyDown={(e) => e.key === 'Enter' && submitPassword()}
-                      onChange={(e) => setAccessCode(e.target.value)}
-                    />
-                    <button
-                      type="button"
-                      onClick={togglePasswordShown}
-                      title={`${accessCodeShown ? 'Hide' : 'Show'} password`}
-                      aria-label={`${accessCodeShown ? 'Hide' : 'Show'} password`}
-                      className="absolute right-[11px] top-[11px] rounded-full p-1 text-primary transition hover:bg-primary hover:text-white dark:text-secondary dark:hover:bg-secondary dark:hover:text-white"
-                    >
-                      {accessCodeShown ? (
-                        <EyeSlashIcon className="h-5 w-5" />
-                      ) : (
-                        <EyeIcon className="h-5 w-5" />
-                      )}
-                    </button>
+                    <div className="relative">
+                      <input
+                        required
+                        name="password"
+                        type={accessCodeShown ? 'text' : 'password'}
+                        autoComplete="new-password"
+                        className="block w-full pl-3 pr-10"
+                        placeholder="Password"
+                        value={accessCode}
+                        onKeyDown={(e) => e.key === 'Enter' && submitPassword()}
+                        onChange={(e) => setAccessCode(e.target.value)}
+                      />
+                      <button
+                        type="button"
+                        onClick={togglePasswordShown}
+                        title={`${accessCodeShown ? 'Hide' : 'Show'} password`}
+                        aria-label={`${accessCodeShown ? 'Hide' : 'Show'} password`}
+                        className="absolute inset-y-0 right-2 flex items-center justify-center rounded-full p-1 text-primary transition hover:opacity-50 dark:text-secondary dark:hover:opacity-50"
+                      >
+                        {accessCodeShown ? (
+                          <EyeSlashIcon className="h-4 lg:h-5 w-4 lg:w-5" />
+                        ) : (
+                          <EyeIcon className="h-4 lg:h-5 w-4 lg:w-5" />
+                        )}
+                      </button>
+                    </div>
                   </div>
 
                   {accessCodeError ? (

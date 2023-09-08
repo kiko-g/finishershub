@@ -134,7 +134,7 @@ export default function AccessModal({ lockedHook, startOpen }: Props) {
                     </div>
                   </div>
 
-                  <div className="relative mt-4 flex flex-col gap-1">
+                  <div className="mt-4 flex flex-col gap-1">
                     <label htmlFor="password" className="sr-only">
                       Identity Codephrase for general access
                     </label>
@@ -154,7 +154,7 @@ export default function AccessModal({ lockedHook, startOpen }: Props) {
                       onClick={togglePasswordShown}
                       title={`${accessCodeShown ? 'Hide' : 'Show'} password`}
                       aria-label={`${accessCodeShown ? 'Hide' : 'Show'} password`}
-                      className="absolute right-[11px] top-[11px] rounded-full p-1 text-primary transition hover:bg-primary hover:text-white dark:text-secondary dark:hover:bg-secondary dark:hover:text-white"
+                      className="rounded-full p-1 text-primary transition hover:bg-primary hover:text-white dark:text-secondary dark:hover:bg-secondary dark:hover:text-white"
                     >
                       {accessCodeShown ? (
                         <EyeSlashIcon className="h-5 w-5" />
@@ -174,7 +174,7 @@ export default function AccessModal({ lockedHook, startOpen }: Props) {
                     <button
                       type="button"
                       onClick={submitPassword}
-                      className="w-full rounded bg-primary p-2 text-white transition hover:opacity-80 dark:bg-secondary"
+                      className="w-full text-sm rounded bg-primary p-2 text-white transition hover:opacity-80 dark:bg-secondary"
                     >
                       Submit
                     </button>

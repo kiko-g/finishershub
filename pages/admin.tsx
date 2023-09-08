@@ -136,7 +136,7 @@ export default function Videos({}: Props) {
                   </tr>
                 </thead>
 
-                <tbody className="bg-white dark:bg-transparent divide-y divide-transparent dark:divide-gray-700">
+                <tbody className="bg-white dark:bg-transparent divide-y divide-transparent dark:divide-transparent">
                   {data
                     .sort((a, b) => (a.id > b.id ? 1 : -1))
                     .map((video, videoIdx) => (
@@ -193,7 +193,7 @@ function TableRow({ video, rowIndex, replaceRowAction }: TableRowProps) {
   return (
     <tr
       className={classNames(
-        isRowFilled ? 'bg-emerald-600/[15%]' : '',
+        isRowFilled ? 'bg-emerald-600/[15%] dark:bg-teal-400/10' : '',
         hasRowChanged && !rowSaved ? 'bg-orange-500/[15%]' : '',
       )}
     >
