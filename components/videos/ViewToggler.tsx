@@ -5,7 +5,7 @@ type Props = {
   hook: [boolean, Dispatch<SetStateAction<boolean>>]
 }
 
-export default function ViewToggler({ hook }: Props) {
+export function ViewToggler({ hook }: Props) {
   const [type, setType] = hook
 
   return (

@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react"
 
-const useLocalStorage = (key: string, initialValue?: any) => {
+function useLocalStorage(key: string, initialValue?: any) {
   const [storedValue, setStoredValue] = useState(() => {
     try {
       if (typeof window !== "undefined") {
@@ -13,7 +13,7 @@ const useLocalStorage = (key: string, initialValue?: any) => {
     }
   })
 
-  const setValue = (value: any) => {
+  function setValue(value: any) {
     try {
       const valueToStore = value instanceof Function ? value(storedValue) : value
 

@@ -15,7 +15,7 @@ type Props = {
   willFade?: boolean
 }
 
-export default function DelayDisclaimerFade({ type, willFade = false }: Props) {
+export function DelayDisclaimerFade({ type, willFade = false }: Props) {
   const [shown, setShown] = React.useState(true)
   const [fading, setFading] = React.useState(false)
 

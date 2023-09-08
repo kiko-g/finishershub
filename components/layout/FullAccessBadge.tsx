@@ -1,9 +1,7 @@
 import React from "react"
 import { CheckBadgeIcon } from "@heroicons/react/24/outline"
 
-type Props = {}
-
-export default function FullAccessBadge({}: Props) {
+export function FullAccessBadge() {
   const [folded, setFolded] = React.useState<boolean>(true)
 
   return (

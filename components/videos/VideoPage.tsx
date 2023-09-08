@@ -8,7 +8,7 @@ type Props = {
   videoIndex: number
 }
 
-export default function VideoPage({ game, videoIndex }: Props) {
+export function VideoPage({ game, videoIndex }: Props) {
   const [video, setVideo] = useState<VideoType | null>(null)
   const [loading, setLoading] = useState<boolean>(true)
   const [fetchError, setFetchError] = useState<boolean>(false)

@@ -6,7 +6,7 @@ type Props = {
   siteTitle: string
 }
 
-export default function Footer({ siteTitle }: Props) {
+export function Footer({ siteTitle }: Props) {
   return (
     <footer className="z-10 flex items-center justify-between px-4 py-3 text-xs text-gray-500 opacity-80 dark:text-gray-300 md:px-6 md:py-4 md:text-sm">
       <span className="text-gray-700 dark:text-gray-300 sm:text-center">

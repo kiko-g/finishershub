@@ -1,7 +1,7 @@
 import React from "react"
 import Link from "next/link"
 import useAccessDenied from "../../hooks/useAccessDenied"
-import VideoPlayer from "./VideoPlayer"
+import { VideoPlayer } from "./VideoPlayer"
 import { VideoType } from "../../@types"
 import { AccessModal, InvisbleTopLayer } from "../layout"
 import { getVideoUrlFromVideo } from "../../utils"
@@ -22,7 +22,7 @@ type Props = {
   expandedViewHook: [boolean, React.Dispatch<React.SetStateAction<boolean>>]
 }
 
-export default function SingleVideoShowcase({ video, expandedViewHook }: Props) {
+export function SingleVideoShowcase({ video, expandedViewHook }: Props) {
   const next = getVideoUrlFromVideo(video, 1)
   const previous = getVideoUrlFromVideo(video, -1)
 
@@ -41,6 +41,7 @@ export default function SingleVideoShowcase({ video, expandedViewHook }: Props) 
       <div className="flex flex-wrap items-center justify-center gap-2 md:justify-between">
         <div className="flex items-center gap-2">
           {accessDenied ? <AccessModal lockedHook={[accessDenied, setAccessDenied]} startOpen={false} /> : null}
+
           <Link
             href={previous}
             title="Previous video"

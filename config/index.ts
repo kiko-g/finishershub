@@ -3,7 +3,7 @@ import mongoose from "mongoose"
 import NextCors from "nextjs-cors"
 import { NextApiRequest, NextApiResponse } from "next"
 
-export const connectMongoDB = async () => {
+export async function connectMongoDB() {
   const mongoURI = process.env.MONGO_URI!
   mongoose.set("strictQuery", false)
 

@@ -1,4 +1,4 @@
-const resetCookies = () => {
+function resetCookies() {
   document.cookie
     .split(";")
     .forEach(
@@ -7,13 +7,13 @@ const resetCookies = () => {
     )
 }
 
-const clearCache = (invalidateCookies?: boolean) => {
+function clearCache(invalidateCookies?: boolean) {
   localStorage.clear()
   sessionStorage.clear()
   if (invalidateCookies) resetCookies()
 }
 
-const isStorageValid = (hoursElapsed: number = 24 * 7) => {
+function isStorageValid(hoursElapsed: number = 24 * 7) {
   const videosStr = localStorage.getItem("finishershub.videos") as string
   const savedTimeStr = localStorage.getItem("finishershub.videos-fetch-date") as string
 
@@ -24,7 +24,7 @@ const isStorageValid = (hoursElapsed: number = 24 * 7) => {
   return storedVideos !== null && storedSavedTime !== null && !expiredStorage
 }
 
-const writeVideosStorage = (videos: string[]) => {
+function writeVideosStorage(videos: string[]) {
   localStorage.setItem("finishershub.videos", JSON.stringify(videos))
   localStorage.setItem("finishershub.videos-fetch-date", JSON.stringify(new Date()))
 }

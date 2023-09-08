@@ -14,8 +14,8 @@ import {
   TwitchVideoClip,
   DeleteCookiesButton,
   VideoSkeleton,
+  DelayDisclaimer,
 } from "../../components/videos"
-import DelayDisclaimer from "../../components/videos/DelayDisclaimer"
 
 export default function IndexPage() {
   const isMobile = useMediaQuery("(max-width: 768px)")

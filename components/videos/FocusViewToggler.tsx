@@ -7,7 +7,7 @@ type Props = {
   size?: "sm" | "md" | "lg" | "xl"
 }
 
-export default function FocusViewToggler({ hook, size = "sm" }: Props) {
+export function FocusViewToggler({ hook, size = "sm" }: Props) {
   const [unfocused, setFocused] = hook
 
   return (

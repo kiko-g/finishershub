@@ -1,15 +1,14 @@
 import React, { Dispatch, Fragment, SetStateAction, memo, useState } from "react"
-import classNames from "classnames"
+import Link from "next/link"
 import { Dialog, Transition } from "@headlessui/react"
 import { EyeIcon, EyeSlashIcon, XMarkIcon, ArrowTopRightOnSquareIcon, KeyIcon } from "@heroicons/react/24/outline"
-import Link from "next/link"
 
 type Props = {
   lockedHook: [boolean, Dispatch<SetStateAction<boolean>>]
   startOpen?: boolean
 }
 
-export default function AccessModal({ lockedHook, startOpen }: Props) {
+export function AccessModal({ lockedHook, startOpen }: Props) {
   const secretCode = "Doeu"
   const secretHints = ["Levels", "Bio", "Window", "Clip"]
 
@@ -20,15 +19,15 @@ export default function AccessModal({ lockedHook, startOpen }: Props) {
   const [locked, setLocked] = lockedHook
   const [isOpen, setIsOpen] = useState(startOpen !== undefined ? startOpen : locked)
 
-  const closeModal = () => {
+  function closeModal() {
     setIsOpen(false)
   }
 
-  const togglePasswordShown = () => {
+  function togglePasswordShown() {
     setAccessCodeShown(!accessCodeShown)
   }
 
-  const submitPassword = () => {
+  function submitPassword() {
     if (accessCode.toLowerCase() === secretCode.toLowerCase()) {
       setAccessCode("")
       setLocked(false)

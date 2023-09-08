@@ -6,7 +6,7 @@ type Props = {
   showHook: [boolean, React.Dispatch<React.SetStateAction<boolean>>]
   size?: "sm" | "md" | "lg" | "xl"
 }
-export default function KeyboardUsageButton({ showHook, size = "sm" }: Props) {
+export function KeyboardUsageButton({ showHook, size = "sm" }: Props) {
   const [show, setShow] = showHook
 
   const toggleShow = useCallback(() => {
@@ -18,9 +18,10 @@ export default function KeyboardUsageButton({ showHook, size = "sm" }: Props) {
   }, [setShow])
 
   useEffect(() => {
-    const handleKeyDown = (event: any) => {
+    function handleKeyDown(event: any) {
       if (event.keyCode === 73) toggleShow() // I key
     }
+
     window.addEventListener("keydown", handleKeyDown)
     return () => {
       window.removeEventListener("keydown", handleKeyDown)

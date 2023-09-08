@@ -1,7 +1,7 @@
 import { S3Client, GetObjectCommand } from "@aws-sdk/client-s3"
 import { getSignedUrl } from "@aws-sdk/s3-request-presigner"
 
-export const estabilishS3Connection = () => {
+export function estabilishS3Connection() {
   return new S3Client({
     region: process.env.NEXT_PUBLIC_AWS_S3_REGION_NAME!,
     credentials: {
@@ -11,7 +11,7 @@ export const estabilishS3Connection = () => {
   })
 }
 
-export const getVideoUrl = async (s3Uri: string): Promise<string | null> => {
+export async function getVideoUrl(s3Uri: string): Promise<string | null> {
   // Extract bucket and key from the S3 URI
   const match = s3Uri.match(/^s3:\/\/([^/]+)\/(.+)$/)
   if (!match) {
@@ -21,7 +21,6 @@ export const getVideoUrl = async (s3Uri: string): Promise<string | null> => {
 
   const bucket = match[1]
   const key = match[2]
-
   const client = new S3Client({
     region: process.env.NEXT_PUBLIC_AWS_S3_REGION_NAME!,
     credentials: {

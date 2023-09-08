@@ -1,8 +1,8 @@
 import React from "react"
-import DarkModeSwitch from "./DarkModeSwitch"
 import Link from "next/link"
 import Image from "next/image"
 import { Disclosure } from "@headlessui/react"
+import { DarkModeSwitch } from "."
 import {
   ChartBarSquareIcon,
   ArrowUpTrayIcon,
@@ -80,7 +80,7 @@ type Props = {
   location: string
 }
 
-export default function Header({ siteTitle, location }: Props) {
+export function Header({ siteTitle, location }: Props) {
   return (
     <Disclosure
       as="nav"

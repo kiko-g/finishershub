@@ -8,7 +8,7 @@ type Props = {
   size?: "sm" | "md" | "lg" | "xl"
 }
 
-export default function NextVideo({ nextVideo, disabled, size = "sm" }: Props) {
+export function NextVideo({ nextVideo, disabled, size = "sm" }: Props) {
   return (
     <button
       onClick={nextVideo}

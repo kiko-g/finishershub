@@ -7,7 +7,7 @@ type Props = {
   showHook: [boolean, React.Dispatch<React.SetStateAction<boolean>>]
 }
 
-export default function KeyboardUsageInstructions({ showHook }: Props) {
+export function KeyboardUsageInstructions({ showHook }: Props) {
   const [show, setShow] = showHook
   const keysMapping = [
     { key: "<", description: "Previous video" },

@@ -6,7 +6,7 @@ type Props = {
   size?: "sm" | "md" | "lg" | "xl"
 }
 
-export default function AutoplayToggler({ hook, size = "sm" }: Props) {
+export function AutoplayToggler({ hook, size = "sm" }: Props) {
   const [autoplay, setAutoplay] = hook
 
   const toggleAutoplay = useCallback(() => {
@@ -14,9 +14,10 @@ export default function AutoplayToggler({ hook, size = "sm" }: Props) {
   }, [setAutoplay])
 
   useEffect(() => {
-    const handleKeyDown = (event: any) => {
+    function handleKeyDown(event: any) {
       if (event.keyCode === 75) toggleAutoplay() // K key
     }
+
     window.addEventListener("keydown", handleKeyDown)
     return () => {
       window.removeEventListener("keydown", handleKeyDown)

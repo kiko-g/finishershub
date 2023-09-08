@@ -1,9 +1,7 @@
 import classNames from "classnames"
 import React from "react"
 
-type Props = {}
-
-export default function InvisbleTopLayer({}: Props) {
+export function InvisbleTopLayer() {
   const [help, setHelp] = React.useState(false)
   const title = `You do not have access to this content until you log in. Click the green key icon to open the access modal and gain full access to Finishers Hub`
 

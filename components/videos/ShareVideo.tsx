@@ -10,7 +10,7 @@ type Props = {
   size?: "sm" | "md" | "lg" | "xl"
 }
 
-export default function ShareVideo({ video, size = "sm" }: Props) {
+export function ShareVideo({ video, size = "sm" }: Props) {
   const [copied, setCopied] = useState(false)
   const [url, setUrl] = React.useState<string>("")
 
@@ -20,9 +20,10 @@ export default function ShareVideo({ video, size = "sm" }: Props) {
   }, [copied, url])
 
   useEffect(() => {
-    const handleKeyDown = (event: any) => {
+    function handleKeyDown(event: any) {
       if (event.keyCode === 67) handleCopied() // C key
     }
+
     window.addEventListener("keydown", handleKeyDown)
     return () => {
       window.removeEventListener("keydown", handleKeyDown)

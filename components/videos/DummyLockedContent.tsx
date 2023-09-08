@@ -1,8 +1,6 @@
 import { LockClosedIcon } from "@heroicons/react/24/outline"
 
-type Props = {}
-
-export default function DummyLockedContent({}: Props) {
+export function DummyLockedContent() {
   return (
     <div
       className="absolute inset-0 flex h-full min-h-[32rem] w-full items-center justify-center

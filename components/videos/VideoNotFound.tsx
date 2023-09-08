@@ -5,7 +5,7 @@ type Props = {
   message?: string
 }
 
-export default function VideoNotFound({ message }: Props) {
+export function VideoNotFound({ message }: Props) {
   return (
     <div className="flex flex-col items-center justify-center">
       <h1 className="text-3xl font-bold tracking-tight text-slate-800 dark:text-white md:text-5xl">Uh-oh!</h1>

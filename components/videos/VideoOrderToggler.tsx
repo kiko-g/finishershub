@@ -1,12 +1,12 @@
 import React, { Dispatch, SetStateAction, useCallback, useEffect } from "react"
-import ShuffleIcon from "../utils/icons/ShuffleIcon"
 import classNames from "classnames"
+import { ShuffleIcon } from "../icons"
 
 type Props = {
   hook: [boolean, Dispatch<SetStateAction<boolean>>]
 }
 
-export default function VideoOrderToggler({ hook }: Props) {
+export function VideoOrderToggler({ hook }: Props) {
   const [shuffle, setShuffle] = hook
 
   const toggleShuffle = useCallback(() => {
@@ -14,9 +14,10 @@ export default function VideoOrderToggler({ hook }: Props) {
   }, [setShuffle])
 
   useEffect(() => {
-    const handleKeyDown = (event: any) => {
+    function handleKeyDown(event: any) {
       if (event.keyCode === 83) toggleShuffle() // s key
     }
+
     window.addEventListener("keydown", handleKeyDown)
     return () => {
       window.removeEventListener("keydown", handleKeyDown)

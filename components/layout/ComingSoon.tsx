@@ -1,8 +1,6 @@
 import React from "react"
 
-type Props = {}
-
-const ComingSoon = ({}: Props) => {
+export function ComingSoon() {
   return (
     <div className="container">
       <h1 className="font-headings mb-8 text-center text-4xl font-extrabold tracking-tight sm:text-5xl lg:text-6xl">
@@ -44,5 +42,3 @@ const ComingSoon = ({}: Props) => {
     </div>
   )
 }
-
-export default ComingSoon

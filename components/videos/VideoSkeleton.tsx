@@ -6,7 +6,7 @@ type Props = {
   rounded?: boolean
 }
 
-export default function Skeleton({ className, rounded }: Props) {
+export function VideoSkeleton({ className, rounded }: Props) {
   return (
     <div
       className={classNames(

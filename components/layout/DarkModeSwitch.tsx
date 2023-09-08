@@ -1,9 +1,7 @@
-import React, { useEffect } from "react"
+import React from "react"
 import classNames from "classnames"
 
-type Props = {}
-
-export default function DarkModeSwitch({}: Props) {
+export function DarkModeSwitch() {
   function disableTransitionsTemporarily() {
     document.documentElement.classList.add("[&_*]:!transition-none")
     window.setTimeout(() => {

@@ -5,7 +5,7 @@ type Props = {
   title: string
 }
 
-export default function Seo({ title }: Props) {
+export function Seo({ title }: Props) {
   const siteTitle = `Finishers Hub`
   const author = `kikogoncalves`
   const description = `The place for all finisher related content. Chaotic, outrageous, lawless on the fence of criminality. Perfectly unbalanced. As all things should be.`

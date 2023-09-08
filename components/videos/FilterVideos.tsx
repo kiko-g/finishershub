@@ -9,7 +9,7 @@ type Props = {
   pickedHook: [any, Dispatch<SetStateAction<FilterType>>]
 }
 
-export default function FilterVideos({ arenas, pickedHook }: Props) {
+export function FilterVideos({ arenas, pickedHook }: Props) {
   const [picked, setPicked] = pickedHook
 
   return (

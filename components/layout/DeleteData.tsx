@@ -2,10 +2,8 @@ import React from "react"
 import { clearCache } from "../../utils/storage"
 import { TrashIcon } from "@heroicons/react/24/outline"
 
-type Props = {}
-
-export default function DeleteData({}: Props) {
-  const deleteData = () => {
+export function DeleteData() {
+  function deleteData() {
     if (typeof window === "undefined") return
 
     if (window.confirm("Clear all site data and reload the page?")) {

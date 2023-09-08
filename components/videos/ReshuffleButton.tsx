@@ -6,7 +6,7 @@ type Props = {
   hook: [boolean, Dispatch<SetStateAction<boolean>>]
 }
 
-export default function ReshuffleButton({ shuffle, hook }: Props) {
+export function ReshuffleButton({ shuffle, hook }: Props) {
   const [shuffled, setShuffled] = hook
   const [shuffling, setShuffling] = useState(false)
 

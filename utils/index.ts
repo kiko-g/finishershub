@@ -1,17 +1,17 @@
 import type { VideoType } from "../@types"
 
-export const daysDifference = (before: Date, after: Date) => {
+export function daysDifference(before: Date, after: Date) {
   let a = new Date(after.toString())
   let b = new Date(before.toString())
 
   return (a.getTime() - b.getTime()) / (1000 * 3600 * 24)
 }
 
-export const randomBetween = (min: number, max: number) => {
+export function randomBetween(min: number, max: number) {
   return Math.floor(Math.random() * (max - min + 1)) + min
 }
 
-export const shuffle = (array: any[]) => {
+export function shuffle(array: any[]) {
   let result = []
   while (array.length) {
     let randomIndex = Math.floor(Math.random() * array.length),
@@ -44,8 +44,8 @@ export function transpose<T>(arr: T[][]): T[][] {
  * @param strict whether the search should be strict or not
  * @returns
  */
-export const strIncludes = (str: string, query: string, strict?: boolean) =>
-  strict
+export function strIncludes(str: string, query: string, strict?: boolean) {
+  return strict
     ? str.toLowerCase().replace(/\s+/g, "").includes(query.toLowerCase().replace(/\s+/g, ""))
     : str
         .toLowerCase()
@@ -55,8 +55,9 @@ export const strIncludes = (str: string, query: string, strict?: boolean) =>
         .replace(".", "")
         .replace(":", "")
         .includes(query.toLowerCase().replace(/\s+/g, ""))
+}
 
-export const getVideoUrlFromVideo = (video: VideoType, offset?: number) => {
+export function getVideoUrlFromVideo(video: VideoType, offset?: number) {
   const url = typeof window !== "undefined" ? window.location.origin : ""
   const index = offset ? video.index + offset : video.index
   const game = video.filteredGame === "" ? "" : "/" + video.filteredGame

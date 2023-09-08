@@ -1,12 +1,12 @@
 import React, { Dispatch, SetStateAction } from "react"
-import { ShuffleIcon } from "../utils/icons"
+import { ShuffleIcon } from "../icons"
 import { ArrowsRightLeftIcon } from "@heroicons/react/24/outline"
 
 type Props = {
   hook: [boolean, Dispatch<SetStateAction<boolean>>]
 }
 
-export default function ShuffleToggler({ hook }: Props) {
+export function ShuffleToggler({ hook }: Props) {
   const [isShuffled, setIsShuffled] = hook
 
   return (

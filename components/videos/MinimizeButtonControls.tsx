@@ -6,7 +6,7 @@ type Props = {
   minimizeHook: [boolean, React.Dispatch<React.SetStateAction<boolean>>]
 }
 
-export default function MinimizeButtonControls({ buttonControlsRef, minimizeHook }: Props) {
+export function MinimizeButtonControls({ buttonControlsRef, minimizeHook }: Props) {
   const [minimizeButtonControls, setMinimizeButtonControls] = minimizeHook
 
   const toggleMinimize = useCallback(() => {
@@ -26,7 +26,7 @@ export default function MinimizeButtonControls({ buttonControlsRef, minimizeHook
   }, [setMinimizeButtonControls])
 
   useEffect(() => {
-    const handleKeyDown = (event: any) => {
+    function handleKeyDown(event: any) {
       if (event.keyCode === 81) toggleMinimize() // Q key
     }
 

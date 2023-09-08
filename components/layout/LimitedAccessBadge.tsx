@@ -1,9 +1,7 @@
 import React from "react"
 import { ExclamationTriangleIcon } from "@heroicons/react/24/solid"
 
-type Props = {}
-
-export default function LimitedAccessBadge({}: Props) {
+export function LimitedAccessBadge() {
   const [folded, setFolded] = React.useState<boolean>(true)
 
   return (

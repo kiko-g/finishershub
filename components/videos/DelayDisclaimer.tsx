@@ -14,7 +14,7 @@ type Props = {
   type?: ToastType
 }
 
-export default function DelayDisclaimer({ type }: Props) {
+export function DelayDisclaimer({ type }: Props) {
   const [shown, setShown] = React.useState(true)
 
   return shown ? (

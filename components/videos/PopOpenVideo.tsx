@@ -10,7 +10,7 @@ type Props = {
   size?: "sm" | "md" | "lg" | "xl"
 }
 
-export default function PopOpenVideo({ video, size = "sm" }: Props) {
+export function PopOpenVideo({ video, size = "sm" }: Props) {
   const [url, setUrl] = React.useState<string>("")
 
   useEffect(() => {

@@ -10,7 +10,7 @@ type Props = {
   special?: boolean
 }
 
-export default function AccessModalCTA({ lockedHook, startOpen, special = false }: Props) {
+export function AccessModalCTA({ lockedHook, startOpen, special = false }: Props) {
   const secretCode = "Doeu"
   const secretHints = ["Levels", "Bio", "Window", "Clip"]
 
@@ -21,15 +21,15 @@ export default function AccessModalCTA({ lockedHook, startOpen, special = false 
   const [locked, setLocked] = lockedHook
   const [isOpen, setIsOpen] = useState(startOpen !== undefined ? startOpen : locked)
 
-  const closeModal = () => {
+  function closeModal() {
     setIsOpen(false)
   }
 
-  const togglePasswordShown = () => {
+  function togglePasswordShown() {
     setAccessCodeShown(!accessCodeShown)
   }
 
-  const submitPassword = () => {
+  function submitPassword() {
     if (accessCode.toLowerCase() === secretCode.toLowerCase()) {
       setAccessCode("")
       setLocked(false)

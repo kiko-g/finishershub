@@ -1,8 +1,6 @@
 import React from "react"
 
-type Props = {}
-
-export default function Background({}: Props) {
+export function Background() {
   const blobs = Array(12).fill(0)
 
   return (

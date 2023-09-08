@@ -1,5 +1,5 @@
 import React, { useState } from "react"
-import VideoSkeleton from "../videos/VideoSkeleton"
+import { VideoSkeleton } from "../videos/VideoSkeleton"
 
 type Props = {
   video: string
@@ -8,7 +8,7 @@ type Props = {
   autoplay?: boolean
 }
 
-export default function TwitchVideoClip({ video, parent, muted = false, autoplay = false }: Props) {
+export function TwitchVideoClip({ video, parent, muted = false, autoplay = false }: Props) {
   const [loaded, setLoaded] = useState(false)
 
   return (

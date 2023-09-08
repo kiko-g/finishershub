@@ -8,7 +8,7 @@ type Props = {
   size?: "sm" | "md" | "lg" | "xl"
 }
 
-export default function PreviousVideo({ prevVideo, disabled, size = "sm" }: Props) {
+export function PreviousVideo({ prevVideo, disabled, size = "sm" }: Props) {
   return (
     <button
       onClick={prevVideo}

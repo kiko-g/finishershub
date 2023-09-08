@@ -7,7 +7,7 @@ type Props = {
   background?: boolean
 }
 
-export default function Layout({ children, location = "Unknown", background = false }: Props) {
+export function Layout({ children, location = "Unknown", background = false }: Props) {
   const siteTitle = "Finishers Hub"
 
   return (

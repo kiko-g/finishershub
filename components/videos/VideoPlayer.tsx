@@ -12,7 +12,7 @@ type Props = {
   special?: boolean
 }
 
-export default function VideoPlayer(props: Props) {
+export function VideoPlayer(props: Props) {
   const { video, autoplay = false, muted = true, special = false } = props
 
   const [mute, setMute] = useState(muted)
@@ -31,7 +31,7 @@ export default function VideoPlayer(props: Props) {
     setMute((prev) => muted && prev)
   }, [muted])
 
-  const togglePlay = () => {
+  function togglePlay() {
     if (videoRef.current) {
       if (videoRef.current.paused) {
         videoRef.current.play()
@@ -41,8 +41,13 @@ export default function VideoPlayer(props: Props) {
     }
   }
 
-  const handlePlay = () => setPlaying(true)
-  const handlePause = () => setPlaying(false)
+  function handlePlay() {
+    setPlaying(true)
+  }
+
+  function handlePause() {
+    setPlaying(false)
+  }
 
   return (
     <div
@@ -125,8 +130,14 @@ type ToggleMuteVideoProps = {
 
 function ToggleMuteVideo({ hook, defaultMute, size }: ToggleMuteVideoProps) {
   const [mute, setMute] = hook
-  const handleMute = () => setMute(true)
-  const handleUnmute = () => setMute(false)
+
+  function handleMute() {
+    setMute(true)
+  }
+
+  function handleUnmute() {
+    setMute(false)
+  }
 
   return mute ? (
     <button

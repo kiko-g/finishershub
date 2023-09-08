@@ -7,7 +7,7 @@ type Props = {
   limitedAccess?: boolean
 }
 
-export default function MuteToggler({ hook, size = "sm", limitedAccess = true }: Props) {
+export function MuteToggler({ hook, size = "sm", limitedAccess = true }: Props) {
   const [mute, setMuted] = hook
 
   const toggleMute = useCallback(() => {

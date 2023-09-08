@@ -1,6 +1,6 @@
 import React from "react"
 
-export default function ShuffleIcon(props: React.SVGProps<SVGSVGElement>) {
+export function ShuffleIcon(props: React.SVGProps<SVGSVGElement>) {
   return (
     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 15 15" {...props}>
       <path
