@@ -3,7 +3,7 @@ import Image from "next/image"
 
 type Props = {}
 
-export default function Blush({}: Props) {
+export function Blush({}: Props) {
   const title = "You look cute and breedable."
 
   return (

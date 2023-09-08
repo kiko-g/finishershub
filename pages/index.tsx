@@ -36,7 +36,7 @@ export default function Hub() {
         <main className="flex w-full flex-col gap-y-16 px-4 pt-8 md:px-4 md:py-0">
           <MostRecentHighlight />
           <GetFullAccess accessDeniedHook={[accessDenied, setAccessDenied]} />
-          <FactsAndFigures />
+          <ImportantFacts />
           <About />
         </main>
 
@@ -282,20 +282,20 @@ function GetFullAccess({ accessDeniedHook }: { accessDeniedHook: [boolean, Dispa
   )
 }
 
-function FactsAndFigures() {
+function ImportantFacts() {
   return (
     <section id="info" className="mx-auto my-auto mb-8 flex max-w-5xl flex-col space-y-3 py-4">
       <Link href="#info" scroll={false} className="group flex items-center gap-x-2 transition hover:opacity-80">
-        <h2 className="text-3xl font-bold tracking-tight sm:text-4xl">Facts and figures</h2>
+        <h2 className="text-3xl font-bold tracking-tight sm:text-4xl">Important Facts</h2>
         <span className="hidden text-2xl group-hover:flex sm:text-3xl">🔗</span>
       </Link>
 
-      <div className="flex rounded border border-slate-200 bg-white px-8 py-8 dark:border-slate-300/10 dark:bg-slate-800/50">
+      <div className="flex rounded border border-slate-200 bg-white px-6 py-6 text-sm tracking-tight dark:border-slate-300/10 dark:bg-slate-800/50 lg:px-8 lg:py-8 lg:text-base lg:tracking-normal">
         <svg
           aria-hidden="true"
           viewBox="0 0 32 32"
           fill="none"
-          className="h-8 w-8 flex-none [--icon-background:theme(colors.white)] [--icon-foreground:theme(colors.slate.900)]"
+          className="h-6 w-6 flex-none [--icon-background:theme(colors.white)] [--icon-foreground:theme(colors.slate.900)] lg:h-8 lg:w-8"
         >
           <defs>
             <radialGradient
@@ -350,7 +350,8 @@ function FactsAndFigures() {
             ></path>
           </g>
         </svg>
-        <div className="ml-4 flex-auto pr-4">
+
+        <div className="ml-2 flex-auto pr-0 lg:ml-4 lg:pr-4">
           <p className="font-display m-0 text-xl text-sky-900 dark:text-sky-400">You should know this!</p>
           <div className="prose prose-a:text-sky-900 prose-code:text-sky-900 dark:prose-code:text-slate-300 mt-2.5 font-normal text-sky-800 [--tw-prose-background:theme(colors.sky.50)] dark:text-slate-300">
             <p>

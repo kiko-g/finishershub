@@ -1,6 +1,6 @@
 import React from "react"
 import Link from "next/link"
-import { Seo } from "../components/layout"
+import { Layout, Seo } from "../components/layout"
 import { OhNo, TheRock, Frankie, Turtle, Saul, Doeu, Blush } from "../components/404"
 import { ArrowLongRightIcon } from "@heroicons/react/24/outline"
 
@@ -15,9 +15,8 @@ export default function NotFound() {
   ]
 
   return (
-    <>
-      <Seo title="Hub" />
-      <main className="mx-auto mt-0 flex h-full min-h-screen flex-col items-center justify-center gap-y-4 bg-primary/10">
+    <Layout location="404">
+      <main className="mx-auto mb-8 mt-0 flex h-full min-h-screen flex-col items-center justify-center gap-y-4">
         <div className="max-w-4xl">
           <div className="flex w-full flex-col items-start justify-between gap-4 lg:flex-row lg:items-center">
             <div className="flex flex-col gap-y-1">
@@ -47,6 +46,6 @@ export default function NotFound() {
           </div>
         </div>
       </main>
-    </>
+    </Layout>
   )
 }

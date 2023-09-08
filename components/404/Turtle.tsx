@@ -3,7 +3,7 @@ import Image from "next/image"
 
 type Props = {}
 
-export default function Turtle({}: Props) {
+export function Turtle({}: Props) {
   const title = "Bro... That's not right."
 
   return (

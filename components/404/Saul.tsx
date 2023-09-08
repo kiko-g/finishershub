@@ -3,7 +3,7 @@ import React from "react"
 
 type Props = {}
 
-export default function Saul({}: Props) {
+export function Saul({}: Props) {
   const title = "Your honor I think we got off on the wrong foot."
 
   return (

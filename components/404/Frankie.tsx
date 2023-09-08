@@ -5,7 +5,7 @@ type Props = {
   square?: boolean
 }
 
-export default function Frankie({ square }: Props) {
+export function Frankie({ square }: Props) {
   const title = "Coming to theaters soon..."
 
   return (

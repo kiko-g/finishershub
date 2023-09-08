@@ -3,7 +3,7 @@ import Image from "next/image"
 
 type Props = {}
 
-export default function OhNo({}: Props) {
+export function OhNo({}: Props) {
   const title = "Oh dear lord what have you stumbled upon..?"
 
   return (
