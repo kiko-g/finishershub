@@ -1,7 +1,7 @@
 import React from "react"
 import Link from "next/link"
-import { Layout, Seo } from "../components/layout"
-import { OhNo, TheRock, Frankie, Turtle, Saul, Doeu, Blush } from "../components/404"
+import Image from "next/image"
+import { Layout } from "../components/layout"
 import { ArrowLongRightIcon } from "@heroicons/react/24/outline"
 
 export default function NotFound() {
@@ -15,7 +15,7 @@ export default function NotFound() {
   ]
 
   return (
-    <Layout location="404">
+    <Layout location="Oops">
       <main className="mx-auto mb-8 mt-0 flex h-full min-h-screen flex-col items-center justify-center gap-y-4">
         <div className="max-w-4xl">
           <div className="flex w-full flex-col items-start justify-between gap-4 lg:flex-row lg:items-center">
@@ -47,5 +47,111 @@ export default function NotFound() {
         </div>
       </main>
     </Layout>
+  )
+}
+
+function Blush() {
+  const title = "You look cute and breedable."
+
+  return (
+    <Image
+      alt={title}
+      width={2000}
+      height={2000}
+      title={title}
+      src="/images/404/blush.jpg"
+      className="aspect-square h-full w-full rounded object-cover shadow lg:w-full"
+    />
+  )
+}
+
+function Doeu() {
+  const title = "If you know you know."
+
+  return (
+    <Image
+      alt={title}
+      width={2000}
+      height={2000}
+      title={title}
+      src="/images/404/doeu.png"
+      className="aspect-square h-full w-full rounded object-cover shadow lg:w-full"
+    />
+  )
+}
+
+function Frankie({ square }: { square?: boolean }) {
+  const title = "Coming to theaters soon..."
+
+  return (
+    <Image
+      alt={title}
+      width={2000}
+      height={2000}
+      title={title}
+      src="/images/404/frankie.jpeg"
+      className={`${square ? "aspect-square" : ""} h-full w-full rounded object-cover shadow lg:w-full`}
+    />
+  )
+}
+
+function OhNo() {
+  const title = "Oh dear lord what have you stumbled upon..?"
+
+  return (
+    <Image
+      alt={title}
+      width={2000}
+      height={2000}
+      title={title}
+      src="/images/404/oh-no.gif"
+      className="aspect-square h-full w-full rounded object-cover shadow lg:w-full"
+    />
+  )
+}
+
+function TheRock() {
+  const title = "The Rock is sus of you mate."
+
+  return (
+    <Image
+      title={title}
+      alt={title}
+      width={2000}
+      height={2000}
+      src="/images/404/rock-sus.gif"
+      className="aspect-square h-full w-full rounded object-cover shadow lg:w-full"
+    />
+  )
+}
+
+function Turtle() {
+  const title = "Bro... That's not right."
+
+  return (
+    <Image
+      key="turtle"
+      alt={title}
+      width={2000}
+      height={2000}
+      title={title}
+      src="/images/404/turtle.jpg"
+      className="aspect-square h-full w-full rounded object-cover shadow lg:w-full"
+    />
+  )
+}
+
+function Saul() {
+  const title = "Your honor I think we got off on the wrong foot."
+
+  return (
+    <Image
+      alt={title}
+      width={2000}
+      height={2000}
+      title={title}
+      src="/images/404/saul.jpg"
+      className="aspect-square h-full w-full rounded bg-black object-contain shadow lg:w-full"
+    />
   )
 }
