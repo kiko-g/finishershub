@@ -2,8 +2,7 @@ import React, { useState, useEffect, useMemo, useCallback, useRef } from "react"
 import type { FilterType, VideoType, VideoTypeAPI } from "../@types"
 import useAccessDenied from "../hooks/useAccessDenied"
 import { shuffle } from "../utils"
-import { Layout, AccessModal, InvisbleTopLayer } from "../components/layout"
-import { FullAccessBadge, LimitedAccessBadge } from "../components/utils"
+import { Layout, AccessModal, FullAccessBadge, LimitedAccessBadge } from "../components/layout"
 import { ArrowLongLeftIcon, ArrowLongRightIcon } from "@heroicons/react/24/outline"
 import {
   AutoplayToggler,

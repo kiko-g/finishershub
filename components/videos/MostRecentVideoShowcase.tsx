@@ -1,6 +1,6 @@
 import React from "react"
 import type { VideoAPIAndIndex, VideoType } from "../../@types"
-import { VideoSkeleton, VideoNotFound, ShareVideo, PopOpenVideo } from "../videos"
+import { VideoSkeleton, VideoNotFound, ShareVideo, PopOpenVideo } from "."
 
 export function MostRecentVideoShowcase() {
   const [loading, setLoading] = React.useState(true)

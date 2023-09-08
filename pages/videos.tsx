@@ -1,10 +1,9 @@
 import React, { useEffect, useMemo, useState } from "react"
 import useAccessDenied from "../hooks/useAccessDenied"
-import { Layout } from "../components/layout"
+import { Layout, FullAccessBadge, LimitedAccessBadge } from "../components/layout"
 import { useMediaQuery } from "usehooks-ts"
 import { VideoNotFound, VideoSkeleton } from "../components/videos"
 import type { VideoMongoDBWithUrl } from "../@types"
-import { FullAccessBadge, LimitedAccessBadge } from "../components/utils"
 
 type Props = {}
 

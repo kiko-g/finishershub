@@ -2,10 +2,9 @@ import React, { useEffect, useMemo, useRef, useState } from "react"
 import classNames from "classnames"
 import useAccessDenied from "../hooks/useAccessDenied"
 import type { VideoMongoDBWithUrl } from "../@types"
-import { AccessModalCTA, Layout } from "../components/layout"
+import { AccessModalCTA, Layout, FullAccessBadge, LimitedAccessBadge } from "../components/layout"
 import { useMediaQuery } from "usehooks-ts"
 import { VideoNotFound, VideoSkeleton } from "../components/videos"
-import { FullAccessBadge, LimitedAccessBadge } from "../components/utils"
 import { ArrowPathIcon, ArrowTopRightOnSquareIcon, CheckIcon } from "@heroicons/react/24/outline"
 
 type Props = {}

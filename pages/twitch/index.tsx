@@ -4,8 +4,7 @@ import useAccessDenied from "../../hooks/useAccessDenied"
 import { useMediaQuery } from "usehooks-ts"
 import { shuffle } from "../../utils"
 import { clearCache, isStorageValid, writeVideosStorage } from "../../utils/storage"
-import { Layout, AccessModal, InvisbleTopLayer } from "../../components/layout"
-import { FullAccessBadge, LimitedAccessBadge } from "../../components/utils"
+import { Layout, AccessModal, InvisbleTopLayer, FullAccessBadge, LimitedAccessBadge } from "../../components/layout"
 import { PlusIcon } from "@heroicons/react/24/solid"
 import {
   ViewToggler,

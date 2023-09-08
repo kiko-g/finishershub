@@ -2,8 +2,7 @@ import React, { useState, useEffect, useMemo } from "react"
 import { shuffle } from "../../utils"
 import { clearCache, isStorageValid, writeVideosStorage } from "../../utils/storage"
 import useAccessDenied from "../../hooks/useAccessDenied"
-import { FullAccessBadge, LimitedAccessBadge } from "../../components/utils"
-import { Layout, AccessModal, InvisbleTopLayer } from "../../components/layout"
+import { Layout, FullAccessBadge, LimitedAccessBadge, AccessModal, InvisbleTopLayer } from "../../components/layout"
 import {
   AutoplayToggler,
   MuteToggler,

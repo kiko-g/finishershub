@@ -4,8 +4,7 @@ import classNames from "classnames"
 import { shuffle } from "../utils"
 import { useMediaQuery } from "usehooks-ts"
 import useAccessDenied from "../hooks/useAccessDenied"
-import { Layout, AccessModal, InvisbleTopLayer } from "../components/layout"
-import { FullAccessBadge, LimitedAccessBadge } from "../components/utils"
+import { FullAccessBadge, LimitedAccessBadge, Layout, AccessModal } from "../components/layout"
 import {
   ViewToggler,
   AutoplayToggler,

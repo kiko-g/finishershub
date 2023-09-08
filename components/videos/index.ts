@@ -8,6 +8,7 @@ import FocusViewToggler from "./FocusViewToggler"
 import KeyboardUsageButton from "./KeyboardUsageButton"
 import KeyboardUsageInstructions from "./KeyboardUsageInstructions"
 import MinimizeButtonControls from "./MinimizeButtonControls"
+import { MostRecentVideoShowcase } from "./MostRecentVideoShowcase"
 import MuteToggler from "./MuteToggler"
 import NextVideo from "./NextVideo"
 import PopOpenVideo from "./PopOpenVideo"
@@ -35,6 +36,7 @@ export {
   KeyboardUsageButton,
   KeyboardUsageInstructions,
   MinimizeButtonControls,
+  MostRecentVideoShowcase,
   MuteToggler,
   NextVideo,
   PopOpenVideo,
