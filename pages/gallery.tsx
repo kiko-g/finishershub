@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useMemo } from "react"
-import type { FilterType, VideoType, VideoTypeAPI } from "../@types"
+import type { FilterByGameType, VideoType, VideoTypeAPI } from "../@types"
 import classNames from "classnames"
 import { shuffle } from "../utils"
 import { useMediaQuery } from "usehooks-ts"
@@ -20,7 +20,7 @@ import { PlusIcon } from "@heroicons/react/24/solid"
 
 export default function Gallery() {
   const isMobile = useMediaQuery("(max-width: 768px)")
-  const arenas: FilterType[] = [
+  const arenas: FilterByGameType[] = [
     { name: "All", value: "" },
     { name: "Warzone 1", value: "mw2019" },
     { name: "Warzone 2", value: "mw2022" },
@@ -30,7 +30,7 @@ export default function Gallery() {
   const [fetchError, setFetchError] = useState<boolean>(false)
 
   const [videos, setVideos] = useState<VideoType[]>([])
-  const [filter, setFilter] = useState<FilterType>(arenas[0]) // use all
+  const [filter, setFilter] = useState<FilterByGameType>(arenas[0]) // use all
   const [accessDenied, setAccessDenied] = useAccessDenied()
   const [view, setView] = useState<boolean>(false)
   const [muted, setMuted] = useState<boolean>(true)
@@ -132,7 +132,7 @@ export default function Gallery() {
               <MuteToggler hook={[muted, setMuted]} limitedAccess={limitedAccess} />
               <ViewToggler hook={[view, setView]} />
             </div>
-            <FilterVideosByGame arenas={arenas} pickedHook={[filter, setFilter]} />
+            <FilterVideosByGame arenas={arenas} pickedHook={[filter, setFilter]} className="w-full" />
           </div>
         </div>
 

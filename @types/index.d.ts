@@ -72,7 +72,7 @@ export type VideoAPIAndIndex = {
   video: VideoTypeAPI
 }
 
-export type FilterType =
+export type FilterByGameType =
   | { name: "All"; value: "" }
   | { name: "Warzone 1"; value: "mw2019" }
   | { name: "Warzone 2"; value: "mw2022" }

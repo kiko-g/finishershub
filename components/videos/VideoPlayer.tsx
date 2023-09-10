@@ -24,7 +24,7 @@ export function VideoPlayer(props: Props) {
     setSlide(true)
     setTimeout(() => {
       setSlide(false)
-    }, 1000)
+    }, 500)
   }, [video.url])
 
   useEffect(() => {
@@ -52,11 +52,11 @@ export function VideoPlayer(props: Props) {
   return (
     <div
       className={classNames(
-        "group relative z-20",
-        special ? "mx-auto my-auto h-screen overflow-hidden bg-black" : "rounded bg-primary/50 dark:bg-secondary/50",
+        "group relative z-20 w-full",
+        special ? "mx-auto my-auto h-screen overflow-hidden bg-black" : "rounded",
       )}
     >
-      <div className={classNames(special ? "absolute inset-0" : "", slide ? "animate-pulse-500" : "")}>
+      <div className={classNames(special ? "absolute inset-0" : "")}>
         <video
           ref={videoRef}
           loop
@@ -68,7 +68,7 @@ export function VideoPlayer(props: Props) {
           onPlay={handlePlay}
           onPause={handlePause}
           className={classNames(
-            "bg-primary/10 shadow dark:bg-secondary/10",
+            "w-full bg-primary/20 dark:bg-secondary/20",
             special
               ? "aspect-[9/16] h-screen scale-x-[3] scale-y-[3] overflow-hidden lg:aspect-video lg:h-full lg:scale-x-100 lg:scale-y-100"
               : "rounded",

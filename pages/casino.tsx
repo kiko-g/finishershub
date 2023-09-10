@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useMemo, useCallback, useRef } from "react"
-import type { FilterType, VideoType, VideoTypeAPI } from "../@types"
+import type { FilterByGameType, VideoType, VideoTypeAPI } from "../@types"
 import useAccessDenied from "../hooks/useAccessDenied"
 import { shuffle } from "../utils"
 import { Layout, AccessModal, FullAccessBadge, LimitedAccessBadge } from "../components/layout"
@@ -28,7 +28,7 @@ import { useMediaQuery } from "usehooks-ts"
 
 export default function Casino() {
   const buttonControlsRef = useRef<HTMLDivElement | null>(null)
-  const arenas: FilterType[] = [
+  const arenas: FilterByGameType[] = [
     { name: "All", value: "" },
     { name: "Warzone 1", value: "mw2019" },
     { name: "Warzone 2", value: "mw2022" },
@@ -40,7 +40,7 @@ export default function Casino() {
   const [expandedView, setExpandedView] = useState<boolean>(false)
   const [index, setIndex] = useState<number>(0)
   const [videos, setVideos] = useState<VideoType[]>([])
-  const [filter, setFilter] = useState<FilterType>(arenas[arenas.length - 1])
+  const [filter, setFilter] = useState<FilterByGameType>(arenas[arenas.length - 1])
   const [accessDenied, setAccessDenied] = useAccessDenied()
   const [muted, setMuted] = useState<boolean>(true)
   const [autoplay, setAutoplay] = useState<boolean>(true)
@@ -60,6 +60,7 @@ export default function Casino() {
 
   const prevVideo = useCallback(() => setIndex((prev) => prev - 1), [])
   const nextVideo = useCallback(() => setIndex((prev) => prev + 1), [])
+
   const shuffleVideos = () => {
     setVideos((prev) => shuffle(prev))
   }
@@ -194,7 +195,7 @@ export default function Casino() {
                 <AutoplayToggler hook={[autoplay, setAutoplay]} />
                 <MuteToggler hook={[muted, setMuted]} limitedAccess={limitedAccess} />
               </div>
-              <FilterVideosByGame arenas={arenas} pickedHook={[filter, setFilter]} />
+              <FilterVideosByGame arenas={arenas} pickedHook={[filter, setFilter]} className="w-full" />
             </div>
           </div>
 
@@ -222,8 +223,8 @@ export default function Casino() {
             </button>
 
             <div className="flex w-full items-center justify-center self-stretch border border-slate-800/60 bg-slate-800/60 px-4 py-2 dark:border-blue-200/30 dark:bg-blue-200/20 lg:py-1">
-              <span className="text-sm font-bold">
-                {index + 1}/{videos.length}
+              <span className="text-sm">
+                {index + 1} of {videos.length}
               </span>
             </div>
 

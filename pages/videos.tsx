@@ -1,12 +1,19 @@
-import React, { Fragment, useEffect, useMemo, useState } from "react"
+import React, { Fragment, useCallback, useEffect, useMemo, useState } from "react"
 import classNames from "classnames"
 import useAccessDenied from "../hooks/useAccessDenied"
 import { Layout, FullAccessBadge, LimitedAccessBadge } from "../components/layout"
-import { VideoNotFound, VideoSkeleton } from "../components/videos"
-import type { Author, VideoMongoDBWithUrl } from "../@types"
+import { VideoNotFound, VideoPlayer, VideoSkeleton } from "../components/videos"
+import type { Author, FilterByGameType, VideoMongoDBWithUrl, VideoType } from "../@types"
 import { Listbox, Transition } from "@headlessui/react"
-import { CheckIcon, ChevronUpDownIcon } from "@heroicons/react/24/outline"
+import {
+  ArrowLongLeftIcon,
+  ArrowLongRightIcon,
+  CheckIcon,
+  ChevronUpDownIcon,
+  InformationCircleIcon,
+} from "@heroicons/react/24/outline"
 import { CheckCircleIcon } from "@heroicons/react/24/solid"
+import { FilterVideosByGame } from "../components/videos/FilterVideosByGame"
 
 type Props = {}
 
@@ -29,18 +36,29 @@ export default function Videos({}: Props) {
 
   const tags = tagsAndDescriptions.map((item) => item.name).sort()
   const authors = ["Bagger", "Levels", "Reicalo", "Koba", "Junhó", "Castro"]
+  const arenas: FilterByGameType[] = [
+    { name: "All", value: "" },
+    { name: "Warzone 1", value: "mw2019" },
+    { name: "Warzone 2", value: "mw2022" },
+  ]
 
   const [accessDenied, setAccessDenied] = useAccessDenied()
   const [loading, setLoading] = useState<boolean>(true)
   const [fetchError, setFetchError] = useState<boolean>(false)
+  const [expandedView, setExpandedView] = useState<boolean>(false)
   const ready = useMemo(() => !loading && !fetchError, [loading, fetchError])
 
-  const [data, setData] = useState<VideoMongoDBWithUrl[]>([])
+  const [videos, setVideos] = useState<VideoMongoDBWithUrl[]>([])
+  const [index, setIndex] = useState<number>(0)
+  const [selectedGame, setSelectedGame] = useState<FilterByGameType>({ name: "All", value: "" })
   const [selectedTags, setSelectedTags] = useState<string[]>([])
   const [selectedAuthors, setSelectedAuthors] = useState<string[]>([])
 
-  const filteredData = useMemo(() => {
-    let result = data
+  const prevVideo = useCallback(() => setIndex((prev) => prev - 1), [])
+  const nextVideo = useCallback(() => setIndex((prev) => prev + 1), [])
+
+  const filteredVideos = useMemo(() => {
+    let result = videos
 
     if (selectedTags.length > 0) {
       result = result
@@ -54,14 +72,27 @@ export default function Videos({}: Props) {
         .filter((video) => selectedAuthors.some((selectedAuthor) => video.authors.includes(selectedAuthor)))
     }
 
+    setIndex(0)
+
     return result
-  }, [data, selectedTags, selectedAuthors])
+  }, [videos, selectedTags, selectedAuthors])
+
+  const video: VideoType = useMemo(
+    () => ({
+      url: filteredVideos[index]?.url,
+      index: index,
+      date: "",
+      game: filteredVideos[index]?.game as "mw2019" | "mw2022",
+      filteredGame: filteredVideos[index]?.game as "mw2019" | "mw2022",
+    }),
+    [filteredVideos, index],
+  )
 
   useEffect(() => {
     fetch(`/api/mongo/videos/urls`)
       .then((res) => res.json())
       .then((vids: VideoMongoDBWithUrl[]) => {
-        setData(vids)
+        setVideos(vids)
         setLoading(false)
         setFetchError(false)
       })
@@ -72,33 +103,81 @@ export default function Videos({}: Props) {
       })
   }, [])
 
+  useEffect(() => {
+    const handleKeyDown = (event: any) => {
+      if (event.keyCode === 39) nextVideo() // right arrow
+      if (event.keyCode === 37) prevVideo() // left arrow
+      if (event.keyCode === 69 && accessDenied === false) setExpandedView((prev) => !prev) // e key
+    }
+
+    window.addEventListener("keydown", handleKeyDown)
+    return () => {
+      window.removeEventListener("keydown", handleKeyDown)
+    }
+  }, [nextVideo, prevVideo, accessDenied])
+
   return (
     <Layout location="Videos">
-      <div className="flex flex-col gap-y-4">
-        <div className="mb-3 text-lg font-normal">
+      <div className="mx-auto flex max-w-3xl flex-col space-y-2">
+        <div className="text-lg font-normal">
           <div className="flex flex-wrap items-center justify-start gap-x-3 gap-y-1">
             <h2 className="whitespace-nowrap text-4xl font-bold tracking-tight sm:text-5xl">Videos</h2>
             {accessDenied ? <LimitedAccessBadge /> : <FullAccessBadge />}
           </div>
-          <p className="mt-1 max-w-3xl">
+          <p className="mt-0.5 max-w-3xl text-sm">
             This is your control panel. Filter as you see fit and relive some of our greatest moments.
           </p>
         </div>
 
-        <main>
+        <main className="">
           {loading && <VideoSkeleton />}
           {fetchError && <VideoNotFound />}
 
           {ready && (
-            <div>
+            <div className="flex flex-col space-y-2 font-normal">
               <div className="flex w-full items-center justify-end gap-2">
                 <PickTags tags={tags} hook={[selectedTags, setSelectedTags]} />
                 <PickAuthors authors={authors} hook={[selectedAuthors, setSelectedAuthors]} />
+                <FilterVideosByGame arenas={arenas} pickedHook={[selectedGame, setSelectedGame]} />
               </div>
 
-              <div className="font-normal">
-                <p>{filteredData.length} results matching your filtering criteria.</p>
+              <div className="flex w-full items-center gap-2 rounded border border-sky-600 bg-sky-600/60 py-2 pl-3 pr-2 text-center text-sm font-medium tracking-tight text-white disabled:cursor-not-allowed disabled:opacity-50 dark:border-sky-500 dark:bg-sky-500/50">
+                <InformationCircleIcon className="h-4 w-4 text-white" />
+                <span>{filteredVideos.length} results matching your filtering criteria.</span>
+              </div>
+
+              <div className="relative w-full">
+                <VideoPlayer video={video} autoplay={true} muted={true} key={`video-element-${video.index}`} />
+              </div>
+
+              <div className="">
                 <div></div>
+                {/* Left Arrow, Clip index, Right Arrow */}
+                <div className="z-20 flex w-full items-center justify-between font-normal text-white">
+                  <button
+                    onClick={prevVideo}
+                    disabled={index === 0}
+                    title="Go to the previous highlight"
+                    className="rounded-l border border-r-0 border-slate-800/60 bg-slate-800/60 px-4 py-2 transition enabled:hover:bg-slate-800/80 disabled:cursor-not-allowed disabled:opacity-25 dark:border-blue-200/30 dark:bg-blue-200/20 enabled:dark:hover:bg-blue-200/50 lg:px-4 lg:py-1"
+                  >
+                    <ArrowLongLeftIcon className="inline-flex h-6 w-6" />
+                  </button>
+
+                  <div className="flex w-full items-center justify-center self-stretch border border-slate-800/60 bg-slate-800/60 px-4 py-2 dark:border-blue-200/30 dark:bg-blue-200/20 lg:py-1">
+                    <span className="text-sm">
+                      {index + 1} of {filteredVideos.length}
+                    </span>
+                  </div>
+
+                  <button
+                    onClick={nextVideo}
+                    disabled={index === filteredVideos.length - 1}
+                    title="Go to the next highlight"
+                    className="rounded-r border border-l-0 border-slate-800/60 bg-slate-800/60 px-4 py-2 transition enabled:hover:bg-slate-800/80 disabled:cursor-not-allowed disabled:opacity-25 dark:border-blue-200/30 dark:bg-blue-200/20 enabled:dark:hover:bg-blue-200/50 lg:px-4 lg:py-1"
+                  >
+                    <ArrowLongRightIcon className="inline-flex h-6 w-6" />
+                  </button>
+                </div>
               </div>
             </div>
           )}
@@ -134,7 +213,7 @@ function PickAuthors({
     >
       {({ open }) => (
         <>
-          <Listbox.Button className="inline-flex w-full items-center justify-center gap-x-1 rounded border border-secondary bg-secondary/50 py-2 pl-3 pr-2 text-center text-sm font-medium tracking-tight text-white transition hover:opacity-80 disabled:cursor-not-allowed disabled:opacity-50 dark:border-secondary dark:bg-secondary/50 lg:px-3 lg:py-1.5">
+          <Listbox.Button className="inline-flex w-full items-center justify-center gap-x-1 rounded border border-secondary bg-secondary/70 py-2 pl-3 pr-2 text-center text-sm font-medium tracking-tight text-white transition hover:opacity-80 disabled:cursor-not-allowed disabled:opacity-50 dark:border-secondary dark:bg-secondary/50 lg:px-3 lg:py-1.5">
             <span className="text-sm font-normal">Authors</span>
             <ChevronUpDownIcon className="h-5 w-5" aria-hidden="true" />
           </Listbox.Button>
@@ -229,7 +308,7 @@ function PickTags({
     >
       {({ open }) => (
         <>
-          <Listbox.Button className="inline-flex w-full items-center justify-center gap-x-1 rounded border border-secondary bg-secondary/50 py-2 pl-3 pr-2 text-center text-sm font-medium tracking-tight text-white transition hover:opacity-80 disabled:cursor-not-allowed disabled:opacity-50 dark:border-secondary dark:bg-secondary/50 lg:px-3 lg:py-1.5">
+          <Listbox.Button className="inline-flex w-full items-center justify-center gap-x-1 rounded border border-secondary bg-secondary/70 py-2 pl-3 pr-2 text-center text-sm font-medium tracking-tight text-white transition hover:opacity-80 disabled:cursor-not-allowed disabled:opacity-50 dark:border-secondary dark:bg-secondary/50 lg:px-3 lg:py-1.5">
             <span className="text-sm font-normal">Tags</span>
             <ChevronUpDownIcon className="h-5 w-5" aria-hidden="true" />
           </Listbox.Button>
