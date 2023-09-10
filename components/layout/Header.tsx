@@ -27,7 +27,7 @@ const navigation = [
     title: "Videos",
     location: "/videos",
     icon: <FilmIcon className="h-5 w-5" />,
-    shown: false,
+    shown: true,
   },
   {
     title: "Gallery",

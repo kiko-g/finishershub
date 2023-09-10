@@ -93,3 +93,8 @@ export interface VideoMongoDB {
 export interface VideoMongoDBWithUrl extends VideoMongoDB {
   url: string
 }
+
+export type Author = {
+  id: number
+  name: string
+}
