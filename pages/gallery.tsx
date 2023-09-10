@@ -11,7 +11,7 @@ import {
   MuteToggler,
   ReshuffleButton,
   DeleteCookiesButton,
-  FilterVideos,
+  FilterVideosByGame,
   VideoPlayer,
   VideoSkeleton,
   DelayDisclaimer,
@@ -132,7 +132,7 @@ export default function Gallery() {
               <MuteToggler hook={[muted, setMuted]} limitedAccess={limitedAccess} />
               <ViewToggler hook={[view, setView]} />
             </div>
-            <FilterVideos arenas={arenas} pickedHook={[filter, setFilter]} />
+            <FilterVideosByGame arenas={arenas} pickedHook={[filter, setFilter]} />
           </div>
         </div>
 

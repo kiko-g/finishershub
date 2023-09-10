@@ -10,7 +10,7 @@ type Props = {
   pickedHook: [any, Dispatch<SetStateAction<FilterType>>]
 }
 
-export function FilterVideos({ arenas, pickedHook }: Props) {
+export function FilterVideosByGame({ arenas, pickedHook }: Props) {
   const [picked, setPicked] = pickedHook
 
   return (

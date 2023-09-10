@@ -7,7 +7,7 @@ import { ArrowLongLeftIcon, ArrowLongRightIcon } from "@heroicons/react/24/outli
 import {
   AutoplayToggler,
   DeleteCookiesButton,
-  FilterVideos,
+  FilterVideosByGame,
   FocusViewToggler,
   KeyboardUsageButton,
   KeyboardUsageInstructions,
@@ -194,7 +194,7 @@ export default function Casino() {
                 <AutoplayToggler hook={[autoplay, setAutoplay]} />
                 <MuteToggler hook={[muted, setMuted]} limitedAccess={limitedAccess} />
               </div>
-              <FilterVideos arenas={arenas} pickedHook={[filter, setFilter]} />
+              <FilterVideosByGame arenas={arenas} pickedHook={[filter, setFilter]} />
             </div>
           </div>
 

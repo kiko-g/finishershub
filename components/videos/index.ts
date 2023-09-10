@@ -1,9 +1,7 @@
 import { AutoplayToggler } from "./AutoplayToggler"
 import { DelayDisclaimer } from "./DelayDisclaimer"
-import { DelayDisclaimerFade } from "./DelayDisclaimerFade"
 import { DeleteCookiesButton } from "./DeleteCookiesButton"
-import { DummyLockedContent } from "./DummyLockedContent"
-import { FilterVideos } from "./FilterVideos"
+import { FilterVideosByGame } from "./FilterVideosByGame"
 import { FocusViewToggler } from "./FocusViewToggler"
 import { KeyboardUsageButton } from "./KeyboardUsageButton"
 import { KeyboardUsageInstructions } from "./KeyboardUsageInstructions"
@@ -16,7 +14,6 @@ import { PreviousVideo } from "./PreviousVideo"
 import { ReshuffleButton } from "./ReshuffleButton"
 import { ShareVideo } from "./ShareVideo"
 import { SingleVideoShowcase } from "./SingleVideoShowcase"
-import { TwitchVideoClip } from "./TwitchVideoClip"
 import { UsageDisclaimer } from "./UsageDisclaimer"
 import { VideoNotFound } from "./VideoNotFound"
 import { VideoOrderToggler } from "./VideoOrderToggler"
@@ -28,10 +25,8 @@ import { ViewToggler } from "./ViewToggler"
 export {
   AutoplayToggler,
   DelayDisclaimer,
-  DelayDisclaimerFade,
   DeleteCookiesButton,
-  DummyLockedContent,
-  FilterVideos,
+  FilterVideosByGame,
   FocusViewToggler,
   KeyboardUsageButton,
   KeyboardUsageInstructions,
@@ -44,7 +39,6 @@ export {
   ReshuffleButton,
   ShareVideo,
   SingleVideoShowcase,
-  TwitchVideoClip,
   UsageDisclaimer,
   VideoNotFound,
   VideoOrderToggler,
