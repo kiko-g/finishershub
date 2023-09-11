@@ -7,7 +7,7 @@ type Props = {
 
 export function VideoNotFound({ message }: Props) {
   return (
-    <div className="flex flex-col items-center justify-center">
+    <div className="flex flex-col items-center justify-center rounded border border-rose-500 bg-rose-500/10 py-16">
       <h1 className="text-3xl font-bold tracking-tight text-slate-800 dark:text-white md:text-5xl">Uh-oh!</h1>
       <p className="mt-4 text-gray-500 dark:text-gray-400">{message ? message : "We can't find that video"} ❌</p>
 
@@ -17,6 +17,13 @@ export function VideoNotFound({ message }: Props) {
       >
         Go back home 🛖
       </Link>
+
+      <button
+        onClick={() => window.location.reload()}
+        className="mt-6 rounded bg-gradient-to-br from-slate-800 to-slate-900 px-3 py-2 text-lg text-white transition hover:opacity-80 dark:bg-gradient-to-br dark:from-gray-200 dark:to-gray-300 dark:text-gray-800"
+      >
+        Reload page 🔄
+      </button>
     </div>
   )
 }

@@ -1,6 +1,5 @@
-import React, { Fragment, useCallback, useEffect, useMemo, useRef, useState } from "react"
+import React, { useCallback, useEffect, useMemo, useRef, useState } from "react"
 import classNames from "classnames"
-import useAccessDenied from "../hooks/useAccessDenied"
 import { Layout, FullAccessBadge, LimitedAccessBadge, Seo, AccessModal } from "../components/layout"
 import {
   AutoplayToggler,
@@ -17,8 +16,8 @@ import {
   VideoPlayer,
   VideoSkeleton,
 } from "../components/videos"
-import type { Author, FilterByGameType, VideoMongoDBWithUrl, VideoType } from "../@types"
-import { Listbox, Transition } from "@headlessui/react"
+import type { FilterByGameType, VideoMongoDBWithUrl, VideoType } from "../@types"
+import { Listbox } from "@headlessui/react"
 import {
   ArrowLongLeftIcon,
   ArrowLongRightIcon,
@@ -30,47 +29,36 @@ import { CheckCircleIcon } from "@heroicons/react/24/solid"
 import { FilterVideosByGame } from "../components/videos/FilterVideosByGame"
 import { useMediaQuery } from "usehooks-ts"
 import { useSwipeable } from "react-swipeable"
+import { useControls } from "../hooks/useControls"
+import { useContentInteraction } from "../hooks/useContentInteraction"
+import { arenas, authors, tags, tagsAndDescriptions } from "../utils/data"
 
 type Props = {}
 
 export default function Videos({}: Props) {
-  const tagsAndDescriptions = [
-    { name: "None", description: "Nothing too special about the finishers in the clip" },
-    { name: "Pernoca", description: "Involves at least one pernoca" },
-    { name: "Self", description: "Involves opp self reviving and getting punished" },
-    { name: "Public", description: "At least one opp teammate watching" },
-    { name: "Co-op", description: "Finishers club cooperation aka tiki-taka" },
-    { name: "Storm", description: "At least one finisher inside or very near the storm" },
-    { name: "Insane", description: "Insane situation" },
-    { name: "Edited", description: "Clip has been edited (is not raw)" },
-    { name: "Hop", description: "At least one finisher happens after agile hop" },
-    { name: "Hop V", description: "At least one finisher is done on the greenie balcony hop" },
-    { name: "Angled", description: "Taboo player rotation (minimum 45 deg angle)" },
-    { name: "Endgame", description: "Finisher happens near the end of the game" },
-    { name: "OG", description: "Clip is from the good old days" },
-  ]
-
-  const tags = tagsAndDescriptions.map((item) => item.name).sort()
-  const authors = ["Bagger", "Levels", "Reicalo", "Koba", "Junhó", "Castro"]
-  const arenas: FilterByGameType[] = [
-    { name: "All", value: "" },
-    { name: "Warzone 1", value: "mw2019" },
-    { name: "Warzone 2", value: "mw2022" },
-  ]
-
-  const isMobile = useMediaQuery("(max-width: 768px)")
-
   const buttonControlsRef = useRef<HTMLDivElement | null>(null)
 
-  const [accessDenied, setAccessDenied] = useAccessDenied()
-  const [loading, setLoading] = useState<boolean>(true)
-  const [fetchError, setFetchError] = useState<boolean>(false)
-  const [expandedView, setExpandedView] = useState<boolean>(false)
-  const ready = useMemo(() => !loading && !fetchError, [loading, fetchError])
+  const {
+    isMobile,
+    accessDenied,
+    setAccessDenied,
+    isLoading,
+    setIsLoading,
+    fetchError,
+    setFetchError,
+    isContentReady,
+  } = useContentInteraction()
 
-  const [muted, setMuted] = useState<boolean>(true)
-  const [autoplay, setAutoplay] = useState<boolean>(true)
-  const [showInstructions, setShowInstructions] = useState(true)
+  const {
+    muted,
+    setMuted,
+    autoplay,
+    setAutoplay,
+    showInstructions,
+    setShowInstructions,
+    expandedView,
+    setExpandedView,
+  } = useControls()
 
   const [videos, setVideos] = useState<VideoMongoDBWithUrl[]>([])
   const [index, setIndex] = useState<number>(0)
@@ -96,21 +84,31 @@ export default function Videos({}: Props) {
         .filter((video) => selectedAuthors.some((selectedAuthor) => video.authors.includes(selectedAuthor)))
     }
 
-    setIndex(0)
+    if (selectedGame.value !== "") {
+      result = result.filter((video) => video.game === selectedGame.value)
+    }
 
     return result
-  }, [videos, selectedTags, selectedAuthors])
+  }, [videos, selectedTags, selectedAuthors, selectedGame])
 
-  const video: VideoType = useMemo(
-    () => ({
+  const someVideosMatching = useMemo(
+    () => isContentReady && filteredVideos.length > 0,
+    [isContentReady, filteredVideos],
+  )
+
+  useEffect(() => {
+    setIndex(0)
+  }, [filteredVideos])
+
+  const video: VideoType | null = useMemo(() => {
+    return {
       url: filteredVideos[index]?.url,
       index: index,
       date: "",
       game: filteredVideos[index]?.game as "mw2019" | "mw2022",
       filteredGame: filteredVideos[index]?.game as "mw2019" | "mw2022",
-    }),
-    [filteredVideos, index],
-  )
+    }
+  }, [filteredVideos, index])
 
   const handlers = useSwipeable({
     onSwipedUp: () => prevVideo,
@@ -119,7 +117,7 @@ export default function Videos({}: Props) {
 
   useEffect(() => {
     setExpandedView(isMobile)
-  }, [isMobile])
+  }, [isMobile, setExpandedView])
 
   useEffect(() => {
     const handleKeyDown = (event: any) => {
@@ -132,7 +130,7 @@ export default function Videos({}: Props) {
     return () => {
       window.removeEventListener("keydown", handleKeyDown)
     }
-  }, [nextVideo, prevVideo, accessDenied])
+  }, [nextVideo, prevVideo, accessDenied, setExpandedView])
 
   useEffect(() => {
     const timerA = setTimeout(() => {
@@ -155,50 +153,56 @@ export default function Videos({}: Props) {
       .then((res) => res.json())
       .then((vids: VideoMongoDBWithUrl[]) => {
         setVideos(vids)
-        setLoading(false)
+        setIsLoading(false)
         setFetchError(false)
       })
       .catch((err) => {
-        setLoading(false)
+        setIsLoading(false)
         setFetchError(true)
         console.error(err)
       })
-  }, [])
+  }, [setFetchError, setIsLoading])
 
   return expandedView ? (
     <>
       <Seo title="Videos" />
       <main className="group relative h-screen">
-        <div
-          ref={buttonControlsRef}
-          className="absolute bottom-0 right-0 top-auto z-50 flex flex-col items-center gap-3 self-end rounded-tl bg-gray-900/80 p-3 text-white opacity-10 transition-opacity duration-[2000] hover:opacity-100 lg:bottom-auto lg:top-0 lg:max-w-full lg:flex-col lg:gap-2 lg:p-4"
-        >
-          <FocusViewToggler hook={[expandedView, setExpandedView]} size="md" />
-          <AutoplayToggler hook={[autoplay, setAutoplay]} size="md" />
-          <MuteToggler hook={[muted, setMuted]} size="md" limitedAccess={accessDenied} />
-          <ShareVideo video={video} size="md" />
-          <PopOpenVideo video={video} size="md" />
-          <PreviousVideo prevVideo={prevVideo} disabled={index === 0} size="md" />
-          <NextVideo nextVideo={nextVideo} disabled={index === videos.length - 1} size="md" />
-          <KeyboardUsageButton showHook={[showInstructions, setShowInstructions]} size="md" />
-        </div>
+        {someVideosMatching ? (
+          <>
+            <div
+              ref={buttonControlsRef}
+              className="absolute bottom-0 right-0 top-auto z-50 flex flex-col items-center gap-3 self-end rounded-tl bg-gray-900/80 p-3 text-white opacity-10 transition-opacity duration-[2000] hover:opacity-100 lg:bottom-auto lg:top-0 lg:max-w-full lg:flex-col lg:gap-2 lg:p-4"
+            >
+              <FocusViewToggler hook={[expandedView, setExpandedView]} size="md" />
+              <AutoplayToggler hook={[autoplay, setAutoplay]} size="md" />
+              <MuteToggler hook={[muted, setMuted]} size="md" limitedAccess={accessDenied} />
+              <ShareVideo video={video} size="md" />
+              <PopOpenVideo video={video} size="md" />
+              <PreviousVideo prevVideo={prevVideo} disabled={index === 0} size="md" />
+              <NextVideo nextVideo={nextVideo} disabled={index === videos.length - 1} size="md" />
+              <KeyboardUsageButton showHook={[showInstructions, setShowInstructions]} size="md" />
+            </div>
 
-        <KeyboardUsageInstructions showHook={[showInstructions, setShowInstructions]} />
+            <KeyboardUsageInstructions showHook={[showInstructions, setShowInstructions]} />
 
-        <div className="relative w-full" {...handlers}>
-          {ready ? (
-            <VideoPlayer
-              video={video}
-              autoplay={autoplay}
-              muted={muted}
-              special={true}
-              key={`video-element-${video.index}`}
-            />
-          ) : (
-            <VideoSkeleton />
-          )}
-          {fetchError && <VideoNotFound />}
-        </div>
+            <div className="relative w-full" {...handlers}>
+              {isContentReady ? (
+                <VideoPlayer
+                  video={video}
+                  autoplay={autoplay}
+                  muted={muted}
+                  special={true}
+                  key={`video-element-${video.index}`}
+                />
+              ) : (
+                <VideoSkeleton />
+              )}
+              {fetchError && <VideoNotFound />}
+            </div>
+          </>
+        ) : (
+          <VideoNotFound />
+        )}
       </main>
     </>
   ) : (
@@ -215,10 +219,10 @@ export default function Videos({}: Props) {
         </div>
 
         <main className="">
-          {loading && <VideoSkeleton />}
+          {isLoading && <VideoSkeleton />}
           {fetchError && <VideoNotFound />}
 
-          {ready && (
+          {isContentReady && someVideosMatching ? (
             <div className="flex flex-col space-y-2 font-normal">
               <div className="flex w-full items-center justify-between gap-4">
                 <div className="flex items-center justify-end gap-1">
@@ -248,7 +252,12 @@ export default function Videos({}: Props) {
               </div>
 
               <div className="relative w-full">
-                <VideoPlayer video={video} autoplay={autoplay} muted={muted} key={`video-element-${video.index}`} />
+                <VideoPlayer
+                  video={video}
+                  autoplay={autoplay}
+                  muted={muted}
+                  key={`video-element-${filteredVideos[index]._id}`}
+                />
               </div>
 
               <div className="">
@@ -281,6 +290,8 @@ export default function Videos({}: Props) {
                 </div>
               </div>
             </div>
+          ) : (
+            isContentReady && <VideoNotFound />
           )}
         </main>
       </div>
@@ -314,7 +325,7 @@ function PickAuthors({
     >
       {({ open }) => (
         <>
-          <Listbox.Button className="inline-flex w-full items-center justify-center gap-x-0.5 rounded border border-secondary bg-secondary/70 py-1.5 pl-2 pr-1.5 text-center text-xs text-white transition hover:opacity-80 disabled:cursor-not-allowed disabled:opacity-50 dark:border-secondary dark:bg-secondary/50 lg:px-3 lg:py-1.5 lg:text-sm">
+          <Listbox.Button className="inline-flex w-full items-center justify-center gap-x-0.5 rounded border border-secondary bg-secondary/70 py-1.5 pl-2 pr-1.5 text-center text-xs text-white transition hover:opacity-80 disabled:cursor-not-allowed disabled:opacity-50 dark:border-secondary dark:bg-secondary/50 lg:py-1.5 lg:pl-3 lg:pr-2 lg:text-sm">
             <span className="font-normal tracking-tighter lg:tracking-normal">Authors</span>
             <ChevronUpDownIcon className="h-4 w-4 lg:h-5 lg:w-5" aria-hidden="true" />
           </Listbox.Button>
@@ -408,7 +419,7 @@ function PickTags({
     >
       {({ open }) => (
         <>
-          <Listbox.Button className="inline-flex w-full items-center justify-center gap-x-0.5 rounded border border-secondary bg-secondary/70 py-1.5 pl-2 pr-1.5 text-center text-xs text-white transition hover:opacity-80 disabled:cursor-not-allowed disabled:opacity-50 dark:border-secondary dark:bg-secondary/50 lg:px-3 lg:py-1.5 lg:text-sm">
+          <Listbox.Button className="inline-flex w-full items-center justify-center gap-x-0.5 rounded border border-secondary bg-secondary/70 py-1.5 pl-2 pr-1.5 text-center text-xs text-white transition hover:opacity-80 disabled:cursor-not-allowed disabled:opacity-50 dark:border-secondary dark:bg-secondary/50 lg:py-1.5 lg:pl-3 lg:pr-2 lg:text-sm">
             <span className="font-normal tracking-tighter lg:tracking-normal">Tags</span>
             <ChevronUpDownIcon className="h-4 w-4 lg:h-5 lg:w-5" aria-hidden="true" />
           </Listbox.Button>

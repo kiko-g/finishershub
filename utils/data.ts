@@ -1,4 +1,30 @@
-export const videoTags = ["pernoca", "self", "public", "coop", "storm", "insane", "edited", "hop varanda"]
+import type { FilterByGameType } from "../@types"
+
+export const arenas: FilterByGameType[] = [
+  { name: "All", value: "" },
+  { name: "Warzone 1", value: "mw2019" },
+  { name: "Warzone 2", value: "mw2022" },
+]
+
+export const tagsAndDescriptions = [
+  { name: "None", description: "Nothing too special about the finishers in the clip" },
+  { name: "Pernoca", description: "Involves at least one pernoca" },
+  { name: "Self", description: "Involves opp self reviving and getting punished" },
+  { name: "Public", description: "At least one opp teammate watching" },
+  { name: "Co-op", description: "Finishers club cooperation aka tiki-taka" },
+  { name: "Storm", description: "At least one finisher inside or very near the storm" },
+  { name: "Insane", description: "Insane situation" },
+  { name: "Edited", description: "Clip has been edited (is not raw)" },
+  { name: "Hop", description: "At least one finisher happens after agile hop" },
+  { name: "Hop V", description: "At least one finisher is done on the greenie balcony hop" },
+  { name: "Angled", description: "Taboo player rotation (minimum 45 deg angle)" },
+  { name: "Endgame", description: "Finisher happens near the end of the game" },
+  { name: "OG", description: "Clip is from the good old days" },
+]
+
+export const tags = tagsAndDescriptions.map((item) => item.name).sort()
+
+export const authors = ["Bagger", "Levels", "Reicalo", "Koba", "Junhó", "Castro"]
 
 export const verdanskLocations = [
   "Military Base",
