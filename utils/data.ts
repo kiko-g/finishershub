@@ -6,6 +6,8 @@ export const arenas: FilterByGameType[] = [
   { name: "Warzone 2", value: "mw2022" },
 ]
 
+export const games = arenas.map((item) => item.value).filter((item) => item)
+
 export const tagsAndDescriptions = [
   { name: "None", description: "Nothing too special about the finishers in the clip" },
   { name: "Pernoca", description: "Involves at least one pernoca" },
@@ -25,6 +27,18 @@ export const tagsAndDescriptions = [
 export const tags = tagsAndDescriptions.map((item) => item.name).sort()
 
 export const authors = ["Bagger", "Levels", "Reicalo", "Koba", "Junhó", "Castro"]
+
+export const getLocations = (game: string, map: string) => {
+  if (game === "mw2019") {
+    if (map.toLowerCase() === "verdansk") return verdanskLocations
+    if (map.toLowerCase() === "rebirth") return rebirthLocations
+  }
+  if (game === "mw2022") {
+    if (map.toLowerCase() === "ashika") return ashikaLocations
+  }
+
+  return [verdanskLocations, rebirthLocations, ashikaLocations].flat()
+}
 
 export const verdanskLocations = [
   "Military Base",
