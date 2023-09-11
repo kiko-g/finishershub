@@ -1,6 +1,8 @@
 import React, { useState, useEffect, useMemo, useCallback, useRef } from "react"
 import type { FilterByGameType, VideoType, VideoTypeAPI } from "../@types"
 import useAccessDenied from "../hooks/useAccessDenied"
+import { useSwipeable } from "react-swipeable"
+import { useMediaQuery } from "usehooks-ts"
 import { shuffle } from "../utils"
 import { Layout, AccessModal, FullAccessBadge, LimitedAccessBadge } from "../components/layout"
 import { ArrowLongLeftIcon, ArrowLongRightIcon } from "@heroicons/react/24/outline"
@@ -23,8 +25,6 @@ import {
   VideoPlayer,
   VideoSkeleton,
 } from "../components/videos"
-import { useSwipeable } from "react-swipeable"
-import { useMediaQuery } from "usehooks-ts"
 
 export default function Casino() {
   const buttonControlsRef = useRef<HTMLDivElement | null>(null)
@@ -139,7 +139,7 @@ export default function Casino() {
     <main className="group relative h-screen">
       <div
         ref={buttonControlsRef}
-        className="absolute bottom-0 right-2 top-auto z-50 flex flex-row flex-wrap items-center gap-2 self-end bg-white p-3 text-gray-800 opacity-10 transition-opacity duration-[2000] hover:opacity-100 dark:bg-slate-800 dark:text-white lg:bottom-auto lg:top-0 lg:max-w-full lg:flex-col lg:p-4"
+        className="absolute bottom-0 right-0 top-auto z-50 flex flex-col items-center gap-2 self-end rounded-tl bg-gray-900/80 p-3 text-white opacity-10 transition-opacity duration-[2000] hover:opacity-100 lg:bottom-auto lg:top-0 lg:max-w-full lg:flex-col lg:p-4"
       >
         <FocusViewToggler hook={[expandedView, setExpandedView]} size="md" />
         <AutoplayToggler hook={[autoplay, setAutoplay]} size="md" />
@@ -187,8 +187,12 @@ export default function Casino() {
 
             <div className="flex flex-row flex-wrap items-center justify-center gap-2 lg:mt-0 lg:flex-col">
               <div className="flex w-full items-center justify-end gap-x-2">
-                {limitedAccess ? <AccessModal lockedHook={[accessDenied, setAccessDenied]} startOpen={false} /> : null}
-                <DeleteCookiesButton />
+                {limitedAccess ? (
+                  <AccessModal lockedHook={[accessDenied, setAccessDenied]} startOpen={false} />
+                ) : (
+                  <DeleteCookiesButton />
+                )}
+
                 <FocusViewToggler hook={[expandedView, setExpandedView]} />
                 <VideoOrderToggler hook={[shuffled, setShuffled]} />
                 <ReshuffleButton hook={[shuffled, setShuffled]} shuffle={shuffleVideos} />

@@ -1,5 +1,6 @@
-import classNames from "classnames"
 import React, { Dispatch, SetStateAction, useCallback, useEffect } from "react"
+import classNames from "classnames"
+import { getButtonSizeClassNames } from "../../utils"
 
 type Props = {
   hook: [boolean, Dispatch<SetStateAction<boolean>>]
@@ -32,12 +33,7 @@ export function AutoplayToggler({ hook, size = "sm" }: Props) {
             xmlns="http://www.w3.org/2000/svg"
             viewBox="0 0 20 20"
             fill="currentColor"
-            className={classNames(
-              size === "sm" ? "h-4 w-4 lg:h-6 lg:w-6" : "",
-              size === "md" ? "h-5 w-5 lg:h-7 lg:w-7" : "",
-              size === "lg" ? "h-6 w-6 lg:h-8 lg:w-8" : "",
-              size === "xl" ? "h-8 w-8 lg:h-10 lg:w-10" : "",
-            )}
+            className={getButtonSizeClassNames(size)}
           >
             <path
               fillRule="evenodd"
@@ -54,12 +50,7 @@ export function AutoplayToggler({ hook, size = "sm" }: Props) {
             viewBox="0 0 24 24"
             stroke="currentColor"
             strokeWidth="1.5"
-            className={classNames(
-              size === "sm" ? "h-4 w-4 lg:h-6 lg:w-6" : "",
-              size === "md" ? "h-5 w-5 lg:h-7 lg:w-7" : "",
-              size === "lg" ? "h-6 w-6 lg:h-8 lg:w-8" : "",
-              size === "xl" ? "h-8 w-8 lg:h-10 lg:w-10" : "",
-            )}
+            className={getButtonSizeClassNames(size)}
           >
             <path
               strokeLinecap="round"

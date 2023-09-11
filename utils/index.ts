@@ -1,4 +1,14 @@
+import classNames from "classnames"
 import type { VideoType } from "../@types"
+
+export function getButtonSizeClassNames(size: "sm" | "md" | "lg" | "xl") {
+  return classNames(
+    size === "sm" ? "h-5 w-5 lg:h-6 lg:w-6" : "",
+    size === "md" ? "h-6 w-6 lg:h-7 lg:w-7" : "",
+    size === "lg" ? "h-7 w-7 lg:h-8 lg:w-8" : "",
+    size === "xl" ? "h-8 w-8 lg:h-9 lg:w-9" : "",
+  )
+}
 
 export function daysDifference(before: Date, after: Date) {
   let a = new Date(after.toString())

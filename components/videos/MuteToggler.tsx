@@ -1,5 +1,5 @@
-import classNames from "classnames"
 import React, { Dispatch, SetStateAction, useCallback, useEffect } from "react"
+import { getButtonSizeClassNames } from "../../utils"
 
 type Props = {
   hook: [boolean, Dispatch<SetStateAction<boolean>>]
@@ -39,12 +39,7 @@ export function MuteToggler({ hook, size = "sm", limitedAccess = true }: Props) 
             viewBox="0 0 24 24"
             stroke="currentColor"
             strokeWidth="1.5"
-            className={classNames(
-              size === "sm" ? "h-4 w-4 lg:h-6 lg:w-6" : "",
-              size === "md" ? "h-5 w-5 lg:h-7 lg:w-7" : "",
-              size === "lg" ? "h-6 w-6 lg:h-8 lg:w-8" : "",
-              size === "xl" ? "h-8 w-8 lg:h-10 lg:w-10" : "",
-            )}
+            className={getButtonSizeClassNames(size)}
           >
             <path
               strokeLinecap="round"
@@ -68,12 +63,7 @@ export function MuteToggler({ hook, size = "sm", limitedAccess = true }: Props) 
             viewBox="0 0 24 24"
             stroke="currentColor"
             strokeWidth="1.5"
-            className={classNames(
-              size === "sm" ? "h-4 w-4 lg:h-6 lg:w-6" : "",
-              size === "md" ? "h-5 w-5 lg:h-7 lg:w-7" : "",
-              size === "lg" ? "h-6 w-6 lg:h-8 lg:w-8" : "",
-              size === "xl" ? "h-8 w-8 lg:h-10 lg:w-10" : "",
-            )}
+            className={getButtonSizeClassNames(size)}
           >
             <path
               strokeLinecap="round"

@@ -1,8 +1,22 @@
-import React, { Fragment, useCallback, useEffect, useMemo, useState } from "react"
+import React, { Fragment, useCallback, useEffect, useMemo, useRef, useState } from "react"
 import classNames from "classnames"
 import useAccessDenied from "../hooks/useAccessDenied"
-import { Layout, FullAccessBadge, LimitedAccessBadge } from "../components/layout"
-import { VideoNotFound, VideoPlayer, VideoSkeleton } from "../components/videos"
+import { Layout, FullAccessBadge, LimitedAccessBadge, Seo, AccessModal } from "../components/layout"
+import {
+  AutoplayToggler,
+  DeleteCookiesButton,
+  FocusViewToggler,
+  KeyboardUsageButton,
+  KeyboardUsageInstructions,
+  MuteToggler,
+  NextVideo,
+  PopOpenVideo,
+  PreviousVideo,
+  ShareVideo,
+  VideoNotFound,
+  VideoPlayer,
+  VideoSkeleton,
+} from "../components/videos"
 import type { Author, FilterByGameType, VideoMongoDBWithUrl, VideoType } from "../@types"
 import { Listbox, Transition } from "@headlessui/react"
 import {
@@ -14,6 +28,8 @@ import {
 } from "@heroicons/react/24/outline"
 import { CheckCircleIcon } from "@heroicons/react/24/solid"
 import { FilterVideosByGame } from "../components/videos/FilterVideosByGame"
+import { useMediaQuery } from "usehooks-ts"
+import { useSwipeable } from "react-swipeable"
 
 type Props = {}
 
@@ -42,11 +58,19 @@ export default function Videos({}: Props) {
     { name: "Warzone 2", value: "mw2022" },
   ]
 
+  const isMobile = useMediaQuery("(max-width: 768px)")
+
+  const buttonControlsRef = useRef<HTMLDivElement | null>(null)
+
   const [accessDenied, setAccessDenied] = useAccessDenied()
   const [loading, setLoading] = useState<boolean>(true)
   const [fetchError, setFetchError] = useState<boolean>(false)
   const [expandedView, setExpandedView] = useState<boolean>(false)
   const ready = useMemo(() => !loading && !fetchError, [loading, fetchError])
+
+  const [muted, setMuted] = useState<boolean>(true)
+  const [autoplay, setAutoplay] = useState<boolean>(true)
+  const [showInstructions, setShowInstructions] = useState(true)
 
   const [videos, setVideos] = useState<VideoMongoDBWithUrl[]>([])
   const [index, setIndex] = useState<number>(0)
@@ -88,6 +112,44 @@ export default function Videos({}: Props) {
     [filteredVideos, index],
   )
 
+  const handlers = useSwipeable({
+    onSwipedUp: () => prevVideo,
+    onSwiped: () => nextVideo,
+  })
+
+  useEffect(() => {
+    setExpandedView(isMobile)
+  }, [isMobile])
+
+  useEffect(() => {
+    const handleKeyDown = (event: any) => {
+      if (event.keyCode === 39) nextVideo() // right arrow
+      if (event.keyCode === 37) prevVideo() // left arrow
+      if (event.keyCode === 69 && accessDenied === false) setExpandedView((prev) => !prev) // e key
+    }
+
+    window.addEventListener("keydown", handleKeyDown)
+    return () => {
+      window.removeEventListener("keydown", handleKeyDown)
+    }
+  }, [nextVideo, prevVideo, accessDenied])
+
+  useEffect(() => {
+    const timerA = setTimeout(() => {
+      if (buttonControlsRef.current) buttonControlsRef.current.classList.add("opacity-50")
+    }, 4000)
+
+    const timerB = setTimeout(() => {
+      if (buttonControlsRef.current) buttonControlsRef.current.classList.remove("opacity-50")
+      if (buttonControlsRef.current) buttonControlsRef.current.classList.add("opacity-0")
+    }, 8000)
+
+    return () => {
+      clearTimeout(timerA)
+      clearTimeout(timerB)
+    }
+  }, [])
+
   useEffect(() => {
     fetch(`/api/mongo/videos/urls`)
       .then((res) => res.json())
@@ -103,20 +165,43 @@ export default function Videos({}: Props) {
       })
   }, [])
 
-  useEffect(() => {
-    const handleKeyDown = (event: any) => {
-      if (event.keyCode === 39) nextVideo() // right arrow
-      if (event.keyCode === 37) prevVideo() // left arrow
-      if (event.keyCode === 69 && accessDenied === false) setExpandedView((prev) => !prev) // e key
-    }
+  return expandedView ? (
+    <>
+      <Seo title="Videos" />
+      <main className="group relative h-screen">
+        <div
+          ref={buttonControlsRef}
+          className="absolute bottom-0 right-0 top-auto z-50 flex flex-col items-center gap-3 self-end rounded-tl bg-gray-900/80 p-3 text-white opacity-10 transition-opacity duration-[2000] hover:opacity-100 lg:bottom-auto lg:top-0 lg:max-w-full lg:flex-col lg:gap-2 lg:p-4"
+        >
+          <FocusViewToggler hook={[expandedView, setExpandedView]} size="md" />
+          <AutoplayToggler hook={[autoplay, setAutoplay]} size="md" />
+          <MuteToggler hook={[muted, setMuted]} size="md" limitedAccess={accessDenied} />
+          <ShareVideo video={video} size="md" />
+          <PopOpenVideo video={video} size="md" />
+          <PreviousVideo prevVideo={prevVideo} disabled={index === 0} size="md" />
+          <NextVideo nextVideo={nextVideo} disabled={index === videos.length - 1} size="md" />
+          <KeyboardUsageButton showHook={[showInstructions, setShowInstructions]} size="md" />
+        </div>
 
-    window.addEventListener("keydown", handleKeyDown)
-    return () => {
-      window.removeEventListener("keydown", handleKeyDown)
-    }
-  }, [nextVideo, prevVideo, accessDenied])
+        <KeyboardUsageInstructions showHook={[showInstructions, setShowInstructions]} />
 
-  return (
+        <div className="relative w-full" {...handlers}>
+          {ready ? (
+            <VideoPlayer
+              video={video}
+              autoplay={autoplay}
+              muted={muted}
+              special={true}
+              key={`video-element-${video.index}`}
+            />
+          ) : (
+            <VideoSkeleton />
+          )}
+          {fetchError && <VideoNotFound />}
+        </div>
+      </main>
+    </>
+  ) : (
     <Layout location="Videos">
       <div className="mx-auto flex max-w-3xl flex-col space-y-2">
         <div className="text-lg font-normal">
@@ -135,11 +220,27 @@ export default function Videos({}: Props) {
 
           {ready && (
             <div className="flex flex-col space-y-2 font-normal">
-              <div className="flex w-full items-center justify-end gap-2">
-                <PickTags tags={tags} hook={[selectedTags, setSelectedTags]} />
-                <PickAuthors authors={authors} hook={[selectedAuthors, setSelectedAuthors]} />
-                <FilterVideosByGame arenas={arenas} pickedHook={[selectedGame, setSelectedGame]} />
+              <div className="flex w-full items-center justify-between gap-4">
+                <div className="flex items-center justify-end gap-1">
+                  {accessDenied ? (
+                    <AccessModal lockedHook={[accessDenied, setAccessDenied]} startOpen={false} />
+                  ) : (
+                    <DeleteCookiesButton />
+                  )}
+                  <KeyboardUsageButton showHook={[showInstructions, setShowInstructions]} size="sm" />
+                  <FocusViewToggler hook={[expandedView, setExpandedView]} size="sm" />
+                  <AutoplayToggler hook={[autoplay, setAutoplay]} size="sm" />
+                  <MuteToggler hook={[muted, setMuted]} size="md" limitedAccess={accessDenied} />
+                </div>
+
+                <div className="flex items-center justify-end gap-2">
+                  <PickTags tags={tags} hook={[selectedTags, setSelectedTags]} />
+                  <PickAuthors authors={authors} hook={[selectedAuthors, setSelectedAuthors]} />
+                  <FilterVideosByGame arenas={arenas} pickedHook={[selectedGame, setSelectedGame]} />
+                </div>
               </div>
+
+              <KeyboardUsageInstructions showHook={[showInstructions, setShowInstructions]} />
 
               <div className="flex w-full items-center gap-2 rounded border border-sky-600 bg-sky-600/60 py-2 pl-3 pr-2 text-center text-sm font-medium tracking-tight text-white disabled:cursor-not-allowed disabled:opacity-50 dark:border-sky-500 dark:bg-sky-500/50">
                 <InformationCircleIcon className="h-4 w-4 text-white" />
@@ -147,7 +248,7 @@ export default function Videos({}: Props) {
               </div>
 
               <div className="relative w-full">
-                <VideoPlayer video={video} autoplay={true} muted={true} key={`video-element-${video.index}`} />
+                <VideoPlayer video={video} autoplay={autoplay} muted={muted} key={`video-element-${video.index}`} />
               </div>
 
               <div className="">
@@ -213,15 +314,14 @@ function PickAuthors({
     >
       {({ open }) => (
         <>
-          <Listbox.Button className="inline-flex w-full items-center justify-center gap-x-1 rounded border border-secondary bg-secondary/70 py-2 pl-3 pr-2 text-center text-sm font-medium tracking-tight text-white transition hover:opacity-80 disabled:cursor-not-allowed disabled:opacity-50 dark:border-secondary dark:bg-secondary/50 lg:px-3 lg:py-1.5">
-            <span className="text-sm font-normal">Authors</span>
-            <ChevronUpDownIcon className="h-5 w-5" aria-hidden="true" />
+          <Listbox.Button className="inline-flex w-full items-center justify-center gap-x-0.5 rounded border border-secondary bg-secondary/70 py-1.5 pl-2 pr-1.5 text-center text-xs text-white transition hover:opacity-80 disabled:cursor-not-allowed disabled:opacity-50 dark:border-secondary dark:bg-secondary/50 lg:px-3 lg:py-1.5 lg:text-sm">
+            <span className="font-normal tracking-tighter lg:tracking-normal">Authors</span>
+            <ChevronUpDownIcon className="h-4 w-4 lg:h-5 lg:w-5" aria-hidden="true" />
           </Listbox.Button>
 
           <Listbox.Options
             className={classNames(
-              "z-40 rounded-md px-0 py-1 text-sm shadow-xl",
-              "max-h-[34rem] overflow-scroll border-2 border-white bg-white dark:border-[#434b51] dark:bg-[#2e373d]",
+              "z-40 max-h-[34rem] overflow-scroll rounded-md bg-white px-0 py-1 text-sm shadow-xl dark:bg-[#2e373d]",
               open ? "absolute right-0 mt-2 w-full min-w-[12rem] lg:w-48" : "hidden",
             )}
           >
@@ -308,15 +408,14 @@ function PickTags({
     >
       {({ open }) => (
         <>
-          <Listbox.Button className="inline-flex w-full items-center justify-center gap-x-1 rounded border border-secondary bg-secondary/70 py-2 pl-3 pr-2 text-center text-sm font-medium tracking-tight text-white transition hover:opacity-80 disabled:cursor-not-allowed disabled:opacity-50 dark:border-secondary dark:bg-secondary/50 lg:px-3 lg:py-1.5">
-            <span className="text-sm font-normal">Tags</span>
-            <ChevronUpDownIcon className="h-5 w-5" aria-hidden="true" />
+          <Listbox.Button className="inline-flex w-full items-center justify-center gap-x-0.5 rounded border border-secondary bg-secondary/70 py-1.5 pl-2 pr-1.5 text-center text-xs text-white transition hover:opacity-80 disabled:cursor-not-allowed disabled:opacity-50 dark:border-secondary dark:bg-secondary/50 lg:px-3 lg:py-1.5 lg:text-sm">
+            <span className="font-normal tracking-tighter lg:tracking-normal">Tags</span>
+            <ChevronUpDownIcon className="h-4 w-4 lg:h-5 lg:w-5" aria-hidden="true" />
           </Listbox.Button>
 
           <Listbox.Options
             className={classNames(
-              "z-40 rounded-md px-0 py-1 text-sm shadow-xl",
-              "max-h-[34rem] overflow-scroll border-2 border-white bg-white dark:border-[#434b51] dark:bg-[#2e373d]",
+              "z-40 max-h-[34rem] overflow-scroll rounded-md bg-white px-0 py-1 text-sm shadow-xl dark:bg-[#2e373d]",
               open ? "absolute right-0 mt-2 w-full min-w-[12rem] lg:w-48" : "hidden",
             )}
           >
