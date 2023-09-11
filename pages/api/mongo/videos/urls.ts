@@ -15,8 +15,23 @@ export default async function getAllVideosWithUrl(req: NextApiRequest, res: Next
     const videosWithUrl = await Promise.all(
       allVideos.map(async (video) => {
         const url = video.s3_uri ? await getVideoUrl(video.s3_uri) : null
+        const videoObj = video.toObject() as VideoMongoDB
+
+        // Ensure tags are split
+        const splitTags =
+          videoObj.tags?.flatMap((tag) =>
+            typeof tag === "string" && tag.includes(",") ? tag.split(", ").map((t) => t.trim()) : tag,
+          ) || []
+
+        const splitAuthors =
+          videoObj.authors?.flatMap((author) =>
+            typeof author === "string" && author.includes(",") ? author.split(", ").map((x) => x.trim()) : author,
+          ) || []
+
         return {
-          ...(video.toObject() as VideoMongoDB),
+          ...videoObj,
+          tags: splitTags,
+          authors: splitAuthors,
           url,
         }
       }),
