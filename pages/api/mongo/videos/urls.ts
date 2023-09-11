@@ -13,28 +13,30 @@ export default async function getAllVideosWithUrl(req: NextApiRequest, res: Next
   try {
     const allVideos = await Videos.find()
     const videosWithUrl = await Promise.all(
-      allVideos.map(async (video) => {
-        const url = video.s3_uri ? await getVideoUrl(video.s3_uri) : null
-        const videoObj = video.toObject() as VideoMongoDB
+      allVideos
+        .sort((a, b) => a.id - b.id)
+        .map(async (video) => {
+          const url = video.s3_uri ? await getVideoUrl(video.s3_uri) : null
+          const videoObj = video.toObject() as VideoMongoDB
 
-        // Ensure tags are split
-        const splitTags =
-          videoObj.tags?.flatMap((tag) =>
-            typeof tag === "string" && tag.includes(",") ? tag.split(", ").map((t) => t.trim()) : tag,
-          ) || []
+          // Ensure tags are split
+          const splitTags =
+            videoObj.tags?.flatMap((tag) =>
+              typeof tag === "string" && tag.includes(",") ? tag.split(", ").map((t) => t.trim()) : tag,
+            ) || []
 
-        const splitAuthors =
-          videoObj.authors?.flatMap((author) =>
-            typeof author === "string" && author.includes(",") ? author.split(", ").map((x) => x.trim()) : author,
-          ) || []
+          const splitAuthors =
+            videoObj.authors?.flatMap((author) =>
+              typeof author === "string" && author.includes(",") ? author.split(", ").map((x) => x.trim()) : author,
+            ) || []
 
-        return {
-          ...videoObj,
-          tags: splitTags,
-          authors: splitAuthors,
-          url,
-        }
-      }),
+          return {
+            ...videoObj,
+            tags: splitTags,
+            authors: splitAuthors,
+            url,
+          }
+        }),
     )
 
     res.status(200).json(videosWithUrl)

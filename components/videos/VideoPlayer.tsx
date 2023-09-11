@@ -18,7 +18,9 @@ export function VideoPlayer(props: Props) {
   const [mute, setMute] = useState(muted)
   const [playing, setPlaying] = useState(false)
   const [progress, setProgress] = useState(0)
+
   const videoRef = useRef<HTMLVideoElement>(null)
+  const progressBarRef = useRef<HTMLDivElement>(null)
 
   useEffect(() => {
     setMute((prev) => muted && prev)
@@ -60,6 +62,17 @@ export function VideoPlayer(props: Props) {
     setPlaying(false)
   }
 
+  useEffect(() => {
+    function handleKeyDown(event: KeyboardEvent) {
+      if (event.code === "Space") togglePlay()
+    }
+
+    window.addEventListener("keydown", handleKeyDown)
+    return () => {
+      window.removeEventListener("keydown", handleKeyDown)
+    }
+  }, [])
+
   return (
     <div
       className={classNames(
@@ -73,7 +86,7 @@ export function VideoPlayer(props: Props) {
           loop
           controls={false}
           muted={mute || muted}
-          autoPlay={video.index === 0 ? false : autoplay}
+          autoPlay={autoplay}
           preload="auto"
           onClick={togglePlay}
           onPlay={handlePlay}
@@ -105,9 +118,24 @@ export function VideoPlayer(props: Props) {
       </div>
 
       <div
-        style={{ width: `${progress}%` }}
-        className="absolute bottom-0 left-0 z-50 h-[3px] rounded-b bg-rose-500 dark:bg-rose-500"
-      />
+        ref={progressBarRef}
+        className="group relative -mt-[3px] h-[3px] cursor-pointer rounded-b hover:-mt-[6px] hover:h-[6px]"
+        onClick={(event) => {
+          if (progressBarRef.current && videoRef.current) {
+            const rect = progressBarRef.current.getBoundingClientRect()
+            const clickPosition = event.clientX - rect.left
+            const percentage = (clickPosition / rect.width) * 100
+            setProgress(percentage)
+            videoRef.current.currentTime = (percentage / 100) * videoRef.current.duration
+          }
+        }}
+      >
+        <div className="absolute bottom-0 left-0 z-40 h-full w-full rounded-b bg-black/20 transition" />
+        <div
+          style={{ width: `${progress}%` }}
+          className="absolute bottom-0 left-0 z-50 h-full rounded-bl bg-rose-500 transition dark:bg-rose-500"
+        />
+      </div>
     </div>
   )
 }
@@ -123,6 +151,7 @@ type PlayPauseVideoProps = {
 function PlayPauseVideo({ playing, togglePlay, handlePlay, handlePause, size = "sm" }: PlayPauseVideoProps) {
   return playing ? (
     <PauseIcon
+      title="Pause (or press Space)"
       fillRule="evenodd"
       strokeWidth="1.5"
       onClick={togglePlay}
@@ -130,6 +159,7 @@ function PlayPauseVideo({ playing, togglePlay, handlePlay, handlePause, size = "
     />
   ) : (
     <PlayIcon
+      title="Play (or press Space)"
       fillRule="evenodd"
       strokeWidth="1.5"
       onClick={togglePlay}

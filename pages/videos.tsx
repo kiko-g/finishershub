@@ -13,6 +13,7 @@ import {
   PreviousVideo,
   ShareVideo,
   VideoNotFound,
+  VideoOrderToggler,
   VideoPlayer,
   VideoSkeleton,
 } from "../components/videos"
@@ -27,11 +28,10 @@ import {
 } from "@heroicons/react/24/outline"
 import { CheckCircleIcon } from "@heroicons/react/24/solid"
 import { FilterVideosByGame } from "../components/videos/FilterVideosByGame"
-import { useMediaQuery } from "usehooks-ts"
 import { useSwipeable } from "react-swipeable"
 import { useControls } from "../hooks/useControls"
 import { useContentInteraction } from "../hooks/useContentInteraction"
-import { arenas, authors, tags, tagsAndDescriptions } from "../utils/data"
+import { arenas, authors, tags } from "../utils/data"
 
 type Props = {}
 
@@ -54,6 +54,8 @@ export default function Videos({}: Props) {
     setMuted,
     autoplay,
     setAutoplay,
+    shuffled,
+    setShuffled,
     showInstructions,
     setShowInstructions,
     expandedView,
@@ -88,8 +90,8 @@ export default function Videos({}: Props) {
       result = result.filter((video) => video.game === selectedGame.value)
     }
 
-    return result
-  }, [videos, selectedTags, selectedAuthors, selectedGame])
+    return shuffled ? result.sort(() => Math.random() - 0.5) : result.sort((a, b) => a.id - b.id)
+  }, [videos, selectedTags, selectedAuthors, selectedGame, shuffled])
 
   const someVideosMatching = useMemo(
     () => isContentReady && filteredVideos.length > 0,
@@ -101,12 +103,13 @@ export default function Videos({}: Props) {
   }, [filteredVideos])
 
   const video: VideoType | null = useMemo(() => {
+    const vid = filteredVideos[index]
     return {
-      url: filteredVideos[index]?.url,
-      index: index,
+      url: vid?.url,
+      index: vid?.id as number,
       date: "",
       game: filteredVideos[index]?.game as "mw2019" | "mw2022",
-      filteredGame: filteredVideos[index]?.game as "mw2019" | "mw2022",
+      filteredGame: "",
     }
   }, [filteredVideos, index])
 
@@ -174,6 +177,7 @@ export default function Videos({}: Props) {
               className="absolute bottom-0 right-0 top-auto z-50 flex flex-col items-center gap-3 self-end rounded-tl bg-gray-900/80 p-3 text-white opacity-10 transition-opacity duration-[2000] hover:opacity-100 lg:bottom-auto lg:top-0 lg:max-w-full lg:flex-col lg:gap-2 lg:p-4"
             >
               <FocusViewToggler hook={[expandedView, setExpandedView]} size="md" />
+              <VideoOrderToggler hook={[shuffled, setShuffled]} />
               <AutoplayToggler hook={[autoplay, setAutoplay]} size="md" />
               <MuteToggler hook={[muted, setMuted]} size="md" limitedAccess={accessDenied} />
               <ShareVideo video={video} size="md" />
@@ -232,6 +236,7 @@ export default function Videos({}: Props) {
                     <DeleteCookiesButton />
                   )}
                   <KeyboardUsageButton showHook={[showInstructions, setShowInstructions]} size="sm" />
+                  <VideoOrderToggler hook={[shuffled, setShuffled]} />
                   <FocusViewToggler hook={[expandedView, setExpandedView]} size="sm" />
                   <AutoplayToggler hook={[autoplay, setAutoplay]} size="sm" />
                   <MuteToggler hook={[muted, setMuted]} size="md" limitedAccess={accessDenied} />
@@ -256,12 +261,11 @@ export default function Videos({}: Props) {
                   video={video}
                   autoplay={autoplay}
                   muted={muted}
-                  key={`video-element-${filteredVideos[index]._id}`}
+                  key={`video-element-${filteredVideos[index]?._id ?? video.index}`}
                 />
               </div>
 
-              <div className="">
-                <div></div>
+              <div>
                 {/* Left Arrow, Clip index, Right Arrow */}
                 <div className="z-20 flex w-full items-center justify-between font-normal text-white">
                   <button
