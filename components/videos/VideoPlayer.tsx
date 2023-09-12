@@ -77,7 +77,7 @@ export function VideoPlayer(props: Props) {
     <div
       className={classNames(
         "group relative z-20 w-full",
-        special ? "mx-auto my-auto h-screen overflow-hidden bg-black" : "rounded",
+        special ? "mx-auto my-auto h-screen overflow-hidden" : "rounded",
       )}
     >
       <div className={classNames(special ? "absolute inset-0" : "")}>
@@ -133,7 +133,7 @@ export function VideoPlayer(props: Props) {
         <div className="absolute bottom-0 left-0 z-40 h-full w-full rounded-b bg-black/20 transition" />
         <div
           style={{ width: `${progress}%` }}
-          className="absolute bottom-0 left-0 z-50 h-full rounded-bl bg-rose-500 transition dark:bg-rose-500"
+          className="absolute bottom-0 left-0 z-[999] h-full rounded-bl bg-rose-500 transition dark:bg-rose-500"
         />
       </div>
     </div>

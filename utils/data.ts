@@ -20,13 +20,21 @@ export const tagsAndDescriptions = [
   { name: "Hop", description: "At least one finisher happens after agile hop" },
   { name: "Hop V", description: "At least one finisher is done on the greenie balcony hop" },
   { name: "Angled", description: "Taboo player rotation (minimum 45 deg angle)" },
+  { name: "Elite", description: "Clip is of absolute prime quality" },
   { name: "Endgame", description: "Finisher happens near the end of the game" },
   { name: "OG", description: "Clip is from the good old days" },
-]
+].sort((a, b) => a.name.localeCompare(b.name))
 
-export const tags = tagsAndDescriptions.map((item) => item.name).sort()
+export const tags = tagsAndDescriptions.map((item) => item.name).sort((a, b) => a.localeCompare(b))
 
 export const authors = ["Bagger", "Levels", "Reicalo", "Koba", "Junhó", "Castro"]
+
+export const getMaps = (game: string) => {
+  if (game === "mw2019") return ["Verdansk", "Rebirth"]
+  if (game === "mw2022") return ["Ashika"]
+
+  return ["Verdansk", "Rebirth", "Ashika"]
+}
 
 export const getLocations = (game: string, map: string) => {
   if (game === "mw2019") {
@@ -59,7 +67,7 @@ export const verdanskLocations = [
   "Promenade East",
   "Promenade West",
   "Misc",
-]
+].sort((a, b) => a.localeCompare(b))
 
 export const rebirthLocations = [
   "Living Quarters Main",
@@ -81,7 +89,7 @@ export const rebirthLocations = [
   "Greenie",
   "HQ",
   "Misc",
-]
+].sort((a, b) => a.localeCompare(b))
 
 export const ashikaLocations = [
   "Helicopter",
@@ -96,7 +104,7 @@ export const ashikaLocations = [
   "Town Center",
   "Shipwreck",
   "Misc",
-]
+].sort((a, b) => a.localeCompare(b))
 
 export const socials = [
   {

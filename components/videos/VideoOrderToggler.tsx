@@ -28,10 +28,7 @@ export function VideoOrderToggler({ hook }: Props) {
     <div className="flex items-end justify-center space-x-2">
       <button
         title={shuffle ? "Turn shuffle off" : "Turn shuffle on"}
-        className={classNames(
-          "transition hover:opacity-80",
-          shuffle ? "text-primary dark:text-secondary" : "text-gray-800 dark:text-white",
-        )}
+        className={classNames("transition hover:opacity-80", shuffle ? "text-primary dark:text-secondary" : "")}
         onClick={toggleShuffle}
       >
         <ShuffleIcon className="h-5 w-5 lg:h-6 lg:w-6" />

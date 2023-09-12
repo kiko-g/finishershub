@@ -13,7 +13,7 @@ import {
   ChevronUpDownIcon,
 } from "@heroicons/react/24/outline"
 import { Listbox, Transition } from "@headlessui/react"
-import { authors, games, getLocations, tags } from "../utils/data"
+import { authors, games, getLocations, getMaps, tags } from "../utils/data"
 
 type Props = {}
 
@@ -30,7 +30,8 @@ export default function Videos({}: Props) {
   const displayedData = useMemo(() => {
     const start = (currentPage - 1) * itemsPerPage
     const end = start + itemsPerPage
-    return data.sort((a, b) => (a.id > b.id ? 1 : -1)).slice(start, end)
+    return data.sort((a, b) => (a.id > b.id ? 1 : -1))
+    //.slice(start, end)
   }, [data, currentPage])
 
   const ready = useMemo(() => !loading && !fetchError, [loading, fetchError])
@@ -84,7 +85,7 @@ export default function Videos({}: Props) {
 
   return (
     <Layout location="Admin">
-      <div className="mb-8 min-w-full overflow-scroll">
+      <div className="mb-16 min-w-full overflow-scroll">
         <div className="mb-3 text-lg font-normal">
           <div className="flex flex-wrap items-center justify-start gap-x-3 gap-y-1">
             <h2 className="whitespace-nowrap text-4xl font-bold tracking-tight sm:text-5xl">Admin</h2>
@@ -228,7 +229,7 @@ function TableRow({ video, rowIndex, replaceRowAction }: TableRowProps) {
     try {
       await Promise.all([
         replaceRowAction(row, rowIndex),
-        new Promise((resolve) => setTimeout(resolve, 800)), // ensures at least 800 ms delay
+        new Promise((resolve) => setTimeout(resolve, 500)), // ensures at least 500 ms delay
       ])
     } catch (error) {
       console.error("Error replacing row:", error)
@@ -249,7 +250,9 @@ function TableRow({ video, rowIndex, replaceRowAction }: TableRowProps) {
       <td className="whitespace-nowrap px-2 pt-0.5 lg:px-3">
         <PickGame setRowSaved={setRowSaved} rowHook={[row, setRow]} />
       </td>
-      <td className="whitespace-nowrap px-2 pt-0.5 lg:px-3">{row.map}</td>
+      <td className="whitespace-nowrap px-2 pt-0.5 lg:px-3">
+        <PickMap game={row.game} setRowSaved={setRowSaved} rowHook={[row, setRow]} />
+      </td>
       <td className="whitespace-nowrap px-2 pt-0.5 lg:px-3">
         <PickLocation game={row.game} map={row.map} setRowSaved={setRowSaved} rowHook={[row, setRow]} />
       </td>
@@ -350,6 +353,84 @@ function PickGame({
                           )}
                           <span className={classNames("block truncate", highlight ? "font-bold" : "font-normal")}>
                             {game}
+                          </span>
+                        </span>
+                      )
+                    }}
+                  </Listbox.Option>
+                )
+              })}
+            </Listbox.Options>
+          </Transition>
+        </div>
+      )}
+    </Listbox>
+  )
+}
+
+function PickMap({
+  game,
+  rowHook,
+  setRowSaved,
+  className,
+}: {
+  game: string
+  setRowSaved: Dispatch<SetStateAction<boolean>>
+  rowHook: [VideoMongoDBWithUrl, Dispatch<SetStateAction<VideoMongoDBWithUrl>>]
+  className?: string
+}) {
+  const [row, setRow] = rowHook
+  const picked = useMemo(() => row.map, [row])
+  const maps = getMaps(game)
+
+  return (
+    <Listbox
+      as="div"
+      value={picked}
+      onChange={(newValue) => {
+        setRowSaved(false)
+        setRow({ ...row, map: newValue })
+      }}
+    >
+      {({ open }) => (
+        <div className={classNames("relative", className)}>
+          <Listbox.Button className="inline-flex w-full items-center justify-between gap-x-2 bg-black/50 py-1.5 pl-2 pr-1.5 text-center text-xs text-white transition hover:opacity-80 disabled:cursor-not-allowed disabled:opacity-50 dark:bg-white/20 lg:py-1 lg:pl-2 lg:pr-1 lg:text-sm">
+            <span className="font-normal tracking-tighter">{picked}</span>
+            <ChevronUpDownIcon className="h-4 w-4 lg:h-5 lg:w-5" aria-hidden="true" />
+          </Listbox.Button>
+
+          <Transition as={Fragment} leave="transition ease-in duration-100" leaveFrom="opacity-100" leaveTo="opacity-0">
+            <Listbox.Options
+              className={classNames(
+                "z-[999] max-h-96 overflow-scroll rounded-md bg-white px-0 py-1 text-sm shadow-xl dark:bg-[#2e373d]",
+                open ? "absolute left-0 mt-2 w-full min-w-[8rem] lg:w-48" : "hidden",
+              )}
+            >
+              {maps.map((map: string, mapIdx: number) => {
+                const isSelected = picked === map
+
+                return (
+                  <Listbox.Option
+                    key={mapIdx}
+                    value={map}
+                    className={({ active }) =>
+                      classNames(
+                        "relative cursor-default select-none py-1.5 pl-3 pr-3",
+                        active ? "bg-slate-200 dark:bg-slate-600" : "",
+                      )
+                    }
+                  >
+                    {({ selected }) => {
+                      const highlight = selected || isSelected
+                      return (
+                        <span className="flex items-center gap-2">
+                          {highlight ? (
+                            <CheckCircleIcon className="h-5 w-5 text-teal-500" aria-hidden="true" />
+                          ) : (
+                            <span className="h-5 w-5" />
+                          )}
+                          <span className={classNames("block truncate", highlight ? "font-bold" : "font-normal")}>
+                            {map}
                           </span>
                         </span>
                       )
