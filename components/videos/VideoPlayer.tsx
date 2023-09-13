@@ -92,7 +92,7 @@ export function VideoPlayer(props: Props) {
           onPlay={handlePlay}
           onPause={handlePause}
           className={classNames(
-            "w-full bg-primary/20 dark:bg-secondary/20",
+            "w-full",
             special
               ? "aspect-[9/16] h-screen scale-x-[3] scale-y-[3] overflow-hidden lg:aspect-video lg:h-full lg:scale-x-100 lg:scale-y-100"
               : "rounded",

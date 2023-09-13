@@ -1,26 +1,23 @@
 import React, { useEffect, useMemo, useState } from "react"
 import { Footer, Header, Seo } from "../layout"
 import { SingleVideoShowcase, VideoNotFound, VideoSkeleton } from "."
-import type { VideoType, VideoTypeAPI } from "../../@types"
+import type { VideoMongoDBWithUrl, VideoType, VideoTypeAPI } from "../../@types"
 
 type Props = {
-  game: "mw2019" | "mw2022" | ""
   videoIndex: number
 }
 
-export function VideoPage({ game, videoIndex }: Props) {
+export function VideoPage({ videoIndex }: Props) {
   const [video, setVideo] = useState<VideoType | null>(null)
   const [loading, setLoading] = useState<boolean>(true)
   const [fetchError, setFetchError] = useState<boolean>(false)
-  const [expandedView, setExpandedView] = useState<boolean>(true)
+  const [normalView, setNormalView] = useState<boolean>(true)
   const ready = useMemo(() => !loading && !fetchError, [loading, fetchError])
 
   useEffect(() => {
     if (videoIndex === -1) return
-    const gameRoute = game === "" ? "" : `/${game}`
-    const url = `/api/s3${gameRoute}/${videoIndex}`
 
-    fetch(url)
+    fetch(`/api/mongo/videos/urls/${videoIndex}`)
       .then((res) => {
         if (res.status === 404) {
           setFetchError(true)
@@ -28,15 +25,15 @@ export function VideoPage({ game, videoIndex }: Props) {
           return res.json()
         }
       })
-      .then((vid: VideoTypeAPI) => {
+      .then((video: VideoMongoDBWithUrl) => {
         setLoading(false)
         setVideo({
-          url: vid.url,
+          url: video.url,
           index: videoIndex,
-          date: vid.date,
-          game: vid.game,
-          filteredGame: game,
-          filename: vid.filename,
+          date: video._id,
+          game: video.game as VideoTypeAPI["game"],
+          filteredGame: "",
+          filename: "",
         })
       })
       .catch((err) => {
@@ -44,16 +41,16 @@ export function VideoPage({ game, videoIndex }: Props) {
         setFetchError(true)
         console.error(err)
       })
-  }, [videoIndex, game])
+  }, [videoIndex])
 
-  return expandedView ? (
+  return normalView ? (
     <div className="flex min-h-screen flex-col bg-light dark:bg-navy">
-      <Seo title="Video" />
+      <Seo title={`Video ${videoIndex}`} />
       <Header siteTitle="Finishers Hub" location="Video" />
       <div className="flex flex-1 items-start justify-center md:items-center">
         <div className="mx-auto w-full max-w-full px-4 lg:max-w-5xl lg:px-0">
           {ready && video !== null ? (
-            <SingleVideoShowcase video={video} expandedViewHook={[expandedView, setExpandedView]} />
+            <SingleVideoShowcase video={video} expandedViewHook={[normalView, setNormalView]} />
           ) : fetchError ? (
             <VideoNotFound />
           ) : (
@@ -63,7 +60,12 @@ export function VideoPage({ game, videoIndex }: Props) {
       </div>
       <Footer siteTitle="Finishers Hub" />
     </div>
-  ) : ready && video !== null ? (
-    <SingleVideoShowcase video={video} expandedViewHook={[expandedView, setExpandedView]} />
-  ) : null
+  ) : (
+    ready && video !== null && (
+      <>
+        <Seo title={`Video ${videoIndex}`} />
+        <SingleVideoShowcase video={video} expandedViewHook={[normalView, setNormalView]} />
+      </>
+    )
+  )
 }

@@ -70,7 +70,14 @@ export function strIncludes(str: string, query: string, strict?: boolean) {
 export function getVideoUrlFromVideo(video: VideoType, offset?: number) {
   const url = typeof window !== "undefined" ? window.location.origin : ""
   const index = offset ? video.index + offset : video.index
-  const game = video.filteredGame === "" ? "" : "/" + video.filteredGame
 
-  return `${url}/video${game}/${index}`
+  return `${url}/video/${index}`
+}
+
+export function ensureItemsAreSplit(items?: string[]): string[] {
+  return (
+    items?.flatMap((item) =>
+      typeof item === "string" && item.includes(",") ? item.split(", ").map((x) => x.trim()) : item,
+    ) || []
+  )
 }

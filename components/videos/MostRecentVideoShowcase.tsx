@@ -1,5 +1,5 @@
 import React from "react"
-import type { VideoAPIAndIndex, VideoType } from "../../@types"
+import type { VideoMongoDBWithUrl, VideoType } from "../../@types"
 import { VideoSkeleton, VideoNotFound, ShareVideo, PopOpenVideo } from "."
 
 export function MostRecentVideoShowcase() {
@@ -8,7 +8,7 @@ export function MostRecentVideoShowcase() {
   const [video, setVideo] = React.useState<VideoType | null>(null)
 
   React.useEffect(() => {
-    fetch("/api/s3/last")
+    fetch(`/api/mongo/videos/urls/last`)
       .then((res) => {
         if (res.status === 404) {
           setError(true)
@@ -17,15 +17,15 @@ export function MostRecentVideoShowcase() {
           return res.json()
         }
       })
-      .then((res: VideoAPIAndIndex) => {
+      .then((video: VideoMongoDBWithUrl) => {
         setLoading(false)
         setVideo({
-          url: res.video.url,
-          index: res.index,
-          date: res.video.date,
-          game: res.video.game,
-          filteredGame: "mw2022",
-          filename: res.video.filename,
+          url: video.url,
+          index: video.id,
+          date: "",
+          game: video.game as VideoType["game"],
+          filteredGame: "",
+          filename: "",
         })
       })
   }, [])

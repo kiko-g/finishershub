@@ -45,41 +45,25 @@ export function SingleVideoShowcase({ video, expandedViewHook }: Props) {
           <Link
             href={previous}
             title="Previous video"
-            className="self-stretch rounded bg-slate-600 px-4 py-2 text-sm uppercase text-white transition hover:opacity-80"
+            className="self-stretch rounded bg-slate-600 px-4 py-2 text-sm text-white transition hover:opacity-80"
           >
-            <BackwardIcon className="h-4 w-4 lg:h-6 lg:w-6" />
+            Previous
           </Link>
+
           <Link
             href={next}
             title="Next video"
-            className="self-stretch rounded bg-slate-600 px-4 py-2 text-sm uppercase text-white transition hover:opacity-80"
+            className="self-stretch rounded bg-slate-600 px-4 py-2 text-sm text-white transition hover:opacity-80"
           >
-            <ForwardIcon className="h-4 w-4 lg:h-6 lg:w-6" />
+            Next
           </Link>
-          <button
-            disabled={accessDenied}
-            onClick={() => {
-              if (accessDenied) return
-              setMuted((prev) => !prev)
-            }}
-            title="Toggle mute"
-            className={classNames(
-              muted ? "bg-rose-600" : "bg-teal-600",
-              "self-stretch rounded px-4 py-2 text-sm uppercase text-white transition hover:opacity-80 disabled:cursor-not-allowed disabled:opacity-20",
-            )}
-          >
-            {muted ? (
-              <SpeakerXMarkIcon className="h-4 w-4 lg:h-6 lg:w-6" />
-            ) : (
-              <SpeakerWaveIcon className="h-4 w-4 lg:h-6 lg:w-6" />
-            )}
-          </button>
+
           <button
             onClick={() => setExpandedView((prev) => !prev)}
             title="Toggle expanded view"
             className="self-stretch rounded bg-blue-500 px-4 py-2 text-sm uppercase text-white transition hover:opacity-80"
           >
-            <ArrowsPointingOutIcon className="h-4 w-4 lg:h-6 lg:w-6" />
+            <ArrowsPointingOutIcon className="h-4 w-4" />
           </button>
         </div>
 

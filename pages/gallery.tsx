@@ -1,9 +1,9 @@
 import React, { useState, useEffect, useMemo } from "react"
-import type { FilterByGameType, VideoType, VideoTypeAPI } from "../@types"
+import type { FilterByGameType, VideoMongoDBWithUrl, VideoType } from "../@types"
 import classNames from "classnames"
 import { shuffle } from "../utils"
-import { useMediaQuery } from "usehooks-ts"
 import useAccessDenied from "../hooks/useAccessDenied"
+import { useMediaQuery } from "usehooks-ts"
 import { FullAccessBadge, LimitedAccessBadge, Layout, AccessModal } from "../components/layout"
 import {
   ViewToggler,
@@ -56,22 +56,18 @@ export default function Gallery() {
   }
 
   useEffect(() => {
-    fetch(`/api/s3/${filter.value}`)
+    fetch(`/api/mongo/videos/urls/game/${filter.value}`)
       .then((res) => res.json())
-      .then((vids: VideoTypeAPI[]) => {
+      .then((videos: VideoMongoDBWithUrl[]) => {
         setLoading(false)
-        return vids.map((vid: VideoTypeAPI, index: number) => {
-          const video: VideoType = {
-            url: vid.url,
-            index: index,
-            date: vid.date,
-            game: vid.game,
-            filteredGame: filter.value,
-            filename: vid.filename,
-          }
-
-          return video
-        })
+        return videos.map((video: VideoMongoDBWithUrl, index: number) => ({
+          url: video.url,
+          index: video.id,
+          date: "",
+          game: video.game,
+          filteredGame: "",
+          filename: "",
+        }))
       })
       .then((videos) => {
         const shuffledVideos = shuffle(videos) as VideoType[]

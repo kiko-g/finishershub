@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useMemo, useCallback, useRef } from "react"
-import type { FilterByGameType, VideoType, VideoTypeAPI } from "../@types"
+import type { FilterByGameType, VideoMongoDBWithUrl, VideoType, VideoTypeAPI } from "../@types"
 import useAccessDenied from "../hooks/useAccessDenied"
 import { useSwipeable } from "react-swipeable"
 import { useMediaQuery } from "usehooks-ts"
@@ -75,22 +75,18 @@ export default function Casino() {
   }, [isMobile])
 
   useEffect(() => {
-    fetch(`/api/s3/${filter.value}`)
+    fetch(`/api/mongo/videos/urls/game/${filter.value}`)
       .then((res) => res.json())
-      .then((vids: VideoTypeAPI[]) => {
+      .then((videos: VideoMongoDBWithUrl[]) => {
         setLoading(false)
-        return vids.map((vid: VideoTypeAPI, index: number) => {
-          const video: VideoType = {
-            url: vid.url,
-            index: index,
-            date: vid.date,
-            game: vid.game,
-            filteredGame: filter.value,
-            filename: vid.filename,
-          }
-
-          return video
-        })
+        return videos.map((video: VideoMongoDBWithUrl, index: number) => ({
+          url: video.url,
+          index: video.id,
+          date: "",
+          game: video.game,
+          filteredGame: "",
+          filename: "",
+        }))
       })
       .then((videos) => {
         setIndex(0)
