@@ -224,11 +224,10 @@ export default function Videos({}: Props) {
                   {accessDenied ? (
                     <AccessModal lockedHook={[accessDenied, setAccessDenied]} startOpen={false} />
                   ) : (
-                    <DeleteCookiesButton />
+                    <DeleteCookiesButton size="sm" />
                   )}
                   <KeyboardUsageButton showHook={[showInstructions, setShowInstructions]} size="sm" />
                   <VideoOrderToggler hook={[shuffled, setShuffled]} />
-                  <FocusViewToggler hook={[expandedView, setExpandedView]} size="sm" />
                   <AutoplayToggler hook={[autoplay, setAutoplay]} size="sm" />
                   <MuteToggler hook={[muted, setMuted]} size="md" limitedAccess={accessDenied} />
                 </div>
@@ -249,7 +248,13 @@ export default function Videos({}: Props) {
 
               <div className="relative w-full">
                 {video !== null && (
-                  <VideoPlayer video={video} autoplay={autoplay} muted={muted} key={`video-element-${video.id}`} />
+                  <VideoPlayer
+                    limitedAccess={accessDenied}
+                    video={video}
+                    autoplay={autoplay}
+                    muted={muted}
+                    key={`video-element-${video.id}`}
+                  />
                 )}
               </div>
 

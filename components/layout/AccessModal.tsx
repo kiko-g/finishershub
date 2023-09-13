@@ -2,13 +2,16 @@ import React, { Dispatch, Fragment, SetStateAction, memo, useState } from "react
 import Link from "next/link"
 import { Dialog, Transition } from "@headlessui/react"
 import { EyeIcon, EyeSlashIcon, XMarkIcon, ArrowTopRightOnSquareIcon, KeyIcon } from "@heroicons/react/24/outline"
+import classNames from "classnames"
+import { getButtonSizeClassNames } from "../../utils"
 
 type Props = {
   lockedHook: [boolean, Dispatch<SetStateAction<boolean>>]
   startOpen?: boolean
+  size?: "sm" | "md" | "lg" | "xl"
 }
 
-export function AccessModal({ lockedHook, startOpen }: Props) {
+export function AccessModal({ lockedHook, startOpen, size = "sm" }: Props) {
   const secretCode = "Doeu"
   const secretHints = ["Levels", "Bio", "Window", "Clip"]
 
@@ -44,12 +47,8 @@ export function AccessModal({ lockedHook, startOpen }: Props) {
   return (
     <>
       {/* Button */}
-      <button
-        title="Open access modal"
-        onClick={() => setIsOpen(true)}
-        className="text-teal-500 transition hover:opacity-80 dark:text-teal-400"
-      >
-        <KeyIcon className="h-5 w-5 lg:h-6 lg:w-6" />
+      <button title="Open access modal" onClick={() => setIsOpen(true)} className="transition hover:opacity-80">
+        <KeyIcon className={classNames(getButtonSizeClassNames(size), "text-teal-500 dark:text-teal-400")} />
       </button>
 
       {/* Modal */}

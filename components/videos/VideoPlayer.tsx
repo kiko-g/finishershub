@@ -4,23 +4,36 @@ import React, { useState, useEffect, useRef, SetStateAction, Dispatch } from "re
 import { ShareVideo, PopOpenVideo, VideoSkeleton } from "./"
 import { PauseIcon, PlayIcon } from "@heroicons/react/24/solid"
 import { getButtonSizeClassNames } from "../../utils"
+import { FocusViewToggler } from "./FocusViewToggler"
 
 type Props = {
   video: VideoMongoDBWithUrl
+  limitedAccess?: boolean
+  startExpanded?: boolean
+  loop?: boolean
   autoplay?: boolean
   muted?: boolean
   special?: boolean
 }
 
 export function VideoPlayer(props: Props) {
-  const { video, autoplay = false, muted = true, special = false } = props
+  const {
+    video,
+    limitedAccess = true,
+    startExpanded = false,
+    loop = false,
+    autoplay = false,
+    muted = true,
+    special = false,
+  } = props
+
+  const videoRef = useRef<HTMLVideoElement>(null)
+  const progressBarRef = useRef<HTMLDivElement>(null)
 
   const [mute, setMute] = useState(muted)
   const [playing, setPlaying] = useState(false)
   const [progress, setProgress] = useState(0)
-
-  const videoRef = useRef<HTMLVideoElement>(null)
-  const progressBarRef = useRef<HTMLDivElement>(null)
+  const [expanded, setExpanded] = useState(startExpanded)
 
   useEffect(() => {
     setMute((prev) => muted && prev)
@@ -28,40 +41,21 @@ export function VideoPlayer(props: Props) {
 
   useEffect(() => {
     if (videoRef.current === null) return
-    const video: HTMLVideoElement = videoRef.current
 
-    const updateProgress = () => {
-      if (video.duration) {
-        setProgress((video.currentTime / video.duration) * 100)
-      }
-      animationFrameId = requestAnimationFrame(updateProgress)
+    const updateVideoProgress = () => {
+      if (video.duration) setProgress((video.currentTime / video.duration) * 100)
+      animationFrameId = requestAnimationFrame(updateVideoProgress)
     }
 
-    let animationFrameId = requestAnimationFrame(updateProgress)
+    const video: HTMLVideoElement = videoRef.current
+    let animationFrameId = requestAnimationFrame(updateVideoProgress)
 
     return () => {
       cancelAnimationFrame(animationFrameId)
     }
   }, [])
 
-  function togglePlay() {
-    if (videoRef.current) {
-      if (videoRef.current.paused) {
-        videoRef.current.play()
-      } else {
-        videoRef.current.pause()
-      }
-    }
-  }
-
-  function handlePlay() {
-    setPlaying(true)
-  }
-
-  function handlePause() {
-    setPlaying(false)
-  }
-
+  // keyboard controls
   useEffect(() => {
     function handleKeyDown(event: KeyboardEvent) {
       if (event.code === "Space") togglePlay()
@@ -72,6 +66,21 @@ export function VideoPlayer(props: Props) {
       window.removeEventListener("keydown", handleKeyDown)
     }
   }, [])
+
+  function togglePlay() {
+    if (!videoRef.current) return
+
+    if (videoRef.current.paused) videoRef.current.play()
+    else videoRef.current.pause()
+  }
+
+  function handlePlay() {
+    setPlaying(true)
+  }
+
+  function handlePause() {
+    setPlaying(false)
+  }
 
   return (
     <div
@@ -100,23 +109,34 @@ export function VideoPlayer(props: Props) {
         >
           <source src={video.url} type="video/mp4" />
         </video>
+
         {special ? null : (
-          <div className="absolute bottom-0 left-0 z-30 hidden font-normal text-white transition group-hover:flex group-hover:gap-2">
-            <div className="flex flex-col items-center gap-2 rounded-bl rounded-tr bg-black/50 px-2 py-2 lg:gap-2 lg:px-3 lg:py-3">
-              <PlayPauseVideo
-                size="sm"
-                playing={playing}
-                togglePlay={togglePlay}
-                handlePlay={handlePlay}
-                handlePause={handlePause}
-              />
-              <ShareVideo video={video} size="sm" />
-              <PopOpenVideo video={video} size="sm" />
+          <>
+            <div className="absolute left-0 top-0 z-30 hidden font-normal text-white transition group-hover:flex group-hover:gap-2">
+              <div className="flex flex-col items-center gap-2 rounded-br rounded-tl bg-black/50 px-2 py-2 lg:gap-2 lg:px-3 lg:py-3">
+                <ShareVideo video={video} size="sm" />
+                <PopOpenVideo video={video} size="sm" />
+              </div>
             </div>
-          </div>
+
+            <div className="absolute bottom-0 right-0 z-30 hidden font-normal text-white transition group-hover:flex group-hover:gap-2">
+              <div className="flex flex-col items-center gap-2 rounded-br rounded-tl bg-black/50 px-2 py-2 lg:gap-2 lg:px-3 lg:py-3">
+                <FocusViewToggler hook={[expanded, setExpanded]} size="sm" />
+                {/* <ToggleMuteVideo hook={[mute, setMute]} disabled={limitedAccess} size="sm" /> */}
+                <PlayPauseVideo
+                  size="sm"
+                  playing={playing}
+                  togglePlay={togglePlay}
+                  handlePlay={handlePlay}
+                  handlePause={handlePause}
+                />
+              </div>
+            </div>
+          </>
         )}
       </div>
 
+      {/* Progress Bar */}
       <div
         ref={progressBarRef}
         className="group relative -mt-[3px] h-[3px] cursor-pointer rounded-b hover:-mt-[6px] hover:h-[6px]"
@@ -170,11 +190,11 @@ function PlayPauseVideo({ playing, togglePlay, handlePlay, handlePause, size = "
 
 type ToggleMuteVideoProps = {
   hook: [boolean, Dispatch<SetStateAction<boolean>>]
-  defaultMute: boolean
+  disabled?: boolean
   size?: "sm" | "md" | "lg" | "xl"
 }
 
-function ToggleMuteVideo({ hook, defaultMute, size = "sm" }: ToggleMuteVideoProps) {
+function ToggleMuteVideo({ hook, disabled = true, size = "sm" }: ToggleMuteVideoProps) {
   const [mute, setMute] = hook
 
   function handleMute() {
@@ -187,7 +207,7 @@ function ToggleMuteVideo({ hook, defaultMute, size = "sm" }: ToggleMuteVideoProp
 
   return mute ? (
     <button
-      disabled={defaultMute}
+      disabled={disabled}
       title="Turn default mute off (or press M)"
       className="transition hover:opacity-80 disabled:cursor-not-allowed disabled:opacity-25"
       onClick={handleUnmute}
@@ -211,7 +231,7 @@ function ToggleMuteVideo({ hook, defaultMute, size = "sm" }: ToggleMuteVideoProp
     </button>
   ) : (
     <button
-      disabled={defaultMute}
+      disabled={disabled}
       title="Turn default mute on"
       className="transition hover:opacity-80 disabled:cursor-not-allowed disabled:opacity-25"
       onClick={handleMute}

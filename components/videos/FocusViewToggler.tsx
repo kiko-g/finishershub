@@ -9,17 +9,17 @@ type Props = {
 }
 
 export function FocusViewToggler({ hook, size = "sm" }: Props) {
-  const [unfocused, setFocused] = hook
+  const [expanded, setExpanded] = hook
 
   return (
     <div className="flex items-end justify-center space-x-2">
-      {unfocused ? (
-        <button title="Turn focus view on" className="transition hover:opacity-80" onClick={() => setFocused(false)}>
-          <ArrowsPointingOutIcon className={getButtonSizeClassNames(size)} />
+      {expanded ? (
+        <button title="Turn focus view on" className="transition hover:opacity-80" onClick={() => setExpanded(false)}>
+          <ArrowsPointingInIcon className={getButtonSizeClassNames(size)} />
         </button>
       ) : (
-        <button title="Turn focus view off" className="transition hover:opacity-80" onClick={() => setFocused(true)}>
-          <ArrowsPointingInIcon className={getButtonSizeClassNames(size)} />
+        <button title="Turn focus view off" className="transition hover:opacity-80" onClick={() => setExpanded(true)}>
+          <ArrowsPointingOutIcon className={getButtonSizeClassNames(size)} />
         </button>
       )}
     </div>

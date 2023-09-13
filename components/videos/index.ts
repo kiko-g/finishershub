@@ -5,7 +5,6 @@ import { FilterVideosByGame } from "./FilterVideosByGame"
 import { FocusViewToggler } from "./FocusViewToggler"
 import { KeyboardUsageButton } from "./KeyboardUsageButton"
 import { KeyboardUsageInstructions } from "./KeyboardUsageInstructions"
-import { MinimizeButtonControls } from "./MinimizeButtonControls"
 import { MostRecentVideoShowcase } from "./MostRecentVideoShowcase"
 import { MuteToggler } from "./MuteToggler"
 import { NextVideo } from "./NextVideo"
@@ -30,7 +29,6 @@ export {
   FocusViewToggler,
   KeyboardUsageButton,
   KeyboardUsageInstructions,
-  MinimizeButtonControls,
   MostRecentVideoShowcase,
   MuteToggler,
   NextVideo,

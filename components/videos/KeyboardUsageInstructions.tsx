@@ -12,7 +12,6 @@ export function KeyboardUsageInstructions({ showHook }: Props) {
   const keysMapping = [
     { key: "<", description: "Previous video" },
     { key: ">", description: "Next video" },
-    { key: "q", description: "Minimize button controls" },
     { key: "m", description: "Toggle mute" },
     { key: "e", description: "Toggle expanded view" },
     { key: "c", description: "Copy video URL to clipboard" },

@@ -1,8 +1,14 @@
 import React from "react"
 import { clearCache } from "../../utils/storage"
 import { FireIcon } from "@heroicons/react/24/outline"
+import classNames from "classnames"
+import { getButtonSizeClassNames } from "../../utils"
 
-export function DeleteCookiesButton() {
+type Props = {
+  size?: "sm" | "md" | "lg" | "xl"
+}
+
+export function DeleteCookiesButton({ size = "sm" }: Props) {
   function deleteData() {
     if (typeof window === "undefined") return
 
@@ -13,13 +19,18 @@ export function DeleteCookiesButton() {
   }
 
   return (
-    <div className="flex items-end justify-center space-x-2 text-orange-500 dark:text-orange-500">
+    <div className="flex items-end justify-center space-x-2">
       <button
         onClick={deleteData}
         title="Clear all cookies (helps if page does not load)"
         className="transition hover:opacity-80"
       >
-        <FireIcon className="h-5 w-5 lg:h-6 lg:w-6" />
+        <FireIcon
+          className={classNames(
+            getButtonSizeClassNames(size),
+            "fill-white text-orange-500 dark:fill-orange-500/20 dark:text-orange-500",
+          )}
+        />
       </button>
     </div>
   )
