@@ -17,7 +17,7 @@ import {
   VideoPlayer,
   VideoSkeleton,
 } from "../components/videos"
-import type { FilterByGameType, VideoMongoDBWithUrl, VideoType } from "../@types"
+import type { FilterByGameType, VideoMongoDBWithUrl } from "../@types"
 import { Listbox } from "@headlessui/react"
 import {
   ArrowLongLeftIcon,
@@ -102,16 +102,7 @@ export default function Videos({}: Props) {
     setIndex(0)
   }, [filteredVideos])
 
-  const video: VideoType | null = useMemo(() => {
-    const vid = filteredVideos[index]
-    return {
-      url: vid?.url,
-      index: vid?.id as number,
-      date: "",
-      game: filteredVideos[index]?.game as "mw2019" | "mw2022",
-      filteredGame: "",
-    }
-  }, [filteredVideos, index])
+  const video = useMemo(() => (filteredVideos.length > 0 ? filteredVideos[index] : null), [filteredVideos, index])
 
   const handlers = useSwipeable({
     onSwipedUp: () => prevVideo,
@@ -190,13 +181,13 @@ export default function Videos({}: Props) {
             <KeyboardUsageInstructions showHook={[showInstructions, setShowInstructions]} />
 
             <div className="relative w-full" {...handlers}>
-              {isContentReady ? (
+              {isContentReady && video !== null ? (
                 <VideoPlayer
                   video={video}
                   autoplay={autoplay}
                   muted={muted}
                   special={true}
-                  key={`video-element-${video.index}`}
+                  key={`video-element-${video.id}`}
                 />
               ) : (
                 <VideoSkeleton />
@@ -257,12 +248,9 @@ export default function Videos({}: Props) {
               </div>
 
               <div className="relative w-full">
-                <VideoPlayer
-                  video={video}
-                  autoplay={autoplay}
-                  muted={muted}
-                  key={`video-element-${filteredVideos[index]?._id ?? video.index}`}
-                />
+                {video !== null && (
+                  <VideoPlayer video={video} autoplay={autoplay} muted={muted} key={`video-element-${video.id}`} />
+                )}
               </div>
 
               <div>

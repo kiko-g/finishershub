@@ -1,12 +1,12 @@
 import React, { useCallback, useEffect, useState } from "react"
 import classNames from "classnames"
-import type { VideoType } from "../../@types"
+import type { VideoMongoDBWithUrl } from "../../@types"
 import { getButtonSizeClassNames, getVideoUrlFromVideo } from "../../utils"
 import { ClipboardIcon } from "@heroicons/react/24/outline"
 import { ClipboardDocumentCheckIcon } from "@heroicons/react/24/solid"
 
 type Props = {
-  video: VideoType
+  video: VideoMongoDBWithUrl | null
   size?: "sm" | "md" | "lg" | "xl"
 }
 
@@ -44,7 +44,7 @@ export function ShareVideo({ video, size = "sm" }: Props) {
       }, 3000)
   }, [copied, setCopied])
 
-  return (
+  return video === null ? null : (
     <button
       onClick={handleCopied}
       title="Copy video link (or press C)"

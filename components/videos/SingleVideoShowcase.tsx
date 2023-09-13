@@ -2,7 +2,7 @@ import React from "react"
 import Link from "next/link"
 import useAccessDenied from "../../hooks/useAccessDenied"
 import { VideoPlayer } from "./VideoPlayer"
-import { VideoType } from "../../@types"
+import { VideoMongoDBWithUrl } from "../../@types"
 import { AccessModal, InvisbleTopLayer } from "../layout"
 import { getVideoUrlFromVideo } from "../../utils"
 import {
@@ -18,7 +18,7 @@ import classNames from "classnames"
 import { FocusViewToggler, MuteToggler, ShareVideo } from "./"
 
 type Props = {
-  video: VideoType
+  video: VideoMongoDBWithUrl
   expandedViewHook: [boolean, React.Dispatch<React.SetStateAction<boolean>>]
 }
 
@@ -74,7 +74,7 @@ export function SingleVideoShowcase({ video, expandedViewHook }: Props) {
           >
             {video.game}
           </div>
-          <div
+          {/* <div
             title="Upload Date"
             className="self-stretch rounded border border-violet-500 bg-violet-500/50 px-4 py-2 text-sm text-white"
           >
@@ -83,7 +83,7 @@ export function SingleVideoShowcase({ video, expandedViewHook }: Props) {
               month: "long",
               year: "numeric",
             })}
-          </div>
+          </div> */}
         </div>
       </div>
     </section>
@@ -99,13 +99,7 @@ export function SingleVideoShowcase({ video, expandedViewHook }: Props) {
       </div>
 
       <div className="relative w-full">
-        <VideoPlayer
-          video={video}
-          autoplay={autoplay}
-          muted={muted}
-          special={true}
-          key={`video-element-${video.index}`}
-        />
+        <VideoPlayer video={video} autoplay={autoplay} muted={muted} special={true} key={`video-element-${video.id}`} />
       </div>
     </main>
   )

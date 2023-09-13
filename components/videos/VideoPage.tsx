@@ -1,21 +1,21 @@
 import React, { useEffect, useMemo, useState } from "react"
 import { Footer, Header, Seo } from "../layout"
 import { SingleVideoShowcase, VideoNotFound, VideoSkeleton } from "."
-import type { VideoMongoDBWithUrl, VideoType, VideoTypeAPI } from "../../@types"
+import type { VideoMongoDBWithUrl } from "../../@types"
 
 type Props = {
   videoIndex: number
 }
 
 export function VideoPage({ videoIndex }: Props) {
-  const [video, setVideo] = useState<VideoType | null>(null)
+  const [video, setVideo] = useState<VideoMongoDBWithUrl | null>(null)
   const [loading, setLoading] = useState<boolean>(true)
   const [fetchError, setFetchError] = useState<boolean>(false)
   const [normalView, setNormalView] = useState<boolean>(true)
   const ready = useMemo(() => !loading && !fetchError, [loading, fetchError])
 
   useEffect(() => {
-    if (videoIndex === -1) return
+    if (videoIndex === undefined || videoIndex < 0) return
 
     fetch(`/api/mongo/videos/urls/${videoIndex}`)
       .then((res) => {
@@ -27,14 +27,8 @@ export function VideoPage({ videoIndex }: Props) {
       })
       .then((video: VideoMongoDBWithUrl) => {
         setLoading(false)
-        setVideo({
-          url: video.url,
-          index: videoIndex,
-          date: video._id,
-          game: video.game as VideoTypeAPI["game"],
-          filteredGame: "",
-          filename: "",
-        })
+        setFetchError(false)
+        setVideo(video)
       })
       .catch((err) => {
         setLoading(false)

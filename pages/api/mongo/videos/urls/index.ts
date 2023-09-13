@@ -2,7 +2,6 @@ import Videos from "../../../../../models/videos"
 import type { NextApiRequest, NextApiResponse } from "next"
 import { allowCors, connectMongoDB } from "../../../../../config"
 import { getVideoUrl } from "../../../../../utils/api/s3"
-import { VideoMongoDB } from "../../../../../@types"
 import { ensureItemsAreSplit } from "../../../../../utils"
 
 // @desc     Get all videos with url
@@ -19,7 +18,7 @@ export default async function getAllVideosWithUrl(req: NextApiRequest, res: Next
         .sort((a, b) => a.id - b.id)
         .map(async (video) => {
           const url = video.s3_uri ? await getVideoUrl(video.s3_uri) : null
-          const videoObj = video.toObject() as VideoMongoDB
+          const videoObj = video.toObject()
           const splitTags = ensureItemsAreSplit(videoObj.tags)
           const splitAuthors = ensureItemsAreSplit(videoObj.authors)
 

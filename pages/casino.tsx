@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useMemo, useCallback, useRef } from "react"
-import type { FilterByGameType, VideoMongoDBWithUrl, VideoType, VideoTypeAPI } from "../@types"
+import type { FilterByGameType, VideoMongoDBWithUrl } from "../@types"
 import useAccessDenied from "../hooks/useAccessDenied"
 import { useSwipeable } from "react-swipeable"
 import { useMediaQuery } from "usehooks-ts"
@@ -39,7 +39,7 @@ export default function Casino() {
   const [fetchError, setFetchError] = useState<boolean>(false)
   const [expandedView, setExpandedView] = useState<boolean>(false)
   const [index, setIndex] = useState<number>(0)
-  const [videos, setVideos] = useState<VideoType[]>([])
+  const [videos, setVideos] = useState<VideoMongoDBWithUrl[]>([])
   const [filter, setFilter] = useState<FilterByGameType>(arenas[arenas.length - 1])
   const [accessDenied, setAccessDenied] = useAccessDenied()
   const [muted, setMuted] = useState<boolean>(true)
@@ -79,19 +79,8 @@ export default function Casino() {
       .then((res) => res.json())
       .then((videos: VideoMongoDBWithUrl[]) => {
         setLoading(false)
-        return videos.map((video: VideoMongoDBWithUrl, index: number) => ({
-          url: video.url,
-          index: video.id,
-          date: "",
-          game: video.game,
-          filteredGame: "",
-          filename: "",
-        }))
-      })
-      .then((videos) => {
         setIndex(0)
-        const typedVideos = videos as VideoType[]
-        const newVideos = shuffled ? shuffle(typedVideos) : typedVideos
+        const newVideos = shuffled ? shuffle(videos) : videos
         setVideos(newVideos)
       })
       .catch((err) => {
@@ -156,7 +145,7 @@ export default function Casino() {
             autoplay={autoplay}
             muted={muted}
             special={true}
-            key={`video-element-${video.index}`}
+            key={`video-element-${video.id}`}
           />
         ) : (
           <VideoSkeleton />
@@ -204,7 +193,7 @@ export default function Casino() {
           {/* Video */}
           <div className="relative w-full" {...handlers}>
             {ready ? (
-              <VideoPlayer video={video} autoplay={autoplay} muted={muted} key={`video-element-${video.index}`} />
+              <VideoPlayer video={video} autoplay={autoplay} muted={muted} key={`video-element-${video.id}`} />
             ) : (
               <VideoSkeleton />
             )}

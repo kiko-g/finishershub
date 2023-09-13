@@ -1,7 +1,6 @@
 import Videos from "../../../../models/videos"
 import type { NextApiRequest, NextApiResponse } from "next"
 import { allowCors, connectMongoDB } from "../../../../config"
-import { VideoMongoDB } from "../../../../@types"
 
 // @desc     Update a video document
 // @route    PUT /api/mongo/videos/urls
@@ -15,7 +14,7 @@ export default async function updateAllVideos(req: NextApiRequest, res: NextApiR
   }
 
   try {
-    const videoData: VideoMongoDB = req.body
+    const videoData = req.body
     const updatedVideo = await Videos.findOneAndUpdate({ _id: videoData._id }, videoData, { new: true })
 
     if (!updatedVideo) {

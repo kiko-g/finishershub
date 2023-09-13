@@ -1,12 +1,12 @@
 import classNames from "classnames"
-import type { VideoType } from "../../@types"
+import type { VideoMongoDBWithUrl } from "../../@types"
 import React, { useState, useEffect, useRef, SetStateAction, Dispatch } from "react"
 import { ShareVideo, PopOpenVideo, VideoSkeleton } from "./"
 import { PauseIcon, PlayIcon } from "@heroicons/react/24/solid"
 import { getButtonSizeClassNames } from "../../utils"
 
 type Props = {
-  video: VideoType
+  video: VideoMongoDBWithUrl
   autoplay?: boolean
   muted?: boolean
   special?: boolean

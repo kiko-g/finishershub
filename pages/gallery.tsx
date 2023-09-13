@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useMemo } from "react"
-import type { FilterByGameType, VideoMongoDBWithUrl, VideoType } from "../@types"
+import type { FilterByGameType, VideoMongoDBWithUrl } from "../@types"
 import classNames from "classnames"
 import { shuffle } from "../utils"
 import useAccessDenied from "../hooks/useAccessDenied"
@@ -29,7 +29,7 @@ export default function Gallery() {
   const [loading, setLoading] = useState<boolean>(true)
   const [fetchError, setFetchError] = useState<boolean>(false)
 
-  const [videos, setVideos] = useState<VideoType[]>([])
+  const [videos, setVideos] = useState<VideoMongoDBWithUrl[]>([])
   const [filter, setFilter] = useState<FilterByGameType>(arenas[0]) // use all
   const [accessDenied, setAccessDenied] = useAccessDenied()
   const [view, setView] = useState<boolean>(false)
@@ -60,25 +60,15 @@ export default function Gallery() {
       .then((res) => res.json())
       .then((videos: VideoMongoDBWithUrl[]) => {
         setLoading(false)
-        return videos.map((video: VideoMongoDBWithUrl, index: number) => ({
-          url: video.url,
-          index: video.id,
-          date: "",
-          game: video.game,
-          filteredGame: "",
-          filename: "",
-        }))
-      })
-      .then((videos) => {
-        const shuffledVideos = shuffle(videos) as VideoType[]
-        setVideos(shuffledVideos)
+        const newVideos = shuffled ? shuffle(videos) : videos
+        setVideos(newVideos)
       })
       .catch((err) => {
         setLoading(false)
         setFetchError(true)
         console.error(err)
       })
-  }, [filter])
+  }, [filter, shuffled])
 
   useEffect(() => {
     if (limitedAccess) {
@@ -146,8 +136,8 @@ export default function Gallery() {
           {videos.length > 0
             ? videos
                 .slice(0, clipsShown)
-                .map((video: VideoType, videoIdx: number) => (
-                  <VideoPlayer video={video} autoplay={autoplay} muted={muted} key={`video-gallery-${video.index}`} />
+                .map((video: VideoMongoDBWithUrl, videoIdx: number) => (
+                  <VideoPlayer video={video} autoplay={autoplay} muted={muted} key={`video-gallery-${video.id}`} />
                 ))
             : Array(clipsShown)
                 .fill(null)

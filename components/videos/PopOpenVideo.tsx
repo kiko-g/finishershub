@@ -1,11 +1,11 @@
 import React, { useEffect } from "react"
 import Link from "next/link"
-import type { VideoType } from "../../@types"
 import { getButtonSizeClassNames, getVideoUrlFromVideo } from "../../utils"
 import { ArrowTopRightOnSquareIcon } from "@heroicons/react/24/outline"
+import type { VideoMongoDBWithUrl } from "../../@types"
 
 type Props = {
-  video: VideoType
+  video: VideoMongoDBWithUrl | null
   size?: "sm" | "md" | "lg" | "xl"
 }
 
@@ -32,7 +32,7 @@ export function PopOpenVideo({ video, size = "sm" }: Props) {
     setUrl(videoUrl)
   }, [video])
 
-  return url === "" ? null : (
+  return video === null ? null : (
     <Link href={url} target="_blank" title="Open video in new tab (or press P)" className="transition hover:opacity-80">
       <ArrowTopRightOnSquareIcon fillRule="evenodd" strokeWidth="1.5" className={getButtonSizeClassNames(size)} />
     </Link>

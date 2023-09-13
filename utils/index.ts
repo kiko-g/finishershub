@@ -1,5 +1,5 @@
 import classNames from "classnames"
-import type { VideoType } from "../@types"
+import type { VideoMongoDBWithUrl } from "../@types"
 
 export function getButtonSizeClassNames(size: "sm" | "md" | "lg" | "xl") {
   return classNames(
@@ -67,9 +67,11 @@ export function strIncludes(str: string, query: string, strict?: boolean) {
         .includes(query.toLowerCase().replace(/\s+/g, ""))
 }
 
-export function getVideoUrlFromVideo(video: VideoType, offset?: number) {
-  const url = typeof window !== "undefined" ? window.location.origin : ""
-  const index = offset ? video.index + offset : video.index
+export function getVideoUrlFromVideo(video: VideoMongoDBWithUrl, offset?: number, forceUseProduction?: boolean) {
+  const productionBaseUrl = "https://finishershub.vercel.app/"
+  const windowUrl = typeof window !== "undefined" ? window.location.origin : ""
+  const url = forceUseProduction ? productionBaseUrl : windowUrl
+  const index = offset ? video.id + offset : video.id
 
   return `${url}/video/${index}`
 }

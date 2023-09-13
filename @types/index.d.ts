@@ -51,16 +51,7 @@ export type CatalogueItem = {
   video: string
 }
 
-export type VideoType = {
-  index: number
-  url: string
-  date: string
-  game: "mw2019" | "mw2022"
-  filteredGame: "mw2019" | "mw2022" | ""
-  filename?: string
-}
-
-export type VideoTypeAPI = {
+export type VideoFromS3 = {
   url: string
   date: string
   game: "mw2019" | "mw2022"
@@ -69,7 +60,7 @@ export type VideoTypeAPI = {
 
 export type VideoAPIAndIndex = {
   index: number
-  video: VideoTypeAPI
+  video: VideoFromS3
 }
 
 export type FilterByGameType =
@@ -77,7 +68,7 @@ export type FilterByGameType =
   | { name: "Warzone 1"; value: "mw2019" }
   | { name: "Warzone 2"; value: "mw2022" }
 
-export interface VideoMongoDB {
+export interface VideoMongoDBWithUrl {
   _id: string
   id: number
   authors: string[]
@@ -88,13 +79,5 @@ export interface VideoMongoDB {
   game: string
   bucket: string
   s3_uri: string
-}
-
-export interface VideoMongoDBWithUrl extends VideoMongoDB {
   url: string
-}
-
-export type Author = {
-  id: number
-  name: string
 }

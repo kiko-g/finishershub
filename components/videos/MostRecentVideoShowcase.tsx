@@ -1,17 +1,17 @@
 import React from "react"
-import type { VideoMongoDBWithUrl, VideoType } from "../../@types"
+import type { VideoMongoDBWithUrl } from "../../@types"
 import { VideoSkeleton, VideoNotFound, ShareVideo, PopOpenVideo } from "."
 
 export function MostRecentVideoShowcase() {
   const [loading, setLoading] = React.useState(true)
-  const [error, setError] = React.useState(false)
-  const [video, setVideo] = React.useState<VideoType | null>(null)
+  const [fetchError, setFetchError] = React.useState(false)
+  const [video, setVideo] = React.useState<VideoMongoDBWithUrl | null>(null)
 
   React.useEffect(() => {
     fetch(`/api/mongo/videos/urls/last`)
       .then((res) => {
         if (res.status === 404) {
-          setError(true)
+          setFetchError(true)
           return null
         } else {
           return res.json()
@@ -19,20 +19,13 @@ export function MostRecentVideoShowcase() {
       })
       .then((video: VideoMongoDBWithUrl) => {
         setLoading(false)
-        setVideo({
-          url: video.url,
-          index: video.id,
-          date: "",
-          game: video.game as VideoType["game"],
-          filteredGame: "",
-          filename: "",
-        })
+        setVideo(video)
       })
   }, [])
 
   if (loading) return <VideoSkeleton />
 
-  if (error || video === null) return <VideoNotFound />
+  if (fetchError || video === null) return <VideoNotFound />
 
   return (
     <div className="group relative">
