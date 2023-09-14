@@ -47,6 +47,7 @@ export default function Videos({}: Props) {
     fetchError,
     setFetchError,
     isContentReady,
+    soundAvailable,
   } = useContentInteraction()
 
   const {
@@ -185,7 +186,7 @@ export default function Videos({}: Props) {
                 <VideoPlayer
                   video={video}
                   autoplay={autoplay}
-                  muted={muted}
+                  muted={soundAvailable ? true : muted}
                   special={true}
                   key={`video-element-${video.id}`}
                 />
@@ -252,7 +253,7 @@ export default function Videos({}: Props) {
                     limitedAccess={accessDenied}
                     video={video}
                     autoplay={autoplay}
-                    muted={muted}
+                    muted={soundAvailable ? true : muted}
                     key={`video-element-${video.id}`}
                   />
                 )}

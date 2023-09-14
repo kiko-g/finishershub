@@ -17,6 +17,7 @@ import {
   DelayDisclaimer,
 } from "../components/videos"
 import { PlusIcon } from "@heroicons/react/24/solid"
+import { useSoundAvailable } from "../hooks/useSoundAvailable"
 
 export default function Gallery() {
   const isMobile = useMediaQuery("(max-width: 768px)")
@@ -26,12 +27,13 @@ export default function Gallery() {
     { name: "Warzone 2", value: "mw2022" },
   ]
 
+  const [accessDenied, setAccessDenied] = useAccessDenied()
+  const [soundAvailable] = useSoundAvailable()
+
   const [loading, setLoading] = useState<boolean>(true)
   const [fetchError, setFetchError] = useState<boolean>(false)
-
   const [videos, setVideos] = useState<VideoMongoDBWithUrl[]>([])
   const [filter, setFilter] = useState<FilterByGameType>(arenas[0]) // use all
-  const [accessDenied, setAccessDenied] = useAccessDenied()
   const [view, setView] = useState<boolean>(false)
   const [muted, setMuted] = useState<boolean>(true)
   const [autoplay, setAutoplay] = useState<boolean>(false)
@@ -137,7 +139,12 @@ export default function Gallery() {
             ? videos
                 .slice(0, clipsShown)
                 .map((video: VideoMongoDBWithUrl, videoIdx: number) => (
-                  <VideoPlayer video={video} autoplay={autoplay} muted={muted} key={`video-gallery-${video.id}`} />
+                  <VideoPlayer
+                    video={video}
+                    autoplay={autoplay}
+                    muted={soundAvailable ? true : muted}
+                    key={`video-gallery-${video.id}`}
+                  />
                 ))
             : Array(clipsShown)
                 .fill(null)

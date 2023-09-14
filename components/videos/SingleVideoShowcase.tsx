@@ -16,26 +16,33 @@ import {
 } from "@heroicons/react/24/outline"
 import classNames from "classnames"
 import { FocusViewToggler, MuteToggler, ShareVideo } from "./"
+import { useSoundAvailable } from "../../hooks/useSoundAvailable"
 
 type Props = {
   video: VideoMongoDBWithUrl
   expandedViewHook: [boolean, React.Dispatch<React.SetStateAction<boolean>>]
 }
 
-export function SingleVideoShowcase({ video, expandedViewHook }: Props) {
+export function SingleVideoShowcase({ video }: Props) {
   const next = getVideoUrlFromVideo(video, 1)
   const previous = getVideoUrlFromVideo(video, -1)
 
   const buttonControlsRef = React.useRef<HTMLDivElement | null>(null)
+  const [soundAvailable] = useSoundAvailable()
+
   const [muted, setMuted] = React.useState(true)
   const [autoplay, setAutoplay] = React.useState(true)
   const [accessDenied, setAccessDenied] = useAccessDenied()
-  const [expandedView, setExpandedView] = expandedViewHook
 
-  return expandedView ? (
+  return (
     <section className="flex flex-col gap-y-4 md:gap-y-3">
       <div className="relative">
-        <VideoPlayer video={video} muted={muted} autoplay={autoplay} key={`single-video-${video.url}`} />
+        <VideoPlayer
+          video={video}
+          muted={soundAvailable ? true : muted}
+          autoplay={autoplay}
+          key={`single-video-${video.url}`}
+        />
       </div>
 
       <div className="flex flex-wrap items-center justify-center gap-2 md:justify-between">
@@ -57,14 +64,6 @@ export function SingleVideoShowcase({ video, expandedViewHook }: Props) {
           >
             Next
           </Link>
-
-          <button
-            onClick={() => setExpandedView((prev) => !prev)}
-            title="Toggle expanded view"
-            className="self-stretch rounded bg-blue-500 px-4 py-2 text-sm uppercase text-white transition hover:opacity-80"
-          >
-            <ArrowsPointingOutIcon className="h-4 w-4" />
-          </button>
         </div>
 
         <div className="flex items-center gap-2">
@@ -75,32 +74,17 @@ export function SingleVideoShowcase({ video, expandedViewHook }: Props) {
             {video.game}
           </div>
           {/* <div
-            title="Upload Date"
-            className="self-stretch rounded border border-violet-500 bg-violet-500/50 px-4 py-2 text-sm text-white"
-          >
-            {new Date(video.date).toLocaleDateString("en-US", {
-              day: "numeric",
-              month: "long",
-              year: "numeric",
-            })}
-          </div> */}
+        title="Upload Date"
+        className="self-stretch rounded border border-violet-500 bg-violet-500/50 px-4 py-2 text-sm text-white"
+      >
+        {new Date(video.date).toLocaleDateString("en-US", {
+          day: "numeric",
+          month: "long",
+          year: "numeric",
+        })}
+      </div> */}
         </div>
       </div>
     </section>
-  ) : (
-    <main className="group relative h-screen">
-      <div
-        ref={buttonControlsRef}
-        className="absolute bottom-0 right-2 top-auto z-50 flex flex-row flex-wrap items-center gap-2 self-end bg-white p-3 text-gray-800 opacity-50 transition-opacity duration-[2000] hover:opacity-100 dark:bg-slate-800 dark:text-white lg:bottom-auto lg:top-0 lg:max-w-full lg:flex-col lg:p-4"
-      >
-        <FocusViewToggler hook={[expandedView, setExpandedView]} size="md" />
-        <MuteToggler hook={[muted, setMuted]} size="md" limitedAccess={accessDenied} />
-        <ShareVideo video={video} size="md" />
-      </div>
-
-      <div className="relative w-full">
-        <VideoPlayer video={video} autoplay={autoplay} muted={muted} special={true} key={`video-element-${video.id}`} />
-      </div>
-    </main>
   )
 }

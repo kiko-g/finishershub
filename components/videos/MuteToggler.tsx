@@ -1,5 +1,6 @@
 import React, { Dispatch, SetStateAction, useCallback, useEffect } from "react"
 import { getButtonSizeClassNames } from "../../utils"
+import { useSoundAvailable } from "../../hooks/useSoundAvailable"
 
 type Props = {
   hook: [boolean, Dispatch<SetStateAction<boolean>>]
@@ -9,6 +10,7 @@ type Props = {
 
 export function MuteToggler({ hook, size = "sm", limitedAccess = true }: Props) {
   const [mute, setMuted] = hook
+  const [soundAvailable] = useSoundAvailable()
 
   const toggleMute = useCallback(() => {
     setMuted((prev) => !prev)
@@ -23,6 +25,8 @@ export function MuteToggler({ hook, size = "sm", limitedAccess = true }: Props) 
       window.removeEventListener("keydown", handleKeyDown)
     }
   }, [toggleMute])
+
+  if (!soundAvailable) return null
 
   return (
     <div className="flex items-end justify-center space-x-2">

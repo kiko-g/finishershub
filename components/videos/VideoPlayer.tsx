@@ -5,6 +5,7 @@ import { ShareVideo, PopOpenVideo, VideoSkeleton } from "./"
 import { PauseIcon, PlayIcon } from "@heroicons/react/24/solid"
 import { getButtonSizeClassNames } from "../../utils"
 import { FocusViewToggler } from "./FocusViewToggler"
+import { useSoundAvailable } from "../../hooks/useSoundAvailable"
 
 type Props = {
   video: VideoMongoDBWithUrl
@@ -29,6 +30,7 @@ export function VideoPlayer(props: Props) {
 
   const videoRef = useRef<HTMLVideoElement>(null)
   const progressBarRef = useRef<HTMLDivElement>(null)
+  const [soundAvailable] = useSoundAvailable()
 
   const [mute, setMute] = useState(muted)
   const [playing, setPlaying] = useState(false)
@@ -94,7 +96,7 @@ export function VideoPlayer(props: Props) {
           ref={videoRef}
           loop
           controls={false}
-          muted={mute || muted}
+          muted={soundAvailable ? mute : true}
           autoPlay={autoplay}
           preload="auto"
           onClick={togglePlay}
@@ -122,7 +124,7 @@ export function VideoPlayer(props: Props) {
             <div className="absolute bottom-0 right-0 z-30 hidden font-normal text-white transition group-hover:flex group-hover:gap-2">
               <div className="flex flex-col items-center gap-2 rounded-br rounded-tl bg-black/50 px-2 py-2 lg:gap-2 lg:px-3 lg:py-3">
                 <FocusViewToggler hook={[expanded, setExpanded]} size="sm" />
-                {/* <ToggleMuteVideo hook={[mute, setMute]} disabled={limitedAccess} size="sm" /> */}
+                <ToggleMuteVideo hook={[mute, setMute]} disabled={limitedAccess} size="sm" />
                 <PlayPauseVideo
                   size="sm"
                   playing={playing}
@@ -196,6 +198,7 @@ type ToggleMuteVideoProps = {
 
 function ToggleMuteVideo({ hook, disabled = true, size = "sm" }: ToggleMuteVideoProps) {
   const [mute, setMute] = hook
+  const [soundAvailable] = useSoundAvailable()
 
   function handleMute() {
     setMute(true)
@@ -204,6 +207,8 @@ function ToggleMuteVideo({ hook, disabled = true, size = "sm" }: ToggleMuteVideo
   function handleUnmute() {
     setMute(false)
   }
+
+  if (!soundAvailable) return null
 
   return mute ? (
     <button

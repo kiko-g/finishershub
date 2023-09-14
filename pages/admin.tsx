@@ -5,13 +5,8 @@ import type { VideoMongoDBWithUrl } from "../@types"
 import { AccessModalCTA, Layout, FullAccessBadge, LimitedAccessBadge } from "../components/layout"
 import { useMediaQuery } from "usehooks-ts"
 import { VideoNotFound, VideoSkeleton } from "../components/videos"
-import {
-  ArrowPathIcon,
-  ArrowTopRightOnSquareIcon,
-  CheckCircleIcon,
-  CheckIcon,
-  ChevronUpDownIcon,
-} from "@heroicons/react/24/outline"
+import { ArrowPathIcon, ArrowTopRightOnSquareIcon, CheckIcon, ChevronUpDownIcon } from "@heroicons/react/24/outline"
+import { CheckCircleIcon } from "@heroicons/react/24/solid"
 import { Listbox, Transition } from "@headlessui/react"
 import { authors, games, getLocations, getMaps, tags } from "../utils/data"
 
@@ -27,24 +22,18 @@ export default function Videos({}: Props) {
   const itemsPerPage = 50
   const [currentPage, setCurrentPage] = useState(1)
 
-  const displayedData = useMemo(() => {
-    const start = (currentPage - 1) * itemsPerPage
-    const end = start + itemsPerPage
-    return data.sort((a, b) => (a.id > b.id ? 1 : -1))
-    //.slice(start, end)
-  }, [data, currentPage])
-
   const ready = useMemo(() => !loading && !fetchError, [loading, fetchError])
   const leftDisabled = useMemo(() => currentPage === 1, [currentPage])
   const rightDisabled = useMemo(() => currentPage * itemsPerPage >= data.length, [currentPage, data.length])
 
   async function replaceRow(row: VideoMongoDBWithUrl, rowIndex: number) {
-    const newData = [...data]
-    newData[rowIndex] = row
-    setData(newData)
-
     try {
       const updatedVideo = await updateVideo(row)
+      setData((prev) => {
+        const newData = [...prev]
+        newData[rowIndex] = row
+        return newData
+      })
     } catch (error) {
       const errorMessage = error instanceof Error ? error.message : null
       console.error("Error updating video:", errorMessage)
@@ -83,9 +72,18 @@ export default function Videos({}: Props) {
       })
   }, [])
 
+  const ids = data.map((item) => item.id)
+  const uniqueIds = new Set(ids)
+
+  if (ids.length !== uniqueIds.size) {
+    console.log("BAD")
+  } else {
+    console.log("GOOD")
+  }
+
   return (
     <Layout location="Admin">
-      <div className="mb-16 min-w-full overflow-scroll">
+      <div className="flex min-w-full flex-col overflow-scroll">
         <div className="mb-3 text-lg font-normal">
           <div className="flex flex-wrap items-center justify-start gap-x-3 gap-y-1">
             <h2 className="whitespace-nowrap text-4xl font-bold tracking-tight sm:text-5xl">Admin</h2>
@@ -114,7 +112,7 @@ export default function Videos({}: Props) {
             {fetchError && <VideoNotFound />}
             {ready ? (
               <>
-                <table className="min-w-full divide-y divide-gray-200 border border-gray-200 text-xs font-normal dark:divide-gray-700 dark:border-gray-700">
+                <table className="min-w-full max-w-full divide-y divide-gray-200 overflow-x-scroll border border-gray-200 text-xs font-normal dark:divide-gray-700 dark:border-gray-700">
                   <thead>
                     <tr>
                       <th className="bg-gray-700 px-2 py-2 text-left text-xs font-medium uppercase tracking-wider text-gray-100 dark:bg-gray-800 dark:text-gray-300 lg:px-3 lg:py-3">
@@ -148,20 +146,22 @@ export default function Videos({}: Props) {
                   </thead>
 
                   <tbody className="divide-y divide-transparent bg-white dark:divide-transparent dark:bg-transparent">
-                    {displayedData.map((video, videoIdx) => (
-                      <TableRow
-                        video={video}
-                        rowIndex={videoIdx}
-                        replaceRowAction={replaceRow}
-                        key={`admin-video-${video.id}-${video._id}`}
-                      />
-                    ))}
+                    {data
+                      .sort((a, b) => (a.id > b.id ? 1 : -1))
+                      .map((video, videoIdx) => (
+                        <TableRow
+                          video={video}
+                          rowIndex={videoIdx}
+                          replaceRowAction={replaceRow}
+                          key={`video-${video.id}`}
+                        />
+                      ))}
                   </tbody>
                 </table>
 
                 <nav
                   aria-label="Pagination"
-                  className="mt-4 flex items-center justify-between bg-white px-4 py-3 text-sm font-normal text-gray-800 dark:bg-gray-800 dark:text-white sm:px-6"
+                  className="mb-72 mt-4 flex min-w-full flex-1 items-center justify-between self-stretch bg-white px-4 py-3 text-sm font-normal text-gray-800 dark:bg-gray-800 dark:text-white sm:px-6"
                 >
                   <div className="hidden sm:block">
                     <p>
@@ -551,7 +551,7 @@ function PickAuthors({
       {({ open }) => (
         <div className={classNames("relative", className)}>
           <Listbox.Button className="inline-flex w-full items-center justify-between gap-x-2 bg-black/50 py-1.5 pl-2 pr-1.5 text-center text-xs text-white transition hover:opacity-80 disabled:cursor-not-allowed disabled:opacity-50 dark:bg-white/20 lg:py-1 lg:pl-2 lg:pr-1 lg:text-sm">
-            <span className="truncate font-normal tracking-tighter">{picked.join(", ")}</span>
+            <span className="max-w-[12rem] truncate font-normal tracking-tighter">{picked.join(", ")}</span>
             <ChevronUpDownIcon className="h-4 w-4 lg:h-5 lg:w-5" aria-hidden="true" />
           </Listbox.Button>
 
@@ -627,7 +627,7 @@ function PickTags({
       {({ open }) => (
         <div className={classNames("relative", className)}>
           <Listbox.Button className="inline-flex w-full items-center justify-between gap-x-2 bg-black/50 py-1.5 pl-2 pr-1.5 text-center text-xs text-white transition hover:opacity-80 disabled:cursor-not-allowed disabled:opacity-50 dark:bg-white/20 lg:py-1 lg:pl-2 lg:pr-1 lg:text-sm">
-            <span className="truncate font-normal tracking-tighter">{picked.join(", ")}</span>
+            <span className="max-w-[12rem] truncate font-normal tracking-tighter">{picked.join(", ")}</span>
             <ChevronUpDownIcon className="h-4 w-4 lg:h-5 lg:w-5" aria-hidden="true" />
           </Listbox.Button>
 

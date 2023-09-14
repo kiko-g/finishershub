@@ -15,10 +15,11 @@ import {
   VideoSkeleton,
   DelayDisclaimer,
 } from "../../components/videos"
+import { useSoundAvailable } from "../../hooks/useSoundAvailable"
 
 export default function IndexPage() {
   const isMobile = useMediaQuery("(max-width: 768px)")
-  const sensitive = process.env.NEXT_PUBLIC_SENSITIVE! === "false" ? false : true
+  const [soundAvailable] = useSoundAvailable()
 
   const [loading, setLoading] = useState<boolean>(true)
   const [fetchError, setFetchError] = useState<boolean>(false)
@@ -33,7 +34,7 @@ export default function IndexPage() {
   const [clipsShown, setClipsShown] = useState<number>(isMobile ? 1 : view ? 2 : 3)
   const [showMoreCount, setShowMoreCount] = useState<number>(0)
 
-  const limitedAccess = useMemo(() => sensitive && accessDenied, [sensitive, accessDenied])
+  const limitedAccess = useMemo(() => !soundAvailable && accessDenied, [soundAvailable, accessDenied])
   const toastType = useMemo(() => {
     if (fetchError) return "error"
     else if (loading) return "warning"
@@ -130,7 +131,7 @@ export default function IndexPage() {
                 const play = isMobile ? (videoIdx <= showMoreCount ? true : autoplay) : videoIdx === 0 ? true : autoplay
                 return (
                   <TwitchVideoClip
-                    muted={muted}
+                    muted={limitedAccess ? true : muted}
                     video={video}
                     parent={hostname}
                     key={`video-${videoIdx}`}

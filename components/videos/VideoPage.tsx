@@ -37,7 +37,7 @@ export function VideoPage({ videoIndex }: Props) {
       })
   }, [videoIndex])
 
-  return normalView ? (
+  return (
     <div className="flex min-h-screen flex-col bg-light dark:bg-navy">
       <Seo title={`Video ${videoIndex}`} />
       <Header siteTitle="Finishers Hub" location="Video" />
@@ -54,12 +54,5 @@ export function VideoPage({ videoIndex }: Props) {
       </div>
       <Footer siteTitle="Finishers Hub" />
     </div>
-  ) : (
-    ready && video !== null && (
-      <>
-        <Seo title={`Video ${videoIndex}`} />
-        <SingleVideoShowcase video={video} expandedViewHook={[normalView, setNormalView]} />
-      </>
-    )
   )
 }

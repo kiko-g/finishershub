@@ -6,15 +6,15 @@ import { Layout } from "../../components/layout/Layout"
 export default function Video() {
   const [videoIndex, setVideoIndex] = useState<number | null>(null)
   const router = useRouter()
-  const { vid } = router.query
+  const { id } = router.query
 
   useEffect(() => {
     if (!router.isReady) return
 
-    const parsedIndex = parseInt(vid as string, 10)
+    const parsedIndex = parseInt(id as string, 10)
     if (!isNaN(parsedIndex)) setVideoIndex(parsedIndex)
     else setVideoIndex(-1)
-  }, [vid, router.isReady])
+  }, [id, router.isReady])
 
   return (
     router.isReady &&

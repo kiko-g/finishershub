@@ -12,9 +12,10 @@ import {
   DelayDisclaimer,
 } from "../../components/videos"
 import { ArrowLongLeftIcon, ArrowLongRightIcon } from "@heroicons/react/24/outline"
+import { useSoundAvailable } from "../../hooks/useSoundAvailable"
 
 export default function CasinoPage() {
-  const sensitive = process.env.NEXT_PUBLIC_SENSITIVE === "false" ? false : true
+  const [soundAvailable] = useSoundAvailable()
 
   const [loading, setLoading] = useState<boolean>(true)
   const [fetchError, setFetchError] = useState<boolean>(false)
@@ -27,7 +28,7 @@ export default function CasinoPage() {
   const [autoplay, setAutoplay] = useState<boolean>(true)
   const [shuffled, setShuffled] = useState<boolean>(true)
 
-  const limitedAccess = useMemo(() => sensitive && accessDenied, [sensitive, accessDenied])
+  const limitedAccess = useMemo(() => !soundAvailable && accessDenied, [soundAvailable, accessDenied])
   const toastType = useMemo(() => {
     if (fetchError) return "error"
     else if (loading) return "warning"
@@ -113,7 +114,7 @@ export default function CasinoPage() {
             <div className="relative w-full">
               {limitedAccess ? <InvisbleTopLayer /> : null}
               <TwitchVideoClip
-                muted={muted}
+                muted={soundAvailable ? true : muted}
                 video={videos[index]}
                 parent={hostname}
                 autoplay={index === 0 ? true : autoplay}

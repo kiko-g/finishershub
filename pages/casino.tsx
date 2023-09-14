@@ -25,6 +25,7 @@ import {
   VideoPlayer,
   VideoSkeleton,
 } from "../components/videos"
+import { useSoundAvailable } from "../hooks/useSoundAvailable"
 
 export default function Casino() {
   const buttonControlsRef = useRef<HTMLDivElement | null>(null)
@@ -35,13 +36,16 @@ export default function Casino() {
   ]
 
   const isMobile = useMediaQuery("(max-width: 768px)")
+  const [accessDenied, setAccessDenied] = useAccessDenied()
+  const [soundAvailable] = useSoundAvailable()
+
   const [loading, setLoading] = useState<boolean>(true)
   const [fetchError, setFetchError] = useState<boolean>(false)
   const [expandedView, setExpandedView] = useState<boolean>(false)
+
   const [index, setIndex] = useState<number>(0)
   const [videos, setVideos] = useState<VideoMongoDBWithUrl[]>([])
   const [filter, setFilter] = useState<FilterByGameType>(arenas[arenas.length - 1])
-  const [accessDenied, setAccessDenied] = useAccessDenied()
   const [muted, setMuted] = useState<boolean>(true)
   const [autoplay, setAutoplay] = useState<boolean>(true)
   const [shuffled, setShuffled] = useState<boolean>(true)
@@ -193,7 +197,12 @@ export default function Casino() {
           {/* Video */}
           <div className="relative w-full" {...handlers}>
             {ready ? (
-              <VideoPlayer video={video} autoplay={autoplay} muted={muted} key={`video-element-${video.id}`} />
+              <VideoPlayer
+                video={video}
+                autoplay={autoplay}
+                muted={soundAvailable ? true : muted}
+                key={`video-element-${video.id}`}
+              />
             ) : (
               <VideoSkeleton />
             )}
