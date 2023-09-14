@@ -109,7 +109,7 @@ export default function Videos({}: Props) {
         ) : (
           <>
             {loading && <VideoSkeleton />}
-            {fetchError && <VideoNotFound />}
+            {fetchError && <VideoNotFound message="Admin content failed loading" />}
             {ready ? (
               <>
                 <table className="min-w-full max-w-full divide-y divide-gray-200 overflow-x-scroll border border-gray-200 text-xs font-normal dark:divide-gray-700 dark:border-gray-700">

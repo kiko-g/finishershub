@@ -5,7 +5,7 @@ import classNames from "classnames"
 import { getButtonSizeClassNames } from "../../utils"
 
 type Props = {
-  size?: "sm" | "md" | "lg" | "xl"
+  size?: "xs" | "sm" | "md" | "lg" | "xl"
 }
 
 export function DeleteCookiesButton({ size = "sm" }: Props) {
@@ -28,7 +28,7 @@ export function DeleteCookiesButton({ size = "sm" }: Props) {
         <FireIcon
           className={classNames(
             getButtonSizeClassNames(size),
-            "fill-white text-orange-500 dark:fill-orange-500/20 dark:text-orange-500",
+            "fill-transparent text-orange-500 dark:fill-orange-500/10 dark:text-orange-500",
           )}
         />
       </button>

@@ -53,10 +53,7 @@ export function UsageDisclaimer({ type }: Props) {
           ) : type === "error" ? (
             <span>There has been an error in fetching clips. Please reload your page and try again.</span>
           ) : type === "warning" ? (
-            <span>
-              Fetching clips... Loading stage takes some time if you haven&apos;t been on the website recently or if the
-              results are not cached.
-            </span>
+            <span>Fetching clips... If it takes too long, please reload your page and try</span>
           ) : (
             <span>
               Tap the right arrow to get a <strong>new random highlight</strong> and use the left one to{" "}

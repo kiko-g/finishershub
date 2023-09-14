@@ -8,7 +8,7 @@ import { getButtonSizeClassNames } from "../../utils"
 type Props = {
   lockedHook: [boolean, Dispatch<SetStateAction<boolean>>]
   startOpen?: boolean
-  size?: "sm" | "md" | "lg" | "xl"
+  size?: "xs" | "sm" | "md" | "lg" | "xl"
 }
 
 export function AccessModal({ lockedHook, startOpen, size = "sm" }: Props) {

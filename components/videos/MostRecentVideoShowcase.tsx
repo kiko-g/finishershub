@@ -25,7 +25,7 @@ export function MostRecentVideoShowcase() {
 
   if (loading) return <VideoSkeleton />
 
-  if (fetchError || video === null) return <VideoNotFound />
+  if (fetchError || video === null) return <VideoNotFound reloadPage />
 
   return (
     <div className="group relative">

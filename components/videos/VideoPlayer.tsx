@@ -123,8 +123,6 @@ export function VideoPlayer(props: Props) {
 
             <div className="absolute bottom-0 right-0 z-30 hidden font-normal text-white transition group-hover:flex group-hover:gap-2">
               <div className="flex flex-col items-center gap-2 rounded-br rounded-tl bg-black/50 px-2 py-2 lg:gap-2 lg:px-3 lg:py-3">
-                <FocusViewToggler hook={[expanded, setExpanded]} size="sm" />
-                <ToggleMuteVideo hook={[mute, setMute]} disabled={limitedAccess} size="sm" />
                 <PlayPauseVideo
                   size="sm"
                   playing={playing}
@@ -132,6 +130,8 @@ export function VideoPlayer(props: Props) {
                   handlePlay={handlePlay}
                   handlePause={handlePause}
                 />
+                <ToggleMuteVideo hook={[mute, setMute]} disabled={limitedAccess} size="sm" />
+                <FocusViewToggler hook={[expanded, setExpanded]} size="sm" />
               </div>
             </div>
           </>
@@ -167,7 +167,7 @@ type PlayPauseVideoProps = {
   togglePlay?: () => void
   handlePlay?: () => void
   handlePause?: () => void
-  size?: "sm" | "md" | "lg" | "xl"
+  size?: "xs" | "sm" | "md" | "lg" | "xl"
 }
 
 function PlayPauseVideo({ playing, togglePlay, handlePlay, handlePause, size = "sm" }: PlayPauseVideoProps) {
@@ -193,7 +193,7 @@ function PlayPauseVideo({ playing, togglePlay, handlePlay, handlePause, size = "
 type ToggleMuteVideoProps = {
   hook: [boolean, Dispatch<SetStateAction<boolean>>]
   disabled?: boolean
-  size?: "sm" | "md" | "lg" | "xl"
+  size?: "xs" | "sm" | "md" | "lg" | "xl"
 }
 
 function ToggleMuteVideo({ hook, disabled = true, size = "sm" }: ToggleMuteVideoProps) {

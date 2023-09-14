@@ -5,7 +5,7 @@ import { ChevronDoubleLeftIcon } from "@heroicons/react/24/outline"
 type Props = {
   prevVideo: () => void
   disabled: boolean
-  size?: "sm" | "md" | "lg" | "xl"
+  size?: "xs" | "sm" | "md" | "lg" | "xl"
 }
 
 export function PreviousVideo({ prevVideo, disabled, size = "sm" }: Props) {

@@ -15,7 +15,7 @@ import {
   SpeakerXMarkIcon,
 } from "@heroicons/react/24/outline"
 import classNames from "classnames"
-import { FocusViewToggler, MuteToggler, ShareVideo } from "./"
+import { FocusViewToggler, AutomuteToggler, ShareVideo } from "./"
 import { useSoundAvailable } from "../../hooks/useSoundAvailable"
 
 type Props = {

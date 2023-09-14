@@ -8,7 +8,7 @@ import { FullAccessBadge, LimitedAccessBadge, Layout, AccessModal } from "../com
 import {
   ViewToggler,
   AutoplayToggler,
-  MuteToggler,
+  AutomuteToggler,
   ReshuffleButton,
   DeleteCookiesButton,
   FilterVideosByGame,
@@ -117,7 +117,7 @@ export default function Gallery() {
               <DeleteCookiesButton />
               <ReshuffleButton hook={[shuffled, setShuffled]} shuffle={shuffleVideos} />
               <AutoplayToggler hook={[autoplay, setAutoplay]} />
-              <MuteToggler hook={[muted, setMuted]} limitedAccess={limitedAccess} />
+              <AutomuteToggler hook={[muted, setMuted]} limitedAccess={limitedAccess} />
               <ViewToggler hook={[view, setView]} />
             </div>
             <FilterVideosByGame arenas={arenas} pickedHook={[filter, setFilter]} className="w-full" />

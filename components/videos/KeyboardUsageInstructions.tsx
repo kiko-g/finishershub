@@ -12,13 +12,16 @@ export function KeyboardUsageInstructions({ showHook }: Props) {
   const keysMapping = [
     { key: "<", description: "Previous video" },
     { key: ">", description: "Next video" },
+    { key: "_", description: "Play/pause" },
     { key: "m", description: "Toggle mute" },
-    { key: "e", description: "Toggle expanded view" },
+    { key: "f", description: "Toggle expanded view" },
     { key: "c", description: "Copy video URL to clipboard" },
     { key: "p", description: "Pop open video in new tab" },
     { key: "i", description: "Toggle keyboard information" },
-    { key: "s", description: "Toggle shuffle" },
   ]
+
+  const isMobile = window.matchMedia("(max-width: 768px)").matches
+  if (isMobile) return null
 
   return (
     <>

@@ -46,7 +46,7 @@ export function VideoPage({ videoIndex }: Props) {
           {ready && video !== null ? (
             <SingleVideoShowcase video={video} expandedViewHook={[normalView, setNormalView]} />
           ) : fetchError ? (
-            <VideoNotFound />
+            <VideoNotFound reloadPage />
           ) : (
             <VideoSkeleton />
           )}

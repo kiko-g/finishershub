@@ -13,7 +13,7 @@ import {
   FocusViewToggler,
   KeyboardUsageButton,
   KeyboardUsageInstructions,
-  MuteToggler,
+  AutomuteToggler,
   NextVideo,
   PopOpenVideo,
   PreviousVideo,
@@ -58,25 +58,16 @@ export default function Casino() {
   const toastType = useMemo(() => {
     if (fetchError) return "error"
     else if (loading) return "warning"
-    else if (!loading && !fetchError) return "success"
+    else if (!loading && !fetchError) return "info"
     else return ""
   }, [loading, fetchError])
 
   const prevVideo = useCallback(() => setIndex((prev) => prev - 1), [])
   const nextVideo = useCallback(() => setIndex((prev) => prev + 1), [])
 
-  const shuffleVideos = () => {
+  function shuffleVideos() {
     setVideos((prev) => shuffle(prev))
   }
-
-  const handlers = useSwipeable({
-    onSwipedUp: () => prevVideo,
-    onSwiped: () => nextVideo,
-  })
-
-  useEffect(() => {
-    setExpandedView(isMobile)
-  }, [isMobile])
 
   useEffect(() => {
     fetch(`/api/mongo/videos/urls/game/${filter.value}`)
@@ -98,7 +89,6 @@ export default function Casino() {
     const handleKeyDown = (event: any) => {
       if (event.keyCode === 39) nextVideo() // right arrow
       if (event.keyCode === 37) prevVideo() // left arrow
-      if (event.keyCode === 69 && limitedAccess === false) setExpandedView((prev) => !prev) // e key
     }
 
     window.addEventListener("keydown", handleKeyDown)
@@ -107,60 +97,9 @@ export default function Casino() {
     }
   }, [nextVideo, prevVideo, limitedAccess])
 
-  useEffect(() => {
-    const timerA = setTimeout(() => {
-      if (buttonControlsRef.current) buttonControlsRef.current.classList.add("opacity-50")
-    }, 4000)
-
-    const timerB = setTimeout(() => {
-      if (buttonControlsRef.current) buttonControlsRef.current.classList.remove("opacity-50")
-      if (buttonControlsRef.current) buttonControlsRef.current.classList.add("opacity-0")
-    }, 8000)
-
-    return () => {
-      clearTimeout(timerA)
-      clearTimeout(timerB)
-    }
-  }, [])
-
-  return expandedView ? (
-    // focused view
-    <main className="group relative h-screen">
-      <div
-        ref={buttonControlsRef}
-        className="absolute bottom-0 right-0 top-auto z-50 flex flex-col items-center gap-2 self-end rounded-tl bg-gray-900/80 p-3 text-white opacity-10 transition-opacity duration-[2000] hover:opacity-100 lg:bottom-auto lg:top-0 lg:max-w-full lg:flex-col lg:p-4"
-      >
-        <FocusViewToggler hook={[expandedView, setExpandedView]} size="md" />
-        <AutoplayToggler hook={[autoplay, setAutoplay]} size="md" />
-        <MuteToggler hook={[muted, setMuted]} size="md" limitedAccess={limitedAccess} />
-        <ShareVideo video={video} size="md" />
-        <PopOpenVideo video={video} size="md" />
-        <PreviousVideo prevVideo={prevVideo} disabled={index === 0} size="md" />
-        <NextVideo nextVideo={nextVideo} disabled={index === videos.length - 1} size="md" />
-        <KeyboardUsageButton showHook={[showInstructions, setShowInstructions]} size="md" />
-      </div>
-
-      <KeyboardUsageInstructions showHook={[showInstructions, setShowInstructions]} />
-
-      <div className="relative w-full" {...handlers}>
-        {ready ? (
-          <VideoPlayer
-            video={video}
-            autoplay={autoplay}
-            muted={muted}
-            special={true}
-            key={`video-element-${video.id}`}
-          />
-        ) : (
-          <VideoSkeleton />
-        )}
-        {fetchError && <VideoNotFound />}
-      </div>
-    </main>
-  ) : (
-    // unfocused view
+  return (
     <Layout location="Casino">
-      <div className="mx-auto max-w-full lg:max-w-3xl">
+      <div className="mx-auto flex max-w-[52rem] flex-col space-y-2">
         <main className="flex flex-col gap-2.5">
           <div className="flex flex-col justify-between gap-y-2 lg:flex-row lg:gap-x-6">
             <div className="text-lg font-normal">
@@ -173,29 +112,23 @@ export default function Casino() {
                 part though.
               </p>
             </div>
+          </div>
 
-            <div className="flex flex-row flex-wrap items-center justify-center gap-2 lg:mt-0 lg:flex-col">
-              <div className="flex w-full items-center justify-end gap-x-2">
-                {limitedAccess ? (
-                  <AccessModal lockedHook={[accessDenied, setAccessDenied]} startOpen={false} />
-                ) : (
-                  <DeleteCookiesButton />
-                )}
+          <div className="flex w-full items-center justify-between gap-2">
+            <div className="flex items-center justify-center gap-x-2">
+              <ReshuffleButton hook={[shuffled, setShuffled]} shuffle={shuffleVideos} size="xs" />
+              <AutoplayToggler hook={[autoplay, setAutoplay]} size="xs" />
+              <AutomuteToggler hook={[muted, setMuted]} limitedAccess={limitedAccess} size="xs" />
+            </div>
 
-                <FocusViewToggler hook={[expandedView, setExpandedView]} />
-                <VideoOrderToggler hook={[shuffled, setShuffled]} />
-                <ReshuffleButton hook={[shuffled, setShuffled]} shuffle={shuffleVideos} />
-                <AutoplayToggler hook={[autoplay, setAutoplay]} />
-                <MuteToggler hook={[muted, setMuted]} limitedAccess={limitedAccess} />
-              </div>
+            <div className="flex items-center justify-center gap-x-2">
               <FilterVideosByGame arenas={arenas} pickedHook={[filter, setFilter]} className="w-full" />
             </div>
           </div>
 
           <UsageDisclaimer type={toastType} />
 
-          {/* Video */}
-          <div className="relative w-full" {...handlers}>
+          <div className="relative w-full">
             {ready ? (
               <VideoPlayer
                 video={video}

@@ -7,7 +7,7 @@ import {
   FocusViewToggler,
   KeyboardUsageButton,
   KeyboardUsageInstructions,
-  MuteToggler,
+  AutomuteToggler,
   NextVideo,
   PopOpenVideo,
   PreviousVideo,
@@ -69,9 +69,6 @@ export default function Videos({}: Props) {
   const [selectedTags, setSelectedTags] = useState<string[]>([])
   const [selectedAuthors, setSelectedAuthors] = useState<string[]>([])
 
-  const prevVideo = useCallback(() => setIndex((prev) => prev - 1), [])
-  const nextVideo = useCallback(() => setIndex((prev) => prev + 1), [])
-
   const filteredVideos = useMemo(() => {
     let result = videos
 
@@ -94,54 +91,26 @@ export default function Videos({}: Props) {
     return shuffled ? result.sort(() => Math.random() - 0.5) : result.sort((a, b) => a.id - b.id)
   }, [videos, selectedTags, selectedAuthors, selectedGame, shuffled])
 
-  const someVideosMatching = useMemo(
-    () => isContentReady && filteredVideos.length > 0,
-    [isContentReady, filteredVideos],
-  )
+  const video = useMemo(() => (filteredVideos.length > 0 ? filteredVideos[index] : null), [filteredVideos, index])
+
+  const prevVideo = useCallback(() => setIndex((prev) => prev - 1), [])
+  const nextVideo = useCallback(() => setIndex((prev) => prev + 1), [])
 
   useEffect(() => {
     setIndex(0)
   }, [filteredVideos])
 
-  const video = useMemo(() => (filteredVideos.length > 0 ? filteredVideos[index] : null), [filteredVideos, index])
-
-  const handlers = useSwipeable({
-    onSwipedUp: () => prevVideo,
-    onSwiped: () => nextVideo,
-  })
-
-  useEffect(() => {
-    setExpandedView(isMobile)
-  }, [isMobile, setExpandedView])
-
   useEffect(() => {
     const handleKeyDown = (event: any) => {
       if (event.keyCode === 39) nextVideo() // right arrow
       if (event.keyCode === 37) prevVideo() // left arrow
-      if (event.keyCode === 69 && accessDenied === false) setExpandedView((prev) => !prev) // e key
     }
 
     window.addEventListener("keydown", handleKeyDown)
     return () => {
       window.removeEventListener("keydown", handleKeyDown)
     }
-  }, [nextVideo, prevVideo, accessDenied, setExpandedView])
-
-  useEffect(() => {
-    const timerA = setTimeout(() => {
-      if (buttonControlsRef.current) buttonControlsRef.current.classList.add("opacity-50")
-    }, 4000)
-
-    const timerB = setTimeout(() => {
-      if (buttonControlsRef.current) buttonControlsRef.current.classList.remove("opacity-50")
-      if (buttonControlsRef.current) buttonControlsRef.current.classList.add("opacity-0")
-    }, 8000)
-
-    return () => {
-      clearTimeout(timerA)
-      clearTimeout(timerB)
-    }
-  }, [])
+  }, [nextVideo, prevVideo, accessDenied])
 
   useEffect(() => {
     fetch(`/api/mongo/videos/urls`)
@@ -158,82 +127,33 @@ export default function Videos({}: Props) {
       })
   }, [setFetchError, setIsLoading])
 
-  return expandedView ? (
-    <>
-      <Seo title="Videos" />
-      <main className="group relative h-screen">
-        {someVideosMatching ? (
-          <>
-            <div
-              ref={buttonControlsRef}
-              className="absolute bottom-0 right-0 top-auto z-50 flex flex-col items-center gap-3 self-end rounded-tl bg-gray-900/80 p-3 text-white opacity-10 transition-opacity duration-[2000] hover:opacity-100 lg:bottom-auto lg:top-0 lg:max-w-full lg:flex-col lg:gap-2 lg:p-4"
-            >
-              <FocusViewToggler hook={[expandedView, setExpandedView]} size="md" />
-              <VideoOrderToggler hook={[shuffled, setShuffled]} />
-              <AutoplayToggler hook={[autoplay, setAutoplay]} size="md" />
-              <MuteToggler hook={[muted, setMuted]} size="md" limitedAccess={accessDenied} />
-              <ShareVideo video={video} size="md" />
-              <PopOpenVideo video={video} size="md" />
-              <PreviousVideo prevVideo={prevVideo} disabled={index === 0} size="md" />
-              <NextVideo nextVideo={nextVideo} disabled={index === videos.length - 1} size="md" />
-              <KeyboardUsageButton showHook={[showInstructions, setShowInstructions]} size="md" />
-            </div>
-
-            <KeyboardUsageInstructions showHook={[showInstructions, setShowInstructions]} />
-
-            <div className="relative w-full" {...handlers}>
-              {isContentReady && video !== null ? (
-                <VideoPlayer
-                  video={video}
-                  autoplay={autoplay}
-                  muted={soundAvailable ? true : muted}
-                  special={true}
-                  key={`video-element-${video.id}`}
-                />
-              ) : (
-                <VideoSkeleton />
-              )}
-              {fetchError && <VideoNotFound />}
-            </div>
-          </>
-        ) : (
-          <VideoNotFound />
-        )}
-      </main>
-    </>
-  ) : (
+  return (
     <Layout location="Videos">
-      <div className="mx-auto flex max-w-3xl flex-col space-y-2">
+      <div className="mx-auto flex max-w-[52rem] flex-col space-y-2">
         <div className="text-lg font-normal">
           <div className="flex flex-wrap items-center justify-start gap-x-3 gap-y-1">
             <h2 className="whitespace-nowrap text-4xl font-bold tracking-tight sm:text-5xl">Videos</h2>
             {accessDenied ? <LimitedAccessBadge /> : <FullAccessBadge />}
           </div>
           <p className="mt-0.5 max-w-3xl text-sm">
-            This is your control panel. Filter as you see fit and relive some of our greatest moments.
+            Unlimited entertainment with a control panel for you to filter as you wish and relive some of our greatest
+            moments.
           </p>
         </div>
 
-        <main className="">
+        <main>
           {isLoading && <VideoSkeleton />}
-          {fetchError && <VideoNotFound />}
-
-          {isContentReady && someVideosMatching ? (
+          {fetchError && <VideoNotFound reloadPage />}
+          {isContentReady ? (
             <div className="flex flex-col space-y-2 font-normal">
               <div className="flex w-full items-center justify-between gap-4">
-                <div className="flex items-center justify-end gap-1">
-                  {accessDenied ? (
-                    <AccessModal lockedHook={[accessDenied, setAccessDenied]} startOpen={false} />
-                  ) : (
-                    <DeleteCookiesButton size="sm" />
-                  )}
-                  <KeyboardUsageButton showHook={[showInstructions, setShowInstructions]} size="sm" />
-                  <VideoOrderToggler hook={[shuffled, setShuffled]} />
-                  <AutoplayToggler hook={[autoplay, setAutoplay]} size="sm" />
-                  <MuteToggler hook={[muted, setMuted]} size="md" limitedAccess={accessDenied} />
+                <div className="flex items-center gap-1.5">
+                  <KeyboardUsageButton showHook={[showInstructions, setShowInstructions]} size="xs" />
+                  <AutoplayToggler hook={[autoplay, setAutoplay]} size="xs" />
+                  <AutomuteToggler hook={[muted, setMuted]} size="xs" limitedAccess={accessDenied} />
                 </div>
 
-                <div className="flex items-center justify-end gap-2">
+                <div className="flex items-center gap-1.5">
                   <PickTags tags={tags} hook={[selectedTags, setSelectedTags]} />
                   <PickAuthors authors={authors} hook={[selectedAuthors, setSelectedAuthors]} />
                   <FilterVideosByGame arenas={arenas} pickedHook={[selectedGame, setSelectedGame]} />
@@ -248,13 +168,26 @@ export default function Videos({}: Props) {
               </div>
 
               <div className="relative w-full">
-                {video !== null && (
+                {video !== null ? (
                   <VideoPlayer
                     limitedAccess={accessDenied}
                     video={video}
                     autoplay={autoplay}
                     muted={soundAvailable ? true : muted}
                     key={`video-element-${video.id}`}
+                  />
+                ) : (
+                  <VideoNotFound
+                    customActions={[
+                      {
+                        text: "Clear all filters 🗑️",
+                        onClick: () => {
+                          setSelectedGame({ name: "All", value: "" })
+                          setSelectedTags([])
+                          setSelectedAuthors([])
+                        },
+                      },
+                    ]}
                   />
                 )}
               </div>
@@ -271,10 +204,14 @@ export default function Videos({}: Props) {
                     <ArrowLongLeftIcon className="inline-flex h-6 w-6" />
                   </button>
 
-                  <div className="flex w-full items-center justify-center self-stretch border border-slate-800/60 bg-slate-800/60 px-4 py-2 dark:border-blue-200/30 dark:bg-blue-200/20 lg:py-1">
-                    <span className="text-sm">
-                      {index + 1} of {filteredVideos.length}
-                    </span>
+                  <div className="flex w-full items-center justify-center self-stretch border border-slate-800/60 bg-slate-800/60 px-4 py-2 text-sm dark:border-blue-200/30 dark:bg-blue-200/20 lg:py-1">
+                    {filteredVideos.length === 0 ? (
+                      <span>N/A</span>
+                    ) : (
+                      <span>
+                        {index + 1} of {filteredVideos.length}
+                      </span>
+                    )}
                   </div>
 
                   <button
@@ -289,7 +226,7 @@ export default function Videos({}: Props) {
               </div>
             </div>
           ) : (
-            isContentReady && <VideoNotFound />
+            fetchError && <VideoNotFound reloadPage />
           )}
         </main>
       </div>

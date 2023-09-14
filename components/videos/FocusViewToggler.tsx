@@ -5,7 +5,7 @@ import { getButtonSizeClassNames } from "../../utils"
 
 type Props = {
   hook: [boolean, Dispatch<SetStateAction<boolean>>]
-  size?: "sm" | "md" | "lg" | "xl"
+  size?: "xs" | "sm" | "md" | "lg" | "xl"
 }
 
 export function FocusViewToggler({ hook, size = "sm" }: Props) {

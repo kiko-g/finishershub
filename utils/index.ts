@@ -1,8 +1,9 @@
 import classNames from "classnames"
 import type { VideoMongoDBWithUrl } from "../@types"
 
-export function getButtonSizeClassNames(size: "sm" | "md" | "lg" | "xl") {
+export function getButtonSizeClassNames(size: "xs" | "sm" | "md" | "lg" | "xl") {
   return classNames(
+    size === "xs" ? "h-4 w-4 lg:h-5 lg:w-5" : "",
     size === "sm" ? "h-5 w-5 lg:h-6 lg:w-6" : "",
     size === "md" ? "h-6 w-6 lg:h-7 lg:w-7" : "",
     size === "lg" ? "h-7 w-7 lg:h-8 lg:w-8" : "",

@@ -1,38 +1,29 @@
 import React, { Dispatch, SetStateAction, useCallback, useEffect } from "react"
 import classNames from "classnames"
 import { ShuffleIcon } from "../icons"
+import { getButtonSizeClassNames } from "../../utils"
+import { ArrowsRightLeftIcon } from "@heroicons/react/24/outline"
 
 type Props = {
   hook: [boolean, Dispatch<SetStateAction<boolean>>]
+  size?: "xs" | "sm" | "md" | "lg" | "xl"
 }
 
-export function VideoOrderToggler({ hook }: Props) {
+export function VideoOrderToggler({ hook, size = "sm" }: Props) {
   const [shuffle, setShuffle] = hook
 
-  const toggleShuffle = useCallback(() => {
-    setShuffle((prev) => !prev)
-  }, [setShuffle])
-
-  useEffect(() => {
-    function handleKeyDown(event: any) {
-      if (event.keyCode === 83) toggleShuffle() // s key
-    }
-
-    window.addEventListener("keydown", handleKeyDown)
-    return () => {
-      window.removeEventListener("keydown", handleKeyDown)
-    }
-  }, [toggleShuffle])
-
   return (
-    <div className="flex items-end justify-center space-x-2">
-      <button
-        title={shuffle ? "Turn shuffle off" : "Turn shuffle on"}
-        className={classNames("transition hover:opacity-80", shuffle ? "text-primary dark:text-secondary" : "")}
-        onClick={toggleShuffle}
-      >
-        <ShuffleIcon className="h-5 w-5 lg:h-6 lg:w-6" />
-      </button>
-    </div>
+    <button
+      title={shuffle ? "Turn shuffle off" : "Turn shuffle on"}
+      onClick={() => setShuffle((shuffle) => !shuffle)}
+      className="inline-flex items-center justify-center gap-x-1.5 rounded border border-primary bg-primary/70 px-1.5 py-1.5 text-center text-xs text-white transition hover:opacity-80 disabled:cursor-not-allowed disabled:opacity-50 dark:border-primary dark:bg-primary/50 lg:px-2 lg:py-1.5 lg:text-sm"
+    >
+      <span className="hidden tracking-tighter lg:inline-flex">Shuffle</span>
+      {shuffle ? (
+        <ShuffleIcon className={getButtonSizeClassNames(size)} />
+      ) : (
+        <ArrowsRightLeftIcon className={getButtonSizeClassNames(size)} />
+      )}
+    </button>
   )
 }

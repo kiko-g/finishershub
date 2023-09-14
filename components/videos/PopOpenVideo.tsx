@@ -6,7 +6,7 @@ import type { VideoMongoDBWithUrl } from "../../@types"
 
 type Props = {
   video: VideoMongoDBWithUrl | null
-  size?: "sm" | "md" | "lg" | "xl"
+  size?: "xs" | "sm" | "md" | "lg" | "xl"
 }
 
 export function PopOpenVideo({ video, size = "sm" }: Props) {

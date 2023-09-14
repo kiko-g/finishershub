@@ -5,7 +5,7 @@ import useAccessDenied from "../../hooks/useAccessDenied"
 import { Layout, FullAccessBadge, LimitedAccessBadge, AccessModal, InvisbleTopLayer } from "../../components/layout"
 import {
   AutoplayToggler,
-  MuteToggler,
+  AutomuteToggler,
   UsageDisclaimer,
   ReshuffleButton,
   DeleteCookiesButton,
@@ -101,7 +101,7 @@ export default function CasinoPage() {
 
                 <ReshuffleButton hook={[shuffled, setShuffled]} shuffle={shuffleAndSetVideos} />
                 <AutoplayToggler hook={[autoplay, setAutoplay]} />
-                <MuteToggler hook={[muted, setMuted]} limitedAccess={limitedAccess} />
+                <AutomuteToggler hook={[muted, setMuted]} limitedAccess={limitedAccess} />
               </div>
             </div>
           </div>

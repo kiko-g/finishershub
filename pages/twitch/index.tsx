@@ -9,7 +9,7 @@ import { PlusIcon } from "@heroicons/react/24/solid"
 import {
   ViewToggler,
   AutoplayToggler,
-  MuteToggler,
+  AutomuteToggler,
   ReshuffleButton,
   DeleteCookiesButton,
   VideoSkeleton,
@@ -108,7 +108,7 @@ export default function IndexPage() {
               <DeleteCookiesButton />
               <ReshuffleButton hook={[shuffled, setShuffled]} shuffle={shuffleAndSetVideos} />
               <AutoplayToggler hook={[autoplay, setAutoplay]} />
-              <MuteToggler hook={[muted, setMuted]} limitedAccess={limitedAccess} />
+              <AutomuteToggler hook={[muted, setMuted]} limitedAccess={limitedAccess} />
               <ViewToggler hook={[view, setView]} />
             </div>
           </div>

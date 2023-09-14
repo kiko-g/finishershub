@@ -21,7 +21,7 @@ export default function Video() {
     videoIndex !== null &&
     (isNaN(videoIndex) || videoIndex < 0 ? (
       <Layout location="Video Not Found">
-        <VideoNotFound />
+        <VideoNotFound reloadPage />
       </Layout>
     ) : (
       <VideoPage videoIndex={videoIndex} />

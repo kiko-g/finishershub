@@ -7,7 +7,7 @@ import { ClipboardDocumentCheckIcon } from "@heroicons/react/24/solid"
 
 type Props = {
   video: VideoMongoDBWithUrl | null
-  size?: "sm" | "md" | "lg" | "xl"
+  size?: "xs" | "sm" | "md" | "lg" | "xl"
 }
 
 export function ShareVideo({ video, size = "sm" }: Props) {

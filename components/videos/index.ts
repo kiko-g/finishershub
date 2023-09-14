@@ -6,7 +6,7 @@ import { FocusViewToggler } from "./FocusViewToggler"
 import { KeyboardUsageButton } from "./KeyboardUsageButton"
 import { KeyboardUsageInstructions } from "./KeyboardUsageInstructions"
 import { MostRecentVideoShowcase } from "./MostRecentVideoShowcase"
-import { MuteToggler } from "./MuteToggler"
+import { AutomuteToggler } from "./AutomuteToggler"
 import { NextVideo } from "./NextVideo"
 import { PopOpenVideo } from "./PopOpenVideo"
 import { PreviousVideo } from "./PreviousVideo"
@@ -30,7 +30,7 @@ export {
   KeyboardUsageButton,
   KeyboardUsageInstructions,
   MostRecentVideoShowcase,
-  MuteToggler,
+  AutomuteToggler,
   NextVideo,
   PopOpenVideo,
   PreviousVideo,
