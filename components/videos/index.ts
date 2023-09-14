@@ -12,7 +12,6 @@ import { PopOpenVideo } from "./PopOpenVideo"
 import { PreviousVideo } from "./PreviousVideo"
 import { ReshuffleButton } from "./ReshuffleButton"
 import { ShareVideo } from "./ShareVideo"
-import { SingleVideoShowcase } from "./SingleVideoShowcase"
 import { UsageDisclaimer } from "./UsageDisclaimer"
 import { VideoNotFound } from "./VideoNotFound"
 import { VideoOrderToggler } from "./VideoOrderToggler"
@@ -36,7 +35,6 @@ export {
   PreviousVideo,
   ReshuffleButton,
   ShareVideo,
-  SingleVideoShowcase,
   UsageDisclaimer,
   VideoNotFound,
   VideoOrderToggler,

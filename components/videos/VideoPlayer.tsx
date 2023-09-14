@@ -121,7 +121,7 @@ export function VideoPlayer(props: Props) {
               </div>
             </div>
 
-            {(video.authors.length > 0 || video.tags.length > 0) && (
+            {(video.authors || video.tags) && (
               <div className="absolute right-0 top-0 z-30 hidden font-normal text-white opacity-50 transition lg:hidden lg:hover:opacity-100 lg:group-hover:flex lg:group-hover:gap-2">
                 <div className="flex flex-col items-end gap-2 rounded-bl rounded-tr bg-black/50 px-1 py-1 lg:gap-1 lg:px-2 lg:py-2">
                   <div className="flex max-w-md flex-1 flex-wrap items-center gap-1 self-stretch">
