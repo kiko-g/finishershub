@@ -115,12 +115,7 @@ export default function Casino() {
 
           <div className="relative w-full">
             {ready ? (
-              <VideoPlayer
-                video={video}
-                autoplay={autoplay}
-                muted={soundAvailable ? true : muted}
-                key={`video-element-${video.id}`}
-              />
+              <VideoPlayer video={video} autoplay={autoplay} automute={muted} key={`video-element-${video.id}`} />
             ) : (
               <VideoSkeleton />
             )}

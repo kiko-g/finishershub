@@ -1,7 +1,7 @@
 import { useState } from "react"
 
 export function useControls() {
-  const [muted, setMuted] = useState<boolean>(true)
+  const [muted, setMuted] = useState<boolean>(false)
   const [autoplay, setAutoplay] = useState<boolean>(true)
   const [shuffled, setShuffled] = useState<boolean>(true)
   const [showInstructions, setShowInstructions] = useState<boolean>(false)

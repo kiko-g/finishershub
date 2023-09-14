@@ -21,7 +21,9 @@ export const tagsAndDescriptions = [
 
 export const tags = tagsAndDescriptions.map((item) => item.name).sort((a, b) => a.localeCompare(b))
 
-export const authors = ["Bagger", "Levels", "Reicalo", "Koba", "Junhó", "Castro"]
+export const authors = ["Bagger", "Levels", "Reicalo", "Koba", "Junhó", "Castro", "Japa", "Zé"].sort((a, b) =>
+  a.localeCompare(b),
+)
 
 export const getMaps = (game: string) => {
   const mw2019Maps = ["Verdansk", "Rebirth", "Fortune's Keep"]
@@ -34,20 +36,24 @@ export const getMaps = (game: string) => {
 }
 
 export const getLocations = (game: string, map: string) => {
+  // Warzone 1
   if (game === "MW2019") {
-    if (map.toLowerCase() === "verdansk") return verdanskLocations
-    if (map.toLowerCase() === "rebirth") return rebirthLocations
+    if (map === "Verdansk") return verdanskLocations
+    else if (map === "Rebirth") return rebirthLocations
+    else if (map === "Fortune's Keep") return fortunesKeepLocations
   }
-  if (game === "MW2022") {
-    if (map.toLowerCase() === "ashika") return ashikaLocations
+  // Warzone 2
+  else if (game === "MW2022") {
+    if (map === "Ashika") return ashikaLocations
+    else if (map === "Al Mazrah") return alMazrahLocations
   }
 
-  return [verdanskLocations, rebirthLocations, ashikaLocations].flat()
+  return [verdanskLocations, rebirthLocations, ashikaLocations, alMazrahLocations].flat()
 }
 
 export const verdanskLocations = [
-  "Military Base",
   "Gulag",
+  "Military Base",
   "Quarry",
   "Dam",
   "Downtown",
@@ -86,6 +92,43 @@ export const rebirthLocations = [
   "Greenie",
   "HQ",
   "Misc",
+].sort((a, b) => a.localeCompare(b))
+
+export const fortunesKeepLocations = [
+  "Town",
+  "Overlook",
+  "Graveyard",
+  "Terraces",
+  "Gatehouse",
+  "Grotto",
+  "Keep",
+  "Bay",
+  "Winery",
+  "Lighthouse",
+  "Camp",
+  "Smuggler's Cove",
+].sort((a, b) => a.localeCompare(b))
+
+export const alMazrahLocations = [
+  "Gulag",
+  "Airport",
+  "Ahkdar Village",
+  "Al Mazrah City",
+  "Al Sharim Pass",
+  "Caves",
+  "Oasis",
+  "Taraq Village",
+  "Rohan Oil",
+  "Quarry",
+  "Hydroelectric",
+  "Port",
+  "Sa'id City",
+  "Cemetery",
+  "Sawah Village",
+  "Sarrif Bay",
+  "Fortress",
+  "Observatory",
+  "Marshlands",
 ].sort((a, b) => a.localeCompare(b))
 
 export const ashikaLocations = [

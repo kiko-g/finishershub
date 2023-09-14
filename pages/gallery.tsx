@@ -134,12 +134,7 @@ export default function Gallery() {
             ? videos
                 .slice(0, clipsShown)
                 .map((video: VideoMongoDBWithUrl, videoIdx: number) => (
-                  <VideoPlayer
-                    video={video}
-                    autoplay={autoplay}
-                    muted={soundAvailable ? true : muted}
-                    key={`video-gallery-${video.id}`}
-                  />
+                  <VideoPlayer video={video} autoplay={autoplay} automute={muted} key={`video-gallery-${video.id}`} />
                 ))
             : Array(clipsShown)
                 .fill(null)

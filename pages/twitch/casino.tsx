@@ -108,7 +108,7 @@ export default function CasinoPage() {
             <div className="relative w-full">
               {limitedAccess ? <InvisbleTopLayer /> : null}
               <TwitchVideoClip
-                muted={soundAvailable ? true : muted}
+                muted={soundAvailable ? muted : true}
                 video={videos[index]}
                 parent={hostname}
                 autoplay={index === 0 ? true : autoplay}

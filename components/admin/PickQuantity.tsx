@@ -17,7 +17,7 @@ export function PickQuantity({
     <input
       type="number"
       defaultValue={video.quantity}
-      className={classNames("admin text-xs", className ? className : "max-w-[8rem]")}
+      className={classNames("admin text-xs", className ? className : "max-w-[5rem]")}
       onChange={(e) => {
         setVideoSaved(false)
         setVideo({ ...video, quantity: parseInt(e.target.value) })

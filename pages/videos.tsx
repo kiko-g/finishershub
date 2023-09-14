@@ -161,7 +161,7 @@ export default function Videos({}: Props) {
                     limitedAccess={accessDenied}
                     video={video}
                     autoplay={autoplay}
-                    muted={soundAvailable ? true : muted}
+                    automute={muted}
                     key={`video-element-${video.id}`}
                   />
                 ) : (

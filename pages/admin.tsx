@@ -106,6 +106,12 @@ export default function Admin() {
                         ID
                       </th>
                       <th className="bg-gray-700 px-2 py-2 text-left text-xs font-medium uppercase tracking-wider text-gray-100 dark:bg-gray-800 dark:text-gray-300 lg:px-3 lg:py-3">
+                        URL
+                      </th>
+                      <th className="bg-gray-700 px-2 py-2 text-left text-xs font-medium uppercase tracking-wider text-gray-100 dark:bg-gray-800 dark:text-gray-300 lg:px-3 lg:py-3">
+                        Edit
+                      </th>
+                      <th className="bg-gray-700 px-2 py-2 text-left text-xs font-medium uppercase tracking-wider text-gray-100 dark:bg-gray-800 dark:text-gray-300 lg:px-3 lg:py-3">
                         Game
                       </th>
                       <th className="bg-gray-700 px-2 py-2 text-left text-xs font-medium uppercase tracking-wider text-gray-100 dark:bg-gray-800 dark:text-gray-300 lg:px-3 lg:py-3">
@@ -122,12 +128,6 @@ export default function Admin() {
                       </th>
                       <th className="bg-gray-700 px-2 py-2 text-left text-xs font-medium uppercase tracking-wider text-gray-100 dark:bg-gray-800 dark:text-gray-300 lg:px-3 lg:py-3">
                         Quantity
-                      </th>
-                      <th className="bg-gray-700 px-2 py-2 text-left text-xs font-medium uppercase tracking-wider text-gray-100 dark:bg-gray-800 dark:text-gray-300 lg:px-3 lg:py-3">
-                        URL
-                      </th>
-                      <th className="bg-gray-700 px-2 py-2 text-left text-xs font-medium uppercase tracking-wider text-gray-100 dark:bg-gray-800 dark:text-gray-300 lg:px-3 lg:py-3">
-                        Edit
                       </th>
                     </tr>
                   </thead>
@@ -237,6 +237,22 @@ function TableRow({ video, rowIndex, replaceRowAction }: TableRowProps) {
     >
       <td className="whitespace-nowrap px-2 pt-0.5 lg:px-3">{row.id}</td>
       <td className="whitespace-nowrap px-2 pt-0.5 lg:px-3">
+        <a href={row.url} target="_blank" className="hover:scale-125">
+          <ArrowTopRightOnSquareIcon className="h-4 w-4" />
+        </a>
+      </td>
+      <td className="whitespace-nowrap px-2 pt-0.5 lg:px-3">
+        <button
+          className={classNames("hover:scale-125", isLoading && "cursor-not-allowed opacity-50")}
+          disabled={isLoading}
+          onClick={() => {
+            handleReplaceRow(row, rowIndex)
+          }}
+        >
+          {isLoading ? <ArrowPathIcon className="h-4 w-4 animate-spin" /> : <CheckIcon className="h-4 w-4" />}
+        </button>
+      </td>
+      <td className="whitespace-nowrap px-2 pt-0.5 lg:px-3">
         <PickGame setVideoSaved={setRowSaved} videoHook={[row, setRow]} />
       </td>
       <td className="whitespace-nowrap px-2 pt-0.5 lg:px-3">
@@ -253,22 +269,6 @@ function TableRow({ video, rowIndex, replaceRowAction }: TableRowProps) {
       </td>
       <td className="whitespace-nowrap px-2 pt-0.5 lg:px-3">
         <PickQuantity setVideoSaved={setRowSaved} videoHook={[row, setRow]} />
-      </td>
-      <td className="whitespace-nowrap px-2 pt-0.5 lg:px-3">
-        <a href={row.url} target="_blank" className="hover:scale-125">
-          <ArrowTopRightOnSquareIcon className="h-4 w-4" />
-        </a>
-      </td>
-      <td className="whitespace-nowrap px-2 pt-0.5 lg:px-3">
-        <button
-          className={classNames("hover:scale-125", isLoading && "cursor-not-allowed opacity-50")}
-          disabled={isLoading}
-          onClick={() => {
-            handleReplaceRow(row, rowIndex)
-          }}
-        >
-          {isLoading ? <ArrowPathIcon className="h-4 w-4 animate-spin" /> : <CheckIcon className="h-4 w-4" />}
-        </button>
       </td>
     </tr>
   )

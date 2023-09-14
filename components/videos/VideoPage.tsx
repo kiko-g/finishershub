@@ -43,7 +43,7 @@ export function VideoPage({ videoIndex }: Props) {
   const [video, setVideo] = useState<VideoMongoDBWithUrl | null>(null)
   const [videoSaved, setVideoSaved] = useState(false)
   const ready = useMemo(() => !isLoading && !fetchError, [isLoading, fetchError])
-  const canEdit = useMemo(() => !accessDenied && !isMobile, [accessDenied, isMobile])
+  const canEdit = useMemo(() => !accessDenied, [accessDenied])
 
   const next = useMemo(() => (video === null ? undefined : getVideoUrlFromVideo(video, 1)), [video])
   const previous = useMemo(() => (video === null ? undefined : getVideoUrlFromVideo(video, -1)), [video])
@@ -116,10 +116,10 @@ export function VideoPage({ videoIndex }: Props) {
     <div className="flex min-h-screen flex-col bg-light text-gray-700 dark:bg-navy dark:text-white">
       <Seo title={`Video ${videoIndex}`} />
       <Header siteTitle="Finishers Hub" location="Video" />
-      <div className="mx-auto mt-20 flex w-full max-w-7xl flex-1 items-start justify-center gap-x-4 px-4 xl:px-2">
+      <div className="mx-auto mb-8 mt-4 flex w-full max-w-7xl flex-1 flex-col items-start justify-center gap-4 px-4 lg:mb-8 lg:mt-20 xl:flex-row xl:px-2">
         {ready && video !== null ? (
           <>
-            <div className="hidden h-full min-w-[20rem] flex-col justify-between self-stretch rounded bg-white p-3 dark:bg-dark lg:flex">
+            <div className="order-2 h-full min-w-[20rem] flex-col justify-between self-stretch rounded bg-white p-3 dark:bg-dark lg:order-1">
               <div>
                 <div className="flex flex-wrap items-center gap-x-2">
                   <h2 className="text-2xl font-bold">Video {videoIndex}</h2>
@@ -128,7 +128,7 @@ export function VideoPage({ videoIndex }: Props) {
                   </span>
                 </div>
                 <p className="mb-2 mt-1 max-w-sm text-sm">
-                  You need full access to edit video details below. Saved your changes by clicking the save button.
+                  You need full access to edit video details below. Save your changes by clicking the save button.
                 </p>
               </div>
 
@@ -167,18 +167,8 @@ export function VideoPage({ videoIndex }: Props) {
               </div>
             </div>
 
-            <div className="relative max-w-5xl flex-col gap-y-4 md:gap-y-3">
-              <VideoPlayer
-                video={video}
-                muted={soundAvailable ? true : muted}
-                autoplay={autoplay}
-                key={`single-video-${video.url}`}
-              />
-
-              <div className="mt-2 flex w-full flex-row flex-wrap items-center gap-2 lg:hidden">
-                <VideoNavLink name="Previous" href={previous} />
-                <VideoNavLink name="Next" href={next} />
-              </div>
+            <div className="relative order-1 max-w-5xl flex-col gap-y-4 md:gap-y-3 lg:order-2">
+              <VideoPlayer video={video} automute={muted} autoplay={autoplay} key={`single-video-${video.url}`} />
             </div>
           </>
         ) : fetchError ? (

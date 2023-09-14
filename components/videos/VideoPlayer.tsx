@@ -1,6 +1,6 @@
 import classNames from "classnames"
 import type { VideoMongoDBWithUrl } from "../../@types"
-import React, { useState, useEffect, useRef, SetStateAction, Dispatch } from "react"
+import React, { useState, useEffect, useRef, SetStateAction, Dispatch, useCallback } from "react"
 import { ShareVideo, PopOpenVideo, VideoSkeleton } from "./"
 import { PauseIcon, PlayIcon } from "@heroicons/react/24/solid"
 import { getButtonSizeClassNames } from "../../utils"
@@ -13,7 +13,7 @@ type Props = {
   startExpanded?: boolean
   loop?: boolean
   autoplay?: boolean
-  muted?: boolean
+  automute?: boolean
   special?: boolean
 }
 
@@ -24,7 +24,7 @@ export function VideoPlayer(props: Props) {
     startExpanded = false,
     loop = false,
     autoplay = false,
-    muted = true,
+    automute = true,
     special = false,
   } = props
 
@@ -32,14 +32,19 @@ export function VideoPlayer(props: Props) {
   const progressBarRef = useRef<HTMLDivElement>(null)
   const [soundAvailable] = useSoundAvailable()
 
-  const [mute, setMute] = useState(muted)
+  const [mute, setMute] = useState(automute)
   const [playing, setPlaying] = useState(false)
   const [progress, setProgress] = useState(0)
   const [expanded, setExpanded] = useState(startExpanded)
 
   useEffect(() => {
-    setMute((prev) => muted && prev)
-  }, [muted])
+    setMute((prev) => automute && prev)
+  }, [automute])
+
+  const toggleMute = useCallback(() => {
+    if (soundAvailable) setMute((prev) => !prev)
+    else setMute(true)
+  }, [setMute, soundAvailable])
 
   useEffect(() => {
     if (videoRef.current === null) return
@@ -61,13 +66,14 @@ export function VideoPlayer(props: Props) {
   useEffect(() => {
     function handleKeyDown(event: KeyboardEvent) {
       if (event.code === "Space") togglePlay()
+      if (event.keyCode === 77) toggleMute()
     }
 
     window.addEventListener("keydown", handleKeyDown)
     return () => {
       window.removeEventListener("keydown", handleKeyDown)
     }
-  }, [])
+  }, [toggleMute])
 
   function togglePlay() {
     if (!videoRef.current) return
@@ -114,14 +120,28 @@ export function VideoPlayer(props: Props) {
 
         {special ? null : (
           <>
-            <div className="absolute left-0 top-0 z-30 flex font-normal text-white transition lg:hidden lg:group-hover:flex lg:group-hover:gap-2">
-              <div className="flex items-center gap-2 rounded-br rounded-tl bg-black/50 px-2 py-2 lg:gap-2 lg:px-3 lg:py-3">
+            <div className="absolute bottom-0 left-0 z-30 flex font-normal text-white transition lg:hidden lg:group-hover:flex lg:group-hover:gap-2">
+              <div className="flex items-center gap-2 rounded-bl rounded-tr bg-black/50 px-2 pb-3 pt-2 lg:gap-2 lg:px-3 lg:pb-4 lg:pt-3">
                 <ShareVideo video={video} size="sm" />
                 <PopOpenVideo video={video} size="sm" />
               </div>
             </div>
 
-            {(video.authors || video.tags) && (
+            <div className="absolute bottom-0 right-0 z-30 flex font-normal text-white transition lg:hidden lg:group-hover:flex lg:group-hover:gap-2">
+              <div className="flex flex-col items-center gap-2 rounded-br rounded-tl bg-black/50 px-2 pb-3 pt-2 lg:gap-2 lg:px-3 lg:pb-4 lg:pt-3">
+                <PlayPauseVideo
+                  size="sm"
+                  playing={playing}
+                  togglePlay={togglePlay}
+                  handlePlay={handlePlay}
+                  handlePause={handlePause}
+                />
+                <ToggleMuteVideo hook={[mute, setMute]} size="sm" />
+                <FocusViewToggler hook={[expanded, setExpanded]} size="sm" />
+              </div>
+            </div>
+
+            {(video.authors.length > 0 || video.tags.length > 0) && (
               <div className="absolute right-0 top-0 z-30 hidden font-normal text-white opacity-50 transition lg:hidden lg:hover:opacity-100 lg:group-hover:flex lg:group-hover:gap-2">
                 <div className="flex flex-col items-end gap-2 rounded-bl rounded-tr bg-black/50 px-1 py-1 lg:gap-1 lg:px-2 lg:py-2">
                   <div className="flex max-w-md flex-1 flex-wrap items-center gap-1 self-stretch">
@@ -148,20 +168,6 @@ export function VideoPlayer(props: Props) {
                 </div>
               </div>
             )}
-
-            <div className="absolute bottom-0 right-0 z-30 flex font-normal text-white transition lg:hidden lg:group-hover:flex lg:group-hover:gap-2">
-              <div className="flex flex-col items-center gap-2 rounded-br rounded-tl bg-black/50 px-2 py-2 lg:gap-2 lg:px-3 lg:py-3">
-                <PlayPauseVideo
-                  size="sm"
-                  playing={playing}
-                  togglePlay={togglePlay}
-                  handlePlay={handlePlay}
-                  handlePause={handlePause}
-                />
-                <ToggleMuteVideo hook={[mute, setMute]} disabled={limitedAccess} size="sm" />
-                <FocusViewToggler hook={[expanded, setExpanded]} size="sm" />
-              </div>
-            </div>
           </>
         )}
       </div>
@@ -220,11 +226,10 @@ function PlayPauseVideo({ playing, togglePlay, handlePlay, handlePause, size = "
 
 type ToggleMuteVideoProps = {
   hook: [boolean, Dispatch<SetStateAction<boolean>>]
-  disabled?: boolean
   size?: "xs" | "sm" | "md" | "lg" | "xl"
 }
 
-function ToggleMuteVideo({ hook, disabled = true, size = "sm" }: ToggleMuteVideoProps) {
+function ToggleMuteVideo({ hook, size = "sm" }: ToggleMuteVideoProps) {
   const [mute, setMute] = hook
   const [soundAvailable] = useSoundAvailable()
 
@@ -240,7 +245,6 @@ function ToggleMuteVideo({ hook, disabled = true, size = "sm" }: ToggleMuteVideo
 
   return mute ? (
     <button
-      disabled={disabled}
       title="Turn default mute off (or press M)"
       className="transition hover:opacity-80 disabled:cursor-not-allowed disabled:opacity-25"
       onClick={handleUnmute}
@@ -264,7 +268,6 @@ function ToggleMuteVideo({ hook, disabled = true, size = "sm" }: ToggleMuteVideo
     </button>
   ) : (
     <button
-      disabled={disabled}
       title="Turn default mute on"
       className="transition hover:opacity-80 disabled:cursor-not-allowed disabled:opacity-25"
       onClick={handleMute}
