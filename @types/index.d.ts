@@ -54,7 +54,7 @@ export type CatalogueItem = {
 export type VideoFromS3 = {
   url: string
   date: string
-  game: "mw2019" | "mw2022"
+  game: "MW2019" | "MW2022"
   filename: string
 }
 
@@ -63,10 +63,7 @@ export type VideoAPIAndIndex = {
   video: VideoFromS3
 }
 
-export type FilterByGameType =
-  | { name: "All"; value: "" }
-  | { name: "MW2019"; value: "mw2019" }
-  | { name: "MW2022"; value: "mw2022" }
+export type Game = "All" | "MW2019" | "MW2022"
 
 export interface VideoMongoDBWithUrl {
   _id: string

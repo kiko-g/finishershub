@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useMemo } from "react"
-import type { FilterByGameType, VideoMongoDBWithUrl } from "../@types"
+import type { Game, VideoMongoDBWithUrl } from "../@types"
 import classNames from "classnames"
 import { shuffle } from "../utils"
 import useAccessDenied from "../hooks/useAccessDenied"
@@ -21,19 +21,14 @@ import { useSoundAvailable } from "../hooks/useSoundAvailable"
 
 export default function Gallery() {
   const isMobile = useMediaQuery("(max-width: 768px)")
-  const arenas: FilterByGameType[] = [
-    { name: "All", value: "" },
-    { name: "MW2019", value: "mw2019" },
-    { name: "MW2022", value: "mw2022" },
-  ]
 
   const [accessDenied, setAccessDenied] = useAccessDenied()
   const [soundAvailable] = useSoundAvailable()
 
   const [loading, setLoading] = useState<boolean>(true)
+  const [game, setGame] = useState<Game>("All")
   const [fetchError, setFetchError] = useState<boolean>(false)
   const [videos, setVideos] = useState<VideoMongoDBWithUrl[]>([])
-  const [filter, setFilter] = useState<FilterByGameType>(arenas[0]) // use all
   const [view, setView] = useState<boolean>(false)
   const [muted, setMuted] = useState<boolean>(true)
   const [autoplay, setAutoplay] = useState<boolean>(false)
@@ -58,7 +53,7 @@ export default function Gallery() {
   }
 
   useEffect(() => {
-    fetch(`/api/mongo/videos/urls/game/${filter.value}`)
+    fetch(`/api/mongo/videos/urls/game/${game}`)
       .then((res) => res.json())
       .then((videos: VideoMongoDBWithUrl[]) => {
         setLoading(false)
@@ -70,7 +65,7 @@ export default function Gallery() {
         setFetchError(true)
         console.error(err)
       })
-  }, [filter, shuffled])
+  }, [game, shuffled])
 
   useEffect(() => {
     if (limitedAccess) {
@@ -120,7 +115,7 @@ export default function Gallery() {
               <AutomuteToggler hook={[muted, setMuted]} limitedAccess={limitedAccess} />
               <ViewToggler hook={[view, setView]} />
             </div>
-            <FilterVideosByGame arenas={arenas} pickedHook={[filter, setFilter]} className="w-full" />
+            <FilterVideosByGame pickedHook={[game, setGame]} className="w-full" />
           </div>
         </div>
 

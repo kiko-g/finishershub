@@ -1,25 +1,25 @@
 import React, { Dispatch, Fragment, SetStateAction } from "react"
 import classNames from "classnames"
-import type { FilterByGameType } from "../../@types"
+import type { Game } from "../../@types"
 import { Listbox, Transition } from "@headlessui/react"
 import { ChevronUpDownIcon } from "@heroicons/react/24/outline"
 import { CheckCircleIcon } from "@heroicons/react/24/solid"
+import { games } from "../../utils/data"
 
 type Props = {
-  arenas: FilterByGameType[]
-  pickedHook: [any, Dispatch<SetStateAction<FilterByGameType>>]
+  pickedHook: [Game, Dispatch<SetStateAction<Game>>]
   className?: string
 }
 
-export function FilterVideosByGame({ arenas, pickedHook, className }: Props) {
-  const [picked, setPicked] = pickedHook
+export function FilterVideosByGame({ pickedHook, className }: Props) {
+  const [pickedGame, setPickedGame] = pickedHook
 
   return (
-    <Listbox as="div" value={picked} onChange={setPicked}>
+    <Listbox as="div" value={pickedGame} onChange={setPickedGame}>
       {({ open }) => (
         <div className={classNames("relative z-50", className)}>
           <Listbox.Button className="inline-flex w-full items-center justify-center gap-x-0.5 rounded border border-secondary bg-secondary/70 py-1.5 pl-2 pr-1.5 text-center text-xs text-white transition hover:opacity-80 disabled:cursor-not-allowed disabled:opacity-50 dark:border-secondary dark:bg-secondary/50 lg:py-1.5 lg:pl-2.5 lg:pr-1.5 lg:text-xs">
-            <span className="whitespace-nowrap font-normal tracking-tighter">{picked.name}</span>
+            <span className="whitespace-nowrap font-normal tracking-tighter">{pickedGame}</span>
             <ChevronUpDownIcon className="h-4 w-4 lg:h-5 lg:w-5" aria-hidden="true" />
           </Listbox.Button>
 
@@ -30,13 +30,13 @@ export function FilterVideosByGame({ arenas, pickedHook, className }: Props) {
                 open ? "absolute right-0 mt-2 w-full min-w-[12rem] lg:w-48" : "hidden",
               )}
             >
-              {arenas.map((arena: any, arenaIdx: number) => {
-                const isSelected = picked.name === arena.name
+              {games.map((game: Game, arenaIdx: number) => {
+                const isSelected = pickedGame === game
 
                 return (
                   <Listbox.Option
                     key={arenaIdx}
-                    value={arena}
+                    value={game}
                     className={({ active }) =>
                       classNames(
                         "relative cursor-default select-none py-1.5 pl-3 pr-3",
@@ -54,7 +54,7 @@ export function FilterVideosByGame({ arenas, pickedHook, className }: Props) {
                             <span className="h-5 w-5" />
                           )}
                           <span className={classNames("block truncate", highlight ? "font-bold" : "font-normal")}>
-                            {arena.name}
+                            {game}
                           </span>
                         </span>
                       )

@@ -1,12 +1,6 @@
-import type { FilterByGameType } from "../@types"
+import { Game } from "../@types"
 
-export const arenas: FilterByGameType[] = [
-  { name: "All", value: "" },
-  { name: "MW2019", value: "mw2019" },
-  { name: "MW2022", value: "mw2022" },
-]
-
-export const games = arenas.map((item) => item.value).filter((item) => item)
+export const games: Game[] = ["All", "MW2019", "MW2022"]
 
 export const tagsAndDescriptions = [
   { name: "None", description: "Nothing too special about the finishers in the clip" },
@@ -30,18 +24,18 @@ export const tags = tagsAndDescriptions.map((item) => item.name).sort((a, b) => 
 export const authors = ["Bagger", "Levels", "Reicalo", "Koba", "Junhó", "Castro"]
 
 export const getMaps = (game: string) => {
-  if (game === "mw2019") return ["Verdansk", "Rebirth"]
-  if (game === "mw2022") return ["Ashika"]
+  if (game === "MW2019") return ["Verdansk", "Rebirth"]
+  if (game === "MW2022") return ["Ashika"]
 
   return ["Verdansk", "Rebirth", "Ashika"]
 }
 
 export const getLocations = (game: string, map: string) => {
-  if (game === "mw2019") {
+  if (game === "MW2019") {
     if (map.toLowerCase() === "verdansk") return verdanskLocations
     if (map.toLowerCase() === "rebirth") return rebirthLocations
   }
-  if (game === "mw2022") {
+  if (game === "MW2022") {
     if (map.toLowerCase() === "ashika") return ashikaLocations
   }
 

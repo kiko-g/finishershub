@@ -1,24 +1,26 @@
 import React, { Dispatch, SetStateAction } from "react"
 import { Bars3Icon, Bars4Icon } from "@heroicons/react/24/outline"
+import { getButtonSizeClassNames } from "../../utils"
 
 type Props = {
   hook: [boolean, Dispatch<SetStateAction<boolean>>]
+  size?: "xs" | "sm" | "md" | "lg" | "xl"
 }
 
-export function ViewToggler({ hook }: Props) {
+export function ViewToggler({ hook, size = "sm" }: Props) {
   const [type, setType] = hook
 
   return (
-    <div className="hidden items-end justify-center space-x-2 text-gray-700 dark:text-light lg:flex">
+    <button
+      title={type ? "Switch to 3x3 view" : "Switch to 2x2 view"}
+      onClick={() => setType((autoplay) => !autoplay)}
+      className="inline-flex items-center justify-center gap-x-1 rounded border border-primary bg-primary/70 px-1.5 py-1.5 text-center text-xs text-white transition hover:opacity-80 disabled:cursor-not-allowed disabled:opacity-50 dark:border-primary dark:bg-primary/50 lg:px-2 lg:py-1.5 lg:text-sm"
+    >
       {type ? (
-        <button title="Switch to 3x3 view" className="transition hover:opacity-80" onClick={() => setType(false)}>
-          <Bars3Icon className="h-5 w-5 lg:h-6 lg:w-6" />
-        </button>
+        <Bars3Icon className={getButtonSizeClassNames(size)} />
       ) : (
-        <button title="Switch to 2x2 view" className="transition hover:opacity-80" onClick={() => setType(true)}>
-          <Bars4Icon className="h-5 w-5 lg:h-6 lg:w-6" />
-        </button>
+        <Bars4Icon className={getButtonSizeClassNames(size)} />
       )}
-    </div>
+    </button>
   )
 }

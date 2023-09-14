@@ -13,8 +13,8 @@ import {
   VideoSkeleton,
 } from "../components/videos"
 
-import { arenas, authors, tags } from "../utils/data"
-import type { FilterByGameType, VideoMongoDBWithUrl } from "../@types"
+import { authors, tags } from "../utils/data"
+import type { Game, VideoMongoDBWithUrl } from "../@types"
 import { useControls } from "../hooks/useControls"
 import { useContentInteraction } from "../hooks/useContentInteraction"
 import { VideoOrderToggler } from "../components/videos/VideoOrderToggler"
@@ -56,7 +56,7 @@ export default function Videos({}: Props) {
 
   const [videos, setVideos] = useState<VideoMongoDBWithUrl[]>([])
   const [index, setIndex] = useState<number>(0)
-  const [selectedGame, setSelectedGame] = useState<FilterByGameType>({ name: "All", value: "" })
+  const [selectedGame, setSelectedGame] = useState<Game>("MW2022")
   const [selectedTags, setSelectedTags] = useState<string[]>([])
   const [selectedAuthors, setSelectedAuthors] = useState<string[]>([])
 
@@ -75,8 +75,8 @@ export default function Videos({}: Props) {
         .filter((video) => selectedAuthors.some((selectedAuthor) => video.authors.includes(selectedAuthor)))
     }
 
-    if (selectedGame.value !== "") {
-      result = result.filter((video) => video.game === selectedGame.value)
+    if (selectedGame !== "All") {
+      result = result.filter((video) => video.game === selectedGame)
     }
 
     return shuffled ? result.sort(() => Math.random() - 0.5) : result.sort((a, b) => a.id - b.id)
@@ -148,7 +148,7 @@ export default function Videos({}: Props) {
                 <div className="flex items-center gap-1.5">
                   <PickTags tags={tags} hook={[selectedTags, setSelectedTags]} />
                   <PickAuthors authors={authors} hook={[selectedAuthors, setSelectedAuthors]} />
-                  <FilterVideosByGame arenas={arenas} pickedHook={[selectedGame, setSelectedGame]} />
+                  <FilterVideosByGame pickedHook={[selectedGame, setSelectedGame]} />
                   <ResultsAmountBadge count={filteredVideos.length} />
                 </div>
               </div>
@@ -170,7 +170,7 @@ export default function Videos({}: Props) {
                       {
                         text: "Clear all filters 🗑️",
                         onClick: () => {
-                          setSelectedGame({ name: "All", value: "" })
+                          setSelectedGame("All")
                           setSelectedTags([])
                           setSelectedAuthors([])
                         },

@@ -87,27 +87,21 @@ export default function CasinoPage() {
           <div className="flex flex-col justify-between gap-y-2 lg:flex-row lg:gap-x-6">
             <div className="text-lg font-normal">
               <h2 className="mb-2 text-4xl font-bold tracking-tight sm:text-5xl">Slot Machine</h2>
-              <p className="leading-normal">
+              <p className="grow text-sm font-normal">
                 More fun than a casino, especially because we don&apos;t take your money. Not sure about the addiction
                 part though.
               </p>
             </div>
+          </div>
 
-            <div className="flex flex-row items-center justify-center gap-2 lg:mt-0 lg:flex-col">
-              <AccessBadge />
-              <div className="flex items-center justify-end gap-x-2">
-                {limitedAccess ? <AccessModal lockedHook={[accessDenied, setAccessDenied]} /> : null}
-                <DeleteCookiesButton />
-
-                <ReshuffleButton hook={[shuffled, setShuffled]} shuffle={shuffleAndSetVideos} />
-                <AutoplayToggler hook={[autoplay, setAutoplay]} />
-                <AutomuteToggler hook={[muted, setMuted]} limitedAccess={limitedAccess} />
-              </div>
-            </div>
+          <div className="flex items-center justify-end gap-x-2">
+            <AccessBadge />
+            <ReshuffleButton hook={[shuffled, setShuffled]} shuffle={shuffleAndSetVideos} size="xs" />
+            <AutoplayToggler hook={[autoplay, setAutoplay]} size="xs" />
+            <AutomuteToggler hook={[muted, setMuted]} limitedAccess={limitedAccess} size="xs" />
           </div>
 
           <DelayDisclaimer type={toastType} />
-          <UsageDisclaimer type="info" />
 
           <div className="flex w-full flex-col gap-y-3">
             {/* Video */}

@@ -96,27 +96,22 @@ export default function IndexPage() {
         <div className="flex flex-col justify-between gap-y-2 lg:flex-row lg:gap-x-6">
           <div className="flex flex-col justify-center gap-2">
             <h2 className="text-4xl font-bold tracking-tight sm:text-5xl">Finishers Hub</h2>
-            <p className="grow text-lg font-normal">
+            <p className="grow text-sm font-normal">
               The place for all finisher related content. Chaotic, outrageous, lawless on the fence of criminality.
               Perfectly unbalanced. As all things should be.
             </p>
           </div>
-          <div className="mt-1 flex flex-row items-center justify-end gap-3 lg:mt-0 lg:flex-col">
-            <AccessBadge />
-            <div className="flex items-center justify-end gap-x-2">
-              {limitedAccess ? <AccessModal lockedHook={[accessDenied, setAccessDenied]} /> : null}
-              <DeleteCookiesButton />
-              <ReshuffleButton hook={[shuffled, setShuffled]} shuffle={shuffleAndSetVideos} />
-              <AutoplayToggler hook={[autoplay, setAutoplay]} />
-              <AutomuteToggler hook={[muted, setMuted]} limitedAccess={limitedAccess} />
-              <ViewToggler hook={[view, setView]} />
-            </div>
-          </div>
         </div>
 
-        <div>
-          <DelayDisclaimer type={toastType} />
+        <div className="flex items-center justify-end gap-x-2">
+          <AccessBadge />
+          <ReshuffleButton hook={[shuffled, setShuffled]} shuffle={shuffleAndSetVideos} size="xs" />
+          <AutoplayToggler hook={[autoplay, setAutoplay]} size="xs" />
+          <AutomuteToggler hook={[muted, setMuted]} limitedAccess={limitedAccess} size="xs" />
+          <ViewToggler hook={[view, setView]} size="xs" />
         </div>
+
+        <DelayDisclaimer type={toastType} />
 
         <div
           className={classNames(

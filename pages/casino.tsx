@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useMemo, useCallback, useRef } from "react"
-import type { FilterByGameType, VideoMongoDBWithUrl } from "../@types"
+import type { Game, VideoMongoDBWithUrl } from "../@types"
 import useAccessDenied from "../hooks/useAccessDenied"
 import { useMediaQuery } from "usehooks-ts"
 import { shuffle } from "../utils"
@@ -19,11 +19,6 @@ import { useSoundAvailable } from "../hooks/useSoundAvailable"
 
 export default function Casino() {
   const buttonControlsRef = useRef<HTMLDivElement | null>(null)
-  const arenas: FilterByGameType[] = [
-    { name: "All", value: "" },
-    { name: "MW2019", value: "mw2019" },
-    { name: "MW2022", value: "mw2022" },
-  ]
 
   const isMobile = useMediaQuery("(max-width: 768px)")
   const [accessDenied, setAccessDenied] = useAccessDenied()
@@ -33,9 +28,9 @@ export default function Casino() {
   const [fetchError, setFetchError] = useState<boolean>(false)
   const [expandedView, setExpandedView] = useState<boolean>(false)
 
+  const [game, setGame] = useState<Game>("MW2022")
   const [index, setIndex] = useState<number>(0)
   const [videos, setVideos] = useState<VideoMongoDBWithUrl[]>([])
-  const [filter, setFilter] = useState<FilterByGameType>(arenas[arenas.length - 1])
   const [muted, setMuted] = useState<boolean>(true)
   const [autoplay, setAutoplay] = useState<boolean>(true)
   const [shuffled, setShuffled] = useState<boolean>(true)
@@ -60,7 +55,7 @@ export default function Casino() {
   }
 
   useEffect(() => {
-    fetch(`/api/mongo/videos/urls/game/${filter.value}`)
+    fetch(`/api/mongo/videos/urls/game/${game}`)
       .then((res) => res.json())
       .then((videos: VideoMongoDBWithUrl[]) => {
         setLoading(false)
@@ -73,7 +68,7 @@ export default function Casino() {
         setFetchError(true)
         console.error(err)
       })
-  }, [filter, shuffled])
+  }, [game, shuffled])
 
   useEffect(() => {
     const handleKeyDown = (event: any) => {
@@ -112,7 +107,7 @@ export default function Casino() {
             </div>
 
             <div className="flex items-center justify-center gap-x-2">
-              <FilterVideosByGame arenas={arenas} pickedHook={[filter, setFilter]} className="w-full" />
+              <FilterVideosByGame pickedHook={[game, setGame]} className="w-full" />
             </div>
           </div>
 

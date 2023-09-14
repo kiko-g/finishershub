@@ -50,7 +50,7 @@ export function AccessModal({ lockedHook, startOpen, size = "xs" }: Props) {
       <button
         onClick={() => setIsOpen(true)}
         title="Open access modal"
-        className="inline-flex items-center justify-center gap-x-1 rounded border border-teal-600 bg-teal-600/70 px-1.5 py-1.5 text-center text-xs text-white transition hover:opacity-80 disabled:cursor-not-allowed disabled:opacity-50 dark:border-teal-600 dark:bg-teal-600/50 lg:px-2 lg:py-1.5 lg:text-sm"
+        className="inline-flex items-center justify-center gap-x-1 self-stretch rounded border border-teal-600 bg-teal-600/70 px-1.5 py-1.5 text-center text-xs text-white transition hover:opacity-80 disabled:cursor-not-allowed disabled:opacity-50 dark:border-teal-600 dark:bg-teal-600/50 lg:px-2 lg:py-1.5 lg:text-sm"
       >
         <KeyIcon className={classNames(getButtonSizeClassNames(size))} />
       </button>

@@ -21,7 +21,7 @@ export function DelayDisclaimer({ type }: Props) {
     <div
       className={classNames(
         `flex w-full flex-wrap items-center justify-between rounded border 
-        px-3 py-2 text-light lg:px-3 lg:py-2`,
+        px-3 py-2 text-light lg:px-3 lg:py-1.5`,
         type === "info" ? `border-cyan-600/90 bg-cyan-600/80 dark:border-cyan-500/40 dark:bg-cyan-500/40` : ``,
         type === "error" ? `border-rose-600/90 bg-rose-600/80 dark:border-rose-500/40 dark:bg-rose-500/40` : ``,
         type === "warning" ? `border-amber-600/90 bg-amber-600/80 dark:border-amber-500/40 dark:bg-amber-500/40` : ``,
@@ -34,13 +34,13 @@ export function DelayDisclaimer({ type }: Props) {
       <div className="flex w-full items-center justify-between">
         {/* Icon */}
         {type === "success" ? (
-          <CheckBadgeIcon className="h-5 w-5 lg:h-6 lg:w-6" aria-hidden="true" />
+          <CheckBadgeIcon className="h-4 w-4 lg:h-5 lg:w-5" aria-hidden="true" />
         ) : type === "error" ? (
-          <ExclamationCircleIcon className="h-5 w-5 lg:h-6 lg:w-6" aria-hidden="true" />
+          <ExclamationCircleIcon className="h-4 w-4 lg:h-5 lg:w-5" aria-hidden="true" />
         ) : type === "warning" ? (
-          <ExclamationTriangleIcon className="h-5 w-5 lg:h-6 lg:w-6" aria-hidden="true" />
+          <ExclamationTriangleIcon className="h-4 w-4 lg:h-5 lg:w-5" aria-hidden="true" />
         ) : (
-          <InformationCircleIcon className="h-5 w-5 lg:h-6 lg:w-6" aria-hidden="true" />
+          <InformationCircleIcon className="h-4 w-4 lg:h-5 lg:w-5" aria-hidden="true" />
         )}
 
         {/* Text */}
