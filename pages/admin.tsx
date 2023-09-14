@@ -6,7 +6,7 @@ import { AccessModalCTA, Layout, AccessBadge } from "../components/layout"
 import { useMediaQuery } from "usehooks-ts"
 import { VideoNotFound, VideoSkeleton } from "../components/videos"
 import { ArrowPathIcon, ArrowTopRightOnSquareIcon, CheckIcon } from "@heroicons/react/24/outline"
-import { PickAuthors, PickGame, PickLocation, PickMap, PickTags } from "../components/admin"
+import { PickAuthors, PickGame, PickLocation, PickMap, PickQuantity, PickTags } from "../components/admin"
 
 export default function Admin() {
   const isMobile = useMediaQuery("(max-width: 768px)")
@@ -200,7 +200,7 @@ type TableRowProps = {
 }
 
 function TableRow({ video, rowIndex, replaceRowAction }: TableRowProps) {
-  const [row, setRow] = useState<VideoMongoDBWithUrl>(video)
+  const [row, setRow] = useState<VideoMongoDBWithUrl | null>(video)
   const [rowSaved, setRowSaved] = useState(false)
   const [isLoading, setIsLoading] = useState(false)
 
@@ -209,7 +209,7 @@ function TableRow({ video, rowIndex, replaceRowAction }: TableRowProps) {
     return JSON.stringify(row) !== JSON.stringify(initialRowRef.current)
   }, [row])
 
-  const isRowFilled = useMemo(() => row.location && row.authors && row.quantity && row.tags, [row])
+  const isRowFilled = useMemo(() => row !== null && row.location && row.authors && row.quantity && row.tags, [row])
 
   const handleReplaceRow = async (row: VideoMongoDBWithUrl, rowIndex: number) => {
     setIsLoading(true)
@@ -226,6 +226,8 @@ function TableRow({ video, rowIndex, replaceRowAction }: TableRowProps) {
     }
   }
 
+  if (row === null) return null
+
   return (
     <tr
       className={classNames(
@@ -235,30 +237,22 @@ function TableRow({ video, rowIndex, replaceRowAction }: TableRowProps) {
     >
       <td className="whitespace-nowrap px-2 pt-0.5 lg:px-3">{row.id}</td>
       <td className="whitespace-nowrap px-2 pt-0.5 lg:px-3">
-        <PickGame setRowSaved={setRowSaved} rowHook={[row, setRow]} />
+        <PickGame setVideoSaved={setRowSaved} videoHook={[row, setRow]} />
       </td>
       <td className="whitespace-nowrap px-2 pt-0.5 lg:px-3">
-        <PickMap game={row.game} setRowSaved={setRowSaved} rowHook={[row, setRow]} />
+        <PickMap game={row.game} setVideoSaved={setRowSaved} videoHook={[row, setRow]} />
       </td>
       <td className="whitespace-nowrap px-2 pt-0.5 lg:px-3">
-        <PickLocation game={row.game} map={row.map} setRowSaved={setRowSaved} rowHook={[row, setRow]} />
+        <PickLocation game={row.game} map={row.map} setVideoSaved={setRowSaved} videoHook={[row, setRow]} />
       </td>
       <td className="whitespace-nowrap px-2 pt-0.5 lg:px-3">
-        <PickAuthors setRowSaved={setRowSaved} rowHook={[row, setRow]} />
+        <PickAuthors setVideoSaved={setRowSaved} videoHook={[row, setRow]} />
       </td>
       <td className="whitespace-nowrap px-2 pt-0.5 lg:px-3">
-        <PickTags setRowSaved={setRowSaved} rowHook={[row, setRow]} />
+        <PickTags setVideoSaved={setRowSaved} videoHook={[row, setRow]} />
       </td>
       <td className="whitespace-nowrap px-2 pt-0.5 lg:px-3">
-        <input
-          type="number"
-          defaultValue={row.quantity}
-          className="admin max-w-[8rem] text-xs"
-          onChange={(e) => {
-            setRowSaved(false)
-            setRow({ ...row, quantity: parseInt(e.target.value) })
-          }}
-        />
+        <PickQuantity setVideoSaved={setRowSaved} videoHook={[row, setRow]} />
       </td>
       <td className="whitespace-nowrap px-2 pt-0.5 lg:px-3">
         <a href={row.url} target="_blank" className="hover:scale-125">

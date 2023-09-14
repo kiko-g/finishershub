@@ -7,16 +7,16 @@ import { getMaps } from "../../utils/data"
 
 export function PickMap({
   game,
-  rowHook,
-  setRowSaved,
+  videoHook,
+  setVideoSaved,
   className,
 }: {
   game: string
-  setRowSaved: Dispatch<SetStateAction<boolean>>
-  rowHook: [VideoMongoDBWithUrl, Dispatch<SetStateAction<VideoMongoDBWithUrl>>]
+  setVideoSaved: Dispatch<SetStateAction<boolean>>
+  videoHook: [VideoMongoDBWithUrl, Dispatch<SetStateAction<VideoMongoDBWithUrl | null>>]
   className?: string
 }) {
-  const [row, setRow] = rowHook
+  const [row, setRow] = videoHook
   const picked = useMemo(() => row.map, [row])
   const maps = getMaps(game)
 
@@ -25,7 +25,7 @@ export function PickMap({
       as="div"
       value={picked}
       onChange={(newValue) => {
-        setRowSaved(false)
+        setVideoSaved(false)
         setRow({ ...row, map: newValue })
       }}
     >

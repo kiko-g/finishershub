@@ -6,15 +6,15 @@ import { CheckCircleIcon, ChevronUpDownIcon } from "@heroicons/react/24/solid"
 import { games } from "../../utils/data"
 
 export function PickGame({
-  rowHook,
-  setRowSaved,
+  videoHook,
+  setVideoSaved,
   className,
 }: {
-  setRowSaved: Dispatch<SetStateAction<boolean>>
-  rowHook: [VideoMongoDBWithUrl, Dispatch<SetStateAction<VideoMongoDBWithUrl>>]
+  setVideoSaved: Dispatch<SetStateAction<boolean>>
+  videoHook: [VideoMongoDBWithUrl, Dispatch<SetStateAction<VideoMongoDBWithUrl | null>>]
   className?: string
 }) {
-  const [row, setRow] = rowHook
+  const [row, setRow] = videoHook
   const picked = useMemo(() => row.game, [row])
 
   return (
@@ -22,7 +22,7 @@ export function PickGame({
       as="div"
       value={picked}
       onChange={(newValue) => {
-        setRowSaved(false)
+        setVideoSaved(false)
         setRow({ ...row, game: newValue })
       }}
     >

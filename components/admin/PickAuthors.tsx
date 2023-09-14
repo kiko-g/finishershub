@@ -6,26 +6,25 @@ import { CheckCircleIcon, ChevronUpDownIcon } from "@heroicons/react/24/solid"
 import { authors } from "../../utils/data"
 
 export function PickAuthors({
-  rowHook,
-  setRowSaved,
+  videoHook,
+  setVideoSaved,
   className,
 }: {
-  setRowSaved: Dispatch<SetStateAction<boolean>>
-  rowHook: [VideoMongoDBWithUrl, Dispatch<SetStateAction<VideoMongoDBWithUrl>>]
+  setVideoSaved: Dispatch<SetStateAction<boolean>>
+  videoHook: [VideoMongoDBWithUrl, Dispatch<SetStateAction<VideoMongoDBWithUrl | null>>]
   className?: string
 }) {
-  const [row, setRow] = rowHook
-  const picked = useMemo(() => (row.authors === null ? [] : row.authors), [row])
-  console.log(picked)
+  const [video, setVideo] = videoHook
+  const picked = useMemo(() => (video.authors === null ? [] : video.authors), [video])
 
   return (
     <Listbox
       as="div"
       multiple
-      value={row.authors}
+      value={picked}
       onChange={(newValue) => {
-        setRowSaved(false)
-        setRow({ ...row, authors: newValue })
+        setVideoSaved(false)
+        setVideo({ ...video, authors: newValue })
       }}
     >
       {({ open }) => (

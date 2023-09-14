@@ -24,10 +24,13 @@ export const tags = tagsAndDescriptions.map((item) => item.name).sort((a, b) => 
 export const authors = ["Bagger", "Levels", "Reicalo", "Koba", "Junhó", "Castro"]
 
 export const getMaps = (game: string) => {
-  if (game === "MW2019") return ["Verdansk", "Rebirth"]
-  if (game === "MW2022") return ["Ashika"]
+  const mw2019Maps = ["Verdansk", "Rebirth", "Fortune's Keep"]
+  const mw2022Maps = ["Al Mazrah", "Ashika"]
 
-  return ["Verdansk", "Rebirth", "Ashika"]
+  if (game === "MW2019") return mw2019Maps
+  if (game === "MW2022") return mw2022Maps
+
+  return [mw2019Maps, mw2022Maps].flat()
 }
 
 export const getLocations = (game: string, map: string) => {

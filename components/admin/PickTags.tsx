@@ -6,26 +6,25 @@ import { CheckCircleIcon, ChevronUpDownIcon } from "@heroicons/react/24/solid"
 import { tags } from "../../utils/data"
 
 export function PickTags({
-  rowHook,
-  setRowSaved,
+  videoHook,
+  setVideoSaved,
   className,
 }: {
-  setRowSaved: Dispatch<SetStateAction<boolean>>
-  rowHook: [VideoMongoDBWithUrl, Dispatch<SetStateAction<VideoMongoDBWithUrl>>]
+  setVideoSaved: Dispatch<SetStateAction<boolean>>
+  videoHook: [VideoMongoDBWithUrl, Dispatch<SetStateAction<VideoMongoDBWithUrl | null>>]
   className?: string
 }) {
-  const [row, setRow] = rowHook
-  const picked = useMemo(() => (row.tags === null ? [] : row.tags), [row])
-  console.log(picked)
+  const [video, setVideo] = videoHook
+  const picked = useMemo(() => video.tags || [], [video])
 
   return (
     <Listbox
       as="div"
       multiple
-      value={row.tags}
+      value={picked}
       onChange={(newValue) => {
-        setRowSaved(false)
-        setRow({ ...row, tags: newValue })
+        setVideoSaved(false)
+        setVideo({ ...video, tags: newValue })
       }}
     >
       {({ open }) => (
@@ -47,7 +46,7 @@ export function PickTags({
 
                 return (
                   <Listbox.Option
-                    key={tagIdx}
+                    key={`video-tag-${video.id}-${tagIdx}`}
                     value={tag}
                     className={({ active }) =>
                       classNames(

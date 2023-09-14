@@ -7,7 +7,7 @@ import { getVideoUrlFromVideo } from "../../utils"
 import { useContentInteraction } from "../../hooks/useContentInteraction"
 import { useControls } from "../../hooks/useControls"
 import { AccessBadge } from "../layout/AccessBadge"
-import { PickAuthors, PickGame, PickLocation, PickMap, PickTags } from "../admin"
+import { PickAuthors, PickGame, PickLocation, PickMap, PickQuantity, PickTags } from "../admin"
 import { CheckIcon } from "@heroicons/react/24/outline"
 
 type Props = {
@@ -113,15 +113,15 @@ export function VideoPage({ videoIndex }: Props) {
   }, [videoIndex, setIsLoading, setFetchError])
 
   return (
-    <div className="flex min-h-screen flex-col bg-light dark:bg-navy">
+    <div className="flex min-h-screen flex-col bg-light text-gray-700 dark:bg-navy dark:text-white">
       <Seo title={`Video ${videoIndex}`} />
       <Header siteTitle="Finishers Hub" location="Video" />
-      <div className="mx-auto mt-20 flex w-full max-w-7xl flex-1 items-start justify-center gap-x-6 px-4 xl:px-2">
+      <div className="mx-auto mt-20 flex w-full max-w-7xl flex-1 items-start justify-center gap-x-4 px-4 xl:px-2">
         {ready && video !== null ? (
           <>
-            <div className="hidden h-full min-w-[20rem] flex-col justify-between self-stretch lg:flex">
+            <div className="hidden h-full min-w-[20rem] flex-col justify-between self-stretch rounded bg-white p-3 dark:bg-dark lg:flex">
               <div>
-                <div className="flex items-center gap-2">
+                <div className="flex flex-wrap items-center gap-x-2">
                   <h2 className="text-2xl font-bold">Video {videoIndex}</h2>
                   <span>
                     <AccessBadge />
@@ -134,31 +134,17 @@ export function VideoPage({ videoIndex }: Props) {
 
               {canEdit && (
                 <div className="flex flex-col space-y-2">
-                  <PickGame
-                    setRowSaved={setVideoSaved}
-                    rowHook={[video, setVideo] as [VideoMongoDBWithUrl, Dispatch<SetStateAction<VideoMongoDBWithUrl>>]}
-                  />
-                  <PickMap
-                    game={video.game}
-                    setRowSaved={setVideoSaved}
-                    rowHook={[video, setVideo] as [VideoMongoDBWithUrl, Dispatch<SetStateAction<VideoMongoDBWithUrl>>]}
-                  />
+                  <PickGame setVideoSaved={setVideoSaved} videoHook={[video, setVideo]} />
+                  <PickMap game={video.game} setVideoSaved={setVideoSaved} videoHook={[video, setVideo]} />
                   <PickLocation
                     game={video.game}
                     map={video.map}
-                    setRowSaved={setVideoSaved}
-                    rowHook={[video, setVideo] as [VideoMongoDBWithUrl, Dispatch<SetStateAction<VideoMongoDBWithUrl>>]}
+                    setVideoSaved={setVideoSaved}
+                    videoHook={[video, setVideo]}
                   />
-                  {/*
-                  <PickTags
-                    setRowSaved={setVideoSaved}
-                    rowHook={[video, setVideo] as [VideoMongoDBWithUrl, Dispatch<SetStateAction<VideoMongoDBWithUrl>>]}
-                  />
-                  <PickAuthors
-                    setRowSaved={setVideoSaved}
-                    rowHook={[video, setVideo] as [VideoMongoDBWithUrl, Dispatch<SetStateAction<VideoMongoDBWithUrl>>]}
-                  />
-                */}
+                  <PickTags setVideoSaved={setVideoSaved} videoHook={[video, setVideo]} />
+                  <PickAuthors setVideoSaved={setVideoSaved} videoHook={[video, setVideo]} />
+                  <PickQuantity setVideoSaved={setVideoSaved} videoHook={[video, setVideo]} className="w-full" />
                 </div>
               )}
 
@@ -174,8 +160,8 @@ export function VideoPage({ videoIndex }: Props) {
               </div>
 
               <div className="mt-2 flex w-full flex-col items-center gap-2 lg:flex-row">
+                <VideoNavLink name="Previous" href={previous} />
                 <VideoNavLink name="Next" href={next} />
-                <VideoNavLink name="Previous" href={next} />
               </div>
             </div>
 
@@ -188,8 +174,8 @@ export function VideoPage({ videoIndex }: Props) {
               />
 
               <div className="mt-2 flex w-full flex-row flex-wrap items-center gap-2 lg:hidden">
+                <VideoNavLink name="Previous" href={previous} />
                 <VideoNavLink name="Next" href={next} />
-                <VideoNavLink name="Previous" href={next} />
               </div>
             </div>
           </>

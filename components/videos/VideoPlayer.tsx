@@ -169,7 +169,7 @@ export function VideoPlayer(props: Props) {
       {/* Progress Bar */}
       <div
         ref={progressBarRef}
-        className="group relative -mt-[3px] h-[3px] cursor-pointer rounded-b hover:-mt-[6px] hover:h-[6px]"
+        className="group relative -mt-[5px] h-[5px] cursor-pointer rounded-b shadow-inner hover:-mt-[10px] hover:h-[10px]"
         onClick={(event) => {
           if (progressBarRef.current && videoRef.current) {
             const rect = progressBarRef.current.getBoundingClientRect()
@@ -183,7 +183,7 @@ export function VideoPlayer(props: Props) {
         <div className="absolute bottom-0 left-0 z-40 h-full w-full rounded-b bg-black/20 transition" />
         <div
           style={{ width: `${progress}%` }}
-          className="absolute bottom-0 left-0 z-[999] h-full rounded-bl bg-rose-500 transition dark:bg-rose-500"
+          className="absolute bottom-0 left-0 z-[999] h-full rounded-bl bg-primary transition dark:bg-secondary"
         />
       </div>
     </div>
