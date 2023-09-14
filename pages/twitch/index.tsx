@@ -4,7 +4,7 @@ import useAccessDenied from "../../hooks/useAccessDenied"
 import { useMediaQuery } from "usehooks-ts"
 import { shuffle } from "../../utils"
 import { clearCache, isStorageValid, writeVideosStorage } from "../../utils/storage"
-import { Layout, AccessModal, InvisbleTopLayer, FullAccessBadge, LimitedAccessBadge } from "../../components/layout"
+import { Layout, AccessModal, InvisbleTopLayer, AccessBadge } from "../../components/layout"
 import { PlusIcon } from "@heroicons/react/24/solid"
 import {
   ViewToggler,
@@ -102,7 +102,7 @@ export default function IndexPage() {
             </p>
           </div>
           <div className="mt-1 flex flex-row items-center justify-end gap-3 lg:mt-0 lg:flex-col">
-            {limitedAccess ? <LimitedAccessBadge /> : <FullAccessBadge />}
+            <AccessBadge />
             <div className="flex items-center justify-end gap-x-2">
               {limitedAccess ? <AccessModal lockedHook={[accessDenied, setAccessDenied]} /> : null}
               <DeleteCookiesButton />

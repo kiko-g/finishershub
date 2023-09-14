@@ -1,6 +1,6 @@
 import React, { useCallback, useEffect, useMemo, useRef, useState } from "react"
 import classNames from "classnames"
-import { Layout, FullAccessBadge, LimitedAccessBadge, Seo, AccessModal } from "../components/layout"
+import { Layout, AccessBadge } from "../components/layout"
 import {
   AutoplayToggler,
   DeleteCookiesButton,
@@ -28,7 +28,6 @@ import {
 } from "@heroicons/react/24/outline"
 import { CheckCircleIcon } from "@heroicons/react/24/solid"
 import { FilterVideosByGame } from "../components/videos/FilterVideosByGame"
-import { useSwipeable } from "react-swipeable"
 import { useControls } from "../hooks/useControls"
 import { useContentInteraction } from "../hooks/useContentInteraction"
 import { arenas, authors, tags } from "../utils/data"
@@ -36,8 +35,6 @@ import { arenas, authors, tags } from "../utils/data"
 type Props = {}
 
 export default function Videos({}: Props) {
-  const buttonControlsRef = useRef<HTMLDivElement | null>(null)
-
   const {
     isMobile,
     accessDenied,
@@ -133,7 +130,7 @@ export default function Videos({}: Props) {
         <div className="text-lg font-normal">
           <div className="flex flex-wrap items-center justify-start gap-x-3 gap-y-1">
             <h2 className="whitespace-nowrap text-4xl font-bold tracking-tight sm:text-5xl">Videos</h2>
-            {accessDenied ? <LimitedAccessBadge /> : <FullAccessBadge />}
+            <AccessBadge />
           </div>
           <p className="mt-0.5 max-w-3xl text-sm">
             Unlimited entertainment with a control panel for you to filter as you wish and relive some of our greatest

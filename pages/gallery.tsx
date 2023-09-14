@@ -4,7 +4,7 @@ import classNames from "classnames"
 import { shuffle } from "../utils"
 import useAccessDenied from "../hooks/useAccessDenied"
 import { useMediaQuery } from "usehooks-ts"
-import { FullAccessBadge, LimitedAccessBadge, Layout, AccessModal } from "../components/layout"
+import { Layout, AccessModal, AccessBadge } from "../components/layout"
 import {
   ViewToggler,
   AutoplayToggler,
@@ -104,7 +104,7 @@ export default function Gallery() {
           <div className="flex flex-col justify-center gap-2">
             <div className="flex flex-wrap items-center justify-start gap-3">
               <h2 className="mb-1 whitespace-nowrap text-4xl font-bold tracking-tight sm:text-5xl">Finishers Hub</h2>
-              {limitedAccess ? <LimitedAccessBadge /> : <FullAccessBadge />}
+              <AccessBadge />
             </div>
             <p className="text-sm font-normal">
               The place for all finisher related content. Chaotic, outrageous, lawless on the fence of criminality.

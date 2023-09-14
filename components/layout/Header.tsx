@@ -84,8 +84,7 @@ export function Header({ siteTitle, location }: Props) {
   return (
     <Disclosure
       as="nav"
-      className="background sticky top-0 z-20 bg-light/70 px-3 py-3 text-gray-800 
-      backdrop-blur dark:bg-navy/80 dark:text-white lg:px-4 lg:py-2"
+      className="background sticky top-0 z-20 bg-light/70 px-3 py-3 text-gray-800 backdrop-blur-xs dark:bg-navy/80 dark:text-white lg:px-4 lg:py-2"
     >
       {({ open }) => {
         return (
@@ -118,7 +117,7 @@ function Hamburger({ title, open }: HamburgerProps) {
     >
       {open ? null : (
         <Link href="/" className="flex items-center gap-x-2">
-          <div className="h-7 w-7 rounded-full bg-gradient-to-br from-teal-500 to-teal-600 shadow dark:bg-gradient-to-br dark:from-blue-500 dark:to-blue-600">
+          <div className="h-7 w-7 rounded-full bg-gradient-to-br from-primary to-secondary shadow dark:bg-gradient-to-br dark:from-secondary dark:to-primary">
             <Image className="avatar z-20 rounded-full" width={256} height={256} src={avatar} alt="Finishers Hub" />
           </div>
           <span className="whitespace-nowrap font-bold tracking-tight">{title}</span>
@@ -159,7 +158,7 @@ function Navbar({ title, location }: HeaderProps) {
       <div className="relative hidden h-auto self-center duration-200 hover:opacity-80 lg:flex lg:gap-x-8">
         <Link
           href="/"
-          className="relative flex h-7 w-7 items-center gap-x-2 rounded-full bg-gradient-to-br from-teal-500 to-teal-600 dark:bg-gradient-to-br dark:from-blue-500 dark:to-blue-600"
+          className="relative flex h-7 w-7 items-center gap-x-2 rounded-full bg-gradient-to-br from-primary to-secondary dark:bg-gradient-to-br dark:from-secondary dark:to-primary"
         >
           <Image
             src={avatar}

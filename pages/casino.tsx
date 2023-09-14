@@ -1,27 +1,17 @@
 import React, { useState, useEffect, useMemo, useCallback, useRef } from "react"
 import type { FilterByGameType, VideoMongoDBWithUrl } from "../@types"
 import useAccessDenied from "../hooks/useAccessDenied"
-import { useSwipeable } from "react-swipeable"
 import { useMediaQuery } from "usehooks-ts"
 import { shuffle } from "../utils"
-import { Layout, AccessModal, FullAccessBadge, LimitedAccessBadge } from "../components/layout"
+import { Layout, AccessBadge } from "../components/layout"
 import { ArrowLongLeftIcon, ArrowLongRightIcon } from "@heroicons/react/24/outline"
 import {
   AutoplayToggler,
-  DeleteCookiesButton,
   FilterVideosByGame,
-  FocusViewToggler,
-  KeyboardUsageButton,
-  KeyboardUsageInstructions,
   AutomuteToggler,
-  NextVideo,
-  PopOpenVideo,
-  PreviousVideo,
   ReshuffleButton,
-  ShareVideo,
   UsageDisclaimer,
   VideoNotFound,
-  VideoOrderToggler,
   VideoPlayer,
   VideoSkeleton,
 } from "../components/videos"
@@ -105,7 +95,7 @@ export default function Casino() {
             <div className="text-lg font-normal">
               <div className="flex flex-wrap items-center justify-start gap-x-3 gap-y-1">
                 <h2 className="whitespace-nowrap text-4xl font-bold tracking-tight sm:text-5xl">Slot Machine</h2>
-                {limitedAccess ? <LimitedAccessBadge /> : <FullAccessBadge />}
+                <AccessBadge />
               </div>
               <p className="mt-2 text-sm">
                 More fun than a casino, especially because we don&apos;t take your money. Not sure about the addiction

@@ -3,7 +3,7 @@ import classNames from "classnames"
 import Image from "next/image"
 import { Listbox, Transition } from "@headlessui/react"
 import useAccessDenied from "../hooks/useAccessDenied"
-import { Layout, FullAccessBadge, LimitedAccessBadge, ComingSoon } from "../components/layout"
+import { Layout, ComingSoon, AccessBadge } from "../components/layout"
 import { ArrowUpTrayIcon, LockClosedIcon } from "@heroicons/react/24/outline"
 import { CheckIcon, ChevronUpDownIcon } from "@heroicons/react/20/solid"
 
@@ -36,7 +36,7 @@ export default function CreatePage() {
           <div className="text-lg font-normal">
             <div className="flex flex-wrap items-center justify-start gap-x-3 gap-y-2">
               <h2 className="text-4xl font-bold tracking-tight sm:text-5xl">Create</h2>
-              {accessDenied ? <LimitedAccessBadge /> : <FullAccessBadge />}
+              <AccessBadge />
             </div>
             <p className="mt-2">
               This is where we build memories. History needs to be written. For members and members only.
