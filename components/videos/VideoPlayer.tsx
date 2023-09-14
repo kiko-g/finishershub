@@ -114,14 +114,42 @@ export function VideoPlayer(props: Props) {
 
         {special ? null : (
           <>
-            <div className="absolute left-0 top-0 z-30 hidden font-normal text-white transition group-hover:flex group-hover:gap-2">
-              <div className="flex flex-col items-center gap-2 rounded-br rounded-tl bg-black/50 px-2 py-2 lg:gap-2 lg:px-3 lg:py-3">
+            <div className="absolute left-0 top-0 z-30 flex font-normal text-white transition lg:hidden lg:group-hover:flex lg:group-hover:gap-2">
+              <div className="flex items-center gap-2 rounded-br rounded-tl bg-black/50 px-2 py-2 lg:gap-2 lg:px-3 lg:py-3">
                 <ShareVideo video={video} size="sm" />
                 <PopOpenVideo video={video} size="sm" />
               </div>
             </div>
 
-            <div className="absolute bottom-0 right-0 z-30 hidden font-normal text-white transition group-hover:flex group-hover:gap-2">
+            {(video.authors.length > 0 || video.tags.length > 0) && (
+              <div className="absolute right-0 top-0 z-30 hidden font-normal text-white opacity-50 transition lg:hidden lg:hover:opacity-100 lg:group-hover:flex lg:group-hover:gap-2">
+                <div className="flex flex-col items-end gap-2 rounded-bl rounded-tr bg-black/50 px-1 py-1 lg:gap-1 lg:px-2 lg:py-2">
+                  <div className="flex max-w-md flex-1 flex-wrap items-center gap-1 self-stretch">
+                    {video.tags.map((author, authorIdx) => (
+                      <span
+                        key={`${author}-${authorIdx}`}
+                        className="flex-1 whitespace-nowrap rounded bg-primary/50 px-1 py-0.5 text-xxs tracking-tighter dark:bg-secondary/50"
+                      >
+                        {author}
+                      </span>
+                    ))}
+                  </div>
+
+                  <div className="flex max-w-md flex-1 flex-wrap items-center gap-1 self-stretch">
+                    {video.authors.map((author, authorIdx) => (
+                      <span
+                        key={`${author}-${authorIdx}`}
+                        className="flex-1 whitespace-nowrap rounded bg-primary/50 px-1 py-0.5 text-xxs tracking-tighter dark:bg-secondary/50"
+                      >
+                        {author}
+                      </span>
+                    ))}
+                  </div>
+                </div>
+              </div>
+            )}
+
+            <div className="absolute bottom-0 right-0 z-30 flex font-normal text-white transition lg:hidden lg:group-hover:flex lg:group-hover:gap-2">
               <div className="flex flex-col items-center gap-2 rounded-br rounded-tl bg-black/50 px-2 py-2 lg:gap-2 lg:px-3 lg:py-3">
                 <PlayPauseVideo
                   size="sm"

@@ -18,7 +18,7 @@ export function VideoOrderToggler({ hook, size = "sm" }: Props) {
       onClick={() => setShuffle((shuffle) => !shuffle)}
       className="inline-flex items-center justify-center gap-x-1.5 rounded border border-primary bg-primary/70 px-1.5 py-1.5 text-center text-xs text-white transition hover:opacity-80 disabled:cursor-not-allowed disabled:opacity-50 dark:border-primary dark:bg-primary/50 lg:px-2 lg:py-1.5 lg:text-sm"
     >
-      <span className="hidden tracking-tighter lg:inline-flex">Shuffle</span>
+      <span className="hidden tracking-tighter lg:inline-flex">Order</span>
       {shuffle ? (
         <ShuffleIcon className={getButtonSizeClassNames(size)} />
       ) : (

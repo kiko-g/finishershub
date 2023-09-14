@@ -17,6 +17,7 @@ import { arenas, authors, tags } from "../utils/data"
 import type { FilterByGameType, VideoMongoDBWithUrl } from "../@types"
 import { useControls } from "../hooks/useControls"
 import { useContentInteraction } from "../hooks/useContentInteraction"
+import { VideoOrderToggler } from "../components/videos/VideoOrderToggler"
 import {
   ArrowLongLeftIcon,
   CheckCircleIcon,
@@ -136,9 +137,10 @@ export default function Videos({}: Props) {
           {fetchError && <VideoNotFound reloadPage />}
           {isContentReady ? (
             <div className="flex flex-col space-y-2 font-normal">
-              <div className="flex w-full items-center justify-between gap-4">
+              <div className="flex w-full flex-col items-end justify-between gap-2 lg:flex-row lg:gap-4">
                 <div className="flex items-center gap-1.5">
                   <KeyboardUsageButton showHook={[showInstructions, setShowInstructions]} size="xs" />
+                  <VideoOrderToggler hook={[shuffled, setShuffled]} size="xs" />
                   <AutoplayToggler hook={[autoplay, setAutoplay]} size="xs" />
                   <AutomuteToggler hook={[muted, setMuted]} size="xs" limitedAccess={accessDenied} />
                 </div>
@@ -246,8 +248,8 @@ function PickAuthors({
     >
       {({ open }) => (
         <>
-          <Listbox.Button className="inline-flex w-full items-center justify-center gap-x-0.5 rounded border border-secondary bg-secondary/70 py-1.5 pl-2 pr-1.5 text-center text-xs text-white transition hover:opacity-80 disabled:cursor-not-allowed disabled:opacity-50 dark:border-secondary dark:bg-secondary/50 lg:py-1.5 lg:pl-2.5 lg:pr-1.5 lg:text-sm">
-            <span className="font-normal tracking-tighter lg:tracking-normal">Authors</span>
+          <Listbox.Button className="inline-flex w-full items-center justify-center rounded border border-secondary bg-secondary/70 py-1.5 pl-2 pr-1.5 text-center text-xs text-white transition hover:opacity-80 disabled:cursor-not-allowed disabled:opacity-50 dark:border-secondary dark:bg-secondary/50 lg:py-1.5 lg:pl-2.5 lg:pr-1.5 lg:text-xs">
+            <span className="whitespace-nowrap font-normal tracking-tighter">Authors</span>
             <ChevronUpDownIcon className="h-4 w-4 lg:h-5 lg:w-5" aria-hidden="true" />
           </Listbox.Button>
 
@@ -340,8 +342,8 @@ function PickTags({
     >
       {({ open }) => (
         <>
-          <Listbox.Button className="inline-flex w-full items-center justify-center gap-x-0.5 rounded border border-secondary bg-secondary/70 py-1.5 pl-2 pr-1.5 text-center text-xs text-white transition hover:opacity-80 disabled:cursor-not-allowed disabled:opacity-50 dark:border-secondary dark:bg-secondary/50 lg:py-1.5 lg:pl-2.5 lg:pr-1.5 lg:text-sm">
-            <span className="font-normal tracking-tighter lg:tracking-normal">Tags</span>
+          <Listbox.Button className="inline-flex w-full items-center justify-center rounded border border-secondary bg-secondary/70 py-1.5 pl-2 pr-1.5 text-center text-xs text-white transition hover:opacity-80 disabled:cursor-not-allowed disabled:opacity-50 dark:border-secondary dark:bg-secondary/50 lg:py-1.5 lg:pl-2.5 lg:pr-1.5 lg:text-xs">
+            <span className="whitespace-nowrap font-normal ">Tags</span>
             <ChevronUpDownIcon className="h-4 w-4 lg:h-5 lg:w-5" aria-hidden="true" />
           </Listbox.Button>
 
@@ -408,7 +410,7 @@ function PickTags({
 
 function ResultsAmountBadge({ count }: { count: number }) {
   return (
-    <div className="flex w-full items-center gap-2 rounded border border-slate-700 bg-slate-700/80 px-3 py-1.5 text-center text-sm font-medium tracking-tight text-white disabled:cursor-not-allowed disabled:opacity-50 dark:border-slate-500 dark:bg-slate-500/50">
+    <div className="flex w-full items-center gap-2 self-stretch rounded border border-slate-700 bg-slate-700/80 px-2 py-1.5 text-center text-xs font-normal tracking-tight text-white disabled:cursor-not-allowed disabled:opacity-50 dark:border-slate-500 dark:bg-slate-500/50">
       <span className="tracking-tighter">{count} results</span>
     </div>
   )

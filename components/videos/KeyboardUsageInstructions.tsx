@@ -37,21 +37,21 @@ export function KeyboardUsageInstructions({ showHook }: Props) {
           leaveFrom="opacity-100"
           leaveTo="opacity-0"
         >
-          <div className="pointer-events-auto w-full max-w-xs overflow-hidden rounded-tr bg-white opacity-100">
+          <div className="pointer-events-auto w-full max-w-[18rem] overflow-hidden border-t-2 border-primary bg-white opacity-100 dark:border-secondary dark:bg-dark">
             <div className="p-4">
               <div className="flex items-start">
-                <div className="flex-shrink-0">
-                  <InformationCircleIcon className="h-6 w-6 text-teal-600" aria-hidden="true" />
-                </div>
                 <div className="ml-3 w-0 flex-1 pt-0.5">
-                  <p className="text-left text-sm font-medium text-gray-900">Keyboard Shortcuts</p>
-                  <ul className="mt-2 flex flex-col space-y-1 text-sm text-gray-500">
+                  <span className="flex items-center justify-start gap-x-2 text-left text-sm font-medium text-gray-900 dark:text-white">
+                    <InformationCircleIcon className="h-5 w-5 text-primary dark:text-secondary" aria-hidden="true" />
+                    <span>Keyboard Shortcuts</span>
+                  </span>
+                  <ul className="mt-3 flex flex-col space-y-1 text-sm text-gray-500 dark:text-white">
                     {keysMapping.map((keyMapping) => (
                       <li
                         key={`key-${keyMapping.key}`}
-                        className="flex items-center justify-start gap-x-2 tracking-tight"
+                        className="flex items-center justify-start gap-x-2 tracking-tighter"
                       >
-                        <span className="w-4 self-stretch rounded bg-primary/10 text-center text-gray-900">
+                        <span className="w-4 self-stretch rounded bg-primary/20 text-center text-gray-900 dark:bg-secondary/40 dark:text-white">
                           {keyMapping.key}
                         </span>
                         <span>{keyMapping.description}</span>
