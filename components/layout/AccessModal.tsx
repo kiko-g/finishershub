@@ -11,7 +11,7 @@ type Props = {
   size?: "xs" | "sm" | "md" | "lg" | "xl"
 }
 
-export function AccessModal({ lockedHook, startOpen, size = "sm" }: Props) {
+export function AccessModal({ lockedHook, startOpen, size = "xs" }: Props) {
   const secretCode = "Doeu"
   const secretHints = ["Levels", "Bio", "Window", "Clip"]
 
@@ -47,8 +47,12 @@ export function AccessModal({ lockedHook, startOpen, size = "sm" }: Props) {
   return (
     <>
       {/* Button */}
-      <button title="Open access modal" onClick={() => setIsOpen(true)} className="transition hover:opacity-80">
-        <KeyIcon className={classNames(getButtonSizeClassNames(size), "text-teal-500 dark:text-teal-400")} />
+      <button
+        onClick={() => setIsOpen(true)}
+        title="Open access modal"
+        className="inline-flex items-center justify-center gap-x-1 rounded border border-teal-600 bg-teal-600/70 px-1.5 py-1.5 text-center text-xs text-white transition hover:opacity-80 disabled:cursor-not-allowed disabled:opacity-50 dark:border-teal-600 dark:bg-teal-600/50 lg:px-2 lg:py-1.5 lg:text-sm"
+      >
+        <KeyIcon className={classNames(getButtonSizeClassNames(size))} />
       </button>
 
       {/* Modal */}
@@ -63,7 +67,7 @@ export function AccessModal({ lockedHook, startOpen, size = "sm" }: Props) {
             leaveFrom="opacity-100"
             leaveTo="opacity-0"
           >
-            <div className="fixed inset-0 bg-black/80 backdrop-blur dark:bg-white/5" />
+            <div className="fixed inset-0 bg-black/80 backdrop-blur-xs dark:bg-white/5" />
           </Transition.Child>
 
           <div className="fixed inset-0 z-[999] overflow-y-auto">

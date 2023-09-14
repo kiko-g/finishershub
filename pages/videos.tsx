@@ -1,43 +1,33 @@
 import React, { useCallback, useEffect, useMemo, useRef, useState } from "react"
 import classNames from "classnames"
-import { Layout, FullAccessBadge, LimitedAccessBadge, Seo, AccessModal } from "../components/layout"
+import { Listbox } from "@headlessui/react"
+import { FilterVideosByGame } from "../components/videos/FilterVideosByGame"
+import { Layout, AccessBadge } from "../components/layout"
 import {
   AutoplayToggler,
-  DeleteCookiesButton,
-  FocusViewToggler,
   KeyboardUsageButton,
   KeyboardUsageInstructions,
   AutomuteToggler,
-  NextVideo,
-  PopOpenVideo,
-  PreviousVideo,
-  ShareVideo,
   VideoNotFound,
-  VideoOrderToggler,
   VideoPlayer,
   VideoSkeleton,
 } from "../components/videos"
+
+import { arenas, authors, tags } from "../utils/data"
 import type { FilterByGameType, VideoMongoDBWithUrl } from "../@types"
-import { Listbox } from "@headlessui/react"
-import {
-  ArrowLongLeftIcon,
-  ArrowLongRightIcon,
-  CheckIcon,
-  ChevronUpDownIcon,
-  InformationCircleIcon,
-} from "@heroicons/react/24/outline"
-import { CheckCircleIcon } from "@heroicons/react/24/solid"
-import { FilterVideosByGame } from "../components/videos/FilterVideosByGame"
-import { useSwipeable } from "react-swipeable"
 import { useControls } from "../hooks/useControls"
 import { useContentInteraction } from "../hooks/useContentInteraction"
-import { arenas, authors, tags } from "../utils/data"
+import {
+  ArrowLongLeftIcon,
+  CheckCircleIcon,
+  FunnelIcon,
+  ArrowLongRightIcon,
+  ChevronUpDownIcon,
+} from "@heroicons/react/24/outline"
 
 type Props = {}
 
 export default function Videos({}: Props) {
-  const buttonControlsRef = useRef<HTMLDivElement | null>(null)
-
   const {
     isMobile,
     accessDenied,
@@ -133,7 +123,7 @@ export default function Videos({}: Props) {
         <div className="text-lg font-normal">
           <div className="flex flex-wrap items-center justify-start gap-x-3 gap-y-1">
             <h2 className="whitespace-nowrap text-4xl font-bold tracking-tight sm:text-5xl">Videos</h2>
-            {accessDenied ? <LimitedAccessBadge /> : <FullAccessBadge />}
+            <AccessBadge />
           </div>
           <p className="mt-0.5 max-w-3xl text-sm">
             Unlimited entertainment with a control panel for you to filter as you wish and relive some of our greatest
@@ -157,15 +147,11 @@ export default function Videos({}: Props) {
                   <PickTags tags={tags} hook={[selectedTags, setSelectedTags]} />
                   <PickAuthors authors={authors} hook={[selectedAuthors, setSelectedAuthors]} />
                   <FilterVideosByGame arenas={arenas} pickedHook={[selectedGame, setSelectedGame]} />
+                  <ResultsAmountBadge count={filteredVideos.length} />
                 </div>
               </div>
 
               <KeyboardUsageInstructions showHook={[showInstructions, setShowInstructions]} />
-
-              <div className="flex w-full items-center gap-2 rounded border border-sky-600 bg-sky-600/60 py-2 pl-3 pr-2 text-center text-sm font-medium tracking-tight text-white disabled:cursor-not-allowed disabled:opacity-50 dark:border-sky-500 dark:bg-sky-500/50">
-                <InformationCircleIcon className="h-4 w-4 text-white" />
-                <span>{filteredVideos.length} results matching your filtering criteria.</span>
-              </div>
 
               <div className="relative w-full">
                 {video !== null ? (
@@ -260,7 +246,7 @@ function PickAuthors({
     >
       {({ open }) => (
         <>
-          <Listbox.Button className="inline-flex w-full items-center justify-center gap-x-0.5 rounded border border-secondary bg-secondary/70 py-1.5 pl-2 pr-1.5 text-center text-xs text-white transition hover:opacity-80 disabled:cursor-not-allowed disabled:opacity-50 dark:border-secondary dark:bg-secondary/50 lg:py-1.5 lg:pl-3 lg:pr-2 lg:text-sm">
+          <Listbox.Button className="inline-flex w-full items-center justify-center gap-x-0.5 rounded border border-secondary bg-secondary/70 py-1.5 pl-2 pr-1.5 text-center text-xs text-white transition hover:opacity-80 disabled:cursor-not-allowed disabled:opacity-50 dark:border-secondary dark:bg-secondary/50 lg:py-1.5 lg:pl-2.5 lg:pr-1.5 lg:text-sm">
             <span className="font-normal tracking-tighter lg:tracking-normal">Authors</span>
             <ChevronUpDownIcon className="h-4 w-4 lg:h-5 lg:w-5" aria-hidden="true" />
           </Listbox.Button>
@@ -354,7 +340,7 @@ function PickTags({
     >
       {({ open }) => (
         <>
-          <Listbox.Button className="inline-flex w-full items-center justify-center gap-x-0.5 rounded border border-secondary bg-secondary/70 py-1.5 pl-2 pr-1.5 text-center text-xs text-white transition hover:opacity-80 disabled:cursor-not-allowed disabled:opacity-50 dark:border-secondary dark:bg-secondary/50 lg:py-1.5 lg:pl-3 lg:pr-2 lg:text-sm">
+          <Listbox.Button className="inline-flex w-full items-center justify-center gap-x-0.5 rounded border border-secondary bg-secondary/70 py-1.5 pl-2 pr-1.5 text-center text-xs text-white transition hover:opacity-80 disabled:cursor-not-allowed disabled:opacity-50 dark:border-secondary dark:bg-secondary/50 lg:py-1.5 lg:pl-2.5 lg:pr-1.5 lg:text-sm">
             <span className="font-normal tracking-tighter lg:tracking-normal">Tags</span>
             <ChevronUpDownIcon className="h-4 w-4 lg:h-5 lg:w-5" aria-hidden="true" />
           </Listbox.Button>
@@ -417,5 +403,22 @@ function PickTags({
         </>
       )}
     </Listbox>
+  )
+}
+
+function ResultsAmountBadge({ count }: { count: number }) {
+  return (
+    <div className="flex w-full items-center gap-2 rounded border border-slate-700 bg-slate-700/80 px-3 py-1.5 text-center text-sm font-medium tracking-tight text-white disabled:cursor-not-allowed disabled:opacity-50 dark:border-slate-500 dark:bg-slate-500/50">
+      <span className="tracking-tighter">{count} results</span>
+    </div>
+  )
+}
+
+function ResultsAmountAnnouncement({ count }: { count: number }) {
+  return (
+    <div className="flex w-full items-center gap-2 rounded border border-slate-700 bg-slate-700/60 px-3 py-1.5 text-center text-sm font-medium tracking-tight text-white disabled:cursor-not-allowed disabled:opacity-50 dark:border-slate-500 dark:bg-slate-500/50">
+      <FunnelIcon className="h-4 w-4 text-white" />
+      <span>{count} results matching your filtering criteria.</span>
+    </div>
   )
 }

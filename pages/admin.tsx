@@ -2,7 +2,7 @@ import React, { Dispatch, Fragment, SetStateAction, useEffect, useMemo, useRef, 
 import classNames from "classnames"
 import useAccessDenied from "../hooks/useAccessDenied"
 import type { VideoMongoDBWithUrl } from "../@types"
-import { AccessModalCTA, Layout, FullAccessBadge, LimitedAccessBadge } from "../components/layout"
+import { AccessModalCTA, Layout, AccessBadge } from "../components/layout"
 import { useMediaQuery } from "usehooks-ts"
 import { VideoNotFound, VideoSkeleton } from "../components/videos"
 import { ArrowPathIcon, ArrowTopRightOnSquareIcon, CheckIcon, ChevronUpDownIcon } from "@heroicons/react/24/outline"
@@ -87,7 +87,7 @@ export default function Videos({}: Props) {
         <div className="mb-3 text-lg font-normal">
           <div className="flex flex-wrap items-center justify-start gap-x-3 gap-y-1">
             <h2 className="whitespace-nowrap text-4xl font-bold tracking-tight sm:text-5xl">Admin</h2>
-            {accessDenied ? <LimitedAccessBadge /> : <FullAccessBadge />}
+            <AccessBadge />
           </div>
           <p className="mt-1 max-w-3xl">
             Welcome to the back office of Finishers Hub. This is where we can document and report all acts of

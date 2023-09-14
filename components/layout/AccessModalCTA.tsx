@@ -67,7 +67,7 @@ export function AccessModalCTA({ lockedHook, startOpen, special = false }: Props
             leaveFrom="opacity-100"
             leaveTo="opacity-0"
           >
-            <div className="fixed inset-0 bg-black/80 backdrop-blur dark:bg-white/5" />
+            <div className="fixed inset-0 bg-black/80 backdrop-blur-xs dark:bg-white/5" />
           </Transition.Child>
 
           <div className="fixed inset-0 z-[999] overflow-y-auto">

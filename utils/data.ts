@@ -2,8 +2,8 @@ import type { FilterByGameType } from "../@types"
 
 export const arenas: FilterByGameType[] = [
   { name: "All", value: "" },
-  { name: "Warzone 1", value: "mw2019" },
-  { name: "Warzone 2", value: "mw2022" },
+  { name: "MW2019", value: "mw2019" },
+  { name: "MW2022", value: "mw2022" },
 ]
 
 export const games = arenas.map((item) => item.value).filter((item) => item)

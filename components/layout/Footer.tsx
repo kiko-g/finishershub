@@ -8,7 +8,7 @@ type Props = {
 
 export function Footer({ siteTitle }: Props) {
   return (
-    <footer className="z-[5] flex items-center justify-between px-4 py-3 text-xs text-gray-500 opacity-80 dark:text-gray-300 md:px-6 md:py-4 md:text-sm">
+    <footer className="z-[5] flex items-center justify-between px-4 py-3 text-xs text-gray-500 opacity-80 dark:text-gray-300 md:px-4 md:py-3 md:text-sm">
       <span className="text-gray-700 dark:text-gray-300 sm:text-center">
         © {new Date().getFullYear()} {siteTitle}™
       </span>

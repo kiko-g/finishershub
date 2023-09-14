@@ -2,7 +2,7 @@ import React, { useState, useEffect, useMemo } from "react"
 import { shuffle } from "../../utils"
 import { clearCache, isStorageValid, writeVideosStorage } from "../../utils/storage"
 import useAccessDenied from "../../hooks/useAccessDenied"
-import { Layout, FullAccessBadge, LimitedAccessBadge, AccessModal, InvisbleTopLayer } from "../../components/layout"
+import { Layout, AccessModal, InvisbleTopLayer, AccessBadge } from "../../components/layout"
 import {
   AutoplayToggler,
   AutomuteToggler,
@@ -94,7 +94,7 @@ export default function CasinoPage() {
             </div>
 
             <div className="flex flex-row items-center justify-center gap-2 lg:mt-0 lg:flex-col">
-              {limitedAccess ? <LimitedAccessBadge /> : <FullAccessBadge />}
+              <AccessBadge />
               <div className="flex items-center justify-end gap-x-2">
                 {limitedAccess ? <AccessModal lockedHook={[accessDenied, setAccessDenied]} /> : null}
                 <DeleteCookiesButton />
