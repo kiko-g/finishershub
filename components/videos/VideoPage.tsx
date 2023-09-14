@@ -148,16 +148,18 @@ export function VideoPage({ videoIndex }: Props) {
                 </div>
               )}
 
-              <div className="mt-8 flex w-full flex-col items-center gap-2 lg:flex-row">
-                <button
-                  disabled={videoSaved}
-                  className="flex w-full items-center justify-center gap-1 self-stretch rounded bg-teal-600 px-4 py-2 text-sm capitalize text-white transition hover:opacity-80 disabled:cursor-not-allowed disabled:opacity-50"
-                  onClick={() => handleUpdateVideo(video)}
-                >
-                  <span>Save</span>
-                  <CheckIcon className="h-4 w-4" />
-                </button>
-              </div>
+              {canEdit && (
+                <div className="mt-8 flex w-full flex-col items-center gap-2 lg:flex-row">
+                  <button
+                    disabled={videoSaved}
+                    className="flex w-full items-center justify-center gap-1 self-stretch rounded bg-teal-600 px-4 py-2 text-sm capitalize text-white transition hover:opacity-80 disabled:cursor-not-allowed disabled:opacity-50"
+                    onClick={() => handleUpdateVideo(video)}
+                  >
+                    <span>Save</span>
+                    <CheckIcon className="h-4 w-4" />
+                  </button>
+                </div>
+              )}
 
               <div className="mt-2 flex w-full flex-col items-center gap-2 lg:flex-row">
                 <VideoNavLink name="Previous" href={previous} />
