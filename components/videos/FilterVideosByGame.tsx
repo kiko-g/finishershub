@@ -18,7 +18,7 @@ export function FilterVideosByGame({ arenas, pickedHook, className }: Props) {
     <Listbox as="div" value={picked} onChange={setPicked}>
       {({ open }) => (
         <div className={classNames("relative z-50", className)}>
-          <Listbox.Button className="inline-flex w-full items-center justify-center gap-x-0.5 rounded border border-secondary bg-secondary/70 py-1.5 pl-2 pr-1.5 text-center text-xs text-white transition hover:opacity-80 disabled:cursor-not-allowed disabled:opacity-50 dark:border-secondary dark:bg-secondary/50 lg:py-1.5 lg:pl-3 lg:pr-2 lg:text-sm">
+          <Listbox.Button className="inline-flex w-full items-center justify-center gap-x-0.5 rounded border border-secondary bg-secondary/70 py-1.5 pl-2 pr-1.5 text-center text-xs text-white transition hover:opacity-80 disabled:cursor-not-allowed disabled:opacity-50 dark:border-secondary dark:bg-secondary/50 lg:py-1.5 lg:pl-2.5 lg:pr-1.5 lg:text-sm">
             <span className="whitespace-nowrap font-normal tracking-tighter lg:tracking-normal">{picked.name}</span>
             <ChevronUpDownIcon className="h-4 w-4 lg:h-5 lg:w-5" aria-hidden="true" />
           </Listbox.Button>

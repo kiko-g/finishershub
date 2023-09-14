@@ -7,6 +7,7 @@ import {
   ExclamationTriangleIcon,
   InformationCircleIcon,
 } from "@heroicons/react/24/outline"
+import { getButtonSizeClassNames } from "../../utils"
 
 type ToastType = "success" | "error" | "warning" | "info" | ""
 
@@ -21,7 +22,7 @@ export function UsageDisclaimer({ type }: Props) {
     <div
       className={classNames(
         `flex w-full flex-wrap items-center justify-between rounded border 
-        px-3 py-2 text-light lg:px-3 lg:py-2`,
+        px-3 py-2 text-light lg:px-3 lg:py-1.5`,
         type === "info" ? `border-cyan-600/90 bg-cyan-600/80 dark:border-cyan-500/40 dark:bg-cyan-500/40` : ``,
         type === "error" ? `border-rose-600/90 bg-rose-600/80 dark:border-rose-500/40 dark:bg-rose-500/40` : ``,
         type === "warning" ? `border-amber-600/90 bg-amber-600/80 dark:border-amber-500/40 dark:bg-amber-500/40` : ``,
@@ -34,17 +35,17 @@ export function UsageDisclaimer({ type }: Props) {
       <div className="flex w-full items-center justify-between">
         {/* Icon */}
         {type === "success" ? (
-          <CheckBadgeIcon className="h-5 w-5 lg:h-6 lg:w-6" aria-hidden="true" />
+          <CheckBadgeIcon className={getButtonSizeClassNames("xs")} aria-hidden="true" />
         ) : type === "error" ? (
-          <ExclamationCircleIcon className="h-5 w-5 lg:h-6 lg:w-6" aria-hidden="true" />
+          <ExclamationCircleIcon className={getButtonSizeClassNames("xs")} aria-hidden="true" />
         ) : type === "warning" ? (
-          <ExclamationTriangleIcon className="h-5 w-5 lg:h-6 lg:w-6" aria-hidden="true" />
+          <ExclamationTriangleIcon className={getButtonSizeClassNames("xs")} aria-hidden="true" />
         ) : (
-          <InformationCircleIcon className="h-5 w-5 lg:h-6 lg:w-6" aria-hidden="true" />
+          <InformationCircleIcon className={getButtonSizeClassNames("xs")} aria-hidden="true" />
         )}
 
         {/* Text */}
-        <p className="ml-3 flex-1 text-sm font-normal tracking-tight lg:font-normal lg:tracking-normal">
+        <p className="ml-2 flex-1 text-sm font-normal tracking-tight lg:font-normal lg:tracking-normal">
           {type === "success" ? (
             <span>
               Tap the right arrow to get a <strong>new random highlight</strong> and use the left one to{" "}

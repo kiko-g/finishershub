@@ -65,8 +65,8 @@ export type VideoAPIAndIndex = {
 
 export type FilterByGameType =
   | { name: "All"; value: "" }
-  | { name: "Warzone 1"; value: "mw2019" }
-  | { name: "Warzone 2"; value: "mw2022" }
+  | { name: "MW2019"; value: "mw2019" }
+  | { name: "MW2022"; value: "mw2022" }
 
 export interface VideoMongoDBWithUrl {
   _id: string

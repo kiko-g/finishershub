@@ -21,8 +21,8 @@ export default function Casino() {
   const buttonControlsRef = useRef<HTMLDivElement | null>(null)
   const arenas: FilterByGameType[] = [
     { name: "All", value: "" },
-    { name: "Warzone 1", value: "mw2019" },
-    { name: "Warzone 2", value: "mw2022" },
+    { name: "MW2019", value: "mw2019" },
+    { name: "MW2022", value: "mw2022" },
   ]
 
   const isMobile = useMediaQuery("(max-width: 768px)")
@@ -90,21 +90,21 @@ export default function Casino() {
   return (
     <Layout location="Casino">
       <div className="mx-auto flex max-w-[52rem] flex-col space-y-2">
-        <main className="flex flex-col gap-2.5">
+        <main className="flex flex-col space-y-2">
           <div className="flex flex-col justify-between gap-y-2 lg:flex-row lg:gap-x-6">
             <div className="text-lg font-normal">
               <div className="flex flex-wrap items-center justify-start gap-x-3 gap-y-1">
                 <h2 className="whitespace-nowrap text-4xl font-bold tracking-tight sm:text-5xl">Slot Machine</h2>
                 <AccessBadge />
               </div>
-              <p className="mt-2 text-sm">
+              <p className="mt-0.5 text-sm">
                 More fun than a casino, especially because we don&apos;t take your money. Not sure about the addiction
                 part though.
               </p>
             </div>
           </div>
 
-          <div className="flex w-full items-center justify-between gap-2">
+          <div className="flex w-full items-center justify-between gap-1">
             <div className="flex items-center justify-center gap-x-2">
               <ReshuffleButton hook={[shuffled, setShuffled]} shuffle={shuffleVideos} size="xs" />
               <AutoplayToggler hook={[autoplay, setAutoplay]} size="xs" />
