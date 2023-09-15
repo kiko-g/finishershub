@@ -84,7 +84,7 @@ export default function Casino() {
 
   return (
     <Layout location="Casino">
-      <div className="mx-auto flex max-w-[52rem] flex-col space-y-2">
+      <div className="mx-auto flex max-w-[54rem] flex-col space-y-2">
         <main className="flex flex-col space-y-2">
           <div className="flex flex-col justify-between gap-y-2 lg:flex-row lg:gap-x-6">
             <div className="text-lg font-normal">

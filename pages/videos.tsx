@@ -120,7 +120,7 @@ export default function Videos({}: Props) {
 
   return (
     <Layout location="Videos">
-      <div className="mx-auto flex max-w-[52rem] flex-col space-y-2">
+      <div className="mx-auto flex max-w-[54rem] flex-col space-y-2">
         <div className="text-lg font-normal">
           <div className="flex flex-wrap items-center justify-start gap-x-3 gap-y-1">
             <h2 className="whitespace-nowrap text-4xl font-bold tracking-tight sm:text-5xl">Videos</h2>
@@ -149,7 +149,7 @@ export default function Videos({}: Props) {
                   <PickTags tags={tags} hook={[selectedTags, setSelectedTags]} />
                   <PickAuthors authors={authors} hook={[selectedAuthors, setSelectedAuthors]} />
                   <FilterVideosByGame pickedHook={[selectedGame, setSelectedGame]} />
-                  <ResultsAmountBadge count={filteredVideos.length} />
+                  {/* <ResultsAmountBadge count={filteredVideos.length} /> */}
                 </div>
               </div>
 

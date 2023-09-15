@@ -31,7 +31,7 @@ input[type="password"] {
 }
 
 input[type="number"].admin {
-  @apply my-0.5 border border-gray-300 bg-gray-50 px-2 py-2 text-xs font-normal placeholder:font-light placeholder:text-gray-400 hover:border-gray-700/80 hover:bg-gray-700/5 focus:border-gray-700 focus:accent-gray-700 focus:ring-0 focus:ring-gray-700 focus:ring-offset-0 dark:border-gray-200/10 dark:bg-white/20  dark:placeholder:text-gray-400 dark:hover:border-secondary/70 dark:hover:bg-secondary/5 dark:focus:border-secondary/80 dark:focus:ring-0 dark:focus:ring-secondary lg:px-2 lg:py-1 lg:text-sm;
+  @apply my-0.5 border border-gray-300 bg-gray-50 px-2 py-2 text-xs font-normal placeholder:font-light placeholder:text-gray-400 hover:border-gray-700/80 hover:bg-gray-700/5 focus:border-gray-700 focus:accent-gray-700 focus:ring-0 focus:ring-gray-700 focus:ring-offset-0 dark:border-gray-200/10 dark:bg-white/20 dark:placeholder:text-gray-400 dark:hover:border-secondary/70 dark:hover:bg-secondary/5 dark:focus:border-secondary/80 dark:focus:ring-0 dark:focus:ring-secondary lg:px-2 lg:py-1 lg:text-sm;
 }
 
 input[type="checkbox"] {

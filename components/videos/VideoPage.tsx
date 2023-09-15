@@ -9,6 +9,7 @@ import { useControls } from "../../hooks/useControls"
 import { AccessBadge } from "../layout/AccessBadge"
 import { PickAuthors, PickGame, PickLocation, PickMap, PickQuantity, PickTags } from "../admin"
 import { CheckIcon } from "@heroicons/react/24/outline"
+import classNames from "classnames"
 
 type Props = {
   videoIndex: number
@@ -128,7 +129,9 @@ export function VideoPage({ videoIndex }: Props) {
                   </span>
                 </div>
                 <p className="mb-2 mt-1 max-w-sm text-sm">
-                  You need full access to edit video details below. Save your changes by clicking the save button.
+                  {accessDenied
+                    ? "You need full access to edit and saved video details below."
+                    : "You have full access. Save your changes by clicking the save button."}
                 </p>
               </div>
 
@@ -144,7 +147,14 @@ export function VideoPage({ videoIndex }: Props) {
                   />
                   <PickTags setVideoSaved={setVideoSaved} videoHook={[video, setVideo]} />
                   <PickAuthors setVideoSaved={setVideoSaved} videoHook={[video, setVideo]} />
-                  <PickQuantity setVideoSaved={setVideoSaved} videoHook={[video, setVideo]} className="w-full" />
+                  <PickQuantity
+                    setVideoSaved={setVideoSaved}
+                    videoHook={[video, setVideo]}
+                    className={classNames(
+                      "w-full cursor-pointer rounded border",
+                      video.quantity <= 0 && "border-rose-700 bg-rose-200",
+                    )}
+                  />
                 </div>
               )}
 

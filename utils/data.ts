@@ -143,6 +143,7 @@ export const ashikaLocations = [
   "Beach Club",
   "Town Center",
   "Shipwreck",
+  "Vasco",
   "Misc",
 ].sort((a, b) => a.localeCompare(b))
 
