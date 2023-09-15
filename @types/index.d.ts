@@ -76,5 +76,6 @@ export interface VideoMongoDBWithUrl {
   game: string
   bucket: string
   s3_uri: string
+  date: string | null
   url: string
 }

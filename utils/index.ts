@@ -84,3 +84,23 @@ export function ensureItemsAreSplit(items?: string[]): string[] {
     ) || []
   )
 }
+
+export function formatVideoDate(dateStr: string): string {
+  const months = [
+    "January",
+    "February",
+    "March",
+    "April",
+    "May",
+    "June",
+    "July",
+    "August",
+    "September",
+    "October",
+    "November",
+    "December",
+  ]
+
+  const date = new Date(dateStr)
+  return `${date.getDate()}, ${months[date.getMonth()].slice(0, 3)} ${date.getFullYear()}`
+}

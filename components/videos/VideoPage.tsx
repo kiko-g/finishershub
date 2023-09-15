@@ -3,7 +3,7 @@ import Link from "next/link"
 import { Footer, Header, Seo } from "../layout"
 import { VideoNotFound, VideoPlayer, VideoSkeleton } from "."
 import type { VideoMongoDBWithUrl } from "../../@types"
-import { getVideoUrlFromVideo } from "../../utils"
+import { formatVideoDate, getVideoUrlFromVideo } from "../../utils"
 import { useContentInteraction } from "../../hooks/useContentInteraction"
 import { useControls } from "../../hooks/useControls"
 import { AccessBadge } from "../layout/AccessBadge"
@@ -128,7 +128,12 @@ export function VideoPage({ videoIndex }: Props) {
                     <AccessBadge />
                   </span>
                 </div>
-                <p className="mb-2 mt-1 max-w-sm text-sm">
+
+                <p className="mb-1 mt-0 text-sm text-gray-500">
+                  {video.date === null ? "Unknown Date" : formatVideoDate(video.date)}
+                </p>
+
+                <p className="mb-3 max-w-sm text-sm">
                   {accessDenied
                     ? "You need full access to edit and saved video details below."
                     : "You have full access. Save your changes by clicking the save button."}
