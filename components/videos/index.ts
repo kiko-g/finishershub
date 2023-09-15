@@ -11,6 +11,7 @@ import { KeyboardUsageButton } from "./KeyboardUsageButton"
 import { KeyboardUsageInstructions } from "./KeyboardUsageInstructions"
 import { MostRecentVideoShowcase } from "./MostRecentVideoShowcase"
 import { NextVideo } from "./NextVideo"
+import { PopOpenAPICall } from "./PopOpenAPICall"
 import { PopOpenVideo } from "./PopOpenVideo"
 import { PreviousVideo } from "./PreviousVideo"
 import { ReshuffleButton } from "./ReshuffleButton"
@@ -37,6 +38,7 @@ export {
   KeyboardUsageInstructions,
   MostRecentVideoShowcase,
   NextVideo,
+  PopOpenAPICall,
   PopOpenVideo,
   PreviousVideo,
   ReshuffleButton,

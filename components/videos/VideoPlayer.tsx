@@ -1,7 +1,7 @@
 import classNames from "classnames"
 import type { VideoMongoDBWithUrl } from "../../@types"
 import React, { useState, useEffect, useRef, SetStateAction, Dispatch, useCallback } from "react"
-import { ShareVideo, PopOpenVideo, VideoSkeleton } from "./"
+import { ShareVideo, PopOpenVideo, VideoSkeleton, PopOpenAPICall } from "./"
 import { PauseIcon, PlayIcon } from "@heroicons/react/24/solid"
 import { getButtonSizeClassNames } from "../../utils"
 import { FocusViewToggler } from "./FocusViewToggler"
@@ -124,6 +124,7 @@ export function VideoPlayer(props: Props) {
               <div className="flex items-center gap-2 rounded-bl rounded-tr bg-black/50 px-2 pb-3 pt-2 lg:gap-2 lg:px-3 lg:pb-4 lg:pt-3">
                 <ShareVideo video={video} size="sm" />
                 <PopOpenVideo video={video} size="sm" />
+                <PopOpenAPICall videoId={video.id} size="sm" />
               </div>
             </div>
 
