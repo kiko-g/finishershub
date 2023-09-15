@@ -128,7 +128,7 @@ export default function Videos({}: Props) {
 
   return (
     <Layout location="Videos">
-      <div className="mx-auto flex max-w-[54rem] flex-col space-y-2">
+      <div className="mx-auto flex max-w-4xl flex-col space-y-2">
         <div className="text-lg font-normal">
           <div className="flex flex-wrap items-center justify-start gap-x-3 gap-y-1">
             <h2 className="whitespace-nowrap text-4xl font-bold tracking-tight sm:text-5xl">Videos</h2>
@@ -186,6 +186,8 @@ export default function Videos({}: Props) {
                           setSelectedGame("All")
                           setSelectedTags([])
                           setSelectedAuthors([])
+                          setSelectedMap("")
+                          setSelectedLocation("")
                         },
                       },
                     ]}

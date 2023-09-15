@@ -14,6 +14,7 @@ export function FilterVideosByTags({
   className?: string
 }) {
   const [pickedTags, setPickedTags] = hook
+  const nothingSelected = useMemo(() => pickedTags.length === 0, [pickedTags])
   const displayedText = useMemo(() => {
     if (pickedTags.length === 0) return "Tags"
     else if (pickedTags.length === tags.length) return "All tags"
@@ -30,7 +31,14 @@ export function FilterVideosByTags({
     >
       {({ open }) => (
         <>
-          <Listbox.Button className="inline-flex w-full items-center justify-center rounded border border-secondary bg-secondary/70 py-1.5 pl-2 pr-1.5 text-center text-xs text-white transition hover:opacity-80 disabled:cursor-not-allowed disabled:opacity-50 dark:border-secondary dark:bg-secondary/50 lg:py-1.5 lg:pl-2.5 lg:pr-1.5 lg:text-xs">
+          <Listbox.Button
+            className={classNames(
+              "inline-flex w-full items-center justify-center gap-x-0.5 rounded border py-1.5 pl-2 pr-1.5 text-center text-xs text-white transition hover:opacity-80 disabled:cursor-not-allowed disabled:opacity-50 lg:py-1.5 lg:pl-2.5 lg:pr-1.5 lg:text-xs",
+              nothingSelected
+                ? "border-secondary bg-secondary/70 dark:border-secondary dark:bg-secondary/50"
+                : "border-teal-600 bg-teal-600/70 dark:border-teal-600 dark:bg-teal-600/50",
+            )}
+          >
             <span className="whitespace-nowrap font-normal ">Tags</span>
             <ChevronUpDownIcon className="h-4 w-4 lg:h-5 lg:w-5" aria-hidden="true" />
           </Listbox.Button>

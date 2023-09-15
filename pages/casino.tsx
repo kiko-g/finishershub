@@ -55,7 +55,11 @@ export default function Casino() {
   }
 
   useEffect(() => {
-    fetch(`/api/mongo/videos/urls/game/${game}`)
+    const url = game === "All" ? "/api/mongo/videos/urls" : `/api/mongo/videos/urls/game/${game}`
+
+    setLoading(true)
+    setFetchError(false)
+    fetch(url)
       .then((res) => res.json())
       .then((videos: VideoMongoDBWithUrl[]) => {
         setLoading(false)
@@ -84,7 +88,7 @@ export default function Casino() {
 
   return (
     <Layout location="Casino">
-      <div className="mx-auto flex max-w-[54rem] flex-col space-y-2">
+      <div className="mx-auto flex max-w-4xl flex-col space-y-2">
         <main className="flex flex-col space-y-2">
           <div className="flex flex-col justify-between gap-y-2 lg:flex-row lg:gap-x-6">
             <div className="text-lg font-normal">
