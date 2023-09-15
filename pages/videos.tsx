@@ -11,6 +11,9 @@ import {
   VideoNotFound,
   VideoPlayer,
   VideoSkeleton,
+  FilterVideosByAuthors,
+  FilterVideosByMap,
+  FilterVideosByLocation,
 } from "../components/videos"
 
 import { authors, tags } from "../utils/data"
@@ -18,13 +21,8 @@ import type { Game, VideoMongoDBWithUrl } from "../@types"
 import { useControls } from "../hooks/useControls"
 import { useContentInteraction } from "../hooks/useContentInteraction"
 import { VideoOrderToggler } from "../components/videos/VideoOrderToggler"
-import {
-  ArrowLongLeftIcon,
-  CheckCircleIcon,
-  FunnelIcon,
-  ArrowLongRightIcon,
-  ChevronUpDownIcon,
-} from "@heroicons/react/24/outline"
+import { ArrowLongLeftIcon, ArrowLongRightIcon } from "@heroicons/react/24/outline"
+import { FilterVideosByTags } from "../components/videos/FilterVideosByTags"
 
 type Props = {}
 
@@ -57,6 +55,8 @@ export default function Videos({}: Props) {
   const [videos, setVideos] = useState<VideoMongoDBWithUrl[]>([])
   const [index, setIndex] = useState<number>(0)
   const [selectedGame, setSelectedGame] = useState<Game>("MW2022")
+  const [selectedMap, setSelectedMap] = useState<string>("")
+  const [selectedLocation, setSelectedLocation] = useState<string>("")
   const [selectedTags, setSelectedTags] = useState<string[]>([])
   const [selectedAuthors, setSelectedAuthors] = useState<string[]>([])
 
@@ -79,8 +79,16 @@ export default function Videos({}: Props) {
       result = result.filter((video) => video.game === selectedGame)
     }
 
+    if (selectedMap !== "") {
+      result = result.filter((video) => video.map === selectedMap)
+    }
+
+    if (selectedLocation !== "") {
+      result = result.filter((video) => video.location === selectedLocation)
+    }
+
     return shuffled ? result.sort(() => Math.random() - 0.5) : result.sort((a, b) => a.id - b.id)
-  }, [videos, selectedTags, selectedAuthors, selectedGame, shuffled])
+  }, [videos, selectedTags, selectedAuthors, selectedGame, shuffled, selectedMap, selectedLocation])
 
   const video = useMemo(() => (filteredVideos.length > 0 ? filteredVideos[index] : null), [filteredVideos, index])
 
@@ -146,10 +154,15 @@ export default function Videos({}: Props) {
                 </div>
 
                 <div className="flex items-center gap-1.5">
-                  <PickTags tags={tags} hook={[selectedTags, setSelectedTags]} />
-                  <PickAuthors authors={authors} hook={[selectedAuthors, setSelectedAuthors]} />
+                  <FilterVideosByTags tags={tags} hook={[selectedTags, setSelectedTags]} />
+                  <FilterVideosByAuthors authors={authors} hook={[selectedAuthors, setSelectedAuthors]} />
                   <FilterVideosByGame pickedHook={[selectedGame, setSelectedGame]} />
-                  {/* <ResultsAmountBadge count={filteredVideos.length} /> */}
+                  <FilterVideosByMap game={selectedGame} pickedHook={[selectedMap, setSelectedMap]} />
+                  <FilterVideosByLocation
+                    game={selectedGame}
+                    map={selectedMap}
+                    pickedHook={[selectedLocation, setSelectedLocation]}
+                  />
                 </div>
               </div>
 
@@ -197,7 +210,7 @@ export default function Videos({}: Props) {
                       <span>N/A</span>
                     ) : (
                       <span>
-                        {index + 1} of {filteredVideos.length}
+                        {index + 1} of {filteredVideos.length} clips
                       </span>
                     )}
                   </div>
@@ -219,208 +232,5 @@ export default function Videos({}: Props) {
         </main>
       </div>
     </Layout>
-  )
-}
-
-function PickAuthors({
-  authors,
-  hook,
-  className,
-}: {
-  authors: string[]
-  hook: [string[], React.Dispatch<React.SetStateAction<string[]>>]
-  className?: string
-}) {
-  const [pickedAuthors, setPickedAuthors] = hook
-  const displayedText = useMemo(() => {
-    if (pickedAuthors.length === 0) return "Authors"
-    else if (pickedAuthors.length === authors.length) return "Everyone"
-    else return pickedAuthors.map((person) => person).join(", ")
-  }, [pickedAuthors, authors])
-
-  return (
-    <Listbox
-      as="div"
-      multiple
-      value={pickedAuthors}
-      onChange={setPickedAuthors}
-      className={classNames("relative h-full", className)}
-    >
-      {({ open }) => (
-        <>
-          <Listbox.Button className="inline-flex w-full items-center justify-center rounded border border-secondary bg-secondary/70 py-1.5 pl-2 pr-1.5 text-center text-xs text-white transition hover:opacity-80 disabled:cursor-not-allowed disabled:opacity-50 dark:border-secondary dark:bg-secondary/50 lg:py-1.5 lg:pl-2.5 lg:pr-1.5 lg:text-xs">
-            <span className="whitespace-nowrap font-normal tracking-tighter">Authors</span>
-            <ChevronUpDownIcon className="h-4 w-4 lg:h-5 lg:w-5" aria-hidden="true" />
-          </Listbox.Button>
-
-          <Listbox.Options
-            className={classNames(
-              "z-40 max-h-[34rem] overflow-scroll rounded-md bg-white px-0 py-1 text-sm shadow-xl dark:bg-[#2e373d]",
-              open ? "absolute right-0 mt-2 w-full min-w-[12rem] lg:w-48" : "hidden",
-            )}
-          >
-            {/* Option box header */}
-            <div
-              className="flex w-full items-center justify-between border-b 
-              px-3 pb-2 pt-1 font-normal tracking-tighter"
-            >
-              <span>{pickedAuthors.length} selected</span>
-              <button
-                type="button"
-                className="tracking-tighter text-secondary underline hover:font-bold hover:opacity-80 dark:text-secondary"
-                onClick={() => setPickedAuthors([])}
-              >
-                Reset
-              </button>
-            </div>
-
-            {/* Option box body (options list) */}
-            <div className="pt-1">
-              {authors.map((author: string, authorIdx: number) => {
-                const isSelected = pickedAuthors.some((pickedAuthor) => pickedAuthor === author)
-
-                return (
-                  <Listbox.Option
-                    key={`category-${authorIdx}`}
-                    value={author}
-                    className={({ active }) =>
-                      classNames(
-                        "relative cursor-default select-none py-2 pl-3 pr-3",
-                        active ? "bg-slate-200 dark:bg-slate-600" : "",
-                      )
-                    }
-                  >
-                    {({ selected }) => {
-                      const highlight = selected || isSelected
-                      return (
-                        <span className="flex items-center gap-2">
-                          {highlight ? (
-                            <CheckCircleIcon className="h-5 w-5 text-teal-500" aria-hidden="true" />
-                          ) : (
-                            <span className="h-5 w-5" />
-                          )}
-                          <span className={classNames("block truncate", highlight ? "font-bold" : "font-normal")}>
-                            {author}
-                          </span>
-                        </span>
-                      )
-                    }}
-                  </Listbox.Option>
-                )
-              })}
-            </div>
-          </Listbox.Options>
-        </>
-      )}
-    </Listbox>
-  )
-}
-
-function PickTags({
-  tags,
-  hook,
-  className,
-}: {
-  tags: string[]
-  hook: [string[], React.Dispatch<React.SetStateAction<string[]>>]
-  className?: string
-}) {
-  const [pickedTags, setPickedTags] = hook
-  const displayedText = useMemo(() => {
-    if (pickedTags.length === 0) return "Tags"
-    else if (pickedTags.length === tags.length) return "All tags"
-    else return pickedTags.map((person) => person).join(", ")
-  }, [pickedTags, tags])
-
-  return (
-    <Listbox
-      as="div"
-      multiple
-      value={pickedTags}
-      onChange={setPickedTags}
-      className={classNames("relative h-full", className)}
-    >
-      {({ open }) => (
-        <>
-          <Listbox.Button className="inline-flex w-full items-center justify-center rounded border border-secondary bg-secondary/70 py-1.5 pl-2 pr-1.5 text-center text-xs text-white transition hover:opacity-80 disabled:cursor-not-allowed disabled:opacity-50 dark:border-secondary dark:bg-secondary/50 lg:py-1.5 lg:pl-2.5 lg:pr-1.5 lg:text-xs">
-            <span className="whitespace-nowrap font-normal ">Tags</span>
-            <ChevronUpDownIcon className="h-4 w-4 lg:h-5 lg:w-5" aria-hidden="true" />
-          </Listbox.Button>
-
-          <Listbox.Options
-            className={classNames(
-              "z-40 max-h-[34rem] overflow-scroll rounded-md bg-white px-0 py-1 text-sm shadow-xl dark:bg-[#2e373d]",
-              open ? "absolute right-0 mt-2 w-full min-w-[12rem] lg:w-48" : "hidden",
-            )}
-          >
-            <div
-              className="flex w-full items-center justify-between border-b 
-              px-3 pb-2 pt-1 font-normal tracking-tighter"
-            >
-              <span>{pickedTags.length} selected</span>
-              <button
-                type="button"
-                className="tracking-tighter text-secondary underline hover:font-bold hover:opacity-80 dark:text-secondary"
-                onClick={() => setPickedTags([])}
-              >
-                Reset
-              </button>
-            </div>
-
-            <div className="pt-1">
-              {tags.map((tag: string, tagIdx: number) => {
-                const isSelected = pickedTags.some((pickedTag) => pickedTag === tag)
-
-                return (
-                  <Listbox.Option
-                    key={`category-${tagIdx}`}
-                    value={tag}
-                    className={({ active }) =>
-                      classNames(
-                        "relative cursor-default select-none py-1.5 pl-3 pr-3",
-                        active ? "bg-slate-200 dark:bg-slate-600" : "",
-                      )
-                    }
-                  >
-                    {({ selected }) => {
-                      const highlight = selected || isSelected
-                      return (
-                        <span className="flex items-center gap-2">
-                          {highlight ? (
-                            <CheckCircleIcon className="h-5 w-5 text-teal-500" aria-hidden="true" />
-                          ) : (
-                            <span className="h-5 w-5" />
-                          )}
-                          <span className={classNames("block truncate", highlight ? "font-bold" : "font-normal")}>
-                            {tag}
-                          </span>
-                        </span>
-                      )
-                    }}
-                  </Listbox.Option>
-                )
-              })}
-            </div>
-          </Listbox.Options>
-        </>
-      )}
-    </Listbox>
-  )
-}
-
-function ResultsAmountBadge({ count }: { count: number }) {
-  return (
-    <div className="flex w-full items-center gap-2 self-stretch rounded border border-slate-700 bg-slate-700/80 px-2 py-1.5 text-center text-xs font-normal tracking-tight text-white disabled:cursor-not-allowed disabled:opacity-50 dark:border-slate-500 dark:bg-slate-500/50">
-      <span className="tracking-tighter">{count} results</span>
-    </div>
-  )
-}
-
-function ResultsAmountAnnouncement({ count }: { count: number }) {
-  return (
-    <div className="flex w-full items-center gap-2 rounded border border-slate-700 bg-slate-700/60 px-3 py-1.5 text-center text-sm font-medium tracking-tight text-white disabled:cursor-not-allowed disabled:opacity-50 dark:border-slate-500 dark:bg-slate-500/50">
-      <FunnelIcon className="h-4 w-4 text-white" />
-      <span>{count} results matching your filtering criteria.</span>
-    </div>
   )
 }

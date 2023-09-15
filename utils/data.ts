@@ -30,25 +30,31 @@ export const getMaps = (game: string) => {
   const mw2022Maps = ["Al Mazrah", "Ashika"]
 
   if (game === "MW2019") return mw2019Maps
-  if (game === "MW2022") return mw2022Maps
+  else if (game === "MW2022") return mw2022Maps
 
-  return [mw2019Maps, mw2022Maps].flat()
+  return [mw2019Maps, mw2022Maps].flat().sort((a, b) => a.localeCompare(b))
 }
 
 export const getLocations = (game: string, map: string) => {
-  // Warzone 1
-  if (game === "MW2019") {
-    if (map === "Verdansk") return verdanskLocations
-    else if (map === "Rebirth") return rebirthLocations
-    else if (map === "Fortune's Keep") return fortunesKeepLocations
+  if (map === "Verdansk") {
+    return verdanskLocations
+  } else if (map === "Rebirth") {
+    return rebirthLocations
+  } else if (map === "Fortune's Keep") {
+    return fortunesKeepLocations
+  } else if (map === "Ashika") {
+    return ashikaLocations
+  } else if (map === "Al Mazrah") {
+    return alMazrahLocations
+  } else if (game === "MW2019") {
+    return [verdanskLocations, rebirthLocations, fortunesKeepLocations].flat().sort((a, b) => a.localeCompare(b))
+  } else if (game === "MW2022") {
+    return [ashikaLocations, alMazrahLocations].flat().sort((a, b) => a.localeCompare(b))
+  } else {
+    return [verdanskLocations, rebirthLocations, fortunesKeepLocations, ashikaLocations, alMazrahLocations]
+      .flat()
+      .sort((a, b) => a.localeCompare(b))
   }
-  // Warzone 2
-  else if (game === "MW2022") {
-    if (map === "Ashika") return ashikaLocations
-    else if (map === "Al Mazrah") return alMazrahLocations
-  }
-
-  return [verdanskLocations, rebirthLocations, ashikaLocations, alMazrahLocations].flat()
 }
 
 export const verdanskLocations = [

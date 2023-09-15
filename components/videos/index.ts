@@ -1,12 +1,15 @@
+import { AutomuteToggler } from "./AutomuteToggler"
 import { AutoplayToggler } from "./AutoplayToggler"
 import { DelayDisclaimer } from "./DelayDisclaimer"
 import { DeleteCookiesButton } from "./DeleteCookiesButton"
+import { FilterVideosByAuthors } from "./FilterVideosByAuthors"
 import { FilterVideosByGame } from "./FilterVideosByGame"
+import { FilterVideosByLocation } from "./FilterVideosByLocation"
+import { FilterVideosByMap } from "./FilterVideosByMap"
 import { FocusViewToggler } from "./FocusViewToggler"
 import { KeyboardUsageButton } from "./KeyboardUsageButton"
 import { KeyboardUsageInstructions } from "./KeyboardUsageInstructions"
 import { MostRecentVideoShowcase } from "./MostRecentVideoShowcase"
-import { AutomuteToggler } from "./AutomuteToggler"
 import { NextVideo } from "./NextVideo"
 import { PopOpenVideo } from "./PopOpenVideo"
 import { PreviousVideo } from "./PreviousVideo"
@@ -21,15 +24,18 @@ import { VideoSkeleton } from "./VideoSkeleton"
 import { ViewToggler } from "./ViewToggler"
 
 export {
+  AutomuteToggler,
   AutoplayToggler,
   DelayDisclaimer,
   DeleteCookiesButton,
+  FilterVideosByAuthors,
   FilterVideosByGame,
+  FilterVideosByLocation,
+  FilterVideosByMap,
   FocusViewToggler,
   KeyboardUsageButton,
   KeyboardUsageInstructions,
   MostRecentVideoShowcase,
-  AutomuteToggler,
   NextVideo,
   PopOpenVideo,
   PreviousVideo,
