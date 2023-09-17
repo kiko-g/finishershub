@@ -3,17 +3,83 @@ import classNames from "classnames"
 import useAccessDenied from "../hooks/useAccessDenied"
 import type { VideoMongoDBWithUrl } from "../@types"
 import { AccessModalCTA, Layout, AccessBadge } from "../components/layout"
-import { useMediaQuery } from "usehooks-ts"
 import { VideoNotFound, VideoSkeleton } from "../components/videos"
 import { ArrowPathIcon, ArrowTopRightOnSquareIcon, CheckIcon } from "@heroicons/react/24/outline"
 import { PickAuthors, PickGame, PickLocation, PickMap, PickQuantity, PickTags } from "../components/admin"
+import { Tab } from "@headlessui/react"
 
 export default function Admin() {
-  const isMobile = useMediaQuery("(max-width: 768px)")
-  const [accessDenied, setAccessDenied] = useAccessDenied()
+  const tabs = [
+    {
+      name: "Videos",
+      component: <VideoManagementTable />,
+    },
+    {
+      name: "Sound",
+      component: <SoundManagement />,
+    },
+  ]
+
+  return (
+    <Layout location="Admin">
+      <div className="flex min-w-full flex-col overflow-scroll">
+        <div className="mb-3 text-lg font-normal">
+          <div className="flex flex-wrap items-center justify-start gap-x-3 gap-y-1">
+            <h2 className="whitespace-nowrap text-4xl font-bold tracking-tight sm:text-5xl">Admin</h2>
+            <AccessBadge />
+          </div>
+          <p className="mt-0.5 max-w-5xl text-sm">
+            Welcome to the back office of Finishers Hub. This is where we can document and report all acts of
+            ungodliness committed.
+          </p>
+        </div>
+
+        <Tab.Group defaultIndex={1}>
+          <Tab.List className="flex space-x-2 rounded-xl bg-primary/10 p-1 dark:bg-secondary/10">
+            {tabs.map((item, itemIdx) => (
+              <Tab
+                key={`item-${itemIdx}-${item.name}`}
+                className={({ selected }) =>
+                  classNames(
+                    "w-full rounded-lg py-2.5 text-sm font-medium leading-5 text-primary ring-white ring-opacity-60 ring-offset-2 ring-offset-primary transition focus:outline-none focus:ring-2 dark:text-secondary dark:ring-offset-secondary",
+                    selected
+                      ? "bg-primary/80 text-white shadow dark:bg-secondary/80 dark:text-white"
+                      : "hover:bg-primary/40 hover:text-white dark:hover:bg-secondary/40 dark:hover:text-white",
+                  )
+                }
+              >
+                {item.name}
+              </Tab>
+            ))}
+          </Tab.List>
+          <Tab.Panels className="mt-3">
+            <Tab.Panel>
+              <VideoManagementTable />
+            </Tab.Panel>
+
+            <Tab.Panel>
+              <SoundManagement />
+            </Tab.Panel>
+          </Tab.Panels>
+        </Tab.Group>
+      </div>
+    </Layout>
+  )
+}
+
+function SoundManagement() {
+  return (
+    <div>
+      <div></div>
+    </div>
+  )
+}
+
+function VideoManagementTable() {
   const [data, setData] = useState<VideoMongoDBWithUrl[]>([])
   const [loading, setLoading] = useState<boolean>(true)
   const [fetchError, setFetchError] = useState<boolean>(false)
+  const [accessDenied, setAccessDenied] = useAccessDenied()
 
   const itemsPerPage = 50
   const [currentPage, setCurrentPage] = useState(1)
@@ -68,128 +134,104 @@ export default function Admin() {
       })
   }, [])
 
-  return (
-    <Layout location="Admin">
-      <div className="flex min-w-full flex-col overflow-scroll">
-        <div className="mb-3 text-lg font-normal">
-          <div className="flex flex-wrap items-center justify-start gap-x-3 gap-y-1">
-            <h2 className="whitespace-nowrap text-4xl font-bold tracking-tight sm:text-5xl">Admin</h2>
-            <AccessBadge />
-          </div>
-          <p className="mt-0.5 max-w-5xl text-sm">
-            Welcome to the back office of Finishers Hub. This is where we can document and report all acts of
-            ungodliness committed.
-          </p>
-        </div>
+  return accessDenied ? (
+    <div className="mt-2 flex max-w-3xl flex-col items-start justify-start gap-4 rounded border border-gray-600 bg-gray-500/20 px-8 py-8 font-normal">
+      <p>
+        You <span className="font-bold underline">do not have access</span> to this page. Please contact the
+        administrator if you believe this is a mistake. To get full access click on the button below.
+      </p>
 
-        {accessDenied ? (
-          <div className="mt-2 flex max-w-3xl flex-col items-start justify-start gap-4 rounded border border-gray-600 bg-gray-500/20 px-8 py-8 font-normal">
-            <p>
-              You <span className="font-bold underline">do not have access</span> to this page. Please contact the
-              administrator if you believe this is a mistake. To get full access click on the button below.
-            </p>
-
-            <div className="flex justify-center">
-              <AccessModalCTA lockedHook={[accessDenied, setAccessDenied]} startOpen={false} />
-            </div>
-          </div>
-        ) : (
-          <>
-            {loading && <VideoSkeleton />}
-            {fetchError && <VideoNotFound message="Admin content failed loading" />}
-            {ready ? (
-              <>
-                <table className="min-w-full max-w-full divide-y divide-gray-200 overflow-x-scroll border border-gray-200 text-xs font-normal dark:divide-gray-700 dark:border-gray-700">
-                  <thead>
-                    <tr>
-                      <th className="bg-gray-700 px-2 py-2 text-left text-xs font-medium uppercase tracking-wider text-gray-100 dark:bg-gray-800 dark:text-gray-300 lg:px-3 lg:py-3">
-                        ID
-                      </th>
-                      <th className="bg-gray-700 px-2 py-2 text-left text-xs font-medium uppercase tracking-wider text-gray-100 dark:bg-gray-800 dark:text-gray-300 lg:px-3 lg:py-3">
-                        URL
-                      </th>
-                      <th className="bg-gray-700 px-2 py-2 text-left text-xs font-medium uppercase tracking-wider text-gray-100 dark:bg-gray-800 dark:text-gray-300 lg:px-3 lg:py-3">
-                        Edit
-                      </th>
-                      <th className="bg-gray-700 px-2 py-2 text-left text-xs font-medium uppercase tracking-wider text-gray-100 dark:bg-gray-800 dark:text-gray-300 lg:px-3 lg:py-3">
-                        Game
-                      </th>
-                      <th className="bg-gray-700 px-2 py-2 text-left text-xs font-medium uppercase tracking-wider text-gray-100 dark:bg-gray-800 dark:text-gray-300 lg:px-3 lg:py-3">
-                        Map
-                      </th>
-                      <th className="bg-gray-700 px-2 py-2 text-left text-xs font-medium uppercase tracking-wider text-gray-100 dark:bg-gray-800 dark:text-gray-300 lg:px-3 lg:py-3">
-                        Location
-                      </th>
-                      <th className="bg-gray-700 px-2 py-2 text-left text-xs font-medium uppercase tracking-wider text-gray-100 dark:bg-gray-800 dark:text-gray-300 lg:px-3 lg:py-3">
-                        Authors
-                      </th>
-                      <th className="bg-gray-700 px-2 py-2 text-left text-xs font-medium uppercase tracking-wider text-gray-100 dark:bg-gray-800 dark:text-gray-300 lg:px-3 lg:py-3">
-                        Tags
-                      </th>
-                      <th className="bg-gray-700 px-2 py-2 text-left text-xs font-medium uppercase tracking-wider text-gray-100 dark:bg-gray-800 dark:text-gray-300 lg:px-3 lg:py-3">
-                        Quantity
-                      </th>
-                    </tr>
-                  </thead>
-
-                  <tbody className="divide-y divide-transparent bg-white dark:divide-transparent dark:bg-transparent">
-                    {data
-                      .sort((a, b) => (a.id > b.id ? 1 : -1))
-                      .map((video, videoIdx) => (
-                        <TableRow
-                          video={video}
-                          rowIndex={videoIdx}
-                          replaceRowAction={replaceRow}
-                          key={`video-${video.id}`}
-                        />
-                      ))}
-                  </tbody>
-                </table>
-
-                <nav
-                  aria-label="Pagination"
-                  className="mb-72 mt-4 flex min-w-full flex-1 items-center justify-between self-stretch bg-white px-4 py-3 text-sm font-normal text-gray-800 dark:bg-gray-800 dark:text-white sm:px-6"
-                >
-                  <div className="hidden sm:block">
-                    <p>
-                      Showing <span className="font-medium">{(currentPage - 1) * itemsPerPage + 1}</span> to{" "}
-                      <span className="font-medium">{currentPage * itemsPerPage}</span> of{" "}
-                      <span className="font-medium">{data.length}</span> results
-                    </p>
-                  </div>
-
-                  <div className="flex flex-1 items-center justify-between text-xs sm:justify-end">
-                    <button
-                      disabled={leftDisabled}
-                      onClick={() => setCurrentPage((prev) => prev - 1)}
-                      className="relative inline-flex items-center rounded-l border-y border-l px-3 py-2 transition enabled:hover:bg-gray-200 disabled:cursor-not-allowed disabled:opacity-40 dark:border-gray-700 dark:enabled:hover:bg-gray-700"
-                    >
-                      Previous
-                    </button>
-
-                    <span
-                      className={classNames("relative inline-flex items-center border px-3 py-2 dark:border-gray-700")}
-                    >
-                      Page {currentPage}
-                    </span>
-
-                    <button
-                      disabled={rightDisabled}
-                      onClick={() => setCurrentPage((prev) => prev + 1)}
-                      className={classNames(
-                        "relative inline-flex items-center rounded-r border-y border-r px-3 py-2 transition enabled:hover:bg-gray-200 disabled:cursor-not-allowed disabled:opacity-40 dark:border-gray-700 dark:enabled:hover:bg-gray-700",
-                      )}
-                    >
-                      Next
-                    </button>
-                  </div>
-                </nav>
-              </>
-            ) : null}
-          </>
-        )}
+      <div className="flex justify-center">
+        <AccessModalCTA lockedHook={[accessDenied, setAccessDenied]} startOpen={false} />
       </div>
-    </Layout>
+    </div>
+  ) : (
+    <>
+      {loading && <VideoSkeleton />}
+      {fetchError && <VideoNotFound message="Admin content failed loading" />}
+      {ready ? (
+        <>
+          <table className="min-w-full max-w-full divide-y divide-gray-200 overflow-x-scroll border border-gray-200 text-xs font-normal dark:divide-gray-700 dark:border-gray-700">
+            <thead>
+              <tr>
+                <th className="bg-gray-700 px-2 py-2 text-left text-xs font-medium uppercase tracking-wider text-gray-100 dark:bg-gray-800 dark:text-gray-300 lg:px-3 lg:py-3">
+                  ID
+                </th>
+                <th className="bg-gray-700 px-2 py-2 text-left text-xs font-medium uppercase tracking-wider text-gray-100 dark:bg-gray-800 dark:text-gray-300 lg:px-3 lg:py-3">
+                  URL
+                </th>
+                <th className="bg-gray-700 px-2 py-2 text-left text-xs font-medium uppercase tracking-wider text-gray-100 dark:bg-gray-800 dark:text-gray-300 lg:px-3 lg:py-3">
+                  Edit
+                </th>
+                <th className="bg-gray-700 px-2 py-2 text-left text-xs font-medium uppercase tracking-wider text-gray-100 dark:bg-gray-800 dark:text-gray-300 lg:px-3 lg:py-3">
+                  Game
+                </th>
+                <th className="bg-gray-700 px-2 py-2 text-left text-xs font-medium uppercase tracking-wider text-gray-100 dark:bg-gray-800 dark:text-gray-300 lg:px-3 lg:py-3">
+                  Map
+                </th>
+                <th className="bg-gray-700 px-2 py-2 text-left text-xs font-medium uppercase tracking-wider text-gray-100 dark:bg-gray-800 dark:text-gray-300 lg:px-3 lg:py-3">
+                  Location
+                </th>
+                <th className="bg-gray-700 px-2 py-2 text-left text-xs font-medium uppercase tracking-wider text-gray-100 dark:bg-gray-800 dark:text-gray-300 lg:px-3 lg:py-3">
+                  Authors
+                </th>
+                <th className="bg-gray-700 px-2 py-2 text-left text-xs font-medium uppercase tracking-wider text-gray-100 dark:bg-gray-800 dark:text-gray-300 lg:px-3 lg:py-3">
+                  Tags
+                </th>
+                <th className="bg-gray-700 px-2 py-2 text-left text-xs font-medium uppercase tracking-wider text-gray-100 dark:bg-gray-800 dark:text-gray-300 lg:px-3 lg:py-3">
+                  Quantity
+                </th>
+              </tr>
+            </thead>
+
+            <tbody className="divide-y divide-transparent bg-white dark:divide-transparent dark:bg-transparent">
+              {data
+                .sort((a, b) => (a.id > b.id ? 1 : -1))
+                .map((video, videoIdx) => (
+                  <TableRow video={video} rowIndex={videoIdx} replaceRowAction={replaceRow} key={`video-${video.id}`} />
+                ))}
+            </tbody>
+          </table>
+
+          <nav
+            aria-label="Pagination"
+            className="mb-72 mt-4 flex min-w-full flex-1 items-center justify-between self-stretch bg-white px-4 py-3 text-sm font-normal text-gray-800 dark:bg-gray-800 dark:text-white sm:px-6"
+          >
+            <div className="hidden sm:block">
+              <p>
+                Showing <span className="font-medium">{(currentPage - 1) * itemsPerPage + 1}</span> to{" "}
+                <span className="font-medium">{currentPage * itemsPerPage}</span> of{" "}
+                <span className="font-medium">{data.length}</span> results
+              </p>
+            </div>
+
+            <div className="flex flex-1 items-center justify-between text-xs sm:justify-end">
+              <button
+                disabled={leftDisabled}
+                onClick={() => setCurrentPage((prev) => prev - 1)}
+                className="relative inline-flex items-center rounded-l border-y border-l px-3 py-2 transition enabled:hover:bg-gray-200 disabled:cursor-not-allowed disabled:opacity-40 dark:border-gray-700 dark:enabled:hover:bg-gray-700"
+              >
+                Previous
+              </button>
+
+              <span className={classNames("relative inline-flex items-center border px-3 py-2 dark:border-gray-700")}>
+                Page {currentPage}
+              </span>
+
+              <button
+                disabled={rightDisabled}
+                onClick={() => setCurrentPage((prev) => prev + 1)}
+                className={classNames(
+                  "relative inline-flex items-center rounded-r border-y border-r px-3 py-2 transition enabled:hover:bg-gray-200 disabled:cursor-not-allowed disabled:opacity-40 dark:border-gray-700 dark:enabled:hover:bg-gray-700",
+                )}
+              >
+                Next
+              </button>
+            </div>
+          </nav>
+        </>
+      ) : null}
+    </>
   )
 }
 
