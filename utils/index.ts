@@ -1,6 +1,75 @@
 import classNames from "classnames"
 import type { VideoMongoDBWithUrl } from "../@types"
 
+export async function updateVideo(video: VideoMongoDBWithUrl): Promise<VideoMongoDBWithUrl> {
+  const response = await fetch("/api/mongo/videos/update", {
+    method: "PUT",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify(video),
+  })
+
+  if (!response.ok) {
+    const errorMessage = await response.json()
+    throw new Error(errorMessage.message)
+  }
+
+  return response.json()
+}
+
+export async function getSoundStatus(): Promise<boolean> {
+  const response = await fetch("/api/mongo/sound", {
+    method: "GET",
+    headers: {
+      "Content-Type": "application/json",
+    },
+  })
+
+  if (!response.ok) {
+    const errorMessage = await response.json()
+    throw new Error(errorMessage.message)
+  }
+
+  return response.json()
+}
+
+export async function turnSoundOn() {
+  const response = await fetch("/api/mongo/sound/on", {
+    method: "GET",
+    headers: {
+      "Content-Type": "application/json",
+    },
+  })
+
+  if (!response.ok) {
+    const errorMessage = await response.json()
+    throw new Error(errorMessage.message)
+  }
+
+  const data = await response.json()
+  console.log(`turned ON:`, data)
+  return data
+}
+
+export async function turnSoundOff() {
+  const response = await fetch("/api/mongo/sound/off", {
+    method: "GET",
+    headers: {
+      "Content-Type": "application/json",
+    },
+  })
+
+  if (!response.ok) {
+    const errorMessage = await response.json()
+    throw new Error(errorMessage.message)
+  }
+
+  const data = await response.json()
+  console.log(`turned OFF:`, data)
+  return data
+}
+
 export function getButtonSizeClassNames(size: "xs" | "sm" | "md" | "lg" | "xl") {
   return classNames(
     size === "xs" ? "h-4 w-4 lg:h-5 lg:w-5" : "",

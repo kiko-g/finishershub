@@ -19,7 +19,7 @@ import { useSoundAvailable } from "../../hooks/useSoundAvailable"
 
 export default function IndexPage() {
   const isMobile = useMediaQuery("(max-width: 768px)")
-  const [soundAvailable] = useSoundAvailable()
+  const { soundAvailable } = useSoundAvailable()
 
   const [loading, setLoading] = useState<boolean>(true)
   const [fetchError, setFetchError] = useState<boolean>(false)

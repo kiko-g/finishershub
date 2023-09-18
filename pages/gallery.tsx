@@ -23,7 +23,6 @@ export default function Gallery() {
   const isMobile = useMediaQuery("(max-width: 768px)")
 
   const [accessDenied, setAccessDenied] = useAccessDenied()
-  const [soundAvailable] = useSoundAvailable()
 
   const [loading, setLoading] = useState<boolean>(true)
   const [game, setGame] = useState<Game>("All")

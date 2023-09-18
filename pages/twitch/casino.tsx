@@ -15,7 +15,7 @@ import { ArrowLongLeftIcon, ArrowLongRightIcon } from "@heroicons/react/24/outli
 import { useSoundAvailable } from "../../hooks/useSoundAvailable"
 
 export default function CasinoPage() {
-  const [soundAvailable] = useSoundAvailable()
+  const { soundAvailable } = useSoundAvailable()
 
   const [loading, setLoading] = useState<boolean>(true)
   const [fetchError, setFetchError] = useState<boolean>(false)

@@ -30,7 +30,7 @@ export function VideoPlayer(props: Props) {
 
   const videoRef = useRef<HTMLVideoElement>(null)
   const progressBarRef = useRef<HTMLDivElement>(null)
-  const [soundAvailable] = useSoundAvailable()
+  const { soundAvailable } = useSoundAvailable()
 
   const [mute, setMute] = useState(automute)
   const [playing, setPlaying] = useState(false)
@@ -232,7 +232,7 @@ type ToggleMuteVideoProps = {
 
 function ToggleMuteVideo({ hook, size = "sm" }: ToggleMuteVideoProps) {
   const [mute, setMute] = hook
-  const [soundAvailable] = useSoundAvailable()
+  const { soundAvailable } = useSoundAvailable()
 
   function handleMute() {
     setMute(true)

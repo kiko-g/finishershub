@@ -22,19 +22,15 @@ export default function Casino() {
 
   const isMobile = useMediaQuery("(max-width: 768px)")
   const [accessDenied, setAccessDenied] = useAccessDenied()
-  const [soundAvailable] = useSoundAvailable()
 
   const [loading, setLoading] = useState<boolean>(true)
   const [fetchError, setFetchError] = useState<boolean>(false)
-  const [expandedView, setExpandedView] = useState<boolean>(false)
-
   const [game, setGame] = useState<Game>("MW2022")
   const [index, setIndex] = useState<number>(0)
   const [videos, setVideos] = useState<VideoMongoDBWithUrl[]>([])
   const [muted, setMuted] = useState<boolean>(true)
   const [autoplay, setAutoplay] = useState<boolean>(true)
   const [shuffled, setShuffled] = useState<boolean>(true)
-  const [showInstructions, setShowInstructions] = useState(true)
 
   const limitedAccess = useMemo(() => accessDenied, [accessDenied])
   const video = useMemo(() => videos[index], [index, videos])

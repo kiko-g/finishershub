@@ -8,7 +8,7 @@ export function useContentInteraction() {
   const [accessDenied, setAccessDenied] = useAccessDenied()
   const [isLoading, setIsLoading] = useState<boolean>(true)
   const [fetchError, setFetchError] = useState<boolean>(false)
-  const [soundAvailable] = useSoundAvailable()
+  const { soundAvailable } = useSoundAvailable()
   const isContentReady = useMemo(() => !isLoading && !fetchError, [isLoading, fetchError])
 
   return {

@@ -6,7 +6,9 @@ import { AccessModalCTA, Layout, AccessBadge } from "../components/layout"
 import { VideoNotFound, VideoSkeleton } from "../components/videos"
 import { ArrowPathIcon, ArrowTopRightOnSquareIcon, CheckIcon } from "@heroicons/react/24/outline"
 import { PickAuthors, PickGame, PickLocation, PickMap, PickQuantity, PickTags } from "../components/admin"
-import { Tab } from "@headlessui/react"
+import { Switch, Tab } from "@headlessui/react"
+import { useSoundAvailable } from "../hooks/useSoundAvailable"
+import { getSoundStatus, updateVideo } from "../utils"
 
 export default function Admin() {
   const tabs = [
@@ -67,11 +69,93 @@ export default function Admin() {
   )
 }
 
-function SoundManagement() {
+function LockedContent({ hook }: { hook: [boolean, React.Dispatch<React.SetStateAction<boolean>>] }) {
+  const [accessDenied, setAccessDenied] = hook
   return (
-    <div>
-      <div></div>
+    <div className="mt-2 flex max-w-3xl flex-col items-start justify-start gap-4 rounded border border-gray-600 bg-gray-500/20 px-8 py-8 font-normal">
+      <p>
+        You <span className="font-bold underline">do not have access</span> to this page. Please contact the
+        administrator if you believe this is a mistake. To get full access click on the button below.
+      </p>
+
+      <div className="flex justify-center">
+        <AccessModalCTA lockedHook={[accessDenied, setAccessDenied]} startOpen={false} />
+      </div>
     </div>
+  )
+}
+
+function SoundManagement() {
+  const [accessDenied, setAccessDenied] = useAccessDenied()
+  const [allowedToggleDisabled, setAllowedToggleDisabled] = useState(false)
+  const [sensitiveEnabled, setSensitiveEnabled] = useState(process.env.NEXT_PUBLIC_SENSITIVE === "true")
+
+  const { soundAvailable, toggleSound, setToggleSound } = useSoundAvailable()
+
+  const isSensitiveDisabled = true
+
+  return accessDenied ? (
+    <LockedContent hook={[accessDenied, setAccessDenied]} />
+  ) : (
+    <ul className="space-y-3 font-normal">
+      <li
+        className={classNames(
+          "flex items-center justify-start gap-2 rounded px-8 py-8",
+          soundAvailable ? "bg-teal-600/20" : "bg-rose-600/20",
+        )}
+      >
+        <span>Sound Enabled</span>
+        <span>{soundAvailable ? "✅" : "❌"}</span>
+      </li>
+
+      <li className="flex items-center justify-start gap-3 rounded bg-white px-8 py-8 dark:bg-dark">
+        <span>Sound Allowed</span>
+        <Switch
+          disabled={allowedToggleDisabled}
+          checked={toggleSound === null ? soundAvailable : toggleSound}
+          onChange={() => {
+            setAllowedToggleDisabled(true)
+            setToggleSound((prev) => !prev)
+            setTimeout(() => setAllowedToggleDisabled(false), 500)
+          }}
+          className={classNames(
+            soundAvailable ? "bg-teal-600" : "bg-rose-500",
+            "relative inline-flex h-6 w-11 flex-shrink-0 cursor-pointer rounded-full border-2 border-transparent transition-colors duration-200 ease-in-out focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-40 dark:focus:ring-secondary",
+          )}
+        >
+          <span className="sr-only">Use setting</span>
+          <span
+            aria-hidden="true"
+            className={classNames(
+              soundAvailable ? "translate-x-5" : "translate-x-0",
+              "pointer-events-none inline-block h-5 w-5 transform rounded-full bg-white shadow ring-0 transition duration-200 ease-in-out",
+            )}
+          />
+        </Switch>
+      </li>
+
+      <li className="flex items-center justify-start gap-3 rounded bg-white px-8 py-8 dark:bg-dark">
+        <span>Sensitive Content Protection</span>
+        <Switch
+          disabled={isSensitiveDisabled}
+          checked={sensitiveEnabled}
+          onChange={setSensitiveEnabled}
+          className={classNames(
+            sensitiveEnabled ? "bg-teal-600" : "bg-rose-500",
+            "relative inline-flex h-6 w-11 flex-shrink-0 cursor-pointer rounded-full border-2 border-transparent transition-colors duration-200 ease-in-out focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-40 dark:focus:ring-secondary",
+          )}
+        >
+          <span className="sr-only">Use setting</span>
+          <span
+            aria-hidden="true"
+            className={classNames(
+              sensitiveEnabled ? "translate-x-5" : "translate-x-0",
+              "pointer-events-none inline-block h-5 w-5 transform rounded-full bg-white shadow ring-0 transition duration-200 ease-in-out",
+            )}
+          />
+        </Switch>
+      </li>
+    </ul>
   )
 }
 
@@ -88,35 +172,18 @@ function VideoManagementTable() {
   const leftDisabled = useMemo(() => currentPage === 1, [currentPage])
   const rightDisabled = useMemo(() => currentPage * itemsPerPage >= data.length, [currentPage, data.length])
 
-  async function replaceRow(row: VideoMongoDBWithUrl, rowIndex: number) {
+  async function replaceRow(video: VideoMongoDBWithUrl, videoIndex: number) {
     try {
-      const updatedVideo = await updateVideo(row)
+      const updatedVideo = await updateVideo(video)
       setData((prev) => {
         const newData = [...prev]
-        newData[rowIndex] = row
+        newData[videoIndex] = video
         return newData
       })
     } catch (error) {
       const errorMessage = error instanceof Error ? error.message : null
       console.error("Error updating video:", errorMessage)
     }
-  }
-
-  async function updateVideo(row: VideoMongoDBWithUrl): Promise<VideoMongoDBWithUrl> {
-    const response = await fetch("/api/mongo/videos/update", {
-      method: "PUT",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(row),
-    })
-
-    if (!response.ok) {
-      const errorMessage = await response.json()
-      throw new Error(errorMessage.message)
-    }
-
-    return response.json()
   }
 
   useEffect(() => {
@@ -135,16 +202,7 @@ function VideoManagementTable() {
   }, [])
 
   return accessDenied ? (
-    <div className="mt-2 flex max-w-3xl flex-col items-start justify-start gap-4 rounded border border-gray-600 bg-gray-500/20 px-8 py-8 font-normal">
-      <p>
-        You <span className="font-bold underline">do not have access</span> to this page. Please contact the
-        administrator if you believe this is a mistake. To get full access click on the button below.
-      </p>
-
-      <div className="flex justify-center">
-        <AccessModalCTA lockedHook={[accessDenied, setAccessDenied]} startOpen={false} />
-      </div>
-    </div>
+    <LockedContent hook={[accessDenied, setAccessDenied]} />
   ) : (
     <>
       {loading && <VideoSkeleton />}
