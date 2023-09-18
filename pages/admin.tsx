@@ -86,13 +86,12 @@ function LockedContent({ hook }: { hook: [boolean, React.Dispatch<React.SetState
 }
 
 function SoundManagement() {
+  const isSensitiveDisabled = true
   const [accessDenied, setAccessDenied] = useAccessDenied()
   const [allowedToggleDisabled, setAllowedToggleDisabled] = useState(false)
   const [sensitiveEnabled, setSensitiveEnabled] = useState(process.env.NEXT_PUBLIC_SENSITIVE === "true")
 
   const { soundAvailable, toggleSound, setToggleSound } = useSoundAvailable()
-
-  const isSensitiveDisabled = true
 
   return accessDenied ? (
     <LockedContent hook={[accessDenied, setAccessDenied]} />

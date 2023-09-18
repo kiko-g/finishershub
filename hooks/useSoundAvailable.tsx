@@ -27,12 +27,11 @@ export function useSoundAvailable() {
     if (toggleSound === null) return
 
     getSoundStatus().then((status: boolean) => {
+      console.log("prev:", status, "after:", !status)
       if (status === true) {
-        turnSoundOff()
-        setMongoAudioAvailable(false)
+        turnSoundOff().then(() => setMongoAudioAvailable(false))
       } else {
-        turnSoundOn()
-        setMongoAudioAvailable(true)
+        turnSoundOn().then(() => setMongoAudioAvailable(true))
       }
     })
   }, [toggleSound])

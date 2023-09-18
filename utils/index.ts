@@ -47,9 +47,7 @@ export async function turnSoundOn() {
     throw new Error(errorMessage.message)
   }
 
-  const data = await response.json()
-  console.log(`turned ON:`, data)
-  return data
+  return response.json()
 }
 
 export async function turnSoundOff() {
@@ -65,9 +63,7 @@ export async function turnSoundOff() {
     throw new Error(errorMessage.message)
   }
 
-  const data = await response.json()
-  console.log(`turned OFF:`, data)
-  return data
+  return response.json()
 }
 
 export function getButtonSizeClassNames(size: "xs" | "sm" | "md" | "lg" | "xl") {
