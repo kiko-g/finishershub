@@ -72,7 +72,7 @@ export default function Admin() {
 function LockedContent({ hook }: { hook: [boolean, React.Dispatch<React.SetStateAction<boolean>>] }) {
   const [accessDenied, setAccessDenied] = hook
   return (
-    <div className="mt-2 flex max-w-3xl flex-col items-start justify-start gap-4 rounded border border-gray-600 bg-gray-500/20 px-8 py-8 font-normal">
+    <div className="mt-2 flex flex-col items-start justify-start gap-4 rounded border border-gray-600 bg-gray-500/20 px-8 py-8 font-normal">
       <p>
         You <span className="font-bold underline">do not have access</span> to this page. Please contact the
         administrator if you believe this is a mistake. To get full access click on the button below.
@@ -159,7 +159,8 @@ function SoundManagement() {
 }
 
 function VideoManagementTable() {
-  const [data, setData] = useState<VideoMongoDBWithUrl[]>([])
+  const [totalVideos, setTotalVideos] = useState<number>(0)
+  const [videos, setVideos] = useState<VideoMongoDBWithUrl[]>([])
   const [loading, setLoading] = useState<boolean>(true)
   const [fetchError, setFetchError] = useState<boolean>(false)
   const [accessDenied, setAccessDenied] = useAccessDenied()
@@ -169,12 +170,12 @@ function VideoManagementTable() {
 
   const ready = useMemo(() => !loading && !fetchError, [loading, fetchError])
   const leftDisabled = useMemo(() => currentPage === 1, [currentPage])
-  const rightDisabled = useMemo(() => currentPage * itemsPerPage >= data.length, [currentPage, data.length])
+  const rightDisabled = useMemo(() => currentPage * itemsPerPage >= totalVideos, [currentPage, totalVideos])
 
   async function replaceRow(video: VideoMongoDBWithUrl, videoIndex: number) {
     try {
       const updatedVideo = await updateVideo(video)
-      setData((prev) => {
+      setVideos((prev) => {
         const newData = [...prev]
         newData[videoIndex] = video
         return newData
@@ -186,19 +187,38 @@ function VideoManagementTable() {
   }
 
   useEffect(() => {
-    fetch(`/api/mongo/videos/urls`)
-      .then((res) => res.json())
-      .then((vids: VideoMongoDBWithUrl[]) => {
-        setData(vids)
+    const fetchTotalCount = async () => {
+      try {
+        const response = await fetch(`/api/mongo/videos/count`)
+        const count: number = await response.json()
+        setTotalVideos(count)
+      } catch (err) {
+        console.error(err)
+      }
+    }
+
+    fetchTotalCount()
+  }, [])
+
+  useEffect(() => {
+    const fetchVideos = async () => {
+      try {
+        const startIndex = (currentPage - 1) * itemsPerPage
+        const response = await fetch(`/api/mongo/videos/urls/partial/${startIndex}`)
+        const vids: VideoMongoDBWithUrl[] = await response.json()
+
+        setVideos(vids)
         setLoading(false)
         setFetchError(false)
-      })
-      .catch((err) => {
+      } catch (err) {
         setLoading(false)
         setFetchError(true)
         console.error(err)
-      })
-  }, [])
+      }
+    }
+
+    fetchVideos()
+  }, [currentPage])
 
   return accessDenied ? (
     <LockedContent hook={[accessDenied, setAccessDenied]} />
@@ -242,7 +262,7 @@ function VideoManagementTable() {
             </thead>
 
             <tbody className="divide-y divide-transparent bg-white dark:divide-transparent dark:bg-transparent">
-              {data
+              {videos
                 .sort((a, b) => (a.id > b.id ? 1 : -1))
                 .map((video, videoIdx) => (
                   <TableRow video={video} rowIndex={videoIdx} replaceRowAction={replaceRow} key={`video-${video.id}`} />
@@ -258,7 +278,7 @@ function VideoManagementTable() {
               <p>
                 Showing <span className="font-medium">{(currentPage - 1) * itemsPerPage + 1}</span> to{" "}
                 <span className="font-medium">{currentPage * itemsPerPage}</span> of{" "}
-                <span className="font-medium">{data.length}</span> results
+                <span className="font-medium">{totalVideos}</span> results
               </p>
             </div>
 
