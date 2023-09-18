@@ -1,5 +1,5 @@
 import React from "react"
-import { clearCache } from "../../utils/storage"
+import { clearCache } from "@/utils/storage"
 import { TrashIcon } from "@heroicons/react/24/outline"
 
 export function DeleteData() {

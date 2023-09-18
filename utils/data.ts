@@ -1,4 +1,4 @@
-import { Game } from "../@types"
+import { Game } from "@/@types"
 
 export const games: Game[] = ["All", "MW2019", "MW2022"]
 

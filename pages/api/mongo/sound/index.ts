@@ -1,6 +1,6 @@
 import type { NextApiRequest, NextApiResponse } from "next"
-import { allowCors, connectMongoDB } from "../../../../config"
-import { Sound } from "../../../../models"
+import { allowCors, connectMongoDB } from "@/config"
+import { Sound } from "@/models"
 
 // @desc     Get all videos
 // @route    GET /api/mongo/videos/

@@ -1,9 +1,9 @@
 import React, { useState, useEffect, useMemo, useCallback, useRef } from "react"
-import type { Game, VideoMongoDBWithUrl } from "../@types"
-import useAccessDenied from "../hooks/useAccessDenied"
+import type { Game, VideoMongoDBWithUrl } from "@/@types"
+import useAccessDenied from "@/hooks/useAccessDenied"
 import { useMediaQuery } from "usehooks-ts"
-import { shuffle } from "../utils"
-import { Layout, AccessBadge } from "../components/layout"
+import { shuffle } from "@/utils"
+import { Layout, AccessBadge } from "@/components/layout"
 import { ArrowLongLeftIcon, ArrowLongRightIcon } from "@heroicons/react/24/outline"
 import {
   AutoplayToggler,
@@ -14,8 +14,8 @@ import {
   VideoNotFound,
   VideoPlayer,
   VideoSkeleton,
-} from "../components/videos"
-import { useSoundAvailable } from "../hooks/useSoundAvailable"
+} from "@/components/videos"
+import { useSoundAvailable } from "@/hooks/useSoundAvailable"
 
 export default function Casino() {
   const buttonControlsRef = useRef<HTMLDivElement | null>(null)

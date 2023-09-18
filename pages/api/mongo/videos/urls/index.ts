@@ -1,8 +1,8 @@
-import Videos from "../../../../../models/videos"
+import Videos from "@/models/videos"
 import type { NextApiRequest, NextApiResponse } from "next"
-import { allowCors, connectMongoDB } from "../../../../../config"
-import { getVideoUrl } from "../../../../../utils/api/s3"
-import { ensureItemsAreSplit } from "../../../../../utils"
+import { allowCors, connectMongoDB } from "@/config"
+import { getVideoUrl } from "@/utils/api/s3"
+import { ensureItemsAreSplit } from "@/utils"
 
 // @desc     Get all videos with url
 // @route    GET /api/mongo/videos/urls

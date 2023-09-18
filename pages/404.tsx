@@ -1,7 +1,7 @@
 import React from "react"
 import Link from "next/link"
 import Image from "next/image"
-import { Layout } from "../components/layout"
+import { Layout } from "@/components/layout"
 import { ArrowLongRightIcon } from "@heroicons/react/24/outline"
 
 export default function NotFound() {

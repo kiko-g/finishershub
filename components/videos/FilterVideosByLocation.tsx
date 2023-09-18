@@ -1,10 +1,10 @@
 import React, { Dispatch, Fragment, SetStateAction, useEffect, useMemo } from "react"
 import classNames from "classnames"
-import type { Game } from "../../@types"
+import type { Game } from "@/@types"
 import { Listbox, Transition } from "@headlessui/react"
 import { ChevronUpDownIcon } from "@heroicons/react/24/outline"
 import { CheckCircleIcon } from "@heroicons/react/24/solid"
-import { getLocations, getMaps } from "../../utils/data"
+import { getLocations, getMaps } from "@/utils/data"
 
 type Props = {
   game: Game

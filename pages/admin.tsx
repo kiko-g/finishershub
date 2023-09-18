@@ -1,14 +1,14 @@
 import React, { useEffect, useMemo, useRef, useState } from "react"
 import classNames from "classnames"
-import useAccessDenied from "../hooks/useAccessDenied"
-import type { VideoMongoDBWithUrl } from "../@types"
-import { AccessModalCTA, Layout, AccessBadge } from "../components/layout"
-import { VideoNotFound, VideoSkeleton } from "../components/videos"
+import useAccessDenied from "@/hooks/useAccessDenied"
+import type { VideoMongoDBWithUrl } from "@/@types"
+import { AccessModalCTA, Layout, AccessBadge } from "@/components/layout"
+import { VideoNotFound, VideoSkeleton } from "@/components/videos"
 import { ArrowPathIcon, ArrowTopRightOnSquareIcon, CheckIcon } from "@heroicons/react/24/outline"
-import { PickAuthors, PickGame, PickLocation, PickMap, PickQuantity, PickTags } from "../components/admin"
+import { PickAuthors, PickGame, PickLocation, PickMap, PickQuantity, PickTags } from "@/components/admin"
 import { Switch, Tab } from "@headlessui/react"
-import { useSoundAvailable } from "../hooks/useSoundAvailable"
-import { getSoundStatus, updateVideo } from "../utils"
+import { useSoundAvailable } from "@/hooks/useSoundAvailable"
+import { getSoundStatus, updateVideo } from "@/utils"
 
 export default function Admin() {
   const tabs = [

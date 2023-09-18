@@ -1,6 +1,6 @@
 import { GoogleSpreadsheet } from "google-spreadsheet"
 import type { NextApiRequest, NextApiResponse } from "next"
-import { transpose } from "../../../utils"
+import { transpose } from "@/utils"
 
 const GOOGLE_PRIVATE_KEY = process.env.GOOGLE_PRIVATE_KEY!.replace(/\\n/gm, "\n")
 const GOOGLE_SPREADSHEET_ID = process.env.GOOGLE_SHEET_ID!

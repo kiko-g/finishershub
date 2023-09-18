@@ -1,6 +1,6 @@
 import type { NextApiRequest, NextApiResponse } from "next"
-import { Videos } from "../../../../../models"
-import { allowCors, connectMongoDB } from "../../../../../config"
+import { Videos } from "@/models"
+import { allowCors, connectMongoDB } from "@/config"
 
 // @desc     Get total count of videos
 // @route    GET /api/mongo/videos/count

@@ -1,5 +1,5 @@
 import React from "react"
-import type { VideoMongoDBWithUrl } from "../../@types"
+import type { VideoMongoDBWithUrl } from "@/@types"
 import { VideoSkeleton, VideoNotFound, ShareVideo, PopOpenVideo } from "."
 
 export function MostRecentVideoShowcase() {

@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react"
-import { type FinishersClubMember } from "../@types"
+import { type FinishersClubMember } from "@/@types"
 
 function useLocalStorage(key: string, initialValue?: any) {
   const [storedValue, setStoredValue] = useState(() => {

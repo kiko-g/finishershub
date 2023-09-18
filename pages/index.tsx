@@ -1,10 +1,10 @@
 import React, { Dispatch, SetStateAction } from "react"
 import classNames from "classnames"
 import Link from "next/link"
-import useAccessDenied from "../hooks/useAccessDenied"
-import { socials } from "../utils/data"
-import { AccessModalCTA, DarkModeSwitch, DeleteData, Footer, Seo } from "../components/layout"
-import { MostRecentVideoShowcase } from "../components/videos"
+import useAccessDenied from "@/hooks/useAccessDenied"
+import { socials } from "@/utils/data"
+import { AccessModalCTA, DarkModeSwitch, DeleteData, Footer, Seo } from "@/components/layout"
+import { MostRecentVideoShowcase } from "@/components/videos"
 import { ArrowLongRightIcon } from "@heroicons/react/24/outline"
 
 export default function Hub() {

@@ -1,9 +1,9 @@
 import classNames from "classnames"
 import { Dispatch, Fragment, SetStateAction, useMemo } from "react"
-import { VideoMongoDBWithUrl } from "../../@types"
+import { VideoMongoDBWithUrl } from "@/@types"
 import { Listbox, Transition } from "@headlessui/react"
 import { CheckCircleIcon, ChevronUpDownIcon } from "@heroicons/react/24/solid"
-import { tags } from "../../utils/data"
+import { tags } from "@/utils/data"
 
 export function PickTags({
   videoHook,

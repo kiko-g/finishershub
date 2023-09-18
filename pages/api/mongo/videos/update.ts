@@ -1,6 +1,6 @@
-import Videos from "../../../../models/videos"
+import Videos from "@/models/videos"
 import type { NextApiRequest, NextApiResponse } from "next"
-import { allowCors, connectMongoDB } from "../../../../config"
+import { allowCors, connectMongoDB } from "@/config"
 
 // @desc     Update a video document
 // @route    PUT /api/mongo/videos/urls

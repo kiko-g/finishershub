@@ -1,6 +1,6 @@
 import React, { useEffect } from "react"
 import Link from "next/link"
-import { getButtonSizeClassNames } from "../../utils"
+import { getButtonSizeClassNames } from "@/utils"
 import { PaperAirplaneIcon } from "@heroicons/react/24/outline"
 
 type Props = {

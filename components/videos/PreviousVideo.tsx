@@ -1,5 +1,5 @@
 import React from "react"
-import { getButtonSizeClassNames } from "../../utils"
+import { getButtonSizeClassNames } from "@/utils"
 import { ChevronDoubleLeftIcon } from "@heroicons/react/24/outline"
 
 type Props = {

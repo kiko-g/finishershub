@@ -1,8 +1,8 @@
 import React, { useCallback, useEffect, useMemo, useRef, useState } from "react"
 import classNames from "classnames"
 import { Listbox } from "@headlessui/react"
-import { FilterVideosByGame } from "../components/videos/FilterVideosByGame"
-import { Layout, AccessBadge } from "../components/layout"
+import { FilterVideosByGame } from "@/components/videos/FilterVideosByGame"
+import { Layout, AccessBadge } from "@/components/layout"
 import {
   AutoplayToggler,
   KeyboardUsageButton,
@@ -14,15 +14,15 @@ import {
   FilterVideosByAuthors,
   FilterVideosByMap,
   FilterVideosByLocation,
-} from "../components/videos"
+} from "@/components/videos"
 
-import { authors, tags } from "../utils/data"
-import type { Game, VideoMongoDBWithUrl } from "../@types"
-import { useControls } from "../hooks/useControls"
-import { useContentInteraction } from "../hooks/useContentInteraction"
-import { VideoOrderToggler } from "../components/videos/VideoOrderToggler"
+import { authors, tags } from "@/utils/data"
+import type { Game, VideoMongoDBWithUrl } from "@/@types"
+import { useControls } from "@/hooks/useControls"
+import { useContentInteraction } from "@/hooks/useContentInteraction"
+import { VideoOrderToggler } from "@/components/videos/VideoOrderToggler"
 import { ArrowLongLeftIcon, ArrowLongRightIcon } from "@heroicons/react/24/outline"
-import { FilterVideosByTags } from "../components/videos/FilterVideosByTags"
+import { FilterVideosByTags } from "@/components/videos/FilterVideosByTags"
 
 type Props = {}
 

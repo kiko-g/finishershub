@@ -1,6 +1,6 @@
 import type { NextApiRequest, NextApiResponse } from "next"
-import { allowCors, connectMongoDB } from "../../../../../config"
-import Registry from "../../../../../models/registry"
+import { allowCors, connectMongoDB } from "@/config"
+import Registry from "@/models/registry"
 
 // @desc     Get finishers of a certain member
 // @route    GET /api/mongo/registry/:id/

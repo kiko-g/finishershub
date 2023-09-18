@@ -1,8 +1,8 @@
 import React, { useState, useEffect, useMemo } from "react"
-import { shuffle } from "../../utils"
-import { clearCache, isStorageValid, writeVideosStorage } from "../../utils/storage"
-import useAccessDenied from "../../hooks/useAccessDenied"
-import { Layout, AccessModal, InvisbleTopLayer, AccessBadge } from "../../components/layout"
+import { shuffle } from "@/utils"
+import { clearCache, isStorageValid, writeVideosStorage } from "@/utils/storage"
+import useAccessDenied from "@/hooks/useAccessDenied"
+import { Layout, AccessModal, InvisbleTopLayer, AccessBadge } from "@/components/layout"
 import {
   AutoplayToggler,
   AutomuteToggler,
@@ -10,9 +10,9 @@ import {
   ReshuffleButton,
   DeleteCookiesButton,
   DelayDisclaimer,
-} from "../../components/videos"
+} from "@/components/videos"
 import { ArrowLongLeftIcon, ArrowLongRightIcon } from "@heroicons/react/24/outline"
-import { useSoundAvailable } from "../../hooks/useSoundAvailable"
+import { useSoundAvailable } from "@/hooks/useSoundAvailable"
 
 export default function CasinoPage() {
   const { soundAvailable } = useSoundAvailable()

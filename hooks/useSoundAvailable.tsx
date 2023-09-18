@@ -1,5 +1,5 @@
 import { useEffect, useMemo, useState } from "react"
-import { getSoundStatus, turnSoundOff, turnSoundOn } from "../utils"
+import { getSoundStatus, turnSoundOff, turnSoundOn } from "@/utils"
 
 export function useSoundAvailable() {
   const isDevelopment = process.env.NODE_ENV === "development"

@@ -1,6 +1,6 @@
 import React, { Dispatch, SetStateAction } from "react"
 import { Bars3Icon, Bars4Icon } from "@heroicons/react/24/outline"
-import { getButtonSizeClassNames } from "../../utils"
+import { getButtonSizeClassNames } from "@/utils"
 
 type Props = {
   hook: [boolean, Dispatch<SetStateAction<boolean>>]

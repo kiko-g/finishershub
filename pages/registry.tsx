@@ -1,10 +1,10 @@
 import React, { Dispatch, Fragment, SetStateAction, useEffect, useMemo, useState } from "react"
 import Image from "next/image"
-import useLocked from "../hooks/useLocked"
-import RegistryAPI from "../utils/api/registry"
-import { type FinishersClubMember } from "../@types"
+import useLocked from "@/hooks/useLocked"
+import RegistryAPI from "@/utils/api/registry"
+import { type FinishersClubMember } from "@/@types"
 import { Dialog, Listbox, Transition } from "@headlessui/react"
-import { Layout } from "../components/layout"
+import { Layout } from "@/components/layout"
 import {
   CakeIcon,
   CheckIcon,

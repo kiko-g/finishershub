@@ -1,6 +1,6 @@
 import type { NextApiRequest, NextApiResponse } from "next"
-import { allowCors, connectMongoDB } from "../../../../../../config"
-import Registry from "../../../../../../models/registry"
+import { allowCors, connectMongoDB } from "@/config"
+import Registry from "@/models/registry"
 
 // @desc     Increment finishers of a certain member
 // @route    PUT /api/mongo/registry/increment/:id/:arena/

@@ -1,5 +1,5 @@
 import axios, { AxiosInstance } from "axios"
-import { type ClipsResponse } from "../../@types"
+import { type ClipsResponse } from "@/@types"
 import type { NextApiRequest, NextApiResponse } from "next"
 
 const TWITCH_API_URL = "https://api.twitch.tv/helix"

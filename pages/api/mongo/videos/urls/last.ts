@@ -1,8 +1,8 @@
 import type { NextApiRequest, NextApiResponse } from "next"
-import { allowCors, connectMongoDB } from "../../../../../config"
-import { getVideoUrl } from "../../../../../utils/api/s3"
-import { VideoMongoDBWithUrl } from "../../../../../@types"
-import Videos from "../../../../../models/videos"
+import { allowCors, connectMongoDB } from "@/config"
+import { getVideoUrl } from "@/utils/api/s3"
+import { VideoMongoDBWithUrl } from "@/@types"
+import Videos from "@/models/videos"
 
 // @desc     Get the last video with url
 // @route    GET /api/mongo/videos/urls/last

@@ -1,5 +1,5 @@
 import React, { Dispatch, SetStateAction } from "react"
-import { getButtonSizeClassNames } from "../../utils"
+import { getButtonSizeClassNames } from "@/utils"
 import { ArrowsPointingInIcon, ArrowsPointingOutIcon } from "@heroicons/react/24/outline"
 
 type Props = {

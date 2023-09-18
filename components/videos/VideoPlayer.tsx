@@ -1,11 +1,11 @@
 import classNames from "classnames"
-import type { VideoMongoDBWithUrl } from "../../@types"
+import type { VideoMongoDBWithUrl } from "@/@types"
 import React, { useState, useEffect, useRef, SetStateAction, Dispatch, useCallback } from "react"
 import { ShareVideo, PopOpenVideo, VideoSkeleton, PopOpenAPICall } from "./"
 import { PauseIcon, PlayIcon } from "@heroicons/react/24/solid"
-import { getButtonSizeClassNames } from "../../utils"
+import { getButtonSizeClassNames } from "@/utils"
 import { FocusViewToggler } from "./FocusViewToggler"
-import { useSoundAvailable } from "../../hooks/useSoundAvailable"
+import { useSoundAvailable } from "@/hooks/useSoundAvailable"
 
 type Props = {
   video: VideoMongoDBWithUrl

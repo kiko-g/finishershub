@@ -1,10 +1,10 @@
 import React, { useState, useEffect, useMemo } from "react"
 import classNames from "classnames"
-import useAccessDenied from "../../hooks/useAccessDenied"
+import useAccessDenied from "@/hooks/useAccessDenied"
 import { useMediaQuery } from "usehooks-ts"
-import { shuffle } from "../../utils"
-import { clearCache, isStorageValid, writeVideosStorage } from "../../utils/storage"
-import { Layout, AccessModal, InvisbleTopLayer, AccessBadge } from "../../components/layout"
+import { shuffle } from "@/utils"
+import { clearCache, isStorageValid, writeVideosStorage } from "@/utils/storage"
+import { Layout, AccessModal, InvisbleTopLayer, AccessBadge } from "@/components/layout"
 import { PlusIcon } from "@heroicons/react/24/solid"
 import {
   ViewToggler,
@@ -14,8 +14,8 @@ import {
   DeleteCookiesButton,
   VideoSkeleton,
   DelayDisclaimer,
-} from "../../components/videos"
-import { useSoundAvailable } from "../../hooks/useSoundAvailable"
+} from "@/components/videos"
+import { useSoundAvailable } from "@/hooks/useSoundAvailable"
 
 export default function IndexPage() {
   const isMobile = useMediaQuery("(max-width: 768px)")

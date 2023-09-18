@@ -1,8 +1,8 @@
 import React, { useEffect } from "react"
 import Link from "next/link"
-import { getButtonSizeClassNames, getVideoUrlFromVideo } from "../../utils"
+import { getButtonSizeClassNames, getVideoUrlFromVideo } from "@/utils"
 import { ArrowTopRightOnSquareIcon } from "@heroicons/react/24/outline"
-import type { VideoMongoDBWithUrl } from "../../@types"
+import type { VideoMongoDBWithUrl } from "@/@types"
 
 type Props = {
   video: VideoMongoDBWithUrl | null

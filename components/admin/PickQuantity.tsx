@@ -1,5 +1,5 @@
 import React, { Dispatch, SetStateAction } from "react"
-import { VideoMongoDBWithUrl } from "../../@types"
+import { VideoMongoDBWithUrl } from "@/@types"
 import classNames from "classnames"
 
 export function PickQuantity({

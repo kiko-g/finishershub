@@ -1,10 +1,10 @@
 import React, { useState, useEffect, useMemo } from "react"
-import type { Game, VideoMongoDBWithUrl } from "../@types"
+import type { Game, VideoMongoDBWithUrl } from "@/@types"
 import classNames from "classnames"
-import { shuffle } from "../utils"
-import useAccessDenied from "../hooks/useAccessDenied"
+import { shuffle } from "@/utils"
+import useAccessDenied from "@/hooks/useAccessDenied"
 import { useMediaQuery } from "usehooks-ts"
-import { Layout, AccessModal, AccessBadge } from "../components/layout"
+import { Layout, AccessModal, AccessBadge } from "@/components/layout"
 import {
   ViewToggler,
   AutoplayToggler,
@@ -15,9 +15,9 @@ import {
   VideoPlayer,
   VideoSkeleton,
   DelayDisclaimer,
-} from "../components/videos"
+} from "@/components/videos"
 import { PlusIcon } from "@heroicons/react/24/solid"
-import { useSoundAvailable } from "../hooks/useSoundAvailable"
+import { useSoundAvailable } from "@/hooks/useSoundAvailable"
 
 export default function Gallery() {
   const isMobile = useMediaQuery("(max-width: 768px)")

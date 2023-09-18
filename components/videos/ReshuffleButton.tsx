@@ -1,6 +1,6 @@
 import React, { Dispatch, SetStateAction, useState } from "react"
-import { getButtonSizeClassNames } from "../../utils"
-import { SpinnerIcon } from "../icons/SpinnerIcon"
+import { getButtonSizeClassNames } from "@/utils"
+import { SpinnerIcon } from "@/components/icons/SpinnerIcon"
 import { ArrowPathRoundedSquareIcon } from "@heroicons/react/24/outline"
 import classNames from "classnames"
 

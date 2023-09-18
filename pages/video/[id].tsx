@@ -1,7 +1,7 @@
 import React, { useEffect, useMemo, useState } from "react"
 import { useRouter } from "next/router"
-import { VideoNotFound, VideoPage } from "../../components/videos"
-import { Layout } from "../../components/layout/Layout"
+import { VideoNotFound, VideoPage } from "@/components/videos"
+import { Layout } from "@/components/layout/Layout"
 
 export default function Video() {
   const [videoIndex, setVideoIndex] = useState<number | null>(null)

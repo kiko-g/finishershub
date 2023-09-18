@@ -3,7 +3,7 @@ import Link from "next/link"
 import { Dialog, Transition } from "@headlessui/react"
 import { EyeIcon, EyeSlashIcon, XMarkIcon, ArrowTopRightOnSquareIcon, KeyIcon } from "@heroicons/react/24/outline"
 import classNames from "classnames"
-import { getButtonSizeClassNames } from "../../utils"
+import { getButtonSizeClassNames } from "@/utils"
 
 type Props = {
   lockedHook: [boolean, Dispatch<SetStateAction<boolean>>]

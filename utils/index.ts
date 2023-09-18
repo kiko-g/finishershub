@@ -1,5 +1,5 @@
 import classNames from "classnames"
-import type { VideoMongoDBWithUrl } from "../@types"
+import type { VideoMongoDBWithUrl } from "@/@types"
 
 export async function updateVideo(video: VideoMongoDBWithUrl): Promise<VideoMongoDBWithUrl> {
   const response = await fetch("/api/mongo/videos/update", {

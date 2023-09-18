@@ -1,5 +1,5 @@
 import React, { Dispatch, SetStateAction } from "react"
-import { ShuffleIcon } from "../icons"
+import { ShuffleIcon } from "@/components/icons"
 import { ArrowsRightLeftIcon } from "@heroicons/react/24/outline"
 
 type Props = {

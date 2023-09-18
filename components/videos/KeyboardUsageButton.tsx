@@ -1,5 +1,5 @@
 import { useCallback, useEffect } from "react"
-import { getButtonSizeClassNames } from "../../utils"
+import { getButtonSizeClassNames } from "@/utils"
 import { InformationCircleIcon as InformationCircleIconSolid } from "@heroicons/react/24/solid"
 import { InformationCircleIcon as InformationCircleIconOutline } from "@heroicons/react/24/outline"
 

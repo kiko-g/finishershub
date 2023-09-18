@@ -1,9 +1,9 @@
 import { Dispatch, Fragment, SetStateAction, useMemo } from "react"
-import { VideoMongoDBWithUrl } from "../../@types"
+import { VideoMongoDBWithUrl } from "@/@types"
 import { Listbox, Transition } from "@headlessui/react"
 import classNames from "classnames"
 import { CheckCircleIcon, ChevronUpDownIcon } from "@heroicons/react/24/solid"
-import { getLocations } from "../../utils/data"
+import { getLocations } from "@/utils/data"
 
 export function PickLocation({
   game,

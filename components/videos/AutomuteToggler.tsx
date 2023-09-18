@@ -1,5 +1,5 @@
 import React, { Dispatch, SetStateAction, useCallback, useEffect } from "react"
-import { getButtonSizeClassNames } from "../../utils"
+import { getButtonSizeClassNames } from "@/utils"
 import { SpeakerWaveIcon, SpeakerXMarkIcon } from "@heroicons/react/24/outline"
 
 type Props = {

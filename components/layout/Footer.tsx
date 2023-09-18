@@ -1,6 +1,6 @@
 import Link from "next/link"
 import React from "react"
-import { socials } from "../../utils/data"
+import { socials } from "@/utils/data"
 
 type Props = {
   siteTitle: string

@@ -1,8 +1,8 @@
 import React from "react"
 import classNames from "classnames"
-import { clearCache } from "../../utils/storage"
+import { clearCache } from "@/utils/storage"
 import { FireIcon } from "@heroicons/react/24/outline"
-import { getButtonSizeClassNames } from "../../utils"
+import { getButtonSizeClassNames } from "@/utils"
 
 type Props = {
   size?: "xs" | "sm" | "md" | "lg" | "xl"

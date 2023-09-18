@@ -1,7 +1,7 @@
 import React, { useCallback, useEffect, useState } from "react"
 import classNames from "classnames"
-import type { VideoMongoDBWithUrl } from "../../@types"
-import { getButtonSizeClassNames, getVideoUrlFromVideo } from "../../utils"
+import type { VideoMongoDBWithUrl } from "@/@types"
+import { getButtonSizeClassNames, getVideoUrlFromVideo } from "@/utils"
 import { ClipboardIcon } from "@heroicons/react/24/outline"
 import { ClipboardDocumentCheckIcon } from "@heroicons/react/24/solid"
 
