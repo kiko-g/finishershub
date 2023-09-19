@@ -30,7 +30,7 @@ export function VideoPlayer(props: Props) {
 
   const videoRef = useRef<HTMLVideoElement>(null)
   const progressBarRef = useRef<HTMLDivElement>(null)
-  const { soundAvailable } = useSoundAvailable()
+  const { soundAvailable, isEmergency } = useSoundAvailable()
 
   const [mute, setMute] = useState(automute)
   const [playing, setPlaying] = useState(false)
@@ -47,6 +47,18 @@ export function VideoPlayer(props: Props) {
     if (soundAvailable) setMute((prev) => !prev)
     else setMute(true)
   }, [setMute, soundAvailable])
+
+  useEffect(() => {
+    if (!isEmergency) return
+    const videoElement = videoRef.current
+    if (videoElement) {
+      videoElement.onvolumechange = (event) => {
+        if (!videoElement.muted) {
+          videoElement.muted = true
+        }
+      }
+    }
+  }, [isEmergency])
 
   useEffect(() => {
     if (videoRef.current === null) return

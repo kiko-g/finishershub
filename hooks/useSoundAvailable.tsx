@@ -3,6 +3,7 @@ import { getSoundStatus, turnSoundOff, turnSoundOn } from "@/utils"
 
 export function useSoundAvailable() {
   const isDevelopment = process.env.NODE_ENV === "development"
+  const isEmergency = process.env.NEXT_PUBLIC_SENSITIVE === "true"
 
   const [willToggleSound, setWillToggleSound] = useState<boolean | null>(null)
   const [mongoAudioAvailable, setMongoAudioAvailable] = useState(false)
@@ -34,5 +35,5 @@ export function useSoundAvailable() {
     })
   }, [willToggleSound])
 
-  return { soundAvailable, willToggleSound, setWillToggleSound }
+  return { soundAvailable, willToggleSound, setWillToggleSound, isEmergency }
 }
