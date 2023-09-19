@@ -132,6 +132,10 @@ export function VideoPage({ videoIndex }: Props) {
                   {video.date === null ? "Unknown Date" : formatVideoDate(video.date)}
                 </p>
 
+                <p className="mb-1 mt-0 text-sm text-gray-500">
+                  {video.date === null ? "Unknown Date" : formatVideoDate(video.date)}
+                </p>
+
                 <p className="mb-3 max-w-sm text-sm">
                   {accessDenied
                     ? "You need full access to edit and saved video details below."

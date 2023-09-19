@@ -169,3 +169,9 @@ export function formatVideoDate(dateStr: string): string {
   const date = new Date(dateStr)
   return `${date.getDate()}, ${months[date.getMonth()].slice(0, 3)} ${date.getFullYear()}`
 }
+
+export function formatVideoTime(seconds: number) {
+  const mins = Math.floor(seconds / 60)
+  const secs = Math.floor(seconds % 60)
+  return `${mins}:${secs < 10 ? "0" : ""}${secs}`
+}

@@ -14,9 +14,10 @@ export function AutomuteToggler({ hook, size = "sm", limitedAccess = true }: Pro
   const { soundAvailable } = useSoundAvailable()
 
   const toggleMute = useCallback(() => {
-    if (soundAvailable) setMuted((prev) => !prev)
-    else setMuted(true)
-  }, [setMuted, soundAvailable])
+    setMuted((prev) => !prev)
+  }, [setMuted])
+
+  if (!soundAvailable) return null
 
   return (
     <button

@@ -3,7 +3,7 @@ import type { VideoMongoDBWithUrl } from "@/@types"
 import React, { useState, useEffect, useRef, SetStateAction, Dispatch, useCallback } from "react"
 import { ShareVideo, PopOpenVideo, VideoSkeleton, PopOpenAPICall } from "./"
 import { PauseIcon, PlayIcon } from "@heroicons/react/24/solid"
-import { getButtonSizeClassNames } from "@/utils"
+import { formatVideoTime, getButtonSizeClassNames } from "@/utils"
 import { FocusViewToggler } from "./FocusViewToggler"
 import { useSoundAvailable } from "@/hooks/useSoundAvailable"
 
@@ -36,6 +36,8 @@ export function VideoPlayer(props: Props) {
   const [playing, setPlaying] = useState(false)
   const [progress, setProgress] = useState(0)
   const [expanded, setExpanded] = useState(startExpanded)
+  const [totalTime, setTotalTime] = useState("00:00")
+  const [elapsedTime, setElapsedTime] = useState("00:00")
 
   useEffect(() => {
     setMute((prev) => automute && prev)
@@ -61,6 +63,13 @@ export function VideoPlayer(props: Props) {
       cancelAnimationFrame(animationFrameId)
     }
   }, [])
+
+  useEffect(() => {
+    if (videoRef.current) {
+      setElapsedTime(formatVideoTime(videoRef.current.currentTime))
+      setTotalTime(formatVideoTime(videoRef.current.duration))
+    }
+  }, [videoRef.current?.currentTime, videoRef.current?.duration])
 
   // keyboard controls
   useEffect(() => {
@@ -176,7 +185,7 @@ export function VideoPlayer(props: Props) {
       {/* Progress Bar */}
       <div
         ref={progressBarRef}
-        className="group relative -mt-[5px] h-[5px] cursor-pointer rounded-b shadow-inner hover:-mt-[10px] hover:h-[10px]"
+        className="relative -mt-[5px] h-[5px] cursor-pointer rounded-b shadow-inner hover:-mt-[10px] hover:h-[10px]"
         onClick={(event) => {
           if (progressBarRef.current && videoRef.current) {
             const rect = progressBarRef.current.getBoundingClientRect()
@@ -192,6 +201,13 @@ export function VideoPlayer(props: Props) {
           style={{ width: `${progress}%` }}
           className="absolute bottom-0 left-0 z-[999] h-full rounded-bl bg-primary transition dark:bg-secondary"
         />
+      </div>
+
+      {/* Time Display */}
+      <div className="absolute left-0 top-1.5 z-50 rounded-br rounded-tl text-sm font-medium text-white lg:text-base">
+        <span className="mx-auto rounded-br rounded-tl bg-black/50 px-3 py-2 opacity-0 group-hover:opacity-100">
+          {elapsedTime} / {totalTime}
+        </span>
       </div>
     </div>
   )
