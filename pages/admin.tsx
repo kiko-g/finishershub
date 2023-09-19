@@ -113,9 +113,16 @@ function SoundManagement() {
           disabled={allowedToggleDisabled}
           checked={toggleSound === null ? soundAvailable : toggleSound}
           onChange={() => {
-            setAllowedToggleDisabled(true)
-            setToggleSound((prev) => !prev)
-            setTimeout(() => setAllowedToggleDisabled(false), 500)
+            const userCode = window.prompt("Please enter the code to toggle sound:")
+            const expectedCode = "verdoca"
+
+            if (userCode === expectedCode) {
+              setAllowedToggleDisabled(true)
+              setToggleSound((prev) => !prev)
+              setTimeout(() => setAllowedToggleDisabled(false), 500)
+            } else {
+              alert("Incorrect code. Sound settings were not changed.")
+            }
           }}
           className={classNames(
             soundAvailable ? "bg-teal-600" : "bg-rose-500",

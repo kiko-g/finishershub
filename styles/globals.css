@@ -7,7 +7,7 @@ html {
 }
 
 *::selection {
-  @apply bg-rose-700/70 text-white dark:bg-rose-600/50;
+  @apply bg-teal-600/70 text-white dark:bg-secondary/70;
 }
 
 h1,
