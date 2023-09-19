@@ -86,12 +86,15 @@ function LockedContent({ hook }: { hook: [boolean, React.Dispatch<React.SetState
 }
 
 function SoundManagement() {
-  const isSensitiveDisabled = true
   const [accessDenied, setAccessDenied] = useAccessDenied()
   const [allowedToggleDisabled, setAllowedToggleDisabled] = useState(false)
-  const [sensitiveEnabled, setSensitiveEnabled] = useState(process.env.NEXT_PUBLIC_SENSITIVE === "true")
+  const { soundAvailable, willToggleSound, setWillToggleSound } = useSoundAvailable()
 
-  const { soundAvailable, toggleSound, setToggleSound } = useSoundAvailable()
+  function toggleSound() {
+    setAllowedToggleDisabled(true)
+    setWillToggleSound((prev) => !prev)
+    setTimeout(() => setAllowedToggleDisabled(false), 500)
+  }
 
   return accessDenied ? (
     <LockedContent hook={[accessDenied, setAccessDenied]} />
@@ -104,24 +107,19 @@ function SoundManagement() {
         )}
       >
         <span>Sound Enabled</span>
-        <span>{soundAvailable ? "✅" : "❌"}</span>
-      </li>
-
-      <li className="flex items-center justify-start gap-3 rounded bg-white px-8 py-8 dark:bg-dark">
-        <span>Sound Allowed</span>
         <Switch
           disabled={allowedToggleDisabled}
-          checked={toggleSound === null ? soundAvailable : toggleSound}
+          checked={willToggleSound === null ? soundAvailable : willToggleSound}
           onChange={() => {
-            const userCode = window.prompt("Please enter the code to toggle sound:")
-            const expectedCode = "verdoca"
+            // only prompt for code if sound is not available
+            if (willToggleSound === false || (willToggleSound === null && soundAvailable === false)) {
+              const userCode = window.prompt("Please enter the code to toggle sound:")
+              const expectedCode = "verdoca"
 
-            if (userCode === expectedCode) {
-              setAllowedToggleDisabled(true)
-              setToggleSound((prev) => !prev)
-              setTimeout(() => setAllowedToggleDisabled(false), 500)
+              if (userCode === expectedCode) toggleSound()
+              else alert("Incorrect code. Sound settings were not changed.")
             } else {
-              alert("Incorrect code. Sound settings were not changed.")
+              toggleSound()
             }
           }}
           className={classNames(
@@ -134,28 +132,6 @@ function SoundManagement() {
             aria-hidden="true"
             className={classNames(
               soundAvailable ? "translate-x-5" : "translate-x-0",
-              "pointer-events-none inline-block h-5 w-5 transform rounded-full bg-white shadow ring-0 transition duration-200 ease-in-out",
-            )}
-          />
-        </Switch>
-      </li>
-
-      <li className="flex items-center justify-start gap-3 rounded bg-white px-8 py-8 dark:bg-dark">
-        <span>Sensitive Content Protection</span>
-        <Switch
-          disabled={isSensitiveDisabled}
-          checked={sensitiveEnabled}
-          onChange={setSensitiveEnabled}
-          className={classNames(
-            sensitiveEnabled ? "bg-teal-600" : "bg-rose-500",
-            "relative inline-flex h-6 w-11 flex-shrink-0 cursor-pointer rounded-full border-2 border-transparent transition-colors duration-200 ease-in-out focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-40 dark:focus:ring-secondary",
-          )}
-        >
-          <span className="sr-only">Use setting</span>
-          <span
-            aria-hidden="true"
-            className={classNames(
-              sensitiveEnabled ? "translate-x-5" : "translate-x-0",
               "pointer-events-none inline-block h-5 w-5 transform rounded-full bg-white shadow ring-0 transition duration-200 ease-in-out",
             )}
           />

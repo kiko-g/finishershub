@@ -4,7 +4,7 @@ import { getSoundStatus, turnSoundOff, turnSoundOn } from "@/utils"
 export function useSoundAvailable() {
   const isDevelopment = process.env.NODE_ENV === "development"
 
-  const [toggleSound, setToggleSound] = useState<boolean | null>(null)
+  const [willToggleSound, setWillToggleSound] = useState<boolean | null>(null)
   const [mongoAudioAvailable, setMongoAudioAvailable] = useState(false)
 
   const soundAvailable = useMemo(() => mongoAudioAvailable, [mongoAudioAvailable])
@@ -23,7 +23,7 @@ export function useSoundAvailable() {
   }, [])
 
   useEffect(() => {
-    if (toggleSound === null) return
+    if (willToggleSound === null) return
 
     getSoundStatus().then((status: boolean) => {
       if (status === true) {
@@ -32,7 +32,7 @@ export function useSoundAvailable() {
         turnSoundOn().then(() => setMongoAudioAvailable(true))
       }
     })
-  }, [toggleSound])
+  }, [willToggleSound])
 
-  return { soundAvailable, toggleSound, setToggleSound }
+  return { soundAvailable, willToggleSound, setWillToggleSound }
 }
