@@ -1,6 +1,7 @@
 import React, { Dispatch, SetStateAction, useCallback, useEffect } from "react"
 import { getButtonSizeClassNames } from "@/utils"
 import { SpeakerWaveIcon, SpeakerXMarkIcon } from "@heroicons/react/24/outline"
+import { useSoundAvailable } from "../../hooks/useSoundAvailable"
 
 type Props = {
   hook: [boolean, Dispatch<SetStateAction<boolean>>]
@@ -10,10 +11,12 @@ type Props = {
 
 export function AutomuteToggler({ hook, size = "sm", limitedAccess = true }: Props) {
   const [muted, setMuted] = hook
+  const { soundAvailable } = useSoundAvailable()
 
   const toggleMute = useCallback(() => {
-    setMuted((prev) => !prev)
-  }, [setMuted])
+    if (soundAvailable) setMuted((prev) => !prev)
+    else setMuted(true)
+  }, [setMuted, soundAvailable])
 
   return (
     <button

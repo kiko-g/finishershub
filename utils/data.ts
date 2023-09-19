@@ -17,6 +17,7 @@ export const tagsAndDescriptions = [
   { name: "Elite", description: "Clip is of absolute prime quality" },
   { name: "Endgame", description: "Finisher happens near the end of the game" },
   { name: "OG", description: "Clip is from the good old days" },
+  { name: "Virgula", description: "At least one virgula: 180 degrees access to the back" },
 ].sort((a, b) => a.name.localeCompare(b.name))
 
 export const tags = tagsAndDescriptions.map((item) => item.name).sort((a, b) => a.localeCompare(b))
