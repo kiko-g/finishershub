@@ -88,7 +88,7 @@ function LockedContent({ hook }: { hook: [boolean, React.Dispatch<React.SetState
 function SoundManagement() {
   const [accessDenied, setAccessDenied] = useAccessDenied()
   const [allowedToggleDisabled, setAllowedToggleDisabled] = useState(false)
-  const { soundAvailable, willToggleSound, setWillToggleSound } = useSoundAvailable()
+  const { soundAvailable, willToggleSound, setWillToggleSound, isEmergency } = useSoundAvailable()
 
   function toggleSound() {
     setAllowedToggleDisabled(true)
@@ -136,6 +136,17 @@ function SoundManagement() {
             )}
           />
         </Switch>
+      </li>
+
+      <li
+        className={classNames(
+          "flex items-center justify-start gap-2 rounded px-8 py-8",
+          isEmergency ? "bg-rose-600/20" : "bg-teal-600/20",
+        )}
+      >
+        <span>
+          Emergency Mode <strong>{isEmergency ? "⛔️" : "📴"}</strong>
+        </span>
       </li>
     </ul>
   )
