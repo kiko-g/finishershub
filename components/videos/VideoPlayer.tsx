@@ -1,6 +1,6 @@
 import classNames from "classnames"
 import type { VideoMongoDBWithUrl } from "@/@types"
-import React, { useState, useEffect, useRef, SetStateAction, Dispatch, useCallback } from "react"
+import React, { useState, useEffect, useRef, SetStateAction, Dispatch, useCallback, useMemo } from "react"
 import { ShareVideo, PopOpenVideo, VideoSkeleton, PopOpenAPICall } from "./"
 import { PauseIcon, PlayIcon } from "@heroicons/react/24/solid"
 import { formatVideoTime, getButtonSizeClassNames } from "@/utils"
@@ -38,6 +38,8 @@ export function VideoPlayer(props: Props) {
   const [expanded, setExpanded] = useState(startExpanded)
   const [totalTime, setTotalTime] = useState("00:00")
   const [elapsedTime, setElapsedTime] = useState("00:00")
+
+  const timeAvailable = useMemo(() => totalTime !== "00:00" && !totalTime.includes("NaN"), [totalTime])
 
   useEffect(() => {
     setMute((prev) => automute && prev)
@@ -216,11 +218,13 @@ export function VideoPlayer(props: Props) {
       </div>
 
       {/* Time Display */}
-      <div className="absolute left-0 top-1.5 z-50 rounded-br rounded-tl text-sm font-medium text-white lg:text-base">
-        <span className="mx-auto rounded-br rounded-tl bg-black/50 px-3 py-2 opacity-0 group-hover:opacity-100">
-          {elapsedTime} / {totalTime}
-        </span>
-      </div>
+      {timeAvailable && (
+        <div className="absolute left-0 top-1.5 z-50 rounded-br rounded-tl text-sm font-medium text-white lg:text-base">
+          <span className="mx-auto rounded-br rounded-tl bg-black/50 px-3 py-2 opacity-0 group-hover:opacity-100">
+            {elapsedTime} / {totalTime}
+          </span>
+        </div>
+      )}
     </div>
   )
 }
@@ -260,7 +264,7 @@ type ToggleMuteVideoProps = {
 
 function ToggleMuteVideo({ hook, size = "sm" }: ToggleMuteVideoProps) {
   const [mute, setMute] = hook
-  const { soundAvailable } = useSoundAvailable()
+  const { soundAvailable, isEmergency } = useSoundAvailable()
 
   function handleMute() {
     setMute(true)
@@ -270,7 +274,7 @@ function ToggleMuteVideo({ hook, size = "sm" }: ToggleMuteVideoProps) {
     setMute(false)
   }
 
-  if (!soundAvailable) return null
+  if (!soundAvailable || isEmergency) return null
 
   return mute ? (
     <button

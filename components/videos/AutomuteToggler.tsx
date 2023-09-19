@@ -11,13 +11,13 @@ type Props = {
 
 export function AutomuteToggler({ hook, size = "sm", limitedAccess = true }: Props) {
   const [muted, setMuted] = hook
-  const { soundAvailable } = useSoundAvailable()
+  const { soundAvailable, isEmergency } = useSoundAvailable()
 
   const toggleMute = useCallback(() => {
     setMuted((prev) => !prev)
   }, [setMuted])
 
-  if (!soundAvailable) return null
+  if (!soundAvailable || isEmergency) return null
 
   return (
     <button

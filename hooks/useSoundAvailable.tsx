@@ -1,14 +1,14 @@
-import { useEffect, useMemo, useState } from "react"
+import { useEffect, useState } from "react"
 import { getSoundStatus, turnSoundOff, turnSoundOn } from "@/utils"
 
 export function useSoundAvailable() {
   const isDevelopment = process.env.NODE_ENV === "development"
-  const isEmergency = process.env.NEXT_PUBLIC_SENSITIVE === "true"
+  const [isEmergency, setIsEmergency] = useState(process.env.NEXT_PUBLIC_SENSITIVE === "true")
 
   const [willToggleSound, setWillToggleSound] = useState<boolean | null>(null)
   const [mongoAudioAvailable, setMongoAudioAvailable] = useState(false)
 
-  const soundAvailable = useMemo(() => mongoAudioAvailable, [mongoAudioAvailable])
+  const soundAvailable = mongoAudioAvailable
 
   useEffect(() => {
     async function fetchData() {
@@ -35,5 +35,11 @@ export function useSoundAvailable() {
     })
   }, [willToggleSound])
 
-  return { soundAvailable, willToggleSound, setWillToggleSound, isEmergency }
+  return {
+    soundAvailable,
+    willToggleSound,
+    setWillToggleSound,
+    isEmergency,
+    setIsEmergency,
+  }
 }

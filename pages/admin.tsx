@@ -88,12 +88,20 @@ function LockedContent({ hook }: { hook: [boolean, React.Dispatch<React.SetState
 function SoundManagement() {
   const [accessDenied, setAccessDenied] = useAccessDenied()
   const [allowedToggleDisabled, setAllowedToggleDisabled] = useState(false)
-  const { soundAvailable, willToggleSound, setWillToggleSound, isEmergency } = useSoundAvailable()
+  const { soundAvailable, willToggleSound, setWillToggleSound, isEmergency, setIsEmergency } = useSoundAvailable()
 
   function toggleSound() {
     setAllowedToggleDisabled(true)
     setWillToggleSound((prev) => !prev)
     setTimeout(() => setAllowedToggleDisabled(false), 500)
+  }
+
+  function toggleEmergency() {
+    const userCode = window.prompt(`Please enter the code to toggle emergency mode ${isEmergency ? "OFF" : "ON"}:`)
+    const expectedCode = "insano"
+
+    if (userCode === expectedCode) setIsEmergency((prev) => !prev)
+    else alert("Incorrect code. Emergency mode was not changed.")
   }
 
   return accessDenied ? (
@@ -106,7 +114,7 @@ function SoundManagement() {
           soundAvailable ? "bg-teal-600/20" : "bg-rose-600/20",
         )}
       >
-        <span>Sound Enabled</span>
+        <span>Sound 🔈</span>
         <Switch
           disabled={allowedToggleDisabled}
           checked={willToggleSound === null ? soundAvailable : willToggleSound}
@@ -123,7 +131,7 @@ function SoundManagement() {
             }
           }}
           className={classNames(
-            soundAvailable ? "bg-teal-600" : "bg-rose-500",
+            soundAvailable ? "bg-teal-600" : "bg-rose-600",
             "relative inline-flex h-6 w-11 flex-shrink-0 cursor-pointer rounded-full border-2 border-transparent transition-colors duration-200 ease-in-out focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-40 dark:focus:ring-secondary",
           )}
         >
@@ -144,9 +152,24 @@ function SoundManagement() {
           isEmergency ? "bg-rose-600/20" : "bg-teal-600/20",
         )}
       >
-        <span>
-          Emergency Mode <strong>{isEmergency ? "⛔️" : "📴"}</strong>
-        </span>
+        <span>Emergency Mode 🚨</span>
+        <Switch
+          checked={isEmergency}
+          onChange={toggleEmergency}
+          className={classNames(
+            isEmergency ? "bg-rose-800" : "bg-slate-600",
+            "relative inline-flex h-6 w-11 flex-shrink-0 cursor-pointer rounded-full border-2 border-transparent transition-colors duration-200 ease-in-out focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-40 dark:focus:ring-secondary",
+          )}
+        >
+          <span className="sr-only">Toggle emergency mode</span>
+          <span
+            aria-hidden="true"
+            className={classNames(
+              isEmergency ? "translate-x-5" : "translate-x-0",
+              "pointer-events-none inline-block h-5 w-5 transform rounded-full bg-white shadow ring-0 transition duration-200 ease-in-out",
+            )}
+          />
+        </Switch>
       </li>
     </ul>
   )
