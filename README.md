@@ -9,7 +9,7 @@ https://user-images.githubusercontent.com/40745490/230927052-362d6bd0-0abe-495d-
 ## Roadmap
 
 - Visit the [Main Hub](https://finishershub.vercel.app) where you get a welcoming and comprenhesive showcase of all the content.
-- Visit the [Casino](https://finishershub.vercel.app/casino) to get a random objectively probably hilarious highlight from a pool of around 1000 clips as of March 2023. The [Casino](https://finishershub.vercel.app/casino) is the place to go if you are looking for a quick laugh and you can also visit the [Gallery](https://finishershub.vercel.app/gallery) from an alternative perspective.
+- Visit the [Casino](https://finishershub.vercel.app/casino) to get a random objectively probably hilarious highlight from a pool of around 1000 clips as of March 2023. The [Casino](https://finishershub.vercel.app/casino) is the place to go if you are looking for a quick laugh and you can also visit the [Videos](https://finishershub.vercel.app/videos) page which has more filters.
 - Visit the [Lab](https://finishershub.vercel.app/lab) to gain insight into how we (and also you should) select your finishing moves, evaluate them and rank them based on efficiency and effectiveness. Currently we have data for all MW2022 finishing moves.
 - Visit the [Registry](https://finishershub.vercel.app/registry) to see the profiles and stats of the Finishers Hub team. If you're a member this is where you register your finishing moves.
 - Check out the [extra content page](https://finishershub.vercel.app/more).

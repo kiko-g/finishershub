@@ -65,7 +65,7 @@ export type VideoAPIAndIndex = {
 
 export type Game = "All" | "MW2019" | "MW2022"
 
-export interface VideoMongoDBWithUrl {
+export interface VideoMongoDB {
   _id: string
   id: number
   authors: string[]
@@ -77,5 +77,8 @@ export interface VideoMongoDBWithUrl {
   bucket: string
   s3_uri: string
   date: string | null
+}
+
+export interface VideoMongoDBWithUrl extends VideoMongoDB {
   url: string
 }

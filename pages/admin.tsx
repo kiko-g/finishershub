@@ -182,7 +182,7 @@ function VideoManagementTable() {
   const [fetchError, setFetchError] = useState<boolean>(false)
   const [accessDenied, setAccessDenied] = useAccessDenied()
 
-  const itemsPerPage = 50
+  const itemsPerPage = 30
   const [currentPage, setCurrentPage] = useState(1)
 
   const ready = useMemo(() => !loading && !fetchError, [loading, fetchError])

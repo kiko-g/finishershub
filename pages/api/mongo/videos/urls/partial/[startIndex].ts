@@ -12,7 +12,8 @@ export default async function getPaginatedVideosWithUrl(req: NextApiRequest, res
   await connectMongoDB()
 
   const { startIndex } = req.query
-  const itemsPerPage = 50 // get 50 videos starting from startIndex
+  const itemsPerPage = 30
+
   try {
     const allVideos = await Videos.find().sort({ id: 1 }).skip(Number(startIndex)).limit(itemsPerPage)
 

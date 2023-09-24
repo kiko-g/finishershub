@@ -136,18 +136,6 @@ function NavigationCards() {
       ),
     },
     {
-      name: "Gallery",
-      href: "/gallery",
-      emoji: "🪟",
-      shown: false,
-      description: (
-        <>
-          Head over to the gallery. It&apos;s like a museum, but with heinous highlights of individuals performing the
-          most gruesome and relentless finishing moves ever recorded.
-        </>
-      ),
-    },
-    {
       name: "Lab",
       href: "/lab",
       emoji: "🧪",
@@ -293,7 +281,7 @@ function GetFullAccess({ accessDeniedHook }: { accessDeniedHook: [boolean, Dispa
             {accessDenied ? (
               <span className="text-rose-700 dark:text-rose-600">Get</span>
             ) : (
-              <span className="text-teal-700 dark:text-teal-500">You have</span>
+              <span className="text-teal-700 dark:text-secondary">You have</span>
             )}{" "}
             full access
           </h2>
@@ -474,7 +462,7 @@ function About() {
             target="_blank"
             rel="noopener"
             href="https://linktr.ee/kikogoncalves"
-            className="text-primary underline hover:opacity-80 dark:text-teal-500"
+            className="text-primary underline hover:opacity-80 dark:text-secondary"
           >
             Francisco Gonçalves
           </Link>
@@ -485,20 +473,17 @@ function About() {
         {/* Home page */}
         <AboutCardLI emoji="🍿">
           The{" "}
-          <Link className="text-primary underline hover:opacity-80 dark:text-teal-500" href="/gallery">
-            gallery page
+          <Link className="text-primary underline hover:opacity-80 dark:text-secondary" href="/videos">
+            videos page
           </Link>{" "}
-          will show you a museum of highlights, that are pulled from{" "}
-          <span className="line-through">
-            <span className="text-[#6441a5] dark:text-[#976fe1]">Twitch</span> with the help of the TwitchAPI
-          </span>{" "}
-          an S3 Bucket, where we manage our media content 🆕
+          will show you a museum of highlights, that are pulled from S3 Buckets, where we manage our media content.
+          Interact with the filters to find your favorite finishing moves 🆕
         </AboutCardLI>
 
         {/* Casino page */}
         <AboutCardLI emoji="🎰">
           The{" "}
-          <Link className="text-primary underline hover:opacity-80 dark:text-teal-500" href="/casino">
+          <Link className="text-primary underline hover:opacity-80 dark:text-secondary" href="/casino">
             Casino page
           </Link>{" "}
           acts like the home page with a twist: instead of a museum you can view a random new highlight by pressing the
@@ -508,7 +493,7 @@ function About() {
         {/* Registry page */}
         <AboutCardLI emoji="📅">
           The{" "}
-          <Link className="text-primary underline hover:opacity-80 dark:text-teal-500" href="/registry">
+          <Link className="text-primary underline hover:opacity-80 dark:text-secondary" href="/registry">
             Registry page
           </Link>{" "}
           is where you can find information and stats about the Finishers Club members. It also works as a platform to

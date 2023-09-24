@@ -30,12 +30,6 @@ const navigation = [
     shown: true,
   },
   {
-    title: "Gallery",
-    location: "/gallery",
-    icon: <FilmIcon className="h-5 w-5" />,
-    shown: false,
-  },
-  {
     title: "Casino",
     location: "/casino",
     icon: <BoltIcon className="h-5 w-5" />,
