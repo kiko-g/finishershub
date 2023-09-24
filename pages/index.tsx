@@ -466,8 +466,8 @@ function About() {
           >
             Francisco Gonçalves
           </Link>
-          , as a result of awesome moments on Warzone that happened mostly between 2020 and 2021. Everything you can
-          find on the website is related to finishing moves, the heart and soul of Finishers Hub.
+          , as a result of awesome moments on Warzone that happened mostly between 2021 and early 2023. Everything you
+          can find on the website is related to finishing moves, the heart and soul of Finishers Hub.
         </AboutCardLI>
 
         {/* Home page */}
@@ -486,8 +486,8 @@ function About() {
           <Link className="text-primary underline hover:opacity-80 dark:text-secondary" href="/casino">
             Casino page
           </Link>{" "}
-          acts like the home page with a twist: instead of a museum you can view a random new highlight by pressing the
-          arrows. It&apos;s called casino because it acts like a slot machine of finishing moves.
+          acts like the video page with a twist: you always geta a random new highlight by pressing the arrows. It acts
+          like a slot machine of finishing moves. All for your entertainment.
         </AboutCardLI>
 
         {/* Registry page */}

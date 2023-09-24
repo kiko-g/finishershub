@@ -1,13 +1,10 @@
 import React, { useState, useEffect, useMemo, useCallback, useRef } from "react"
-import type { Game, VideoMongoDBWithUrl } from "@/@types"
-import useAccessDenied from "@/hooks/useAccessDenied"
-import { useMediaQuery } from "usehooks-ts"
+import type { VideoMongoDBWithUrl } from "@/@types"
 import { shuffle } from "@/utils"
 import { Layout, AccessBadge } from "@/components/layout"
 import { ArrowLongLeftIcon, ArrowLongRightIcon } from "@heroicons/react/24/outline"
 import {
   AutoplayToggler,
-  FilterVideosByGame,
   AutomuteToggler,
   ReshuffleButton,
   UsageDisclaimer,
@@ -15,17 +12,21 @@ import {
   VideoPlayer,
   VideoSkeleton,
 } from "@/components/videos"
-import { useSoundAvailable } from "@/hooks/useSoundAvailable"
+import { useContentInteraction } from "@/hooks/useContentInteraction"
 
 export default function Casino() {
-  const buttonControlsRef = useRef<HTMLDivElement | null>(null)
+  const {
+    isMobile,
+    accessDenied,
+    setAccessDenied,
+    isLoading,
+    setIsLoading,
+    fetchError,
+    setFetchError,
+    isContentReady,
+    soundAvailable,
+  } = useContentInteraction()
 
-  const isMobile = useMediaQuery("(max-width: 768px)")
-  const [accessDenied, setAccessDenied] = useAccessDenied()
-
-  const [loading, setLoading] = useState<boolean>(true)
-  const [fetchError, setFetchError] = useState<boolean>(false)
-  const [game, setGame] = useState<Game>("MW2022")
   const [index, setIndex] = useState<number>(0)
   const [videos, setVideos] = useState<VideoMongoDBWithUrl[]>([])
   const [muted, setMuted] = useState<boolean>(true)
@@ -34,14 +35,13 @@ export default function Casino() {
 
   const limitedAccess = useMemo(() => accessDenied, [accessDenied])
   const video = useMemo(() => videos[index], [index, videos])
-  const ready = useMemo(() => !loading && !fetchError && video.url !== undefined, [loading, fetchError, video])
 
   const toastType = useMemo(() => {
     if (fetchError) return "error"
-    else if (loading) return "warning"
-    else if (!loading && !fetchError) return "info"
+    else if (isLoading) return "warning"
+    else if (!isLoading && !fetchError) return "info"
     else return ""
-  }, [loading, fetchError])
+  }, [isLoading, fetchError])
 
   const prevVideo = useCallback(() => setIndex((prev) => prev - 1), [])
   const nextVideo = useCallback(() => setIndex((prev) => prev + 1), [])
@@ -51,24 +51,22 @@ export default function Casino() {
   }
 
   useEffect(() => {
-    const url = game === "All" ? "/api/mongo/videos/urls" : `/api/mongo/videos/urls/game/${game}`
-
-    setLoading(true)
+    setIsLoading(true)
     setFetchError(false)
-    fetch(url)
+    fetch("/api/mongo/videos/urls")
       .then((res) => res.json())
       .then((videos: VideoMongoDBWithUrl[]) => {
-        setLoading(false)
+        setIsLoading(false)
         setIndex(0)
         const newVideos = shuffled ? shuffle(videos) : videos
         setVideos(newVideos)
       })
       .catch((err) => {
-        setLoading(false)
+        setIsLoading(false)
         setFetchError(true)
         console.error(err)
       })
-  }, [game, shuffled])
+  }, [shuffled, setFetchError, setIsLoading])
 
   useEffect(() => {
     const handleKeyDown = (event: any) => {
@@ -105,16 +103,12 @@ export default function Casino() {
               <AutoplayToggler hook={[autoplay, setAutoplay]} size="xs" />
               <AutomuteToggler hook={[muted, setMuted]} limitedAccess={limitedAccess} size="xs" />
             </div>
-
-            <div className="flex items-center justify-center gap-x-2">
-              <FilterVideosByGame pickedHook={[game, setGame]} className="w-full" />
-            </div>
           </div>
 
           <UsageDisclaimer type={toastType} />
 
           <div className="relative w-full">
-            {ready ? (
+            {isContentReady ? (
               <VideoPlayer video={video} autoplay={autoplay} automute={muted} key={`video-element-${video.id}`} />
             ) : (
               <VideoSkeleton />
