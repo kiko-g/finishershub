@@ -185,7 +185,7 @@ function CatalogueItem({ item, chosen, setChosen }: CatalogueItemProps) {
       <div
         onClick={() => setChosen(isChosen ? null : item.name)}
         className={classNames(
-          "flex cursor-pointer flex-wrap items-start justify-center gap-3 rounded border p-3 xl:flex-nowrap",
+          "flex h-auto cursor-pointer flex-wrap items-start justify-center gap-3 rounded border p-3 lg:h-[12rem] lg:flex-nowrap",
           isChosen
             ? "border-pink-600 bg-rose-600/10 hover:bg-rose-600/5 dark:bg-pink-600/40 dark:hover:bg-pink-600/25"
             : "border-gray-300 bg-white hover:border-primary hover:bg-primary/10 dark:border-secondary/20 dark:bg-secondary/10 dark:hover:border-secondary dark:hover:bg-secondary/20",
@@ -198,17 +198,17 @@ function CatalogueItem({ item, chosen, setChosen }: CatalogueItemProps) {
             autoPlay
             controls={false}
             preload="preload"
-            className="h-auto w-full rounded object-cover xl:h-32 xl:w-32"
+            className="aspect-video h-full rounded object-cover"
           >
             <source src={item.video} type="video/mp4" />
           </video>
         ) : (
-          <div className="flex aspect-video w-full rounded bg-gradient-to-br from-slate-400 to-slate-500 dark:from-blue-500 dark:to-blue-600 xl:h-32 xl:w-32" />
+          <div className="flex aspect-video h-full rounded bg-gradient-to-br from-slate-400 to-slate-500 dark:from-blue-500 dark:to-blue-600" />
         )}
 
-        <section className="flex w-full items-start justify-between">
+        <section className="flex h-full w-full items-start justify-between">
           {/* Left (name, source, ttrk, score) */}
-          <div className="flex h-32 w-full flex-col justify-between">
+          <div className="flex h-full w-full flex-col justify-between">
             <div className="flex flex-col">
               <p className="font-lexend font-light tracking-tight">{item.name}</p>
               <p className="-mt-0.5 text-sm font-light tracking-tight text-gray-500 dark:text-gray-400">
