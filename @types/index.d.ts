@@ -39,8 +39,8 @@ export type CatalogueItemStatus = "Yes" | "No" | "Almost" | ""
 
 export type CatalogueItem = {
   name: string
-  source: string
-  season: number
+  source: strings
+  game: string
   unlocked: CatalogueItemStatus
   accurate: CatalogueItemStatus
   ttrk: number

@@ -89,7 +89,7 @@ function CatalogueGrid({ catalogue }: { catalogue: (string | number)[][] }) {
           const finisher: CatalogueItemType = {
             name: row[0] as string,
             source: row[1] as string,
-            season: row[2] as number,
+            game: row[2] as string,
             unlocked: row[3] as CatalogueItemStatus,
             accurate: row[4] as CatalogueItemStatus,
             ttrk: row[5] as number,
@@ -219,11 +219,11 @@ function CatalogueItem({ item, chosen, setChosen }: CatalogueItemProps) {
               <p className="font-lexend text-2xl font-normal tracking-tight text-slate-700 dark:text-blue-200">
                 {item.ttrk} ± {uncertainty}s
               </p>
-              <div className="flex gap-2">
+              <div className="flex gap-1.5">
                 <span
                   title="TTRK Speed Badge"
                   className={classNames(
-                    "px-2 py-1 text-sm font-normal text-white",
+                    "px-2 py-1 text-xs font-normal text-white",
                     speedText === "Ultra"
                       ? "bg-blue-600"
                       : speedText === "Fast"
@@ -237,10 +237,26 @@ function CatalogueItem({ item, chosen, setChosen }: CatalogueItemProps) {
                 </span>
                 <span
                   title="Finishing Move Score Badge"
-                  className="bg-slate-700 px-2 py-1 text-sm font-normal text-white dark:bg-slate-500"
+                  className="bg-slate-700 px-2 py-1 text-xs font-normal text-white dark:bg-slate-500"
                 >
                   {item.score}/100
                 </span>
+                {item.game === "MW2" && (
+                  <span
+                    title="MW2 Badge"
+                    className="self-end bg-green-700 px-2 py-1 text-xs font-normal text-white dark:bg-slate-500"
+                  >
+                    MW2
+                  </span>
+                )}
+                {item.game === "MW3" && (
+                  <span
+                    title="MW3 Badge"
+                    className="self-end bg-red-700 px-2 py-1 text-xs font-normal text-white dark:bg-slate-500"
+                  >
+                    MW3
+                  </span>
+                )}
               </div>
             </div>
           </div>
