@@ -84,7 +84,7 @@ function CatalogueGrid({ catalogue }: { catalogue: (string | number)[][] }) {
   return (
     <div>
       <p className="mb-1">{catalogue.length} results matching filtering options.</p>
-      <div className="grid grid-cols-1 gap-4 lg:grid-cols-2 xl:grid-cols-3">
+      <div className="grid grid-cols-1 gap-4 lg:grid-cols-2">
         {catalogue.map((row, index) => {
           const finisher: CatalogueItemType = {
             name: row[0] as string,
@@ -159,23 +159,23 @@ function CatalogueItem({ item, chosen, setChosen }: CatalogueItemProps) {
     Number(item.slippery) === 1
       ? "A"
       : Number(item.slippery) === 2
-      ? "B"
-      : Number(item.slippery) === 3
-      ? "C"
-      : Number(item.slippery) === 4
-      ? "D"
-      : "E"
+        ? "B"
+        : Number(item.slippery) === 3
+          ? "C"
+          : Number(item.slippery) === 4
+            ? "D"
+            : "E"
 
   const ledgeDangerText =
     Number(item.ledgeDanger) === 1
       ? "A"
       : Number(item.ledgeDanger) === 2
-      ? "B"
-      : Number(item.ledgeDanger) === 3
-      ? "C"
-      : Number(item.ledgeDanger) === 4
-      ? "D"
-      : "E"
+        ? "B"
+        : Number(item.ledgeDanger) === 3
+          ? "C"
+          : Number(item.ledgeDanger) === 4
+            ? "D"
+            : "E"
 
   const exitFocus = () => setChosen(null)
 
@@ -227,10 +227,10 @@ function CatalogueItem({ item, chosen, setChosen }: CatalogueItemProps) {
                     speedText === "Ultra"
                       ? "bg-blue-600"
                       : speedText === "Fast"
-                      ? "bg-teal-500"
-                      : speedText === "Ok"
-                      ? "bg-amber-500"
-                      : "bg-rose-600",
+                        ? "bg-teal-500"
+                        : speedText === "Ok"
+                          ? "bg-amber-500"
+                          : "bg-rose-600",
                   )}
                 >
                   {speedText}
@@ -270,12 +270,12 @@ function CatalogueItem({ item, chosen, setChosen }: CatalogueItemProps) {
                 ledgeDangerText === "A"
                   ? "bg-blue-500"
                   : ledgeDangerText === "B"
-                  ? "bg-teal-500"
-                  : ledgeDangerText === "C"
-                  ? "bg-amber-500"
-                  : ledgeDangerText === "D"
-                  ? "bg-orange-500"
-                  : "bg-rose-600",
+                    ? "bg-teal-500"
+                    : ledgeDangerText === "C"
+                      ? "bg-amber-500"
+                      : ledgeDangerText === "D"
+                        ? "bg-orange-500"
+                        : "bg-rose-600",
               )}
             >
               <span className="h-4 w-4 text-center text-xs font-normal text-white">{ledgeDangerText}</span>
@@ -287,12 +287,12 @@ function CatalogueItem({ item, chosen, setChosen }: CatalogueItemProps) {
                 slipperyText === "A"
                   ? "bg-blue-500"
                   : slipperyText === "B"
-                  ? "bg-teal-500"
-                  : slipperyText === "C"
-                  ? "bg-amber-500"
-                  : slipperyText === "D"
-                  ? "bg-orange-500"
-                  : "bg-rose-600",
+                    ? "bg-teal-500"
+                    : slipperyText === "C"
+                      ? "bg-amber-500"
+                      : slipperyText === "D"
+                        ? "bg-orange-500"
+                        : "bg-rose-600",
               )}
             >
               <span className="h-4 w-4 text-center text-xs font-normal text-white">{slipperyText}</span>
@@ -371,8 +371,8 @@ function CatalogueItem({ item, chosen, setChosen }: CatalogueItemProps) {
                           item.accurate === "Yes"
                             ? "bg-teal-500"
                             : item.accurate === "Almost"
-                            ? "bg-amber-500"
-                            : "bg-rose-600",
+                              ? "bg-amber-500"
+                              : "bg-rose-600",
                         )}
                       >
                         <span>Accuracy</span>
@@ -385,8 +385,8 @@ function CatalogueItem({ item, chosen, setChosen }: CatalogueItemProps) {
                           item.unlocked === "Yes"
                             ? "bg-teal-500"
                             : item.unlocked === "Almost"
-                            ? "bg-amber-500"
-                            : "bg-rose-600",
+                              ? "bg-amber-500"
+                              : "bg-rose-600",
                         )}
                       >
                         <span>{item.unlocked === "Yes" ? "Unlocked" : "Locked"}</span>
@@ -399,10 +399,10 @@ function CatalogueItem({ item, chosen, setChosen }: CatalogueItemProps) {
                           speedText === "Ultra"
                             ? "bg-blue-600"
                             : speedText === "Fast"
-                            ? "bg-teal-500"
-                            : speedText === "Ok"
-                            ? "bg-amber-500"
-                            : "bg-rose-600",
+                              ? "bg-teal-500"
+                              : speedText === "Ok"
+                                ? "bg-amber-500"
+                                : "bg-rose-600",
                         )}
                       >
                         {speedText}
