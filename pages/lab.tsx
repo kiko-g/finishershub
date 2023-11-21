@@ -198,7 +198,7 @@ function CatalogueItem({ item, chosen, setChosen }: CatalogueItemProps) {
             autoPlay
             controls={false}
             preload="preload"
-            className="aspect-video h-full rounded object-cover"
+            className="aspect-video w-full self-stretch rounded object-cover lg:w-auto"
           >
             <source src={item.video} type="video/mp4" />
           </video>
@@ -208,10 +208,13 @@ function CatalogueItem({ item, chosen, setChosen }: CatalogueItemProps) {
 
         <section className="flex h-full w-full items-start justify-between">
           {/* Left (name, source, ttrk, score) */}
-          <div className="flex h-full w-full flex-col justify-between">
+          <div className="flex h-auto w-full flex-col justify-between lg:h-full">
             <div className="flex flex-col">
               <p className="font-lexend font-light tracking-tight">{item.name}</p>
-              <p className="-mt-0.5 text-sm font-light tracking-tight text-gray-500 dark:text-gray-400">
+              <p
+                title="This information can be wrong at times"
+                className="-mt-0.5 text-sm font-light tracking-tight text-gray-500 dark:text-gray-400"
+              >
                 {item.source}
               </p>
             </div>
@@ -239,7 +242,7 @@ function CatalogueItem({ item, chosen, setChosen }: CatalogueItemProps) {
                   title="Finishing Move Score Badge"
                   className="bg-slate-700 px-2 py-1 text-xs font-normal text-white dark:bg-slate-500"
                 >
-                  {item.score}/100
+                  {item.score}%
                 </span>
                 {item.game === "MW2" && (
                   <span
@@ -360,7 +363,8 @@ function CatalogueItem({ item, chosen, setChosen }: CatalogueItemProps) {
                     </div>
 
                     <p className="mt-0.5 text-sm text-gray-500 dark:text-gray-400">
-                      Source of finishing move: <strong>{item.source}</strong>
+                      Source of finishing move:{" "}
+                      <strong title="This information can be wrong at times">{item.source}</strong>
                     </p>
 
                     <div className="mt-1.5 flex flex-wrap items-center gap-3">
