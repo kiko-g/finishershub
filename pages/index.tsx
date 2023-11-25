@@ -20,7 +20,7 @@ export default function Hub() {
           className="my-auto flex min-h-full w-full flex-col items-center justify-center gap-y-4 self-center py-4 align-middle md:min-h-screen"
         >
           <div className="mt-4 max-w-2xl space-y-2 lg:mt-0">
-            <h2 className="bg-gradient-to-r from-violet-400 to-sky-400 bg-clip-text text-center text-5xl font-bold tracking-tight text-transparent dark:bg-gradient-to-r dark:from-slate-200 dark:to-slate-300 sm:text-6xl">
+            <h2 className="bg-gradient-to-r from-primary to-secondary bg-clip-text text-center text-5xl font-bold tracking-tight text-transparent dark:bg-gradient-to-r dark:from-slate-200 dark:to-slate-300 sm:text-6xl">
               Finishers Hub
             </h2>
             <p className="text-center text-base font-normal leading-tight md:text-lg md:leading-normal">
@@ -88,9 +88,9 @@ function NavCard({ item, border = false }: { item: NavItem; border?: boolean }) 
       href={item.href}
       className={classNames(
         border
-          ? `border border-transparent hover:border-sky-500 dark:border-transparent dark:hover:border-white md:border-2`
+          ? `border border-transparent hover:border-primary dark:border-transparent dark:hover:border-white md:border-2`
           : ``,
-        `group relative flex max-w-[10rem] scale-100 flex-col gap-y-1 self-stretch rounded-md bg-sky-700/70 px-2 py-1.5 font-light text-white shadow-xl duration-100 hover:scale-105 hover:bg-sky-600/60 dark:bg-indigo-400/50 dark:text-white dark:hover:bg-indigo-400/70 md:max-w-xs md:px-4 md:py-4`,
+        `group relative flex max-w-[10rem] scale-100 flex-col gap-y-1 self-stretch rounded-md bg-primary/80 px-2 py-1.5 font-light text-white shadow-xl duration-100 hover:scale-105 hover:bg-primary/70 dark:bg-secondary/50 dark:text-white dark:hover:bg-secondary/70 md:max-w-xs md:px-4 md:py-4`,
       )}
     >
       <div className="group flex flex-row items-center justify-between gap-x-2 font-medium">

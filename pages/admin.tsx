@@ -98,7 +98,7 @@ function SoundManagement() {
 
   function toggleEmergency() {
     const userCode = window.prompt(`Please enter the code to toggle emergency mode ${isEmergency ? "OFF" : "ON"}:`)
-    const expectedCode = "insano"
+    const expectedCode = process.env.NEXT_PUBLIC_SOUND_EMERGENCY_CODE || "insano"
 
     if (userCode === expectedCode) setIsEmergency((prev) => !prev)
     else alert("Incorrect code. Emergency mode was not changed.")
@@ -122,7 +122,7 @@ function SoundManagement() {
             // only prompt for code if sound is not available
             if (willToggleSound === false || (willToggleSound === null && soundAvailable === false)) {
               const userCode = window.prompt("Please enter the code to toggle sound:")
-              const expectedCode = "verdoca"
+              const expectedCode = process.env.NEXT_PUBLIC_SOUND_CODE || "verdoca"
 
               if (userCode === expectedCode) toggleSound()
               else alert("Incorrect code. Sound settings were not changed.")
