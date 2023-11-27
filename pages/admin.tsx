@@ -36,7 +36,7 @@ export default function Admin() {
           </p>
         </div>
 
-        <Tab.Group defaultIndex={1}>
+        <Tab.Group defaultIndex={0}>
           <Tab.List className="flex space-x-2 rounded-xl bg-primary/10 p-1 dark:bg-secondary/10">
             {tabs.map((item, itemIdx) => (
               <Tab
@@ -247,34 +247,17 @@ function VideoManagementTable() {
         <>
           <table className="min-w-full max-w-full divide-y divide-gray-200 overflow-x-scroll border border-gray-200 text-xs font-normal dark:divide-gray-700 dark:border-gray-700">
             <thead>
-              <tr>
-                <th className="bg-gray-700 px-2 py-2 text-left text-xs font-medium uppercase tracking-wider text-gray-100 dark:bg-gray-800 dark:text-gray-300 lg:px-3 lg:py-3">
-                  ID
-                </th>
-                <th className="bg-gray-700 px-2 py-2 text-left text-xs font-medium uppercase tracking-wider text-gray-100 dark:bg-gray-800 dark:text-gray-300 lg:px-3 lg:py-3">
-                  URL
-                </th>
-                <th className="bg-gray-700 px-2 py-2 text-left text-xs font-medium uppercase tracking-wider text-gray-100 dark:bg-gray-800 dark:text-gray-300 lg:px-3 lg:py-3">
-                  Edit
-                </th>
-                <th className="bg-gray-700 px-2 py-2 text-left text-xs font-medium uppercase tracking-wider text-gray-100 dark:bg-gray-800 dark:text-gray-300 lg:px-3 lg:py-3">
-                  Game
-                </th>
-                <th className="bg-gray-700 px-2 py-2 text-left text-xs font-medium uppercase tracking-wider text-gray-100 dark:bg-gray-800 dark:text-gray-300 lg:px-3 lg:py-3">
-                  Map
-                </th>
-                <th className="bg-gray-700 px-2 py-2 text-left text-xs font-medium uppercase tracking-wider text-gray-100 dark:bg-gray-800 dark:text-gray-300 lg:px-3 lg:py-3">
-                  Location
-                </th>
-                <th className="bg-gray-700 px-2 py-2 text-left text-xs font-medium uppercase tracking-wider text-gray-100 dark:bg-gray-800 dark:text-gray-300 lg:px-3 lg:py-3">
-                  Authors
-                </th>
-                <th className="bg-gray-700 px-2 py-2 text-left text-xs font-medium uppercase tracking-wider text-gray-100 dark:bg-gray-800 dark:text-gray-300 lg:px-3 lg:py-3">
-                  Tags
-                </th>
-                <th className="bg-gray-700 px-2 py-2 text-left text-xs font-medium uppercase tracking-wider text-gray-100 dark:bg-gray-800 dark:text-gray-300 lg:px-3 lg:py-3">
-                  Quantity
-                </th>
+              <tr className="text-left text-xs font-normal uppercase tracking-tighter text-gray-100 dark:text-gray-300">
+                <th className="py.1.5 bg-gray-700 px-1.5 dark:bg-gray-800 lg:px-2 lg:py-2">ID</th>
+                <th className="py.1.5 bg-gray-700 px-1.5 dark:bg-gray-800 lg:px-2 lg:py-2">Filename</th>
+                <th className="py.1.5 bg-gray-700 px-1.5 dark:bg-gray-800 lg:px-2 lg:py-2">URL</th>
+                <th className="py.1.5 bg-gray-700 px-1.5 dark:bg-gray-800 lg:px-2 lg:py-2">Edit</th>
+                <th className="py.1.5 bg-gray-700 px-1.5 dark:bg-gray-800 lg:px-2 lg:py-2">Game</th>
+                <th className="py.1.5 bg-gray-700 px-1.5 dark:bg-gray-800 lg:px-2 lg:py-2">Map</th>
+                <th className="py.1.5 bg-gray-700 px-1.5 dark:bg-gray-800 lg:px-2 lg:py-2">Location</th>
+                <th className="py.1.5 bg-gray-700 px-1.5 dark:bg-gray-800 lg:px-2 lg:py-2">Authors</th>
+                <th className="py.1.5 bg-gray-700 px-1.5 dark:bg-gray-800 lg:px-2 lg:py-2">Tags</th>
+                <th className="py.1.5 bg-gray-700 px-1.5 dark:bg-gray-800 lg:px-2 lg:py-2">Quantity</th>
               </tr>
             </thead>
 
@@ -367,17 +350,19 @@ function TableRow({ video, rowIndex, replaceRowAction }: TableRowProps) {
   return (
     <tr
       className={classNames(
+        "tracking-tighter",
         isRowFilled ? "bg-emerald-600/[15%] dark:bg-teal-500/20" : "",
         hasRowChanged && !rowSaved ? "bg-orange-500/20 dark:bg-orange-400/30" : "",
       )}
     >
-      <td className="whitespace-nowrap px-2 pt-0.5 lg:px-3">{row.id}</td>
-      <td className="whitespace-nowrap px-2 pt-0.5 lg:px-3">
+      <td className="whitespace-nowrap px-1.5 lg:px-2">{row.id}</td>
+      <td className="whitespace-nowrap px-1.5 lg:px-2">{row.filename}</td>
+      <td className="whitespace-nowrap px-1.5 lg:px-2">
         <a href={row.url} target="_blank" className="hover:scale-125">
           <ArrowTopRightOnSquareIcon className="h-4 w-4" />
         </a>
       </td>
-      <td className="whitespace-nowrap px-2 pt-0.5 lg:px-3">
+      <td className="whitespace-nowrap px-1.5 lg:px-2">
         <button
           className={classNames("hover:scale-125", isLoading && "cursor-not-allowed opacity-50")}
           disabled={isLoading}
@@ -388,22 +373,22 @@ function TableRow({ video, rowIndex, replaceRowAction }: TableRowProps) {
           {isLoading ? <ArrowPathIcon className="h-4 w-4 animate-spin" /> : <CheckIcon className="h-4 w-4" />}
         </button>
       </td>
-      <td className="whitespace-nowrap px-2 pt-0.5 lg:px-3">
+      <td className="whitespace-nowrap px-1.5 lg:px-2">
         <PickGame setVideoSaved={setRowSaved} videoHook={[row, setRow]} />
       </td>
-      <td className="whitespace-nowrap px-2 pt-0.5 lg:px-3">
+      <td className="whitespace-nowrap px-1.5 lg:px-2">
         <PickMap game={row.game} setVideoSaved={setRowSaved} videoHook={[row, setRow]} />
       </td>
-      <td className="whitespace-nowrap px-2 pt-0.5 lg:px-3">
+      <td className="whitespace-nowrap px-1.5 lg:px-2">
         <PickLocation game={row.game} map={row.map} setVideoSaved={setRowSaved} videoHook={[row, setRow]} />
       </td>
-      <td className="whitespace-nowrap px-2 pt-0.5 lg:px-3">
+      <td className="whitespace-nowrap px-1.5 lg:px-2">
         <PickAuthors setVideoSaved={setRowSaved} videoHook={[row, setRow]} />
       </td>
-      <td className="whitespace-nowrap px-2 pt-0.5 lg:px-3">
+      <td className="whitespace-nowrap px-1.5 lg:px-2">
         <PickTags setVideoSaved={setRowSaved} videoHook={[row, setRow]} />
       </td>
-      <td className="whitespace-nowrap px-2 pt-0.5 lg:px-3">
+      <td className="whitespace-nowrap px-1.5 lg:px-2">
         <PickQuantity setVideoSaved={setRowSaved} videoHook={[row, setRow]} />
       </td>
     </tr>

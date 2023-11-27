@@ -54,7 +54,7 @@ export default function Videos({}: Props) {
 
   const [videos, setVideos] = useState<VideoMongoDBWithUrl[]>([])
   const [index, setIndex] = useState<number>(0)
-  const [selectedGame, setSelectedGame] = useState<Game>("MW2022")
+  const [selectedGame, setSelectedGame] = useState<Game>("All")
   const [selectedMap, setSelectedMap] = useState<string>("")
   const [selectedLocation, setSelectedLocation] = useState<string>("")
   const [selectedTags, setSelectedTags] = useState<string[]>([])

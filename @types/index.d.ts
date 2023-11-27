@@ -76,6 +76,7 @@ export interface VideoMongoDB {
   game: string
   bucket: string
   s3_uri: string
+  filename: string
   date: string | null
 }
 
