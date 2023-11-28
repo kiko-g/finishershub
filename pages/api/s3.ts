@@ -7,37 +7,26 @@ const s3 = estabilishS3Connection()
 
 export default async function handler(req: NextApiRequest, res: NextApiResponse) {
   try {
-    const bucketMW2019 = process.env.NEXT_PUBLIC_AWS_S3_BUCKET_NAME_MW2019 || "finishershub.mw2019"
-    const bucketMW2022 = process.env.NEXT_PUBLIC_AWS_S3_BUCKET_NAME_MW2022 || "finishershub.mw2022"
+    const bucket = process.env.NEXT_PUBLIC_AWS_S3_BUCKET_NAME
 
-    const objectsMW2019 = new ListObjectsV2Command({ Bucket: bucketMW2019 })
-    const objectsMW2022 = new ListObjectsV2Command({ Bucket: bucketMW2022 })
+    const objects = new ListObjectsV2Command({ Bucket: bucket })
 
-    const [mw2019Response, mw2022Response] = await Promise.all([s3.send(objectsMW2019), s3.send(objectsMW2022)])
+    const response = await s3.send(objects)
 
-    if (!mw2019Response.Contents || !mw2022Response.Contents) {
+    if (!response.Contents) {
       res.status(404).json({ message: "Error requesting objects from S3" })
       return
     }
 
-    const videoDataMW2019 = mw2019Response.Contents.map((object) => ({
-      bucketName: bucketMW2019,
-      filename: object.Key,
-      lastModified: object.LastModified,
-    })).sort((a, b) => (a.filename! < b.filename! ? -1 : 1))
-
-    const videoDataMW2022 = mw2022Response.Contents.map((object) => ({
-      bucketName: bucketMW2022,
+    const videoData = response.Contents.map((object) => ({
       filename: object.Key as string,
       lastModified: object.LastModified,
     })).sort((a, b) => (a.filename! < b.filename! ? -1 : 1))
 
-    const allVideosSorted = [...videoDataMW2019, ...videoDataMW2022]
-
     const videosRes = []
-    for (const video of allVideosSorted) {
+    for (const video of videoData) {
       const getObjectCommandInput = new GetObjectCommand({
-        Bucket: video.bucketName,
+        Bucket: bucket,
         Key: video.filename,
       })
 
@@ -48,7 +37,6 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
       const signedUrl = await getSignedUrl(s3, getObjectCommandInput, getObjectCommandOutput)
 
       videosRes.push({
-        game: video.bucketName.split(".")[1],
         url: signedUrl,
         date: video.lastModified,
         filename: video.filename,

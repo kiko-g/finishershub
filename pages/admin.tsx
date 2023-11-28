@@ -13,7 +13,11 @@ import { getSoundStatus, updateVideo } from "@/utils"
 export default function Admin() {
   const tabs = [
     {
-      name: "Videos",
+      name: "S3",
+      component: <S3ListSearch />,
+    },
+    {
+      name: "Mongo",
       component: <VideoManagementTable />,
     },
     {
@@ -55,13 +59,9 @@ export default function Admin() {
             ))}
           </Tab.List>
           <Tab.Panels className="mt-3">
-            <Tab.Panel>
-              <VideoManagementTable />
-            </Tab.Panel>
-
-            <Tab.Panel>
-              <SoundManagement />
-            </Tab.Panel>
+            {tabs.map((item, itemIdx) => (
+              <Tab.Panel key={`tab-panel-${item.name}`}>{item.component}</Tab.Panel>
+            ))}
           </Tab.Panels>
         </Tab.Group>
       </div>
@@ -172,6 +172,73 @@ function SoundManagement() {
         </Switch>
       </li>
     </ul>
+  )
+}
+
+function FilterByName({ hook }: { hook: [string, React.Dispatch<React.SetStateAction<string>>] }) {
+  const [searchQuery, setSearchQuery] = hook
+
+  return (
+    <input
+      type="search"
+      placeholder="Search by finishing move name"
+      className="w-full"
+      value={searchQuery}
+      onChange={(e) => setSearchQuery(e.target.value)}
+    />
+  )
+}
+
+type S3Videos = {
+  url: string
+  date: string
+  filename: string
+}
+
+function S3ListSearch() {
+  const [videos, setVideos] = useState<S3Videos[]>([])
+  const [filtered, setFiltered] = useState<S3Videos[]>([])
+  const [loading, setLoading] = useState<boolean>(false)
+  const [searchQuery, setSearchQuery] = useState("")
+
+  useEffect(() => {
+    const fetchS3 = async () => {
+      try {
+        setLoading(true)
+        const response = await fetch(`/api/s3`)
+        setVideos(await response.json())
+      } catch (err) {
+        console.error(err)
+      } finally {
+        setLoading(false)
+      }
+    }
+
+    fetchS3()
+  }, [])
+
+  useEffect(() => {
+    if (searchQuery !== "") setFiltered(videos.filter((video) => video.filename.includes(searchQuery)))
+    else setFiltered(videos)
+  }, [videos, searchQuery])
+
+  return loading ? (
+    <VideoSkeleton />
+  ) : (
+    <div className="space-y-2">
+      <FilterByName hook={[searchQuery, setSearchQuery]} />
+      <ul className="flex flex-col items-start justify-start gap-2 rounded border border-gray-600 bg-gray-500/10 px-4 py-4 text-sm font-normal">
+        {filtered.map((video) => (
+          <li className="flex w-full items-center gap-2 border-b" key={video.filename}>
+            <span className="flex-1">{video.filename}</span>
+            <span>{new Date(video.date).toLocaleDateString()}</span>
+            <a href={video.url} className="hover:underline">
+              <ArrowTopRightOnSquareIcon className="h-4 w-4" />
+            </a>
+          </li>
+        ))}
+      </ul>
+    </div>
   )
 }
 

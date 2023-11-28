@@ -60,7 +60,7 @@ function Catalogue() {
   )
 
   useEffect(() => {
-    fetch("/api/catalogue/mw2").then((res) => {
+    fetch("/api/catalogue").then((res) => {
       res.json().then((data) => {
         setHeaders(data.table.headers)
         setCatalogue(data.table.rows)
@@ -113,8 +113,6 @@ function FilterByName({ hook }: { hook: [string, React.Dispatch<React.SetStateAc
   return (
     <input
       type="search"
-      id="searchProduct"
-      name="searchProduct"
       placeholder="Search by finishing move name"
       value={searchQuery}
       onChange={(e) => setSearchQuery(e.target.value)}
