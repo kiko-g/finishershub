@@ -12,6 +12,7 @@ const schema = new Schema(
     location: String,
     game: String,
     bucket: String,
+    filename: String,
     s3_uri: String,
   },
   {

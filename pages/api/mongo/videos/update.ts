@@ -3,7 +3,7 @@ import type { NextApiRequest, NextApiResponse } from "next"
 import { allowCors, connectMongoDB } from "@/config"
 
 // @desc     Update a video document
-// @route    PUT /api/mongo/videos/urls
+// @route    PUT /api/mongo/videos/update
 // @access   Public
 export default async function updateAllVideos(req: NextApiRequest, res: NextApiResponse<any>) {
   await allowCors(req, res)

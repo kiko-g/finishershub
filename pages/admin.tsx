@@ -13,12 +13,12 @@ import { getSoundStatus, updateVideo } from "@/utils"
 export default function Admin() {
   const tabs = [
     {
-      name: "S3",
-      component: <S3ListSearch />,
-    },
-    {
       name: "Mongo",
       component: <VideoManagementTable />,
+    },
+    {
+      name: "S3",
+      component: <S3ListSearch />,
     },
     {
       name: "Sound",
@@ -182,7 +182,7 @@ function FilterByName({ hook }: { hook: [string, React.Dispatch<React.SetStateAc
     <input
       type="search"
       placeholder="Search by finishing move name"
-      className="w-full"
+      className="w-full flex-1 self-stretch"
       value={searchQuery}
       onChange={(e) => setSearchQuery(e.target.value)}
     />
@@ -226,18 +226,30 @@ function S3ListSearch() {
     <VideoSkeleton />
   ) : (
     <div className="space-y-2">
-      <FilterByName hook={[searchQuery, setSearchQuery]} />
-      <ul className="flex flex-col items-start justify-start gap-2 rounded border border-gray-600 bg-gray-500/10 px-4 py-4 text-sm font-normal">
-        {filtered.map((video) => (
-          <li className="flex w-full items-center gap-2 border-b" key={video.filename}>
-            <span className="flex-1">{video.filename}</span>
-            <span>{new Date(video.date).toLocaleDateString()}</span>
-            <a href={video.url} className="hover:underline">
-              <ArrowTopRightOnSquareIcon className="h-4 w-4" />
-            </a>
-          </li>
-        ))}
-      </ul>
+      <div className="flex items-center justify-start gap-2">
+        <FilterByName hook={[searchQuery, setSearchQuery]} />
+        <div className="flex items-center gap-1 self-stretch rounded border border-gray-600 bg-gray-500/10 px-2 text-sm font-normal">
+          <span>{filtered.length}</span>
+          <span className="hidden xl:inline-flex">results</span>
+        </div>
+      </div>
+      {filtered.length > 0 ? (
+        <ul className="flex flex-col items-start justify-start rounded border border-gray-600 bg-gray-500/10 px-4 py-2 text-sm font-normal">
+          {filtered.map((video) => (
+            <li className="flex w-full items-center gap-2 border-b border-gray-400 py-1" key={video.filename}>
+              <a href={video.url} className="hover:underline">
+                <ArrowTopRightOnSquareIcon className="h-4 w-4" />
+              </a>
+              <span>{new Date(video.date).toLocaleDateString()}</span>
+              <span className="flex-1">{video.filename}</span>
+            </li>
+          ))}
+        </ul>
+      ) : (
+        <div className="rounded border border-gray-600 bg-gray-500/10 px-4 py-8 text-sm font-normal">
+          No files with matching your search.
+        </div>
+      )}
     </div>
   )
 }

@@ -16,6 +16,11 @@ export function PickAuthors({
 }) {
   const [video, setVideo] = videoHook
   const picked = useMemo(() => (video.authors === null ? [] : video.authors), [video])
+  const xeggy = {
+    name: "Xeggy",
+    url: "https://www.youtube.com/channel/UCv7Xe0ackt-4BAV4sYeEDjA",
+    keg: picked,
+  }
 
   return (
     <Listbox
