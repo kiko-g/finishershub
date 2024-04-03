@@ -201,7 +201,7 @@ function CatalogueItem({ item, chosen, setChosen }: CatalogueItemProps) {
             <source src={item.video} type="video/mp4" />
           </video>
         ) : (
-          <div className="flex aspect-video h-full rounded bg-gradient-to-br from-slate-400 to-slate-500 dark:from-blue-500 dark:to-blue-600" />
+          <div className="flex aspect-video w-full rounded bg-gradient-to-br from-slate-400 to-slate-500 dark:from-blue-500 dark:to-blue-600 lg:h-full lg:w-auto" />
         )}
 
         <section className="flex h-full w-full items-start justify-between">
@@ -263,7 +263,7 @@ function CatalogueItem({ item, chosen, setChosen }: CatalogueItemProps) {
           </div>
 
           {/* Right (symbols) */}
-          <div className="mr-1 grid grid-cols-2 gap-x-2 gap-y-1">
+          <div className="flex flex-col gap-1">
             <span
               title="Ledge Danger Class"
               className={classNames(

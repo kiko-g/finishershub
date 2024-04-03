@@ -313,6 +313,22 @@ function VideoManagementTable() {
       }
     }
 
+    const fetchVideosEmpty = async () => {
+      try {
+        const startIndex = (currentPage - 1) * itemsPerPage
+        const response = await fetch(`/api/mongo/videos/urls/partial/${startIndex}`)
+        const vids: VideoMongoDBWithUrl[] = await response.json()
+
+        setVideos(vids)
+        setLoading(false)
+        setFetchError(false)
+      } catch (err) {
+        setLoading(false)
+        setFetchError(true)
+        console.error(err)
+      }
+    }
+
     fetchVideos()
   }, [currentPage])
 

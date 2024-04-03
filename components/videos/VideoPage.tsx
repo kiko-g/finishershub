@@ -128,11 +128,7 @@ export function VideoPage({ videoIndex }: Props) {
                   </span>
                 </div>
 
-                <p className="mb-1 mt-0 text-sm text-gray-500">
-                  {video.date === null ? "Unknown Date" : formatVideoDate(video.date)}
-                </p>
-
-                <p className="mb-1 mt-0 text-sm text-gray-500">
+                <p className="mb-1 mt-3 border-t pt-2 text-sm text-gray-500">
                   {video.date === null ? "Unknown Date" : formatVideoDate(video.date)}
                 </p>
 
