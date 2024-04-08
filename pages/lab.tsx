@@ -242,22 +242,16 @@ function CatalogueItem({ item, chosen, setChosen }: CatalogueItemProps) {
                 >
                   {item.score}%
                 </span>
-                {item.game === "MW2" && (
-                  <span
-                    title="MW2 Badge"
-                    className="self-end bg-green-700 px-2 py-1 text-xs font-normal text-white dark:bg-slate-500"
-                  >
-                    MW2
-                  </span>
-                )}
-                {item.game === "MW3" && (
-                  <span
-                    title="MW3 Badge"
-                    className="self-end bg-red-700 px-2 py-1 text-xs font-normal text-white dark:bg-slate-500"
-                  >
-                    MW3
-                  </span>
-                )}
+                <span
+                  title="MW2 Badge"
+                  className={classNames(
+                    "self-end bg-green-700 px-2 py-1 text-xs font-normal text-white dark:bg-slate-500",
+                    item.game === "MW2" && "bg-green-700",
+                    item.game === "MW3" && "bg-red-700",
+                  )}
+                >
+                  MW2
+                </span>
               </div>
             </div>
           </div>
@@ -418,7 +412,8 @@ function CatalogueItem({ item, chosen, setChosen }: CatalogueItemProps) {
                       </div>
                     </div>
 
-                    <div className="mt-3">
+                    {/* TTRK Section */}
+                    <div className="border-b py-3">
                       <h4 className="text-base font-medium leading-6 text-gray-800 dark:text-white">
                         Time to Register Kill (TTRK)
                       </h4>
@@ -426,12 +421,13 @@ function CatalogueItem({ item, chosen, setChosen }: CatalogueItemProps) {
                         The time between the first frame of the animation and the moment the kill is registered. We use
                         the final frame right as the kill register sound is queued.
                       </p>
-                      <p className="mt-0.5 font-lexend text-2xl font-normal tracking-tight text-slate-700 dark:text-blue-200">
+                      <p className="mt-0.5 text-xl font-semibold tracking-tight text-black dark:text-pink-300">
                         {item.ttrk} ± {uncertainty}s
                       </p>
                     </div>
 
-                    <div className="mt-4">
+                    {/* TTCA Section */}
+                    <div className="border-b py-3">
                       <h4 className="text-base font-medium leading-6 text-gray-800 dark:text-white">
                         Time to Complete Animation (TTCA)
                       </h4>
@@ -439,12 +435,13 @@ function CatalogueItem({ item, chosen, setChosen }: CatalogueItemProps) {
                         The time between the first frame of the animation and the final frame, also known has the moment
                         when the player regains control.
                       </p>
-                      <p className="mt-0.5 font-lexend text-2xl font-normal tracking-tight text-slate-700 dark:text-blue-200">
+                      <p className="mt-0.5 text-xl font-semibold tracking-tight text-black dark:text-pink-300">
                         {item.ttca.toString() === "?" ? "Unknown" : item.ttca}
                       </p>
                     </div>
 
-                    <div className="mt-4">
+                    {/* SC Section */}
+                    <div className="border-b py-3">
                       <h4 className="text-base font-medium leading-6 text-gray-800 dark:text-white">
                         Slippery Coefficient
                       </h4>
@@ -455,12 +452,13 @@ function CatalogueItem({ item, chosen, setChosen }: CatalogueItemProps) {
                         </span>
                         .
                       </p>
-                      <p className="mt-0.5 font-lexend text-2xl font-normal tracking-tight text-slate-700 dark:text-blue-200">
+                      <p className="mt-0.5 text-xl font-semibold tracking-tight text-black dark:text-pink-300">
                         Class {slipperyText}
                       </p>
                     </div>
 
-                    <div className="mt-4">
+                    {/* LDC Section */}
+                    <div className="border-b py-3">
                       <h4 className="text-base font-medium leading-6 text-gray-800 dark:text-white">
                         Ledge Danger Coefficient
                       </h4>
@@ -472,7 +470,7 @@ function CatalogueItem({ item, chosen, setChosen }: CatalogueItemProps) {
                         </span>
                         . This can negate the effect of the slippery coefficient.
                       </p>
-                      <p className="mt-0.5 font-lexend text-2xl font-normal tracking-tight text-slate-700 dark:text-blue-200">
+                      <p className="mt-0.5 text-xl font-semibold tracking-tight text-black dark:text-pink-300">
                         Class {ledgeDangerText}
                       </p>
                     </div>
@@ -486,7 +484,7 @@ function CatalogueItem({ item, chosen, setChosen }: CatalogueItemProps) {
                           score = 100-(slippery^2-1)-(ledgeDanger^2-1)-(4*ttrk^2)
                         </code>
                       </p>
-                      <p className="mt-0.5 font-lexend text-2xl font-normal tracking-tight text-slate-700 dark:text-blue-200">
+                      <p className="mt-0.5 text-xl font-semibold tracking-tight text-black dark:text-pink-300">
                         {item.score}
                       </p>
                     </div>

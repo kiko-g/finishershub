@@ -406,14 +406,14 @@ function ImportantFacts() {
               </li>
               <li>
                 Even though finishing moves performed on arenas like Multiplayer do not count towards the lifetime
-                finisher count, we still highly encourage performing them whenever possible, depending on the situation
+                finisher count, we still highly encourage performing them whenever possible for maximizing humiliation
                 ℹ️
               </li>
               <li>
-                A <span className="italic underline">pernoca</span> is a finishing move performed on opps laying prone.
-                Any lover of finishing moves will tell you how riveting and delicious a{" "}
-                <span className="italic underline">pernoca</span> is, as your opponent is caught lacking to the extreme
-                🪓
+                A <strong className="italic underline">pernoca</strong> is a finishing move performed on opps laying
+                prone. Any lover of finishing moves will tell you how riveting and delicious a{" "}
+                <strong className="italic underline">pernoca</strong> is, as your opponent is caught lacking to the
+                extreme 🪓
               </li>
             </ol>
           </div>
