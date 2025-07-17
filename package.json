@@ -9,6 +9,9 @@
     "lint": "next lint",
     "format": "prettier --write \"**/*.{js,jsx,ts,tsx,json,md,html,css}\""
   },
+  "engines": {
+    "node": ">=22.0.0"
+  },
   "dependencies": {
     "@aws-sdk/client-s3": "^3.295.0",
     "@aws-sdk/s3-request-presigner": "^3.295.0",
